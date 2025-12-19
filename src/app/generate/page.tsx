@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { useFlashcards } from '@/hooks/useFlashcards';
+import type { Flashcard, MedicalSystem } from '@/types';
 
 interface GeneratedCard {
   front: string;
@@ -58,6 +59,27 @@ export default function GeneratePage() {
     'Neurology',
     'Emergency Medicine',
   ];
+
+  // Map UI system names to MedicalSystem type
+  const systemMap: Record<string, MedicalSystem> = {
+    'General': 'General',
+    'Cardiovascular': 'Cardiology',
+    'Respiratory': 'Pulmonology',
+    'Gastrointestinal': 'Gastroenterology',
+    'Renal': 'Nephrology',
+    'Neurology': 'Neurology',
+    'Endocrine': 'Endocrinology',
+    'Hematology/Oncology': 'Hematology/Oncology',
+    'Infectious Disease': 'Infectious Disease',
+    'Rheumatology': 'Rheumatology',
+    'Dermatology': 'Dermatology',
+    'Psychiatry': 'Psychiatry',
+    'Obstetrics/Gynecology': 'OB/GYN',
+    'Pediatrics': 'Pediatrics',
+    'Surgery': 'Surgery',
+    'Emergency Medicine': 'Emergency Medicine',
+    'Musculoskeletal': 'General',
+  };
 
   const generatePrompt = () => {
     const styleInstructions = {
@@ -170,8 +192,15 @@ Return ONLY the JSON array, no other text.`;
   const handleSaveCards = () => {
     if (generatedCards.length === 0) return;
 
-    const cardsToAdd = generatedCards.map((card, index) => ({
+    const now = new Date().toISOString();
+    const mappedSystem = systemMap[system] || 'General';
+
+    const cardsToAdd: Flashcard[] = generatedCards.map((card, index) => ({
       id: `gen-${Date.now()}-${index}`,
+      schemaVersion: '1.0',
+      userId: 'local-user',
+      createdAt: now,
+      updatedAt: now,
       content: {
         front: card.front,
         back: card.back,
@@ -179,26 +208,21 @@ Return ONLY the JSON array, no other text.`;
       },
       metadata: {
         tags: ['ai-generated'],
-        system: system,
+        system: mappedSystem,
         topic: card.topic || topic || 'General',
-        difficulty: 'medium' as const,
+        difficulty: 'medium',
         clinicalVignette: cardStyle === 'clinical',
-        rotation: rotation,
       },
-      fsrsData: {
-        state: 'new' as const,
-        difficulty: 0,
-        stability: 0,
-        retrievability: 1,
-        elapsedDays: 0,
-        scheduledDays: 0,
+      spacedRepetition: {
+        state: 'new',
+        interval: 0,
+        ease: 2.5,
         reps: 0,
         lapses: 0,
-        lastReview: null,
-        nextReview: new Date().toISOString(),
+        nextReview: now,
+        stability: 0,
+        difficulty: 0,
       },
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
     }));
 
     addCards(cardsToAdd);

@@ -1,8 +1,7 @@
 {
+  "/generate/page": "app/generate/page.js",
   "/shelf/page": "app/shelf/page.js",
-  "/api/generate/route": "app/api/generate/route.js",
-  "/flashcards/page": "app/flashcards/page.js",
-  "/import/page": "app/import/page.js",
+  "/page": "app/page.js",
   "/rapid-review/page": "app/rapid-review/page.js",
-  "/generate/page": "app/generate/page.js"
+  "/import/page": "app/import/page.js"
 }
