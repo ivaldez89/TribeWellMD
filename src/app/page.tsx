@@ -1,10 +1,38 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { DeckFilterPanel } from '@/components/deck/DeckFilterPanel';
 import { PerformanceAnalytics } from '@/components/deck/PerformanceAnalytics';
 import { useFlashcards } from '@/hooks/useFlashcards';
+
+// Rapid review stats type
+interface RapidReviewStats {
+  totalCardsReviewed: number;
+  totalSessions: number;
+  lastSessionDate: string | null;
+  todayCardsReviewed: number;
+  streak: number;
+}
+
+// Get rapid review stats from localStorage
+function getRapidReviewStats(): RapidReviewStats {
+  if (typeof window === 'undefined') {
+    return { totalCardsReviewed: 0, totalSessions: 0, lastSessionDate: null, todayCardsReviewed: 0, streak: 0 };
+  }
+  const stored = localStorage.getItem('step2_rapid_review_stats');
+  if (stored) {
+    const stats = JSON.parse(stored);
+    // Reset today's count if it's a new day
+    const today = new Date().toDateString();
+    if (stats.lastSessionDate !== today) {
+      stats.todayCardsReviewed = 0;
+    }
+    return stats;
+  }
+  return { totalCardsReviewed: 0, totalSessions: 0, lastSessionDate: null, todayCardsReviewed: 0, streak: 0 };
+}
 
 export default function HomePage() {
   const { 
@@ -19,6 +47,13 @@ export default function HomePage() {
     setFilters,
     clearFilters
   } = useFlashcards();
+
+  const [rapidStats, setRapidStats] = useState<RapidReviewStats>({ totalCardsReviewed: 0, totalSessions: 0, lastSessionDate: null, todayCardsReviewed: 0, streak: 0 });
+
+  // Load rapid review stats on mount
+  useEffect(() => {
+    setRapidStats(getRapidReviewStats());
+  }, []);
 
   if (isLoading) {
     return (
@@ -140,6 +175,41 @@ export default function HomePage() {
             }
           />
         </section>
+
+        {/* Rapid Review Stats Card */}
+        {rapidStats.totalCardsReviewed > 0 && (
+          <section className="mb-8">
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border border-amber-200 p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center">
+                  <svg className="w-6 h-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900">Rapid Review Progress</h3>
+                {rapidStats.streak > 1 && (
+                  <span className="ml-auto px-3 py-1 bg-orange-100 text-orange-700 text-sm font-medium rounded-full flex items-center gap-1">
+                    🔥 {rapidStats.streak} day streak!
+                  </span>
+                )}
+              </div>
+              <div className="grid grid-cols-3 gap-4">
+                <div className="text-center p-3 bg-white/60 rounded-xl">
+                  <p className="text-2xl font-bold text-amber-600">{rapidStats.todayCardsReviewed}</p>
+                  <p className="text-sm text-slate-600">Today</p>
+                </div>
+                <div className="text-center p-3 bg-white/60 rounded-xl">
+                  <p className="text-2xl font-bold text-amber-600">{rapidStats.totalCardsReviewed}</p>
+                  <p className="text-sm text-slate-600">Total Reviews</p>
+                </div>
+                <div className="text-center p-3 bg-white/60 rounded-xl">
+                  <p className="text-2xl font-bold text-amber-600">{rapidStats.totalSessions}</p>
+                  <p className="text-sm text-slate-600">Sessions</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Filter Panel and Analytics */}
         <section className="grid md:grid-cols-2 gap-6 mb-8">

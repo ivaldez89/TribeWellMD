@@ -16,15 +16,20 @@
       "static/chunks/main-app.js",
       "static/chunks/app/flashcards/page.js"
     ],
+    "/rapid-review/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/rapid-review/page.js"
+    ],
     "/import/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/import/page.js"
     ],
-    "/rapid-review/page": [
+    "/shelf/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/rapid-review/page.js"
+      "static/chunks/app/shelf/page.js"
     ]
   }
 }

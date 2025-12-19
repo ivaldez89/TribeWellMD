@@ -4,6 +4,68 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { useFlashcards } from '@/hooks/useFlashcards';
 
+// Rapid review stats type
+interface RapidReviewStats {
+  totalCardsReviewed: number;
+  totalSessions: number;
+  lastSessionDate: string | null;
+  todayCardsReviewed: number;
+  streak: number;
+}
+
+// Get rapid review stats from localStorage
+function getRapidReviewStats(): RapidReviewStats {
+  if (typeof window === 'undefined') {
+    return { totalCardsReviewed: 0, totalSessions: 0, lastSessionDate: null, todayCardsReviewed: 0, streak: 0 };
+  }
+  const stored = localStorage.getItem('step2_rapid_review_stats');
+  if (stored) {
+    const stats = JSON.parse(stored);
+    // Reset today's count if it's a new day
+    const today = new Date().toDateString();
+    if (stats.lastSessionDate !== today) {
+      stats.todayCardsReviewed = 0;
+    }
+    return stats;
+  }
+  return { totalCardsReviewed: 0, totalSessions: 0, lastSessionDate: null, todayCardsReviewed: 0, streak: 0 };
+}
+
+// Save rapid review stats to localStorage
+function saveRapidReviewStats(stats: RapidReviewStats) {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('step2_rapid_review_stats', JSON.stringify(stats));
+  }
+}
+
+// Update stats when a card is reviewed
+function trackCardReviewed() {
+  const stats = getRapidReviewStats();
+  const today = new Date().toDateString();
+  const yesterday = new Date(Date.now() - 86400000).toDateString();
+  
+  stats.totalCardsReviewed++;
+  stats.todayCardsReviewed++;
+  
+  // Update streak
+  if (stats.lastSessionDate === yesterday) {
+    stats.streak++;
+  } else if (stats.lastSessionDate !== today) {
+    stats.streak = 1;
+  }
+  
+  stats.lastSessionDate = today;
+  saveRapidReviewStats(stats);
+  return stats;
+}
+
+// Track session start
+function trackSessionStart() {
+  const stats = getRapidReviewStats();
+  stats.totalSessions++;
+  saveRapidReviewStats(stats);
+}
+
 export default function RapidReviewPage() {
   const {
     filteredDueCards,
@@ -22,6 +84,9 @@ export default function RapidReviewPage() {
   const [autoAdvance, setAutoAdvance] = useState(true);
   const [autoAdvanceDelay, setAutoAdvanceDelay] = useState(3);
   const [showSettings, setShowSettings] = useState(false);
+  const [sessionStarted, setSessionStarted] = useState(false);
+  const [cardsReviewedThisSession, setCardsReviewedThisSession] = useState(0);
+  const [rapidStats, setRapidStats] = useState<RapidReviewStats>({ totalCardsReviewed: 0, totalSessions: 0, lastSessionDate: null, todayCardsReviewed: 0, streak: 0 });
   
   // Voice selection
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
@@ -29,8 +94,32 @@ export default function RapidReviewPage() {
   const [voiceFilter, setVoiceFilter] = useState<'all' | 'female' | 'male'>('all');
   
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const reviewedCardsRef = useRef<Set<string>>(new Set());
 
   const currentCard = reviewCards[currentIndex];
+
+  // Load stats on mount
+  useEffect(() => {
+    setRapidStats(getRapidReviewStats());
+  }, []);
+
+  // Track session start
+  useEffect(() => {
+    if (!sessionStarted && currentCard) {
+      setSessionStarted(true);
+      trackSessionStart();
+    }
+  }, [sessionStarted, currentCard]);
+
+  // Track card reviewed when answer is revealed
+  const markCardReviewed = useCallback(() => {
+    if (currentCard && !reviewedCardsRef.current.has(currentCard.id)) {
+      reviewedCardsRef.current.add(currentCard.id);
+      const newStats = trackCardReviewed();
+      setRapidStats(newStats);
+      setCardsReviewedThisSession(prev => prev + 1);
+    }
+  }, [currentCard]);
 
   // Load available voices
   useEffect(() => {
@@ -166,6 +255,12 @@ export default function RapidReviewPage() {
     }
   }, [currentIndex, stopSpeaking]);
 
+  // Handle reveal - track the card
+  const handleReveal = useCallback(() => {
+    setIsRevealed(true);
+    markCardReviewed();
+  }, [markCardReviewed]);
+
   // Play current card with TTS
   const playCard = useCallback(() => {
     if (!currentCard) return;
@@ -175,7 +270,7 @@ export default function RapidReviewPage() {
     
     if (!isRevealed) {
       speak(questionText, () => {
-        setIsRevealed(true);
+        handleReveal();
         timerRef.current = setTimeout(() => {
           speak(answerText, () => {
             if (autoAdvance && isPlaying) {
@@ -195,7 +290,7 @@ export default function RapidReviewPage() {
         }
       });
     }
-  }, [currentCard, isRevealed, speak, autoAdvance, autoAdvanceDelay, isPlaying, nextCard]);
+  }, [currentCard, isRevealed, speak, autoAdvance, autoAdvanceDelay, isPlaying, nextCard, handleReveal]);
 
   // Toggle play/pause
   const togglePlay = useCallback(() => {
@@ -220,7 +315,7 @@ export default function RapidReviewPage() {
       if (e.code === 'Space') {
         e.preventDefault();
         if (!isRevealed) {
-          setIsRevealed(true);
+          handleReveal();
         } else {
           nextCard();
         }
@@ -237,7 +332,7 @@ export default function RapidReviewPage() {
     
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isRevealed, nextCard, prevCard, togglePlay, stopSpeaking]);
+  }, [isRevealed, nextCard, prevCard, togglePlay, stopSpeaking, handleReveal]);
 
   // Speak just the current visible text
   const speakCurrent = () => {
@@ -306,6 +401,38 @@ export default function RapidReviewPage() {
           </button>
         </div>
       </header>
+
+      {/* Session Stats Bar */}
+      <div className="border-b border-slate-700/50 bg-amber-900/20">
+        <div className="max-w-5xl mx-auto px-4 py-2 flex items-center justify-center gap-6 text-sm">
+          <div className="flex items-center gap-2">
+            <span className="text-amber-400">⚡</span>
+            <span className="text-slate-300">This session:</span>
+            <span className="font-bold text-white">{cardsReviewedThisSession}</span>
+          </div>
+          <div className="w-px h-4 bg-slate-700" />
+          <div className="flex items-center gap-2">
+            <span className="text-amber-400">📅</span>
+            <span className="text-slate-300">Today:</span>
+            <span className="font-bold text-white">{rapidStats.todayCardsReviewed}</span>
+          </div>
+          <div className="w-px h-4 bg-slate-700" />
+          <div className="flex items-center gap-2">
+            <span className="text-amber-400">🏆</span>
+            <span className="text-slate-300">Total:</span>
+            <span className="font-bold text-white">{rapidStats.totalCardsReviewed}</span>
+          </div>
+          {rapidStats.streak > 1 && (
+            <>
+              <div className="w-px h-4 bg-slate-700" />
+              <div className="flex items-center gap-2">
+                <span className="text-orange-400">🔥</span>
+                <span className="font-bold text-orange-400">{rapidStats.streak} day streak!</span>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
 
       {/* Settings Panel */}
       {showSettings && (
@@ -475,7 +602,7 @@ export default function RapidReviewPage() {
             {!isRevealed ? (
               <div className="px-6 md:px-8 pb-6 md:pb-8">
                 <button
-                  onClick={() => setIsRevealed(true)}
+                  onClick={handleReveal}
                   className="w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
                 >
                   <span>Reveal Answer</span>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { FlashcardViewer } from '@/components/flashcards/FlashcardViewer';
@@ -8,6 +8,16 @@ import { AnswerButtons } from '@/components/flashcards/AnswerButtons';
 import { DeckFilterPanel } from '@/components/deck/DeckFilterPanel';
 import { CardEditor } from '@/components/deck/CardEditor';
 import { useFlashcards } from '@/hooks/useFlashcards';
+
+// Ambient sound definitions
+const AMBIENT_SOUNDS = [
+  { id: 'rain', name: 'Rain', emoji: '🌧️', url: 'https://cdn.pixabay.com/audio/2022/05/16/audio_3b65c15d51.mp3' },
+  { id: 'thunder', name: 'Thunder', emoji: '⛈️', url: 'https://cdn.pixabay.com/audio/2022/10/30/audio_f2cbc47b97.mp3' },
+  { id: 'forest', name: 'Forest', emoji: '🌲', url: 'https://cdn.pixabay.com/audio/2022/08/04/audio_2dde668d05.mp3' },
+  { id: 'ocean', name: 'Ocean', emoji: '🌊', url: 'https://cdn.pixabay.com/audio/2022/06/07/audio_b9bd4170e4.mp3' },
+  { id: 'fire', name: 'Fireplace', emoji: '🔥', url: 'https://cdn.pixabay.com/audio/2022/11/17/audio_fe4e9cf054.mp3' },
+  { id: 'cafe', name: 'Café', emoji: '☕', url: 'https://cdn.pixabay.com/audio/2022/03/09/audio_c121d4f7ce.mp3' },
+];
 
 export default function FlashcardsPage() {
   const {
@@ -37,6 +47,66 @@ export default function FlashcardsPage() {
 
   const [showEditor, setShowEditor] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
+  const [showAmbient, setShowAmbient] = useState(false);
+  
+  // Ambient sound state
+  const [currentSound, setCurrentSound] = useState<string | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(0.5);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Initialize audio element
+  useEffect(() => {
+    audioRef.current = new Audio();
+    audioRef.current.loop = true;
+    audioRef.current.volume = volume;
+    
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
+  // Update volume when changed
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
+
+  // Play/pause sound
+  const playSound = (soundId: string) => {
+    const sound = AMBIENT_SOUNDS.find(s => s.id === soundId);
+    if (!sound || !audioRef.current) return;
+
+    if (currentSound === soundId && isPlaying) {
+      // Pause current sound
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      // Play new or resume sound
+      if (currentSound !== soundId) {
+        audioRef.current.src = sound.url;
+        setCurrentSound(soundId);
+      }
+      audioRef.current.play().catch(() => {
+        // Handle autoplay restrictions
+        console.log('Audio playback failed');
+      });
+      setIsPlaying(true);
+    }
+  };
+
+  const stopSound = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    setIsPlaying(false);
+    setCurrentSound(null);
+  };
 
   // Auto-start session when page loads with due cards
   useEffect(() => {
@@ -198,6 +268,28 @@ export default function FlashcardsPage() {
           </div>
           
           <div className="flex items-center gap-3">
+            {/* Ambient sounds button */}
+            <button
+              onClick={() => setShowAmbient(!showAmbient)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                showAmbient || isPlaying
+                  ? 'bg-purple-100 text-purple-700' 
+                  : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100'
+              }`}
+            >
+              {isPlaying ? (
+                <span className="flex items-center gap-1">
+                  <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
+                  {AMBIENT_SOUNDS.find(s => s.id === currentSound)?.emoji}
+                </span>
+              ) : (
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                </svg>
+              )}
+              Sounds
+            </button>
+
             {/* Toggle filters button */}
             <button
               onClick={() => setShowFilters(!showFilters)}
@@ -221,6 +313,66 @@ export default function FlashcardsPage() {
             </button>
           </div>
         </div>
+
+        {/* Ambient Sound Panel */}
+        {showAmbient && (
+          <div className="mb-6 p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-semibold text-slate-900 flex items-center gap-2">
+                <svg className="w-5 h-5 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                </svg>
+                Ambient Sounds
+              </h3>
+              {isPlaying && (
+                <button
+                  onClick={stopSound}
+                  className="text-sm px-3 py-1 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
+                >
+                  Stop
+                </button>
+              )}
+            </div>
+            
+            {/* Sound buttons */}
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-4">
+              {AMBIENT_SOUNDS.map((sound) => (
+                <button
+                  key={sound.id}
+                  onClick={() => playSound(sound.id)}
+                  className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all ${
+                    currentSound === sound.id && isPlaying
+                      ? 'bg-purple-100 border-2 border-purple-400 shadow-sm'
+                      : 'bg-slate-50 border-2 border-transparent hover:bg-slate-100'
+                  }`}
+                >
+                  <span className="text-2xl">{sound.emoji}</span>
+                  <span className="text-xs font-medium text-slate-600">{sound.name}</span>
+                  {currentSound === sound.id && isPlaying && (
+                    <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
+                  )}
+                </button>
+              ))}
+            </div>
+            
+            {/* Volume control */}
+            <div className="flex items-center gap-3">
+              <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+              </svg>
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.1"
+                value={volume}
+                onChange={(e) => setVolume(parseFloat(e.target.value))}
+                className="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-purple-500"
+              />
+              <span className="text-sm text-slate-500 w-12 text-right">{Math.round(volume * 100)}%</span>
+            </div>
+          </div>
+        )}
 
         {/* Collapsible filter panel */}
         {showFilters && (
