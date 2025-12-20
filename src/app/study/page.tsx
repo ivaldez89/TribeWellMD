@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 import { FlashcardViewer } from '@/components/flashcards/FlashcardViewer';
 import { AnswerButtons } from '@/components/flashcards/AnswerButtons';
 import { DeckFilterPanel } from '@/components/deck/DeckFilterPanel';
@@ -1342,6 +1343,9 @@ export default function StudyPage() {
           onClose={() => setNewAchievement(null)}
         />
       )}
+
+      {/* Footer - only show when not studying */}
+      {!isStudying && <Footer />}
     </div>
   );
 }

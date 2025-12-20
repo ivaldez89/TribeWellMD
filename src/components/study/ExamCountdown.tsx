@@ -94,26 +94,62 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
     return null;
   }
 
-  // Compact variant for header - floating dropdown
+  // Compact variant for header - floating dropdown with white card
   if (variant === 'compact') {
     return (
       <div className="relative">
-        {/* Toggle Button */}
+        {/* Toggle Button - White card with shadow for better visibility */}
         <button
           onClick={() => setShowPanel(!showPanel)}
-          className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors ${
-            showPanel || examDate
-              ? examDate ? `${getUrgencyBg()} ${getUrgencyColor()}` : 'bg-teal-100 text-teal-700'
-              : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100'
-          }`}
+          className="flex items-center gap-3 px-4 py-2.5 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg border border-white/50 hover:bg-white hover:shadow-xl transition-all duration-300"
           title={examDate ? `Exam: ${examDate.toLocaleDateString()}` : 'Set exam date'}
         >
-          <span className="text-base">
-            {!examDate ? '📅' : daysRemaining !== null && daysRemaining <= 7 ? '🔥' : daysRemaining !== null && daysRemaining <= 30 ? '📅' : '🎯'}
-          </span>
-          <span>
-            {!examDate ? 'Exam' : daysRemaining !== null ? (daysRemaining < 0 ? 'Passed' : daysRemaining === 0 ? 'Today!' : `${daysRemaining}d`) : 'Exam'}
-          </span>
+          {/* Calendar icon */}
+          <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+            examDate
+              ? daysRemaining !== null && daysRemaining <= 7
+                ? 'bg-red-100'
+                : daysRemaining !== null && daysRemaining <= 30
+                  ? 'bg-orange-100'
+                  : 'bg-teal-100'
+              : 'bg-slate-100'
+          }`}>
+            <span className="text-xl">
+              {!examDate ? '📅' : daysRemaining !== null && daysRemaining <= 7 ? '🔥' : daysRemaining !== null && daysRemaining <= 30 ? '⏰' : '🎯'}
+            </span>
+          </div>
+
+          {/* Text content */}
+          <div className="text-left">
+            <div className="text-xs text-slate-500 font-medium uppercase tracking-wide">
+              {examDate ? 'Exam In' : 'Set Your'}
+            </div>
+            <div className={`font-bold text-lg leading-tight ${
+              examDate
+                ? daysRemaining !== null && daysRemaining <= 7
+                  ? 'text-red-600'
+                  : daysRemaining !== null && daysRemaining <= 30
+                    ? 'text-orange-600'
+                    : 'text-teal-600'
+                : 'text-slate-700'
+            }`}>
+              {!examDate
+                ? 'Exam Date'
+                : daysRemaining !== null
+                  ? (daysRemaining < 0
+                      ? 'Passed!'
+                      : daysRemaining === 0
+                        ? 'Today!'
+                        : `${daysRemaining} Days`)
+                  : 'Exam Date'
+              }
+            </div>
+          </div>
+
+          {/* Chevron */}
+          <svg className={`w-4 h-4 text-slate-400 transition-transform ${showPanel ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
         </button>
 
         {/* Dropdown Panel */}
