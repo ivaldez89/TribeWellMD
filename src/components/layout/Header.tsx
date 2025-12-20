@@ -125,6 +125,7 @@ const studyDropdownItems: DropdownItem[] = [
   { label: 'Rapid Review', href: '/study/rapid-review', description: 'Quick concept review' },
   { label: 'Progress', href: '/study/progress', description: 'Track your learning' },
   { label: 'Card Library', href: '/library', description: 'QBank-linked cards' },
+  { label: 'Resources', href: '/resources', description: 'Visual guides & infographics' },
 ];
 
 const casesDropdownItems: DropdownItem[] = [
@@ -134,7 +135,6 @@ const casesDropdownItems: DropdownItem[] = [
 
 const wellnessDropdownItems: DropdownItem[] = [
   { label: 'Wellness Hub', href: '/wellness', description: 'Your wellness dashboard' },
-  { label: 'Resources', href: '/resources', description: 'Visual guides & infographics' },
 ];
 
 const communityDropdownItems: DropdownItem[] = [
