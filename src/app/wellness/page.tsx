@@ -7,6 +7,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { useWellness } from '@/hooks/useWellness';
 import { WELLNESS_DOMAINS, CHARITABLE_CAUSES, type WellnessDomain, type CharitableCause } from '@/types/wellness';
+import { useTribes } from '@/hooks/useTribes';
 
 // Mood emoji mapping
 const MOOD_EMOJIS = ['😢', '😔', '😐', '🙂', '😊'];
@@ -46,6 +47,9 @@ export default function WellnessPage() {
 
   const stats = getStats();
   const userVillages = getUserVillages();
+
+  // Get user's tribes with primary tribe info
+  const { userTribes, primaryTribe, setPrimaryTribe: setUserPrimaryTribe } = useTribes();
 
   if (isLoading) {
     return (
@@ -286,6 +290,130 @@ export default function WellnessPage() {
 
         {activeTab === 'village' && (
           <>
+            {/* My Tribes - Featured Section */}
+            {userTribes.length > 0 && (
+              <section className="mb-8">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span className="w-3 h-3 bg-teal-500 rounded-full" />
+                    My Tribes
+                  </h2>
+                  <Link
+                    href="/tribes"
+                    className="text-sm text-teal-600 dark:text-teal-400 hover:underline font-medium"
+                  >
+                    View All Tribes →
+                  </Link>
+                </div>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {userTribes.map((tribe) => {
+                    const isPrimary = primaryTribe?.id === tribe.id;
+                    return (
+                      <div
+                        key={tribe.id}
+                        className={`relative p-5 rounded-2xl border transition-all ${
+                          isPrimary
+                            ? 'bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 border-teal-300 dark:border-teal-700 ring-2 ring-teal-500/50'
+                            : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:shadow-lg'
+                        }`}
+                      >
+                        {/* Primary Badge */}
+                        {isPrimary && (
+                          <div className="absolute -top-2 -right-2 px-2 py-1 bg-gradient-to-r from-teal-500 to-cyan-500 text-white text-xs font-bold rounded-full shadow-lg">
+                            ⭐ PRIMARY
+                          </div>
+                        )}
+
+                        <Link href={`/tribes/${tribe.id}`} className="block">
+                          <div className="flex items-start gap-4">
+                            <div
+                              className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl shadow-lg"
+                              style={{ background: `linear-gradient(135deg, ${tribe.color}, ${tribe.color}dd)` }}
+                            >
+                              {tribe.icon}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-semibold text-slate-900 dark:text-white truncate">{tribe.name}</h3>
+                              <p className="text-xs text-slate-500 dark:text-slate-400 capitalize mb-2">{tribe.type}</p>
+                              <div className="flex items-center gap-3 text-xs">
+                                <span className="text-teal-600 dark:text-teal-400">{tribe.memberCount} members</span>
+                                <span className="text-cyan-600 dark:text-cyan-400">{tribe.totalPoints} pts</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Goal Progress */}
+                          {tribe.currentGoal && (
+                            <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-700">
+                              <div className="flex items-center justify-between text-xs mb-1">
+                                <span className="text-slate-600 dark:text-slate-400">{tribe.currentGoal.title}</span>
+                                <span className="font-medium text-teal-600 dark:text-teal-400">
+                                  {Math.round((tribe.currentGoal.currentPoints / tribe.currentGoal.targetPoints) * 100)}%
+                                </span>
+                              </div>
+                              <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full transition-all"
+                                  style={{ width: `${Math.min((tribe.currentGoal.currentPoints / tribe.currentGoal.targetPoints) * 100, 100)}%` }}
+                                />
+                              </div>
+                            </div>
+                          )}
+                        </Link>
+
+                        {/* Set as Primary Button */}
+                        {!isPrimary && (
+                          <button
+                            onClick={() => setUserPrimaryTribe(tribe.id)}
+                            className="mt-3 w-full py-2 bg-slate-100 dark:bg-slate-700 hover:bg-teal-100 dark:hover:bg-teal-900/30 text-slate-600 dark:text-slate-400 hover:text-teal-700 dark:hover:text-teal-300 text-xs font-medium rounded-lg transition-all"
+                          >
+                            Set as Primary
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Explore More Tribes CTA */}
+                <div className="mt-4 p-4 bg-gradient-to-r from-teal-500/10 to-cyan-500/10 rounded-xl border border-teal-200 dark:border-teal-800">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-slate-900 dark:text-white">Looking for more communities?</p>
+                      <p className="text-xs text-slate-600 dark:text-slate-400">Discover tribes that match your interests</p>
+                    </div>
+                    <Link
+                      href="/tribes"
+                      className="px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white text-sm font-medium rounded-lg hover:from-teal-600 hover:to-cyan-600 transition-all"
+                    >
+                      Explore Tribes
+                    </Link>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* No Tribes Yet */}
+            {userTribes.length === 0 && (
+              <section className="mb-8">
+                <div className="p-8 bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-2xl border border-teal-200 dark:border-teal-800 text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center">
+                    <span className="text-3xl">🏘️</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Join Your First Tribe</h3>
+                  <p className="text-slate-600 dark:text-slate-400 mb-6 max-w-md mx-auto">
+                    Tribes are communities with shared missions and social impact goals. Join up to 5 tribes and make a difference together!
+                  </p>
+                  <Link
+                    href="/tribes"
+                    className="inline-block px-8 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-medium rounded-xl transition-all"
+                  >
+                    Explore Tribes
+                  </Link>
+                </div>
+              </section>
+            )}
+
             {/* My Villages */}
             {userVillages.length > 0 && (
               <section className="mb-8">
