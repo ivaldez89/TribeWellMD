@@ -3,7 +3,8 @@
 // All cards are understanding-based with clinical decision points ("passwords")
 
 import type { Flashcard, MedicalSystem, Rotation, Difficulty } from '@/types';
-import { allConcepts, ClinicalConcept } from './concept-taxonomy';
+import { allConcepts } from './concept-taxonomy';
+import type { ClinicalConcept } from '@/types';
 
 // Library category structure
 export interface CardCategory {
@@ -580,5 +581,3 @@ export function getLibraryStats(understandingCards: Flashcard[]) {
   };
 }
 
-// Export types
-export type { CardCategory, CardSubcategory };
