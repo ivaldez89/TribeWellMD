@@ -100,38 +100,68 @@ const TESTIMONIALS = [
 
 export default function CommunityPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-orange-50 dark:from-slate-900 dark:to-orange-900/20">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
-        <section className="text-center py-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 dark:bg-orange-900/30 rounded-full text-orange-700 dark:text-orange-300 text-sm font-medium mb-6">
-            <span>🚀</span>
-            <span>Coming Soon</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-            Find Your <span className="text-orange-600 dark:text-orange-400">Tribe</span>
-          </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-8">
-            Medicine is hard. You don't have to do it alone. Connect with mentors, peers, and a community that understands your journey.
-          </p>
-
-          {/* Email Signup */}
-          <div className="max-w-md mx-auto">
-            <div className="flex gap-3">
-              <input
-                type="email"
-                placeholder="Enter your email for early access"
-                className="flex-1 px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-              />
-              <button className="px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-xl hover:from-orange-600 hover:to-amber-600 transition-all shadow-lg shadow-orange-500/25">
-                Notify Me
-              </button>
+        <section className="mb-8">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-500 p-8 md:p-10 shadow-2xl">
+            {/* Animated background elements */}
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
+              <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+              <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-orange-300/20 rounded-full blur-2xl" />
             </div>
-            <p className="text-sm text-slate-500 mt-3">
-              Be the first to know when community features launch. No spam, ever.
-            </p>
+
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="text-center md:text-left">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/20 backdrop-blur rounded-full text-white/90 text-sm font-medium mb-4">
+                  <span className="w-2 h-2 bg-orange-300 rounded-full animate-pulse" />
+                  <span>Coming Soon</span>
+                </div>
+
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 leading-tight">
+                  Find Your <span className="text-orange-200">Tribe</span>
+                </h1>
+
+                <p className="text-white/80 text-lg max-w-xl mb-6">
+                  Medicine is hard. You don't have to do it alone. Connect with mentors, peers, and a community that understands your journey.
+                </p>
+
+                {/* Stats row */}
+                <div className="flex items-center gap-4 md:gap-6">
+                  <div className="text-center px-4 py-2 bg-white/10 backdrop-blur rounded-xl">
+                    <p className="text-2xl md:text-3xl font-bold text-white">{COMMUNITY_FEATURES.length}</p>
+                    <p className="text-white/60 text-xs">Features</p>
+                  </div>
+                  <div className="text-center px-4 py-2 bg-white/10 backdrop-blur rounded-xl">
+                    <p className="text-2xl md:text-3xl font-bold text-white">{RESEARCH_NEWS_FEATURES.length}</p>
+                    <p className="text-white/60 text-xs">Research Tools</p>
+                  </div>
+                  <div className="text-center px-4 py-2 bg-white/10 backdrop-blur rounded-xl">
+                    <p className="text-2xl md:text-3xl font-bold text-white">24/7</p>
+                    <p className="text-white/60 text-xs">Support</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Email Signup Card */}
+              <div className="p-5 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 w-full max-w-sm">
+                <h3 className="text-white font-semibold mb-3 text-center">Get Early Access</h3>
+                <div className="space-y-3">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50"
+                  />
+                  <button className="w-full px-6 py-3 bg-white hover:bg-orange-50 text-orange-600 font-bold rounded-xl shadow-lg transition-all hover:scale-105">
+                    Notify Me
+                  </button>
+                </div>
+                <p className="text-white/60 text-xs text-center mt-3">No spam, ever.</p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -256,14 +286,25 @@ export default function CommunityPage() {
         </section>
 
         {/* CTA */}
-        <section className="text-center p-12 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl text-white">
-          <h2 className="text-3xl font-bold mb-4">Ready to Join Your Tribe?</h2>
-          <p className="text-orange-100 mb-8 max-w-2xl mx-auto">
-            We're building this for you. Sign up for early access and help shape the community.
-          </p>
-          <button className="px-8 py-4 bg-white text-orange-600 font-bold rounded-xl hover:bg-orange-50 transition-colors shadow-lg">
-            Get Early Access
-          </button>
+        <section className="mb-8">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 p-8">
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+            </div>
+
+            <div className="relative z-10 text-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center">
+                <span className="text-3xl">🤝</span>
+              </div>
+              <h2 className="text-2xl font-bold text-white mb-2">Ready to Join Your Tribe?</h2>
+              <p className="text-orange-100 mb-6 max-w-2xl mx-auto">
+                We're building this for you. Sign up for early access and help shape the community.
+              </p>
+              <button className="px-8 py-4 bg-white hover:bg-orange-50 text-orange-600 font-bold rounded-xl shadow-lg transition-all hover:scale-105">
+                Get Early Access
+              </button>
+            </div>
+          </div>
         </section>
 
       </main>

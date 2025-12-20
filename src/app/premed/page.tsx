@@ -76,38 +76,68 @@ const TESTIMONIALS = [
 
 export default function PreMedPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-emerald-50 dark:from-slate-900 dark:to-emerald-900/20">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
-        <section className="text-center py-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-full text-emerald-700 dark:text-emerald-300 text-sm font-medium mb-6">
-            <span>🌱</span>
-            <span>TribeWell<span className="font-bold">PreMed</span> - Coming Soon</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-            Your Journey to <span className="text-emerald-600 dark:text-emerald-400">Medicine</span> Starts Here
-          </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-8">
-            From pre-med to MD. Get guidance, mentorship, and resources from people who've walked the path before you.
-          </p>
-
-          {/* Email Signup */}
-          <div className="max-w-md mx-auto">
-            <div className="flex gap-3">
-              <input
-                type="email"
-                placeholder="Enter your email for early access"
-                className="flex-1 px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-              />
-              <button className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold rounded-xl hover:from-emerald-600 hover:to-teal-600 transition-all shadow-lg shadow-emerald-500/25">
-                Notify Me
-              </button>
+        <section className="mb-8">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 p-8 md:p-10 shadow-2xl">
+            {/* Animated background elements */}
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
+              <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+              <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-emerald-300/20 rounded-full blur-2xl" />
             </div>
-            <p className="text-sm text-slate-500 mt-3">
-              Be the first to know when PreMed features launch.
-            </p>
+
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="text-center md:text-left">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/20 backdrop-blur rounded-full text-white/90 text-sm font-medium mb-4">
+                  <span className="w-2 h-2 bg-emerald-300 rounded-full animate-pulse" />
+                  <span>TribeWellPreMed - Coming Soon</span>
+                </div>
+
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 leading-tight">
+                  Your Journey to <span className="text-emerald-200">Medicine</span> Starts Here
+                </h1>
+
+                <p className="text-white/80 text-lg max-w-xl mb-6">
+                  From pre-med to MD. Get guidance, mentorship, and resources from people who've walked the path before you.
+                </p>
+
+                {/* Stats row */}
+                <div className="flex items-center gap-4 md:gap-6">
+                  <div className="text-center px-4 py-2 bg-white/10 backdrop-blur rounded-xl">
+                    <p className="text-2xl md:text-3xl font-bold text-white">{PREMED_FEATURES.length}</p>
+                    <p className="text-white/60 text-xs">Features</p>
+                  </div>
+                  <div className="text-center px-4 py-2 bg-white/10 backdrop-blur rounded-xl">
+                    <p className="text-2xl md:text-3xl font-bold text-white">{JOURNEY_STEPS.length}</p>
+                    <p className="text-white/60 text-xs">Year Journey</p>
+                  </div>
+                  <div className="text-center px-4 py-2 bg-white/10 backdrop-blur rounded-xl">
+                    <p className="text-2xl md:text-3xl font-bold text-white">1:1</p>
+                    <p className="text-white/60 text-xs">Mentorship</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Email Signup Card */}
+              <div className="p-5 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 w-full max-w-sm">
+                <h3 className="text-white font-semibold mb-3 text-center">Get Early Access</h3>
+                <div className="space-y-3">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50"
+                  />
+                  <button className="w-full px-6 py-3 bg-white hover:bg-emerald-50 text-emerald-600 font-bold rounded-xl shadow-lg transition-all hover:scale-105">
+                    Notify Me
+                  </button>
+                </div>
+                <p className="text-white/60 text-xs text-center mt-3">Be the first to know when PreMed launches.</p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -222,42 +252,55 @@ export default function PreMedPage() {
         </section>
 
         {/* Connection to TribeWellMD */}
-        <section className="mb-16 p-8 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl text-white">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">Part of the TribeWellMD Family</h2>
-            <p className="text-emerald-100 mb-6">
-              TribeWellPreMed is your starting point. When you get into medical school,
-              you'll have seamless access to TribeWellMD's full suite of study tools,
-              wellness resources, and community features.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/"
-                className="px-6 py-3 bg-white text-emerald-600 font-semibold rounded-xl hover:bg-emerald-50 transition-colors"
-              >
-                Explore TribeWellMD
-              </Link>
-              <Link
-                href="/community"
-                className="px-6 py-3 bg-emerald-600 text-white font-semibold rounded-xl hover:bg-emerald-700 transition-colors border border-emerald-400"
-              >
-                Join the Community
-              </Link>
+        <section className="mb-8">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 p-8">
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+            </div>
+
+            <div className="relative z-10 max-w-3xl mx-auto text-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center">
+                <span className="text-3xl">🏥</span>
+              </div>
+              <h2 className="text-2xl font-bold text-white mb-2">Part of the TribeWellMD Family</h2>
+              <p className="text-emerald-100 mb-6">
+                TribeWellPreMed is your starting point. When you get into medical school,
+                you'll have seamless access to TribeWellMD's full suite of study tools,
+                wellness resources, and community features.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link
+                  href="/"
+                  className="px-6 py-3 bg-white text-emerald-600 font-semibold rounded-xl hover:bg-emerald-50 transition-all hover:scale-105"
+                >
+                  Explore TribeWellMD
+                </Link>
+                <Link
+                  href="/community"
+                  className="px-6 py-3 bg-white/20 backdrop-blur text-white font-semibold rounded-xl hover:bg-white/30 transition-all border border-white/30"
+                >
+                  Join the Community
+                </Link>
+              </div>
             </div>
           </div>
         </section>
 
         {/* CTA */}
-        <section className="text-center p-12 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
-          <div className="text-5xl mb-4">🌱</div>
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Ready to Start Your Journey?</h2>
-          <p className="text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
-            Sign up for early access and be the first to know when TribeWellPreMed launches.
-            Your future in medicine starts with a single step.
-          </p>
-          <button className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold rounded-xl hover:from-emerald-600 hover:to-teal-600 transition-all shadow-lg shadow-emerald-500/25">
-            Get Early Access
-          </button>
+        <section className="mb-8">
+          <div className="p-8 bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 text-center">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center">
+              <span className="text-3xl">🌱</span>
+            </div>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Ready to Start Your Journey?</h2>
+            <p className="text-slate-600 dark:text-slate-400 mb-6 max-w-2xl mx-auto">
+              Sign up for early access and be the first to know when TribeWellPreMed launches.
+              Your future in medicine starts with a single step.
+            </p>
+            <button className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/25 transition-all hover:scale-105">
+              Get Early Access
+            </button>
+          </div>
         </section>
 
       </main>
