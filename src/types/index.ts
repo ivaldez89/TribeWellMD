@@ -54,6 +54,14 @@ export interface CardMetadata {
   source?: string;
   usmleStep?: 1 | 2 | 3;
   rotation?: Rotation; // Which rotation/exam this card belongs to
+  // Concept-based learning additions
+  conceptCode?: string; // Unique identifier for the clinical decision point
+  clinicalDecision?: string; // The "password" being tested (e.g., "CHA2DS2-VASc ≥2 for anticoagulation")
+  qbankCodes?: {
+    uworld?: string[]; // UWorld question IDs that test this concept
+    amboss?: string[]; // AMBOSS article codes
+  };
+  relatedConcepts?: string[]; // Links to related concept codes
 }
 
 export interface SpacedRepetitionData {
@@ -136,4 +144,119 @@ export interface FSRSParameters {
   requestRetention: number;
   maximumInterval: number;
   w: number[]; // FSRS weights
+}
+
+// Concept-based learning types for clinical decision points
+export interface ClinicalConcept {
+  code: string; // Unique identifier (e.g., "afib-anticoag-threshold")
+  name: string; // Human-readable name
+  clinicalDecision: string; // The "password" - what's being tested
+  system: MedicalSystem;
+  topic: string;
+  highYield: boolean;
+  testableAngles: string[]; // Different ways this concept is tested
+  relatedConcepts: string[]; // Links to related concept codes
+  qbankMapping: {
+    uworld: string[];
+    amboss: string[];
+  };
+}
+
+// QBank lookup result
+export interface QBankLookupResult {
+  qid: string;
+  source: 'uworld' | 'amboss';
+  concepts: ClinicalConcept[];
+  suggestedCards: Flashcard[];
+}
+
+// ============================================
+// Interactive Clinical Vignette (ICV) Types
+// ============================================
+
+// Core vignette structure
+export interface ClinicalVignette {
+  id: string;
+  schemaVersion: string;
+  createdAt: string;
+  updatedAt: string;
+  title: string;
+  initialScenario: string;
+  rootNodeId: string;
+  nodes: Record<string, DecisionNode>;
+  metadata: VignetteMetadata;
+}
+
+export interface VignetteMetadata {
+  system: MedicalSystem;
+  topic: string;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  conceptCodes: string[];
+  estimatedMinutes: number;
+  tags: string[];
+}
+
+export type DecisionNodeType = 'decision' | 'outcome' | 'information';
+
+export interface DecisionNode {
+  id: string;
+  type: DecisionNodeType;
+  content: string;
+  question?: string;
+  choices?: Choice[];
+  media?: {
+    type: 'imaging' | 'labs' | 'pathology' | 'ecg';
+    data: string; // base64 or URL
+    caption?: string;
+  };
+  clinicalPearl?: string;
+}
+
+export interface Choice {
+  id: string;
+  text: string;
+  isOptimal: boolean;
+  isAcceptable: boolean;
+  feedback: string;
+  consequence: string;
+  nextNodeId: string | null; // null = terminal
+  conceptCode?: string;
+}
+
+// Progress tracking
+export type VignetteMastery = 'learning' | 'familiar' | 'mastered';
+
+export interface VignetteProgress {
+  vignetteId: string;
+  completions: number;
+  lastCompleted: string | null;
+  nodePerformance: Record<string, NodePerformance>;
+  overallMastery: VignetteMastery;
+  nextReview: string;
+}
+
+export interface NodePerformance {
+  attempts: number;
+  optimalChoices: number;
+  acceptableChoices: number;
+  avgTimeMs: number;
+}
+
+// Session tracking
+export interface VignetteSession {
+  id: string;
+  vignetteId: string;
+  startedAt: string;
+  endedAt?: string;
+  decisions: DecisionRecord[];
+  completedOptimally: boolean;
+}
+
+export interface DecisionRecord {
+  nodeId: string;
+  choiceId: string;
+  wasOptimal: boolean;
+  wasAcceptable: boolean;
+  timeSpentMs: number;
+  timestamp: string;
 }

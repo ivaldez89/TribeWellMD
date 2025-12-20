@@ -9,6 +9,8 @@ import { DeckFilterPanel } from '@/components/deck/DeckFilterPanel';
 import { CardEditor } from '@/components/deck/CardEditor';
 import { PomodoroTimer } from '@/components/study/PomodoroTimer';
 import { recordCardReview, AchievementNotification } from '@/components/study/StudyStats';
+import { BackgroundSelector, useStudyBackground, getBackgroundUrl } from '@/components/study/BackgroundSelector';
+import { ExamCountdown } from '@/components/study/ExamCountdown';
 import { useFlashcards } from '@/hooks/useFlashcards';
 import type { Rating } from '@/types';
 
@@ -31,6 +33,16 @@ const AMBIENT_SOUNDS = [
   { id: 'rain', name: 'Rain', emoji: '🌧️' },
   { id: 'wind', name: 'Wind', emoji: '💨' },
   { id: 'binaural', name: 'Focus 40Hz', emoji: '🧠' },
+];
+
+// Study music streams - royalty-free radio stations
+const MUSIC_STREAMS = [
+  { id: 'lofi', name: 'Lofi Hip Hop', emoji: '🎧', url: 'https://streams.ilovemusic.de/iloveradio17.mp3' },
+  { id: 'classical', name: 'Classical', emoji: '🎻', url: 'https://live.musopen.org:8085/streamvbr0' },
+  { id: 'piano', name: 'Piano', emoji: '🎹', url: 'https://streams.ilovemusic.de/iloveradio28.mp3' },
+  { id: 'jazz', name: 'Jazz', emoji: '🎷', url: 'https://streaming.radio.co/s774887f7b/listen' },
+  { id: 'ambient', name: 'Ambient', emoji: '🌊', url: 'https://streams.ilovemusic.de/iloveradio6.mp3' },
+  { id: 'chillout', name: 'Chill Out', emoji: '☕', url: 'https://streams.ilovemusic.de/iloveradio7.mp3' },
 ];
 
 // Noise generator using Web Audio API
@@ -276,6 +288,7 @@ class NoiseGenerator {
 
 export default function FlashcardsPage() {
   const {
+    cards,
     dueCards,
     filteredDueCards,
     currentCard,
@@ -304,6 +317,16 @@ export default function FlashcardsPage() {
   const [showAmbient, setShowAmbient] = useState(false);
   const [showPomodoro, setShowPomodoro] = useState(false);
   const [newAchievement, setNewAchievement] = useState<Achievement | null>(null);
+  const [cramMode, setCramMode] = useState(false);
+  const [cramIndex, setCramIndex] = useState(0);
+  const [cramRevealed, setCramRevealed] = useState(false);
+
+  // Cram mode: cards with lapses (cards user got wrong before)
+  const cramCards = cards.filter(card => card.spacedRepetition.lapses > 0);
+  const currentCramCard = cramMode ? cramCards[cramIndex] : null;
+
+  // Study background state
+  const { selectedBackground, setSelectedBackground, opacity, setOpacity } = useStudyBackground();
   
   // Ambient sound state
   const [currentSound, setCurrentSound] = useState<string | null>(null);
@@ -311,10 +334,17 @@ export default function FlashcardsPage() {
   const [volume, setVolume] = useState(0.3);
   const noiseGenRef = useRef<NoiseGenerator | null>(null);
 
+  // Music stream state
+  const [currentMusic, setCurrentMusic] = useState<string | null>(null);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  const [isMusicLoading, setIsMusicLoading] = useState(false);
+  const [musicVolume, setMusicVolume] = useState(0.3);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
   // Initialize noise generator
   useEffect(() => {
     noiseGenRef.current = new NoiseGenerator();
-    
+
     return () => {
       if (noiseGenRef.current) {
         noiseGenRef.current.stop();
@@ -322,16 +352,62 @@ export default function FlashcardsPage() {
     };
   }, []);
 
-  // Update volume
+  // Initialize audio element for music
+  useEffect(() => {
+    audioRef.current = new Audio();
+    audioRef.current.volume = musicVolume;
+    audioRef.current.preload = 'auto';
+
+    // Event listeners for loading state
+    const audio = audioRef.current;
+    const handleCanPlay = () => setIsMusicLoading(false);
+    const handleWaiting = () => setIsMusicLoading(true);
+    const handlePlaying = () => setIsMusicLoading(false);
+    const handleError = () => {
+      setIsMusicLoading(false);
+      setIsMusicPlaying(false);
+      console.error('Music stream error');
+    };
+
+    audio.addEventListener('canplay', handleCanPlay);
+    audio.addEventListener('waiting', handleWaiting);
+    audio.addEventListener('playing', handlePlaying);
+    audio.addEventListener('error', handleError);
+
+    return () => {
+      audio.removeEventListener('canplay', handleCanPlay);
+      audio.removeEventListener('waiting', handleWaiting);
+      audio.removeEventListener('playing', handlePlaying);
+      audio.removeEventListener('error', handleError);
+      audio.pause();
+      audio.src = '';
+    };
+  }, []);
+
+  // Update sound volume
   useEffect(() => {
     if (noiseGenRef.current && isPlaying) {
       noiseGenRef.current.setVolume(volume);
     }
   }, [volume, isPlaying]);
 
-  // Play/pause sound
+  // Update music volume
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = musicVolume;
+    }
+  }, [musicVolume]);
+
+  // Play/pause ambient sound
   const playSound = useCallback((soundId: string) => {
     if (!noiseGenRef.current) return;
+
+    // Stop music if playing
+    if (audioRef.current && isMusicPlaying) {
+      audioRef.current.pause();
+      setIsMusicPlaying(false);
+      setCurrentMusic(null);
+    }
 
     if (currentSound === soundId && isPlaying) {
       noiseGenRef.current.stop();
@@ -342,7 +418,39 @@ export default function FlashcardsPage() {
       setCurrentSound(soundId);
       setIsPlaying(true);
     }
-  }, [currentSound, isPlaying, volume]);
+  }, [currentSound, isPlaying, volume, isMusicPlaying]);
+
+  // Play/pause music stream
+  const playMusic = useCallback((musicId: string) => {
+    if (!audioRef.current) return;
+
+    // Stop ambient sound if playing
+    if (noiseGenRef.current && isPlaying) {
+      noiseGenRef.current.stop();
+      setIsPlaying(false);
+      setCurrentSound(null);
+    }
+
+    if (currentMusic === musicId && isMusicPlaying) {
+      audioRef.current.pause();
+      setIsMusicPlaying(false);
+      setIsMusicLoading(false);
+    } else {
+      const stream = MUSIC_STREAMS.find(s => s.id === musicId);
+      if (stream) {
+        setIsMusicLoading(true);
+        setCurrentMusic(musicId);
+        audioRef.current.src = stream.url;
+        audioRef.current.play().then(() => {
+          setIsMusicPlaying(true);
+        }).catch((err) => {
+          console.error('Failed to play:', err);
+          setIsMusicLoading(false);
+          setIsMusicPlaying(false);
+        });
+      }
+    }
+  }, [currentMusic, isMusicPlaying, isPlaying]);
 
   const stopSound = useCallback(() => {
     if (noiseGenRef.current) {
@@ -351,6 +459,20 @@ export default function FlashcardsPage() {
     setIsPlaying(false);
     setCurrentSound(null);
   }, []);
+
+  const stopMusic = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.src = '';
+    }
+    setIsMusicPlaying(false);
+    setCurrentMusic(null);
+  }, []);
+
+  const stopAll = useCallback(() => {
+    stopSound();
+    stopMusic();
+  }, [stopSound, stopMusic]);
 
   // Auto-start session when page loads with due cards
   useEffect(() => {
@@ -494,12 +616,28 @@ export default function FlashcardsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 relative">
       <Header stats={stats} />
-      
-      <main className="max-w-5xl mx-auto px-4 py-8">
-        {/* Session progress bar */}
-        <div className="mb-6 flex items-center justify-between flex-wrap gap-2">
+
+      {/* Background overlay - positioned below header and toolbar, behind all content */}
+      {selectedBackground !== 'none' && (
+        <div
+          className="fixed left-0 right-0 bottom-0 bg-no-repeat transition-opacity duration-500 pointer-events-none"
+          style={{
+            top: '180px', // Below header + toolbar area
+            backgroundImage: `url(${getBackgroundUrl(selectedBackground)})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center bottom',
+            backgroundAttachment: 'fixed',
+            opacity: opacity,
+            zIndex: 0
+          }}
+        />
+      )}
+
+      <main className="relative max-w-5xl mx-auto px-4 py-8" style={{ zIndex: 2 }}>
+        {/* Session progress bar - solid background to cover the scene */}
+        <div className="mb-6 flex items-center justify-between flex-wrap gap-2 bg-slate-50 py-2 -mx-4 px-4 -mt-8 pt-8">
           <div className="flex items-center gap-4">
             {session && (
               <>
@@ -527,28 +665,71 @@ export default function FlashcardsPage() {
           <div className="flex items-center gap-2">
             {/* Pomodoro Timer (compact) */}
             <PomodoroTimer />
-            
-            {/* Ambient sounds button */}
+
+            {/* Exam Countdown (compact) */}
+            <ExamCountdown variant="compact" />
+
+            {/* Cram Mode toggle */}
+            <button
+              onClick={() => {
+                setCramMode(!cramMode);
+                setCramIndex(0);
+                setCramRevealed(false);
+              }}
+              disabled={cramCards.length === 0}
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                cramMode
+                  ? 'bg-orange-100 text-orange-700 border border-orange-300'
+                  : cramCards.length > 0
+                    ? 'text-slate-500 hover:text-slate-700 hover:bg-slate-100'
+                    : 'text-slate-300 cursor-not-allowed'
+              }`}
+              title={cramCards.length === 0 ? 'No cards to cram - you haven\'t missed any yet!' : `Cram ${cramCards.length} missed cards`}
+            >
+              <span className="text-base">🔥</span>
+              <span>Cram</span>
+              {cramCards.length > 0 && (
+                <span className={`text-xs px-1.5 py-0.5 rounded-full ${
+                  cramMode ? 'bg-orange-200' : 'bg-slate-200'
+                }`}>
+                  {cramCards.length}
+                </span>
+              )}
+            </button>
+
+            {/* Sounds & Music button */}
             <button
               onClick={() => setShowAmbient(!showAmbient)}
               className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors ${
-                showAmbient || isPlaying
-                  ? 'bg-purple-100 text-purple-700' 
+                showAmbient || isPlaying || isMusicPlaying
+                  ? 'bg-purple-100 text-purple-700'
                   : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100'
               }`}
             >
-              {isPlaying ? (
+              {isPlaying || isMusicPlaying ? (
                 <span className="flex items-center gap-1">
                   <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
-                  {AMBIENT_SOUNDS.find(s => s.id === currentSound)?.emoji}
+                  {isPlaying
+                    ? AMBIENT_SOUNDS.find(s => s.id === currentSound)?.emoji
+                    : MUSIC_STREAMS.find(s => s.id === currentMusic)?.emoji
+                  }
                 </span>
               ) : (
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                 </svg>
               )}
-              Sounds
+              Audio
             </button>
+
+            {/* Background scene selector */}
+            <BackgroundSelector
+              selectedBackground={selectedBackground}
+              opacity={opacity}
+              onBackgroundChange={setSelectedBackground}
+              onOpacityChange={setOpacity}
+              variant="light"
+            />
 
             {/* Toggle filters button */}
             <button
@@ -574,64 +755,124 @@ export default function FlashcardsPage() {
           </div>
         </div>
 
-        {/* Ambient Sound Panel */}
+        {/* Audio Panel - Ambient Sounds & Music */}
         {showAmbient && (
           <div className="mb-6 p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+            {/* Header with Stop button */}
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-semibold text-slate-900 flex items-center gap-2">
                 <svg className="w-5 h-5 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                 </svg>
-                Ambient Sounds
+                Sounds & Music
               </h3>
-              {isPlaying && (
+              {(isPlaying || isMusicPlaying) && (
                 <button
-                  onClick={stopSound}
+                  onClick={stopAll}
                   className="text-sm px-3 py-1 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
                 >
-                  Stop
+                  Stop All
                 </button>
               )}
             </div>
-            
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-4">
-              {AMBIENT_SOUNDS.map((sound) => (
-                <button
-                  key={sound.id}
-                  onClick={() => playSound(sound.id)}
-                  className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all ${
-                    currentSound === sound.id && isPlaying
-                      ? 'bg-purple-100 border-2 border-purple-400 shadow-sm'
-                      : 'bg-slate-50 border-2 border-transparent hover:bg-slate-100'
-                  }`}
-                >
-                  <span className="text-2xl">{sound.emoji}</span>
-                  <span className="text-xs font-medium text-slate-600">{sound.name}</span>
-                  {currentSound === sound.id && isPlaying && (
-                    <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
-                  )}
-                </button>
-              ))}
+
+            {/* Ambient Sounds Section */}
+            <div className="mb-5">
+              <h4 className="text-sm font-medium text-slate-600 mb-2 flex items-center gap-2">
+                <span>🎧</span> Ambient Sounds
+              </h4>
+              <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-3">
+                {AMBIENT_SOUNDS.map((sound) => (
+                  <button
+                    key={sound.id}
+                    onClick={() => playSound(sound.id)}
+                    className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all ${
+                      currentSound === sound.id && isPlaying
+                        ? 'bg-purple-100 border-2 border-purple-400 shadow-sm'
+                        : 'bg-slate-50 border-2 border-transparent hover:bg-slate-100'
+                    }`}
+                  >
+                    <span className="text-2xl">{sound.emoji}</span>
+                    <span className="text-xs font-medium text-slate-600">{sound.name}</span>
+                    {currentSound === sound.id && isPlaying && (
+                      <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
+                    )}
+                  </button>
+                ))}
+              </div>
+              {isPlaying && (
+                <div className="flex items-center gap-3">
+                  <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                  </svg>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.05"
+                    value={volume}
+                    onChange={(e) => setVolume(parseFloat(e.target.value))}
+                    className="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-purple-500"
+                  />
+                  <span className="text-sm text-slate-500 w-12 text-right">{Math.round(volume * 100)}%</span>
+                </div>
+              )}
             </div>
-            
-            <div className="flex items-center gap-3">
-              <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-              </svg>
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.05"
-                value={volume}
-                onChange={(e) => setVolume(parseFloat(e.target.value))}
-                className="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-purple-500"
-              />
-              <span className="text-sm text-slate-500 w-12 text-right">{Math.round(volume * 100)}%</span>
+
+            {/* Divider */}
+            <div className="border-t border-slate-200 my-4" />
+
+            {/* Study Music Section */}
+            <div>
+              <h4 className="text-sm font-medium text-slate-600 mb-2 flex items-center gap-2">
+                <span>🎵</span> Study Music
+              </h4>
+              <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-3">
+                {MUSIC_STREAMS.map((music) => (
+                  <button
+                    key={music.id}
+                    onClick={() => playMusic(music.id)}
+                    disabled={isMusicLoading && currentMusic !== music.id}
+                    className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all ${
+                      currentMusic === music.id && (isMusicPlaying || isMusicLoading)
+                        ? 'bg-indigo-100 border-2 border-indigo-400 shadow-sm'
+                        : 'bg-slate-50 border-2 border-transparent hover:bg-slate-100'
+                    } ${isMusicLoading && currentMusic !== music.id ? 'opacity-50' : ''}`}
+                  >
+                    <span className="text-2xl">{music.emoji}</span>
+                    <span className="text-xs font-medium text-slate-600">{music.name}</span>
+                    {currentMusic === music.id && isMusicLoading && (
+                      <span className="w-3 h-3 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+                    )}
+                    {currentMusic === music.id && isMusicPlaying && !isMusicLoading && (
+                      <span className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse" />
+                    )}
+                  </button>
+                ))}
+              </div>
+              {isMusicPlaying && (
+                <div className="flex items-center gap-3">
+                  <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                  </svg>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.05"
+                    value={musicVolume}
+                    onChange={(e) => setMusicVolume(parseFloat(e.target.value))}
+                    className="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                  />
+                  <span className="text-sm text-slate-500 w-12 text-right">{Math.round(musicVolume * 100)}%</span>
+                </div>
+              )}
             </div>
-            
-            <p className="mt-3 text-xs text-slate-400">
-              💡 Use headphones for binaural beats (Focus 40Hz) - creates a subtle beat perceived by your brain to enhance concentration.
+
+            {/* Tips */}
+            <p className="mt-4 text-xs text-slate-400">
+              💡 Ambient sounds are generated locally. Music streams from free internet radio stations.
+              Use headphones for binaural beats (Focus 40Hz).
             </p>
           </div>
         )}
@@ -651,8 +892,84 @@ export default function FlashcardsPage() {
           </div>
         )}
         
-        {/* Flashcard */}
-        {currentCard && (
+        {/* Cram Mode UI */}
+        {cramMode && (
+          <div className="mb-6">
+            {/* Cram Mode Header */}
+            <div className="flex items-center justify-between mb-4 p-4 bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl border border-orange-200">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🔥</span>
+                <div>
+                  <h2 className="font-semibold text-orange-900">Cram Mode</h2>
+                  <p className="text-sm text-orange-700">Reviewing cards you've missed before</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-orange-600">
+                  {cramIndex + 1} of {cramCards.length}
+                </span>
+                <button
+                  onClick={() => {
+                    setCramMode(false);
+                    setCramIndex(0);
+                    setCramRevealed(false);
+                  }}
+                  className="text-sm px-3 py-1.5 bg-white border border-orange-300 text-orange-700 rounded-lg hover:bg-orange-50 transition-colors"
+                >
+                  Exit Cram
+                </button>
+              </div>
+            </div>
+
+            {/* Cram Card Display */}
+            {currentCramCard ? (
+              <>
+                <FlashcardViewer
+                  card={currentCramCard}
+                  isRevealed={cramRevealed}
+                  onReveal={() => setCramRevealed(true)}
+                  onEdit={() => {}}
+                  onBack={cramIndex > 0 ? () => { setCramIndex(cramIndex - 1); setCramRevealed(false); } : undefined}
+                  cardNumber={cramIndex + 1}
+                  totalCards={cramCards.length}
+                />
+
+                {/* Cram Navigation */}
+                {cramRevealed && (
+                  <div className="flex justify-center gap-3 mt-6">
+                    <button
+                      onClick={() => {
+                        if (cramIndex < cramCards.length - 1) {
+                          setCramIndex(cramIndex + 1);
+                          setCramRevealed(false);
+                        } else {
+                          setCramMode(false);
+                          setCramIndex(0);
+                          setCramRevealed(false);
+                        }
+                      }}
+                      className="px-8 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-medium rounded-xl hover:from-orange-600 hover:to-amber-600 transition-all shadow-lg"
+                    >
+                      {cramIndex < cramCards.length - 1 ? 'Next Card' : 'Finish Cram'}
+                    </button>
+                  </div>
+                )}
+
+                {/* Card Stats */}
+                <div className="mt-4 text-center text-sm text-slate-500">
+                  <span>This card has been missed {currentCramCard.spacedRepetition.lapses} time{currentCramCard.spacedRepetition.lapses !== 1 ? 's' : ''}</span>
+                </div>
+              </>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-slate-500">No more cards to cram!</p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Regular Flashcard - only show when not in cram mode */}
+        {!cramMode && currentCard && (
           <>
             <FlashcardViewer
               card={currentCard}
@@ -663,7 +980,7 @@ export default function FlashcardsPage() {
               cardNumber={currentIndex + 1}
               totalCards={filteredDueCards.length}
             />
-            
+
             {/* Answer buttons - only show when revealed */}
             <AnswerButtons
               onRate={handleRateCard}
@@ -672,13 +989,19 @@ export default function FlashcardsPage() {
             />
           </>
         )}
-        
+
         {/* Keyboard shortcuts help */}
         <div className="mt-8 text-center">
           <p className="text-sm text-slate-400">
             <kbd className="px-1.5 py-0.5 bg-slate-200 rounded text-xs font-mono">Space</kbd> to reveal
             <span className="mx-2">•</span>
             <kbd className="px-1.5 py-0.5 bg-slate-200 rounded text-xs font-mono">1-4</kbd> to rate
+            {cramMode && (
+              <>
+                <span className="mx-2">•</span>
+                <kbd className="px-1.5 py-0.5 bg-orange-200 rounded text-xs font-mono">Esc</kbd> exit cram
+              </>
+            )}
           </p>
         </div>
       </main>

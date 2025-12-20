@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { useFlashcards } from '@/hooks/useFlashcards';
+import { BackgroundSelector, useStudyBackground, getBackgroundUrl } from '@/components/study/BackgroundSelector';
 
 // Rapid review stats type
 interface RapidReviewStats {
@@ -87,6 +88,9 @@ export default function RapidReviewPage() {
   const [sessionStarted, setSessionStarted] = useState(false);
   const [cardsReviewedThisSession, setCardsReviewedThisSession] = useState(0);
   const [rapidStats, setRapidStats] = useState<RapidReviewStats>({ totalCardsReviewed: 0, totalSessions: 0, lastSessionDate: null, todayCardsReviewed: 0, streak: 0 });
+
+  // Study background state
+  const { selectedBackground, setSelectedBackground, opacity, setOpacity } = useStudyBackground();
   
   // Voice selection
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
@@ -372,7 +376,23 @@ export default function RapidReviewPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative">
+      {/* Background overlay - positioned below header/stats bar */}
+      {selectedBackground !== 'none' && (
+        <div
+          className="fixed left-0 right-0 bottom-0 bg-no-repeat transition-opacity duration-500"
+          style={{
+            top: '100px', // Below header + stats bar
+            backgroundImage: `url(${getBackgroundUrl(selectedBackground)})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center bottom', // Anchor to bottom so beach/horizon stays visible
+            backgroundAttachment: 'fixed', // Prevents shifting when scrolling/resizing
+            opacity: opacity,
+            zIndex: 0
+          }}
+        />
+      )}
+
       {/* Header */}
       <header className="border-b border-slate-700/50 bg-slate-900/50 backdrop-blur-sm">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -390,15 +410,26 @@ export default function RapidReviewPage() {
             Rapid Review
           </h1>
           
-          <button
-            onClick={() => setShowSettings(!showSettings)}
-            className={`p-2 rounded-lg transition-colors ${showSettings ? 'bg-slate-700 text-white' : 'text-slate-400 hover:text-white'}`}
-          >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </button>
+          <div className="flex items-center gap-2">
+            {/* Background scene selector */}
+            <BackgroundSelector
+              selectedBackground={selectedBackground}
+              opacity={opacity}
+              onBackgroundChange={setSelectedBackground}
+              onOpacityChange={setOpacity}
+              variant="dark"
+            />
+
+            <button
+              onClick={() => setShowSettings(!showSettings)}
+              className={`p-2 rounded-lg transition-colors ${showSettings ? 'bg-slate-700 text-white' : 'text-slate-400 hover:text-white'}`}
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </button>
+          </div>
         </div>
       </header>
 

@@ -14,25 +14,25 @@
   }
   
   body {
-    @apply bg-slate-50 text-slate-900;
+    @apply bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100;
   }
   
-  /* Custom scrollbar */
+  /* Custom scrollbar - Light */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
   
   ::-webkit-scrollbar-track {
-    @apply bg-slate-100;
+    @apply bg-slate-100 dark:bg-slate-800;
   }
   
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-300 rounded-full;
+    @apply bg-slate-300 dark:bg-slate-600 rounded-full;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-400;
+    @apply bg-slate-400 dark:bg-slate-500;
   }
 }
 
@@ -49,12 +49,12 @@
   
   /* Loading skeleton */
   .skeleton {
-    @apply animate-pulse bg-slate-200 rounded;
+    @apply animate-pulse bg-slate-200 dark:bg-slate-700 rounded;
   }
   
   /* Focus ring for accessibility */
   .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2;
+    @apply focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900;
   }
 }
 
@@ -71,7 +71,7 @@
   
   /* Gradient text */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-teal-600;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-teal-600 dark:from-emerald-400 dark:to-teal-400;
   }
   
   /* Hide scrollbar but keep functionality */
@@ -140,4 +140,90 @@
 
 .animate-confetti {
   animation: confetti 1s ease-out forwards;
+}
+
+/* Animated gradient background */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.dark .glass-card {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Warm background */
+.bg-warm {
+  background: linear-gradient(135deg, #faf8f5 0%, #f5f3ef 50%, #faf8f5 100%);
+}
+
+.dark .bg-warm {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+}
+
+/* Floating orbs for background effect */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Gradient text animation */
+@keyframes text-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #0d9488 0%,
+    #06b6d4 25%,
+    #6366f1 50%,
+    #06b6d4 75%,
+    #0d9488 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shimmer 4s linear infinite;
 }

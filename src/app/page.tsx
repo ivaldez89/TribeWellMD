@@ -3,344 +3,323 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
-import { DeckFilterPanel } from '@/components/deck/DeckFilterPanel';
-import { PerformanceAnalytics } from '@/components/deck/PerformanceAnalytics';
-import { StudyStatsDisplay } from '@/components/study/StudyStats';
-import { useFlashcards } from '@/hooks/useFlashcards';
+
+// Type for PWA install prompt
+interface BeforeInstallPromptEvent extends Event {
+  prompt(): Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
+}
+
+const PLATFORM_PILLARS = [
+  {
+    title: 'Study',
+    description: 'FSRS-powered flashcards, rapid review, and exam prep designed for medical education',
+    href: '/study',
+    emoji: '📚',
+    gradient: 'from-teal-400 to-cyan-500',
+    features: ['Spaced Repetition', 'Step 2 CK & Shelf Exams', 'AI Card Generation']
+  },
+  {
+    title: 'Wellness',
+    description: 'Mental health resources, stress management, and support for your wellbeing journey',
+    href: '/wellness',
+    emoji: '💚',
+    gradient: 'from-rose-400 to-pink-500',
+    features: ['Mental Health Tools', 'Crisis Resources', 'Self-Care Guides']
+  },
+  {
+    title: 'Resources',
+    description: 'High-yield infographics, survival guides, and curated content for medical education',
+    href: '/resources',
+    emoji: '🖼️',
+    gradient: 'from-amber-400 to-orange-500',
+    features: ['Visual Summaries', 'Clinical Pearls', 'Study Guides']
+  },
+  {
+    title: 'Community',
+    description: 'Connect with mentors, join study groups, and find your tribe in medicine',
+    href: '/community',
+    emoji: '👥',
+    gradient: 'from-violet-400 to-purple-500',
+    features: ['Mentorship', 'Research & News', 'Study Groups'],
+    comingSoon: true
+  },
+  {
+    title: 'PreMed',
+    description: 'Guidance, mentorship, and resources for your journey to medical school',
+    href: '/premed',
+    emoji: '🎓',
+    gradient: 'from-emerald-400 to-teal-500',
+    features: ['MCAT Prep', 'Application Guide', 'Med Student Mentors'],
+    comingSoon: true
+  },
+];
+
+const USER_TYPES = [
+  { type: 'Medical Students', description: 'Ace your exams while staying sane', emoji: '🩺' },
+  { type: 'Residents', description: 'Stay sharp, pay it forward', emoji: '👨‍⚕️' },
+  { type: 'Attendings', description: 'Share wisdom, stay connected', emoji: '🏥' },
+  { type: 'Pre-Meds', description: 'Start your journey right', emoji: '📖' },
+];
 
 export default function HomePage() {
-  const { 
-    stats, 
-    dueCards, 
-    filteredDueCards,
-    isLoading, 
-    filters, 
-    availableTags, 
-    availableSystems,
-    topicPerformance,
-    setFilters,
-    clearFilters
-  } = useFlashcards();
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [isInstalled, setIsInstalled] = useState(true);
+  const [isIOS, setIsIOS] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full" />
-      </div>
-    );
-  }
+  useEffect(() => {
+    setIsMounted(true);
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    setIsInstalled(isStandalone);
+    const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    setIsIOS(isIOSDevice);
 
-  const hasActiveFilters = 
-    filters.tags.length > 0 || 
-    filters.systems.length > 0 || 
-    filters.rotations.length > 0 ||
-    filters.states.length > 0 ||
-    filters.difficulties.length > 0;
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e as BeforeInstallPromptEvent);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    const handleAppInstalled = () => {
+      setIsInstalled(true);
+      setDeferredPrompt(null);
+    };
+
+    window.addEventListener('appinstalled', handleAppInstalled);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', handleAppInstalled);
+    };
+  }, []);
+
+  const handleInstall = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        setIsInstalled(true);
+      }
+      setDeferredPrompt(null);
+    }
+  };
 
   return (
-    <div className="min-h-screen">
-      <Header stats={stats} />
-      
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+      <Header />
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Hero Section */}
-        <section className="text-center py-12 md:py-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-            Master <span className="text-gradient">Step 2 CK</span>
+        <section className="text-center mb-16 py-12 md:py-20">
+          <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
+            Study Smart.
+            <br />
+            <span className="bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 bg-clip-text text-transparent">Stay Well.</span>
+            <br />
+            Find Your Tribe.
           </h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
-            Evidence-based spaced repetition with clinical vignettes designed for 
-            high-yield retention. Study smarter, not harder.
+
+          <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto mb-10">
+            The complete platform for medical students, residents, and attendings.
+            <br />
+            Evidence-based tools. Mental wellness. Community.
           </p>
-          
-          {/* Main CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            {filteredDueCards.length > 0 ? (
-              <Link
-                href="/flashcards"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold rounded-xl shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
-              >
-                <span>Start Studying</span>
-                {hasActiveFilters && (
-                  <span className="px-2 py-0.5 text-xs bg-white/20 rounded-full">
-                    {filteredDueCards.length} cards
-                  </span>
-                )}
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </Link>
-            ) : dueCards.length > 0 && hasActiveFilters ? (
-              <button
-                onClick={clearFilters}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-amber-50 text-amber-700 font-semibold rounded-xl border border-amber-200 hover:bg-amber-100 transition-colors"
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                </svg>
-                <span>Clear filters ({dueCards.length} cards due)</span>
-              </button>
-            ) : (
-              <div className="inline-flex items-center gap-2 px-8 py-4 bg-slate-100 text-slate-600 font-semibold rounded-xl">
-                <svg className="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <span>All caught up! No cards due.</span>
-              </div>
-            )}
-            
-            {/* Rapid Review Button */}
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link
-              href="/rapid-review"
-              className="inline-flex items-center gap-2 px-6 py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold rounded-xl shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
+              href="/study"
+              className="px-8 py-4 bg-slate-900 dark:bg-slate-800 text-white font-semibold rounded-full hover:bg-slate-800 dark:hover:bg-slate-700 transition-colors"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-              <span>Rapid Review</span>
+              Get Started &nbsp;→
+            </Link>
+            <Link
+              href="/wellness"
+              className="text-slate-600 dark:text-slate-400 font-medium hover:text-slate-900 dark:hover:text-white transition-colors"
+            >
+              Explore Wellness →
             </Link>
           </div>
         </section>
-        
-        {/* Stats Grid */}
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <StatCard
-            label="Due Today"
-            value={hasActiveFilters ? filteredDueCards.length : stats.dueToday}
-            subValue={hasActiveFilters ? `of ${stats.dueToday}` : undefined}
-            icon={
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            }
-            highlight={stats.dueToday > 0}
-          />
-          <StatCard
-            label="Total Cards"
-            value={stats.totalCards}
-            icon={
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-              </svg>
-            }
-          />
-          <StatCard
-            label="New"
-            value={stats.newCards}
-            icon={
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-              </svg>
-            }
-          />
-          <StatCard
-            label="Learning"
-            value={stats.learningCards}
-            icon={
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-              </svg>
-            }
-          />
+
+        {/* Platform Pillars */}
+        <section className="mb-16">
+          {/* Top row - 2 featured cards */}
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            {PLATFORM_PILLARS.slice(0, 2).map((pillar, index) => (
+              <Link
+                key={index}
+                href={pillar.href}
+                className={`group relative p-8 rounded-2xl bg-gradient-to-br ${pillar.gradient} text-white overflow-hidden hover:scale-[1.02] transition-transform duration-300 shadow-lg`}
+              >
+                <div className="flex items-start justify-between">
+                  <div>
+                    <div className="text-5xl mb-4">{pillar.emoji}</div>
+                    <h3 className="text-3xl font-bold mb-3">{pillar.title}</h3>
+                    <p className="text-white/90 mb-6 max-w-md">{pillar.description}</p>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {pillar.features.map((feature, idx) => (
+                    <span key={idx} className="px-4 py-1.5 bg-white/20 backdrop-blur rounded-full text-sm">
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Bottom row - 3 cards */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {PLATFORM_PILLARS.slice(2).map((pillar, index) => (
+              <Link
+                key={index}
+                href={pillar.href}
+                className={`group relative p-6 rounded-2xl bg-gradient-to-br ${pillar.gradient} text-white overflow-hidden hover:scale-[1.02] transition-transform duration-300 shadow-lg`}
+              >
+                {pillar.comingSoon && (
+                  <div className="absolute top-4 right-4 px-3 py-1 bg-white/20 backdrop-blur rounded-full text-xs font-medium">
+                    Coming Soon
+                  </div>
+                )}
+
+                <div className="text-4xl mb-4">{pillar.emoji}</div>
+                <h3 className="text-2xl font-bold mb-2">{pillar.title}</h3>
+                <p className="text-white/80 text-sm mb-4">{pillar.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {pillar.features.map((feature, idx) => (
+                    <span key={idx} className="px-3 py-1 bg-white/20 backdrop-blur rounded-full text-xs">
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+              </Link>
+            ))}
+          </div>
         </section>
 
-        {/* AI Card Generator CTA */}
-        <section className="mb-8">
-          <Link
-            href="/generate"
-            className="block group p-6 bg-gradient-to-br from-violet-500 via-purple-500 to-fuchsia-500 rounded-2xl shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all duration-300 text-white"
-          >
-            <div className="flex items-center justify-between">
+        {/* Who We Serve */}
+        <section className="mb-16 py-16 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-100 to-slate-50 dark:from-slate-800/50 dark:to-slate-900">
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white text-center mb-4">
+            For Everyone in Medicine
+          </h2>
+          <p className="text-center text-slate-600 dark:text-slate-400 mb-10 max-w-2xl mx-auto">
+            Whether you're just starting out or leading a team, we've got your back.
+          </p>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto">
+            {USER_TYPES.map((user, i) => (
+              <div
+                key={i}
+                className="group p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-700 transition-all hover:shadow-lg text-center"
+              >
+                <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-600 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
+                  {user.emoji}
+                </div>
+                <h3 className="font-bold text-slate-900 dark:text-white mb-1">{user.type}</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400">{user.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Mission Section */}
+        <section className="mb-16 bg-slate-900 dark:bg-slate-800 rounded-3xl p-8 md:p-12 text-center">
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
+            Built by Medical Students, for Everyone in Medicine
+          </h2>
+          <p className="text-slate-300 text-lg max-w-3xl mx-auto mb-8">
+            We believe that succeeding in medicine shouldn't mean sacrificing your health. TribeWellMD combines evidence-based study tools with wellness resources and a supportive community to help you thrive at every stage.
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-6 mt-8">
+            <div className="text-center">
+              <div className="text-4xl mb-3">🎯</div>
+              <h4 className="font-semibold text-white mb-2">Study Smarter</h4>
+              <p className="text-slate-400 text-sm">FSRS algorithm optimizes your learning for maximum retention with minimum time</p>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl mb-3">💚</div>
+              <h4 className="font-semibold text-white mb-2">Wellness First</h4>
+              <p className="text-slate-400 text-sm">Mental health resources, crisis support, and self-care tools always at your fingertips</p>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl mb-3">🤝</div>
+              <h4 className="font-semibold text-white mb-2">Find Your Tribe</h4>
+              <p className="text-slate-400 text-sm">Connect with mentors, peers, and a community that understands your journey</p>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="text-center mb-16">
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+            Ready to Join Your Tribe?
+          </h2>
+          <p className="text-slate-600 dark:text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
+            Start your journey today. Study smarter, take care of yourself, and connect with a community that has your back.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/study"
+              className="px-8 py-4 bg-teal-500 text-white font-bold rounded-xl hover:bg-teal-600 transition-all shadow-lg"
+            >
+              Start Studying Now →
+            </Link>
+            <Link
+              href="/premed"
+              className="px-8 py-4 border-2 border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold rounded-xl hover:border-teal-500 hover:text-teal-600 transition-all"
+            >
+              I'm a Pre-Med
+            </Link>
+          </div>
+        </section>
+
+        {/* Install App Section */}
+        {isMounted && !isInstalled && (
+          <section className="mb-16 p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center">
-                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center flex-shrink-0">
+                  <span className="text-2xl">📱</span>
                 </div>
                 <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-xl font-bold group-hover:translate-x-1 transition-transform">
-                      AI Card Generator
-                    </h3>
-                    <span className="px-2 py-0.5 text-xs bg-white/20 rounded-full">NEW</span>
-                  </div>
-                  <p className="text-white/80 mt-1">
-                    Paste lecture notes or describe a topic → get instant flashcards
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">Install TribeWellMD</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm">
+                    {isIOS ? 'Tap share → Add to Home Screen' : 'Add to your home screen for quick access'}
                   </p>
                 </div>
               </div>
-              <svg className="w-6 h-6 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
+              {deferredPrompt ? (
+                <button
+                  onClick={handleInstall}
+                  className="px-6 py-3 bg-teal-500 text-white font-semibold rounded-xl hover:bg-teal-600 transition-all"
+                >
+                  Install App
+                </button>
+              ) : (
+                <div className="text-slate-500 text-sm">
+                  {isIOS ? 'Use Safari to install' : 'Use browser menu to install'}
+                </div>
+              )}
             </div>
-          </Link>
-        </section>
+          </section>
+        )}
 
-        {/* Your Progress (Gamification) */}
-        <section className="mb-8">
-          <StudyStatsDisplay />
-        </section>
-
-        {/* Filter Panel and Analytics */}
-        <section className="grid md:grid-cols-2 gap-6 mb-8">
-          <DeckFilterPanel
-            filters={filters}
-            availableTags={availableTags}
-            availableSystems={availableSystems}
-            filteredCount={filteredDueCards.length}
-            totalDueCount={dueCards.length}
-            onFiltersChange={setFilters}
-            onClearFilters={clearFilters}
-          />
-          <PerformanceAnalytics topicPerformance={topicPerformance} />
-        </section>
-        
-        {/* Quick Actions */}
-        <section className="grid md:grid-cols-4 gap-6">
-          {/* Shelf Exam Selector */}
-          <Link
-            href="/shelf"
-            className="group p-6 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-300 text-white"
-          >
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:translate-x-1 transition-transform">
-                  Shelf Exams
-                </h3>
-                <p className="text-white/80 mt-1 text-sm">
-                  Targeted rotation content
-                </p>
-              </div>
-            </div>
-          </Link>
-
-          {/* Study Session */}
-          <Link
-            href="/flashcards"
-            className="group p-6 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg hover:border-emerald-200 transition-all duration-300"
-          >
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center group-hover:bg-emerald-500 transition-colors">
-                <svg className="w-6 h-6 text-emerald-600 group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-slate-900 group-hover:text-emerald-600 transition-colors">
-                  Study Session
-                </h3>
-                <p className="text-slate-600 mt-1 text-sm">
-                  Spaced repetition review
-                </p>
-              </div>
-            </div>
-          </Link>
-          
-          {/* Import Cards */}
-          <Link
-            href="/import"
-            className="group p-6 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg hover:border-emerald-200 transition-all duration-300"
-          >
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center group-hover:bg-emerald-500 transition-colors">
-                <svg className="w-6 h-6 text-emerald-600 group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-slate-900 group-hover:text-emerald-600 transition-colors">
-                  Import Cards
-                </h3>
-                <p className="text-slate-600 mt-1 text-sm">
-                  Add from JSON files
-                </p>
-              </div>
-            </div>
-          </Link>
-
-          {/* AI Generate */}
-          <Link
-            href="/generate"
-            className="group p-6 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg hover:border-violet-200 transition-all duration-300"
-          >
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-violet-100 flex items-center justify-center group-hover:bg-violet-500 transition-colors">
-                <svg className="w-6 h-6 text-violet-600 group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-slate-900 group-hover:text-violet-600 transition-colors">
-                  AI Generate
-                </h3>
-                <p className="text-slate-600 mt-1 text-sm">
-                  Create cards from notes
-                </p>
-              </div>
-            </div>
-          </Link>
-        </section>
-        
-        {/* FSRS Info */}
-        <section className="mt-12 p-6 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl text-white">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
-              <svg className="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Powered by FSRS Algorithm</h3>
-              <p className="text-slate-300 leading-relaxed">
-                Step2Cards uses the Free Spaced Repetition Scheduler (FSRS), a modern algorithm 
-                that optimizes review intervals based on your performance. Cards you find easy 
-                will appear less frequently, while challenging material gets more practice time.
-              </p>
-            </div>
+        {/* Footer */}
+        <footer className="text-center py-8 border-t border-slate-200 dark:border-slate-800">
+          <div className="flex items-center justify-center gap-1 mb-2">
+            <span className="font-serif text-xl font-bold text-slate-900 dark:text-white">Tribe</span>
+            <span className="font-serif text-xl font-bold text-teal-600">Well</span>
+            <span className="font-serif text-xl font-light text-indigo-600">MD</span>
           </div>
-        </section>
+          <p className="text-slate-500 dark:text-slate-400 text-sm">
+            Study smart. Stay well. Find your tribe.
+          </p>
+        </footer>
       </main>
-    </div>
-  );
-}
-
-interface StatCardProps {
-  label: string;
-  value: number;
-  subValue?: string;
-  icon: React.ReactNode;
-  highlight?: boolean;
-}
-
-function StatCard({ label, value, subValue, icon, highlight }: StatCardProps) {
-  return (
-    <div className={`
-      p-4 rounded-xl border transition-all duration-300
-      ${highlight 
-        ? 'bg-gradient-to-br from-emerald-50 to-teal-50 border-emerald-200' 
-        : 'bg-white border-slate-200'
-      }
-    `}>
-      <div className="flex items-center gap-3">
-        <div className={`
-          w-10 h-10 rounded-lg flex items-center justify-center
-          ${highlight ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 text-slate-500'}
-        `}>
-          {icon}
-        </div>
-        <div>
-          <div className="flex items-baseline gap-1">
-            <p className="text-2xl font-bold text-slate-900">{value}</p>
-            {subValue && <span className="text-sm text-slate-400">{subValue}</span>}
-          </div>
-          <p className="text-sm text-slate-500">{label}</p>
-        </div>
-      </div>
     </div>
   );
 }
