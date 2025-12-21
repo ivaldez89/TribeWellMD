@@ -203,6 +203,28 @@ export function StreakCounter({ variant = 'compact', showDropdown = true }: Stre
               </div>
             </div>
 
+            {/* Village Points - Study contributes to charity */}
+            <div className="p-4 border-b border-slate-100 dark:border-slate-700 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">💚</span>
+                  <div>
+                    <div className="text-sm font-medium text-slate-700 dark:text-slate-300">Village Points</div>
+                    <div className="text-xs text-slate-500 dark:text-slate-400">Your study helps the community</div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">
+                    {(streakData.weeklyVillagePoints || 0).toLocaleString()}
+                  </div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400">this week</div>
+                </div>
+              </div>
+              <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                Every 10 XP = 1 Village Point toward charity
+              </p>
+            </div>
+
             {/* Streak Freezes */}
             <div className="p-4 bg-slate-50 dark:bg-slate-900/50">
               <div className="flex items-center justify-between">

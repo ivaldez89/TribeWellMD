@@ -276,8 +276,8 @@ export function BackgroundSelector({
             onClick={() => setShowPanel(false)}
           />
 
-          {/* Panel */}
-          <div className={`absolute right-0 mt-2 w-80 rounded-xl shadow-xl border z-[110] ${
+          {/* Panel - positioned to not overflow screen */}
+          <div className={`fixed right-4 mt-2 w-80 rounded-xl shadow-xl border z-[110] ${
             isDark
               ? 'bg-slate-800 border-slate-700'
               : 'bg-white border-slate-200'

@@ -16,6 +16,10 @@ export interface StreakData {
   usedFreezeToday: boolean;
   weeklyActivity: boolean[]; // Last 7 days, index 0 = today
   achievements: string[];
+  // Village points from study activities
+  totalVillagePoints: number;
+  weeklyVillagePoints: number;
+  lastVillagePointsReset: string | null;
 }
 
 const DEFAULT_DAILY_GOAL = 50; // XP needed per day
@@ -50,6 +54,14 @@ const getXPForNextLevel = (level: number): number => {
   return xpRequired;
 };
 
+const getWeekStart = (): string => {
+  const now = new Date();
+  const dayOfWeek = now.getDay(); // 0 = Sunday
+  const diff = now.getDate() - dayOfWeek;
+  const weekStart = new Date(now.setDate(diff));
+  return getDateString(weekStart);
+};
+
 const createDefaultStreak = (): StreakData => ({
   currentStreak: 0,
   longestStreak: 0,
@@ -61,7 +73,10 @@ const createDefaultStreak = (): StreakData => ({
   streakFreezes: 2, // Start with 2 free streak freezes
   usedFreezeToday: false,
   weeklyActivity: [false, false, false, false, false, false, false],
-  achievements: []
+  achievements: [],
+  totalVillagePoints: 0,
+  weeklyVillagePoints: 0,
+  lastVillagePointsReset: getWeekStart()
 });
 
 export function useStreak() {
@@ -192,6 +207,18 @@ export function useStreak() {
         newAchievements.push('first-steps');
       }
 
+      // Calculate village points (study activities contribute to charity pool)
+      // 10 XP = 1 village point (studying helps the community!)
+      const villagePointsEarned = Math.floor(amount / 10);
+
+      // Check if we need to reset weekly village points
+      const currentWeekStart = getWeekStart();
+      const shouldResetWeekly = prev.lastVillagePointsReset !== currentWeekStart;
+
+      const newWeeklyVillagePoints = shouldResetWeekly
+        ? villagePointsEarned
+        : prev.weeklyVillagePoints + villagePointsEarned;
+
       return {
         ...prev,
         todayXP: newTodayXP,
@@ -201,7 +228,10 @@ export function useStreak() {
         longestStreak: newLongestStreak,
         lastActivityDate: today,
         weeklyActivity: newWeeklyActivity,
-        achievements: newAchievements
+        achievements: newAchievements,
+        totalVillagePoints: prev.totalVillagePoints + villagePointsEarned,
+        weeklyVillagePoints: newWeeklyVillagePoints,
+        lastVillagePointsReset: currentWeekStart
       };
     });
   }, []);
