@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
@@ -14,7 +14,7 @@ const MOOD_EMOJIS = ['😢', '😔', '😐', '🙂', '😊'];
 const ENERGY_EMOJIS = ['😴', '🥱', '😌', '⚡', '🔥'];
 const STRESS_EMOJIS = ['😌', '🙂', '😐', '😰', '🤯'];
 
-export default function WellnessPage() {
+function WellnessPageContent() {
   const searchParams = useSearchParams();
   const {
     profile,
@@ -993,5 +993,24 @@ export default function WellnessPage() {
 
       <Footer />
     </div>
+  );
+}
+
+// Wrapper component with Suspense boundary for useSearchParams
+export default function WellnessPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+        <Header />
+        <div className="flex items-center justify-center" style={{ minHeight: 'calc(100vh - 64px)' }}>
+          <div className="text-center">
+            <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+            <p className="text-slate-600 dark:text-slate-400">Loading your wellness journey...</p>
+          </div>
+        </div>
+      </div>
+    }>
+      <WellnessPageContent />
+    </Suspense>
   );
 }
