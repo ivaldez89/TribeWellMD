@@ -8,6 +8,7 @@ import { useVignette } from '@/hooks/useVignette';
 import { VignetteViewer } from '@/components/vignettes/VignetteViewer';
 import { VignetteProgress } from '@/components/vignettes/VignetteProgress';
 import { BackgroundSelector, useStudyBackground, getBackgroundUrl } from '@/components/study/BackgroundSelector';
+import { useStreak } from '@/hooks/useStreak';
 
 // Ambient sound definitions
 const AMBIENT_SOUNDS = [
@@ -295,6 +296,9 @@ export default function CasePlayerPage() {
     endSession
   } = useVignette(vignetteId);
 
+  // Streak/XP system
+  const { addXP } = useStreak();
+
   // Study background state
   const { selectedBackground, setSelectedBackground, opacity, setOpacity } = useStudyBackground();
 
@@ -479,6 +483,11 @@ export default function CasePlayerPage() {
   };
 
   const handleFinish = () => {
+    // Award XP for completing the case (bonus for optimal path)
+    const baseXP = 25;
+    const optimalBonus = session?.completedOptimally ? 15 : 0;
+    addXP(baseXP + optimalBonus, 'Case completion');
+
     stopAll();
     endSession();
     router.push('/cases');

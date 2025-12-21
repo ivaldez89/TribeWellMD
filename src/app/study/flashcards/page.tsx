@@ -13,6 +13,7 @@ import { BackgroundSelector, useStudyBackground, getBackgroundUrl } from '@/comp
 import { CalendarWidget } from '@/components/calendar/CalendarWidget';
 import { ExamCountdown } from '@/components/study/ExamCountdown';
 import { useFlashcards } from '@/hooks/useFlashcards';
+import { useStreak } from '@/hooks/useStreak';
 import type { Rating } from '@/types';
 
 // Achievement type for notifications
@@ -313,6 +314,9 @@ export default function FlashcardsPage() {
     goToCard
   } = useFlashcards();
 
+  // Streak/XP system
+  const { addXP } = useStreak();
+
   const [showEditor, setShowEditor] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [showAmbient, setShowAmbient] = useState(false);
@@ -527,16 +531,25 @@ export default function FlashcardsPage() {
     }
   };
 
-  // Handle card rating with achievement tracking
+  // Handle card rating with achievement tracking and XP
   const handleRateCard = (rating: Rating) => {
     // Record the review for stats/achievements
     const { newAchievements } = recordCardReview();
-    
+
     // Show achievement notification if any
     if (newAchievements.length > 0) {
       setNewAchievement(newAchievements[0]);
     }
-    
+
+    // Award XP based on rating quality (better recall = more XP)
+    const xpRewards: Record<Rating, number> = {
+      1: 5,   // Again - still learning
+      2: 8,   // Hard - some effort
+      3: 10,  // Good - solid recall
+      4: 12   // Easy - mastered
+    };
+    addXP(xpRewards[rating], 'Flashcard review');
+
     // Call the original rate function
     rateCard(rating);
   };

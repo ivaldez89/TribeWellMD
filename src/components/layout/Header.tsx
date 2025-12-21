@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ThemeToggle } from '@/components/theme/ThemeProvider';
 import { ProfileDropdown } from '@/components/profile/ProfileDropdown';
+import { StreakCounter } from '@/components/gamification/StreakCounter';
 
 interface NavLinkProps {
   href: string;
@@ -179,8 +180,11 @@ export function Header({ stats }: HeaderProps) {
             <NavDropdown label="Community" href="/community" items={communityDropdownItems} />
           </nav>
           
-          {/* Right side: Theme toggle, Stats & Profile */}
+          {/* Right side: Streak, Theme toggle, Stats & Profile */}
           <div className="flex items-center gap-3">
+            {/* Streak Counter - Duolingo style */}
+            <StreakCounter variant="compact" />
+
             {/* Theme Toggle */}
             <ThemeToggle />
 
