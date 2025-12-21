@@ -10,31 +10,31 @@ export default function AboutPage() {
       <Header />
 
       <main>
-        {/* Hero Section - Origin Story */}
-        <section className="bg-gradient-to-b from-slate-50 to-white dark:from-slate-800 dark:to-slate-900">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        {/* Hero Section - Dark Banner (matching Investors/Partners/Home style) */}
+        <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="max-w-4xl">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 rounded-full text-sm font-medium mb-6">
-                <span className="w-2 h-2 bg-teal-500 rounded-full animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-teal-500/20 text-teal-300 rounded-full text-sm font-medium mb-6">
+                <span className="w-2 h-2 bg-teal-400 rounded-full animate-pulse" />
                 Our Story
-              </span>
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-8 leading-tight">
-                Born From Experience.<br />
-                <span className="text-teal-600 dark:text-teal-400">Built for Change.</span>
-              </h1>
-              <div className="prose prose-lg dark:prose-invert max-w-none">
-                <p className="text-xl text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
-                  TribeWellMD was founded by physicians who lived the paradox: training to heal others while watching themselves and colleagues struggle with burnout, isolation, and a system that treats wellness as an afterthought.
-                </p>
-                <blockquote className="border-l-4 border-teal-500 pl-6 py-2 my-8 bg-teal-50 dark:bg-teal-900/20 rounded-r-xl">
-                  <p className="text-xl text-slate-700 dark:text-slate-300 italic mb-2">
-                    "We kept asking ourselves: why does becoming a doctor require sacrificing your own health? What if the same tools that help us learn could help us thrive?"
-                  </p>
-                  <cite className="text-sm text-slate-500 dark:text-slate-400 not-italic">
-                    — TribeWellMD Founding Team
-                  </cite>
-                </blockquote>
               </div>
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                Born From Experience.{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-400">
+                  Built for Change.
+                </span>
+              </h1>
+              <p className="text-xl text-slate-300 mb-8 max-w-3xl">
+                TribeWellMD was founded by physicians who lived the paradox: training to heal others while watching themselves and colleagues struggle with burnout, isolation, and a system that treats wellness as an afterthought.
+              </p>
+              <blockquote className="border-l-4 border-teal-400 pl-6 py-4 bg-white/5 rounded-r-xl max-w-3xl">
+                <p className="text-xl text-slate-200 italic mb-2">
+                  "We kept asking ourselves: why does becoming a doctor require sacrificing your own health? What if the same tools that help us learn could help us thrive?"
+                </p>
+                <cite className="text-sm text-slate-400 not-italic">
+                  — TribeWellMD Founding Team
+                </cite>
+              </blockquote>
             </div>
           </div>
         </section>

@@ -66,21 +66,6 @@ const Icons = {
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 12h.01" />
     </svg>
   ),
-  Heart: () => (
-    <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-    </svg>
-  ),
-  Handshake: () => (
-    <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M10.05 4.575a1.575 1.575 0 10-3.15 0v3m3.15-3v-1.5a1.575 1.575 0 013.15 0v1.5m-3.15 0l.075 5.925m3.075.75V4.575m0 0a1.575 1.575 0 013.15 0V15M6.9 7.575a1.575 1.575 0 10-3.15 0v8.175a6.75 6.75 0 006.75 6.75h2.018a5.25 5.25 0 003.712-1.538l1.732-1.732a5.25 5.25 0 001.538-3.712l.003-2.024a.668.668 0 01.198-.471 1.575 1.575 0 10-2.228-2.228 3.818 3.818 0 00-1.12 2.687M6.9 7.575V12m6.27 4.318A4.49 4.49 0 0116.35 15" />
-    </svg>
-  ),
-  Sparkles: () => (
-    <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
-    </svg>
-  ),
   Users: () => (
     <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
       <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
@@ -91,14 +76,19 @@ const Icons = {
       <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
     </svg>
   ),
-  Lightbulb: () => (
-    <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+  Sparkles: () => (
+    <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
     </svg>
   ),
-  Phone: () => (
-    <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+  Check: () => (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+  ),
+  Arrow: () => (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
     </svg>
   ),
 };
@@ -118,7 +108,7 @@ const PLATFORM_PILLARS = [
     href: '/wellness',
     icon: 'Wellness',
     gradient: 'from-rose-400 to-pink-500',
-    features: ['Points → Donations', 'Activity Tracking', 'Wellness Challenges']
+    features: ['Points to Donations', 'Activity Tracking', 'Wellness Challenges']
   },
   {
     title: 'Resources',
@@ -155,6 +145,13 @@ const USER_TYPES = [
   { type: 'Pre-Meds', description: 'Start your journey right', icon: 'PreMedStudent' },
 ];
 
+const VALUE_PROPS = [
+  { text: 'FSRS-powered spaced repetition', icon: 'brain' },
+  { text: 'Wellness points become real donations', icon: 'heart' },
+  { text: 'Mentorship from those who walked your path', icon: 'users' },
+  { text: 'Evidence-based learning science', icon: 'science' },
+];
+
 // Icon renderer helper
 const renderIcon = (iconName: string, className?: string) => {
   const IconComponent = Icons[iconName as keyof typeof Icons];
@@ -167,10 +164,8 @@ const renderIcon = (iconName: string, className?: string) => {
 };
 
 export default function HomePage() {
-  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
-  const [isInstalled, setIsInstalled] = useState(true);
-  const [isIOS, setIsIOS] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+  const [, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [, setIsInstalled] = useState(true);
 
   // Scroll animation refs
   const frameworkRef = useRef<HTMLDivElement>(null);
@@ -208,11 +203,8 @@ export default function HomePage() {
   };
 
   useEffect(() => {
-    setIsMounted(true);
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
     setIsInstalled(isStandalone);
-    const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    setIsIOS(isIOSDevice);
 
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
@@ -257,69 +249,73 @@ export default function HomePage() {
     return () => observer.disconnect();
   }, []);
 
-  const handleInstall = async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        setIsInstalled(true);
-      }
-      setDeferredPrompt(null);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
       <Header />
 
       <main>
-        {/* Hero Section - White background */}
-        <section className="bg-white dark:bg-slate-900 overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 text-center">
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
-              <span className="inline-block animate-fade-in-up">Study Smart.</span>
-              <br />
-              <span className="inline-block animate-fade-in-up animation-delay-100">Find Your Tribe.</span>
-              <br />
-              <span className="inline-block animate-fade-in-up animation-delay-200">
-                <span className="text-shimmer">Stay Well.</span>
-              </span>
-            </h1>
+        {/* Hero Section - Dark Banner (matching Investors/Partners style) */}
+        <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+            <div className="max-w-4xl">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-teal-500/20 text-teal-300 rounded-full text-sm font-medium mb-6">
+                <span className="w-2 h-2 bg-teal-400 rounded-full animate-pulse" />
+                Medical Education Reimagined
+              </div>
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                Study Smart. Find Your Tribe.{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-400">
+                  Stay Well.
+                </span>
+              </h1>
+              <p className="text-xl text-slate-300 mb-8 max-w-3xl">
+                The complete platform for medical students, residents, and attendings.
+                Evidence-based learning tools, mental wellness support, and a community that has your back.
+              </p>
 
-            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto mb-10 animate-fade-in-up animation-delay-300">
-              The complete platform for medical students, residents, and attendings.
-              <br />
-              Evidence-based tools. Mental wellness. Community.
-            </p>
+              {/* Value props */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
+                {VALUE_PROPS.map((prop, idx) => (
+                  <div key={idx} className="flex items-center gap-3 text-slate-300">
+                    <div className="w-5 h-5 rounded-full bg-teal-500/30 flex items-center justify-center">
+                      <Icons.Check />
+                    </div>
+                    <span className="text-sm">{prop.text}</span>
+                  </div>
+                ))}
+              </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-fade-in-up animation-delay-400">
-              <Link
-                href="/study"
-                className="px-8 py-4 bg-slate-900 dark:bg-slate-800 text-white font-semibold rounded-full hover:bg-slate-800 dark:hover:bg-slate-700 transition-all hover:scale-105 hover:shadow-lg"
-              >
-                Get Started &nbsp;→
-              </Link>
-              <Link
-                href="/wellness"
-                className="text-slate-600 dark:text-slate-400 font-medium hover:text-slate-900 dark:hover:text-white transition-colors"
-              >
-                Explore Wellness →
-              </Link>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href="/register"
+                  className="px-8 py-4 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold rounded-xl hover:from-teal-600 hover:to-cyan-600 transition-all shadow-lg hover:scale-105"
+                >
+                  Get Started Free
+                </Link>
+                <Link
+                  href="/about"
+                  className="px-8 py-4 border-2 border-slate-600 text-white font-semibold rounded-xl hover:bg-slate-800 transition-all"
+                >
+                  Learn More
+                </Link>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Platform Pillars - Light teal background (first after hero) */}
-        <section className="bg-gradient-to-b from-teal-50/70 to-cyan-50/50 dark:from-slate-800/50 dark:to-slate-900" ref={pillarsRef}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div className={`text-center mb-10 transition-all duration-700 ${pillarsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-                Explore Our Platform
+        {/* Platform Pillars */}
+        <section className="bg-white dark:bg-slate-900" ref={pillarsRef}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div className={`text-center mb-12 transition-all duration-700 ${pillarsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <span className="text-sm font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">Platform Features</span>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 mb-4">
+                Everything You Need to Thrive
               </h2>
               <p className="text-slate-600 dark:text-slate-300 text-lg max-w-2xl mx-auto">
-                Tools designed to help you thrive at every stage of your medical journey
+                Tools designed to help you succeed at every stage of your medical journey
               </p>
             </div>
+
             {/* Top row - 2 featured cards */}
             <div className={`grid md:grid-cols-2 gap-6 mb-6 transition-all duration-700 delay-200 ${pillarsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               {PLATFORM_PILLARS.slice(0, 2).map((pillar, index) => (
@@ -382,200 +378,125 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Philosophy Quote - White background */}
-        <section className="bg-white dark:bg-slate-900">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 text-center">
-            <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-100 to-cyan-100 dark:from-teal-900/50 dark:to-cyan-900/50 flex items-center justify-center text-teal-600 dark:text-teal-400">
-              <Icons.Lightbulb />
-            </div>
-            <blockquote className="text-2xl md:text-3xl font-serif text-slate-800 dark:text-slate-200 max-w-4xl mx-auto mb-6 leading-relaxed">
-              "Most people believe <span className="text-teal-600 dark:text-teal-400 font-semibold">individualism</span> and{' '}
-              <span className="text-indigo-600 dark:text-indigo-400 font-semibold">community</span> are mutually exclusive.{' '}
-              <br className="hidden md:block" />
-              Our mission is to show they are{' '}
-              <span className="bg-gradient-to-r from-teal-500 to-indigo-500 bg-clip-text text-transparent font-bold">
-                mutually reinforcing
-              </span>."
-            </blockquote>
-            <p className="text-slate-500 dark:text-slate-400 italic">
-              — TribeWellMD Philosophy
-            </p>
-          </div>
-        </section>
-
-        {/* Wellness Framework - Light teal background (flows from quote) */}
-        <section className="bg-gradient-to-b from-teal-50/70 to-cyan-50/50 dark:from-slate-800/50 dark:to-slate-900" ref={frameworkRef}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-            <div className={`text-center mb-16 transition-all duration-700 ${frameworkVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 rounded-full text-sm font-medium mb-4">
-                <span className="w-2 h-2 bg-teal-500 rounded-full animate-pulse" />
-                Our Framework
-              </span>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-                The TribeWellMD Wellness Framework
+        {/* The Virtuous Cycle - Core Philosophy */}
+        <section className="bg-gradient-to-b from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 border-y border-slate-200 dark:border-slate-700" ref={frameworkRef}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div className={`text-center mb-12 transition-all duration-700 ${frameworkVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <span className="text-sm font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">Our Philosophy</span>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 mb-4">
+                The Virtuous Cycle
               </h2>
               <p className="text-slate-600 dark:text-slate-300 text-lg max-w-2xl mx-auto">
-                How individualism and community become mutually reinforcing
+                Individual achievement and community wellbeing are not opposing forces—they are mutually reinforcing.
               </p>
             </div>
 
-            {/* Framework Cards with Connecting Arrows */}
-            <div className={`relative max-w-6xl mx-auto transition-all duration-700 delay-200 ${frameworkVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {/* Three Pillar Cards in a Row */}
-              <div className="grid md:grid-cols-3 gap-6 md:gap-8 relative">
-                {/* Card 1 - Sustained Behavior Change (Purple) */}
-                <div className={`bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-violet-500 transform transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl ${frameworkVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} style={{ transitionDelay: frameworkVisible ? '300ms' : '0ms' }}>
-                  <div className="w-12 h-12 mb-4 rounded-xl bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center text-violet-600 dark:text-violet-400">
-                    <Icons.Target />
-                  </div>
-                  <h3 className="font-bold text-xl text-slate-900 dark:text-white mb-3">Sustained Behavior Change</h3>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
-                    Real growth comes from consistent, sustainable habits—not cramming or burning out. Our platform uses evidence-based techniques like spaced repetition and gamification to make lasting change achievable.
+            {/* Three Pillar Cards */}
+            <div className={`grid md:grid-cols-3 gap-6 md:gap-8 relative transition-all duration-700 delay-200 ${frameworkVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              {/* Card 1 - Sustained Behavior Change */}
+              <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-violet-500 hover:scale-[1.02] transition-all">
+                <div className="w-12 h-12 mb-4 rounded-xl bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center text-violet-600 dark:text-violet-400">
+                  <Icons.Target />
+                </div>
+                <h3 className="font-bold text-xl text-slate-900 dark:text-white mb-3">Sustained Behavior Change</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                  Real growth comes from consistent, sustainable habits—not cramming or burning out. Evidence-based spaced repetition makes lasting change achievable.
+                </p>
+                <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-violet-500 rounded-full"></span>
+                    FSRS-powered spaced repetition
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-violet-500 rounded-full"></span>
+                    Wellness tracking & habits
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-violet-500 rounded-full"></span>
+                    Progress visualization
+                  </li>
+                </ul>
+              </div>
+
+              {/* Card 2 - Guided Social Connection */}
+              <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-emerald-500 hover:scale-[1.02] transition-all">
+                <div className="w-12 h-12 mb-4 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                  <Icons.Users />
+                </div>
+                <h3 className="font-bold text-xl text-slate-900 dark:text-white mb-3">Guided Social Connection</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                  Medicine does not have to be lonely. Connect with mentors who have walked your path and peers who understand your struggles.
+                </p>
+                <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                    Mentorship matching
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                    Study groups & tribes
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                    Shared accountability
+                  </li>
+                </ul>
+              </div>
+
+              {/* Card 3 - Altruistic Contributions */}
+              <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-orange-500 hover:scale-[1.02] transition-all">
+                <div className="w-12 h-12 mb-4 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
+                  <Icons.HeartHand />
+                </div>
+                <h3 className="font-bold text-xl text-slate-900 dark:text-white mb-3">Altruistic Contributions</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                  Your achievements matter beyond your own success. Progress converts to real donations—giving creates purpose that fuels continued growth.
+                </p>
+                <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
+                    Progress becomes donations
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
+                    Community impact tracking
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
+                    Purpose-driven motivation
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* The Cycle Explanation */}
+            <div className={`mt-10 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl p-6 md:p-8 text-white transition-all duration-700 delay-400 ${frameworkVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                  <Icons.Sparkles />
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg mb-2">How It Works Together</h3>
+                  <p className="text-white/90 text-sm leading-relaxed">
+                    These three pillars are not separate—they reinforce each other. When you achieve your personal goals, you contribute to the community. When the community supports you, you are more likely to succeed. And when your success creates real-world impact through charitable giving, it creates meaning that drives you to keep growing.{' '}
+                    <span className="font-semibold">Giving back creates meaning and purpose, which fuels continued personal growth.</span>
                   </p>
-                  <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-violet-500 rounded-full"></span>
-                      FSRS-powered spaced repetition
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-violet-500 rounded-full"></span>
-                      Wellness tracking & habits
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-violet-500 rounded-full"></span>
-                      Progress visualization
-                    </li>
-                  </ul>
                 </div>
-
-                {/* Arrow 1: Purple → Green (between card 1 and 2) */}
-                <div className="hidden md:flex absolute left-[31%] top-1/2 -translate-y-1/2 z-10">
-                  <div className="flex items-center">
-                    <div className="w-8 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
-                    <div className="w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] border-l-slate-300 dark:border-l-slate-600"></div>
-                  </div>
-                </div>
-
-                {/* Card 2 - Guided Social Connection (Green) */}
-                <div className={`bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-emerald-500 transform transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl ${frameworkVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} style={{ transitionDelay: frameworkVisible ? '450ms' : '0ms' }}>
-                  <div className="w-12 h-12 mb-4 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
-                    <Icons.Users />
-                  </div>
-                  <h3 className="font-bold text-xl text-slate-900 dark:text-white mb-3">Guided Social Connection</h3>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
-                    Medicine doesn't have to be lonely. Connect with mentors who've walked your path, peers who understand your struggles, and a community that celebrates your wins alongside you.
-                  </p>
-                  <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
-                      Mentorship matching
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
-                      Study groups & tribes
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
-                      Shared accountability
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Arrow 2: Green → Orange (between card 2 and 3) */}
-                <div className="hidden md:flex absolute left-[64.5%] top-1/2 -translate-y-1/2 z-10">
-                  <div className="flex items-center">
-                    <div className="w-8 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
-                    <div className="w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] border-l-slate-300 dark:border-l-slate-600"></div>
-                  </div>
-                </div>
-
-                {/* Card 3 - Altruistic Contributions (Orange) */}
-                <div className={`bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-orange-500 transform transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl ${frameworkVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} style={{ transitionDelay: frameworkVisible ? '600ms' : '0ms' }}>
-                  <div className="w-12 h-12 mb-4 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
-                    <Icons.HeartHand />
-                  </div>
-                  <h3 className="font-bold text-xl text-slate-900 dark:text-white mb-3">Altruistic Contributions</h3>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
-                    Your achievements matter beyond your own success. Through our platform, your progress converts to real donations—and that act of giving creates meaning and purpose that fuels continued growth.
-                  </p>
-                  <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
-                      Progress → Donations
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
-                      Community impact tracking
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
-                      Purpose-driven motivation
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Arrow 3: Orange back to Purple (curved arrow below) */}
-              <div className="hidden md:flex justify-center mt-6">
-                <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500">
-                  <div className="w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-r-[10px] border-r-slate-300 dark:border-r-slate-600"></div>
-                  <div className="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-full">
-                    <div className="w-16 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
-                    <span className="text-xs font-medium italic whitespace-nowrap">The Virtuous Cycle</span>
-                    <div className="w-16 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
-                  </div>
-                  <div className="w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] border-l-slate-300 dark:border-l-slate-600"></div>
-                </div>
-              </div>
-
-              {/* Mobile arrows - show vertically */}
-              <div className="flex md:hidden flex-col items-center gap-2 -mt-2 mb-4">
-                <div className="flex flex-col items-center py-2">
-                  <div className="h-4 w-1 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
-                  <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[10px] border-t-slate-300 dark:border-t-slate-600"></div>
-                </div>
-              </div>
-
-              {/* The Virtuous Cycle Explanation */}
-              <div className="mt-8 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl p-6 md:p-8 text-white">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
-                    <Icons.Sparkles />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg mb-2">The Virtuous Cycle</h3>
-                    <p className="text-white/90 text-sm leading-relaxed">
-                      Here's the magic: these three pillars aren't separate—they reinforce each other. When you achieve your personal goals, you contribute to the community. When the community supports you, you're more likely to succeed. And when your success creates real-world impact through charitable giving, it creates meaning that drives you to keep growing. <span className="font-semibold">Giving back creates meaning and purpose, which fuels continued personal growth.</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* CTA */}
-              <div className="text-center mt-10">
-                <Link
-                  href="/about"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-teal-500 hover:bg-teal-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg text-lg hover:scale-105 hover:shadow-xl"
-                >
-                  Explore Our Mission
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </Link>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Who We Serve - White background */}
-        <section className="bg-gradient-to-b from-slate-50 to-slate-100/50 dark:from-slate-800/50 dark:to-slate-900">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Who We Serve */}
+        <section className="bg-white dark:bg-slate-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className="text-center mb-12">
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              <span className="text-sm font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">Our Community</span>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 mb-4">
                 For Everyone in Medicine
               </h2>
               <p className="text-slate-600 dark:text-slate-300 text-lg">
-                From pre-meds to attendings, we're building tools for every stage of your journey
+                From pre-meds to attendings, we are building tools for every stage of your journey
               </p>
             </div>
 
@@ -586,7 +507,7 @@ export default function HomePage() {
                 return (
                   <div
                     key={index}
-                    className={`relative p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center hover:shadow-lg transition-all group`}
+                    className={`relative p-5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center hover:shadow-lg transition-all group`}
                   >
                     <div className={`w-12 h-12 mx-auto mb-3 rounded-xl bg-${color}-100 dark:bg-${color}-500/20 flex items-center justify-center text-${color}-600 dark:text-${color}-400 group-hover:scale-110 transition-transform`}>
                       {renderIcon(user.icon)}
@@ -600,24 +521,22 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* CTA Section - Soft teal accent */}
-        <section className="bg-gradient-to-br from-teal-600 to-cyan-600 dark:from-teal-800 dark:to-cyan-900">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 text-center">
+        {/* CTA Section */}
+        <section className="bg-gradient-to-br from-slate-900 to-slate-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
               Ready to Join Your Tribe?
             </h2>
-            <p className="text-teal-100 text-lg mb-8 max-w-2xl mx-auto">
+            <p className="text-slate-300 text-lg mb-8 max-w-2xl mx-auto">
               Start your journey today. Study smarter, take care of yourself, and connect with a community that has your back.
             </p>
 
-            {/* Email Signup - Join the Village */}
+            {/* Email Signup */}
             <div className="max-w-md mx-auto mb-10">
               <p className="text-white font-medium mb-3">Join the Village</p>
               {ctaSubscribed ? (
-                <div className="flex items-center justify-center gap-2 text-white">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
+                <div className="flex items-center justify-center gap-2 text-teal-400">
+                  <Icons.Check />
                   <span className="font-medium">Welcome to the village!</span>
                 </div>
               ) : (
@@ -629,32 +548,38 @@ export default function HomePage() {
                     placeholder="Enter your email"
                     required
                     disabled={ctaLoading}
-                    className="flex-1 px-4 py-3 bg-white/10 backdrop-blur border border-white/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent disabled:opacity-50"
+                    className="flex-1 px-4 py-3 bg-white/10 backdrop-blur border border-slate-600 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:opacity-50"
                   />
                   <button
                     type="submit"
                     disabled={ctaLoading}
-                    className="px-6 py-3 bg-white hover:bg-white/90 text-teal-600 font-bold rounded-xl transition-all disabled:opacity-50 shadow-lg"
+                    className="px-6 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-bold rounded-xl transition-all disabled:opacity-50 shadow-lg"
                   >
                     {ctaLoading ? '...' : 'Join'}
                   </button>
                 </form>
               )}
-              <p className="text-teal-100/80 text-xs mt-2">Get updates on new features. No spam, ever.</p>
+              <p className="text-slate-400 text-xs mt-2">Get updates on new features. No spam, ever.</p>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/study"
-                className="px-8 py-4 bg-white text-teal-600 font-bold rounded-xl hover:bg-white/90 transition-all shadow-lg"
+                href="/register"
+                className="px-8 py-4 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold rounded-xl hover:from-teal-600 hover:to-cyan-600 transition-all shadow-lg hover:scale-105"
               >
-                Start Studying Now →
+                Create Your Account
               </Link>
               <Link
-                href="/premed"
-                className="px-8 py-4 border-2 border-white/50 text-white font-semibold rounded-xl hover:bg-white/10 hover:border-white transition-all"
+                href="/investors"
+                className="px-8 py-4 border-2 border-slate-600 text-slate-300 font-semibold rounded-xl hover:bg-slate-800 hover:border-slate-500 transition-all"
               >
-                I'm a Pre-Med
+                For Investors
+              </Link>
+              <Link
+                href="/partners"
+                className="px-8 py-4 border-2 border-slate-600 text-slate-300 font-semibold rounded-xl hover:bg-slate-800 hover:border-slate-500 transition-all"
+              >
+                For Partners
               </Link>
             </div>
           </div>
