@@ -270,6 +270,31 @@ Return ONLY the JSON array, no other text.`;
           </div>
         </div>
 
+        {/* AI Disclaimer */}
+        <div className="mb-6 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl">
+          <div className="flex items-start gap-3">
+            <div className="w-8 h-8 rounded-lg bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center flex-shrink-0">
+              <svg className="w-5 h-5 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="font-semibold text-amber-800 dark:text-amber-300 text-sm">Important: Review AI-Generated Content</h3>
+              <p className="text-amber-700 dark:text-amber-400 text-sm mt-1">
+                AI-generated flashcards may contain errors or inaccuracies. <strong>Always verify medical content</strong> before studying.
+                For accuracy you can trust, use our <Link href="/library" className="underline font-medium hover:text-amber-900 dark:hover:text-amber-200">built-in decks</Link> or
+                carefully review cards you create yourself.
+              </p>
+              <p className="text-amber-600 dark:text-amber-500 text-xs mt-2 flex items-center gap-1">
+                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                Enhanced AI models coming soon
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Success message */}
         {savedCount > 0 && (
           <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center gap-3">

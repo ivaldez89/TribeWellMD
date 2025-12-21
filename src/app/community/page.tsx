@@ -1,104 +1,22 @@
 'use client';
 
+import { useState } from 'react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';
 
-const COMMUNITY_FEATURES = [
-  {
-    title: 'Mentorship Matching',
-    description: 'Connect with residents and attendings in your specialty of interest for guidance and advice',
-    icon: '🎯',
-    status: 'Coming Soon',
-    features: ['Specialty-specific matching', 'Video calls & messaging', 'Career guidance']
-  },
-  {
-    title: 'Day-in-the-Life',
-    description: 'See what residency is really like through posts from current residents at programs nationwide',
-    icon: '📸',
-    status: 'Coming Soon',
-    features: ['Real resident experiences', 'Program insights', 'Specialty exploration']
-  },
-  {
-    title: 'Study Groups',
-    description: 'Find study partners for boards, shelf exams, or just getting through the week',
-    icon: '📚',
-    status: 'Coming Soon',
-    features: ['Location-based matching', 'Virtual study rooms', 'Accountability partners']
-  },
-  {
-    title: 'Anonymous Support',
-    description: 'A safe space to share struggles, ask questions, and support each other',
-    icon: '💬',
-    status: 'Coming Soon',
-    features: ['Moderated discussions', 'Peer support', 'Professional resources']
-  },
-  {
-    title: 'Program Reviews',
-    description: 'Honest, verified reviews of residency programs from people who trained there',
-    icon: '⭐',
-    status: 'Coming Soon',
-    features: ['Verified reviewers', 'Detailed ratings', 'Anonymous feedback']
-  },
-  {
-    title: 'Specialty Channels',
-    description: 'Join communities focused on your specialty interests - from surgery to psychiatry',
-    icon: '🏥',
-    status: 'Coming Soon',
-    features: ['Specialty discussions', 'Research opportunities', 'Conference updates']
-  },
-];
-
-const RESEARCH_NEWS_FEATURES = [
-  {
-    title: 'Medical Breakthroughs',
-    description: 'Stay current with the latest research findings, curated and summarized by specialty',
-    icon: '🔬',
-    status: 'Coming Soon',
-    features: ['Specialty-specific feeds', 'Plain-language summaries', 'Clinical implications']
-  },
-  {
-    title: 'Conference Calendar',
-    description: 'Never miss an important conference - find events by specialty and location',
-    icon: '📅',
-    status: 'Coming Soon',
-    features: ['Specialty filters', 'Virtual & in-person', 'Abstract deadlines']
-  },
-  {
-    title: 'Funding Opportunities',
-    description: 'Discover grants, fellowships, and research funding matched to your interests',
-    icon: '💰',
-    status: 'Coming Soon',
-    features: ['Deadline tracking', 'Eligibility matching', 'Application tips']
-  },
-  {
-    title: 'Journal Club',
-    description: 'Join discussions about landmark papers and emerging research in your field',
-    icon: '📰',
-    status: 'Coming Soon',
-    features: ['Moderated discussions', 'Expert commentary', 'Critical appraisal']
-  },
-];
-
-const TESTIMONIALS = [
-  {
-    quote: "I wish I had something like this when I was applying. Finding a mentor in interventional cardiology was pure luck.",
-    author: "PGY-3, Internal Medicine",
-    avatar: "👨‍⚕️"
-  },
-  {
-    quote: "The anonymous support would have helped so much during my surgery rotation. I thought I was the only one struggling.",
-    author: "MS3, Midwest Medical School",
-    avatar: "👩‍⚕️"
-  },
-  {
-    quote: "Knowing what programs are actually like before rank day would be invaluable. The interview day experience isn't reality.",
-    author: "PGY-1, Emergency Medicine",
-    avatar: "🧑‍⚕️"
-  },
-];
-
 export default function CommunityPage() {
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      setSubscribed(true);
+      setEmail('');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <Header />
@@ -106,9 +24,9 @@ export default function CommunityPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
         <section className="mb-8">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-500 p-8 md:p-10 shadow-2xl">
-            {/* Animated background elements */}
-            <div className="absolute inset-0 overflow-hidden">
+          <div className="relative rounded-3xl bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-500 p-8 md:p-10 shadow-2xl">
+            {/* Animated background elements - contained */}
+            <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
               <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
               <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
               <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-orange-300/20 rounded-full blur-2xl" />
@@ -132,11 +50,11 @@ export default function CommunityPage() {
                 {/* Stats row */}
                 <div className="flex items-center gap-4 md:gap-6">
                   <div className="text-center px-4 py-2 bg-white/10 backdrop-blur rounded-xl">
-                    <p className="text-2xl md:text-3xl font-bold text-white">{COMMUNITY_FEATURES.length}</p>
+                    <p className="text-2xl md:text-3xl font-bold text-white">6</p>
                     <p className="text-white/60 text-xs">Features</p>
                   </div>
                   <div className="text-center px-4 py-2 bg-white/10 backdrop-blur rounded-xl">
-                    <p className="text-2xl md:text-3xl font-bold text-white">{RESEARCH_NEWS_FEATURES.length}</p>
+                    <p className="text-2xl md:text-3xl font-bold text-white">4</p>
                     <p className="text-white/60 text-xs">Research Tools</p>
                   </div>
                   <div className="text-center px-4 py-2 bg-white/10 backdrop-blur rounded-xl">
@@ -149,161 +67,276 @@ export default function CommunityPage() {
               {/* Email Signup Card */}
               <div className="p-6 bg-white rounded-2xl shadow-2xl w-full max-w-sm">
                 <h3 className="text-slate-900 font-bold text-lg mb-4 text-center">Get Early Access</h3>
-                <div className="space-y-3">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="w-full px-4 py-3 rounded-xl bg-slate-100 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                  />
-                  <button className="w-full px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold rounded-xl shadow-lg shadow-orange-500/25 transition-all hover:scale-105">
-                    Notify Me
-                  </button>
-                </div>
+                {subscribed ? (
+                  <div className="text-center py-4">
+                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <svg className="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <p className="text-green-700 font-medium">You're on the list!</p>
+                    <p className="text-slate-500 text-sm mt-1">We'll notify you when we launch.</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubscribe} className="space-y-3">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your email"
+                      required
+                      className="w-full px-4 py-3 rounded-xl bg-slate-100 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    />
+                    <button
+                      type="submit"
+                      className="w-full px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold rounded-xl shadow-lg shadow-orange-500/25 transition-all hover:scale-105"
+                    >
+                      Notify Me
+                    </button>
+                  </form>
+                )}
                 <p className="text-slate-500 text-xs text-center mt-3">No spam, ever.</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Community Features Grid */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-8 text-center">
-            Connect & Support
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {COMMUNITY_FEATURES.map((feature, index) => (
-              <div
-                key={index}
-                className="relative p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700"
-              >
-                <div className="absolute top-4 right-4 px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-xs font-medium rounded-full">
-                  {feature.status}
-                </div>
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-100 to-amber-100 dark:from-orange-900/30 dark:to-amber-900/30 flex items-center justify-center mb-4 text-2xl">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">{feature.title}</h3>
-                <p className="text-slate-600 dark:text-slate-400 mb-4">{feature.description}</p>
-                <ul className="space-y-2">
-                  {feature.features.map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-                      <svg className="w-4 h-4 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+        {/* 4-Box Grid - Community Features */}
+        <section className="mb-8">
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Connect & Support</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Box 1: Mentorship Matching */}
+            <Link
+              href="/community"
+              className="group relative p-6 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 hover:scale-[1.02] transition-all duration-300 text-white"
+            >
+              <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
               </div>
-            ))}
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center text-2xl">
+                    🎯
+                  </div>
+                  <span className="px-3 py-1 bg-white/20 text-white/90 text-xs font-medium rounded-full">
+                    Coming Soon
+                  </span>
+                </div>
+                <h3 className="font-bold text-xl mb-2">Mentorship Matching</h3>
+                <p className="text-white/80 text-sm mb-4">
+                  Connect with residents and attendings in your specialty of interest for guidance and advice
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-2 py-1 bg-white/10 rounded-lg text-xs">Specialty-specific</span>
+                  <span className="px-2 py-1 bg-white/10 rounded-lg text-xs">Video calls</span>
+                  <span className="px-2 py-1 bg-white/10 rounded-lg text-xs">Career guidance</span>
+                </div>
+              </div>
+            </Link>
+
+            {/* Box 2: Day-in-the-Life */}
+            <Link
+              href="/community"
+              className="group relative p-6 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] transition-all duration-300 text-white"
+            >
+              <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+              </div>
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center text-2xl">
+                    📸
+                  </div>
+                  <span className="px-3 py-1 bg-white/20 text-white/90 text-xs font-medium rounded-full">
+                    Coming Soon
+                  </span>
+                </div>
+                <h3 className="font-bold text-xl mb-2">Day-in-the-Life</h3>
+                <p className="text-white/80 text-sm mb-4">
+                  See what residency is really like through posts from current residents at programs nationwide
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-2 py-1 bg-white/10 rounded-lg text-xs">Real experiences</span>
+                  <span className="px-2 py-1 bg-white/10 rounded-lg text-xs">Program insights</span>
+                  <span className="px-2 py-1 bg-white/10 rounded-lg text-xs">Specialty exploration</span>
+                </div>
+              </div>
+            </Link>
+
+            {/* Box 3: Study Groups */}
+            <Link
+              href="/tribes"
+              className="group relative p-6 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] transition-all duration-300 text-white"
+            >
+              <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+              </div>
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center text-2xl">
+                    📚
+                  </div>
+                  <span className="px-3 py-1 bg-emerald-400/40 text-white text-xs font-medium rounded-full">
+                    Active
+                  </span>
+                </div>
+                <h3 className="font-bold text-xl mb-2">Study Groups</h3>
+                <p className="text-white/80 text-sm mb-4">
+                  Find study partners for boards, shelf exams, or just getting through the week
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-2 py-1 bg-white/10 rounded-lg text-xs">Location-based</span>
+                  <span className="px-2 py-1 bg-white/10 rounded-lg text-xs">Virtual rooms</span>
+                  <span className="px-2 py-1 bg-white/10 rounded-lg text-xs">Accountability</span>
+                </div>
+              </div>
+              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
+            </Link>
+
+            {/* Box 4: Anonymous Support */}
+            <Link
+              href="/wellness"
+              className="group relative p-6 bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 hover:scale-[1.02] transition-all duration-300 text-white"
+            >
+              <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+              </div>
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center text-2xl">
+                    💬
+                  </div>
+                  <span className="px-3 py-1 bg-white/20 text-white/90 text-xs font-medium rounded-full">
+                    Coming Soon
+                  </span>
+                </div>
+                <h3 className="font-bold text-xl mb-2">Anonymous Support</h3>
+                <p className="text-white/80 text-sm mb-4">
+                  A safe space to share struggles, ask questions, and support each other
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-2 py-1 bg-white/10 rounded-lg text-xs">Moderated</span>
+                  <span className="px-2 py-1 bg-white/10 rounded-lg text-xs">Peer support</span>
+                  <span className="px-2 py-1 bg-white/10 rounded-lg text-xs">Professional resources</span>
+                </div>
+              </div>
+            </Link>
           </div>
         </section>
 
-        {/* Research & News Section */}
-        <section className="mb-16">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full text-blue-700 dark:text-blue-300 text-sm font-medium mb-4">
-              <span>🔬</span>
-              <span>Research & News</span>
-            </div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
-              Stay Current, Stay Connected
-            </h2>
-            <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              From breakthrough research to funding opportunities, stay informed and engaged with the academic medicine community.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {RESEARCH_NEWS_FEATURES.map((feature, index) => (
-              <div
-                key={index}
-                className="relative p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-600 transition-colors"
-              >
-                <div className="absolute top-4 right-4 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium rounded-full">
-                  {feature.status}
+        {/* Why Community Matters - Stats Section */}
+        <section className="mb-8">
+          <div className="p-8 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl text-white">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-2xl font-bold mb-6">Why This Matters</h2>
+              <div className="grid grid-cols-3 gap-4 md:gap-8 mb-6">
+                <div className="p-4 bg-white/5 rounded-xl">
+                  <div className="text-3xl md:text-4xl font-bold text-orange-400 mb-1">27%</div>
+                  <p className="text-slate-400 text-xs md:text-sm">of medical students experience depression</p>
                 </div>
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 flex items-center justify-center mb-4 text-2xl">
-                  {feature.icon}
+                <div className="p-4 bg-white/5 rounded-xl">
+                  <div className="text-3xl md:text-4xl font-bold text-orange-400 mb-1">50%</div>
+                  <p className="text-slate-400 text-xs md:text-sm">feel they lack adequate mentorship</p>
                 </div>
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">{feature.title}</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm mb-4">{feature.description}</p>
-                <ul className="space-y-2">
-                  {feature.features.map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-                      <svg className="w-4 h-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                <div className="p-4 bg-white/5 rounded-xl">
+                  <div className="text-3xl md:text-4xl font-bold text-orange-400 mb-1">1 in 3</div>
+                  <p className="text-slate-400 text-xs md:text-sm">residents report burnout symptoms</p>
+                </div>
               </div>
-            ))}
+              <p className="text-slate-400">
+                Medical training can be isolating. TribeWellMD is building the community that should have always existed.
+              </p>
+            </div>
           </div>
         </section>
 
-        {/* Why Community Matters */}
-        <section className="mb-16 p-8 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl text-white">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6">Why This Matters</h2>
-            <div className="grid md:grid-cols-3 gap-8 mb-8">
-              <div>
-                <div className="text-4xl font-bold text-orange-400 mb-2">27%</div>
-                <p className="text-slate-300">of medical students experience depression</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-orange-400 mb-2">50%</div>
-                <p className="text-slate-300">feel they lack adequate mentorship</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-orange-400 mb-2">1 in 3</div>
-                <p className="text-slate-300">residents report burnout symptoms</p>
+        {/* Quick Stats Bar */}
+        <section className="mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-teal-100 dark:bg-teal-900/50 flex items-center justify-center">
+                  <span className="text-lg">🎯</span>
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">0</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Mentors Available</p>
+                </div>
               </div>
             </div>
-            <p className="text-slate-300 text-lg">
-              Medical training can be isolating. TribeWellMD is building the community that should have always existed.
-            </p>
+
+            <div className="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center">
+                  <span className="text-lg">👥</span>
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">12</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Active Tribes</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
+                  <span className="text-lg">📸</span>
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">0</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">DITL Posts</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-pink-100 dark:bg-pink-900/50 flex items-center justify-center">
+                  <span className="text-lg">💬</span>
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">0</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Support Threads</p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Testimonials */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-8 text-center">
-            What Trainees Are Saying
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((testimonial, index) => (
+        <section className="mb-8">
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4">What Trainees Are Saying</h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            {[
+              {
+                quote: "I wish I had something like this when I was applying. Finding a mentor in interventional cardiology was pure luck.",
+                author: "PGY-3, Internal Medicine",
+                avatar: "👨‍⚕️"
+              },
+              {
+                quote: "The anonymous support would have helped so much during my surgery rotation. I thought I was the only one struggling.",
+                author: "MS3, Midwest Medical School",
+                avatar: "👩‍⚕️"
+              },
+              {
+                quote: "Knowing what programs are actually like before rank day would be invaluable. The interview day experience isn't reality.",
+                author: "PGY-1, Emergency Medicine",
+                avatar: "🧑‍⚕️"
+              },
+            ].map((testimonial, index) => (
               <div
                 key={index}
-                className="p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700"
+                className="p-5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
               >
-                <div className="text-4xl mb-4">{testimonial.avatar}</div>
-                <p className="text-slate-600 dark:text-slate-300 italic mb-4">"{testimonial.quote}"</p>
-                <p className="text-sm text-slate-500 dark:text-slate-400">- {testimonial.author}</p>
+                <div className="text-3xl mb-3">{testimonial.avatar}</div>
+                <p className="text-slate-600 dark:text-slate-300 text-sm italic mb-3">"{testimonial.quote}"</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">- {testimonial.author}</p>
               </div>
             ))}
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="mb-8">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 p-8">
-            <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-            </div>
-
-            <div className="relative z-10 text-center">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center">
-                <span className="text-3xl">🤝</span>
-              </div>
-              <h2 className="text-2xl font-bold text-white mb-2">Ready to Join Your Tribe?</h2>
-              <p className="text-orange-100 mb-6 max-w-2xl mx-auto">
-                We're building this for you. Sign up for early access and help shape the community.
-              </p>
-              <button className="px-8 py-4 bg-white hover:bg-orange-50 text-orange-600 font-bold rounded-xl shadow-lg transition-all hover:scale-105">
-                Get Early Access
-              </button>
-            </div>
           </div>
         </section>
 

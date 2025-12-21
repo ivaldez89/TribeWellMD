@@ -4,6 +4,8 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { getUserProfile, getUserInitials, getDisplayName, type UserProfile } from '@/lib/storage/profileStorage';
 import { getConnectionCount, getPendingRequestCount } from '@/lib/storage/chatStorage';
+import { getUserTribes } from '@/lib/storage/tribeStorage';
+import type { Tribe } from '@/types/tribes';
 
 interface ProfileDropdownProps {
   className?: string;
@@ -14,6 +16,7 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [connectionCount, setConnectionCount] = useState(0);
   const [pendingCount, setPendingCount] = useState(0);
+  const [userTribes, setUserTribes] = useState<Tribe[]>([]);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -22,6 +25,7 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
     setProfile(getUserProfile());
     setConnectionCount(getConnectionCount());
     setPendingCount(getPendingRequestCount());
+    setUserTribes(getUserTribes());
   }, []);
 
   // Close dropdown when clicking outside
@@ -113,6 +117,42 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
               <p className="text-sm text-slate-500 dark:text-slate-400">
                 Set up your profile to get started
               </p>
+            )}
+
+            {/* Tribes Section - show if user has tribes */}
+            {userTribes.length > 0 && (
+              <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-700">
+                <div className="flex items-center gap-2 mb-2">
+                  <svg className="w-4 h-4 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                  <span className="text-xs font-medium text-slate-600 dark:text-slate-400">
+                    {userTribes.length} Tribe{userTribes.length !== 1 ? 's' : ''}
+                  </span>
+                </div>
+                <Link
+                  href="/tribes"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-2 p-2 rounded-lg bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 border border-orange-100 dark:border-orange-800/50 hover:from-orange-100 hover:to-amber-100 dark:hover:from-orange-900/30 dark:hover:to-amber-900/30 transition-colors"
+                >
+                  <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${userTribes[0]?.color || 'from-orange-400 to-amber-500'} flex items-center justify-center text-white text-sm`}>
+                    {userTribes[0]?.icon || '🔥'}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-slate-900 dark:text-white truncate">
+                      {userTribes[0]?.name || 'Your Tribe'}
+                    </p>
+                    {userTribes.length > 1 && (
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
+                        +{userTribes.length - 1} more
+                      </p>
+                    )}
+                  </div>
+                  <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
             )}
 
             {/* Quick Stats */}
