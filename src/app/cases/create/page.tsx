@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Header } from '@/components/layout/Header';
 import type { ClinicalVignette, DecisionNode } from '@/types';
 import { VignetteEditor } from '@/components/vignettes/VignetteEditor';
 import { useVignettes } from '@/hooks/useVignettes';
@@ -119,8 +120,10 @@ export default function CreateCasePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
-      {/* Header */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
+      <Header />
+
+      {/* Sub-header with page-specific actions */}
+      <div className="bg-white border-b border-slate-200 sticky top-0 z-10">
         <div className="max-w-5xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -155,7 +158,7 @@ export default function CreateCasePage() {
             </div>
           </div>
         </div>
-      </header>
+      </div>
 
       <main className="max-w-5xl mx-auto px-4 py-6">
         <VignetteEditor

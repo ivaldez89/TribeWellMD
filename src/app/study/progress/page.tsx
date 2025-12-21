@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/Header';
 import Link from 'next/link';
 import { StudyStatsDisplay, getStudyStats } from '@/components/study/StudyStats';
 import { PerformanceAnalytics } from '@/components/deck/PerformanceAnalytics';
+import { CalendarWidget } from '@/components/calendar/CalendarWidget';
 import type { TopicPerformance } from '@/types';
 
 interface DayData {
@@ -26,7 +27,7 @@ export default function ProgressPage() {
   const [studySessions, setStudySessions] = useState<StudySession[]>([]);
   const [topicPerformance, setTopicPerformance] = useState<TopicPerformance[]>([]);
   const [stats, setStats] = useState<ReturnType<typeof getStudyStats> | null>(null);
-  const [activeTab, setActiveTab] = useState<'calendar' | 'performance' | 'achievements'>('calendar');
+  const [activeTab, setActiveTab] = useState<'calendar' | 'schedule' | 'performance' | 'achievements'>('calendar');
 
   useEffect(() => {
     // Load study stats
@@ -162,20 +163,60 @@ export default function ProgressPage() {
           Back to Study
         </Link>
 
-        {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-2">
-            Your Progress
-          </h1>
-          <p className="text-slate-600 dark:text-slate-400">
-            Track your study habits, view achievements, and analyze your performance
-          </p>
-        </div>
+        {/* Hero Banner */}
+        <section className="mb-8">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 p-8 md:p-10 shadow-2xl">
+            {/* Animated background elements */}
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
+              <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+              <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-emerald-300/20 rounded-full blur-2xl" />
+            </div>
+
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/20 backdrop-blur rounded-full text-white/90 text-sm font-medium mb-4">
+                <span className="w-2 h-2 bg-emerald-300 rounded-full animate-pulse" />
+                <span>Track Your Journey</span>
+              </div>
+
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 leading-tight">
+                Your <span className="text-emerald-200">Progress</span>
+              </h1>
+
+              <p className="text-white/80 text-lg max-w-2xl mb-6">
+                Track your study habits, view achievements, and analyze your performance over time.
+              </p>
+
+              {/* Quick stats row */}
+              {stats && (
+                <div className="flex items-center gap-4 md:gap-6">
+                  <div className="text-center px-4 py-2 bg-white/10 backdrop-blur rounded-xl">
+                    <p className="text-2xl md:text-3xl font-bold text-white">{stats.totalCardsReviewed}</p>
+                    <p className="text-white/60 text-xs">Cards Reviewed</p>
+                  </div>
+                  <div className="text-center px-4 py-2 bg-white/10 backdrop-blur rounded-xl">
+                    <p className="text-2xl md:text-3xl font-bold text-white">{stats.totalStudyDays}</p>
+                    <p className="text-white/60 text-xs">Study Days</p>
+                  </div>
+                  <div className="text-center px-4 py-2 bg-white/10 backdrop-blur rounded-xl">
+                    <p className="text-2xl md:text-3xl font-bold text-white">{stats.currentStreak}</p>
+                    <p className="text-white/60 text-xs">Day Streak</p>
+                  </div>
+                  <div className="text-center px-4 py-2 bg-white/10 backdrop-blur rounded-xl">
+                    <p className="text-2xl md:text-3xl font-bold text-white">Lvl {stats.level}</p>
+                    <p className="text-white/60 text-xs">Current Level</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
 
         {/* Tab Navigation */}
-        <div className="flex gap-2 mb-6 border-b border-slate-200 dark:border-slate-700">
+        <div className="flex gap-2 mb-6 border-b border-slate-200 dark:border-slate-700 overflow-x-auto">
           {[
-            { id: 'calendar', label: 'Calendar', icon: '📅' },
+            { id: 'calendar', label: 'Study Activity', icon: '📅' },
+            { id: 'schedule', label: 'My Schedule', icon: '🗓️' },
             { id: 'performance', label: 'Performance', icon: '📊' },
             { id: 'achievements', label: 'Achievements', icon: '🏆' },
           ].map((tab) => (
@@ -331,6 +372,32 @@ export default function ProgressPage() {
                 </div>
               </div>
             )}
+          </div>
+        )}
+
+        {/* Schedule Tab - External Calendar Integration */}
+        {activeTab === 'schedule' && (
+          <div className="space-y-6">
+            {/* Info Banner */}
+            <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 rounded-2xl border border-indigo-200 dark:border-indigo-800/50 p-6">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center text-2xl">
+                  🗓️
+                </div>
+                <div>
+                  <h3 className="font-semibold text-slate-900 dark:text-white mb-1">
+                    Sync Your Medical School Calendar
+                  </h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                    Connect your Google or Outlook calendar to see your classes, labs, clinical rotations,
+                    and exams alongside your study progress. Never miss a deadline!
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Calendar Widget */}
+            <CalendarWidget variant="full" />
           </div>
         )}
 

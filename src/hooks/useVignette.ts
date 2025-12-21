@@ -18,6 +18,13 @@ import {
   getProgressForVignette
 } from '@/lib/storage/vignetteStorage';
 
+// History entry for progressive display
+interface HistoryEntry {
+  nodeId: string;
+  node: DecisionNode;
+  selectedChoice: Choice | null;
+}
+
 interface UseVignetteReturn {
   // State
   vignette: ClinicalVignette | null;
@@ -34,11 +41,14 @@ interface UseVignetteReturn {
   currentNodeIndex: number;
   selectedChoice: Choice | null;
   showFeedback: boolean;
+  // New: Progressive history for display
+  nodeHistory: HistoryEntry[];
 
   // Actions
   startVignette: () => void;
   makeChoice: (choiceId: string) => void;
   continueAfterFeedback: () => void;
+  retryCurrentQuestion: () => void;
   restartVignette: () => void;
   endSession: () => void;
 }
@@ -53,6 +63,8 @@ export function useVignette(vignetteId: string): UseVignetteReturn {
   const [error, setError] = useState<string | null>(null);
   const [selectedChoice, setSelectedChoice] = useState<Choice | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
+  // Track node history for progressive display
+  const [nodeHistory, setNodeHistory] = useState<HistoryEntry[]>([]);
 
   // Load vignette on mount
   useEffect(() => {
@@ -109,6 +121,7 @@ export function useVignette(vignetteId: string): UseVignetteReturn {
     setSession(newSession);
     setCurrentNodeId(vignette.rootNodeId);
     setDecisionHistory([]);
+    setNodeHistory([]); // Reset node history
     setNodeStartTime(Date.now());
     setSelectedChoice(null);
     setShowFeedback(false);
@@ -152,7 +165,14 @@ export function useVignette(vignetteId: string): UseVignetteReturn {
 
   // Continue to next node after viewing feedback
   const continueAfterFeedback = useCallback(() => {
-    if (!selectedChoice) return;
+    if (!selectedChoice || !currentNode) return;
+
+    // Add current node to history before moving on
+    setNodeHistory(prev => [...prev, {
+      nodeId: currentNode.id,
+      node: currentNode,
+      selectedChoice: selectedChoice
+    }]);
 
     if (selectedChoice.nextNodeId) {
       setCurrentNodeId(selectedChoice.nextNodeId);
@@ -161,7 +181,29 @@ export function useVignette(vignetteId: string): UseVignetteReturn {
 
     setSelectedChoice(null);
     setShowFeedback(false);
-  }, [selectedChoice]);
+  }, [selectedChoice, currentNode]);
+
+  // Retry the current question (for wrong answers)
+  const retryCurrentQuestion = useCallback(() => {
+    // Remove the last decision from history since we're retrying
+    setDecisionHistory(prev => prev.slice(0, -1));
+
+    // Update session decisions
+    if (session) {
+      const updatedSession: VignetteSession = {
+        ...session,
+        decisions: session.decisions.slice(0, -1),
+        // Recalculate completedOptimally based on remaining decisions
+        completedOptimally: session.decisions.slice(0, -1).every(d => d.wasOptimal)
+      };
+      setSession(updatedSession);
+    }
+
+    // Reset node start time and clear feedback
+    setNodeStartTime(Date.now());
+    setSelectedChoice(null);
+    setShowFeedback(false);
+  }, [session]);
 
   // Restart the vignette
   const restartVignette = useCallback(() => {
@@ -256,9 +298,11 @@ export function useVignette(vignetteId: string): UseVignetteReturn {
     currentNodeIndex,
     selectedChoice,
     showFeedback,
+    nodeHistory,
     startVignette,
     makeChoice,
     continueAfterFeedback,
+    retryCurrentQuestion,
     restartVignette,
     endSession
   };

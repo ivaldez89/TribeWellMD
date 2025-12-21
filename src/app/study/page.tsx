@@ -11,6 +11,8 @@ import { CardEditor } from '@/components/deck/CardEditor';
 import { PomodoroTimer } from '@/components/study/PomodoroTimer';
 import { recordCardReview, AchievementNotification } from '@/components/study/StudyStats';
 import { BackgroundSelector, useStudyBackground, getBackgroundUrl } from '@/components/study/BackgroundSelector';
+import { SpotifyWidget } from '@/components/music/SpotifyWidget';
+import { CalendarWidget } from '@/components/calendar/CalendarWidget';
 import { ExamCountdown } from '@/components/study/ExamCountdown';
 import { useFlashcards } from '@/hooks/useFlashcards';
 import { useMissedConcepts } from '@/hooks/useMissedConcepts';
@@ -1139,6 +1141,12 @@ export default function StudyPage() {
                   onCustomBackgroundChange={setCustomBackgroundUrl}
                   variant="light"
                 />
+
+                {/* Spotify Widget */}
+                <SpotifyWidget variant="compact" />
+
+                {/* Calendar Widget */}
+                <CalendarWidget variant="compact" />
 
                 <button
                   onClick={() => setShowFilters(!showFilters)}

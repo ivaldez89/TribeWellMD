@@ -147,19 +147,19 @@ export default function CommunityPage() {
               </div>
 
               {/* Email Signup Card */}
-              <div className="p-5 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 w-full max-w-sm">
-                <h3 className="text-white font-semibold mb-3 text-center">Get Early Access</h3>
+              <div className="p-6 bg-white rounded-2xl shadow-2xl w-full max-w-sm">
+                <h3 className="text-slate-900 font-bold text-lg mb-4 text-center">Get Early Access</h3>
                 <div className="space-y-3">
                   <input
                     type="email"
                     placeholder="Enter your email"
-                    className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-100 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   />
-                  <button className="w-full px-6 py-3 bg-white hover:bg-orange-50 text-orange-600 font-bold rounded-xl shadow-lg transition-all hover:scale-105">
+                  <button className="w-full px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold rounded-xl shadow-lg shadow-orange-500/25 transition-all hover:scale-105">
                     Notify Me
                   </button>
                 </div>
-                <p className="text-white/60 text-xs text-center mt-3">No spam, ever.</p>
+                <p className="text-slate-500 text-xs text-center mt-3">No spam, ever.</p>
               </div>
             </div>
           </div>

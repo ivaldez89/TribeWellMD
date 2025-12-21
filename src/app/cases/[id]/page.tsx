@@ -8,6 +8,7 @@ import { useVignette } from '@/hooks/useVignette';
 import { VignetteViewer } from '@/components/vignettes/VignetteViewer';
 import { VignetteProgress } from '@/components/vignettes/VignetteProgress';
 import { BackgroundSelector, useStudyBackground, getBackgroundUrl } from '@/components/study/BackgroundSelector';
+import { SpotifyWidget } from '@/components/music/SpotifyWidget';
 
 // Ambient sound definitions
 const AMBIENT_SOUNDS = [
@@ -286,9 +287,11 @@ export default function CasePlayerPage() {
     currentNodeIndex,
     selectedChoice,
     showFeedback,
+    nodeHistory,
     startVignette,
     makeChoice,
     continueAfterFeedback,
+    retryCurrentQuestion,
     restartVignette,
     endSession
   } = useVignette(vignetteId);
@@ -302,6 +305,8 @@ export default function CasePlayerPage() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.3);
   const noiseGenRef = useRef<NoiseGenerator | null>(null);
+  const audioPanelRef = useRef<HTMLDivElement>(null);
+  const audioButtonRef = useRef<HTMLButtonElement>(null);
 
   // Music stream state
   const [currentMusic, setCurrentMusic] = useState<string | null>(null);
@@ -367,6 +372,24 @@ export default function CasePlayerPage() {
       audioRef.current.volume = musicVolume;
     }
   }, [musicVolume]);
+
+  // Close audio panel when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        showAudio &&
+        audioPanelRef.current &&
+        audioButtonRef.current &&
+        !audioPanelRef.current.contains(event.target as Node) &&
+        !audioButtonRef.current.contains(event.target as Node)
+      ) {
+        setShowAudio(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showAudio]);
 
   // Play/pause ambient sound
   const playSound = useCallback((soundId: string) => {
@@ -729,30 +752,151 @@ export default function CasePlayerPage() {
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Audio button */}
-            <button
-              onClick={() => setShowAudio(!showAudio)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors ${
-                showAudio || isPlaying || isMusicPlaying
-                  ? 'bg-purple-100 text-purple-700'
-                  : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100'
-              }`}
-            >
-              {isPlaying || isMusicPlaying ? (
-                <span className="flex items-center gap-1">
-                  <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
-                  {isPlaying
-                    ? AMBIENT_SOUNDS.find(s => s.id === currentSound)?.emoji
-                    : MUSIC_STREAMS.find(s => s.id === currentMusic)?.emoji
-                  }
-                </span>
-              ) : (
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                </svg>
+            {/* Spotify Widget */}
+            <SpotifyWidget variant="compact" />
+
+            {/* Audio dropdown */}
+            <div className="relative">
+              <button
+                ref={audioButtonRef}
+                onClick={() => setShowAudio(!showAudio)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                  showAudio || isPlaying || isMusicPlaying
+                    ? 'bg-purple-100 text-purple-700'
+                    : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100'
+                }`}
+              >
+                {isPlaying || isMusicPlaying ? (
+                  <span className="flex items-center gap-1">
+                    <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
+                    {isPlaying
+                      ? AMBIENT_SOUNDS.find(s => s.id === currentSound)?.emoji
+                      : MUSIC_STREAMS.find(s => s.id === currentMusic)?.emoji
+                    }
+                  </span>
+                ) : (
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                  </svg>
+                )}
+                <span className="hidden sm:inline">Audio</span>
+              </button>
+
+              {/* Audio dropdown panel */}
+              {showAudio && (
+                <div
+                  ref={audioPanelRef}
+                  className="absolute top-full right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-slate-200 z-50 overflow-hidden"
+                >
+                  {/* Header */}
+                  <div className="px-4 py-3 border-b border-slate-100 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <svg className="w-5 h-5 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                      </svg>
+                      <span className="font-semibold text-slate-900">Audio</span>
+                    </div>
+                    {(isPlaying || isMusicPlaying) && (
+                      <button
+                        onClick={stopAll}
+                        className="text-xs px-2 py-1 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
+                      >
+                        Stop
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="p-4 space-y-4 max-h-[400px] overflow-y-auto">
+                    {/* Ambient Sounds */}
+                    <div>
+                      <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Ambient Sounds</h4>
+                      <div className="grid grid-cols-3 gap-2">
+                        {AMBIENT_SOUNDS.map((sound) => (
+                          <button
+                            key={sound.id}
+                            onClick={() => playSound(sound.id)}
+                            className={`
+                              flex flex-col items-center gap-1 p-3 rounded-xl transition-all text-center
+                              ${currentSound === sound.id && isPlaying
+                                ? 'bg-purple-100 border-2 border-purple-400 shadow-sm'
+                                : 'bg-slate-50 hover:bg-slate-100 border-2 border-transparent'
+                              }
+                            `}
+                          >
+                            <span className="text-xl">{sound.emoji}</span>
+                            <span className="text-xs font-medium text-slate-700 leading-tight">{sound.name}</span>
+                            {currentSound === sound.id && isPlaying && (
+                              <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse" />
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                      {isPlaying && (
+                        <div className="flex items-center gap-2 mt-3 px-1">
+                          <span className="text-xs text-slate-400">Vol</span>
+                          <input
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.05"
+                            value={volume}
+                            onChange={(e) => setVolume(parseFloat(e.target.value))}
+                            className="flex-1 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-purple-500"
+                          />
+                          <span className="text-xs text-slate-500 w-8">{Math.round(volume * 100)}%</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Music Streams */}
+                    <div>
+                      <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Study Music</h4>
+                      <div className="grid grid-cols-3 gap-2">
+                        {MUSIC_STREAMS.map((music) => (
+                          <button
+                            key={music.id}
+                            onClick={() => playMusic(music.id)}
+                            disabled={isMusicLoading && currentMusic !== music.id}
+                            className={`
+                              flex flex-col items-center gap-1 p-3 rounded-xl transition-all text-center
+                              ${currentMusic === music.id && (isMusicPlaying || isMusicLoading)
+                                ? 'bg-indigo-100 border-2 border-indigo-400 shadow-sm'
+                                : 'bg-slate-50 hover:bg-slate-100 border-2 border-transparent'
+                              }
+                              ${isMusicLoading && currentMusic !== music.id ? 'opacity-50' : ''}
+                            `}
+                          >
+                            <span className="text-xl">{music.emoji}</span>
+                            <span className="text-xs font-medium text-slate-700 leading-tight">{music.name}</span>
+                            {currentMusic === music.id && isMusicLoading && (
+                              <span className="w-3 h-3 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+                            )}
+                            {currentMusic === music.id && isMusicPlaying && !isMusicLoading && (
+                              <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full animate-pulse" />
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                      {isMusicPlaying && (
+                        <div className="flex items-center gap-2 mt-3 px-1">
+                          <span className="text-xs text-slate-400">Vol</span>
+                          <input
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.05"
+                            value={musicVolume}
+                            onChange={(e) => setMusicVolume(parseFloat(e.target.value))}
+                            className="flex-1 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                          />
+                          <span className="text-xs text-slate-500 w-8">{Math.round(musicVolume * 100)}%</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
               )}
-              <span className="hidden sm:inline">Audio</span>
-            </button>
+            </div>
 
             {/* Scene selector */}
             <BackgroundSelector
@@ -766,112 +910,6 @@ export default function CasePlayerPage() {
         </div>
       </div>
 
-      {/* Audio Panel */}
-      {showAudio && (
-        <div className="sticky top-[121px] z-10 bg-white/95 backdrop-blur border-b border-slate-200">
-          <div className="max-w-4xl mx-auto px-4 py-4">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="font-medium text-slate-800 flex items-center gap-2">
-                <svg className="w-5 h-5 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                </svg>
-                Sounds & Music
-              </h3>
-              {(isPlaying || isMusicPlaying) && (
-                <button
-                  onClick={stopAll}
-                  className="text-sm px-3 py-1 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
-                >
-                  Stop All
-                </button>
-              )}
-            </div>
-
-            {/* Ambient Sounds */}
-            <div className="mb-4">
-              <h4 className="text-xs font-medium text-slate-500 mb-2">Ambient Sounds</h4>
-              <div className="flex flex-wrap gap-2">
-                {AMBIENT_SOUNDS.map((sound) => (
-                  <button
-                    key={sound.id}
-                    onClick={() => playSound(sound.id)}
-                    className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all text-sm ${
-                      currentSound === sound.id && isPlaying
-                        ? 'bg-purple-100 border border-purple-300 text-purple-700'
-                        : 'bg-slate-50 hover:bg-slate-100 text-slate-600'
-                    }`}
-                  >
-                    <span>{sound.emoji}</span>
-                    <span>{sound.name}</span>
-                    {currentSound === sound.id && isPlaying && (
-                      <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse" />
-                    )}
-                  </button>
-                ))}
-              </div>
-              {isPlaying && (
-                <div className="flex items-center gap-3 mt-3">
-                  <span className="text-xs text-slate-400">Volume</span>
-                  <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.05"
-                    value={volume}
-                    onChange={(e) => setVolume(parseFloat(e.target.value))}
-                    className="flex-1 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-purple-500"
-                  />
-                  <span className="text-xs text-slate-500 w-8">{Math.round(volume * 100)}%</span>
-                </div>
-              )}
-            </div>
-
-            {/* Music Streams */}
-            <div>
-              <h4 className="text-xs font-medium text-slate-500 mb-2">Study Music</h4>
-              <div className="flex flex-wrap gap-2">
-                {MUSIC_STREAMS.map((music) => (
-                  <button
-                    key={music.id}
-                    onClick={() => playMusic(music.id)}
-                    disabled={isMusicLoading && currentMusic !== music.id}
-                    className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all text-sm ${
-                      currentMusic === music.id && (isMusicPlaying || isMusicLoading)
-                        ? 'bg-indigo-100 border border-indigo-300 text-indigo-700'
-                        : 'bg-slate-50 hover:bg-slate-100 text-slate-600'
-                    } ${isMusicLoading && currentMusic !== music.id ? 'opacity-50' : ''}`}
-                  >
-                    <span>{music.emoji}</span>
-                    <span>{music.name}</span>
-                    {currentMusic === music.id && isMusicLoading && (
-                      <span className="w-3 h-3 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
-                    )}
-                    {currentMusic === music.id && isMusicPlaying && !isMusicLoading && (
-                      <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full animate-pulse" />
-                    )}
-                  </button>
-                ))}
-              </div>
-              {isMusicPlaying && (
-                <div className="flex items-center gap-3 mt-3">
-                  <span className="text-xs text-slate-400">Volume</span>
-                  <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.05"
-                    value={musicVolume}
-                    onChange={(e) => setMusicVolume(parseFloat(e.target.value))}
-                    className="flex-1 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-500"
-                  />
-                  <span className="text-xs text-slate-500 w-8">{Math.round(musicVolume * 100)}%</span>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Main content */}
       <main className="relative z-[1] max-w-4xl mx-auto px-4 py-6">
         <VignetteViewer
@@ -881,10 +919,12 @@ export default function CasePlayerPage() {
           totalNodes={nodeCount}
           onMakeChoice={makeChoice}
           onContinue={continueAfterFeedback}
+          onRetry={retryCurrentQuestion}
           onBack={handleBack}
           selectedChoice={selectedChoice}
           showFeedback={showFeedback}
           isComplete={isComplete}
+          history={nodeHistory}
         />
       </main>
 

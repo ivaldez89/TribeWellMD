@@ -1,27 +1,34 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { CLINICAL_CARDS, searchByMultipleCodes, getCardsByCategory, getQBankStats, type ClinicalCard } from '@/data/qbank-cards';
+import { searchByMultipleCodes, getCardsByCategory, getQBankStats } from '@/data/qbank-cards';
 
 export default function LibraryPage() {
   const [codeInput, setCodeInput] = useState('');
-  const [searchResults, setSearchResults] = useState<ClinicalCard[]>([]);
-  const [hasSearched, setHasSearched] = useState(false);
-  const [selectedCards, setSelectedCards] = useState<string[]>([]);
-  const [showPreview, setShowPreview] = useState(false);
-  const [previewCard, setPreviewCard] = useState<ClinicalCard | null>(null);
+  const [searchMessage, setSearchMessage] = useState<{ type: 'success' | 'error' | null; text: string }>({ type: null, text: '' });
+  const router = useRouter();
 
   const stats = getQBankStats();
 
   const handleSearch = () => {
-    if (!codeInput.trim()) return;
+    if (!codeInput.trim()) {
+      setSearchMessage({ type: 'error', text: 'Please enter at least one code' });
+      return;
+    }
+
     const results = searchByMultipleCodes(codeInput);
-    setSearchResults(results);
-    setHasSearched(true);
-    setSelectedCards(results.map(c => c.id));
+
+    if (results.length > 0) {
+      // Store the card IDs in sessionStorage and navigate to flashcard study
+      sessionStorage.setItem('qbank-cards', JSON.stringify(results.map(c => c.id)));
+      sessionStorage.setItem('qbank-codes', codeInput);
+      router.push('/study/flashcards?source=qbank');
+    } else {
+      setSearchMessage({ type: 'error', text: 'No cards found for those codes. Try different codes.' });
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -30,17 +37,25 @@ export default function LibraryPage() {
     }
   };
 
-  const toggleCardSelection = (cardId: string) => {
-    setSelectedCards(prev =>
-      prev.includes(cardId)
-        ? prev.filter(id => id !== cardId)
-        : [...prev, cardId]
-    );
+  const handleCategoryClick = (category: string) => {
+    const categoryCards = getCardsByCategory(category);
+    if (categoryCards.length > 0) {
+      sessionStorage.setItem('qbank-cards', JSON.stringify(categoryCards.map(c => c.id)));
+      sessionStorage.setItem('qbank-codes', category);
+      router.push('/study/flashcards?source=qbank');
+    }
   };
 
-  const handleStartStudy = () => {
-    // In a full implementation, this would add selected cards to study session
-    alert(`Starting study session with ${selectedCards.length} cards!`);
+  const handleSampleCode = (code: string) => {
+    setCodeInput(code);
+    const results = searchByMultipleCodes(code);
+    if (results.length > 0) {
+      sessionStorage.setItem('qbank-cards', JSON.stringify(results.map(c => c.id)));
+      sessionStorage.setItem('qbank-codes', code);
+      router.push('/study/flashcards?source=qbank');
+    } else {
+      setSearchMessage({ type: 'error', text: 'No cards found for that code.' });
+    }
   };
 
   return (
@@ -67,7 +82,7 @@ export default function LibraryPage() {
               </h1>
 
               <p className="text-white/80 text-lg max-w-2xl mb-6">
-                Enter your UWorld or AMBOSS question codes to get targeted review cards.
+                Enter your UWorld or AMBOSS question codes to start reviewing targeted flashcards.
               </p>
 
               {/* Stats */}
@@ -91,7 +106,10 @@ export default function LibraryPage() {
                 <input
                   type="text"
                   value={codeInput}
-                  onChange={(e) => setCodeInput(e.target.value)}
+                  onChange={(e) => {
+                    setCodeInput(e.target.value);
+                    setSearchMessage({ type: null, text: '' });
+                  }}
                   onKeyPress={handleKeyPress}
                   placeholder="Enter codes (e.g., 4523, z5ar5O, 102345)"
                   className="flex-1 px-5 py-4 rounded-xl bg-white/20 backdrop-blur border border-white/30 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 text-lg"
@@ -100,125 +118,26 @@ export default function LibraryPage() {
                   onClick={handleSearch}
                   className="px-8 py-4 bg-white hover:bg-teal-50 text-teal-600 font-bold rounded-xl shadow-lg transition-all hover:scale-105"
                 >
-                  Search
+                  Find Cards
                 </button>
               </div>
               <p className="text-white/60 text-sm mt-2">
                 Separate multiple codes with commas or spaces
               </p>
-            </div>
-          </div>
-        </section>
 
-        {/* Search Results */}
-        {hasSearched && (
-          <section className="mb-8">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white">
-                {searchResults.length > 0
-                  ? `Found ${searchResults.length} card${searchResults.length !== 1 ? 's' : ''}`
-                  : 'No cards found'}
-              </h2>
-              {searchResults.length > 0 && (
-                <div className="flex items-center gap-3">
-                  <span className="text-sm text-slate-500 dark:text-slate-400">
-                    {selectedCards.length} selected
-                  </span>
-                  <button
-                    onClick={handleStartStudy}
-                    disabled={selectedCards.length === 0}
-                    className="px-5 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-medium rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-teal-500/25 transition-all"
-                  >
-                    Start Study Session
-                  </button>
+              {/* Search Message */}
+              {searchMessage.type && (
+                <div className={`mt-4 px-4 py-3 rounded-xl ${
+                  searchMessage.type === 'error'
+                    ? 'bg-red-500/20 border border-red-400/30 text-white'
+                    : 'bg-green-500/20 border border-green-400/30 text-white'
+                }`}>
+                  {searchMessage.text}
                 </div>
               )}
             </div>
-
-            {searchResults.length > 0 ? (
-              <div className="space-y-3">
-                {searchResults.map((card) => (
-                  <div
-                    key={card.id}
-                    className={`p-5 bg-white dark:bg-slate-800 rounded-2xl border-2 transition-all cursor-pointer ${
-                      selectedCards.includes(card.id)
-                        ? 'border-teal-500 shadow-lg shadow-teal-500/10'
-                        : 'border-slate-200 dark:border-slate-700 hover:border-slate-300'
-                    }`}
-                    onClick={() => toggleCardSelection(card.id)}
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="px-2.5 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium rounded">
-                            {card.subcategory}
-                          </span>
-                          <span className="px-2.5 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 text-xs font-medium rounded">
-                            {card.type}
-                          </span>
-                          {card.uworldId && (
-                            <span className="px-2.5 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-medium rounded">
-                              UW: {card.uworldId}
-                            </span>
-                          )}
-                          {card.ambossId && (
-                            <span className="px-2.5 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs font-medium rounded">
-                              AMB: {card.ambossId}
-                            </span>
-                          )}
-                        </div>
-                        <h3 className="font-semibold text-slate-900 dark:text-white mb-1">
-                          {card.topic}
-                        </h3>
-                        <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
-                          {card.question}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setPreviewCard(card);
-                            setShowPreview(true);
-                          }}
-                          className="p-2 text-slate-400 hover:text-teal-500 transition-colors"
-                        >
-                          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                          </svg>
-                        </button>
-                        <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                          selectedCards.includes(card.id)
-                            ? 'bg-teal-500 border-teal-500'
-                            : 'border-slate-300 dark:border-slate-600'
-                        }`}>
-                          {selectedCards.includes(card.id) && (
-                            <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                            </svg>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="p-8 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </div>
-                <h3 className="font-semibold text-slate-900 dark:text-white mb-1">No cards found for those codes</h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
-                  Try different codes or browse by category below
-                </p>
-              </div>
-            )}
-          </section>
-        )}
+          </div>
+        </section>
 
         {/* Browse by Category */}
         <section className="mb-8">
@@ -227,14 +146,10 @@ export default function LibraryPage() {
             {['Internal Medicine', 'Family Medicine'].map((category) => {
               const categoryCards = getCardsByCategory(category);
               return (
-                <div
+                <button
                   key={category}
-                  className="p-5 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-700 transition-all cursor-pointer group"
-                  onClick={() => {
-                    setSearchResults(categoryCards);
-                    setHasSearched(true);
-                    setSelectedCards(categoryCards.map(c => c.id));
-                  }}
+                  onClick={() => handleCategoryClick(category)}
+                  className="p-5 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-700 transition-all cursor-pointer group text-left"
                 >
                   <div className="flex items-center justify-between">
                     <div>
@@ -245,11 +160,11 @@ export default function LibraryPage() {
                     </div>
                     <div className="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400 group-hover:bg-teal-500 group-hover:text-white transition-colors">
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
                     </div>
                   </div>
-                </div>
+                </button>
               );
             })}
           </div>
@@ -278,7 +193,7 @@ export default function LibraryPage() {
                 <div className="w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">3</div>
                 <div>
                   <h3 className="font-medium text-slate-900 dark:text-white text-sm">Study the Concept</h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Master the clinical reasoning behind the question</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Review flashcards to master the clinical reasoning</p>
                 </div>
               </div>
             </div>
@@ -292,14 +207,8 @@ export default function LibraryPage() {
             {['4523', '5127', '1823', 'z5ar5O', 'hT67wQ', '4911'].map((code) => (
               <button
                 key={code}
-                onClick={() => {
-                  setCodeInput(code);
-                  const results = searchByMultipleCodes(code);
-                  setSearchResults(results);
-                  setHasSearched(true);
-                  setSelectedCards(results.map(c => c.id));
-                }}
-                className="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-mono text-slate-600 dark:text-slate-300 hover:border-teal-500 hover:text-teal-600 transition-all"
+                onClick={() => handleSampleCode(code)}
+                className="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-mono text-slate-600 dark:text-slate-300 hover:border-teal-500 hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-all"
               >
                 {code}
               </button>
@@ -309,86 +218,6 @@ export default function LibraryPage() {
       </main>
 
       <Footer />
-
-      {/* Card Preview Modal */}
-      {showPreview && previewCard && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" onClick={() => setShowPreview(false)}>
-          <div className="w-full max-w-2xl bg-white dark:bg-slate-800 rounded-3xl shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
-            {/* Card Header */}
-            <div className="p-4 bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <span className="font-semibold text-slate-900 dark:text-white">{previewCard.subcategory}</span>
-                  <span className="text-slate-400">•</span>
-                  <span className="text-slate-600 dark:text-slate-400">{previewCard.topic}</span>
-                </div>
-                <span className="px-3 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 text-sm font-medium rounded-full">
-                  {previewCard.type}
-                </span>
-              </div>
-            </div>
-
-            {/* Question */}
-            <div className="p-6 border-b border-slate-100 dark:border-slate-700">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400 font-bold flex-shrink-0">
-                  Q
-                </div>
-                <p className="text-lg text-slate-900 dark:text-white leading-relaxed">
-                  {previewCard.question}
-                </p>
-              </div>
-            </div>
-
-            {/* Answer */}
-            <div className="p-6 border-b border-slate-100 dark:border-slate-700">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 dark:text-amber-400 font-bold flex-shrink-0">
-                  A
-                </div>
-                <div>
-                  <p className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
-                    {previewCard.answer}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Clinical Pearl */}
-            <div className="p-6 bg-amber-50 dark:bg-amber-900/20">
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-amber-500 flex items-center justify-center flex-shrink-0">
-                  <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <p className="text-amber-800 dark:text-amber-200 leading-relaxed">
-                  {previewCard.clinicalPearl}
-                </p>
-              </div>
-            </div>
-
-            {/* Tags & Codes */}
-            <div className="p-4 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700">
-              <div className="flex items-center justify-between">
-                <div className="flex flex-wrap gap-2">
-                  {previewCard.tags.map((tag, i) => (
-                    <span key={i} className="px-2 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 text-xs rounded">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <button
-                  onClick={() => setShowPreview(false)}
-                  className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

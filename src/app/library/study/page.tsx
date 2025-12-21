@@ -8,6 +8,8 @@ import { FlashcardViewer } from '@/components/flashcards/FlashcardViewer';
 import { AnswerButtons } from '@/components/flashcards/AnswerButtons';
 import { PomodoroTimer } from '@/components/study/PomodoroTimer';
 import { BackgroundSelector, useStudyBackground, getBackgroundUrl } from '@/components/study/BackgroundSelector';
+import { SpotifyWidget } from '@/components/music/SpotifyWidget';
+import { CalendarWidget } from '@/components/calendar/CalendarWidget';
 import {
   shelfCategories,
   topicCategories,
@@ -719,6 +721,12 @@ function LibraryStudyContent() {
               onCustomBackgroundChange={setCustomBackgroundUrl}
               variant="light"
             />
+
+            {/* Spotify Widget */}
+            <SpotifyWidget variant="compact" />
+
+            {/* Calendar Widget */}
+            <CalendarWidget variant="compact" />
 
             <Link
               href={`/library?view=${viewType}`}

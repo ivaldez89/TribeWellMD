@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Source_Serif_4 } from 'next/font/google';
 import { Providers } from './providers';
+import { ChatBubble } from '@/components/chat/ChatBubble';
 import './globals.css';
 
 const inter = Inter({
@@ -52,6 +53,7 @@ export default function RootLayout({
       <body className="font-sans antialiased bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen transition-colors">
         <Providers>
           {children}
+          <ChatBubble />
         </Providers>
       </body>
     </html>

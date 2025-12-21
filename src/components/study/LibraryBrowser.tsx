@@ -144,55 +144,17 @@ export function LibraryBrowser({ defaultView = 'shelves', onStudySubcategory }: 
             onClick={() => handleStudy(selectedSubcategory, selectedCategory)}
             className="w-full py-4 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold rounded-xl shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 transition-all"
           >
-            Study {relatedCards.length} Cards
+            Let's Study {relatedCards.length} Cards
           </button>
         )}
 
-        {/* Concepts List */}
-        <div className="space-y-3">
-          <h3 className="font-semibold text-slate-900 dark:text-white">Clinical Decision Points</h3>
-          {concepts.length > 0 ? (
-            <div className="space-y-2">
-              {concepts.map(concept => (
-                <div
-                  key={concept.code}
-                  className="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-700 transition-colors"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <h4 className="font-medium text-slate-900 dark:text-white">{concept.name}</h4>
-                        {concept.highYield && (
-                          <span className="px-2 py-0.5 text-xs bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full">
-                            High-Yield
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-teal-600 dark:text-teal-400 text-sm mt-1">
-                        {concept.clinicalDecision}
-                      </p>
-                      <div className="flex flex-wrap gap-1 mt-2">
-                        {concept.testableAngles.slice(0, 3).map((angle: string, i: number) => (
-                          <span
-                            key={i}
-                            className="px-2 py-0.5 text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 rounded"
-                          >
-                            {angle}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <span className="text-xs text-slate-400 font-mono">{concept.code}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-slate-500 dark:text-slate-400 text-center py-8">
-              No concepts added yet. More coming soon!
+        {relatedCards.length === 0 && (
+          <div className="p-8 bg-slate-50 dark:bg-slate-800/50 rounded-xl text-center">
+            <p className="text-slate-500 dark:text-slate-400">
+              No cards available yet for this topic. More coming soon!
             </p>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     );
   }

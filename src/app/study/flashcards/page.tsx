@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { FlashcardViewer } from '@/components/flashcards/FlashcardViewer';
@@ -10,6 +10,8 @@ import { CardEditor } from '@/components/deck/CardEditor';
 import { PomodoroTimer } from '@/components/study/PomodoroTimer';
 import { recordCardReview, AchievementNotification } from '@/components/study/StudyStats';
 import { BackgroundSelector, useStudyBackground, getBackgroundUrl } from '@/components/study/BackgroundSelector';
+import { SpotifyWidget } from '@/components/music/SpotifyWidget';
+import { CalendarWidget } from '@/components/calendar/CalendarWidget';
 import { ExamCountdown } from '@/components/study/ExamCountdown';
 import { useFlashcards } from '@/hooks/useFlashcards';
 import type { Rating } from '@/types';
@@ -317,6 +319,10 @@ export default function FlashcardsPage() {
   const [showAmbient, setShowAmbient] = useState(false);
   const [showPomodoro, setShowPomodoro] = useState(false);
   const [newAchievement, setNewAchievement] = useState<Achievement | null>(null);
+
+  // Ref for Audio panel to detect outside clicks
+  const audioPanelRef = useRef<HTMLDivElement>(null);
+  const audioButtonRef = useRef<HTMLButtonElement>(null);
   const [cramMode, setCramMode] = useState(false);
   const [cramIndex, setCramIndex] = useState(0);
   const [cramRevealed, setCramRevealed] = useState(false);
@@ -480,6 +486,24 @@ export default function FlashcardsPage() {
       startSession();
     }
   }, [isLoading, filteredDueCards.length, session, startSession]);
+
+  // Close Audio panel when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        showAmbient &&
+        audioPanelRef.current &&
+        audioButtonRef.current &&
+        !audioPanelRef.current.contains(event.target as Node) &&
+        !audioButtonRef.current.contains(event.target as Node)
+      ) {
+        setShowAmbient(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showAmbient]);
 
   const handleEditCard = () => {
     setShowEditor(true);
@@ -699,6 +723,7 @@ export default function FlashcardsPage() {
 
             {/* Sounds & Music button */}
             <button
+              ref={audioButtonRef}
               onClick={() => setShowAmbient(!showAmbient)}
               className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors ${
                 showAmbient || isPlaying || isMusicPlaying
@@ -731,6 +756,12 @@ export default function FlashcardsPage() {
               variant="light"
             />
 
+            {/* Spotify Widget */}
+            <SpotifyWidget variant="compact" />
+
+            {/* Calendar Widget */}
+            <CalendarWidget variant="compact" />
+
             {/* Toggle filters button */}
             <button
               onClick={() => setShowFilters(!showFilters)}
@@ -757,7 +788,7 @@ export default function FlashcardsPage() {
 
         {/* Audio Panel - Ambient Sounds & Music */}
         {showAmbient && (
-          <div className="mb-6 p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+          <div ref={audioPanelRef} className="mb-6 p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
             {/* Header with Stop button */}
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-semibold text-slate-900 flex items-center gap-2">

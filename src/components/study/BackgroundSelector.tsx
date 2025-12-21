@@ -103,11 +103,11 @@ const STORAGE_KEY_BG = 'step2_study_background';
 const STORAGE_KEY_OPACITY = 'step2_study_bg_opacity';
 const STORAGE_KEY_CUSTOM_BG = 'step2_custom_background';
 const STORAGE_KEY_VERSION = 'step2_study_bg_version';
-const CURRENT_VERSION = '2'; // Increment to reset to new defaults
+const CURRENT_VERSION = '3'; // Increment to reset to new defaults
 
-// Default values - medical library theme at max visibility
+// Default values - medical library theme at full intensity
 const DEFAULT_BACKGROUND = 'library';
-const DEFAULT_OPACITY = 0.8;
+const DEFAULT_OPACITY = 1.0;
 
 // Hook to manage background state with localStorage persistence
 export function useStudyBackground() {
@@ -387,8 +387,8 @@ export function BackgroundSelector({
                   </div>
                   <input
                     type="range"
-                    min="0.1"
-                    max="0.8"
+                    min="0.25"
+                    max="1.0"
                     step="0.05"
                     value={opacity}
                     onChange={(e) => onOpacityChange(parseFloat(e.target.value))}
@@ -399,7 +399,7 @@ export function BackgroundSelector({
                     }`}
                   />
                   <p className={`mt-2 text-xs ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
-                    Lower values = more subtle, higher = more vivid
+                    25% = subtle, 100% = full intensity
                   </p>
                 </div>
               )}
