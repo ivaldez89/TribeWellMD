@@ -77,13 +77,7 @@ export default function AboutPage() {
 
             {/* Logic Model */}
             <div className="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-2xl p-8 md:p-10">
-              <div className="grid md:grid-cols-5 gap-4 md:gap-2 relative">
-                {/* Arrows for desktop */}
-                <div className="hidden md:block absolute top-1/2 left-[18%] w-[14%] h-0.5 bg-gradient-to-r from-violet-400 to-emerald-400 -translate-y-1/2" />
-                <div className="hidden md:block absolute top-1/2 left-[38%] w-[14%] h-0.5 bg-gradient-to-r from-emerald-400 to-orange-400 -translate-y-1/2" />
-                <div className="hidden md:block absolute top-1/2 left-[58%] w-[14%] h-0.5 bg-gradient-to-r from-orange-400 to-cyan-400 -translate-y-1/2" />
-                <div className="hidden md:block absolute top-1/2 left-[78%] w-[14%] h-0.5 bg-gradient-to-r from-cyan-400 to-teal-400 -translate-y-1/2" />
-
+              <div className="grid md:grid-cols-5 gap-4 md:gap-6">
                 {/* Input */}
                 <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border-t-4 border-violet-500 shadow-lg">
                   <span className="text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-wider">Inputs</span>
