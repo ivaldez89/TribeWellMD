@@ -254,6 +254,99 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Philosophy Quote - Individualism + Community */}
+        <section className="mb-16 relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-teal-500/5 via-cyan-500/5 to-indigo-500/5 rounded-3xl" />
+          <div className="relative p-8 md:p-12 text-center">
+            <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-100 to-cyan-100 dark:from-teal-900/50 dark:to-cyan-900/50 flex items-center justify-center">
+              <span className="text-3xl">💡</span>
+            </div>
+            <blockquote className="text-2xl md:text-3xl font-serif text-slate-800 dark:text-slate-200 max-w-4xl mx-auto mb-6 leading-relaxed">
+              "Most people believe <span className="text-teal-600 dark:text-teal-400 font-semibold">individualism</span> and{' '}
+              <span className="text-indigo-600 dark:text-indigo-400 font-semibold">community</span> are mutually exclusive.{' '}
+              <br className="hidden md:block" />
+              Our mission is to show they are{' '}
+              <span className="bg-gradient-to-r from-teal-500 to-indigo-500 bg-clip-text text-transparent font-bold">
+                mutually reinforcing
+              </span>."
+            </blockquote>
+            <p className="text-slate-500 dark:text-slate-400 italic">
+              — TribeWellMD Philosophy
+            </p>
+          </div>
+        </section>
+
+        {/* Self-Care to Impact - Points System Concept */}
+        <section className="mb-16 bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 rounded-3xl p-8 md:p-12 text-white overflow-hidden relative">
+          {/* Background decoration */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
+          </div>
+
+          <div className="relative z-10">
+            <div className="text-center mb-10">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/20 backdrop-blur rounded-full text-sm font-medium mb-4">
+                <span className="w-2 h-2 bg-yellow-300 rounded-full animate-pulse" />
+                Coming Soon
+              </span>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">
+                Self-Care Drives Community Impact
+              </h2>
+              <p className="text-white/90 text-lg max-w-2xl mx-auto">
+                When you take care of yourself, you earn points that become real donations to causes you care about.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 mb-10">
+              <div className="bg-white/10 backdrop-blur rounded-2xl p-6 text-center">
+                <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-white/20 flex items-center justify-center">
+                  <span className="text-2xl">✨</span>
+                </div>
+                <h3 className="font-bold text-xl mb-2">Earn Points</h3>
+                <p className="text-white/80 text-sm">
+                  Study flashcards, log sleep, complete wellness activities, hit your goals
+                </p>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur rounded-2xl p-6 text-center">
+                <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-white/20 flex items-center justify-center">
+                  <span className="text-2xl">🤝</span>
+                </div>
+                <h3 className="font-bold text-xl mb-2">Unite with Your Tribe</h3>
+                <p className="text-white/80 text-sm">
+                  Join tribes supporting causes like Red Cross, animal shelters, or beach cleanups
+                </p>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur rounded-2xl p-6 text-center">
+                <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-white/20 flex items-center justify-center">
+                  <span className="text-2xl">💚</span>
+                </div>
+                <h3 className="font-bold text-xl mb-2">Make Real Impact</h3>
+                <p className="text-white/80 text-sm">
+                  Your points convert to charity donations — self-improvement becomes world improvement
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <p className="text-white/80 mb-6 max-w-xl mx-auto">
+                Imagine: Every time you review flashcards or get 8 hours of sleep, you're contributing to clean water access, disaster relief, or medical missions.
+              </p>
+              <Link
+                href="/tribes"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-teal-600 font-bold rounded-xl hover:bg-white/90 transition-colors shadow-lg"
+              >
+                Explore Tribes
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="text-center mb-16">
           <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">

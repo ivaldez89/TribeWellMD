@@ -122,13 +122,22 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
             {/* Tribes Section - show if user has tribes */}
             {userTribes.length > 0 && (
               <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-700">
-                <div className="flex items-center gap-2 mb-2">
-                  <svg className="w-4 h-4 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                  <span className="text-xs font-medium text-slate-600 dark:text-slate-400">
-                    {userTribes.length} Tribe{userTribes.length !== 1 ? 's' : ''}
-                  </span>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span className="text-xs font-medium text-slate-600 dark:text-slate-400">
+                      {userTribes.length} Tribe{userTribes.length !== 1 ? 's' : ''}
+                    </span>
+                  </div>
+                  {/* Total tribe members indicator */}
+                  <div className="flex items-center gap-1 px-2 py-0.5 bg-teal-50 dark:bg-teal-900/30 rounded-full">
+                    <span className="text-xs font-bold text-teal-600 dark:text-teal-400">
+                      {userTribes.reduce((acc, t) => acc + (t.memberCount || 0), 0)}
+                    </span>
+                    <span className="text-xs text-teal-500 dark:text-teal-500">members</span>
+                  </div>
                 </div>
                 <Link
                   href="/tribes"
@@ -152,6 +161,27 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>
+
+                {/* Tribe Progress - Points & Impact */}
+                <div className="mt-2 p-2 rounded-lg bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border border-emerald-100 dark:border-emerald-800/50">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
+                        <span className="text-xs">✨</span>
+                      </div>
+                      <div>
+                        <p className="text-xs font-medium text-slate-700 dark:text-slate-300">Tribe Impact</p>
+                        <p className="text-[10px] text-slate-500 dark:text-slate-400">Your wellness points</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm font-bold text-emerald-600 dark:text-emerald-400">
+                        {userTribes.reduce((acc, t) => acc + (t.weeklyPoints || 0), 0)}
+                      </p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">this week</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -227,6 +257,22 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
               <div>
                 <span className="block text-sm font-medium">Study Progress</span>
                 <span className="block text-xs text-slate-500 dark:text-slate-400">View your analytics</span>
+              </div>
+            </Link>
+
+            <Link
+              href="/tribes"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center gap-3 px-4 py-3 text-slate-700 dark:text-slate-200 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-transparent dark:hover:from-emerald-900/20 dark:hover:to-transparent transition-all duration-200"
+            >
+              <div className="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+                <svg className="w-4 h-4 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <div>
+                <span className="block text-sm font-medium">Tribe Progress</span>
+                <span className="block text-xs text-slate-500 dark:text-slate-400">Impact & charity goals</span>
               </div>
             </Link>
           </div>
