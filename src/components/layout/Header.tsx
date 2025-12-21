@@ -122,7 +122,6 @@ function NavDropdown({ label, href, items }: NavDropdownProps) {
 // Dropdown menu configurations
 const studyDropdownItems: DropdownItem[] = [
   { label: 'Clinical Cases', href: '/cases', description: 'Interactive patient scenarios' },
-  { label: 'Flashcards', href: '/study/flashcards', description: 'Spaced repetition review' },
   { label: 'Rapid Review', href: '/study/rapid-review', description: 'Quick concept review' },
   { label: 'Progress', href: '/study/progress', description: 'Track your learning' },
   { label: 'Card Library', href: '/library', description: 'QBank-linked cards' },
