@@ -136,7 +136,7 @@ export function SpotifyWidget({ variant = 'compact', className = '' }: SpotifyWi
                         </div>
                       </div>
                       <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">
-                        Music continues playing as you navigate. Check the player in the bottom right corner.
+                        Music continues playing as you navigate. Check the player in the bottom left corner.
                       </p>
                     </div>
                   )}
@@ -238,7 +238,7 @@ export function SpotifyWidget({ variant = 'compact', className = '' }: SpotifyWi
             <h3 className="font-semibold text-slate-900 dark:text-white">{selectedPlaylistData.name}</h3>
             <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">{selectedPlaylistData.description}</p>
             <p className="text-xs text-green-600 dark:text-green-400">
-              Now playing - check the player in the bottom right corner
+              Now playing - check the player in the bottom left corner
             </p>
             <button
               onClick={() => stopPlayback()}

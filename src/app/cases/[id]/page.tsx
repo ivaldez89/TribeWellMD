@@ -8,7 +8,6 @@ import { useVignette } from '@/hooks/useVignette';
 import { VignetteViewer } from '@/components/vignettes/VignetteViewer';
 import { VignetteProgress } from '@/components/vignettes/VignetteProgress';
 import { BackgroundSelector, useStudyBackground, getBackgroundUrl } from '@/components/study/BackgroundSelector';
-import { SpotifyWidget } from '@/components/music/SpotifyWidget';
 
 // Ambient sound definitions
 const AMBIENT_SOUNDS = [
@@ -752,9 +751,6 @@ export default function CasePlayerPage() {
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Spotify Widget */}
-            <SpotifyWidget variant="compact" />
-
             {/* Audio dropdown */}
             <div className="relative">
               <button
