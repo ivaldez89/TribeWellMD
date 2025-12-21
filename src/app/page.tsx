@@ -259,57 +259,44 @@ export default function HomePage() {
       <Header />
 
       <main>
-        {/* Hero Section - Dark Banner (matching Investors/Partners style) */}
-        <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
-            <div className="max-w-4xl">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-teal-500/20 text-teal-300 rounded-full text-sm font-medium mb-6">
-                <span className="w-2 h-2 bg-teal-400 rounded-full animate-pulse" />
-                Medical Education Reimagined
-              </div>
-              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Study Smart. Find Your Tribe.{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-400">
-                  Stay Well.
-                </span>
-              </h1>
-              <p className="text-xl text-slate-300 mb-8 max-w-3xl">
-                The complete platform for medical students, residents, and attendings.
-                Evidence-based learning tools, mental wellness support, and a community that has your back.
-              </p>
+        {/* Hero Section - Clean White */}
+        <section className="bg-white dark:bg-slate-900 overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 text-center">
+            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
+              <span className="inline-block animate-fade-in-up">Study Smart.</span>
+              <br />
+              <span className="inline-block animate-fade-in-up animation-delay-100">Find Your Tribe.</span>
+              <br />
+              <span className="inline-block animate-fade-in-up animation-delay-200">
+                <span className="text-shimmer">Stay Well.</span>
+              </span>
+            </h1>
 
-              {/* Value props */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
-                {VALUE_PROPS.map((prop, idx) => (
-                  <div key={idx} className="flex items-center gap-3 text-slate-300">
-                    <div className="w-5 h-5 rounded-full bg-teal-500/30 flex items-center justify-center">
-                      <Icons.Check />
-                    </div>
-                    <span className="text-sm">{prop.text}</span>
-                  </div>
-                ))}
-              </div>
+            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto mb-10 animate-fade-in-up animation-delay-300">
+              The complete platform for medical students, residents, and attendings.
+              <br />
+              Evidence-based tools. Mental wellness. Community.
+            </p>
 
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  href="/register"
-                  className="px-8 py-4 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold rounded-xl hover:from-teal-600 hover:to-cyan-600 transition-all shadow-lg hover:scale-105"
-                >
-                  Get Started Free
-                </Link>
-                <Link
-                  href="/about"
-                  className="px-8 py-4 border-2 border-slate-600 text-white font-semibold rounded-xl hover:bg-slate-800 transition-all"
-                >
-                  Learn More
-                </Link>
-              </div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-fade-in-up animation-delay-400">
+              <Link
+                href="/register"
+                className="px-8 py-4 bg-slate-900 dark:bg-slate-800 text-white font-semibold rounded-full hover:bg-slate-800 dark:hover:bg-slate-700 transition-all hover:scale-105 hover:shadow-lg"
+              >
+                Get Started &nbsp;→
+              </Link>
+              <Link
+                href="/wellness"
+                className="text-slate-600 dark:text-slate-400 font-medium hover:text-slate-900 dark:hover:text-white transition-colors"
+              >
+                Explore Wellness →
+              </Link>
             </div>
           </div>
         </section>
 
         {/* Platform Pillars */}
-        <section className="bg-white dark:bg-slate-900" ref={pillarsRef}>
+        <section className="bg-gradient-to-b from-teal-50/70 to-cyan-50/50 dark:from-slate-800/50 dark:to-slate-900" ref={pillarsRef}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className={`text-center mb-12 transition-all duration-700 ${pillarsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <span className="text-sm font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">Platform Features</span>
