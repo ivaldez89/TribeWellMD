@@ -80,7 +80,7 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
       {isOpen && (
         <div
           ref={dropdownRef}
-          className="absolute top-full right-0 mt-2 w-72 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden z-50"
+          className="absolute top-full right-0 mt-2 w-72 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden z-[110]"
         >
           {/* Profile Header */}
           <div className="relative">

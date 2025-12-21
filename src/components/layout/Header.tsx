@@ -97,7 +97,7 @@ function NavDropdown({ label, href, items }: NavDropdownProps) {
       </Link>
 
       {isOpen && (
-        <div className="absolute top-full left-0 pt-1 w-64 z-50">
+        <div className="absolute top-full left-0 pt-1 w-64 z-[110]">
           <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-200 dark:border-slate-700 py-2">
             {items.map((item) => (
               <Link

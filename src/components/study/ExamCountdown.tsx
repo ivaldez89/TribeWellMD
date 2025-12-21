@@ -107,7 +107,7 @@ function getUrgencyStyles(daysRemaining: number | null) {
 }
 
 interface ExamCountdownProps {
-  variant?: 'compact' | 'full';
+  variant?: 'compact' | 'full' | 'expanded';
 }
 
 export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
@@ -186,6 +186,318 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
 
   if (!isLoaded) {
     return null;
+  }
+
+  // Expanded variant for hero section - full width with more details
+  if (variant === 'expanded') {
+    return (
+      <div className="relative w-full">
+        {/* Toggle Button - Full width, expanded style */}
+        <button
+          onClick={() => setShowPanel(!showPanel)}
+          className={`w-full flex items-center justify-between px-6 py-4 font-semibold rounded-xl shadow-lg transition-all hover:scale-[1.01] ${
+            primaryExam
+              ? `bg-gradient-to-r ${styles.gradient} text-white shadow-lg`
+              : 'bg-white/95 backdrop-blur-sm text-slate-700 border border-white/50 hover:bg-white shadow-lg'
+          }`}
+          title={primaryExam ? `${getExamDisplayName(primaryExam)}: ${primaryDays} days` : 'Set exam date'}
+        >
+          <div className="flex items-center gap-3">
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span>
+              {!primaryExam
+                ? 'Set Exam Date'
+                : getExamDisplayName(primaryExam)
+              }
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-lg font-bold">
+              {!primaryExam
+                ? ''
+                : primaryDays !== null
+                  ? (primaryDays < 0
+                      ? 'Passed!'
+                      : primaryDays === 0
+                        ? 'Today!'
+                        : `${primaryDays} days`)
+                  : ''
+              }
+            </span>
+            {exams.length > 1 && (
+              <span className="px-2 py-0.5 bg-white/20 text-xs rounded-full">{exams.length} exams</span>
+            )}
+            <svg className={`w-5 h-5 transition-transform ${showPanel ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </button>
+
+        {/* Dropdown Panel */}
+        {showPanel && (
+          <>
+            {/* Backdrop */}
+            <div
+              className="fixed inset-0 z-[100]"
+              onClick={() => setShowPanel(false)}
+            />
+
+            {/* Panel */}
+            <div className="absolute left-0 right-0 mt-2 rounded-xl shadow-xl border z-[110] bg-white border-slate-200 max-h-[70vh] overflow-y-auto">
+              <div className="p-4">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-semibold text-slate-900 flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    My Exams
+                  </h3>
+                  <button
+                    onClick={() => setShowAddModal(true)}
+                    className="text-xs px-2 py-1 bg-teal-100 text-teal-700 rounded-lg hover:bg-teal-200 transition-colors"
+                  >
+                    + Add Exam
+                  </button>
+                </div>
+
+                {exams.length === 0 ? (
+                  <div className="text-center py-6">
+                    <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-slate-100 flex items-center justify-center">
+                      <svg className="w-6 h-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <p className="text-sm text-slate-500 mb-3">No exams scheduled</p>
+                    <button
+                      onClick={() => setShowAddModal(true)}
+                      className="text-sm text-teal-600 hover:underline"
+                    >
+                      Add your first exam
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    {exams.map(exam => {
+                      const days = getDaysUntil(exam);
+                      const examStyles = getUrgencyStyles(days);
+                      return (
+                        <div
+                          key={exam.id}
+                          className={`p-3 rounded-lg border ${exam.isPrimary ? examStyles.bg : 'bg-slate-50 border-slate-200'}`}
+                        >
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2">
+                                <h4 className="font-medium text-slate-900 text-sm">
+                                  {getExamDisplayName(exam)}
+                                </h4>
+                                {exam.isPrimary && (
+                                  <span className="px-1.5 py-0.5 bg-teal-500 text-white text-[10px] rounded-full">PRIMARY</span>
+                                )}
+                              </div>
+                              <div className="flex items-center gap-2 mt-1">
+                                <span className={`text-lg font-bold ${examStyles.text}`}>
+                                  {days !== null
+                                    ? days < 0
+                                      ? 'Passed'
+                                      : days === 0
+                                        ? 'Today!'
+                                        : `${days} days`
+                                    : 'Not set'}
+                                </span>
+                                {exam.dateType === 'approximate' && (
+                                  <span className="text-[10px] text-slate-400 bg-slate-200 px-1.5 py-0.5 rounded">~approx</span>
+                                )}
+                              </div>
+                              <p className="text-[10px] text-slate-500 mt-0.5">
+                                {exam.dateType === 'exact' && exam.exactDate
+                                  ? new Date(exam.exactDate).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })
+                                  : exam.timeRange
+                                    ? TIME_RANGES[exam.timeRange].label
+                                    : ''}
+                              </p>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              {!exam.isPrimary && (
+                                <button
+                                  onClick={() => handleSetPrimary(exam.id)}
+                                  className="p-1 text-slate-400 hover:text-teal-600 transition-colors"
+                                  title="Set as primary"
+                                >
+                                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                                  </svg>
+                                </button>
+                              )}
+                              <button
+                                onClick={() => handleDeleteExam(exam.id)}
+                                className="p-1 text-slate-400 hover:text-red-600 transition-colors"
+                                title="Delete exam"
+                              >
+                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Study recommendations based on exams */}
+                {primaryExam && primaryDays !== null && primaryDays > 0 && (
+                  <div className="mt-4 p-3 bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg">
+                    <p className="text-xs font-medium text-slate-700 mb-1">Study Focus</p>
+                    <p className="text-[11px] text-slate-600">
+                      {primaryDays <= 7
+                        ? 'Final review! Focus on high-yield topics and weak areas.'
+                        : primaryDays <= 14
+                          ? 'Review weak areas and do full practice exams.'
+                          : primaryDays <= 30
+                            ? 'Increase QBank volume. Target 40-60 questions/day.'
+                            : primaryDays <= 60
+                              ? 'Build foundation with First Pass of UWorld.'
+                              : 'Focus on learning concepts. Start with your weakest systems.'}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* Add Exam Modal */}
+        {showAddModal && (
+          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/50">
+            <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+              <div className="px-6 py-4 border-b border-slate-200 bg-gradient-to-r from-teal-500 to-emerald-500">
+                <h3 className="text-lg font-semibold text-white">Add Exam</h3>
+                <p className="text-sm text-white/80">
+                  Plan your upcoming exams
+                </p>
+              </div>
+
+              <div className="p-6 space-y-4">
+                {/* Exam Type */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Exam Type</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {(['step1', 'step2ck', 'step3', 'shelf'] as ExamType[]).map(type => (
+                      <button
+                        key={type}
+                        onClick={() => setNewExamType(type)}
+                        className={`px-3 py-2 text-sm rounded-lg border-2 transition-all ${
+                          newExamType === type
+                            ? 'border-teal-500 bg-teal-50 text-teal-700'
+                            : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                        }`}
+                      >
+                        {type === 'step1' && 'Step 1'}
+                        {type === 'step2ck' && 'Step 2 CK'}
+                        {type === 'step3' && 'Step 3'}
+                        {type === 'shelf' && 'Shelf Exam'}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Shelf Category (if shelf selected) */}
+                {newExamType === 'shelf' && (
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">Shelf Category</label>
+                    <select
+                      value={newShelfCategory}
+                      onChange={(e) => setNewShelfCategory(e.target.value)}
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    >
+                      {SHELF_CATEGORIES.map(cat => (
+                        <option key={cat} value={cat}>{cat}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
+                {/* Date Type */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">When is your exam?</label>
+                  <div className="flex gap-2 mb-3">
+                    <button
+                      onClick={() => setNewDateType('exact')}
+                      className={`flex-1 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
+                        newDateType === 'exact'
+                          ? 'border-teal-500 bg-teal-50 text-teal-700'
+                          : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                      }`}
+                    >
+                      📅 Exact Date
+                    </button>
+                    <button
+                      onClick={() => setNewDateType('approximate')}
+                      className={`flex-1 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
+                        newDateType === 'approximate'
+                          ? 'border-teal-500 bg-teal-50 text-teal-700'
+                          : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                      }`}
+                    >
+                      ⏰ Approximate
+                    </button>
+                  </div>
+
+                  {newDateType === 'exact' ? (
+                    <input
+                      type="date"
+                      value={newExactDate}
+                      onChange={(e) => setNewExactDate(e.target.value)}
+                      min={new Date().toISOString().split('T')[0]}
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    />
+                  ) : (
+                    <div className="grid grid-cols-3 gap-2">
+                      {(Object.keys(TIME_RANGES) as TimeRange[]).filter(k => k !== 'exact').map(range => (
+                        <button
+                          key={range}
+                          onClick={() => setNewTimeRange(range)}
+                          className={`px-2 py-2 text-xs rounded-lg border-2 transition-all ${
+                            newTimeRange === range
+                              ? 'border-teal-500 bg-teal-50 text-teal-700'
+                              : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                          }`}
+                        >
+                          {TIME_RANGES[range].label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="px-6 py-4 border-t border-slate-200 bg-slate-50 flex gap-2">
+                <button
+                  onClick={() => {
+                    setShowAddModal(false);
+                    resetForm();
+                  }}
+                  className="flex-1 py-2 text-sm text-slate-600 hover:text-slate-900 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleAddExam}
+                  disabled={newDateType === 'exact' && !newExactDate}
+                  className="flex-1 py-2 bg-teal-600 text-white text-sm font-medium rounded-lg hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Add Exam
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
   }
 
   // Compact variant for hero section

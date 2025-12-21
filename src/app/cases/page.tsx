@@ -331,10 +331,10 @@ export default function CasesPage() {
               {showShelfDropdown && (
                 <>
                   <div
-                    className="fixed inset-0 z-40"
+                    className="fixed inset-0 z-[100]"
                     onClick={() => setShowShelfDropdown(false)}
                   />
-                  <div className="absolute left-6 right-6 top-[calc(100%-3.5rem)] mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-50 max-h-64 overflow-y-auto">
+                  <div className="absolute left-6 right-6 top-[calc(100%-3.5rem)] mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-[110] max-h-64 overflow-y-auto">
                     {SHELF_CATEGORIES.map((shelf) => (
                       <button
                         key={shelf.id}
@@ -353,10 +353,10 @@ export default function CasesPage() {
               {showCategoryDropdown && (
                 <>
                   <div
-                    className="fixed inset-0 z-40"
+                    className="fixed inset-0 z-[100]"
                     onClick={() => setShowCategoryDropdown(false)}
                   />
-                  <div className="absolute left-6 right-6 top-full mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-50 max-h-64 overflow-y-auto">
+                  <div className="absolute left-6 right-6 top-full mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-[110] max-h-64 overflow-y-auto">
                     {SYSTEM_CATEGORIES.map((cat) => {
                       const count = getCasesBySystem(cat.id).length;
                       return (

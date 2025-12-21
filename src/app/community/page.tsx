@@ -45,7 +45,7 @@ export default function CommunityPage() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
-        <section className="mb-8">
+        <section className="mb-8 animate-fade-in-up">
           <div className="relative rounded-3xl bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-500 p-8 md:p-10 shadow-2xl">
             {/* Animated background elements - contained */}
             <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
@@ -129,7 +129,7 @@ export default function CommunityPage() {
         </section>
 
         {/* Main 4-Box Navigation Grid - Matching Study page style */}
-        <section className="mb-8">
+        <section className="mb-8 animate-fade-in-up animation-delay-100">
           <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Connect & Support</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Box 1: Mentorship Matching */}
@@ -253,7 +253,7 @@ export default function CommunityPage() {
         </section>
 
         {/* Secondary Actions Row - Like Study page */}
-        <section className="mb-8">
+        <section className="mb-8 animate-fade-in-up animation-delay-200">
           <div className="grid grid-cols-2 gap-4">
             {/* Resources Hub */}
             <Link
@@ -296,7 +296,7 @@ export default function CommunityPage() {
         </section>
 
         {/* Why Community Matters - Stats Section */}
-        <section className="mb-8">
+        <section className="mb-8 animate-fade-in-up animation-delay-300">
           <div className="p-8 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl text-white">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-2xl font-bold mb-6">Why This Matters</h2>
@@ -322,7 +322,7 @@ export default function CommunityPage() {
         </section>
 
         {/* Quick Stats Bar - 4 columns like Study page */}
-        <section className="mb-8">
+        <section className="mb-8 animate-fade-in-up animation-delay-400">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
               <div className="flex items-center gap-3">
@@ -375,7 +375,7 @@ export default function CommunityPage() {
         </section>
 
         {/* Testimonials */}
-        <section className="mb-8">
+        <section className="mb-8 animate-fade-in-up animation-delay-500">
           <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4">What Trainees Are Saying</h2>
           <div className="grid md:grid-cols-3 gap-4">
             {[

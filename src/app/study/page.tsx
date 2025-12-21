@@ -675,22 +675,9 @@ export default function StudyPage() {
                       </div>
                     )}
 
-                    {/* Secondary Action Buttons - Consistent sizing */}
-                    <div className="flex gap-3 w-full">
-                      {/* Rapid Review Button */}
-                      <Link
-                        href="/study/rapid-review"
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl shadow-lg shadow-amber-500/30 hover:shadow-amber-500/50 hover:scale-[1.02] transition-all"
-                      >
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                        <span className="hidden sm:inline">Rapid Review</span>
-                        <span className="sm:hidden">Rapid</span>
-                      </Link>
-
-                      {/* Exam Countdown - Matching style */}
-                      <ExamCountdown variant="compact" />
+                    {/* Secondary Action - Calendar Widget matching hero width */}
+                    <div className="w-full min-w-[280px]">
+                      <ExamCountdown variant="expanded" />
                     </div>
                   </div>
                 </div>
@@ -814,7 +801,7 @@ export default function StudyPage() {
                 })()}
 
                 {/* Box 2: Browse Cards by Shelf / Topic */}
-                <div className="relative p-6 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl shadow-lg shadow-teal-500/25 text-white">
+                <div className="relative p-6 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl shadow-lg shadow-teal-500/25 text-white z-20">
                   <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
                     <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
                   </div>
@@ -868,10 +855,10 @@ export default function StudyPage() {
                   {showShelfDropdown && (
                     <>
                       <div
-                        className="fixed inset-0 z-40"
+                        className="fixed inset-0 z-[100]"
                         onClick={() => setShowShelfDropdown(false)}
                       />
-                      <div className="absolute left-6 right-6 top-[calc(100%-3.5rem)] mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-50 max-h-64 overflow-y-auto">
+                      <div className="absolute left-6 right-6 top-[calc(100%-3.5rem)] mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-[110] max-h-64 overflow-y-auto">
                         {shelfCategories.map((shelf) => (
                           <Link
                             key={shelf.id}
@@ -891,10 +878,10 @@ export default function StudyPage() {
                   {showTopicDropdown && (
                     <>
                       <div
-                        className="fixed inset-0 z-40"
+                        className="fixed inset-0 z-[100]"
                         onClick={() => setShowTopicDropdown(false)}
                       />
-                      <div className="absolute left-6 right-6 top-full mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-50 max-h-64 overflow-y-auto">
+                      <div className="absolute left-6 right-6 top-full mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-[110] max-h-64 overflow-y-auto">
                         {topicCategories.slice(0, 10).map((topic) => (
                           <Link
                             key={topic.id}
