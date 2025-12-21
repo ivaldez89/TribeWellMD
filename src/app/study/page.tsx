@@ -640,8 +640,9 @@ export default function StudyPage() {
                     </div>
                   </div>
 
-                  {/* Right side - CTA Button */}
+                  {/* Right side - CTA Buttons */}
                   <div className="flex flex-col items-center gap-4">
+                    {/* Main Study Button */}
                     {filteredDueCards.length > 0 ? (
                       <button
                         onClick={handleStartStudying}
@@ -665,6 +666,17 @@ export default function StudyPage() {
                         All Done for Now
                       </div>
                     )}
+
+                    {/* Rapid Review Button - Added to hero */}
+                    <Link
+                      href="/study/rapid-review"
+                      className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-xl shadow-lg shadow-amber-500/30 hover:shadow-amber-500/50 hover:scale-105 transition-all"
+                    >
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                      Rapid Review
+                    </Link>
 
                     {/* Exam countdown inline */}
                     <ExamCountdown variant="compact" />
@@ -718,50 +730,27 @@ export default function StudyPage() {
               </div>
             </section>
 
-            {/* Quick Actions Bar */}
-            <section className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-3">
-                <Link
-                  href="/study/progress"
-                  className="flex items-center gap-2 px-4 py-2.5 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-600 hover:shadow-md transition-all"
-                >
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
-                  Progress
-                </Link>
-                <Link
-                  href="/study/rapid-review"
-                  className="flex items-center gap-2 px-4 py-2.5 text-sm bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl shadow-md shadow-amber-500/25 hover:shadow-lg hover:shadow-amber-500/30 transition-all"
-                >
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                  Rapid Review
-                </Link>
-              </div>
-
-              <p className="text-sm text-slate-500 dark:text-slate-400">
-                Browse content below to add more cards
-              </p>
-            </section>
-
-            {/* Main Navigation Tabs */}
+            {/* Main 4-Box Navigation Grid - Matching Cases page style */}
             <section className="mb-8">
-              <div className="grid grid-cols-4 gap-4">
-                {/* Shelf Exams */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                {/* Box 1: Shelf Exams */}
                 <Link
                   href="/library?view=shelves"
                   className="group relative p-6 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] transition-all duration-300 text-white overflow-hidden"
                 >
                   <div className="relative z-10">
-                    <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mb-4">
-                      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center mb-4">
+                      <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                       </svg>
                     </div>
-                    <h3 className="font-bold text-lg mb-1">Shelf Exams</h3>
-                    <p className="text-white/70 text-sm">{shelfCategories.length} rotations</p>
+                    <h3 className="font-bold text-xl mb-1">Shelf Exams</h3>
+                    <p className="text-white/70 text-sm mb-3">Study by rotation</p>
+                    <div className="flex items-center gap-2">
+                      <span className="text-3xl font-bold">{shelfCategories.length}</span>
+                      <span className="text-white/60 text-sm">rotations</span>
+                    </div>
                   </div>
                   <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -770,19 +759,23 @@ export default function StudyPage() {
                   </div>
                 </Link>
 
-                {/* Topics */}
+                {/* Box 2: Topics */}
                 <Link
                   href="/library?view=topics"
                   className="group relative p-6 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 hover:scale-[1.02] transition-all duration-300 text-white overflow-hidden"
                 >
                   <div className="relative z-10">
-                    <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mb-4">
-                      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center mb-4">
+                      <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                       </svg>
                     </div>
-                    <h3 className="font-bold text-lg mb-1">Topics</h3>
-                    <p className="text-white/70 text-sm">{topicCategories.length} systems</p>
+                    <h3 className="font-bold text-xl mb-1">Topics</h3>
+                    <p className="text-white/70 text-sm mb-3">Study by system</p>
+                    <div className="flex items-center gap-2">
+                      <span className="text-3xl font-bold">{topicCategories.length}</span>
+                      <span className="text-white/60 text-sm">systems</span>
+                    </div>
                   </div>
                   <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -791,46 +784,75 @@ export default function StudyPage() {
                   </div>
                 </Link>
 
-                {/* AI Generate */}
-                <Link
-                  href="/generate"
-                  className="group relative p-6 bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-2xl shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 hover:scale-[1.02] transition-all duration-300 text-white overflow-hidden"
+                {/* Box 3: QBank Lookup - PROMOTED! Differentiator Feature */}
+                <button
+                  onClick={() => setShowQBankLookup(!showQBankLookup)}
+                  className={`group relative p-6 rounded-2xl shadow-lg transition-all duration-300 text-white overflow-hidden text-left ${
+                    showQBankLookup
+                      ? 'bg-gradient-to-br from-orange-500 to-red-600 shadow-orange-500/40 scale-[1.02]'
+                      : 'bg-gradient-to-br from-orange-500 to-amber-600 shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02]'
+                  }`}
                 >
                   <div className="relative z-10">
-                    <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mb-4">
-                      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center mb-4">
+                      <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                       </svg>
                     </div>
-                    <h3 className="font-bold text-lg mb-1 flex items-center gap-2">
-                      AI Generate
-                      <span className="px-1.5 py-0.5 text-xs bg-white/20 rounded-full">NEW</span>
+                    <h3 className="font-bold text-xl mb-1 flex items-center gap-2">
+                      QBank Lookup
+                      <span className="px-1.5 py-0.5 text-xs bg-white/20 rounded-full">UNIQUE</span>
                     </h3>
-                    <p className="text-white/70 text-sm">From your notes</p>
+                    <p className="text-white/70 text-sm mb-3">Find missed concepts</p>
+                    <div className="flex items-center gap-2">
+                      {missedStats.totalTracked > 0 ? (
+                        <>
+                          <span className="text-3xl font-bold">{missedStats.totalTracked}</span>
+                          <span className="text-white/60 text-sm">tracked</span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-lg font-medium text-white/80">UWorld + AMBOSS</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg className={`w-6 h-6 transition-transform ${showQBankLookup ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </button>
+
+                {/* Box 4: Your Progress */}
+                <Link
+                  href="/study/progress"
+                  className="group relative p-6 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] transition-all duration-300 text-white overflow-hidden"
+                >
+                  <div className="relative z-10">
+                    <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center mb-4">
+                      <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                      </svg>
+                    </div>
+                    <h3 className="font-bold text-xl mb-1">Your Progress</h3>
+                    <p className="text-white/70 text-sm mb-3">Track your mastery</p>
+                    {/* Progress Bar */}
+                    <div className="mb-2">
+                      <div className="h-2 bg-white/20 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-white rounded-full transition-all duration-500"
+                          style={{ width: `${stats.totalCards > 0 ? Math.round((stats.dueToday / stats.totalCards) * 100) : 0}%` }}
+                        />
+                      </div>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-white/70">{stats.totalCards} cards</span>
+                      <span className="font-bold">{stats.averageEase.toFixed(0)}% ease</span>
+                    </div>
                   </div>
                   <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </div>
-                </Link>
-
-                {/* Import Cards */}
-                <Link
-                  href="/import"
-                  className="group relative p-6 bg-white dark:bg-slate-800 rounded-2xl border-2 border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-600 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 overflow-hidden"
-                >
-                  <div className="relative z-10">
-                    <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-700 group-hover:bg-teal-500 flex items-center justify-center mb-4 transition-colors">
-                      <svg className="w-6 h-6 text-slate-600 dark:text-slate-400 group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                      </svg>
-                    </div>
-                    <h3 className="font-bold text-lg mb-1 text-slate-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">Import Cards</h3>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm">Your own decks</p>
-                  </div>
-                  <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <svg className="w-6 h-6 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                   </div>
@@ -838,49 +860,15 @@ export default function StudyPage() {
               </div>
             </section>
 
-            {/* QBank Lookup - Compact */}
-            <section className="mb-8">
-              <button
-                onClick={() => setShowQBankLookup(!showQBankLookup)}
-                className={`w-full p-4 rounded-xl border transition-all duration-300 flex items-center justify-between ${
-                  showQBankLookup
-                    ? 'bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/30 dark:to-cyan-900/30 border-teal-500'
-                    : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-700'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                  </div>
-                  <div className="text-left">
-                    <h3 className="font-semibold text-slate-900 dark:text-white text-sm">QBank Lookup</h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
-                      Find concepts for missed questions
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  {missedStats.totalTracked > 0 && (
-                    <span className="px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-xs font-medium rounded-full">
-                      {missedStats.totalTracked} tracked
-                    </span>
-                  )}
-                  <svg className={`w-4 h-4 text-slate-400 transition-transform ${showQBankLookup ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-              </button>
-
-              {/* Expanded QBank Lookup */}
-              {showQBankLookup && (
-                <div className="mt-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+            {/* QBank Lookup Expanded Panel */}
+            {showQBankLookup && (
+              <section className="mb-8 -mt-4">
+                <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg">
                   <QBankLookup />
 
                   {/* Missed Concepts Summary */}
                   {missedStats.totalTracked > 0 && priorityConcepts.length > 0 && (
-                    <div className="mt-4 p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
+                    <div className="mt-4 p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-xl border border-amber-200 dark:border-amber-800">
                       <div className="flex items-center justify-between mb-3">
                         <h4 className="font-medium text-amber-900 dark:text-amber-100 text-sm flex items-center gap-2">
                           Weak Concepts
@@ -895,7 +883,7 @@ export default function StudyPage() {
                         {priorityConcepts.slice(0, 3).map(({ conceptCode, missCount, concept }) => (
                           <div
                             key={conceptCode}
-                            className="flex items-center justify-between p-2 bg-white dark:bg-slate-800 rounded border border-amber-200 dark:border-amber-700"
+                            className="flex items-center justify-between p-3 bg-white dark:bg-slate-800 rounded-lg border border-amber-200 dark:border-amber-700"
                           >
                             <div>
                               <p className="font-medium text-slate-900 dark:text-white text-sm">
@@ -914,7 +902,53 @@ export default function StudyPage() {
                     </div>
                   )}
                 </div>
-              )}
+              </section>
+            )}
+
+            {/* Secondary Actions Row */}
+            <section className="mb-8">
+              <div className="grid grid-cols-2 gap-4">
+                {/* AI Generate */}
+                <Link
+                  href="/generate"
+                  className="group flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-violet-300 dark:hover:border-violet-600 hover:shadow-lg transition-all"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-slate-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors flex items-center gap-2">
+                      AI Generate
+                      <span className="px-1.5 py-0.5 text-xs bg-violet-100 dark:bg-violet-900/50 text-violet-600 dark:text-violet-400 rounded-full">NEW</span>
+                    </h3>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">Create cards from your notes</p>
+                  </div>
+                  <svg className="w-5 h-5 text-slate-400 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
+
+                {/* Import Cards */}
+                <Link
+                  href="/import"
+                  className="group flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-600 hover:shadow-lg transition-all"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-700 group-hover:bg-teal-500 flex items-center justify-center transition-colors">
+                    <svg className="w-6 h-6 text-slate-600 dark:text-slate-400 group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-slate-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">Import Cards</h3>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">Your own Anki or CSV decks</p>
+                  </div>
+                  <svg className="w-5 h-5 text-slate-400 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
+              </div>
             </section>
           </>
         )}
