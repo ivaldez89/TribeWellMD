@@ -163,15 +163,15 @@ export function Header({ stats }: HeaderProps) {
     <header className="sticky top-0 z-50 bg-gradient-to-r from-teal-50 via-cyan-50 to-emerald-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 backdrop-blur-md border-b border-teal-100 dark:border-slate-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
-            <div className="w-10 h-10 rounded-xl shadow-lg shadow-teal-500/25 group-hover:shadow-teal-500/40 transition-shadow overflow-hidden">
+          {/* Logo - always clickable to go home */}
+          <Link href="/" className="flex items-center gap-2 sm:gap-3 group flex-shrink-0">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl shadow-lg shadow-teal-500/25 group-hover:shadow-teal-500/40 transition-shadow overflow-hidden">
               <img src="/logo.jpeg" alt="TribeWellMD" className="w-full h-full object-cover" />
             </div>
-            <div className="hidden sm:block">
-              <span className="text-xl font-bold text-slate-900 dark:text-white">Tribe</span>
-              <span className="text-xl font-bold text-teal-600 dark:text-teal-400">Well</span>
-              <span className="text-xl font-light text-indigo-600 dark:text-indigo-400">MD</span>
+            <div>
+              <span className="text-base sm:text-xl font-bold text-slate-900 dark:text-white">Tribe</span>
+              <span className="text-base sm:text-xl font-bold text-teal-600 dark:text-teal-400">Well</span>
+              <span className="text-base sm:text-xl font-light text-indigo-600 dark:text-indigo-400">MD</span>
             </div>
           </Link>
 
