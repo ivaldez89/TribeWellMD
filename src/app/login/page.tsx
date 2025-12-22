@@ -3,9 +3,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { createClient } from '@/lib/supabase/client';
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -16,16 +17,27 @@ export default function LoginPage() {
     setIsLoading(true);
     setError('');
 
-    // Simple client-side validation matching middleware credentials
-    if (username === 'tribewellmd' && password === 'preview2024') {
-      // Set auth cookie
-      document.cookie = 'tribewellmd-auth=authenticated; path=/; max-age=604800'; // 7 days
-      router.push('/');
-      router.refresh();
-    } else {
-      setError('Invalid credentials');
+    const supabase = createClient();
+
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (signInError) {
+      if (signInError.message.includes('Invalid login credentials')) {
+        setError('Invalid email or password');
+      } else if (signInError.message.includes('Email not confirmed')) {
+        setError('Please check your email to confirm your account before signing in');
+      } else {
+        setError(signInError.message);
+      }
       setIsLoading(false);
+      return;
     }
+
+    router.push('/');
+    router.refresh();
   };
 
   return (
@@ -55,16 +67,16 @@ export default function LoginPage() {
         <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl shadow-2xl shadow-slate-200/50 dark:shadow-slate-900/50 border border-white/50 dark:border-slate-700/50 p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Username
+              <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                Email
               </label>
               <input
-                id="username"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-teal-500 focus:border-transparent focus:bg-white dark:focus:bg-slate-700 transition-all"
-                placeholder="Enter username"
+                placeholder="you@school.edu"
                 required
               />
             </div>
@@ -109,7 +121,7 @@ export default function LoginPage() {
 
           <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-700">
             <p className="text-center text-sm text-slate-500 dark:text-slate-400 mb-3">
-              Don't have an account?
+              Don&apos;t have an account?
             </p>
             <Link
               href="/register"

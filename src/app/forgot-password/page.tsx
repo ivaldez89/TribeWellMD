@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { createClient } from '@/lib/supabase/client';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -22,9 +23,18 @@ export default function ForgotPasswordPage() {
     }
 
     try {
-      // TODO: Integrate with Supabase auth.resetPasswordForEmail
-      // For now, simulate success
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const supabase = createClient();
+
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+
+      if (resetError) {
+        setError(resetError.message);
+        setIsLoading(false);
+        return;
+      }
+
       setSuccess(true);
     } catch {
       setError('Something went wrong. Please try again.');

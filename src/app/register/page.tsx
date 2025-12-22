@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { createClient } from '@/lib/supabase/client';
 
 type UserRole = 'premed' | 'medical-student' | 'resident' | 'fellow' | 'attending' | 'institution';
 
@@ -105,6 +106,8 @@ export default function RegisterPage() {
     firstName: '',
     lastName: '',
     email: '',
+    password: '',
+    confirmPassword: '',
     institution: '',
     currentYear: '',
     specialty: '',
@@ -130,7 +133,7 @@ export default function RegisterPage() {
     setIsLoading(true);
     setError('');
 
-    if (!formData.firstName || !formData.lastName || !formData.email) {
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.password) {
       setError('Please fill in all required fields');
       setIsLoading(false);
       return;
@@ -146,6 +149,19 @@ export default function RegisterPage() {
     // Require .edu email
     if (!formData.email.toLowerCase().endsWith('.edu')) {
       setError('A .edu email address is required to register');
+      setIsLoading(false);
+      return;
+    }
+
+    // Password validation
+    if (formData.password.length < 8) {
+      setError('Password must be at least 8 characters');
+      setIsLoading(false);
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
       setIsLoading(false);
       return;
     }
@@ -173,31 +189,63 @@ export default function RegisterPage() {
           break;
       }
 
-      const profile = {
-        id: crypto.randomUUID(),
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        school: formData.institution,
-        currentYear,
-        role: selectedRole,
-        ...(selectedRole === 'resident' || selectedRole === 'fellow' ? {
-          interestedSpecialties: formData.specialty ? [formData.specialty] : [],
-          pgyYear: formData.pgyYear,
-        } : {}),
-        ...(selectedRole === 'institution' ? {
-          jobTitle: formData.jobTitle,
-        } : {}),
-        profileVisibility: 'connections' as const,
-        showStudyStats: true,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
+      const supabase = createClient();
 
-      localStorage.setItem('tribewellmd_user_profile', JSON.stringify(profile));
-      document.cookie = 'tribewellmd-auth=authenticated; path=/; max-age=604800';
-      router.push('/profile');
-      router.refresh();
+      // Sign up with Supabase
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            role: selectedRole,
+            institution: formData.institution,
+            current_year: currentYear,
+            specialty: formData.specialty || null,
+            pgy_year: formData.pgyYear || null,
+            job_title: formData.jobTitle || null,
+          },
+        },
+      });
+
+      if (signUpError) {
+        if (signUpError.message.includes('already registered')) {
+          setError('An account with this email already exists. Please sign in instead.');
+        } else {
+          setError(signUpError.message);
+        }
+        setIsLoading(false);
+        return;
+      }
+
+      if (data.user) {
+        // Also store profile in localStorage for now (can migrate to Supabase DB later)
+        const profile = {
+          id: data.user.id,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          school: formData.institution,
+          currentYear,
+          role: selectedRole,
+          ...(selectedRole === 'resident' || selectedRole === 'fellow' ? {
+            interestedSpecialties: formData.specialty ? [formData.specialty] : [],
+            pgyYear: formData.pgyYear,
+          } : {}),
+          ...(selectedRole === 'institution' ? {
+            jobTitle: formData.jobTitle,
+          } : {}),
+          profileVisibility: 'connections' as const,
+          showStudyStats: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        };
+
+        localStorage.setItem('tribewellmd_user_profile', JSON.stringify(profile));
+        router.push('/profile');
+        router.refresh();
+      }
     } catch (err) {
       setError('Something went wrong. Please try again.');
       setIsLoading(false);
@@ -346,6 +394,44 @@ export default function RegisterPage() {
                 ) : (
                   <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">A .edu email address is required to register</p>
                 )}
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    Password <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="password"
+                    type="password"
+                    value={formData.password}
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                    placeholder="Min. 8 characters"
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    Confirm Password <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="confirmPassword"
+                    type="password"
+                    value={formData.confirmPassword}
+                    onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                    className={`w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:border-transparent transition-all ${
+                      formData.confirmPassword && formData.password !== formData.confirmPassword
+                        ? 'border-red-500 focus:ring-red-500'
+                        : 'border-slate-200 dark:border-slate-600 focus:ring-teal-500'
+                    }`}
+                    placeholder="Confirm password"
+                    required
+                  />
+                  {formData.confirmPassword && formData.password !== formData.confirmPassword && (
+                    <p className="mt-1 text-xs text-red-500 font-medium">Passwords do not match</p>
+                  )}
+                </div>
               </div>
 
               <div>
