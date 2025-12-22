@@ -9,10 +9,12 @@ import {
   getUserInitials,
   MEDICAL_SPECIALTIES,
   ACADEMIC_YEARS,
+  getCurrentUserId,
   type UserProfile
 } from '@/lib/storage/profileStorage';
 import { SchoolSelector } from '@/components/profile/SchoolSelector';
 import type { SchoolType } from '@/lib/data/schools';
+import { uploadAvatar } from '@/lib/storage/supabaseStorage';
 import {
   getConnectedUsers,
   getPendingRequestUsers,
@@ -42,6 +44,8 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
+  const [avatarUploading, setAvatarUploading] = useState(false);
+  const [avatarError, setAvatarError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Connections state
@@ -171,16 +175,44 @@ export default function ProfilePage() {
     }, 500);
   };
 
-  const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !profile) return;
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const base64 = event.target?.result as string;
-      setProfile({ ...profile, avatar: base64 });
-    };
-    reader.readAsDataURL(file);
+    const userId = getCurrentUserId();
+    if (!userId) {
+      setAvatarError('Please log in to upload an avatar');
+      return;
+    }
+
+    setAvatarUploading(true);
+    setAvatarError(null);
+
+    try {
+      const result = await uploadAvatar(file, userId);
+
+      if (result.success && result.url) {
+        setProfile({ ...profile, avatar: result.url });
+        setSaveMessage('Photo uploaded! Click Save to keep changes.');
+        setTimeout(() => setSaveMessage(null), 3000);
+      } else {
+        // Fallback to base64 for local storage if Supabase fails
+        console.warn('Supabase upload failed, using local storage:', result.error);
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const base64 = event.target?.result as string;
+          setProfile({ ...profile, avatar: base64 });
+          setAvatarError('Photo saved locally (cloud sync unavailable)');
+          setTimeout(() => setAvatarError(null), 5000);
+        };
+        reader.readAsDataURL(file);
+      }
+    } catch (error) {
+      console.error('Avatar upload error:', error);
+      setAvatarError('Failed to upload photo. Please try again.');
+    } finally {
+      setAvatarUploading(false);
+    }
   };
 
   const handleSpecialtyToggle = (specialty: string) => {
@@ -247,11 +279,12 @@ export default function ProfilePage() {
               {/* Avatar */}
               <div className="relative">
                 <div
-                  onClick={() => isEditing && fileInputRef.current?.click()}
+                  onClick={() => isEditing && !avatarUploading && fileInputRef.current?.click()}
                   className={`
                     w-28 h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden
                     border-4 border-white dark:border-slate-800 shadow-xl
-                    ${isEditing ? 'cursor-pointer group' : ''}
+                    ${isEditing && !avatarUploading ? 'cursor-pointer group' : ''}
+                    ${avatarUploading ? 'opacity-70' : ''}
                   `}
                 >
                   {profile.avatar ? (
@@ -266,8 +299,15 @@ export default function ProfilePage() {
                     </div>
                   )}
 
+                  {/* Upload loading overlay */}
+                  {avatarUploading && (
+                    <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                      <div className="w-8 h-8 border-3 border-white border-t-transparent rounded-full animate-spin" />
+                    </div>
+                  )}
+
                   {/* Edit overlay */}
-                  {isEditing && (
+                  {isEditing && !avatarUploading && (
                     <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                       <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
@@ -282,10 +322,20 @@ export default function ProfilePage() {
                   accept="image/*"
                   onChange={handleAvatarUpload}
                   className="hidden"
+                  disabled={avatarUploading}
                 />
 
                 {/* Online indicator */}
-                <span className="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 border-3 border-white dark:border-slate-800 rounded-full" />
+                {!avatarUploading && (
+                  <span className="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 border-3 border-white dark:border-slate-800 rounded-full" />
+                )}
+
+                {/* Avatar error message */}
+                {avatarError && (
+                  <div className="absolute -bottom-8 left-0 right-0 text-center">
+                    <span className="text-xs text-amber-500 dark:text-amber-400">{avatarError}</span>
+                  </div>
+                )}
               </div>
 
               {/* Name & Info */}
