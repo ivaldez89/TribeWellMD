@@ -143,6 +143,13 @@ export default function RegisterPage() {
       return;
     }
 
+    // Require .edu email
+    if (!formData.email.toLowerCase().endsWith('.edu')) {
+      setError('A .edu email address is required to register');
+      setIsLoading(false);
+      return;
+    }
+
     try {
       let currentYear: string | undefined;
       switch (selectedRole) {
@@ -326,11 +333,19 @@ export default function RegisterPage() {
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                  className={`w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:border-transparent transition-all ${
+                    formData.email && !formData.email.toLowerCase().endsWith('.edu')
+                      ? 'border-red-500 focus:ring-red-500'
+                      : 'border-slate-200 dark:border-slate-600 focus:ring-teal-500'
+                  }`}
                   placeholder="john.doe@school.edu"
                   required
                 />
-                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Use your .edu email for automatic school verification</p>
+                {formData.email && !formData.email.toLowerCase().endsWith('.edu') ? (
+                  <p className="mt-1 text-xs text-red-500 font-medium">A .edu email address is required to register</p>
+                ) : (
+                  <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">A .edu email address is required to register</p>
+                )}
               </div>
 
               <div>
