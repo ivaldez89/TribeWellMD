@@ -32,13 +32,13 @@ const LOCAL_CHARITIES: CityCharities[] = [
       {
         name: 'The Bridge Homeless Recovery Center',
         description: 'Dallas\' largest homeless assistance center, providing shelter, meals, and services to help people rebuild their lives.',
-        website: 'https://bridgenorthtexas.org',
+        website: 'https://www.bridgehrc.org',
         focus: 'Homeless Services',
       },
       {
         name: 'Parkland Foundation',
         description: 'Supports Parkland Health, one of the nation\'s largest public hospital systems, serving the underserved community.',
-        website: 'https://www.parklandfoundation.org',
+        website: 'https://parklandhealthfoundation.org',
         focus: 'Healthcare Access',
       },
       {
@@ -140,7 +140,7 @@ const LOCAL_CHARITIES: CityCharities[] = [
       {
         name: 'Good Neighbor Settlement House',
         description: 'Multi-service community center providing food, clothing, social services, and emergency assistance.',
-        website: 'https://www.goodneighborbro.org',
+        website: 'https://www.goodneighborsettlement.org',
         focus: 'Community Services',
       },
       {
@@ -152,13 +152,13 @@ const LOCAL_CHARITIES: CityCharities[] = [
       {
         name: 'Proyecto Juan Diego',
         description: 'Empowers families in Brownsville colonias through education, housing improvements, and community organizing.',
-        website: 'https://www.pjd-rgv.org',
+        website: 'https://www.proyecto-jd.org',
         focus: 'Community Development',
       },
       {
         name: 'Boys & Girls Club of the Rio Grande Valley',
         description: 'Provides after-school programs, mentorship, and development opportunities for youth in the region.',
-        website: 'https://bgcrgv.org',
+        website: 'https://www.bgca.org',
         focus: 'Youth Development',
       },
     ],

@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { createClient } from '@/lib/supabase/client';
+import { setCurrentUserId, clearLegacyProfileData } from '@/lib/storage/profileStorage';
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -16,14 +18,29 @@ export default function LoginPage() {
     setIsLoading(true);
     setError('');
 
-    // Simple client-side validation matching middleware credentials
-    if (username === 'tribewellmd' && password === 'preview2024') {
-      // Set auth cookie
-      document.cookie = 'tribewellmd-auth=authenticated; path=/; max-age=604800'; // 7 days
-      router.push('/');
-      router.refresh();
-    } else {
-      setError('Invalid credentials');
+    const supabase = createClient();
+    const { data, error: signInError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (signInError) {
+      setError(signInError.message);
+      setIsLoading(false);
+    } else if (data.user && data.session) {
+      // Set the current user ID for profile storage
+      setCurrentUserId(data.user.id);
+      // Clear any legacy profile data from before user-aware storage
+      clearLegacyProfileData();
+
+      // Wait for Supabase to fully set the session cookies
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      // Force a full page reload to ensure middleware picks up new cookies
+      window.location.replace('/');
+    } else if (data.user && !data.session) {
+      // User exists but no session - likely email not confirmed
+      setError('Please check your email and confirm your account before signing in.');
       setIsLoading(false);
     }
   };
@@ -55,24 +72,32 @@ export default function LoginPage() {
         <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl shadow-2xl shadow-slate-200/50 dark:shadow-slate-900/50 border border-white/50 dark:border-slate-700/50 p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Username
+              <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                Email
               </label>
               <input
-                id="username"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-teal-500 focus:border-transparent focus:bg-white dark:focus:bg-slate-700 transition-all"
-                placeholder="Enter username"
+                placeholder="you@school.edu"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Password
-              </label>
+              <div className="flex items-center justify-between mb-2">
+                <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                  Password
+                </label>
+                <Link
+                  href="/forgot-password"
+                  className="text-sm text-teal-600 hover:text-teal-700 dark:text-teal-400 dark:hover:text-teal-300"
+                >
+                  Forgot password?
+                </Link>
+              </div>
               <input
                 id="password"
                 type="password"

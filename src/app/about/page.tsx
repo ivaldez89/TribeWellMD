@@ -1,10 +1,131 @@
 'use client';
 
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';
 
+// Core values data
+const coreValues = [
+  {
+    number: '01',
+    title: 'Evidence Over Opinion',
+    description: 'Every feature is grounded in peer-reviewed research. We build on what science proves works.',
+    gradient: 'from-violet-500 to-purple-600',
+  },
+  {
+    number: '02',
+    title: 'Community First',
+    description: 'We design for collective benefit. Individual success is a stepping stone to community thriving.',
+    gradient: 'from-emerald-500 to-teal-600',
+  },
+  {
+    number: '03',
+    title: 'Sustainable Growth',
+    description: 'No shortcuts, no burnout culture. We optimize for long-term wellbeing, not short-term metrics.',
+    gradient: 'from-orange-500 to-amber-600',
+  },
+  {
+    number: '04',
+    title: 'Radical Transparency',
+    description: 'Users know exactly how points convert, where donations go, and how the platform works.',
+    gradient: 'from-cyan-500 to-blue-600',
+  },
+  {
+    number: '05',
+    title: 'Purpose-Driven',
+    description: 'Every action on the platform can create real-world impact. Progress becomes meaningful.',
+    gradient: 'from-rose-500 to-pink-600',
+  },
+];
+
 export default function AboutPage() {
+  // Scroll animation refs
+  const philosophyRef = useRef<HTMLDivElement>(null);
+  const theoryRef = useRef<HTMLDivElement>(null);
+  const valuesRef = useRef<HTMLDivElement>(null);
+  const cycleRef = useRef<HTMLDivElement>(null);
+  const impactRef = useRef<HTMLDivElement>(null);
+
+  const [philosophyVisible, setPhilosophyVisible] = useState(false);
+  const [theoryVisible, setTheoryVisible] = useState(false);
+  const [valuesVisible, setValuesVisible] = useState(false);
+  const [cycleVisible, setCycleVisible] = useState(false);
+  const [impactVisible, setImpactVisible] = useState(false);
+
+  // Carousel state
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+
+  // Navigate to next/previous card
+  const goToCard = useCallback((index: number) => {
+    const newIndex = ((index % coreValues.length) + coreValues.length) % coreValues.length;
+    setActiveIndex(newIndex);
+    // Scroll the card into view
+    if (cardRefs.current[newIndex]) {
+      cardRefs.current[newIndex]?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+    }
+  }, []);
+
+  // Auto-rotate carousel
+  useEffect(() => {
+    if (isPaused || !valuesVisible) return;
+
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => {
+        const newIndex = (prev + 1) % coreValues.length;
+        // Scroll to the new card
+        setTimeout(() => {
+          if (cardRefs.current[newIndex]) {
+            cardRefs.current[newIndex]?.scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest',
+              inline: 'center',
+            });
+          }
+        }, 50);
+        return newIndex;
+      });
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [isPaused, valuesVisible]);
+
+
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (entry.target === philosophyRef.current) setPhilosophyVisible(true);
+          if (entry.target === theoryRef.current) setTheoryVisible(true);
+          if (entry.target === valuesRef.current) setValuesVisible(true);
+          if (entry.target === cycleRef.current) setCycleVisible(true);
+          if (entry.target === impactRef.current) setImpactVisible(true);
+        }
+      });
+    }, observerOptions);
+
+    if (philosophyRef.current) observer.observe(philosophyRef.current);
+    if (theoryRef.current) observer.observe(theoryRef.current);
+    if (valuesRef.current) observer.observe(valuesRef.current);
+    if (cycleRef.current) observer.observe(cycleRef.current);
+    if (impactRef.current) observer.observe(impactRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
       <Header />
@@ -35,8 +156,8 @@ export default function AboutPage() {
         </section>
 
         {/* Philosophy Quote */}
-        <section className="bg-white dark:bg-slate-900">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 text-center">
+        <section className="bg-white dark:bg-slate-900" ref={philosophyRef}>
+          <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 text-center transition-all duration-700 ${philosophyVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-100 to-cyan-100 dark:from-teal-900/50 dark:to-cyan-900/50 flex items-center justify-center text-teal-600 dark:text-teal-400">
               <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
@@ -58,9 +179,9 @@ export default function AboutPage() {
         </section>
 
         {/* Theory of Change - Academic Framework */}
-        <section className="bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-700">
+        <section className="bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-700" ref={theoryRef}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-            <div className="text-center mb-12">
+            <div className={`text-center mb-12 transition-all duration-700 ${theoryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <span className="text-sm font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">Evidence-Based Approach</span>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 mb-4">
                 Theory of Change
@@ -71,7 +192,7 @@ export default function AboutPage() {
             </div>
 
             {/* Logic Model */}
-            <div className="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-2xl p-8 md:p-10">
+            <div className={`bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-2xl p-8 md:p-10 transition-all duration-700 delay-200 ${theoryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <div className="grid md:grid-cols-5 gap-4 md:gap-6">
                 {/* Input */}
                 <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border-t-4 border-violet-500 shadow-lg">
@@ -136,7 +257,7 @@ export default function AboutPage() {
             </div>
 
             {/* Research Citations */}
-            <div className="mt-8 grid md:grid-cols-3 gap-6">
+            <div className={`mt-8 grid md:grid-cols-3 gap-6 transition-all duration-700 delay-400 ${theoryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-6">
                 <div className="text-3xl font-bold text-violet-600 dark:text-violet-400 mb-2">2.5x</div>
                 <p className="text-slate-600 dark:text-slate-400 text-sm">
@@ -168,10 +289,10 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Core Values - Strategic Pillars */}
-        <section className="bg-gradient-to-b from-slate-50 to-white dark:from-slate-800 dark:to-slate-900">
+        {/* Core Values - Carousel */}
+        <section className="bg-gradient-to-b from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 overflow-hidden" ref={valuesRef}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-            <div className="text-center mb-12">
+            <div className={`text-center mb-12 transition-all duration-700 ${valuesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <span className="text-sm font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">Guiding Principles</span>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 mb-4">
                 Core Values
@@ -181,167 +302,268 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
-              {/* Value 1 */}
-              <div className="group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-slate-200 dark:border-slate-700">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white text-xl mb-4 group-hover:scale-110 transition-transform">
-                  01
-                </div>
-                <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-2">Evidence Over Opinion</h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
-                  Every feature is grounded in peer-reviewed research. We build on what science proves works.
-                </p>
+            {/* Carousel Container */}
+            <div
+              className={`relative transition-all duration-700 delay-200 ${valuesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+              onTouchStart={() => setIsPaused(true)}
+              onTouchEnd={() => setTimeout(() => setIsPaused(false), 3000)}
+            >
+              {/* Navigation Arrows */}
+              <button
+                onClick={() => goToCard(activeIndex - 1)}
+                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 bg-white dark:bg-slate-800 rounded-full shadow-lg border border-slate-200 dark:border-slate-600 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all hover:scale-110"
+                aria-label="Previous value"
+              >
+                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={() => goToCard(activeIndex + 1)}
+                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 bg-white dark:bg-slate-800 rounded-full shadow-lg border border-slate-200 dark:border-slate-600 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all hover:scale-110"
+                aria-label="Next value"
+              >
+                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+
+              {/* Cards Container with Featured Active Card */}
+              <div
+                className="flex items-center gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-12 md:px-20 py-6"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                {coreValues.map((value, index) => {
+                  const isActive = index === activeIndex;
+                  return (
+                    <div
+                      key={value.number}
+                      ref={(el) => { cardRefs.current[index] = el; }}
+                      onClick={() => goToCard(index)}
+                      className={`flex-shrink-0 snap-center transition-all duration-500 ease-out cursor-pointer ${
+                        isActive
+                          ? 'w-[320px] md:w-[420px] scale-100 opacity-100'
+                          : 'w-[200px] md:w-[240px] scale-90 opacity-40 hover:opacity-60'
+                      }`}
+                    >
+                      <div className={`bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 h-full transition-all duration-500 ${
+                        isActive ? 'p-6 md:p-8 shadow-xl ring-2 ring-teal-500/20' : 'p-4 md:p-5'
+                      }`}>
+                        <div className={`rounded-xl bg-gradient-to-br ${value.gradient} flex items-center justify-center text-white font-bold transition-all duration-500 ${
+                          isActive ? 'w-14 h-14 md:w-16 md:h-16 text-xl md:text-2xl mb-4 md:mb-6' : 'w-10 h-10 md:w-12 md:h-12 text-lg mb-3'
+                        }`}>
+                          {value.number}
+                        </div>
+                        <h3 className={`font-bold text-slate-900 dark:text-white transition-all duration-500 ${
+                          isActive ? 'text-xl md:text-2xl mb-3' : 'text-base md:text-lg mb-2'
+                        }`}>{value.title}</h3>
+                        <p className={`text-slate-600 dark:text-slate-400 leading-relaxed transition-all duration-500 ${
+                          isActive ? 'text-base' : 'text-sm line-clamp-2'
+                        }`}>
+                          {value.description}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
 
-              {/* Value 2 */}
-              <div className="group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-slate-200 dark:border-slate-700">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white text-xl mb-4 group-hover:scale-110 transition-transform">
-                  02
-                </div>
-                <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-2">Community First</h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
-                  We design for collective benefit. Individual success is a stepping stone to community thriving.
-                </p>
+              {/* Dot Indicators */}
+              <div className="flex justify-center gap-2 mt-4">
+                {coreValues.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToCard(index)}
+                    className={`transition-all duration-300 rounded-full ${
+                      index === activeIndex
+                        ? 'w-8 h-2 bg-teal-500'
+                        : 'w-2 h-2 bg-slate-300 dark:bg-slate-600 hover:bg-slate-400 dark:hover:bg-slate-500'
+                    }`}
+                    aria-label={`Go to value ${index + 1}`}
+                  />
+                ))}
               </div>
 
-              {/* Value 3 */}
-              <div className="group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-slate-200 dark:border-slate-700">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center text-white text-xl mb-4 group-hover:scale-110 transition-transform">
-                  03
+              {/* Auto-rotate indicator */}
+              <p className="text-center text-xs text-slate-400 dark:text-slate-500 mt-3">
+                {isPaused ? 'Paused' : 'Auto-rotating'} • Click cards or use arrows to navigate
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* The Virtuous Cycle - Core Philosophy */}
+        <section className="bg-gradient-to-b from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 border-y border-slate-200 dark:border-slate-700" ref={cycleRef}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div className={`text-center mb-12 transition-all duration-700 ${cycleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <span className="text-sm font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">Our Philosophy</span>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 mb-4">
+                The Virtuous Cycle
+              </h2>
+              <p className="text-slate-600 dark:text-slate-300 text-lg max-w-2xl mx-auto">
+                Individual achievement and community wellbeing are not opposing forces—they are mutually reinforcing.
+              </p>
+            </div>
+
+            {/* Three Pillar Cards - Staggered reveal with pastel hover glow */}
+            <div className="grid md:grid-cols-3 gap-6 md:gap-8 relative">
+              {/* Card 1 - Sustained Behavior Change */}
+              <div className={`bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-violet-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-violet-100/50 dark:hover:shadow-violet-900/30 transition-all duration-500 ${cycleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: cycleVisible ? '200ms' : '0ms' }}>
+                <div className="w-12 h-12 mb-4 rounded-xl bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center text-violet-600 dark:text-violet-400">
+                  <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 12h.01" />
+                  </svg>
                 </div>
-                <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-2">Sustainable Growth</h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
-                  No shortcuts, no burnout culture. We optimize for long-term wellbeing, not short-term metrics.
+                <h3 className="font-bold text-xl text-slate-900 dark:text-white mb-3">Sustained Behavior Change</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                  Real growth comes from consistent, sustainable habits—not cramming or burning out. Evidence-based spaced repetition makes lasting change achievable.
                 </p>
+                <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-violet-500 rounded-full"></span>
+                    FSRS-powered spaced repetition
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-violet-500 rounded-full"></span>
+                    Wellness tracking & habits
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-violet-500 rounded-full"></span>
+                    Progress visualization
+                  </li>
+                </ul>
               </div>
 
-              {/* Value 4 */}
-              <div className="group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-slate-200 dark:border-slate-700">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xl mb-4 group-hover:scale-110 transition-transform">
-                  04
+              {/* Card 2 - Guided Social Connection */}
+              <div className={`bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-emerald-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-100/50 dark:hover:shadow-emerald-900/30 transition-all duration-500 ${cycleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: cycleVisible ? '350ms' : '0ms' }}>
+                <div className="w-12 h-12 mb-4 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                  <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                  </svg>
                 </div>
-                <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-2">Radical Transparency</h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
-                  Users know exactly how points convert, where donations go, and how the platform works.
+                <h3 className="font-bold text-xl text-slate-900 dark:text-white mb-3">Guided Social Connection</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                  Medicine does not have to be lonely. Connect with mentors who have walked your path and peers who understand your struggles.
                 </p>
+                <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                    Mentorship matching
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                    Study groups & tribes
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                    Shared accountability
+                  </li>
+                </ul>
               </div>
 
-              {/* Value 5 */}
-              <div className="group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-slate-200 dark:border-slate-700">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-white text-xl mb-4 group-hover:scale-110 transition-transform">
-                  05
+              {/* Card 3 - Altruistic Contributions */}
+              <div className={`bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-orange-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-orange-100/50 dark:hover:shadow-orange-900/30 transition-all duration-500 ${cycleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: cycleVisible ? '500ms' : '0ms' }}>
+                <div className="w-12 h-12 mb-4 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
+                  <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                  </svg>
                 </div>
-                <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-2">Purpose-Driven</h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
-                  Every action on the platform can create real-world impact. Progress becomes meaningful.
+                <h3 className="font-bold text-xl text-slate-900 dark:text-white mb-3">Altruistic Contributions</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                  Your achievements matter beyond your own success. Progress converts to real donations—giving creates purpose that fuels continued growth.
                 </p>
+                <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
+                    Progress becomes donations
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
+                    Community impact tracking
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
+                    Purpose-driven motivation
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* The Cycle Explanation */}
+            <div className={`mt-10 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl p-6 md:p-8 text-white transition-all duration-700 ${cycleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: cycleVisible ? '650ms' : '0ms' }}>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg mb-2">How It Works Together</h3>
+                  <p className="text-white/90 text-sm leading-relaxed">
+                    These three pillars are not separate—they reinforce each other. When you achieve your personal goals, you contribute to the community. When the community supports you, you are more likely to succeed. And when your success creates real-world impact through charitable giving, it creates meaning that drives you to keep growing.{' '}
+                    <span className="font-semibold">Giving back creates meaning and purpose, which fuels continued personal growth.</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* The Virtuous Cycle - Visual Diagram */}
-        <section className="bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-700">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-            <div className="text-center mb-12">
-              <span className="text-sm font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">Core Mechanism</span>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 mb-4">
-                The Virtuous Cycle
-              </h2>
-              <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-                Our unique insight: individual achievement and community wellbeing are not opposing forces—they are mutually reinforcing.
-              </p>
-            </div>
-
-            {/* Cycle Visualization */}
-            <div className="relative max-w-4xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4">
-                {/* Personal Achievement */}
-                <div className="relative">
-                  <div className="bg-gradient-to-br from-violet-50 to-violet-100 dark:from-violet-900/30 dark:to-violet-800/20 rounded-2xl p-8 text-center border-2 border-violet-200 dark:border-violet-700">
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
-                      <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                      </svg>
-                    </div>
-                    <h3 className="font-bold text-xl text-violet-900 dark:text-violet-300 mb-2">Personal Achievement</h3>
-                    <p className="text-violet-700 dark:text-violet-400 text-sm">
-                      Study effectively with FSRS, build healthy habits, and track your progress
-                    </p>
-                  </div>
-                  {/* Arrow to next */}
-                  <div className="hidden md:block absolute -right-4 top-1/2 -translate-y-1/2 z-10">
-                    <svg className="w-8 h-8 text-emerald-500" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
-                  </div>
-                  <div className="md:hidden flex justify-center my-4">
-                    <svg className="w-8 h-8 text-emerald-500 rotate-90" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Community Connection */}
-                <div className="relative">
-                  <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/30 dark:to-emerald-800/20 rounded-2xl p-8 text-center border-2 border-emerald-200 dark:border-emerald-700">
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-                      <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                      </svg>
-                    </div>
-                    <h3 className="font-bold text-xl text-emerald-900 dark:text-emerald-300 mb-2">Community Connection</h3>
-                    <p className="text-emerald-700 dark:text-emerald-400 text-sm">
-                      Join tribes, find mentors, share wins, and lift each other up
-                    </p>
-                  </div>
-                  {/* Arrow to next */}
-                  <div className="hidden md:block absolute -right-4 top-1/2 -translate-y-1/2 z-10">
-                    <svg className="w-8 h-8 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
-                  </div>
-                  <div className="md:hidden flex justify-center my-4">
-                    <svg className="w-8 h-8 text-orange-500 rotate-90" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Charitable Impact */}
-                <div className="relative">
-                  <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/20 rounded-2xl p-8 text-center border-2 border-orange-200 dark:border-orange-700">
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center">
-                      <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                      </svg>
-                    </div>
-                    <h3 className="font-bold text-xl text-orange-900 dark:text-orange-300 mb-2">Charitable Impact</h3>
-                    <p className="text-orange-700 dark:text-orange-400 text-sm">
-                      Convert achievements to donations, creating purpose that fuels more growth
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Connecting cycle arrow back */}
-              <div className="hidden md:block absolute -bottom-8 left-1/2 -translate-x-1/2 w-3/4">
-                <svg className="w-full h-12 text-violet-400" viewBox="0 0 400 50" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M380 10 C 380 40, 20 40, 20 10" strokeDasharray="5,5" />
-                  <path d="M20 10 L 10 20 M20 10 L 30 20" strokeDasharray="none" />
+        {/* Find Charities CTA */}
+        <section className="bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 py-16 md:py-20">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            {/* Decorative elements */}
+            <div className="relative inline-block mb-8">
+              <div className="absolute -inset-4 bg-gradient-to-r from-teal-500/20 via-cyan-500/20 to-emerald-500/20 blur-2xl rounded-full" />
+              <div className="relative w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center shadow-xl shadow-teal-500/30">
+                <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                 </svg>
               </div>
-              <p className="hidden md:block text-center text-sm text-violet-600 dark:text-violet-400 mt-8 italic">
-                Purpose creates meaning → Meaning drives motivation → Motivation fuels achievement
+            </div>
+
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              Make Your Impact Local
+            </h2>
+            <p className="text-lg text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto">
+              Discover verified charities in your community. Your Village Points can create real change right where you live and study.
+            </p>
+
+            {/* Main CTA Button */}
+            <Link
+              href="/impact/local"
+              className="group inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-teal-500 via-cyan-500 to-teal-500 hover:from-teal-600 hover:via-cyan-600 hover:to-teal-600 text-white font-bold text-lg rounded-2xl shadow-xl shadow-teal-500/30 hover:shadow-teal-500/50 hover:scale-105 transition-all duration-300"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              Find Local Charities
+              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+
+            {/* Inspirational Quote */}
+            <div className="mt-10 pt-8 border-t border-slate-200 dark:border-slate-700">
+              <p className="text-xl md:text-2xl font-serif italic text-slate-700 dark:text-slate-300 max-w-xl mx-auto">
+                &ldquo;Transform your medical journey into community purpose.&rdquo;
+              </p>
+              <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+                Every study session. Every wellness check-in. Every connection made.
               </p>
             </div>
           </div>
         </section>
 
         {/* Commitment to Impact */}
-        <section className="bg-gradient-to-b from-slate-50 to-white dark:from-slate-800 dark:to-slate-900">
+        <section className="bg-gradient-to-b from-slate-50 to-white dark:from-slate-800 dark:to-slate-900" ref={impactRef}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className={`grid md:grid-cols-2 gap-12 items-center transition-all duration-700 ${impactVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <div>
                 <span className="text-sm font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">Our Commitment</span>
                 <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 mb-6">

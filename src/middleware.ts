@@ -1,27 +1,35 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { updateSession } from '@/lib/supabase/middleware';
 
 // Public routes that don't require authentication
 const publicRoutes = ['/', '/about', '/privacy', '/terms', '/login', '/register', '/investors', '/partners', '/accessibility', '/support', '/feedback', '/faq', '/impact', '/impact/local'];
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
+  // Update Supabase session (refreshes auth tokens) and get user
+  const { response, user } = await updateSession(request);
+
   const pathname = request.nextUrl.pathname;
 
-  // Skip auth for API routes
-  if (pathname.startsWith('/api')) {
-    return NextResponse.next();
+  // Skip auth for API routes and auth callback
+  if (pathname.startsWith('/api') || pathname.startsWith('/auth')) {
+    return response;
   }
 
   // Check if current path is a public route (exact match)
   if (publicRoutes.includes(pathname)) {
-    return NextResponse.next();
+    return response;
   }
 
-  // Check for auth cookie
-  const authCookie = request.cookies.get('tribewellmd-auth');
+  // Check for Supabase authenticated user
+  if (user) {
+    return response;
+  }
 
+  // Check for legacy auth cookie (for backwards compatibility during migration)
+  const authCookie = request.cookies.get('tribewellmd-auth');
   if (authCookie?.value === 'authenticated') {
-    return NextResponse.next();
+    return response;
   }
 
   // Redirect to login

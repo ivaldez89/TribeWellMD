@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -60,6 +61,48 @@ const Icons = {
 };
 
 export default function InvestorsPage() {
+  // Scroll animation refs
+  const problemRef = useRef<HTMLDivElement>(null);
+  const solutionRef = useRef<HTMLDivElement>(null);
+  const landscapeRef = useRef<HTMLDivElement>(null);
+  const marketRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+
+  // Visibility states
+  const [problemVisible, setProblemVisible] = useState(false);
+  const [solutionVisible, setSolutionVisible] = useState(false);
+  const [landscapeVisible, setLandscapeVisible] = useState(false);
+  const [marketVisible, setMarketVisible] = useState(false);
+  const [contactVisible, setContactVisible] = useState(false);
+
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (entry.target === problemRef.current) setProblemVisible(true);
+          if (entry.target === solutionRef.current) setSolutionVisible(true);
+          if (entry.target === landscapeRef.current) setLandscapeVisible(true);
+          if (entry.target === marketRef.current) setMarketVisible(true);
+          if (entry.target === contactRef.current) setContactVisible(true);
+        }
+      });
+    }, observerOptions);
+
+    const refs = [problemRef, solutionRef, landscapeRef, marketRef, contactRef];
+    refs.forEach((ref) => {
+      if (ref.current) observer.observe(ref.current);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
       <Header />
@@ -103,8 +146,8 @@ export default function InvestorsPage() {
         </section>
 
         {/* Problem Statement */}
-        <section className="bg-white dark:bg-slate-900 py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section ref={problemRef} className="bg-white dark:bg-slate-900 py-16 md:py-24">
+          <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${problemVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="flex items-start gap-4 mb-8">
               <div className="w-14 h-14 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center text-red-600 dark:text-red-400 flex-shrink-0">
                 <Icons.Problem />
@@ -161,8 +204,8 @@ export default function InvestorsPage() {
         </section>
 
         {/* Solution */}
-        <section className="bg-gradient-to-b from-teal-50/70 to-cyan-50/50 dark:from-slate-800/50 dark:to-slate-900 py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section ref={solutionRef} className="bg-gradient-to-b from-teal-50/70 to-cyan-50/50 dark:from-slate-800/50 dark:to-slate-900 py-16 md:py-24">
+          <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${solutionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="flex items-start gap-4 mb-8">
               <div className="w-14 h-14 rounded-xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400 flex-shrink-0">
                 <Icons.Solution />
@@ -217,8 +260,8 @@ export default function InvestorsPage() {
         </section>
 
         {/* Competitive Landscape - McKinsey/BCG Style */}
-        <section className="bg-white dark:bg-slate-900 py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section ref={landscapeRef} className="bg-white dark:bg-slate-900 py-16 md:py-24">
+          <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${landscapeVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="flex items-start gap-4 mb-8">
               <div className="w-14 h-14 rounded-xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 dark:text-amber-400 flex-shrink-0">
                 <Icons.Differentiator />
@@ -355,8 +398,8 @@ export default function InvestorsPage() {
         </section>
 
         {/* Market Opportunity */}
-        <section className="bg-gradient-to-b from-slate-100 to-slate-50 dark:from-slate-800/50 dark:to-slate-900 py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section ref={marketRef} className="bg-gradient-to-b from-slate-100 to-slate-50 dark:from-slate-800/50 dark:to-slate-900 py-16 md:py-24">
+          <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${marketVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="flex items-start gap-4 mb-8">
               <div className="w-14 h-14 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 flex-shrink-0">
                 <Icons.Market />
@@ -447,8 +490,8 @@ export default function InvestorsPage() {
         </section>
 
         {/* Contact CTA */}
-        <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-16 md:py-24">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <section ref={contactRef} className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-16 md:py-24">
+          <div className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center transition-all duration-700 ${contactVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-teal-500/20 flex items-center justify-center text-teal-400">
               <Icons.Contact />
             </div>

@@ -173,9 +173,7 @@ export default function HomePage() {
   const [, setIsInstalled] = useState(true);
 
   // Scroll animation refs
-  const frameworkRef = useRef<HTMLDivElement>(null);
   const pillarsRef = useRef<HTMLDivElement>(null);
-  const [frameworkVisible, setFrameworkVisible] = useState(false);
   const [pillarsVisible, setPillarsVisible] = useState(false);
 
   // Email signup state
@@ -242,13 +240,11 @@ export default function HomePage() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          if (entry.target === frameworkRef.current) setFrameworkVisible(true);
           if (entry.target === pillarsRef.current) setPillarsVisible(true);
         }
       });
     }, observerOptions);
 
-    if (frameworkRef.current) observer.observe(frameworkRef.current);
     if (pillarsRef.current) observer.observe(pillarsRef.current);
 
     return () => observer.disconnect();
@@ -296,7 +292,7 @@ export default function HomePage() {
         </section>
 
         {/* Platform Pillars */}
-        <section className="bg-gradient-to-b from-teal-50/70 to-cyan-50/50 dark:from-slate-800/50 dark:to-slate-900" ref={pillarsRef}>
+        <section className="bg-teal-50/80 dark:bg-slate-800/50" ref={pillarsRef}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className={`text-center mb-12 transition-all duration-700 ${pillarsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <span className="text-sm font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">Platform Features</span>
@@ -370,112 +366,40 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* The Virtuous Cycle - Core Philosophy */}
-        <section className="bg-gradient-to-b from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 border-y border-slate-200 dark:border-slate-700" ref={frameworkRef}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div className={`text-center mb-12 transition-all duration-700 ${frameworkVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <span className="text-sm font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">Our Philosophy</span>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 mb-4">
-                The Virtuous Cycle
-              </h2>
-              <p className="text-slate-600 dark:text-slate-300 text-lg max-w-2xl mx-auto">
-                Individual achievement and community wellbeing are not opposing forces—they are mutually reinforcing.
-              </p>
-            </div>
-
-            {/* Three Pillar Cards */}
-            <div className={`grid md:grid-cols-3 gap-6 md:gap-8 relative transition-all duration-700 delay-200 ${frameworkVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {/* Card 1 - Sustained Behavior Change */}
-              <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-violet-500 hover:scale-[1.02] transition-all">
-                <div className="w-12 h-12 mb-4 rounded-xl bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center text-violet-600 dark:text-violet-400">
-                  <Icons.Target />
-                </div>
-                <h3 className="font-bold text-xl text-slate-900 dark:text-white mb-3">Sustained Behavior Change</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
-                  Real growth comes from consistent, sustainable habits—not cramming or burning out. Evidence-based spaced repetition makes lasting change achievable.
-                </p>
-                <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-violet-500 rounded-full"></span>
-                    FSRS-powered spaced repetition
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-violet-500 rounded-full"></span>
-                    Wellness tracking & habits
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-violet-500 rounded-full"></span>
-                    Progress visualization
-                  </li>
-                </ul>
-              </div>
-
-              {/* Card 2 - Guided Social Connection */}
-              <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-emerald-500 hover:scale-[1.02] transition-all">
-                <div className="w-12 h-12 mb-4 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
-                  <Icons.Users />
-                </div>
-                <h3 className="font-bold text-xl text-slate-900 dark:text-white mb-3">Guided Social Connection</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
-                  Medicine does not have to be lonely. Connect with mentors who have walked your path and peers who understand your struggles.
-                </p>
-                <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
-                    Mentorship matching
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
-                    Study groups & tribes
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
-                    Shared accountability
-                  </li>
-                </ul>
-              </div>
-
-              {/* Card 3 - Altruistic Contributions */}
-              <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-orange-500 hover:scale-[1.02] transition-all">
-                <div className="w-12 h-12 mb-4 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
-                  <Icons.HeartHand />
-                </div>
-                <h3 className="font-bold text-xl text-slate-900 dark:text-white mb-3">Altruistic Contributions</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
-                  Your achievements matter beyond your own success. Progress converts to real donations—giving creates purpose that fuels continued growth.
-                </p>
-                <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
-                    Progress becomes donations
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
-                    Community impact tracking
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
-                    Purpose-driven motivation
-                  </li>
-                </ul>
+        {/* Find Local Charities CTA */}
+        <section className="bg-teal-50/80 dark:bg-slate-800/50 py-16 md:py-20">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            {/* TribeWellMD Logo */}
+            <div className="relative inline-block mb-6">
+              <div className="absolute -inset-3 bg-gradient-to-r from-teal-500/20 via-cyan-500/20 to-emerald-500/20 blur-2xl rounded-full" />
+              <div className="relative w-16 h-16 mx-auto rounded-2xl shadow-xl shadow-teal-500/30 overflow-hidden">
+                <img src="/logo.jpeg" alt="TribeWellMD" className="w-full h-full object-cover" />
               </div>
             </div>
 
-            {/* The Cycle Explanation */}
-            <div className={`mt-10 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl p-6 md:p-8 text-white transition-all duration-700 delay-400 ${frameworkVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
-                  <Icons.Sparkles />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg mb-2">How It Works Together</h3>
-                  <p className="text-white/90 text-sm leading-relaxed">
-                    These three pillars are not separate—they reinforce each other. When you achieve your personal goals, you contribute to the community. When the community supports you, you are more likely to succeed. And when your success creates real-world impact through charitable giving, it creates meaning that drives you to keep growing.{' '}
-                    <span className="font-semibold">Giving back creates meaning and purpose, which fuels continued personal growth.</span>
-                  </p>
-                </div>
-              </div>
-            </div>
+            <p className="text-lg text-slate-600 dark:text-slate-400 mb-6">
+              Your wellness journey creates real-world impact
+            </p>
+
+            {/* Main CTA Button */}
+            <Link
+              href="/impact/local"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-teal-500 via-cyan-500 to-teal-500 hover:from-teal-600 hover:via-cyan-600 hover:to-teal-600 text-white font-bold text-lg rounded-2xl shadow-xl shadow-teal-500/30 hover:shadow-teal-500/50 hover:scale-105 transition-all duration-300"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              Find a Charity
+              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+
+            {/* Inspirational Tagline */}
+            <p className="mt-8 text-xl font-serif italic text-slate-700 dark:text-slate-300">
+              &ldquo;Transform your study sessions and <span className="font-bold text-teal-600 dark:text-teal-400 not-italic">individual</span> goals into <span className="font-bold text-teal-600 dark:text-teal-400 not-italic">community</span> impact.&rdquo;
+            </p>
           </div>
         </section>
 

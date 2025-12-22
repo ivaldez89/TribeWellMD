@@ -58,8 +58,51 @@ export interface UserStats {
   joinedDate: string;
 }
 
-const PROFILE_STORAGE_KEY = 'tribewellmd_user_profile';
-const STATS_STORAGE_KEY = 'tribewellmd_user_stats';
+const PROFILE_STORAGE_KEY_PREFIX = 'tribewellmd_user_profile_';
+const STATS_STORAGE_KEY_PREFIX = 'tribewellmd_user_stats_';
+const CURRENT_USER_KEY = 'tribewellmd_current_user_id';
+
+// Legacy keys (for migration)
+const LEGACY_PROFILE_KEY = 'tribewellmd_user_profile';
+const LEGACY_STATS_KEY = 'tribewellmd_user_stats';
+
+// Get the current user's storage key
+function getProfileStorageKey(userId?: string): string {
+  if (typeof window === 'undefined') return PROFILE_STORAGE_KEY_PREFIX;
+  const id = userId || localStorage.getItem(CURRENT_USER_KEY);
+  return id ? `${PROFILE_STORAGE_KEY_PREFIX}${id}` : LEGACY_PROFILE_KEY;
+}
+
+function getStatsStorageKey(userId?: string): string {
+  if (typeof window === 'undefined') return STATS_STORAGE_KEY_PREFIX;
+  const id = userId || localStorage.getItem(CURRENT_USER_KEY);
+  return id ? `${STATS_STORAGE_KEY_PREFIX}${id}` : LEGACY_STATS_KEY;
+}
+
+// Set the current user ID (call this on login/signup)
+export function setCurrentUserId(userId: string): void {
+  if (typeof window === 'undefined') return;
+  localStorage.setItem(CURRENT_USER_KEY, userId);
+}
+
+// Get the current user ID
+export function getCurrentUserId(): string | null {
+  if (typeof window === 'undefined') return null;
+  return localStorage.getItem(CURRENT_USER_KEY);
+}
+
+// Clear current user session (call this on logout)
+export function clearCurrentUserSession(): void {
+  if (typeof window === 'undefined') return;
+  localStorage.removeItem(CURRENT_USER_KEY);
+}
+
+// Clear legacy profile data (one-time cleanup)
+export function clearLegacyProfileData(): void {
+  if (typeof window === 'undefined') return;
+  localStorage.removeItem(LEGACY_PROFILE_KEY);
+  localStorage.removeItem(LEGACY_STATS_KEY);
+}
 
 // Medical specialties for selection
 export const MEDICAL_SPECIALTIES = [
@@ -117,7 +160,8 @@ export function getUserProfile(): UserProfile | null {
   if (typeof window === 'undefined') return null;
 
   try {
-    const stored = localStorage.getItem(PROFILE_STORAGE_KEY);
+    const storageKey = getProfileStorageKey();
+    const stored = localStorage.getItem(storageKey);
     if (stored) {
       return JSON.parse(stored);
     }
@@ -133,11 +177,12 @@ export function saveUserProfile(profile: UserProfile): void {
   if (typeof window === 'undefined') return;
 
   try {
+    const storageKey = getProfileStorageKey();
     const updatedProfile = {
       ...profile,
       updatedAt: new Date().toISOString(),
     };
-    localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(updatedProfile));
+    localStorage.setItem(storageKey, JSON.stringify(updatedProfile));
   } catch (error) {
     console.error('Error saving profile:', error);
   }
@@ -165,7 +210,8 @@ export function getUserStats(): UserStats {
   }
 
   try {
-    const stored = localStorage.getItem(STATS_STORAGE_KEY);
+    const storageKey = getStatsStorageKey();
+    const stored = localStorage.getItem(storageKey);
     if (stored) {
       return JSON.parse(stored);
     }
@@ -192,7 +238,8 @@ export function saveUserStats(stats: UserStats): void {
   if (typeof window === 'undefined') return;
 
   try {
-    localStorage.setItem(STATS_STORAGE_KEY, JSON.stringify(stats));
+    const storageKey = getStatsStorageKey();
+    localStorage.setItem(storageKey, JSON.stringify(stats));
   } catch (error) {
     console.error('Error saving stats:', error);
   }

@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-
-type UserRole = 'premed' | 'medical-student' | 'resident' | 'fellow' | 'attending' | 'institution';
+import { signUp, type UserRole } from '@/lib/supabase/auth';
+import { setCurrentUserId, clearLegacyProfileData } from '@/lib/storage/profileStorage';
 
 interface RoleOption {
   id: UserRole;
@@ -105,12 +105,15 @@ export default function RegisterPage() {
     firstName: '',
     lastName: '',
     email: '',
+    password: '',
+    confirmPassword: '',
     institution: '',
     currentYear: '',
     specialty: '',
     pgyYear: '',
     jobTitle: '',
   });
+  const [successMessage, setSuccessMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
@@ -129,9 +132,22 @@ export default function RegisterPage() {
     e.preventDefault();
     setIsLoading(true);
     setError('');
+    setSuccessMessage('');
 
-    if (!formData.firstName || !formData.lastName || !formData.email) {
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.password) {
       setError('Please fill in all required fields');
+      setIsLoading(false);
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters');
+      setIsLoading(false);
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
       setIsLoading(false);
       return;
     }
@@ -139,6 +155,13 @@ export default function RegisterPage() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       setError('Please enter a valid email address');
+      setIsLoading(false);
+      return;
+    }
+
+    // Require .edu email for student verification
+    if (!formData.email.toLowerCase().endsWith('.edu')) {
+      setError('Please use your school email address (.edu) to register');
       setIsLoading(false);
       return;
     }
@@ -166,31 +189,34 @@ export default function RegisterPage() {
           break;
       }
 
-      const profile = {
-        id: crypto.randomUUID(),
+      const result = await signUp({
+        email: formData.email,
+        password: formData.password,
         firstName: formData.firstName,
         lastName: formData.lastName,
-        email: formData.email,
-        school: formData.institution,
+        role: selectedRole!,
+        institution: formData.institution,
         currentYear,
-        role: selectedRole,
-        ...(selectedRole === 'resident' || selectedRole === 'fellow' ? {
-          interestedSpecialties: formData.specialty ? [formData.specialty] : [],
-          pgyYear: formData.pgyYear,
-        } : {}),
-        ...(selectedRole === 'institution' ? {
-          jobTitle: formData.jobTitle,
-        } : {}),
-        profileVisibility: 'connections' as const,
-        showStudyStats: true,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
+        specialty: formData.specialty,
+        pgyYear: formData.pgyYear,
+        jobTitle: formData.jobTitle,
+      });
 
-      localStorage.setItem('tribewellmd_user_profile', JSON.stringify(profile));
-      document.cookie = 'tribewellmd-auth=authenticated; path=/; max-age=604800';
-      router.push('/profile');
-      router.refresh();
+      if (result.error) {
+        setError(result.error);
+        setIsLoading(false);
+        return;
+      }
+
+      // Set the current user ID for profile storage (if user is returned)
+      if (result.user) {
+        setCurrentUserId(result.user.id);
+        // Clear any legacy profile data from before user-aware storage
+        clearLegacyProfileData();
+      }
+
+      setSuccessMessage('Account created! Please check your email to confirm your account.');
+      setIsLoading(false);
     } catch (err) {
       setError('Something went wrong. Please try again.');
       setIsLoading(false);
@@ -326,11 +352,52 @@ export default function RegisterPage() {
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                  className={`w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:border-transparent transition-all ${
+                    formData.email && !formData.email.toLowerCase().endsWith('.edu')
+                      ? 'border-red-500 focus:ring-red-500'
+                      : 'border-slate-200 dark:border-slate-600 focus:ring-teal-500'
+                  }`}
                   placeholder="john.doe@school.edu"
                   required
                 />
-                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Use your .edu email for automatic school verification</p>
+                {formData.email && !formData.email.toLowerCase().endsWith('.edu') ? (
+                  <p className="mt-1 text-xs text-red-500 font-medium">A .edu email address is required to register</p>
+                ) : (
+                  <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">A .edu email address is required to register</p>
+                )}
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    Password <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="password"
+                    type="password"
+                    value={formData.password}
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                    placeholder="Min 6 characters"
+                    required
+                    minLength={6}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    Confirm Password <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="confirmPassword"
+                    type="password"
+                    value={formData.confirmPassword}
+                    onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                    placeholder="Confirm password"
+                    required
+                    minLength={6}
+                  />
+                </div>
               </div>
 
               <div>
@@ -441,6 +508,15 @@ export default function RegisterPage() {
               {error && (
                 <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl text-red-600 dark:text-red-400 text-sm text-center">
                   {error}
+                </div>
+              )}
+
+              {successMessage && (
+                <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl text-green-700 dark:text-green-400 text-sm text-center">
+                  <p className="font-medium">{successMessage}</p>
+                  <Link href="/login" className="inline-block mt-2 text-teal-600 hover:text-teal-700 dark:text-teal-400 font-medium underline">
+                    Go to Login
+                  </Link>
                 </div>
               )}
 

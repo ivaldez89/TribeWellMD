@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -29,6 +30,45 @@ const Icons = {
 };
 
 export default function PartnersPage() {
+  // Scroll animation refs
+  const pointsRef = useRef<HTMLDivElement>(null);
+  const verificationRef = useRef<HTMLDivElement>(null);
+  const partnersRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+
+  // Visibility states
+  const [pointsVisible, setPointsVisible] = useState(false);
+  const [verificationVisible, setVerificationVisible] = useState(false);
+  const [partnersVisible, setPartnersVisible] = useState(false);
+  const [contactVisible, setContactVisible] = useState(false);
+
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (entry.target === pointsRef.current) setPointsVisible(true);
+          if (entry.target === verificationRef.current) setVerificationVisible(true);
+          if (entry.target === partnersRef.current) setPartnersVisible(true);
+          if (entry.target === contactRef.current) setContactVisible(true);
+        }
+      });
+    }, observerOptions);
+
+    const refs = [pointsRef, verificationRef, partnersRef, contactRef];
+    refs.forEach((ref) => {
+      if (ref.current) observer.observe(ref.current);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
       <Header />
@@ -69,8 +109,8 @@ export default function PartnersPage() {
         </section>
 
         {/* How It Works - Points Economy */}
-        <section className="bg-white dark:bg-slate-900 py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section ref={pointsRef} className="bg-white dark:bg-slate-900 py-16 md:py-24">
+          <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${pointsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="flex items-start gap-4 mb-8">
               <div className="w-14 h-14 rounded-xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400 flex-shrink-0">
                 <Icons.Points />
@@ -166,8 +206,8 @@ export default function PartnersPage() {
         </section>
 
         {/* Activity Verification System */}
-        <section className="bg-gradient-to-b from-slate-100 to-slate-50 dark:from-slate-800/50 dark:to-slate-900 py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section ref={verificationRef} className="bg-gradient-to-b from-slate-100 to-slate-50 dark:from-slate-800/50 dark:to-slate-900 py-16 md:py-24">
+          <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${verificationVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="flex items-start gap-4 mb-8">
               <div className="w-14 h-14 rounded-xl bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center text-violet-600 dark:text-violet-400 flex-shrink-0">
                 <Icons.Verification />
@@ -236,8 +276,8 @@ export default function PartnersPage() {
         </section>
 
         {/* Charity Partnerships */}
-        <section className="bg-white dark:bg-slate-900 py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section ref={partnersRef} className="bg-white dark:bg-slate-900 py-16 md:py-24">
+          <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${partnersVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="flex items-start gap-4 mb-8">
               <div className="w-14 h-14 rounded-xl bg-rose-100 dark:bg-rose-900/30 flex items-center justify-center text-rose-600 dark:text-rose-400 flex-shrink-0">
                 <Icons.Heart />
@@ -368,8 +408,8 @@ export default function PartnersPage() {
         </section>
 
         {/* Contact CTA */}
-        <section className="bg-gradient-to-br from-rose-600 via-pink-600 to-orange-500 text-white py-16 md:py-24">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <section ref={contactRef} className="bg-gradient-to-br from-rose-600 via-pink-600 to-orange-500 text-white py-16 md:py-24">
+          <div className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center transition-all duration-700 ${contactVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-white/20 flex items-center justify-center text-white">
               <Icons.Contact />
             </div>

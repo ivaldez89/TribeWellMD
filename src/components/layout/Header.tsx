@@ -124,6 +124,7 @@ function NavDropdown({ label, href, items }: NavDropdownProps) {
 
 // Dropdown menu configurations
 const studyDropdownItems: DropdownItem[] = [
+  { label: 'My Tasks', href: '/tasks', description: 'Manage your study tasks' },
   { label: 'Clinical Cases', href: '/cases', description: 'Interactive patient scenarios' },
   { label: 'Rapid Review', href: '/study/rapid-review', description: 'Quick concept review' },
   { label: 'Progress', href: '/study/progress', description: 'Track your learning' },
@@ -275,6 +276,7 @@ export function Header({ stats }: HeaderProps) {
             {isAuthenticated ? (
               <>
                 <MobileNavLink href="/" onClick={() => setMobileMenuOpen(false)}>Home</MobileNavLink>
+                <MobileNavLink href="/tasks" onClick={() => setMobileMenuOpen(false)}>My Tasks</MobileNavLink>
                 <MobileNavLink href="/study" onClick={() => setMobileMenuOpen(false)}>Study</MobileNavLink>
                 <MobileNavLink href="/cases" onClick={() => setMobileMenuOpen(false)}>Clinical Cases</MobileNavLink>
                 <MobileNavLink href="/library" onClick={() => setMobileMenuOpen(false)}>Card Library</MobileNavLink>
