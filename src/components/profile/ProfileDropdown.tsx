@@ -6,7 +6,8 @@ import { useRouter } from 'next/navigation';
 import { getUserProfile, getUserInitials, getDisplayName, type UserProfile } from '@/lib/storage/profileStorage';
 import { getConnectionCount, getPendingRequestCount } from '@/lib/storage/chatStorage';
 import { getUserTribes } from '@/lib/storage/tribeStorage';
-import { signOut } from '@/hooks/useAuth';
+import { signOut as legacySignOut } from '@/hooks/useAuth';
+import { signOut as supabaseSignOut } from '@/lib/supabase/auth';
 import type { Tribe } from '@/types/tribes';
 
 interface ProfileDropdownProps {
@@ -23,13 +24,12 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
     setIsOpen(false);
-    // Use shared signOut which notifies all auth listeners
-    signOut();
-    // Redirect to homepage (which is now public)
-    router.push('/');
-    router.refresh();
+    // Use legacy signOut to clear cookies and localStorage user session
+    legacySignOut();
+    // Also sign out of Supabase (this will redirect to /login)
+    await supabaseSignOut();
   };
 
   // Load profile on mount
@@ -93,7 +93,7 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
       {isOpen && (
         <div
           ref={dropdownRef}
-          className="absolute top-full right-0 mt-2 w-72 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden z-[110]"
+          className="fixed sm:absolute top-16 sm:top-full right-2 sm:right-0 left-2 sm:left-auto mt-0 sm:mt-2 w-auto sm:w-72 max-w-[calc(100vw-1rem)] bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden z-[110]"
         >
           {/* Profile Header */}
           <div className="relative">
