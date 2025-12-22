@@ -737,7 +737,7 @@ export default function CasePlayerPage() {
       )}
 
       {/* Case toolbar */}
-      <div className="sticky top-[64px] z-20 bg-white/90 backdrop-blur border-b border-slate-200">
+      <div className="sticky top-[64px] z-20 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 shadow-sm">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link
