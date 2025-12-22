@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { Icons } from '@/components/ui/Icons';
 import { useFlashcards } from '@/hooks/useFlashcards';
 import { useStreak } from '@/hooks/useStreak';
 import { useWellness } from '@/hooks/useWellness';
@@ -29,9 +31,44 @@ interface ActivityItem {
   title: string;
   description: string;
   timestamp: Date;
-  icon: string;
+  iconType: 'book' | 'heart' | 'target' | 'trophy';
   color: string;
 }
+
+// Icon components for activity feed
+const ActivityIcon = ({ type, className }: { type: string; className?: string }) => {
+  const baseClass = className || "w-5 h-5";
+  switch (type) {
+    case 'book':
+      return (
+        <svg className={baseClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+        </svg>
+      );
+    case 'heart':
+      return (
+        <svg className={baseClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+        </svg>
+      );
+    case 'target':
+      return (
+        <svg className={baseClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <circle cx="12" cy="12" r="10" />
+          <circle cx="12" cy="12" r="6" />
+          <circle cx="12" cy="12" r="2" fill="currentColor" />
+        </svg>
+      );
+    case 'trophy':
+      return (
+        <svg className={baseClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m3.044-1.35a6.726 6.726 0 01-2.748 1.35m0 0a6.772 6.772 0 01-3.044 0" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+};
 
 export default function HomePage() {
   const router = useRouter();
@@ -80,7 +117,7 @@ export default function HomePage() {
           title: 'Study session completed',
           description: 'Reviewed 25 cards in Cardiology',
           timestamp: new Date(Date.now() - 1000 * 60 * 30),
-          icon: '📚',
+          iconType: 'book',
           color: 'from-teal-500 to-cyan-500'
         },
         {
@@ -89,7 +126,7 @@ export default function HomePage() {
           title: 'Daily challenge completed',
           description: '10-minute meditation - earned 50 points',
           timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2),
-          icon: '🧘',
+          iconType: 'heart',
           color: 'from-rose-500 to-pink-500'
         },
         {
@@ -98,7 +135,7 @@ export default function HomePage() {
           title: 'Tribe milestone reached',
           description: 'Cardiology Study Group hit 1,000 collective points',
           timestamp: new Date(Date.now() - 1000 * 60 * 60 * 5),
-          icon: '🎯',
+          iconType: 'target',
           color: 'from-amber-500 to-orange-500'
         },
         {
@@ -107,7 +144,7 @@ export default function HomePage() {
           title: 'New badge earned',
           description: '7-day streak champion!',
           timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24),
-          icon: '🏆',
+          iconType: 'trophy',
           color: 'from-yellow-500 to-amber-500'
         },
       ];
@@ -127,9 +164,9 @@ export default function HomePage() {
 
   if (isLoading || isAuthenticated === null) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col">
         <Header />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
           <div className="animate-pulse space-y-6">
             <div className="h-48 bg-slate-200 dark:bg-slate-800 rounded-3xl" />
             <div className="grid md:grid-cols-3 gap-6">
@@ -138,6 +175,7 @@ export default function HomePage() {
             </div>
           </div>
         </main>
+        <Footer />
       </div>
     );
   }
@@ -159,10 +197,10 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col">
       <Header />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full">
         {/* Welcome Section - Personal & Warm */}
         <section className="mb-6">
           <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-teal-600 via-cyan-600 to-indigo-600 p-6 md:p-8 shadow-2xl">
@@ -210,7 +248,10 @@ export default function HomePage() {
                   <>
                     <div className="text-center px-4 py-2 bg-white/10 backdrop-blur rounded-xl border border-white/20">
                       <div className="flex items-center justify-center gap-1 text-yellow-300 text-2xl font-bold">
-                        <span className="text-xl">🔥</span>
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
+                        </svg>
                         {streakData.currentStreak}
                       </div>
                       <p className="text-white/60 text-xs">Streak</p>
@@ -281,7 +322,9 @@ export default function HomePage() {
                 className="group relative overflow-hidden p-4 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl text-white shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 hover:scale-[1.02] transition-all"
               >
                 <div className="relative z-10">
-                  <span className="text-2xl mb-2 block">📚</span>
+                  <div className="w-8 h-8 mb-2">
+                    <Icons.Book />
+                  </div>
                   <p className="font-semibold text-sm">Study</p>
                   {dueCards.length > 0 && (
                     <p className="text-white/70 text-xs mt-0.5">{dueCards.length} due</p>
@@ -295,7 +338,9 @@ export default function HomePage() {
                 className="group relative overflow-hidden p-4 bg-gradient-to-br from-rose-500 to-pink-600 rounded-2xl text-white shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40 hover:scale-[1.02] transition-all"
               >
                 <div className="relative z-10">
-                  <span className="text-2xl mb-2 block">❤️</span>
+                  <div className="w-8 h-8 mb-2">
+                    <Icons.Heart />
+                  </div>
                   <p className="font-semibold text-sm">Wellness</p>
                   <p className="text-white/70 text-xs mt-0.5">{completedChallenges}/{dailyChallenges.length} done</p>
                 </div>
@@ -307,7 +352,9 @@ export default function HomePage() {
                 className="group relative overflow-hidden p-4 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl text-white shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-[1.02] transition-all"
               >
                 <div className="relative z-10">
-                  <span className="text-2xl mb-2 block">👥</span>
+                  <div className="w-8 h-8 mb-2">
+                    <Icons.Users />
+                  </div>
                   <p className="font-semibold text-sm">My Tribes</p>
                   <p className="text-white/70 text-xs mt-0.5">{userTribes.length} joined</p>
                 </div>
@@ -319,7 +366,9 @@ export default function HomePage() {
                 className="group relative overflow-hidden p-4 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl text-white shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 hover:scale-[1.02] transition-all"
               >
                 <div className="relative z-10">
-                  <span className="text-2xl mb-2 block">🏥</span>
+                  <div className="w-8 h-8 mb-2">
+                    <Icons.Hospital />
+                  </div>
                   <p className="font-semibold text-sm">Cases</p>
                   <p className="text-white/70 text-xs mt-0.5">Clinical</p>
                 </div>
@@ -331,7 +380,9 @@ export default function HomePage() {
             <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
               <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between">
                 <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                  <span className="text-xl">⚡</span>
+                  <div className="w-6 h-6 text-amber-500">
+                    <Icons.Lightning />
+                  </div>
                   Recent Activity
                 </h2>
                 <span className="text-sm text-slate-500 dark:text-slate-400">Your journey</span>
@@ -343,8 +394,8 @@ export default function HomePage() {
                     className="px-6 py-4 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
                   >
                     <div className="flex items-start gap-4">
-                      <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${activity.color} flex items-center justify-center text-lg shadow-sm`}>
-                        {activity.icon}
+                      <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${activity.color} flex items-center justify-center text-white shadow-sm`}>
+                        <ActivityIcon type={activity.iconType} className="w-5 h-5" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-medium text-slate-900 dark:text-white text-sm">
@@ -366,7 +417,7 @@ export default function HomePage() {
                   href="/study/progress"
                   className="text-sm text-teal-600 dark:text-teal-400 hover:underline font-medium"
                 >
-                  View Full Progress →
+                  View Full Progress
                 </Link>
               </div>
             </div>
@@ -375,14 +426,16 @@ export default function HomePage() {
             <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
               <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between">
                 <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                  <span className="text-xl">📊</span>
+                  <div className="w-6 h-6 text-teal-500">
+                    <Icons.Chart />
+                  </div>
                   Study Stats
                 </h2>
                 <Link
                   href="/study/progress"
                   className="text-sm text-teal-600 dark:text-teal-400 hover:underline font-medium"
                 >
-                  Details →
+                  Details
                 </Link>
               </div>
               <div className="p-6">
@@ -441,7 +494,9 @@ export default function HomePage() {
               <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
                 <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-700">
                   <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                    <span className="text-xl">🏠</span>
+                    <div className="w-6 h-6 text-amber-500">
+                      <Icons.Village />
+                    </div>
                     My Primary Tribe
                   </h2>
                 </div>
@@ -451,9 +506,11 @@ export default function HomePage() {
                 >
                   <div className="flex items-center gap-4 mb-4">
                     <div
-                      className={`w-14 h-14 rounded-xl bg-gradient-to-br ${primaryTribe.color} flex items-center justify-center text-2xl shadow-lg`}
+                      className={`w-14 h-14 rounded-xl bg-gradient-to-br ${primaryTribe.color} flex items-center justify-center shadow-lg`}
                     >
-                      {primaryTribe.icon}
+                      <div className="w-7 h-7 text-white">
+                        <Icons.Users />
+                      </div>
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="font-semibold text-slate-900 dark:text-white truncate">{primaryTribe.name}</p>
@@ -482,14 +539,16 @@ export default function HomePage() {
                     href="/tribes"
                     className="text-sm text-amber-600 dark:text-amber-400 hover:underline font-medium"
                   >
-                    View All Tribes →
+                    View All Tribes
                   </Link>
                 </div>
               </div>
             ) : (
               <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl border border-amber-200 dark:border-amber-800 p-6 text-center">
-                <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-2xl shadow-lg">
-                  👥
+                <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-lg">
+                  <div className="w-7 h-7 text-white">
+                    <Icons.Users />
+                  </div>
                 </div>
                 <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Join a Tribe</h3>
                 <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
@@ -508,7 +567,9 @@ export default function HomePage() {
             <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
               <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between">
                 <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                  <span className="text-xl">🤝</span>
+                  <div className="w-6 h-6 text-cyan-500">
+                    <Icons.Handshake />
+                  </div>
                   Your Tribe
                 </h2>
                 <span className="text-sm font-medium text-cyan-600 dark:text-cyan-400">
@@ -560,7 +621,9 @@ export default function HomePage() {
             <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
               <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between">
                 <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                  <span className="text-xl">🎯</span>
+                  <div className="w-6 h-6 text-rose-500">
+                    <Icons.Target />
+                  </div>
                   Daily Challenges
                 </h2>
                 <span className="text-sm text-slate-500 dark:text-slate-400">
@@ -610,7 +673,7 @@ export default function HomePage() {
                   href="/wellness"
                   className="text-sm text-rose-600 dark:text-rose-400 hover:underline font-medium"
                 >
-                  View All Challenges →
+                  View All Challenges
                 </Link>
               </div>
             </div>
@@ -620,7 +683,11 @@ export default function HomePage() {
               <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
                 <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-700">
                   <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                    <span className="text-xl">📈</span>
+                    <div className="w-6 h-6 text-emerald-500">
+                      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+                      </svg>
+                    </div>
                     This Week
                   </h2>
                 </div>
@@ -663,6 +730,8 @@ export default function HomePage() {
           </div>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }
