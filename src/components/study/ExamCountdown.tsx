@@ -372,8 +372,17 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
 
         {/* Add Exam Modal */}
         {showAddModal && (
-          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/50">
-            <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+          <div
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/50"
+            onClick={() => {
+              setShowAddModal(false);
+              resetForm();
+            }}
+          >
+            <div
+              className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
               <div className="px-6 py-4 border-b border-slate-200 bg-gradient-to-r from-teal-500 to-emerald-500">
                 <h3 className="text-lg font-semibold text-white">Add Exam</h3>
                 <p className="text-sm text-white/80">
@@ -427,23 +436,29 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                   <div className="flex gap-2 mb-3">
                     <button
                       onClick={() => setNewDateType('exact')}
-                      className={`flex-1 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
+                      className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                         newDateType === 'exact'
                           ? 'border-teal-500 bg-teal-50 text-teal-700'
                           : 'border-slate-200 hover:border-slate-300 text-slate-700'
                       }`}
                     >
-                      📅 Exact Date
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      Exact Date
                     </button>
                     <button
                       onClick={() => setNewDateType('approximate')}
-                      className={`flex-1 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
+                      className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                         newDateType === 'approximate'
                           ? 'border-teal-500 bg-teal-50 text-teal-700'
                           : 'border-slate-200 hover:border-slate-300 text-slate-700'
                       }`}
                     >
-                      ⏰ Approximate
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      Approximate
                     </button>
                   </div>
 
@@ -530,7 +545,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
             }
           </span>
           <span className="sm:hidden">
-            {primaryExam && primaryDays !== null ? `${primaryDays}d` : '📅'}
+            {primaryExam && primaryDays !== null ? `${primaryDays}d` : ''}
           </span>
           {exams.length > 1 && (
             <span className="px-1.5 py-0.5 bg-white/20 text-xs rounded-full">{exams.length}</span>
@@ -674,8 +689,17 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
 
         {/* Add Exam Modal */}
         {showAddModal && (
-          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/50">
-            <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+          <div
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/50"
+            onClick={() => {
+              setShowAddModal(false);
+              resetForm();
+            }}
+          >
+            <div
+              className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
               <div className="px-6 py-4 border-b border-slate-200 bg-gradient-to-r from-teal-500 to-emerald-500">
                 <h3 className="text-lg font-semibold text-white">Add Exam</h3>
                 <p className="text-sm text-white/80">
@@ -729,23 +753,29 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                   <div className="flex gap-2 mb-3">
                     <button
                       onClick={() => setNewDateType('exact')}
-                      className={`flex-1 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
+                      className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                         newDateType === 'exact'
                           ? 'border-teal-500 bg-teal-50 text-teal-700'
                           : 'border-slate-200 hover:border-slate-300 text-slate-700'
                       }`}
                     >
-                      📅 Exact Date
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      Exact Date
                     </button>
                     <button
                       onClick={() => setNewDateType('approximate')}
-                      className={`flex-1 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
+                      className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                         newDateType === 'approximate'
                           ? 'border-teal-500 bg-teal-50 text-teal-700'
                           : 'border-slate-200 hover:border-slate-300 text-slate-700'
                       }`}
                     >
-                      ⏰ Approximate
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      Approximate
                     </button>
                   </div>
 
@@ -935,8 +965,17 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
 
       {/* Add Exam Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/50">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+        <div
+          className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/50"
+          onClick={() => {
+            setShowAddModal(false);
+            resetForm();
+          }}
+        >
+          <div
+            className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700 bg-gradient-to-r from-teal-500 to-emerald-500">
               <h3 className="text-lg font-semibold text-white">Add Exam</h3>
               <p className="text-sm text-white/80">
@@ -990,23 +1029,29 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                 <div className="flex gap-2 mb-3">
                   <button
                     onClick={() => setNewDateType('exact')}
-                    className={`flex-1 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
+                    className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                       newDateType === 'exact'
                         ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300'
                         : 'border-slate-200 dark:border-slate-600 hover:border-slate-300 text-slate-700 dark:text-slate-300'
                     }`}
                   >
-                    📅 Exact Date
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    Exact Date
                   </button>
                   <button
                     onClick={() => setNewDateType('approximate')}
-                    className={`flex-1 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
+                    className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                       newDateType === 'approximate'
                         ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300'
                         : 'border-slate-200 dark:border-slate-600 hover:border-slate-300 text-slate-700 dark:text-slate-300'
                     }`}
                   >
-                    ⏰ Approximate
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Approximate
                   </button>
                 </div>
 

@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 import { useFlashcards } from '@/hooks/useFlashcards';
 import type { Flashcard } from '@/types';
 
@@ -115,10 +116,10 @@ export default function ImportPage() {
 ]`;
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col">
       <Header stats={stats} />
       
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="flex-1 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         {/* Back Link */}
         <Link
           href="/"
@@ -230,6 +231,8 @@ export default function ImportPage() {
           </details>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }
