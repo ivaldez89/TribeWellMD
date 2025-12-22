@@ -124,12 +124,17 @@ function NavDropdown({ label, href, items }: NavDropdownProps) {
 
 // Dropdown menu configurations
 const studyDropdownItems: DropdownItem[] = [
-  { label: 'My Tasks', href: '/tasks', description: 'Manage your study tasks' },
   { label: 'Clinical Cases', href: '/cases', description: 'Interactive patient scenarios' },
   { label: 'Rapid Review', href: '/study/rapid-review', description: 'Quick concept review' },
   { label: 'Progress', href: '/study/progress', description: 'Track your learning' },
   { label: 'Card Library', href: '/library', description: 'QBank-linked cards' },
   { label: 'Resources', href: '/resources', description: 'Visual guides & infographics' },
+];
+
+const toolsDropdownItems: DropdownItem[] = [
+  { label: 'My Tasks', href: '/tasks', description: 'Manage your to-do list' },
+  { label: 'My Calendar', href: '/calendar', description: 'Schedule & achievements' },
+  { label: 'Pomodoro Timer', href: '/study', description: 'Focus timer for study sessions' },
 ];
 
 const wellnessDropdownItems: DropdownItem[] = [
@@ -182,6 +187,7 @@ export function Header({ stats }: HeaderProps) {
             {isAuthenticated ? (
               <>
                 <NavDropdown label="Study" href="/study" items={studyDropdownItems} />
+                <NavDropdown label="Tools" href="/tasks" items={toolsDropdownItems} />
                 <NavDropdown label="Wellness" href="/wellness" items={wellnessDropdownItems} />
                 <NavDropdown label="Community" href="/community" items={communityDropdownItems} />
               </>
@@ -276,13 +282,28 @@ export function Header({ stats }: HeaderProps) {
             {isAuthenticated ? (
               <>
                 <MobileNavLink href="/" onClick={() => setMobileMenuOpen(false)}>Home</MobileNavLink>
-                <MobileNavLink href="/tasks" onClick={() => setMobileMenuOpen(false)}>My Tasks</MobileNavLink>
-                <MobileNavLink href="/study" onClick={() => setMobileMenuOpen(false)}>Study</MobileNavLink>
-                <MobileNavLink href="/cases" onClick={() => setMobileMenuOpen(false)}>Clinical Cases</MobileNavLink>
-                <MobileNavLink href="/library" onClick={() => setMobileMenuOpen(false)}>Card Library</MobileNavLink>
-                <MobileNavLink href="/wellness" onClick={() => setMobileMenuOpen(false)}>Wellness</MobileNavLink>
-                <MobileNavLink href="/tribes" onClick={() => setMobileMenuOpen(false)}>Tribes</MobileNavLink>
-                <MobileNavLink href="/community" onClick={() => setMobileMenuOpen(false)}>Community</MobileNavLink>
+
+                {/* Study Section */}
+                <div className="pt-2">
+                  <p className="px-4 py-1 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Study</p>
+                  <MobileNavLink href="/study" onClick={() => setMobileMenuOpen(false)}>Study Hub</MobileNavLink>
+                  <MobileNavLink href="/cases" onClick={() => setMobileMenuOpen(false)}>Clinical Cases</MobileNavLink>
+                  <MobileNavLink href="/library" onClick={() => setMobileMenuOpen(false)}>Card Library</MobileNavLink>
+                </div>
+
+                {/* Tools Section */}
+                <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
+                  <p className="px-4 py-1 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Tools</p>
+                  <MobileNavLink href="/tasks" onClick={() => setMobileMenuOpen(false)}>My Tasks</MobileNavLink>
+                  <MobileNavLink href="/calendar" onClick={() => setMobileMenuOpen(false)}>My Calendar</MobileNavLink>
+                </div>
+
+                {/* More Section */}
+                <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
+                  <MobileNavLink href="/wellness" onClick={() => setMobileMenuOpen(false)}>Wellness</MobileNavLink>
+                  <MobileNavLink href="/tribes" onClick={() => setMobileMenuOpen(false)}>Tribes</MobileNavLink>
+                  <MobileNavLink href="/community" onClick={() => setMobileMenuOpen(false)}>Community</MobileNavLink>
+                </div>
               </>
             ) : (
               <>

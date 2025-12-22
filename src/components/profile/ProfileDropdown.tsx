@@ -241,6 +241,22 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
             </Link>
 
             <Link
+              href="/calendar"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center gap-3 px-4 py-3 text-slate-700 dark:text-slate-200 hover:bg-gradient-to-r hover:from-blue-50 hover:to-transparent dark:hover:from-blue-900/20 dark:hover:to-transparent transition-all duration-200"
+            >
+              <div className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                <svg className="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <span className="block text-sm font-medium">My Calendar</span>
+                <span className="block text-xs text-slate-500 dark:text-slate-400">Schedule & achievements</span>
+              </div>
+            </Link>
+
+            <Link
               href="/profile"
               onClick={() => setIsOpen(false)}
               className="flex items-center gap-3 px-4 py-3 text-slate-700 dark:text-slate-200 hover:bg-gradient-to-r hover:from-teal-50 hover:to-transparent dark:hover:from-teal-900/20 dark:hover:to-transparent transition-all duration-200"
