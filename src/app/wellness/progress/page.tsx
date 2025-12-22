@@ -353,7 +353,7 @@ export default function WellnessProgressPage() {
                 <div className="grid md:grid-cols-3 gap-4">
                   <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 text-center">
                     <div className="w-16 h-16 mx-auto mb-3 rounded-2xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
-                      <Icons.Smile />
+                      <Icons.Heart />
                     </div>
                     <p className="text-3xl font-bold text-slate-900 dark:text-white">{moodTrends.avgMood.toFixed(1)}</p>
                     <p className="text-slate-600 dark:text-slate-400">Avg Mood (7 days)</p>
@@ -367,7 +367,7 @@ export default function WellnessProgressPage() {
                   </div>
                   <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 text-center">
                     <div className="w-16 h-16 mx-auto mb-3 rounded-2xl bg-rose-100 dark:bg-rose-900/30 flex items-center justify-center text-rose-600 dark:text-rose-400">
-                      <Icons.Pulse />
+                      <Icons.Fire />
                     </div>
                     <p className="text-3xl font-bold text-slate-900 dark:text-white">{moodTrends.avgStress.toFixed(1)}</p>
                     <p className="text-slate-600 dark:text-slate-400">Avg Stress (7 days)</p>

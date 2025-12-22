@@ -9,7 +9,7 @@ import { useTribes } from '@/hooks/useTribes';
 import { useWellness } from '@/hooks/useWellness';
 
 export default function CommunityPage() {
-  const { userTribes, primaryTribe, allTribes } = useTribes();
+  const { userTribes, primaryTribe, tribes } = useTribes();
   const { getStats } = useWellness();
   const stats = getStats();
 
@@ -587,7 +587,7 @@ export default function CommunityPage() {
                   </div>
                   <div>
                     <h4 className="font-medium text-slate-900 dark:text-white">Study Tribes</h4>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">Join {allTribes?.length || 12} active tribes</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">Join {tribes?.length || 12} active tribes</p>
                   </div>
                 </Link>
 
