@@ -29,11 +29,21 @@ import {
   type DemoUser
 } from '@/lib/storage/chatStorage';
 
+// Badge icon SVGs
+const BadgeIcons: Record<string, React.ReactNode> = {
+  flame: <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2c1.5 2.5 1 5-1 7 2-1 4 0 5 2s0 5-2 6c2-1 3-3 3-5 0-4-3-8-5-10zm-4 10c1 2 0 4-2 5 1 0 2-1 3-2 0 2-1 4-3 5 3 0 6-2 6-5 0-2-2-4-4-3z"/></svg>,
+  book: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>,
+  users: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>,
+  heart: <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>,
+  handshake: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11l5-5m0 0l5 5m-5-5v12" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15l4-4 4 4M17 15l4-4" /></svg>,
+  star: <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>,
+};
+
 // Achievement badge component
 function Badge({ icon, label, color }: { icon: string; label: string; color: string }) {
   return (
     <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r ${color} rounded-full text-white text-xs font-medium shadow-sm`}>
-      <span>{icon}</span>
+      <span>{BadgeIcons[icon] || BadgeIcons.star}</span>
       <span>{label}</span>
     </div>
   );
@@ -170,26 +180,26 @@ export default function ProfilePage() {
     ? `${profile.firstName} ${profile.lastName}`
     : 'Complete Your Profile';
 
-  // Calculate achievements/badges
+  // Calculate achievements/badges - using SVG icons instead of emojis
   const badges = [];
   if (streakData && streakData.currentStreak >= 7) {
-    badges.push({ icon: '🔥', label: '7+ Day Streak', color: 'from-orange-500 to-red-500' });
+    badges.push({ icon: 'flame', label: '7+ Day Streak', color: 'from-[#A89070] to-[#8B7355]' });
   }
   if (stats.totalCards >= 100) {
-    badges.push({ icon: '📚', label: '100+ Cards', color: 'from-tribe-sage-500 to-cyan-500' });
+    badges.push({ icon: 'book', label: '100+ Cards', color: 'from-[#5B7B6D] to-[#7FA08F]' });
   }
   if (userTribes.length >= 3) {
-    badges.push({ icon: '👥', label: 'Social Butterfly', color: 'from-violet-500 to-purple-500' });
+    badges.push({ icon: 'users', label: 'Social Butterfly', color: 'from-[#6B8B7D] to-[#8BA89A]' });
   }
   if ((wellnessProfile?.villagePoints?.donated || 0) >= 1000) {
-    badges.push({ icon: '❤️', label: 'Philanthropist', color: 'from-rose-500 to-pink-500' });
+    badges.push({ icon: 'heart', label: 'Philanthropist', color: 'from-[#8B7355] to-[#A89070]' });
   }
   if (connectionCount >= 10) {
-    badges.push({ icon: '🤝', label: 'Networker', color: 'from-blue-500 to-indigo-500' });
+    badges.push({ icon: 'handshake', label: 'Networker', color: 'from-[#5B7B6D] to-[#6B8B7D]' });
   }
   // Add default badge if none earned
   if (badges.length === 0) {
-    badges.push({ icon: '⭐', label: 'Getting Started', color: 'from-amber-500 to-yellow-500' });
+    badges.push({ icon: 'star', label: 'Getting Started', color: 'from-[#A89070] to-[#C4A77D]' });
   }
 
   return (
@@ -200,7 +210,7 @@ export default function ProfilePage() {
         {/* Profile Header - Cover Photo Style */}
         <section className="relative mb-6">
           {/* Cover Photo */}
-          <div className="h-40 md:h-56 rounded-t-3xl bg-gradient-to-br from-tribe-sage-500 via-cyan-500 to-indigo-600 relative overflow-hidden">
+          <div className="h-40 md:h-56 rounded-t-3xl bg-gradient-to-br from-[#5B7B6D] via-[#6B8B7D] to-[#7FA08F] relative overflow-hidden">
             {/* Decorative elements */}
             <div className="absolute inset-0">
               <div className="absolute top-10 right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
@@ -237,7 +247,7 @@ export default function ProfilePage() {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-teal-400 via-cyan-500 to-indigo-500 flex items-center justify-center text-white text-4xl md:text-5xl font-bold">
+                    <div className="w-full h-full bg-gradient-to-br from-[#5B7B6D] via-[#6B8B7D] to-[#8B7355] flex items-center justify-center text-white text-4xl md:text-5xl font-bold">
                       {initials}
                     </div>
                   )}
@@ -270,7 +280,7 @@ export default function ProfilePage() {
 
                 {/* Online indicator */}
                 {!avatarUploading && (
-                  <span className="absolute bottom-2 right-2 w-5 h-5 md:w-6 md:h-6 bg-tribe-sage-500 border-3 border-white dark:border-slate-800 rounded-full" />
+                  <span className="absolute bottom-2 right-2 w-5 h-5 md:w-6 md:h-6 bg-[#5B7B6D] border-3 border-white dark:border-slate-800 rounded-full" />
                 )}
 
                 {/* Avatar error message */}
@@ -341,14 +351,14 @@ export default function ProfilePage() {
             {profile?.interestedSpecialties && profile.interestedSpecialties.length > 0 && (
               <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
                 <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                  <span className="text-xl">🩺</span>
+                  <svg className="w-5 h-5 text-[#5B7B6D]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                   Interested Specialties
                 </h2>
                 <div className="flex flex-wrap gap-2">
                   {profile.interestedSpecialties.map((specialty) => (
                     <span
                       key={specialty}
-                      className="px-4 py-2 bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-900/30 dark:to-indigo-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm font-medium"
+                      className="px-4 py-2 bg-gradient-to-r from-[#E8E0D5] to-[#F5F0E8] dark:from-[#3D4A44] dark:to-[#4A5A50] text-[#5B7B6D] dark:text-[#7FA08F] rounded-full text-sm font-medium"
                     >
                       {specialty}
                     </span>
@@ -360,35 +370,35 @@ export default function ProfilePage() {
             {/* Study Stats */}
             <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
               <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                <span className="text-xl">📊</span>
+                <svg className="w-5 h-5 text-[#5B7B6D]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
                 Study Progress
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div className="text-center p-4 bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-xl">
-                  <p className="text-2xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400">{stats.totalCards}</p>
+                <div className="text-center p-4 bg-gradient-to-br from-[#E8E0D5] to-[#F5F0E8] dark:from-[#3D4A44] dark:to-[#4A5A50] rounded-xl">
+                  <p className="text-2xl font-bold text-[#5B7B6D] dark:text-[#7FA08F]">{stats.totalCards}</p>
                   <p className="text-xs text-slate-600 dark:text-slate-400">Total Cards</p>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 rounded-xl">
-                  <p className="text-2xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400">{stats.reviewCards}</p>
+                <div className="text-center p-4 bg-gradient-to-br from-[#E8E0D5] to-[#F5F0E8] dark:from-[#3D4A44] dark:to-[#4A5A50] rounded-xl">
+                  <p className="text-2xl font-bold text-[#5B7B6D] dark:text-[#7FA08F]">{stats.reviewCards}</p>
                   <p className="text-xs text-slate-600 dark:text-slate-400">Mastered</p>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 rounded-xl">
-                  <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">{streakData?.totalXP?.toLocaleString() || 0}</p>
+                <div className="text-center p-4 bg-gradient-to-br from-[#F5F0E8] to-[#E8E0D5] dark:from-[#3D3832] dark:to-[#4A4038] rounded-xl">
+                  <p className="text-2xl font-bold text-[#8B7355] dark:text-[#C4A77D]">{streakData?.totalXP?.toLocaleString() || 0}</p>
                   <p className="text-xs text-slate-600 dark:text-slate-400">Total XP</p>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 rounded-xl">
-                  <p className="text-2xl font-bold text-rose-600 dark:text-rose-400">{wellnessProfile?.villagePoints?.available || 0}</p>
+                <div className="text-center p-4 bg-gradient-to-br from-[#F5F0E8] to-[#E8E0D5] dark:from-[#3D3832] dark:to-[#4A4038] rounded-xl">
+                  <p className="text-2xl font-bold text-[#A89070] dark:text-[#C4A77D]">{wellnessProfile?.villagePoints?.available || 0}</p>
                   <p className="text-xs text-slate-600 dark:text-slate-400">Village Pts</p>
                 </div>
               </div>
 
               {/* Level Progress */}
               {streakData && (
-                <div className="mt-6 p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl">
+                <div className="mt-6 p-4 bg-[#F5F0E8] dark:bg-slate-700/50 rounded-xl">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <span className="text-lg font-bold text-slate-900 dark:text-white">Level {streakData.level}</span>
-                      <span className="px-2 py-0.5 bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-400 text-xs font-medium rounded-full">
+                      <span className="px-2 py-0.5 bg-[#E8E0D5] dark:bg-[#3D4A44] text-[#5B7B6D] dark:text-[#7FA08F] text-xs font-medium rounded-full">
                         {streakData.level >= 10 ? 'Expert' : streakData.level >= 5 ? 'Scholar' : 'Learner'}
                       </span>
                     </div>
@@ -396,9 +406,9 @@ export default function ProfilePage() {
                       {streakData.totalXP % 1000} / 1000 XP
                     </span>
                   </div>
-                  <div className="h-3 bg-slate-200 dark:bg-slate-600 rounded-full overflow-hidden">
+                  <div className="h-3 bg-[#E8E0D5] dark:bg-slate-600 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-tribe-sage-500 to-cyan-500 rounded-full transition-all"
+                      className="h-full bg-gradient-to-r from-[#5B7B6D] to-[#7FA08F] rounded-full transition-all"
                       style={{ width: `${(streakData.totalXP % 1000) / 10}%` }}
                     />
                   </div>
@@ -411,14 +421,14 @@ export default function ProfilePage() {
               <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                    <span className="text-xl">👥</span>
+                    <svg className="w-5 h-5 text-[#5B7B6D]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
                     My Tribes
                   </h2>
                   <Link
                     href="/tribes"
-                    className="text-sm text-amber-600 dark:text-amber-400 hover:underline font-medium"
+                    className="text-sm text-[#8B7355] dark:text-[#C4A77D] hover:underline font-medium"
                   >
-                    View All →
+                    View All
                   </Link>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -449,9 +459,9 @@ export default function ProfilePage() {
             )}
 
             {/* Impact Stats */}
-            <div className="bg-gradient-to-br from-rose-500 to-pink-600 rounded-2xl shadow-lg p-6 text-white">
+            <div className="bg-gradient-to-br from-[#5B7B6D] to-[#7FA08F] rounded-2xl shadow-lg p-6 text-white">
               <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <span className="text-xl">❤️</span>
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                 Your Impact
               </h2>
               <div className="grid grid-cols-3 gap-4">
@@ -481,13 +491,13 @@ export default function ProfilePage() {
           <div className="space-y-6">
             {/* Pending Requests */}
             {pendingRequests.length > 0 && (
-              <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl border border-amber-200 dark:border-amber-800 p-6">
+              <div className="bg-gradient-to-br from-[#F5F0E8] to-[#E8E0D5] dark:from-[#3D3832] dark:to-[#4A4038] rounded-2xl border border-[#C4A77D] dark:border-[#8B7355] p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                    <span className="text-xl">📬</span>
+                    <svg className="w-5 h-5 text-[#8B7355]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                     Requests
                   </h2>
-                  <span className="px-2 py-0.5 bg-amber-500 text-white text-xs font-bold rounded-full">
+                  <span className="px-2 py-0.5 bg-[#8B7355] text-white text-xs font-bold rounded-full">
                     {pendingCount}
                   </span>
                 </div>
@@ -497,7 +507,7 @@ export default function ProfilePage() {
                       key={user.id}
                       className="flex items-center gap-3 p-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm"
                     >
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 via-cyan-500 to-indigo-500 flex items-center justify-center text-white font-bold text-sm">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#5B7B6D] via-[#6B8B7D] to-[#8B7355] flex items-center justify-center text-white font-bold text-sm">
                         {getInitials(user.firstName, user.lastName)}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -509,7 +519,7 @@ export default function ProfilePage() {
                       <div className="flex gap-1">
                         <button
                           onClick={() => handleAcceptRequest(user.id)}
-                          className="w-8 h-8 rounded-full bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white flex items-center justify-center transition-colors"
+                          className="w-8 h-8 rounded-full bg-[#5B7B6D] hover:bg-[#4A6A5C] text-white flex items-center justify-center transition-colors"
                         >
                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -534,10 +544,10 @@ export default function ProfilePage() {
             <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                  <span className="text-xl">🤝</span>
+                  <svg className="w-5 h-5 text-[#5B7B6D]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
                   Your Tribe
                 </h2>
-                <span className="text-sm font-medium text-cyan-600 dark:text-cyan-400">
+                <span className="text-sm font-medium text-[#5B7B6D] dark:text-[#7FA08F]">
                   {connectionCount}
                 </span>
               </div>
@@ -551,11 +561,11 @@ export default function ProfilePage() {
                         className="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
                       >
                         <div className="relative">
-                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 via-cyan-500 to-indigo-500 flex items-center justify-center text-white font-bold text-sm">
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#5B7B6D] via-[#6B8B7D] to-[#8B7355] flex items-center justify-center text-white font-bold text-sm">
                             {getInitials(user.firstName, user.lastName)}
                           </div>
                           {user.isOnline && (
-                            <span className="absolute bottom-0 right-0 w-3 h-3 bg-tribe-sage-500 border-2 border-white dark:border-slate-800 rounded-full" />
+                            <span className="absolute bottom-0 right-0 w-3 h-3 bg-[#5B7B6D] border-2 border-white dark:border-slate-800 rounded-full" />
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
@@ -566,7 +576,7 @@ export default function ProfilePage() {
                             {user.specialty || user.currentYear}
                           </p>
                         </div>
-                        <button className="w-8 h-8 rounded-full bg-tribe-sage-100 dark:bg-tribe-sage-900/30 hover:bg-teal-200 dark:hover:bg-teal-900/50 text-tribe-sage-600 dark:text-tribe-sage-400 flex items-center justify-center transition-colors">
+                        <button className="w-8 h-8 rounded-full bg-[#E8E0D5] dark:bg-[#3D4A44] hover:bg-[#D8D0C5] dark:hover:bg-[#4D5A54] text-[#5B7B6D] dark:text-[#7FA08F] flex items-center justify-center transition-colors">
                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                           </svg>
@@ -577,7 +587,7 @@ export default function ProfilePage() {
                   {connections.length > 5 && (
                     <button
                       onClick={() => setShowAllConnections(!showAllConnections)}
-                      className="w-full mt-4 py-2 text-sm font-medium text-tribe-sage-600 dark:text-tribe-sage-400 hover:text-tribe-sage-700 dark:hover:text-tribe-sage-300 transition-colors"
+                      className="w-full mt-4 py-2 text-sm font-medium text-[#5B7B6D] dark:text-[#7FA08F] hover:text-[#4A6A5C] dark:hover:text-[#8FA8A0] transition-colors"
                     >
                       {showAllConnections ? 'Show Less' : `View All ${connectionCount} Connections`}
                     </button>
@@ -597,7 +607,7 @@ export default function ProfilePage() {
 
               <Link
                 href="/profile/settings"
-                className="mt-4 block w-full px-4 py-2 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white text-center rounded-xl font-medium text-sm transition-all shadow-md"
+                className="mt-4 block w-full px-4 py-2 bg-gradient-to-r from-[#5B7B6D] to-[#6B8B7D] hover:from-[#4A6A5C] hover:to-[#5A7A6C] text-white text-center rounded-xl font-medium text-sm transition-all shadow-md"
               >
                 Find People to Connect
               </Link>
@@ -607,7 +617,7 @@ export default function ProfilePage() {
             {(profile?.linkedIn || profile?.twitter) && (
               <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
                 <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                  <span className="text-xl">🔗</span>
+                  <svg className="w-5 h-5 text-[#5B7B6D]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
                   Connect
                 </h2>
                 <div className="space-y-3">

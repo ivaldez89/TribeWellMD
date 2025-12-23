@@ -26,7 +26,7 @@ export default function CommunityPage() {
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Banner */}
         <section className="mb-8 animate-fade-in-up">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-500 p-8 md:p-10 shadow-2xl">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#5B7B6D] via-[#6B8B7D] to-[#7FA08F] p-8 md:p-10 shadow-2xl">
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
@@ -36,12 +36,12 @@ export default function CommunityPage() {
 
             <div className="relative z-10">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/20 backdrop-blur rounded-full text-white/90 text-sm font-medium mb-4">
-                <span className="w-2 h-2 bg-orange-300 rounded-full animate-pulse" />
+                <span className="w-2 h-2 bg-[#C4A77D] rounded-full animate-pulse" />
                 <span>For Everyone in Medicine</span>
               </div>
 
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 leading-tight">
-                Our <span className="text-orange-200">Community</span>
+                Our <span className="text-[#C4A77D]">Community</span>
               </h1>
 
               <p className="text-white/80 text-lg max-w-2xl mb-6">
@@ -84,7 +84,7 @@ export default function CommunityPage() {
               onClick={() => setActiveTab(tab.id as typeof activeTab)}
               className={`flex items-center gap-2 px-4 py-3 font-medium text-sm transition-colors border-b-2 -mb-px whitespace-nowrap ${
                 activeTab === tab.id
-                  ? 'text-amber-600 dark:text-amber-400 border-amber-600 dark:border-amber-400'
+                  ? 'text-[#5B7B6D] dark:text-[#7FA08F] border-[#5B7B6D] dark:border-[#7FA08F]'
                   : 'text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-white'
               }`}
             >
@@ -102,7 +102,7 @@ export default function CommunityPage() {
               {/* Tribes Card */}
               <Link
                 href="/tribes"
-                className="group bg-gradient-to-br from-tribe-sage-500 to-tribe-sage-600 rounded-2xl p-5 text-white hover:scale-[1.02] transition-all"
+                className="group bg-gradient-to-br from-[#5B7B6D] to-[#6B8B7D] rounded-2xl p-5 text-white hover:scale-[1.02] transition-all"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
@@ -123,7 +123,7 @@ export default function CommunityPage() {
               {/* Impact Card */}
               <Link
                 href="/impact"
-                className="group bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl p-5 text-white hover:scale-[1.02] transition-all"
+                className="group bg-gradient-to-br from-[#8B7355] to-[#A89070] rounded-2xl p-5 text-white hover:scale-[1.02] transition-all"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
@@ -144,7 +144,7 @@ export default function CommunityPage() {
               {/* Find Charities Card */}
               <Link
                 href="/impact/local"
-                className="group bg-gradient-to-br from-tribe-sage-500 to-cyan-600 rounded-2xl p-5 text-white hover:scale-[1.02] transition-all"
+                className="group bg-gradient-to-br from-[#6B8B7D] to-[#7FA08F] rounded-2xl p-5 text-white hover:scale-[1.02] transition-all"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
@@ -165,7 +165,7 @@ export default function CommunityPage() {
               {/* PreMed Card */}
               <Link
                 href="/premed"
-                className="group bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-5 text-white hover:scale-[1.02] transition-all"
+                className="group bg-gradient-to-br from-[#A89070] to-[#C4A77D] rounded-2xl p-5 text-white hover:scale-[1.02] transition-all"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
@@ -191,7 +191,7 @@ export default function CommunityPage() {
                   <h3 className="text-lg font-semibold text-slate-900 dark:text-white">My Tribes</h3>
                   <Link
                     href="/tribes"
-                    className="text-sm text-amber-600 dark:text-amber-400 hover:underline"
+                    className="text-sm text-[#8B7355] dark:text-[#C4A77D] hover:underline"
                   >
                     View All
                   </Link>
@@ -215,7 +215,7 @@ export default function CommunityPage() {
                           <p className="text-xs text-slate-500">{tribe.memberCount} members</p>
                         </div>
                         {primaryTribe?.id === tribe.id && (
-                          <span className="px-2 py-0.5 bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 text-xs rounded-full">
+                          <span className="px-2 py-0.5 bg-[#E8E0D5] dark:bg-[#3D3832] text-[#8B7355] dark:text-[#C4A77D] text-xs rounded-full">
                             Primary
                           </span>
                         )}
@@ -224,13 +224,13 @@ export default function CommunityPage() {
                         <div className="mt-3">
                           <div className="flex items-center justify-between text-xs mb-1">
                             <span className="text-slate-500 truncate">{tribe.currentGoal.title}</span>
-                            <span className="text-amber-600 dark:text-amber-400 font-medium">
+                            <span className="text-[#8B7355] dark:text-[#C4A77D] font-medium">
                               {Math.round((tribe.currentGoal.currentPoints / tribe.currentGoal.targetPoints) * 100)}%
                             </span>
                           </div>
                           <div className="h-1.5 bg-slate-200 dark:bg-slate-600 rounded-full overflow-hidden">
                             <div
-                              className="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"
+                              className="h-full bg-gradient-to-r from-[#8B7355] to-[#A89070] rounded-full"
                               style={{ width: `${Math.min((tribe.currentGoal.currentPoints / tribe.currentGoal.targetPoints) * 100, 100)}%` }}
                             />
                           </div>
@@ -242,7 +242,7 @@ export default function CommunityPage() {
               </div>
             ) : (
               <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-8 text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 dark:text-amber-400">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-[#E8E0D5] dark:bg-[#3D4A44] flex items-center justify-center text-[#5B7B6D] dark:text-[#7FA08F]">
                   <Icons.Village />
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Join Your First Tribe</h3>
@@ -251,7 +251,7 @@ export default function CommunityPage() {
                 </p>
                 <Link
                   href="/tribes"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#5B7B6D] to-[#6B8B7D] text-white font-medium rounded-xl hover:from-[#4A6A5C] hover:to-[#5A7A6C] transition-all"
                 >
                   Explore Tribes
                 </Link>
@@ -259,19 +259,19 @@ export default function CommunityPage() {
             )}
 
             {/* Community Stats */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6">
+            <div className="bg-gradient-to-br from-[#3D4A44] to-[#2D3A34] rounded-2xl p-6">
               <h3 className="text-lg font-semibold text-white mb-4">Why Community Matters</h3>
               <div className="grid sm:grid-cols-3 gap-4">
                 <div className="p-4 bg-white/5 rounded-xl text-center">
-                  <p className="text-3xl font-bold text-amber-400 mb-1">27%</p>
+                  <p className="text-3xl font-bold text-[#C4A77D] mb-1">27%</p>
                   <p className="text-slate-400 text-sm">of medical students experience depression</p>
                 </div>
                 <div className="p-4 bg-white/5 rounded-xl text-center">
-                  <p className="text-3xl font-bold text-amber-400 mb-1">50%</p>
+                  <p className="text-3xl font-bold text-[#C4A77D] mb-1">50%</p>
                   <p className="text-slate-400 text-sm">feel they lack adequate mentorship</p>
                 </div>
                 <div className="p-4 bg-white/5 rounded-xl text-center">
-                  <p className="text-3xl font-bold text-amber-400 mb-1">1 in 3</p>
+                  <p className="text-3xl font-bold text-[#C4A77D] mb-1">1 in 3</p>
                   <p className="text-slate-400 text-sm">residents report burnout symptoms</p>
                 </div>
               </div>
@@ -290,15 +290,15 @@ export default function CommunityPage() {
                 {/* Tribe Stats */}
                 <div className="grid md:grid-cols-3 gap-4">
                   <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 text-center">
-                    <p className="text-3xl font-bold text-amber-600 dark:text-amber-400">{userTribes.length}</p>
+                    <p className="text-3xl font-bold text-[#8B7355] dark:text-[#C4A77D]">{userTribes.length}</p>
                     <p className="text-slate-600 dark:text-slate-400">Tribes Joined</p>
                   </div>
                   <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 text-center">
-                    <p className="text-3xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400">{totalTribeMembers}</p>
+                    <p className="text-3xl font-bold text-[#5B7B6D] dark:text-[#7FA08F]">{totalTribeMembers}</p>
                     <p className="text-slate-600 dark:text-slate-400">Total Members</p>
                   </div>
                   <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 text-center">
-                    <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">{totalTribePoints.toLocaleString()}</p>
+                    <p className="text-3xl font-bold text-[#6B8B7D] dark:text-[#8BA89A]">{totalTribePoints.toLocaleString()}</p>
                     <p className="text-slate-600 dark:text-slate-400">Collective Points</p>
                   </div>
                 </div>
@@ -322,7 +322,7 @@ export default function CommunityPage() {
                           <div className="flex items-center gap-2 mb-1">
                             <h3 className="font-semibold text-slate-900 dark:text-white truncate">{tribe.name}</h3>
                             {primaryTribe?.id === tribe.id && (
-                              <span className="px-2 py-0.5 bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 text-xs rounded-full flex-shrink-0">
+                              <span className="px-2 py-0.5 bg-[#E8E0D5] dark:bg-[#3D3832] text-[#8B7355] dark:text-[#C4A77D] text-xs rounded-full flex-shrink-0">
                                 Primary
                               </span>
                             )}
@@ -336,13 +336,13 @@ export default function CommunityPage() {
                             <div className="mt-3">
                               <div className="flex items-center justify-between text-xs mb-1">
                                 <span className="text-slate-600 dark:text-slate-400">{tribe.currentGoal.title}</span>
-                                <span className="font-medium text-amber-600 dark:text-amber-400">
+                                <span className="font-medium text-[#8B7355] dark:text-[#C4A77D]">
                                   {Math.round((tribe.currentGoal.currentPoints / tribe.currentGoal.targetPoints) * 100)}%
                                 </span>
                               </div>
                               <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
                                 <div
-                                  className="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"
+                                  className="h-full bg-gradient-to-r from-[#8B7355] to-[#A89070] rounded-full"
                                   style={{ width: `${Math.min((tribe.currentGoal.currentPoints / tribe.currentGoal.targetPoints) * 100, 100)}%` }}
                                 />
                               </div>
@@ -355,7 +355,7 @@ export default function CommunityPage() {
                 </div>
 
                 {/* Explore More */}
-                <div className="p-6 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl border border-amber-200 dark:border-amber-800">
+                <div className="p-6 bg-gradient-to-r from-[#E8E0D5] to-[#F5F0E8] dark:from-[#3D4A44] dark:to-[#4A5A50] rounded-2xl border border-[#C4A77D] dark:border-[#8B7355]">
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className="font-semibold text-slate-900 dark:text-white">Looking for more tribes?</h3>
@@ -363,7 +363,7 @@ export default function CommunityPage() {
                     </div>
                     <Link
                       href="/tribes"
-                      className="px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all"
+                      className="px-4 py-2 bg-gradient-to-r from-[#5B7B6D] to-[#6B8B7D] text-white font-medium rounded-xl hover:from-[#4A6A5C] hover:to-[#5A7A6C] transition-all"
                     >
                       Explore All Tribes
                     </Link>
@@ -372,7 +372,7 @@ export default function CommunityPage() {
               </>
             ) : (
               <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-12 text-center">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 dark:text-amber-400">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-[#E8E0D5] dark:bg-[#3D4A44] flex items-center justify-center text-[#5B7B6D] dark:text-[#7FA08F]">
                   <Icons.Village />
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">No Tribes Yet</h3>
@@ -381,7 +381,7 @@ export default function CommunityPage() {
                 </p>
                 <Link
                   href="/tribes"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#5B7B6D] to-[#6B8B7D] text-white font-medium rounded-xl hover:from-[#4A6A5C] hover:to-[#5A7A6C] transition-all"
                 >
                   Explore Tribes
                 </Link>
@@ -395,7 +395,7 @@ export default function CommunityPage() {
           <div className="space-y-6">
             {/* Impact Stats */}
             <div className="grid md:grid-cols-2 gap-4">
-              <div className="bg-gradient-to-br from-tribe-sage-500 to-tribe-sage-600 rounded-2xl p-6 text-white">
+              <div className="bg-gradient-to-br from-[#5B7B6D] to-[#6B8B7D] rounded-2xl p-6 text-white">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
                     <Icons.Heart />
@@ -410,7 +410,7 @@ export default function CommunityPage() {
                 </p>
               </div>
 
-              <div className="bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl p-6 text-white">
+              <div className="bg-gradient-to-br from-[#8B7355] to-[#A89070] rounded-2xl p-6 text-white">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
                     <Icons.Gift />
@@ -432,7 +432,7 @@ export default function CommunityPage() {
               className="block bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 hover:shadow-lg transition-all"
             >
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#8B7355] to-[#A89070] flex items-center justify-center text-white">
                   <Icons.Lightbulb />
                 </div>
                 <div className="flex-1">
@@ -450,10 +450,10 @@ export default function CommunityPage() {
             {/* Find Local Charities */}
             <Link
               href="/impact/local"
-              className="block bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-2xl border border-teal-200 dark:border-teal-800 p-6 hover:shadow-lg transition-all"
+              className="block bg-gradient-to-r from-[#E8E0D5] to-[#F5F0E8] dark:from-[#3D4A44] dark:to-[#4A5A50] rounded-2xl border border-[#C4A77D] dark:border-[#8B7355] p-6 hover:shadow-lg transition-all"
             >
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-tribe-sage-500 to-cyan-500 flex items-center justify-center text-white">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#5B7B6D] to-[#6B8B7D] flex items-center justify-center text-white">
                   <Icons.Location />
                 </div>
                 <div className="flex-1">
@@ -462,7 +462,7 @@ export default function CommunityPage() {
                     Discover verified nonprofits in your community where your points can make an impact
                   </p>
                 </div>
-                <svg className="w-5 h-5 text-tribe-sage-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-5 h-5 text-[#5B7B6D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </div>
@@ -472,18 +472,18 @@ export default function CommunityPage() {
             <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6">
               <h3 className="font-semibold text-slate-900 dark:text-white mb-4">Conversion Rate</h3>
               <div className="grid sm:grid-cols-3 gap-4">
-                <div className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                  <p className="text-xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400">10 XP</p>
+                <div className="p-4 bg-[#F5F0E8] dark:bg-slate-700/50 rounded-xl text-center">
+                  <p className="text-xl font-bold text-[#5B7B6D] dark:text-[#7FA08F]">10 XP</p>
                   <p className="text-xs text-slate-500">=</p>
                   <p className="text-sm text-slate-600 dark:text-slate-400">1 Village Point</p>
                 </div>
-                <div className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                  <p className="text-xl font-bold text-purple-600 dark:text-purple-400">1,000 VP</p>
+                <div className="p-4 bg-[#F5F0E8] dark:bg-slate-700/50 rounded-xl text-center">
+                  <p className="text-xl font-bold text-[#6B8B7D] dark:text-[#8BA89A]">1,000 VP</p>
                   <p className="text-xs text-slate-500">=</p>
                   <p className="text-sm text-slate-600 dark:text-slate-400">$1.00 to charity</p>
                 </div>
-                <div className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                  <p className="text-xl font-bold text-amber-600 dark:text-amber-400">100%</p>
+                <div className="p-4 bg-[#F5F0E8] dark:bg-slate-700/50 rounded-xl text-center">
+                  <p className="text-xl font-bold text-[#8B7355] dark:text-[#C4A77D]">100%</p>
                   <p className="text-xs text-slate-500">=</p>
                   <p className="text-sm text-slate-600 dark:text-slate-400">Transparent</p>
                 </div>
@@ -500,7 +500,7 @@ export default function CommunityPage() {
               {/* Mentorship */}
               <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-tribe-sage-500 to-cyan-600 flex items-center justify-center text-white">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#5B7B6D] to-[#6B8B7D] flex items-center justify-center text-white">
                     <Icons.Target />
                   </div>
                   <div>
@@ -519,7 +519,7 @@ export default function CommunityPage() {
               {/* Day in the Life */}
               <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#6B8B7D] to-[#7FA08F] flex items-center justify-center text-white">
                     <Icons.Camera />
                   </div>
                   <div>
@@ -538,7 +538,7 @@ export default function CommunityPage() {
               {/* Anonymous Support */}
               <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-white">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#A89070] to-[#C4A77D] flex items-center justify-center text-white">
                     <Icons.Chat />
                   </div>
                   <div>
@@ -557,7 +557,7 @@ export default function CommunityPage() {
               {/* Events */}
               <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#8B7355] to-[#A89070] flex items-center justify-center text-white">
                     <Icons.Calendar />
                   </div>
                   <div>
@@ -575,14 +575,14 @@ export default function CommunityPage() {
             </div>
 
             {/* Available Now */}
-            <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl border border-emerald-200 dark:border-emerald-800 p-6">
+            <div className="bg-gradient-to-r from-[#E8E0D5] to-[#F5F0E8] dark:from-[#3D4A44] dark:to-[#4A5A50] rounded-2xl border border-[#C4A77D] dark:border-[#8B7355] p-6">
               <h3 className="font-semibold text-slate-900 dark:text-white mb-4">Available Now</h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 <Link
                   href="/tribes"
                   className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl hover:shadow-lg transition-all"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-tribe-sage-500 to-tribe-sage-600 flex items-center justify-center text-white">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#5B7B6D] to-[#6B8B7D] flex items-center justify-center text-white">
                     <Icons.Village />
                   </div>
                   <div>
@@ -595,7 +595,7 @@ export default function CommunityPage() {
                   href="/wellness"
                   className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl hover:shadow-lg transition-all"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-white">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8B7355] to-[#A89070] flex items-center justify-center text-white">
                     <Icons.Heart />
                   </div>
                   <div>
@@ -612,7 +612,7 @@ export default function CommunityPage() {
         <div className="mt-8 text-center">
           <Link
             href="/tribes"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl transition-colors shadow-lg"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#5B7B6D] hover:bg-[#4A6A5C] text-white font-semibold rounded-xl transition-colors shadow-lg"
           >
             <Icons.Village />
             Explore Tribes
