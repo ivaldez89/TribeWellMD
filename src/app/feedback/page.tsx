@@ -75,7 +75,7 @@ export default function FeedbackPage() {
         <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-8">
           {submitted ? (
             <div className="text-center py-12">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center mx-auto mb-6">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#C4A77D] to-[#A89070] flex items-center justify-center mx-auto mb-6">
                 <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
@@ -88,7 +88,7 @@ export default function FeedbackPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
                   onClick={() => setSubmitted(false)}
-                  className="px-6 py-3 bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white font-semibold rounded-xl transition-colors"
+                  className="px-6 py-3 bg-[#C4A77D] hover:bg-[#A89070] text-white font-semibold rounded-xl transition-colors"
                 >
                   Send More Feedback
                 </button>
@@ -113,7 +113,7 @@ export default function FeedbackPage() {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#C4A77D] focus:border-transparent"
                   placeholder="you@example.com"
                 />
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
@@ -134,7 +134,7 @@ export default function FeedbackPage() {
                       onClick={() => setFormData({ ...formData, feedbackType: type.label })}
                       className={`p-4 rounded-xl border-2 transition-all text-left ${
                         formData.feedbackType === type.label
-                          ? 'border-tribe-sage-500 bg-tribe-sage-50 dark:bg-tribe-sage-900/20'
+                          ? 'border-[#C4A77D] bg-[#F5F0E8] dark:bg-[#C4A77D]/20'
                           : 'border-slate-200 dark:border-slate-600 hover:border-slate-300 dark:hover:border-slate-500'
                       }`}
                     >
@@ -201,7 +201,7 @@ export default function FeedbackPage() {
                   rows={6}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent resize-none"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#C4A77D] focus:border-transparent resize-none"
                   placeholder="Share your thoughts, suggestions, or report issues..."
                 />
               </div>
@@ -215,7 +215,7 @@ export default function FeedbackPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full px-6 py-4 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 disabled:from-teal-400 disabled:to-cyan-400 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-tribe-sage-500/25"
+                className="w-full px-6 py-4 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] disabled:from-[#D4C4B0] disabled:to-[#C4A77D] text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#C4A77D]/25"
               >
                 {loading ? (
                   <>
@@ -242,7 +242,7 @@ export default function FeedbackPage() {
         <div className="mt-8 text-center">
           <p className="text-slate-600 dark:text-slate-400 text-sm">
             Prefer email?{' '}
-            <a href="mailto:feedback@tribewellmd.com" className="text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline">
+            <a href="mailto:feedback@tribewellmd.com" className="text-[#A89070] dark:text-[#C4A77D] hover:underline">
               feedback@tribewellmd.com
             </a>
           </p>

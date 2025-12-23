@@ -65,15 +65,15 @@ export default function TribesPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-amber-50/30 dark:from-slate-900 dark:to-amber-950/20">
+      <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5] dark:from-slate-900 dark:to-[#5B7B6D]/20">
         <Header />
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="animate-pulse space-y-6">
-            <div className="h-48 bg-slate-200 dark:bg-slate-800 rounded-3xl"></div>
-            <div className="h-16 bg-slate-200 dark:bg-slate-800 rounded-2xl"></div>
+            <div className="h-48 bg-[#E8E0D5] dark:bg-[#5B7B6D]/20 rounded-3xl"></div>
+            <div className="h-16 bg-[#E8E0D5] dark:bg-[#5B7B6D]/20 rounded-2xl"></div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="h-64 bg-slate-200 dark:bg-slate-800 rounded-2xl"></div>
+                <div key={i} className="h-64 bg-[#E8E0D5] dark:bg-[#5B7B6D]/20 rounded-2xl"></div>
               ))}
             </div>
           </div>
@@ -83,13 +83,13 @@ export default function TribesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-amber-50/30 dark:from-slate-900 dark:to-amber-950/20">
+    <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5] dark:from-slate-900 dark:to-[#5B7B6D]/20">
       <Header />
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Banner */}
         <section className="mb-8 animate-fade-in-up">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-500 via-orange-500 to-yellow-500 p-8 md:p-10 shadow-2xl">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#C4A77D] to-[#A89070] p-8 md:p-10 shadow-2xl">
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
@@ -106,7 +106,7 @@ export default function TribesPage() {
                 </div>
 
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 leading-tight">
-                  Find Your <span className="text-yellow-200">Tribe</span>
+                  Find Your <span className="text-[#F5F0E8]">Tribe</span>
                 </h1>
 
                 <p className="text-white/80 text-lg max-w-lg mb-6">
@@ -135,7 +135,7 @@ export default function TribesPage() {
               <div className="flex flex-col items-end gap-4">
                 <button
                   onClick={() => setShowCreateModal(true)}
-                  className="px-6 py-3 bg-white text-amber-600 rounded-xl font-semibold hover:bg-amber-50 transition-colors shadow-lg flex items-center gap-2"
+                  className="px-6 py-3 bg-white text-[#8B7355] rounded-xl font-semibold hover:bg-[#F5F0E8] transition-colors shadow-lg flex items-center gap-2"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -163,13 +163,13 @@ export default function TribesPage() {
 
         {/* Filters */}
         <section className="mb-6">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-4">
+          <div className="bg-white dark:bg-[#5B7B6D]/20 rounded-2xl shadow-sm border border-[#D4C4B0] dark:border-[#C4A77D]/30 p-4">
             <div className="flex flex-col md:flex-row gap-4">
               {/* Search */}
               <div className="flex-1">
                 <div className="relative">
                   <svg
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#A89070]"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -186,7 +186,7 @@ export default function TribesPage() {
                     placeholder="Search tribes..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
+                    className="w-full pl-10 pr-4 py-2.5 bg-[#F5F0E8] dark:bg-[#5B7B6D]/20 border border-[#D4C4B0] dark:border-[#C4A77D]/30 rounded-xl text-slate-900 dark:text-white placeholder-[#A89070] focus:ring-2 focus:ring-[#C4A77D] focus:border-[#C4A77D] transition-colors"
                   />
                 </div>
               </div>
@@ -195,7 +195,7 @@ export default function TribesPage() {
               <select
                 value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value as TribeType | 'all')}
-                className="px-4 py-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                className="px-4 py-2.5 bg-[#F5F0E8] dark:bg-[#5B7B6D]/20 border border-[#D4C4B0] dark:border-[#C4A77D]/30 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-[#C4A77D] focus:border-[#C4A77D]"
               >
                 <option value="all">All Types</option>
                 <option value="study">Study Group</option>
@@ -208,7 +208,7 @@ export default function TribesPage() {
               <select
                 value={causeFilter}
                 onChange={(e) => setCauseFilter(e.target.value as SocialCause | 'all')}
-                className="px-4 py-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                className="px-4 py-2.5 bg-[#F5F0E8] dark:bg-[#5B7B6D]/20 border border-[#D4C4B0] dark:border-[#C4A77D]/30 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-[#C4A77D] focus:border-[#C4A77D]"
               >
                 <option value="all">All Causes</option>
                 <option value="environment">Environment</option>
@@ -223,7 +223,7 @@ export default function TribesPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
-                className="px-4 py-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                className="px-4 py-2.5 bg-[#F5F0E8] dark:bg-[#5B7B6D]/20 border border-[#D4C4B0] dark:border-[#C4A77D]/30 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-[#C4A77D] focus:border-[#C4A77D]"
               >
                 <option value="popular">Most Popular</option>
                 <option value="newest">Newest</option>
@@ -236,7 +236,7 @@ export default function TribesPage() {
 
         {/* Results count */}
         <div className="flex items-center justify-between mb-4">
-          <p className="text-sm text-slate-600 dark:text-slate-400">
+          <p className="text-sm text-[#8B7355] dark:text-[#C4A77D]">
             {filteredTribes.length} tribe{filteredTribes.length !== 1 ? 's' : ''} found
           </p>
           {(searchQuery || typeFilter !== 'all' || causeFilter !== 'all') && (
@@ -246,7 +246,7 @@ export default function TribesPage() {
                 setTypeFilter('all');
                 setCauseFilter('all');
               }}
-              className="text-sm text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-medium"
+              className="text-sm text-[#8B7355] dark:text-[#C4A77D] hover:text-[#5B7B6D] dark:hover:text-[#A89070] font-medium"
             >
               Clear filters
             </button>
@@ -266,17 +266,17 @@ export default function TribesPage() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-16 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 mb-8">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-400">
+          <div className="text-center py-16 bg-white dark:bg-[#5B7B6D]/20 rounded-2xl border border-[#D4C4B0] dark:border-[#C4A77D]/30 mb-8">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-[#E8E0D5] dark:bg-[#5B7B6D]/20 flex items-center justify-center text-[#A89070]">
               <Icons.Search />
             </div>
             <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">No tribes found</h3>
-            <p className="text-slate-500 dark:text-slate-400 mb-6 max-w-md mx-auto">
+            <p className="text-[#8B7355] dark:text-[#C4A77D] mb-6 max-w-md mx-auto">
               Try adjusting your filters or create your own tribe to get started!
             </p>
             <button
               onClick={() => setShowCreateModal(true)}
-              className="px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-medium hover:from-amber-600 hover:to-orange-600 transition-colors shadow-lg shadow-amber-500/25"
+              className="px-6 py-3 bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white rounded-xl font-medium hover:from-[#A89070] hover:to-[#8B7355] transition-colors shadow-lg shadow-[#C4A77D]/25"
             >
               Create a Tribe
             </button>
@@ -284,16 +284,16 @@ export default function TribesPage() {
         )}
 
         {/* Leaderboard Section */}
-        <section className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
-          <div className="p-6 border-b border-slate-200 dark:border-slate-700 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20">
+        <section className="bg-white dark:bg-[#5B7B6D]/20 rounded-2xl shadow-sm border border-[#D4C4B0] dark:border-[#C4A77D]/30 overflow-hidden">
+          <div className="p-6 border-b border-[#D4C4B0] dark:border-[#C4A77D]/30 bg-gradient-to-r from-[#F5F0E8] to-[#E8E0D5] dark:from-[#5B7B6D]/20 dark:to-[#2D5A4A]/20">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/25 text-white">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#C4A77D] to-[#A89070] flex items-center justify-center shadow-lg shadow-[#C4A77D]/25 text-white">
                 <Icons.Trophy />
               </div>
               Top Tribes This Month
             </h2>
           </div>
-          <div className="divide-y divide-slate-100 dark:divide-slate-700">
+          <div className="divide-y divide-[#E8E0D5] dark:divide-[#C4A77D]/30">
             {tribes
               .filter((t) => t.visibility === 'public' && t.rank > 0)
               .sort((a, b) => a.rank - b.rank)
@@ -302,17 +302,17 @@ export default function TribesPage() {
                 <Link
                   key={tribe.id}
                   href={`/tribes/${tribe.id}`}
-                  className="flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
+                  className="flex items-center gap-4 p-4 hover:bg-[#F5F0E8] dark:hover:bg-[#5B7B6D]/20 transition-colors"
                 >
                   <span
                     className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${
                       index === 0
-                        ? 'bg-gradient-to-br from-yellow-400 to-amber-500 text-white shadow-lg shadow-amber-500/25'
+                        ? 'bg-gradient-to-br from-[#C4A77D] to-[#A89070] text-white shadow-lg shadow-[#C4A77D]/25'
                         : index === 1
-                        ? 'bg-gradient-to-br from-slate-300 to-slate-400 text-white'
+                        ? 'bg-gradient-to-br from-[#D4C4B0] to-[#C4A77D] text-white'
                         : index === 2
-                        ? 'bg-gradient-to-br from-amber-600 to-amber-700 text-white'
-                        : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400'
+                        ? 'bg-gradient-to-br from-[#8B7355] to-[#5B7B6D] text-white'
+                        : 'bg-[#E8E0D5] dark:bg-[#5B7B6D]/20 text-[#A89070] dark:text-[#C4A77D]'
                     }`}
                   >
                     {index + 1}
@@ -322,15 +322,15 @@ export default function TribesPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold text-slate-900 dark:text-white truncate">{tribe.name}</p>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">{tribe.memberCount} members</p>
+                    <p className="text-sm text-[#8B7355] dark:text-[#C4A77D]">{tribe.memberCount} members</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-lg font-bold text-amber-600 dark:text-amber-400">
+                    <p className="text-lg font-bold text-[#8B7355] dark:text-[#C4A77D]">
                       {tribe.totalPoints.toLocaleString()}
                     </p>
-                    <p className="text-xs text-slate-400 dark:text-slate-500">points</p>
+                    <p className="text-xs text-[#A89070] dark:text-[#C4A77D]/70">points</p>
                   </div>
-                  <svg className="w-5 h-5 text-slate-300 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-[#D4C4B0] dark:text-[#C4A77D]/50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>
@@ -342,7 +342,7 @@ export default function TribesPage() {
         <div className="mt-8 text-center">
           <Link
             href="/community"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-slate-800 dark:bg-slate-700 hover:bg-slate-900 dark:hover:bg-slate-600 text-white font-semibold rounded-xl transition-colors shadow-lg"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#5B7B6D] to-[#2D5A4A] hover:from-[#2D5A4A] hover:to-[#5B7B6D] text-white font-semibold rounded-xl transition-colors shadow-lg"
           >
             <Icons.Users />
             Back to Community Hub

@@ -529,7 +529,7 @@ export default function FlashcardsPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="animate-spin w-10 h-10 border-4 border-tribe-sage-500 border-t-transparent rounded-full" />
+          <div className="animate-spin w-10 h-10 border-4 border-[#8B7355] border-t-transparent rounded-full" />
           <p className="text-slate-500">Loading cards...</p>
         </div>
       </div>
@@ -544,8 +544,8 @@ export default function FlashcardsPage() {
         
         <main className="max-w-3xl mx-auto px-4 py-16 text-center">
           <div className="mb-8">
-            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center">
-              <svg className="w-12 h-12 text-tribe-sage-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#E8E0D5] to-[#D4C4B0] flex items-center justify-center">
+              <svg className="w-12 h-12 text-[#5B7B6D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
@@ -560,7 +560,7 @@ export default function FlashcardsPage() {
                 </p>
                 <button
                   onClick={clearFilters}
-                  className="px-6 py-3 bg-tribe-sage-600 text-white font-medium rounded-xl hover:bg-emerald-700 transition-colors"
+                  className="px-6 py-3 bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white font-medium rounded-xl hover:from-[#A89070] hover:to-[#8B7355] transition-all shadow-lg"
                 >
                   Clear Filters & Study All
                 </button>
@@ -589,7 +589,7 @@ export default function FlashcardsPage() {
                 </div>
                 <div className="w-px h-12 bg-slate-200" />
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-tribe-sage-600">{session.cardsCorrect}</p>
+                  <p className="text-3xl font-bold text-[#5B7B6D]">{session.cardsCorrect}</p>
                   <p className="text-sm text-slate-500">Correct</p>
                 </div>
                 <div className="w-px h-12 bg-slate-200" />
@@ -642,7 +642,7 @@ export default function FlashcardsPage() {
             {session && (
               <>
                 <div className="flex items-center gap-2 text-sm">
-                  <span className="text-tribe-sage-600 font-medium">{session.cardsCorrect}</span>
+                  <span className="text-[#5B7B6D] font-medium">{session.cardsCorrect}</span>
                   <span className="text-slate-400">correct</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
@@ -948,7 +948,7 @@ export default function FlashcardsPage() {
                           setCramRevealed(false);
                         }
                       }}
-                      className="px-8 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-medium rounded-xl hover:from-orange-600 hover:to-amber-600 transition-all shadow-lg"
+                      className="px-8 py-3 bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white font-medium rounded-xl hover:from-[#A89070] hover:to-[#8B7355] transition-all shadow-lg"
                     >
                       {cramIndex < cramCards.length - 1 ? 'Next Card' : 'Finish Cram'}
                     </button>

@@ -66,8 +66,8 @@ export default function PrivacyPage() {
 
             <section>
               <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">4. Data Storage</h2>
-              <div className="p-4 bg-tribe-sage-50 dark:bg-tribe-sage-900/20 border border-teal-200 dark:border-teal-800 rounded-xl">
-                <p className="text-teal-800 dark:text-tribe-sage-300">
+              <div className="p-4 bg-[#F5F0E8] dark:bg-[#5B7B6D]/20 border border-[#C4A77D] dark:border-[#5B7B6D] rounded-xl">
+                <p className="text-[#5B7B6D] dark:text-[#C4A77D]">
                   <strong>Local Storage:</strong> Much of your data (flashcards, study progress, preferences) is stored
                   locally on your device using browser storage. This means your study data stays on your device and
                   is not automatically uploaded to our servers.
@@ -120,7 +120,7 @@ export default function PrivacyPage() {
               </ul>
               <p className="mt-4 text-slate-600 dark:text-slate-300">
                 To exercise these rights, contact us at{' '}
-                <a href="mailto:privacy@tribewellmd.com" className="text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline">
+                <a href="mailto:privacy@tribewellmd.com" className="text-[#5B7B6D] dark:text-[#C4A77D] hover:underline">
                   privacy@tribewellmd.com
                 </a>
               </p>
@@ -173,13 +173,13 @@ export default function PrivacyPage() {
               <div className="mt-3 p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl">
                 <p className="text-slate-700 dark:text-slate-300">
                   <strong>Email:</strong>{' '}
-                  <a href="mailto:privacy@tribewellmd.com" className="text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline">
+                  <a href="mailto:privacy@tribewellmd.com" className="text-[#5B7B6D] dark:text-[#C4A77D] hover:underline">
                     privacy@tribewellmd.com
                   </a>
                 </p>
                 <p className="text-slate-700 dark:text-slate-300 mt-2">
                   <strong>General Inquiries:</strong>{' '}
-                  <a href="mailto:hello@tribewellmd.com" className="text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline">
+                  <a href="mailto:hello@tribewellmd.com" className="text-[#5B7B6D] dark:text-[#C4A77D] hover:underline">
                     hello@tribewellmd.com
                   </a>
                 </p>
@@ -190,7 +190,7 @@ export default function PrivacyPage() {
         </div>
 
         <div className="mt-8 flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
-          <Link href="/terms" className="hover:text-tribe-sage-600 dark:hover:text-tribe-sage-400">
+          <Link href="/terms" className="hover:text-[#5B7B6D] dark:hover:text-[#C4A77D]">
             View Terms of Service →
           </Link>
           <p>© {new Date().getFullYear()} TribeWellMD</p>

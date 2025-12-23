@@ -11,31 +11,31 @@ const coreValues = [
     number: '01',
     title: 'Evidence Over Opinion',
     description: 'Every feature is grounded in peer-reviewed research. We build on what science proves works.',
-    gradient: 'from-violet-500 to-purple-600',
+    gradient: 'from-[#5B7B6D] to-[#6B8B7D]',
   },
   {
     number: '02',
     title: 'Community First',
     description: 'We design for collective benefit. Individual success is a stepping stone to community thriving.',
-    gradient: 'from-tribe-sage-500 to-tribe-sage-600',
+    gradient: 'from-[#8B7355] to-[#A89070]',
   },
   {
     number: '03',
     title: 'Sustainable Growth',
     description: 'No shortcuts, no burnout culture. We optimize for long-term wellbeing, not short-term metrics.',
-    gradient: 'from-orange-500 to-amber-600',
+    gradient: 'from-[#7FA08F] to-[#5B7B6D]',
   },
   {
     number: '04',
     title: 'Radical Transparency',
     description: 'Users know exactly how points convert, where donations go, and how the platform works.',
-    gradient: 'from-cyan-500 to-blue-600',
+    gradient: 'from-[#6B8B7D] to-[#7FA08F]',
   },
   {
     number: '05',
     title: 'Purpose-Driven',
     description: 'Every action on the platform can create real-world impact. Progress becomes meaningful.',
-    gradient: 'from-rose-500 to-pink-600',
+    gradient: 'from-[#A89070] to-[#C4A77D]',
   },
 ];
 
@@ -144,7 +144,7 @@ export default function AboutPage() {
               TribeWellMD was founded by physicians who lived the paradox: training to heal others while watching themselves and colleagues struggle with burnout, isolation, and a system that treats wellness as an afterthought.
             </p>
 
-            <blockquote className="max-w-2xl mx-auto bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-slate-800 dark:to-slate-700 rounded-2xl p-6 border border-teal-100 dark:border-slate-600">
+            <blockquote className="max-w-2xl mx-auto bg-gradient-to-br from-[#F5F0E8] to-[#E8E0D5] dark:from-slate-800 dark:to-slate-700 rounded-2xl p-6 border border-[#D4C4B0] dark:border-slate-600">
               <p className="text-lg text-slate-700 dark:text-slate-200 italic mb-3">
                 &ldquo;We kept asking ourselves: why does becoming a doctor require sacrificing your own health? What if the same tools that help us learn could help us thrive?&rdquo;
               </p>
@@ -158,17 +158,17 @@ export default function AboutPage() {
         {/* Philosophy Quote */}
         <section className="bg-white dark:bg-slate-900" ref={philosophyRef}>
           <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 text-center transition-all duration-700 ${philosophyVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-teal-100 to-cyan-100 dark:from-teal-900/50 dark:to-cyan-900/50 flex items-center justify-center text-tribe-sage-600 dark:text-tribe-sage-400">
+            <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#E8E0D5] to-[#D4C4B0] dark:from-[#C4A77D]/20 dark:to-[#A89070]/20 flex items-center justify-center text-[#8B7355] dark:text-[#C4A77D]">
               <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
               </svg>
             </div>
             <blockquote className="text-2xl md:text-3xl font-serif text-slate-800 dark:text-slate-200 max-w-4xl mx-auto mb-6 leading-relaxed">
-              &ldquo;Most people believe <span className="text-tribe-sage-600 dark:text-tribe-sage-400 font-semibold">individualism</span> and{' '}
-              <span className="text-indigo-600 dark:text-indigo-400 font-semibold">community</span> are mutually exclusive.{' '}
+              &ldquo;Most people believe <span className="text-[#5B7B6D] dark:text-[#7FA08F] font-semibold">individualism</span> and{' '}
+              <span className="text-[#8B7355] dark:text-[#C4A77D] font-semibold">community</span> are mutually exclusive.{' '}
               <br className="hidden md:block" />
               Our mission is to show they are{' '}
-              <span className="bg-gradient-to-r from-tribe-sage-500 to-indigo-500 bg-clip-text text-transparent font-bold">
+              <span className="bg-gradient-to-r from-[#5B7B6D] to-[#C4A77D] bg-clip-text text-transparent font-bold">
                 mutually reinforcing
               </span>.&rdquo;
             </blockquote>
@@ -182,7 +182,7 @@ export default function AboutPage() {
         <section className="bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-700" ref={theoryRef}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
             <div className={`text-center mb-12 transition-all duration-700 ${theoryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <span className="text-sm font-semibold text-tribe-sage-600 dark:text-tribe-sage-400 uppercase tracking-wider">Evidence-Based Approach</span>
+              <span className="text-sm font-semibold text-[#8B7355] dark:text-[#C4A77D] uppercase tracking-wider">Evidence-Based Approach</span>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 mb-4">
                 Theory of Change
               </h2>
@@ -195,8 +195,8 @@ export default function AboutPage() {
             <div className={`bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-2xl p-8 md:p-10 transition-all duration-700 delay-200 ${theoryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <div className="grid md:grid-cols-5 gap-4 md:gap-6">
                 {/* Input */}
-                <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border-t-4 border-violet-500 shadow-lg">
-                  <span className="text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-wider">Inputs</span>
+                <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border-t-4 border-[#5B7B6D] shadow-lg">
+                  <span className="text-xs font-bold text-[#5B7B6D] dark:text-[#7FA08F] uppercase tracking-wider">Inputs</span>
                   <h4 className="font-bold text-slate-900 dark:text-white mt-2 mb-2">Platform & Community</h4>
                   <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                     <li>FSRS algorithm</li>
@@ -207,8 +207,8 @@ export default function AboutPage() {
                 </div>
 
                 {/* Activities */}
-                <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border-t-4 border-tribe-sage-500 shadow-lg">
-                  <span className="text-xs font-bold text-tribe-sage-600 dark:text-tribe-sage-400 uppercase tracking-wider">Activities</span>
+                <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border-t-4 border-[#C4A77D] shadow-lg">
+                  <span className="text-xs font-bold text-[#A89070] dark:text-[#C4A77D] uppercase tracking-wider">Activities</span>
                   <h4 className="font-bold text-slate-900 dark:text-white mt-2 mb-2">User Engagement</h4>
                   <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                     <li>Daily study sessions</li>
@@ -219,8 +219,8 @@ export default function AboutPage() {
                 </div>
 
                 {/* Outputs */}
-                <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border-t-4 border-orange-500 shadow-lg">
-                  <span className="text-xs font-bold text-orange-600 dark:text-orange-400 uppercase tracking-wider">Outputs</span>
+                <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border-t-4 border-[#8B4A3C] shadow-lg">
+                  <span className="text-xs font-bold text-[#8B4A3C] dark:text-[#C17C6B] uppercase tracking-wider">Outputs</span>
                   <h4 className="font-bold text-slate-900 dark:text-white mt-2 mb-2">Measurable Actions</h4>
                   <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                     <li>Cards reviewed</li>
@@ -231,8 +231,8 @@ export default function AboutPage() {
                 </div>
 
                 {/* Outcomes */}
-                <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border-t-4 border-cyan-500 shadow-lg">
-                  <span className="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider">Outcomes</span>
+                <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border-t-4 border-[#5D6B5E] shadow-lg">
+                  <span className="text-xs font-bold text-[#5D6B5E] dark:text-[#8FA090] uppercase tracking-wider">Outcomes</span>
                   <h4 className="font-bold text-slate-900 dark:text-white mt-2 mb-2">Individual Impact</h4>
                   <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                     <li>Better retention</li>
@@ -243,8 +243,8 @@ export default function AboutPage() {
                 </div>
 
                 {/* Impact */}
-                <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border-t-4 border-tribe-sage-500 shadow-lg">
-                  <span className="text-xs font-bold text-tribe-sage-600 dark:text-tribe-sage-400 uppercase tracking-wider">Impact</span>
+                <div className="bg-white dark:bg-slate-900 rounded-xl p-5 border-t-4 border-[#2D5A4A] shadow-lg">
+                  <span className="text-xs font-bold text-[#2D5A4A] dark:text-[#5B7B6D] uppercase tracking-wider">Impact</span>
                   <h4 className="font-bold text-slate-900 dark:text-white mt-2 mb-2">Systemic Change</h4>
                   <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                     <li>Healthier physicians</li>
@@ -259,7 +259,7 @@ export default function AboutPage() {
             {/* Research Citations */}
             <div className={`mt-8 grid md:grid-cols-3 gap-6 transition-all duration-700 delay-400 ${theoryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-6">
-                <div className="text-3xl font-bold text-violet-600 dark:text-violet-400 mb-2">2.5x</div>
+                <div className="text-3xl font-bold text-[#5B7B6D] dark:text-[#7FA08F] mb-2">2.5x</div>
                 <p className="text-slate-600 dark:text-slate-400 text-sm">
                   Spaced repetition improves long-term retention by 2.5x compared to massed practice
                 </p>
@@ -268,7 +268,7 @@ export default function AboutPage() {
                 </cite>
               </div>
               <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-6">
-                <div className="text-3xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400 mb-2">40%</div>
+                <div className="text-3xl font-bold text-[#C4A77D] dark:text-[#D4B48D] mb-2">40%</div>
                 <p className="text-slate-600 dark:text-slate-400 text-sm">
                   Social support reduces burnout symptoms by up to 40% in healthcare workers
                 </p>
@@ -277,7 +277,7 @@ export default function AboutPage() {
                 </cite>
               </div>
               <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-6">
-                <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">68%</div>
+                <div className="text-3xl font-bold text-[#8B4A3C] dark:text-[#C17C6B] mb-2">68%</div>
                 <p className="text-slate-600 dark:text-slate-400 text-sm">
                   Prosocial giving increases happiness and motivation more than self-focused rewards
                 </p>
@@ -293,7 +293,7 @@ export default function AboutPage() {
         <section className="bg-gradient-to-b from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 overflow-hidden" ref={valuesRef}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
             <div className={`text-center mb-12 transition-all duration-700 ${valuesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <span className="text-sm font-semibold text-tribe-sage-600 dark:text-tribe-sage-400 uppercase tracking-wider">Guiding Principles</span>
+              <span className="text-sm font-semibold text-[#8B7355] dark:text-[#C4A77D] uppercase tracking-wider">Guiding Principles</span>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 mb-4">
                 Core Values
               </h2>
@@ -349,7 +349,7 @@ export default function AboutPage() {
                       }`}
                     >
                       <div className={`bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 h-full transition-all duration-500 ${
-                        isActive ? 'p-6 md:p-8 shadow-xl ring-2 ring-tribe-sage-500/20' : 'p-4 md:p-5'
+                        isActive ? 'p-6 md:p-8 shadow-xl ring-2 ring-[#C4A77D]/30' : 'p-4 md:p-5'
                       }`}>
                         <div className={`rounded-xl bg-gradient-to-br ${value.gradient} flex items-center justify-center text-white font-bold transition-all duration-500 ${
                           isActive ? 'w-14 h-14 md:w-16 md:h-16 text-xl md:text-2xl mb-4 md:mb-6' : 'w-10 h-10 md:w-12 md:h-12 text-lg mb-3'
@@ -378,7 +378,7 @@ export default function AboutPage() {
                     onClick={() => goToCard(index)}
                     className={`transition-all duration-300 rounded-full ${
                       index === activeIndex
-                        ? 'w-8 h-2 bg-tribe-sage-500'
+                        ? 'w-8 h-2 bg-[#C4A77D]'
                         : 'w-2 h-2 bg-slate-300 dark:bg-slate-600 hover:bg-slate-400 dark:hover:bg-slate-500'
                     }`}
                     aria-label={`Go to value ${index + 1}`}
@@ -398,7 +398,7 @@ export default function AboutPage() {
         <section className="bg-gradient-to-b from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 border-y border-slate-200 dark:border-slate-700" ref={cycleRef}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className={`text-center mb-12 transition-all duration-700 ${cycleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <span className="text-sm font-semibold text-tribe-sage-600 dark:text-tribe-sage-400 uppercase tracking-wider">Our Philosophy</span>
+              <span className="text-sm font-semibold text-[#8B7355] dark:text-[#C4A77D] uppercase tracking-wider">Our Philosophy</span>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 mb-4">
                 The Virtuous Cycle
               </h2>
@@ -410,8 +410,8 @@ export default function AboutPage() {
             {/* Three Pillar Cards - Staggered reveal with pastel hover glow */}
             <div className="grid md:grid-cols-3 gap-6 md:gap-8 relative">
               {/* Card 1 - Sustained Behavior Change */}
-              <div className={`bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-violet-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-violet-100/50 dark:hover:shadow-violet-900/30 transition-all duration-500 ${cycleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: cycleVisible ? '200ms' : '0ms' }}>
-                <div className="w-12 h-12 mb-4 rounded-xl bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center text-violet-600 dark:text-violet-400">
+              <div className={`bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-[#5B7B6D] hover:scale-[1.02] hover:shadow-2xl hover:shadow-[#5B7B6D]/20 dark:hover:shadow-[#5B7B6D]/10 transition-all duration-500 ${cycleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: cycleVisible ? '200ms' : '0ms' }}>
+                <div className="w-12 h-12 mb-4 rounded-xl bg-[#E8F0ED] dark:bg-[#5B7B6D]/20 flex items-center justify-center text-[#5B7B6D] dark:text-[#7FA08F]">
                   <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
@@ -424,23 +424,23 @@ export default function AboutPage() {
                 </p>
                 <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-violet-500 rounded-full"></span>
+                    <span className="w-1.5 h-1.5 bg-[#5B7B6D] rounded-full"></span>
                     FSRS-powered spaced repetition
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-violet-500 rounded-full"></span>
+                    <span className="w-1.5 h-1.5 bg-[#5B7B6D] rounded-full"></span>
                     Wellness tracking & habits
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-violet-500 rounded-full"></span>
+                    <span className="w-1.5 h-1.5 bg-[#5B7B6D] rounded-full"></span>
                     Progress visualization
                   </li>
                 </ul>
               </div>
 
               {/* Card 2 - Guided Social Connection */}
-              <div className={`bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-tribe-sage-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-100/50 dark:hover:shadow-emerald-900/30 transition-all duration-500 ${cycleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: cycleVisible ? '350ms' : '0ms' }}>
-                <div className="w-12 h-12 mb-4 rounded-xl bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center text-tribe-sage-600 dark:text-tribe-sage-400">
+              <div className={`bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-[#C4A77D] hover:scale-[1.02] hover:shadow-2xl hover:shadow-[#C4A77D]/20 dark:hover:shadow-[#C4A77D]/10 transition-all duration-500 ${cycleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: cycleVisible ? '350ms' : '0ms' }}>
+                <div className="w-12 h-12 mb-4 rounded-xl bg-[#F5F0E8] dark:bg-[#C4A77D]/20 flex items-center justify-center text-[#A89070] dark:text-[#C4A77D]">
                   <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                   </svg>
@@ -451,23 +451,23 @@ export default function AboutPage() {
                 </p>
                 <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-tribe-sage-500 rounded-full"></span>
+                    <span className="w-1.5 h-1.5 bg-[#C4A77D] rounded-full"></span>
                     Mentorship matching
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-tribe-sage-500 rounded-full"></span>
+                    <span className="w-1.5 h-1.5 bg-[#C4A77D] rounded-full"></span>
                     Study groups & tribes
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-tribe-sage-500 rounded-full"></span>
+                    <span className="w-1.5 h-1.5 bg-[#C4A77D] rounded-full"></span>
                     Shared accountability
                   </li>
                 </ul>
               </div>
 
               {/* Card 3 - Altruistic Contributions */}
-              <div className={`bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-orange-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-orange-100/50 dark:hover:shadow-orange-900/30 transition-all duration-500 ${cycleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: cycleVisible ? '500ms' : '0ms' }}>
-                <div className="w-12 h-12 mb-4 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
+              <div className={`bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-xl border-t-4 border-[#8B4A3C] hover:scale-[1.02] hover:shadow-2xl hover:shadow-[#8B4A3C]/20 dark:hover:shadow-[#8B4A3C]/10 transition-all duration-500 ${cycleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: cycleVisible ? '500ms' : '0ms' }}>
+                <div className="w-12 h-12 mb-4 rounded-xl bg-[#F5E8E5] dark:bg-[#8B4A3C]/20 flex items-center justify-center text-[#8B4A3C] dark:text-[#C17C6B]">
                   <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                   </svg>
@@ -478,15 +478,15 @@ export default function AboutPage() {
                 </p>
                 <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
+                    <span className="w-1.5 h-1.5 bg-[#8B4A3C] rounded-full"></span>
                     Progress becomes donations
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
+                    <span className="w-1.5 h-1.5 bg-[#8B4A3C] rounded-full"></span>
                     Community impact tracking
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
+                    <span className="w-1.5 h-1.5 bg-[#8B4A3C] rounded-full"></span>
                     Purpose-driven motivation
                   </li>
                 </ul>
@@ -494,7 +494,7 @@ export default function AboutPage() {
             </div>
 
             {/* The Cycle Explanation */}
-            <div className={`mt-10 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 rounded-2xl p-6 md:p-8 text-white transition-all duration-700 ${cycleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: cycleVisible ? '650ms' : '0ms' }}>
+            <div className={`mt-10 bg-gradient-to-r from-[#5B7B6D] to-[#2D5A4A] rounded-2xl p-6 md:p-8 text-white transition-all duration-700 ${cycleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: cycleVisible ? '650ms' : '0ms' }}>
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
                   <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -518,8 +518,8 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             {/* Decorative elements */}
             <div className="relative inline-block mb-8">
-              <div className="absolute -inset-4 bg-gradient-to-r from-tribe-sage-500/20 via-cyan-500/20 to-tribe-sage-500/20 blur-2xl rounded-full" />
-              <div className="relative w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-tribe-sage-500 to-cyan-600 flex items-center justify-center shadow-xl shadow-tribe-sage-500/30">
+              <div className="absolute -inset-4 bg-gradient-to-r from-[#5B7B6D]/20 via-[#C4A77D]/20 to-[#5B7B6D]/20 blur-2xl rounded-full" />
+              <div className="relative w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-[#5B7B6D] to-[#2D5A4A] flex items-center justify-center shadow-xl shadow-[#5B7B6D]/30">
                 <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                 </svg>
@@ -536,7 +536,7 @@ export default function AboutPage() {
             {/* Main CTA Button */}
             <Link
               href="/impact/local"
-              className="group inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-tribe-sage-500 via-cyan-500 to-teal-500 hover:from-teal-600 hover:via-cyan-600 hover:to-tribe-sage-600 text-white font-bold text-lg rounded-2xl shadow-xl shadow-tribe-sage-500/30 hover:shadow-tribe-sage-500/50 hover:scale-105 transition-all duration-300"
+              className="group inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-[#5B7B6D] via-[#4A6B5D] to-[#2D5A4A] hover:from-[#4A6B5D] hover:via-[#3D5E4D] hover:to-[#234A3A] text-white font-bold text-lg rounded-2xl shadow-xl shadow-[#5B7B6D]/30 hover:shadow-[#5B7B6D]/50 hover:scale-105 transition-all duration-300"
             >
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -565,7 +565,7 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
             <div className={`grid md:grid-cols-2 gap-12 items-center transition-all duration-700 ${impactVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <div>
-                <span className="text-sm font-semibold text-tribe-sage-600 dark:text-tribe-sage-400 uppercase tracking-wider">Our Commitment</span>
+                <span className="text-sm font-semibold text-[#8B7355] dark:text-[#C4A77D] uppercase tracking-wider">Our Commitment</span>
                 <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 mb-6">
                   Impact Over Profit
                 </h2>
@@ -574,7 +574,7 @@ export default function AboutPage() {
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-lg bg-tribe-sage-100 dark:bg-tribe-sage-900/50 flex items-center justify-center text-tribe-sage-600 dark:text-tribe-sage-400 flex-shrink-0 mt-0.5">
+                    <div className="w-8 h-8 rounded-lg bg-[#E8F0ED] dark:bg-[#5B7B6D]/20 flex items-center justify-center text-[#5B7B6D] dark:text-[#7FA08F] flex-shrink-0 mt-0.5">
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>
@@ -585,7 +585,7 @@ export default function AboutPage() {
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-lg bg-tribe-sage-100 dark:bg-tribe-sage-900/50 flex items-center justify-center text-tribe-sage-600 dark:text-tribe-sage-400 flex-shrink-0 mt-0.5">
+                    <div className="w-8 h-8 rounded-lg bg-[#E8F0ED] dark:bg-[#5B7B6D]/20 flex items-center justify-center text-[#5B7B6D] dark:text-[#7FA08F] flex-shrink-0 mt-0.5">
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>
@@ -596,7 +596,7 @@ export default function AboutPage() {
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-lg bg-tribe-sage-100 dark:bg-tribe-sage-900/50 flex items-center justify-center text-tribe-sage-600 dark:text-tribe-sage-400 flex-shrink-0 mt-0.5">
+                    <div className="w-8 h-8 rounded-lg bg-[#E8F0ED] dark:bg-[#5B7B6D]/20 flex items-center justify-center text-[#5B7B6D] dark:text-[#7FA08F] flex-shrink-0 mt-0.5">
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>
@@ -610,27 +610,27 @@ export default function AboutPage() {
               </div>
 
               {/* Impact Stats */}
-              <div className="bg-gradient-to-br from-tribe-sage-500 to-cyan-600 rounded-2xl p-8 text-white">
+              <div className="bg-gradient-to-br from-[#5B7B6D] to-[#2D5A4A] rounded-2xl p-8 text-white">
                 <h3 className="text-xl font-bold mb-6">Our Vision for Impact</h3>
                 <div className="grid grid-cols-2 gap-6">
                   <div className="bg-white/10 rounded-xl p-4 text-center">
                     <div className="text-3xl font-bold mb-1">1M+</div>
-                    <div className="text-tribe-sage-100 text-sm">Medical learners served</div>
+                    <div className="text-[#D4C4B0] text-sm">Medical learners served</div>
                   </div>
                   <div className="bg-white/10 rounded-xl p-4 text-center">
                     <div className="text-3xl font-bold mb-1">$10M+</div>
-                    <div className="text-tribe-sage-100 text-sm">Charitable donations enabled</div>
+                    <div className="text-[#D4C4B0] text-sm">Charitable donations enabled</div>
                   </div>
                   <div className="bg-white/10 rounded-xl p-4 text-center">
                     <div className="text-3xl font-bold mb-1">50%</div>
-                    <div className="text-tribe-sage-100 text-sm">Reduction in reported burnout</div>
+                    <div className="text-[#D4C4B0] text-sm">Reduction in reported burnout</div>
                   </div>
                   <div className="bg-white/10 rounded-xl p-4 text-center">
                     <div className="text-3xl font-bold mb-1">100K+</div>
-                    <div className="text-tribe-sage-100 text-sm">Meaningful peer connections</div>
+                    <div className="text-[#D4C4B0] text-sm">Meaningful peer connections</div>
                   </div>
                 </div>
-                <p className="mt-6 text-tribe-sage-100 text-sm italic text-center">
+                <p className="mt-6 text-[#D4C4B0] text-sm italic text-center">
                   These are the goals we are working toward. Join us in making them reality.
                 </p>
               </div>
@@ -651,7 +651,7 @@ export default function AboutPage() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
                   href="/register"
-                  className="px-8 py-4 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 text-white font-bold rounded-xl hover:from-teal-600 hover:to-cyan-600 transition-all shadow-lg hover:scale-105"
+                  className="px-8 py-4 bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white font-bold rounded-xl hover:from-[#B89B78] hover:to-[#9A8565] transition-all shadow-lg hover:scale-105"
                 >
                   Create Your Account
                 </Link>

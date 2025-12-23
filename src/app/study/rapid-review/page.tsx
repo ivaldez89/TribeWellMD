@@ -362,12 +362,12 @@ export default function RapidReviewPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+      <div className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900">
         <Header />
         <div className="flex items-center justify-center" style={{ minHeight: 'calc(100vh - 64px)' }}>
           <div className="text-center">
-            <div className="w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-            <p className="text-slate-600 dark:text-slate-400">Loading rapid review...</p>
+            <div className="w-12 h-12 border-4 border-[#5B7B6D] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+            <p className="text-[#6B5344]/80 dark:text-slate-400">Loading rapid review...</p>
           </div>
         </div>
       </div>
@@ -376,18 +376,18 @@ export default function RapidReviewPage() {
 
   if (reviewCards.length === 0) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+      <div className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900">
         <Header />
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center py-16">
-            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 flex items-center justify-center">
-              <svg className="w-12 h-12 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#5B7B6D]/20 to-[#3D5A4C]/20 dark:from-[#5B7B6D]/30 dark:to-[#3D5A4C]/30 flex items-center justify-center">
+              <svg className="w-12 h-12 text-[#5B7B6D] dark:text-[#6B8B7D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">No Cards Available</h1>
-            <p className="text-lg text-slate-600 dark:text-slate-400 mb-8">Import some cards first to use Rapid Review mode.</p>
-            <Link href="/study" className="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-xl transition-colors">
+            <h1 className="text-3xl font-bold text-[#3D5A4C] dark:text-white mb-4">No Cards Available</h1>
+            <p className="text-lg text-[#6B5344]/80 dark:text-slate-400 mb-8">Import some cards first to use Rapid Review mode.</p>
+            <Link href="/study" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#5B7B6D] to-[#6B8B7D] hover:from-[#4A6B5D] hover:to-[#5B7B6D] text-white font-medium rounded-xl transition-colors shadow-lg shadow-[#5B7B6D]/20">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
@@ -400,30 +400,36 @@ export default function RapidReviewPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 relative">
+    <div className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900 relative">
       <Header />
 
-      <main className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Subtle organic pattern overlay on sides */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+        <div className="absolute top-0 left-0 w-1/4 h-full bg-gradient-to-r from-[#D4C4B0]/30 to-transparent" />
+        <div className="absolute top-0 right-0 w-1/4 h-full bg-gradient-to-l from-[#D4C4B0]/30 to-transparent" />
+      </div>
+
+      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Banner */}
         <section className="mb-8">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-500 via-orange-500 to-red-500 p-8 md:p-10 shadow-2xl">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#5B7B6D] via-[#6B8B7D] to-[#7FA08F] p-8 md:p-10 shadow-2xl shadow-[#3D5A4C]/20">
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
               <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
-              <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-yellow-300/20 rounded-full blur-2xl" />
+              <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-[#F5F0E8]/20 rounded-full blur-2xl" />
             </div>
 
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
               {/* Left side - Title & Stats */}
               <div className="text-center md:text-left">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/20 backdrop-blur rounded-full text-white/90 text-sm font-medium mb-4">
-                  <span className="w-2 h-2 bg-yellow-300 rounded-full animate-pulse" />
+                  <span className="w-2 h-2 bg-[#F5F0E8] rounded-full animate-pulse" />
                   <span>Speed through your cards</span>
                 </div>
 
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 leading-tight">
-                  <span className="text-yellow-200">Rapid</span> Review
+                  <span className="text-[#F5F0E8]">Rapid</span> Review
                 </h1>
 
                 <p className="text-white/80 text-lg max-w-md mb-6">
@@ -445,9 +451,9 @@ export default function RapidReviewPage() {
                     <p className="text-white/60 text-xs">All Time</p>
                   </div>
                   {rapidStats.streak > 1 && (
-                    <div className="text-center px-4 py-2 bg-orange-600/30 backdrop-blur rounded-xl border border-orange-400/50">
-                      <p className="text-2xl md:text-3xl font-bold text-orange-200">{rapidStats.streak}</p>
-                      <p className="text-orange-200/60 text-xs">Day Streak</p>
+                    <div className="text-center px-4 py-2 bg-[#3D5A4C]/30 backdrop-blur rounded-xl border border-[#6B8B7D]/50">
+                      <p className="text-2xl md:text-3xl font-bold text-[#F5EFE6]">{rapidStats.streak}</p>
+                      <p className="text-[#F5EFE6]/60 text-xs">Day Streak</p>
                     </div>
                   )}
                 </div>
@@ -467,26 +473,26 @@ export default function RapidReviewPage() {
         </section>
 
         {/* Text-to-Speech Control Bar - Always visible, collapsible */}
-        <div className="mb-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+        <div className="mb-6 bg-white dark:bg-slate-800 rounded-2xl border border-[#D4C4B0]/50 dark:border-slate-700 shadow-sm shadow-[#3D5A4C]/5 overflow-hidden">
           {/* Header - always visible */}
           <button
             onClick={() => setShowSettings(!showSettings)}
-            className="w-full px-4 py-3 flex items-center justify-between bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 hover:from-amber-100 hover:to-orange-100 dark:hover:from-amber-900/30 dark:hover:to-orange-900/30 transition-colors"
+            className="w-full px-4 py-3 flex items-center justify-between bg-gradient-to-r from-[#F5EFE6] to-[#E8DFD0] dark:from-[#5B7B6D]/20 dark:to-[#3D5A4C]/20 hover:from-[#E8DFD0] hover:to-[#D4C4B0] dark:hover:from-[#5B7B6D]/30 dark:hover:to-[#3D5A4C]/30 transition-colors"
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-lg shadow-amber-500/25">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#5B7B6D] to-[#6B8B7D] flex items-center justify-center text-white shadow-lg shadow-[#5B7B6D]/25">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                 </svg>
               </div>
               <div className="text-left">
-                <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                <h3 className="font-semibold text-[#3D5A4C] dark:text-white flex items-center gap-2">
                   Text-to-Speech Controls
-                  <span className="px-2 py-0.5 text-xs bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 rounded-full">
+                  <span className="px-2 py-0.5 text-xs bg-[#5B7B6D]/10 dark:bg-[#5B7B6D]/30 text-[#5B7B6D] dark:text-[#E8E0D5] rounded-full">
                     {voices[selectedVoiceIndex]?.name?.split(' ')[0] || 'Default'} @ {speechRate}x
                   </span>
                 </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
+                <p className="text-xs text-[#6B5344]/70 dark:text-slate-400">
                   Listen and learn hands-free • {showSettings ? 'Click to minimize' : 'Click to expand settings'}
                 </p>
               </div>
@@ -501,7 +507,7 @@ export default function RapidReviewPage() {
                 className={`p-2 rounded-lg transition-colors ${
                   isPlaying
                     ? 'bg-red-500 text-white'
-                    : 'bg-amber-500 text-white hover:bg-amber-600'
+                    : 'bg-[#5B7B6D] text-white hover:bg-[#4A6B5D]'
                 }`}
               >
                 {isPlaying ? (
@@ -528,13 +534,13 @@ export default function RapidReviewPage() {
 
           {/* Expanded Settings */}
           {showSettings && (
-            <div className="p-4 border-t border-slate-200 dark:border-slate-700">
+            <div className="p-4 border-t border-[#D4C4B0]/50 dark:border-slate-700">
               <div className="space-y-4">
                 {/* Voice Selection Row */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {/* Gender Filter */}
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-2">Voice Type</label>
+                    <label className="block text-xs font-medium text-[#6B5344]/80 dark:text-slate-400 mb-2">Voice Type</label>
                     <div className="flex gap-1">
                       {(['all', 'female', 'male'] as const).map((filter) => (
                         <button
@@ -542,8 +548,8 @@ export default function RapidReviewPage() {
                           onClick={() => setVoiceFilter(filter)}
                           className={`flex-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors capitalize flex items-center justify-center gap-1 ${
                             voiceFilter === filter
-                              ? 'bg-amber-500 text-white'
-                              : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600'
+                              ? 'bg-[#5B7B6D] text-white'
+                              : 'bg-[#F5EFE6] dark:bg-slate-700 text-[#6B5344] dark:text-slate-300 hover:bg-[#E8DFD0] dark:hover:bg-slate-600'
                           }`}
                         >
                           <span className="w-4 h-4">{filter === 'all' ? <Icons.Group /> : <Icons.Person />}</span>
@@ -555,14 +561,14 @@ export default function RapidReviewPage() {
 
                   {/* Voice Dropdown */}
                   <div className="md:col-span-2">
-                    <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-2">
+                    <label className="block text-xs font-medium text-[#6B5344]/80 dark:text-slate-400 mb-2">
                       Select Voice ({filteredVoices.length} available)
                     </label>
                     <div className="flex gap-2">
                       <select
                         value={selectedVoiceIndex}
                         onChange={(e) => setSelectedVoiceIndex(parseInt(e.target.value))}
-                        className="flex-1 px-3 py-2 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg border border-slate-200 dark:border-slate-600 focus:border-amber-500 focus:outline-none text-sm"
+                        className="flex-1 px-3 py-2 bg-[#F5EFE6] dark:bg-slate-700 text-[#3D5A4C] dark:text-white rounded-lg border border-[#D4C4B0]/50 dark:border-slate-600 focus:border-[#5B7B6D] focus:ring-[#5B7B6D] focus:outline-none text-sm"
                       >
                         {filteredVoices.map((voice, idx) => {
                           const originalIdx = voices.indexOf(voice);
@@ -577,7 +583,7 @@ export default function RapidReviewPage() {
                       </select>
                       <button
                         onClick={testVoice}
-                        className="px-4 py-2 bg-slate-100 dark:bg-slate-600 text-slate-700 dark:text-white rounded-lg hover:bg-slate-200 dark:hover:bg-slate-500 transition-colors text-sm font-medium"
+                        className="px-4 py-2 bg-[#F5EFE6] dark:bg-slate-600 text-[#6B5344] dark:text-white rounded-lg hover:bg-[#E8DFD0] dark:hover:bg-slate-500 transition-colors text-sm font-medium"
                       >
                         Test
                       </button>
@@ -589,11 +595,11 @@ export default function RapidReviewPage() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {/* Speech Speed - Dropdown */}
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-2">Speech Speed</label>
+                    <label className="block text-xs font-medium text-[#6B5344]/80 dark:text-slate-400 mb-2">Speech Speed</label>
                     <select
                       value={speechRate}
                       onChange={(e) => setSpeechRate(parseFloat(e.target.value))}
-                      className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg border border-slate-200 dark:border-slate-600 focus:border-amber-500 focus:outline-none text-sm"
+                      className="w-full px-3 py-2 bg-[#F5EFE6] dark:bg-slate-700 text-[#3D5A4C] dark:text-white rounded-lg border border-[#D4C4B0]/50 dark:border-slate-600 focus:border-[#5B7B6D] focus:ring-[#5B7B6D] focus:outline-none text-sm"
                     >
                       {speedOptions.map((speed) => (
                         <option key={speed} value={speed}>
@@ -605,13 +611,13 @@ export default function RapidReviewPage() {
 
                   {/* Auto Advance */}
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-2">Auto-Advance</label>
+                    <label className="block text-xs font-medium text-[#6B5344]/80 dark:text-slate-400 mb-2">Auto-Advance</label>
                     <button
                       onClick={() => setAutoAdvance(!autoAdvance)}
                       className={`w-full px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
                         autoAdvance
-                          ? 'bg-amber-500 text-white'
-                          : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600'
+                          ? 'bg-[#5B7B6D] text-white'
+                          : 'bg-[#F5EFE6] dark:bg-slate-700 text-[#6B5344] dark:text-slate-300 hover:bg-[#E8DFD0] dark:hover:bg-slate-600'
                       }`}
                     >
                       {autoAdvance ? '✓ Auto-advance On' : 'Auto-advance Off'}
@@ -620,7 +626,7 @@ export default function RapidReviewPage() {
 
                   {/* Delay */}
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-2">Pause After Answer</label>
+                    <label className="block text-xs font-medium text-[#6B5344]/80 dark:text-slate-400 mb-2">Pause After Answer</label>
                     <div className="flex items-center gap-3">
                       <input
                         type="range"
@@ -629,15 +635,15 @@ export default function RapidReviewPage() {
                         step="1"
                         value={autoAdvanceDelay}
                         onChange={(e) => setAutoAdvanceDelay(parseInt(e.target.value))}
-                        className="flex-1 h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                        className="flex-1 h-2 bg-[#E8DFD0] dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-[#5B7B6D]"
                       />
-                      <span className="text-sm text-slate-900 dark:text-white font-medium w-12 text-right">{autoAdvanceDelay}s</span>
+                      <span className="text-sm text-[#3D5A4C] dark:text-white font-medium w-12 text-right">{autoAdvanceDelay}s</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Voice tip */}
-                <p className="text-xs text-slate-500 dark:text-slate-400 flex items-start gap-1 pt-2 border-t border-slate-100 dark:border-slate-700">
+                <p className="text-xs text-[#6B5344]/70 dark:text-slate-400 flex items-start gap-1 pt-2 border-t border-[#D4C4B0]/30 dark:border-slate-700">
                   <span className="w-4 h-4 flex-shrink-0"><Icons.Lightbulb /></span>
                   <span>Tip: On Mac, go to System Settings → Accessibility → Spoken Content → System Voice → Manage Voices to download premium voices like "Siri Voice 1" for the most natural sound.</span>
                 </p>
@@ -647,19 +653,19 @@ export default function RapidReviewPage() {
         </div>
 
         {/* Progress Bar */}
-        <div className="mb-6 h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+        <div className="mb-6 h-2 bg-[#E8DFD0] dark:bg-slate-700 rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all duration-300"
+            className="h-full bg-gradient-to-r from-[#5B7B6D] to-[#7FA08F] transition-all duration-300"
             style={{ width: `${((currentIndex + 1) / reviewCards.length) * 100}%` }}
           />
         </div>
         {/* Card Counter */}
         <div className="text-center mb-6">
-          <span className="text-slate-500 dark:text-slate-400 text-sm">
+          <span className="text-[#6B5344]/70 dark:text-slate-400 text-sm">
             Card {currentIndex + 1} of {reviewCards.length}
           </span>
           {currentCard && isRevealed && (
-            <span className="ml-3 px-2 py-0.5 text-xs bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded">
+            <span className="ml-3 px-2 py-0.5 text-xs bg-[#5B7B6D]/10 dark:bg-[#5B7B6D]/30 text-[#5B7B6D] dark:text-[#E8E0D5] rounded">
               {currentCard.metadata.system}
             </span>
           )}
@@ -667,21 +673,21 @@ export default function RapidReviewPage() {
 
         {/* Card */}
         {currentCard && (
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-xl">
+          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-[#D4C4B0]/50 dark:border-slate-700 overflow-hidden shadow-xl shadow-[#3D5A4C]/10">
             {/* Question */}
             <div className="p-6 md:p-8">
               <div className="flex items-center gap-3 mb-4">
-                <span className="px-3 py-1 text-xs font-bold bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 rounded-full">
+                <span className="px-3 py-1 text-xs font-bold bg-[#5B7B6D]/10 dark:bg-[#5B7B6D]/30 text-[#5B7B6D] dark:text-[#E8E0D5] rounded-full">
                   IF YOU SEE
                 </span>
                 {isSpeaking && !isRevealed && (
-                  <span className="flex items-center gap-1.5 text-xs text-amber-600 dark:text-amber-400">
-                    <span className="w-2 h-2 bg-amber-500 rounded-full animate-pulse" />
+                  <span className="flex items-center gap-1.5 text-xs text-[#5B7B6D] dark:text-[#6B8B7D]">
+                    <span className="w-2 h-2 bg-[#5B7B6D] rounded-full animate-pulse" />
                     Speaking...
                   </span>
                 )}
               </div>
-              <p className="text-xl md:text-2xl text-slate-900 dark:text-white leading-relaxed">
+              <p className="text-xl md:text-2xl text-[#3D5A4C] dark:text-white leading-relaxed">
                 {currentCard.content.front}
               </p>
             </div>
@@ -691,33 +697,33 @@ export default function RapidReviewPage() {
               <div className="px-6 md:px-8 pb-6 md:pb-8">
                 <button
                   onClick={handleReveal}
-                  className="w-full py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/25"
+                  className="w-full py-4 bg-gradient-to-r from-[#5B7B6D] to-[#6B8B7D] hover:from-[#4A6B5D] hover:to-[#5B7B6D] text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#5B7B6D]/25"
                 >
                   <span>Reveal Answer</span>
                   <kbd className="px-2 py-0.5 bg-white/20 rounded text-xs">Space</kbd>
                 </button>
               </div>
             ) : (
-              <div className="border-t border-slate-200 dark:border-slate-700">
-                <div className="p-6 md:p-8 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20">
+              <div className="border-t border-[#D4C4B0]/50 dark:border-slate-700">
+                <div className="p-6 md:p-8 bg-gradient-to-br from-[#F5EFE6] to-[#E8DFD0] dark:from-[#5B7B6D]/20 dark:to-[#3D5A4C]/20">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="px-3 py-1 text-xs font-bold bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-400 rounded-full">
+                    <span className="px-3 py-1 text-xs font-bold bg-[#5B7B6D]/20 dark:bg-[#5B7B6D]/30 text-[#3D5A4C] dark:text-[#D4C4B0] rounded-full">
                       THEN THINK
                     </span>
                     {isSpeaking && isRevealed && (
-                      <span className="flex items-center gap-1.5 text-xs text-tribe-sage-600 dark:text-tribe-sage-400">
-                        <span className="w-2 h-2 bg-tribe-sage-500 rounded-full animate-pulse" />
+                      <span className="flex items-center gap-1.5 text-xs text-[#5B7B6D] dark:text-[#6B8B7D]">
+                        <span className="w-2 h-2 bg-[#5B7B6D] rounded-full animate-pulse" />
                         Speaking...
                       </span>
                     )}
                   </div>
-                  <p className="text-xl md:text-2xl text-emerald-900 dark:text-tribe-sage-100 leading-relaxed whitespace-pre-wrap">
+                  <p className="text-xl md:text-2xl text-[#3D5A4C] dark:text-[#F5EFE6] leading-relaxed whitespace-pre-wrap">
                     {currentCard.content.back}
                   </p>
 
                   {currentCard.content.explanation && (
-                    <div className="mt-6 p-4 bg-white/60 dark:bg-slate-800/50 rounded-xl border border-emerald-200 dark:border-emerald-800">
-                      <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed flex items-start gap-2">
+                    <div className="mt-6 p-4 bg-white/60 dark:bg-slate-800/50 rounded-xl border border-[#D4C4B0]/50 dark:border-[#5B7B6D]">
+                      <p className="text-sm text-[#6B5344] dark:text-slate-300 leading-relaxed flex items-start gap-2">
                         <span className="w-4 h-4 flex-shrink-0"><Icons.Lightbulb /></span>
                         <span>{currentCard.content.explanation}</span>
                       </p>
@@ -735,7 +741,7 @@ export default function RapidReviewPage() {
           <button
             onClick={prevCard}
             disabled={currentIndex === 0}
-            className="p-3 rounded-full bg-white dark:bg-slate-800 text-slate-700 dark:text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700 shadow-sm"
+            className="p-3 rounded-full bg-white dark:bg-slate-800 text-[#6B5344] dark:text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#F5EFE6] dark:hover:bg-slate-700 transition-colors border border-[#D4C4B0]/50 dark:border-slate-700 shadow-sm"
             title="Previous card"
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -748,8 +754,8 @@ export default function RapidReviewPage() {
             onClick={speakCurrent}
             className={`p-3 rounded-full transition-colors border shadow-sm ${
               isSpeaking
-                ? 'bg-amber-500 text-white border-amber-400'
-                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-700 border-slate-200 dark:border-slate-700'
+                ? 'bg-[#5B7B6D] text-white border-[#4A6B5D]'
+                : 'bg-white dark:bg-slate-800 text-[#6B5344] dark:text-white hover:bg-[#F5EFE6] dark:hover:bg-slate-700 border-[#D4C4B0]/50 dark:border-slate-700'
             }`}
             title="Read aloud"
           >
@@ -764,7 +770,7 @@ export default function RapidReviewPage() {
             className={`p-4 rounded-full transition-colors shadow-lg ${
               isPlaying
                 ? 'bg-red-500 text-white shadow-red-500/30'
-                : 'bg-gradient-to-r from-amber-500 to-orange-500 text-white hover:from-amber-600 hover:to-orange-600 shadow-amber-500/30'
+                : 'bg-gradient-to-r from-[#5B7B6D] to-[#6B8B7D] text-white hover:from-[#4A6B5D] hover:to-[#5B7B6D] shadow-[#5B7B6D]/30'
             }`}
             title={isPlaying ? 'Pause auto-play' : 'Start auto-play'}
           >
@@ -796,7 +802,7 @@ export default function RapidReviewPage() {
           <button
             onClick={nextCard}
             disabled={currentIndex === reviewCards.length - 1}
-            className="p-3 rounded-full bg-white dark:bg-slate-800 text-slate-700 dark:text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700 shadow-sm"
+            className="p-3 rounded-full bg-white dark:bg-slate-800 text-[#6B5344] dark:text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#F5EFE6] dark:hover:bg-slate-700 transition-colors border border-[#D4C4B0]/50 dark:border-slate-700 shadow-sm"
             title="Next card"
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -808,7 +814,7 @@ export default function RapidReviewPage() {
         {/* Current voice indicator */}
         {voices[selectedVoiceIndex] && (
           <div className="mt-4 text-center">
-            <span className="text-xs text-slate-500 dark:text-slate-400 flex items-center justify-center gap-1">
+            <span className="text-xs text-[#6B5344]/70 dark:text-slate-400 flex items-center justify-center gap-1">
               <span className="w-4 h-4"><Icons.Headphones /></span>
               {voices[selectedVoiceIndex].name} @ {speechRate}x speed
             </span>
@@ -816,10 +822,10 @@ export default function RapidReviewPage() {
         )}
 
         {/* Keyboard shortcuts */}
-        <div className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400 space-x-3">
-          <span><kbd className="px-1.5 py-0.5 bg-slate-200 dark:bg-slate-700 rounded text-xs border border-slate-300 dark:border-slate-600">Space</kbd> reveal/next</span>
-          <span><kbd className="px-1.5 py-0.5 bg-slate-200 dark:bg-slate-700 rounded text-xs border border-slate-300 dark:border-slate-600">←</kbd><kbd className="px-1.5 py-0.5 bg-slate-200 dark:bg-slate-700 rounded text-xs border border-slate-300 dark:border-slate-600 ml-0.5">→</kbd> navigate</span>
-          <span><kbd className="px-1.5 py-0.5 bg-slate-200 dark:bg-slate-700 rounded text-xs border border-slate-300 dark:border-slate-600">P</kbd> play/pause</span>
+        <div className="mt-6 text-center text-sm text-[#6B5344]/70 dark:text-slate-400 space-x-3">
+          <span><kbd className="px-1.5 py-0.5 bg-[#E8DFD0] dark:bg-slate-700 rounded text-xs border border-[#D4C4B0]/50 dark:border-slate-600">Space</kbd> reveal/next</span>
+          <span><kbd className="px-1.5 py-0.5 bg-[#E8DFD0] dark:bg-slate-700 rounded text-xs border border-[#D4C4B0]/50 dark:border-slate-600">←</kbd><kbd className="px-1.5 py-0.5 bg-[#E8DFD0] dark:bg-slate-700 rounded text-xs border border-[#D4C4B0]/50 dark:border-slate-600 ml-0.5">→</kbd> navigate</span>
+          <span><kbd className="px-1.5 py-0.5 bg-[#E8DFD0] dark:bg-slate-700 rounded text-xs border border-[#D4C4B0]/50 dark:border-slate-600">P</kbd> play/pause</span>
         </div>
       </main>
     </div>

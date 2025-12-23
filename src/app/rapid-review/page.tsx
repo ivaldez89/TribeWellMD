@@ -364,26 +364,26 @@ export default function RapidReviewPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-900">
-        <div className="animate-spin w-8 h-8 border-4 border-tribe-sage-500 border-t-transparent rounded-full" />
+      <div className="min-h-screen flex items-center justify-center bg-[#F5F0E8]">
+        <div className="animate-spin w-8 h-8 border-4 border-[#C4A77D] border-t-transparent rounded-full" />
       </div>
     );
   }
 
   if (reviewCards.length === 0) {
     return (
-      <div className="min-h-screen bg-slate-900">
+      <div className="min-h-screen bg-[#F5F0E8]">
         <main className="max-w-3xl mx-auto px-4 py-16 text-center">
-          <h1 className="text-2xl font-bold text-white mb-4">No Cards Available</h1>
-          <p className="text-slate-400 mb-6">Import some cards first to use Rapid Review mode.</p>
-          <Link href="/" className="text-tribe-sage-400 hover:underline">← Back to Dashboard</Link>
+          <h1 className="text-2xl font-bold text-[#8B7355] mb-4">No Cards Available</h1>
+          <p className="text-[#A89070] mb-6">Import some cards first to use Rapid Review mode.</p>
+          <Link href="/" className="text-[#C4A77D] hover:underline">← Back to Dashboard</Link>
         </main>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative">
+    <div className="min-h-screen bg-gradient-to-br from-[#E8E0D5] via-[#F5F0E8] to-[#E8E0D5] relative">
       {/* Background overlay - positioned below header/stats bar */}
       {selectedBackground !== 'none' && (
         <div
@@ -401,22 +401,22 @@ export default function RapidReviewPage() {
       )}
 
       {/* Header */}
-      <header className="border-b border-slate-700/50 bg-slate-900/50 backdrop-blur-sm">
+      <header className="border-b border-[#D4C4B0] bg-[#F5F0E8]/90 backdrop-blur-sm">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-white hover:text-tribe-sage-400 transition-colors">
+          <Link href="/" className="flex items-center gap-2 text-[#8B7355] hover:text-[#C4A77D] transition-colors">
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             <span className="text-sm">Back</span>
           </Link>
-          
-          <h1 className="text-lg font-semibold text-white flex items-center gap-2">
-            <svg className="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+          <h1 className="text-lg font-semibold text-[#8B7355] flex items-center gap-2">
+            <svg className="w-5 h-5 text-[#C4A77D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
             Rapid Review
           </h1>
-          
+
           <div className="flex items-center gap-2">
             {/* Background scene selector */}
             <BackgroundSelector
@@ -429,7 +429,7 @@ export default function RapidReviewPage() {
 
             <button
               onClick={() => setShowSettings(!showSettings)}
-              className={`p-2 rounded-lg transition-colors ${showSettings ? 'bg-slate-700 text-white' : 'text-slate-400 hover:text-white'}`}
+              className={`p-2 rounded-lg transition-colors ${showSettings ? 'bg-[#C4A77D] text-white' : 'text-[#A89070] hover:text-[#8B7355]'}`}
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -441,31 +441,31 @@ export default function RapidReviewPage() {
       </header>
 
       {/* Session Stats Bar */}
-      <div className="border-b border-slate-700/50 bg-amber-900/20">
+      <div className="border-b border-[#D4C4B0] bg-gradient-to-r from-[#5B7B6D]/10 to-[#C4A77D]/10">
         <div className="max-w-5xl mx-auto px-4 py-2 flex items-center justify-center gap-6 text-sm">
           <div className="flex items-center gap-2">
-            <span className="text-amber-400">⚡</span>
-            <span className="text-slate-300">This session:</span>
-            <span className="font-bold text-white">{cardsReviewedThisSession}</span>
+            <span className="text-[#C4A77D]">⚡</span>
+            <span className="text-[#A89070]">This session:</span>
+            <span className="font-bold text-[#8B7355]">{cardsReviewedThisSession}</span>
           </div>
-          <div className="w-px h-4 bg-slate-700" />
+          <div className="w-px h-4 bg-[#D4C4B0]" />
           <div className="flex items-center gap-2">
-            <span className="text-amber-400">📅</span>
-            <span className="text-slate-300">Today:</span>
-            <span className="font-bold text-white">{rapidStats.todayCardsReviewed}</span>
+            <span className="text-[#C4A77D]">📅</span>
+            <span className="text-[#A89070]">Today:</span>
+            <span className="font-bold text-[#8B7355]">{rapidStats.todayCardsReviewed}</span>
           </div>
-          <div className="w-px h-4 bg-slate-700" />
+          <div className="w-px h-4 bg-[#D4C4B0]" />
           <div className="flex items-center gap-2">
-            <span className="text-amber-400">🏆</span>
-            <span className="text-slate-300">Total:</span>
-            <span className="font-bold text-white">{rapidStats.totalCardsReviewed}</span>
+            <span className="text-[#C4A77D]">🏆</span>
+            <span className="text-[#A89070]">Total:</span>
+            <span className="font-bold text-[#8B7355]">{rapidStats.totalCardsReviewed}</span>
           </div>
           {rapidStats.streak > 1 && (
             <>
-              <div className="w-px h-4 bg-slate-700" />
+              <div className="w-px h-4 bg-[#D4C4B0]" />
               <div className="flex items-center gap-2">
-                <span className="text-orange-400">🔥</span>
-                <span className="font-bold text-orange-400">{rapidStats.streak} day streak!</span>
+                <span className="text-[#5B7B6D]">🔥</span>
+                <span className="font-bold text-[#5B7B6D]">{rapidStats.streak} day streak!</span>
               </div>
             </>
           )}
@@ -474,14 +474,14 @@ export default function RapidReviewPage() {
 
       {/* Settings Panel */}
       {showSettings && (
-        <div className="border-b border-slate-700/50 bg-slate-800/50 backdrop-blur-sm">
+        <div className="border-b border-[#D4C4B0] bg-[#E8E0D5]/90 backdrop-blur-sm">
           <div className="max-w-5xl mx-auto px-4 py-5">
             <div className="space-y-5">
               {/* Voice Selection Row */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Gender Filter */}
                 <div>
-                  <label className="block text-xs font-medium text-slate-400 mb-2">Voice Type</label>
+                  <label className="block text-xs font-medium text-[#A89070] mb-2">Voice Type</label>
                   <div className="flex gap-1">
                     {(['all', 'female', 'male'] as const).map((filter) => (
                       <button
@@ -489,8 +489,8 @@ export default function RapidReviewPage() {
                         onClick={() => setVoiceFilter(filter)}
                         className={`flex-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors capitalize ${
                           voiceFilter === filter
-                            ? 'bg-tribe-sage-600 text-white'
-                            : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                            ? 'bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white'
+                            : 'bg-[#D4C4B0] text-[#8B7355] hover:bg-[#C4A77D]/30'
                         }`}
                       >
                         {filter === 'all' ? '👥 All' : filter === 'female' ? '👩 Female' : '👨 Male'}
@@ -501,20 +501,20 @@ export default function RapidReviewPage() {
 
                 {/* Voice Dropdown */}
                 <div className="md:col-span-2">
-                  <label className="block text-xs font-medium text-slate-400 mb-2">
+                  <label className="block text-xs font-medium text-[#A89070] mb-2">
                     Select Voice ({filteredVoices.length} available)
                   </label>
                   <div className="flex gap-2">
                     <select
                       value={selectedVoiceIndex}
                       onChange={(e) => setSelectedVoiceIndex(parseInt(e.target.value))}
-                      className="flex-1 px-3 py-2 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-tribe-sage-500 focus:outline-none text-sm"
+                      className="flex-1 px-3 py-2 bg-white text-[#8B7355] rounded-lg border border-[#D4C4B0] focus:border-[#C4A77D] focus:ring-[#C4A77D] focus:outline-none text-sm"
                     >
                       {filteredVoices.map((voice, idx) => {
                         const originalIdx = voices.indexOf(voice);
                         const gender = getVoiceGender(voice);
                         const genderIcon = gender === 'female' ? '👩' : gender === 'male' ? '👨' : '🔊';
-                        const qualityBadge = voice.name.includes('Premium') || voice.name.includes('Enhanced') || voice.name.includes('Siri') 
+                        const qualityBadge = voice.name.includes('Premium') || voice.name.includes('Enhanced') || voice.name.includes('Siri')
                           ? ' ⭐' : '';
                         return (
                           <option key={originalIdx} value={originalIdx}>
@@ -525,7 +525,7 @@ export default function RapidReviewPage() {
                     </select>
                     <button
                       onClick={testVoice}
-                      className="px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-500 transition-colors text-sm font-medium"
+                      className="px-4 py-2 bg-[#A89070] text-white rounded-lg hover:bg-[#8B7355] transition-colors text-sm font-medium"
                     >
                       Test
                     </button>
@@ -537,11 +537,11 @@ export default function RapidReviewPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Speech Speed - Dropdown */}
                 <div>
-                  <label className="block text-xs font-medium text-slate-400 mb-2">Speech Speed</label>
+                  <label className="block text-xs font-medium text-[#A89070] mb-2">Speech Speed</label>
                   <select
                     value={speechRate}
                     onChange={(e) => setSpeechRate(parseFloat(e.target.value))}
-                    className="w-full px-3 py-2 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-tribe-sage-500 focus:outline-none text-sm"
+                    className="w-full px-3 py-2 bg-white text-[#8B7355] rounded-lg border border-[#D4C4B0] focus:border-[#C4A77D] focus:ring-[#C4A77D] focus:outline-none text-sm"
                   >
                     {speedOptions.map((speed) => (
                       <option key={speed} value={speed}>
@@ -550,25 +550,25 @@ export default function RapidReviewPage() {
                     ))}
                   </select>
                 </div>
-                
+
                 {/* Auto Advance */}
                 <div>
-                  <label className="block text-xs font-medium text-slate-400 mb-2">Auto-Advance</label>
+                  <label className="block text-xs font-medium text-[#A89070] mb-2">Auto-Advance</label>
                   <button
                     onClick={() => setAutoAdvance(!autoAdvance)}
                     className={`w-full px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-                      autoAdvance 
-                        ? 'bg-tribe-sage-600 text-white' 
-                        : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                      autoAdvance
+                        ? 'bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white'
+                        : 'bg-[#D4C4B0] text-[#8B7355] hover:bg-[#C4A77D]/30'
                     }`}
                   >
                     {autoAdvance ? '✓ Auto-advance On' : 'Auto-advance Off'}
                   </button>
                 </div>
-                
+
                 {/* Delay */}
                 <div>
-                  <label className="block text-xs font-medium text-slate-400 mb-2">Pause After Answer</label>
+                  <label className="block text-xs font-medium text-[#A89070] mb-2">Pause After Answer</label>
                   <div className="flex items-center gap-3">
                     <input
                       type="range"
@@ -577,15 +577,15 @@ export default function RapidReviewPage() {
                       step="1"
                       value={autoAdvanceDelay}
                       onChange={(e) => setAutoAdvanceDelay(parseInt(e.target.value))}
-                      className="flex-1 h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                      className="flex-1 h-2 bg-[#D4C4B0] rounded-lg appearance-none cursor-pointer accent-[#5B7B6D]"
                     />
-                    <span className="text-sm text-white font-medium w-12 text-right">{autoAdvanceDelay}s</span>
+                    <span className="text-sm text-[#8B7355] font-medium w-12 text-right">{autoAdvanceDelay}s</span>
                   </div>
                 </div>
               </div>
 
               {/* Voice tip */}
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-[#A89070]">
                 💡 Tip: On Mac, go to System Settings → Accessibility → Spoken Content → System Voice → Manage Voices to download premium voices like "Siri Voice 1" for the most natural sound.
               </p>
             </div>
@@ -594,9 +594,9 @@ export default function RapidReviewPage() {
       )}
 
       {/* Progress Bar */}
-      <div className="h-1 bg-slate-800">
-        <div 
-          className="h-full bg-gradient-to-r from-tribe-sage-500 to-teal-500 transition-all duration-300"
+      <div className="h-1 bg-[#E8E0D5]">
+        <div
+          className="h-full bg-gradient-to-r from-[#C4A77D] to-[#A89070] transition-all duration-300"
           style={{ width: `${((currentIndex + 1) / reviewCards.length) * 100}%` }}
         />
       </div>
@@ -605,11 +605,11 @@ export default function RapidReviewPage() {
       <main className="max-w-4xl mx-auto px-4 py-8">
         {/* Card Counter */}
         <div className="text-center mb-6">
-          <span className="text-slate-400 text-sm">
+          <span className="text-[#A89070] text-sm">
             Card {currentIndex + 1} of {reviewCards.length}
           </span>
           {currentCard && isRevealed && (
-            <span className="ml-3 px-2 py-0.5 text-xs bg-slate-700 text-slate-300 rounded">
+            <span className="ml-3 px-2 py-0.5 text-xs bg-[#D4C4B0] text-[#8B7355] rounded">
               {currentCard.metadata.system}
             </span>
           )}
@@ -617,21 +617,21 @@ export default function RapidReviewPage() {
 
         {/* Card */}
         {currentCard && (
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 overflow-hidden shadow-2xl">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl border border-[#D4C4B0] overflow-hidden shadow-2xl">
             {/* Question */}
             <div className="p-6 md:p-8">
               <div className="flex items-center gap-3 mb-4">
-                <span className="px-3 py-1 text-xs font-bold bg-amber-500/20 text-amber-400 rounded-full">
+                <span className="px-3 py-1 text-xs font-bold bg-[#C4A77D]/20 text-[#C4A77D] rounded-full">
                   IF YOU SEE
                 </span>
                 {isSpeaking && !isRevealed && (
-                  <span className="flex items-center gap-1.5 text-xs text-tribe-sage-400">
-                    <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                  <span className="flex items-center gap-1.5 text-xs text-[#C4A77D]">
+                    <span className="w-2 h-2 bg-[#C4A77D] rounded-full animate-pulse" />
                     Speaking...
                   </span>
                 )}
               </div>
-              <p className="text-xl md:text-2xl text-white leading-relaxed">
+              <p className="text-xl md:text-2xl text-[#8B7355] leading-relaxed">
                 {currentCard.content.front}
               </p>
             </div>
@@ -641,33 +641,33 @@ export default function RapidReviewPage() {
               <div className="px-6 md:px-8 pb-6 md:pb-8">
                 <button
                   onClick={handleReveal}
-                  className="w-full py-4 bg-gradient-to-r from-emerald-600 to-tribe-sage-600 hover:from-tribe-sage-500 hover:to-teal-500 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-tribe-sage-500/20"
+                  className="w-full py-4 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#C4A77D]/20"
                 >
                   <span>Reveal Answer</span>
                   <kbd className="px-2 py-0.5 bg-white/20 rounded text-xs">Space</kbd>
                 </button>
               </div>
             ) : (
-              <div className="border-t border-slate-700/50">
-                <div className="p-6 md:p-8 bg-emerald-900/20">
+              <div className="border-t border-[#D4C4B0]">
+                <div className="p-6 md:p-8 bg-gradient-to-br from-[#5B7B6D]/10 to-[#C4A77D]/10">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="px-3 py-1 text-xs font-bold bg-tribe-sage-500/20 text-tribe-sage-400 rounded-full">
+                    <span className="px-3 py-1 text-xs font-bold bg-[#5B7B6D]/20 text-[#5B7B6D] rounded-full">
                       THEN THINK
                     </span>
                     {isSpeaking && isRevealed && (
-                      <span className="flex items-center gap-1.5 text-xs text-tribe-sage-400">
-                        <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                      <span className="flex items-center gap-1.5 text-xs text-[#5B7B6D]">
+                        <span className="w-2 h-2 bg-[#5B7B6D] rounded-full animate-pulse" />
                         Speaking...
                       </span>
                     )}
                   </div>
-                  <p className="text-xl md:text-2xl text-tribe-sage-100 leading-relaxed whitespace-pre-wrap">
+                  <p className="text-xl md:text-2xl text-[#8B7355] leading-relaxed whitespace-pre-wrap">
                     {currentCard.content.back}
                   </p>
-                  
+
                   {currentCard.content.explanation && (
-                    <div className="mt-6 p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
-                      <p className="text-sm text-slate-300 leading-relaxed">
+                    <div className="mt-6 p-4 bg-white/50 rounded-xl border border-[#D4C4B0]">
+                      <p className="text-sm text-[#8B7355] leading-relaxed">
                         💡 {currentCard.content.explanation}
                       </p>
                     </div>
@@ -684,7 +684,7 @@ export default function RapidReviewPage() {
           <button
             onClick={prevCard}
             disabled={currentIndex === 0}
-            className="p-3 rounded-full bg-slate-800 text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-slate-700 transition-colors border border-slate-700"
+            className="p-3 rounded-full bg-white text-[#8B7355] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#E8E0D5] transition-colors border border-[#D4C4B0]"
             title="Previous card"
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -696,9 +696,9 @@ export default function RapidReviewPage() {
           <button
             onClick={speakCurrent}
             className={`p-3 rounded-full transition-colors border ${
-              isSpeaking 
-                ? 'bg-tribe-sage-600 text-white border-tribe-sage-500' 
-                : 'bg-slate-800 text-white hover:bg-slate-700 border-slate-700'
+              isSpeaking
+                ? 'bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white border-[#C4A77D]'
+                : 'bg-white text-[#8B7355] hover:bg-[#E8E0D5] border-[#D4C4B0]'
             }`}
             title="Read aloud"
           >
@@ -711,9 +711,9 @@ export default function RapidReviewPage() {
           <button
             onClick={togglePlay}
             className={`p-4 rounded-full transition-colors shadow-lg ${
-              isPlaying 
-                ? 'bg-amber-600 text-white shadow-amber-500/30' 
-                : 'bg-tribe-sage-600 text-white hover:bg-tribe-sage-500 shadow-tribe-sage-500/30'
+              isPlaying
+                ? 'bg-gradient-to-r from-[#5B7B6D] to-[#2D5A4A] text-white shadow-[#5B7B6D]/30'
+                : 'bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white hover:from-[#A89070] hover:to-[#8B7355] shadow-[#C4A77D]/30'
             }`}
             title={isPlaying ? 'Pause auto-play' : 'Start auto-play'}
           >
@@ -732,7 +732,7 @@ export default function RapidReviewPage() {
           {isSpeaking && (
             <button
               onClick={stopSpeaking}
-              className="p-3 rounded-full bg-red-600 text-white hover:bg-red-500 transition-colors border border-red-500"
+              className="p-3 rounded-full bg-gradient-to-r from-[#5B7B6D] to-[#2D5A4A] text-white hover:from-[#2D5A4A] hover:to-[#5B7B6D] transition-colors border border-[#5B7B6D]"
               title="Stop speaking"
             >
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -745,7 +745,7 @@ export default function RapidReviewPage() {
           <button
             onClick={nextCard}
             disabled={currentIndex === reviewCards.length - 1}
-            className="p-3 rounded-full bg-slate-800 text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-slate-700 transition-colors border border-slate-700"
+            className="p-3 rounded-full bg-white text-[#8B7355] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#E8E0D5] transition-colors border border-[#D4C4B0]"
             title="Next card"
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -757,17 +757,17 @@ export default function RapidReviewPage() {
         {/* Current voice indicator */}
         {voices[selectedVoiceIndex] && (
           <div className="mt-4 text-center">
-            <span className="text-xs text-slate-500">
+            <span className="text-xs text-[#A89070]">
               🔊 {voices[selectedVoiceIndex].name} @ {speechRate}x speed
             </span>
           </div>
         )}
 
         {/* Keyboard shortcuts */}
-        <div className="mt-6 text-center text-sm text-slate-500 space-x-3">
-          <span><kbd className="px-1.5 py-0.5 bg-slate-800 rounded text-xs border border-slate-700">Space</kbd> reveal/next</span>
-          <span><kbd className="px-1.5 py-0.5 bg-slate-800 rounded text-xs border border-slate-700">←</kbd><kbd className="px-1.5 py-0.5 bg-slate-800 rounded text-xs border border-slate-700 ml-0.5">→</kbd> navigate</span>
-          <span><kbd className="px-1.5 py-0.5 bg-slate-800 rounded text-xs border border-slate-700">P</kbd> play/pause</span>
+        <div className="mt-6 text-center text-sm text-[#A89070] space-x-3">
+          <span><kbd className="px-1.5 py-0.5 bg-white rounded text-xs border border-[#D4C4B0]">Space</kbd> reveal/next</span>
+          <span><kbd className="px-1.5 py-0.5 bg-white rounded text-xs border border-[#D4C4B0]">←</kbd><kbd className="px-1.5 py-0.5 bg-white rounded text-xs border border-[#D4C4B0] ml-0.5">→</kbd> navigate</span>
+          <span><kbd className="px-1.5 py-0.5 bg-white rounded text-xs border border-[#D4C4B0]">P</kbd> play/pause</span>
         </div>
       </main>
     </div>

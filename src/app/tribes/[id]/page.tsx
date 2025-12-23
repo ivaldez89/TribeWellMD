@@ -72,12 +72,12 @@ export default function TribePage() {
     return (
       <>
         <Header />
-        <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 pt-20 px-4 pb-8">
+        <main className="min-h-screen bg-gradient-to-br from-[#F5F0E8] to-[#E8E0D5] pt-20 px-4 pb-8">
           <div className="max-w-4xl mx-auto">
             <div className="animate-pulse space-y-4">
-              <div className="h-64 bg-slate-200 rounded-2xl"></div>
-              <div className="h-12 bg-slate-200 rounded-xl"></div>
-              <div className="h-96 bg-slate-200 rounded-xl"></div>
+              <div className="h-64 bg-[#D4C4B0] rounded-2xl"></div>
+              <div className="h-12 bg-[#D4C4B0] rounded-xl"></div>
+              <div className="h-96 bg-[#D4C4B0] rounded-xl"></div>
             </div>
           </div>
         </main>
@@ -89,16 +89,16 @@ export default function TribePage() {
     return (
       <>
         <Header />
-        <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 pt-20 px-4 pb-8">
+        <main className="min-h-screen bg-gradient-to-br from-[#F5F0E8] to-[#E8E0D5] pt-20 px-4 pb-8">
           <div className="max-w-4xl mx-auto text-center py-12">
-            <div className="w-16 h-16 mx-auto mb-4 text-slate-400"><Icons.Search /></div>
-            <h1 className="text-2xl font-bold text-slate-800 mb-2">Tribe Not Found</h1>
-            <p className="text-slate-600 mb-6">
+            <div className="w-16 h-16 mx-auto mb-4 text-[#A89070]"><Icons.Search /></div>
+            <h1 className="text-2xl font-bold text-[#8B7355] mb-2">Tribe Not Found</h1>
+            <p className="text-[#A89070] mb-6">
               This tribe doesn&apos;t exist or you don&apos;t have permission to view it.
             </p>
             <a
               href="/tribes"
-              className="inline-block px-6 py-3 bg-tribe-sage-500 text-white rounded-xl font-medium hover:bg-tribe-sage-600 transition-colors"
+              className="inline-block px-6 py-3 bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white rounded-xl font-medium hover:opacity-90 transition-all focus:outline-none focus:ring-2 focus:ring-[#C4A77D] focus:ring-offset-2"
             >
               Browse Tribes
             </a>
@@ -111,7 +111,7 @@ export default function TribePage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 pt-20 px-4 pb-8">
+      <main className="min-h-screen bg-gradient-to-br from-[#F5F0E8] to-[#E8E0D5] pt-20 px-4 pb-8">
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Tribe Header */}
           <TribeHeader
@@ -124,16 +124,16 @@ export default function TribePage() {
           />
 
           {/* Tabs */}
-          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-1">
+          <div className="bg-white rounded-xl shadow-sm border border-[#E8E0D5] p-1">
             <div className="flex gap-1">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                  className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
                     activeTab === tab.id
-                      ? 'bg-tribe-sage-500 text-white shadow-sm'
-                      : 'text-slate-600 hover:bg-slate-100'
+                      ? 'bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white shadow-sm'
+                      : 'text-[#A89070] hover:bg-[#F5F0E8]'
                   }`}
                 >
                   <span className="w-5 h-5">{tab.icon}</span>
@@ -155,33 +155,33 @@ export default function TribePage() {
                 {/* Quick Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {/* Recent Activity */}
-                  <div className="bg-white rounded-xl border border-slate-200 p-6">
-                    <h3 className="font-semibold text-slate-800 mb-4 flex items-center gap-2">
-                      <span className="w-5 h-5 text-tribe-sage-500"><Icons.Chart /></span>
+                  <div className="bg-white rounded-xl border border-[#E8E0D5] p-6">
+                    <h3 className="font-semibold text-[#8B7355] mb-4 flex items-center gap-2">
+                      <span className="w-5 h-5 text-[#5B7B6D]"><Icons.Chart /></span>
                       Recent Activity
                     </h3>
                     <div className="space-y-3">
                       {messages.slice(-3).reverse().map((msg) => (
                         <div key={msg.id} className="flex items-start gap-3 text-sm">
-                          <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+                          <div className="w-8 h-8 rounded-full bg-[#F5F0E8] flex items-center justify-center text-[#A89070]">
                             {msg.type === 'system' ? <Icons.Bell /> : msg.type === 'achievement' ? <Icons.Trophy /> : <Icons.Chat />}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-slate-700 truncate">{msg.content}</p>
-                            <p className="text-slate-400 text-xs">{msg.senderName}</p>
+                            <p className="text-[#8B7355] truncate">{msg.content}</p>
+                            <p className="text-[#A89070] text-xs">{msg.senderName}</p>
                           </div>
                         </div>
                       ))}
                       {messages.length === 0 && (
-                        <p className="text-slate-400 text-sm">No recent activity</p>
+                        <p className="text-[#A89070] text-sm">No recent activity</p>
                       )}
                     </div>
                   </div>
 
                   {/* Top Contributors */}
-                  <div className="bg-white rounded-xl border border-slate-200 p-6">
-                    <h3 className="font-semibold text-slate-800 mb-4 flex items-center gap-2">
-                      <span className="w-5 h-5 text-amber-500"><Icons.Star /></span>
+                  <div className="bg-white rounded-xl border border-[#E8E0D5] p-6">
+                    <h3 className="font-semibold text-[#8B7355] mb-4 flex items-center gap-2">
+                      <span className="w-5 h-5 text-[#C4A77D]"><Icons.Star /></span>
                       Top Contributors
                     </h3>
                     <div className="space-y-3">
@@ -191,53 +191,53 @@ export default function TribePage() {
                         .map((member, index) => (
                           <div key={member.id} className="flex items-center gap-3">
                             <span className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                              index === 0 ? 'bg-yellow-100 text-yellow-700' : index === 1 ? 'bg-slate-200 text-slate-700' : 'bg-amber-100 text-amber-700'
+                              index === 0 ? 'bg-[#F5F0E8] text-[#C4A77D]' : index === 1 ? 'bg-[#E8E0D5] text-[#8B7355]' : 'bg-[#D4C4B0] text-[#A89070]'
                             }`}>
                               {index + 1}
                             </span>
                             <div className="flex-1 min-w-0">
-                              <p className="font-medium text-slate-700 truncate">
+                              <p className="font-medium text-[#8B7355] truncate">
                                 {member.firstName} {member.lastName}
                               </p>
                             </div>
-                            <span className="text-sm font-semibold text-tribe-sage-600">
+                            <span className="text-sm font-semibold text-[#5B7B6D]">
                               {member.contributionPoints.toLocaleString()} pts
                             </span>
                           </div>
                         ))}
                       {tribe.members.length === 0 && (
-                        <p className="text-slate-400 text-sm">No members yet</p>
+                        <p className="text-[#A89070] text-sm">No members yet</p>
                       )}
                     </div>
                   </div>
                 </div>
 
                 {/* Point earning guide */}
-                <div className="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-xl border border-teal-200 p-6">
-                  <h3 className="font-semibold text-slate-800 mb-3 flex items-center gap-2">
-                    <span className="w-5 h-5 text-tribe-sage-600"><Icons.Lightbulb /></span>
+                <div className="bg-gradient-to-r from-[#5B7B6D] to-[#2D5A4A] rounded-xl border border-[#5B7B6D] p-6">
+                  <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
+                    <span className="w-5 h-5 text-[#F5F0E8]"><Icons.Lightbulb /></span>
                     How to Earn Points
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <span className="w-4 h-4 text-tribe-sage-500"><Icons.Book /></span>
+                    <div className="flex items-center gap-2 text-[#F5F0E8]">
+                      <span className="w-4 h-4 text-[#C4A77D]"><Icons.Book /></span>
                       Complete flashcard sessions (+10 pts)
                     </div>
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <span className="w-4 h-4 text-tribe-sage-500"><Icons.Fire /></span>
+                    <div className="flex items-center gap-2 text-[#F5F0E8]">
+                      <span className="w-4 h-4 text-[#C4A77D]"><Icons.Fire /></span>
                       Maintain study streak (+5 pts/day)
                     </div>
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <span className="w-4 h-4 text-tribe-sage-500"><Icons.Meditation /></span>
+                    <div className="flex items-center gap-2 text-[#F5F0E8]">
+                      <span className="w-4 h-4 text-[#C4A77D]"><Icons.Meditation /></span>
                       Complete wellness challenges (+5-12 pts)
                     </div>
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <span className="w-4 h-4 text-tribe-sage-500"><Icons.Handshake /></span>
+                    <div className="flex items-center gap-2 text-[#F5F0E8]">
+                      <span className="w-4 h-4 text-[#C4A77D]"><Icons.Handshake /></span>
                       Help a peer (+15 pts)
                     </div>
                   </div>
                   {!isMember && (
-                    <p className="mt-4 text-sm text-slate-500">
+                    <p className="mt-4 text-sm text-[#E8E0D5]">
                       Join this tribe to start contributing points!
                     </p>
                   )}

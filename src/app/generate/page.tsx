@@ -258,7 +258,7 @@ Return ONLY the JSON array, no other text.`;
           </Link>
           
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#C4A77D] to-[#A89070] flex items-center justify-center">
               <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
               </svg>
@@ -297,13 +297,13 @@ Return ONLY the JSON array, no other text.`;
 
         {/* Success message */}
         {savedCount > 0 && (
-          <div className="mb-6 p-4 bg-tribe-sage-50 dark:bg-tribe-sage-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl flex items-center gap-3">
-            <svg className="w-6 h-6 text-tribe-sage-600 dark:text-tribe-sage-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="mb-6 p-4 bg-[#E8E0D5] dark:bg-[#5B7B6D]/20 border border-[#C4A77D] dark:border-[#8B7355] rounded-xl flex items-center gap-3">
+            <svg className="w-6 h-6 text-[#5B7B6D] dark:text-[#C4A77D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
-            <p className="text-emerald-800 dark:text-tribe-sage-300">
+            <p className="text-[#8B7355] dark:text-[#D4C4B0]">
               Successfully added {savedCount} cards to your deck!{' '}
-              <Link href="/flashcards" className="underline font-medium hover:text-emerald-900 dark:hover:text-emerald-200">Start studying →</Link>
+              <Link href="/flashcards" className="underline font-medium hover:text-[#5B7B6D] dark:hover:text-[#C4A77D]">Start studying →</Link>
             </p>
           </div>
         )}
@@ -325,7 +325,7 @@ Example:
 - Paste a paragraph about heart failure management
 - Copy notes from your pathology lecture
 - Write 'Common causes of acute pancreatitis and their management'"
-                className="w-full h-48 px-4 py-3 border border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-violet-500 resize-none text-slate-900 dark:text-white bg-white dark:bg-slate-700 placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                className="w-full h-48 px-4 py-3 border border-slate-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-[#C4A77D] focus:border-[#C4A77D] resize-none text-slate-900 dark:text-white bg-white dark:bg-slate-700 placeholder:text-slate-400 dark:placeholder:text-slate-500"
               />
               <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
                 {input.length} characters • More detail = better cards
@@ -347,7 +347,7 @@ Example:
                     value={topic}
                     onChange={(e) => setTopic(e.target.value)}
                     placeholder="e.g., Heart Failure"
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-[#C4A77D] focus:border-[#C4A77D] text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
                   />
                 </div>
 
@@ -359,7 +359,7 @@ Example:
                   <select
                     value={system}
                     onChange={(e) => setSystem(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-[#C4A77D] focus:border-[#C4A77D] text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
                   >
                     {SYSTEMS.map(s => (
                       <option key={s} value={s}>{s}</option>
@@ -375,7 +375,7 @@ Example:
                   <select
                     value={rotation}
                     onChange={(e) => setRotation(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-[#C4A77D] focus:border-[#C4A77D] text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
                   >
                     {ROTATIONS.map(r => (
                       <option key={r} value={r}>{r}</option>
@@ -391,7 +391,7 @@ Example:
                   <select
                     value={numCards}
                     onChange={(e) => setNumCards(parseInt(e.target.value))}
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-[#C4A77D] focus:border-[#C4A77D] text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
                   >
                     <option value={5}>5 cards</option>
                     <option value={10}>10 cards</option>
@@ -418,11 +418,11 @@ Example:
                       onClick={() => setCardStyle(style.id as typeof cardStyle)}
                       className={`p-3 rounded-xl border-2 text-left transition-all ${
                         cardStyle === style.id
-                          ? 'border-violet-500 bg-violet-50 dark:bg-violet-900/30'
+                          ? 'border-[#C4A77D] bg-[#F5F0E8] dark:bg-[#8B7355]/30'
                           : 'border-slate-200 dark:border-slate-600 hover:border-slate-300 dark:hover:border-slate-500'
                       }`}
                     >
-                      <p className={`font-medium text-sm ${cardStyle === style.id ? 'text-violet-700 dark:text-violet-300' : 'text-slate-900 dark:text-white'}`}>
+                      <p className={`font-medium text-sm ${cardStyle === style.id ? 'text-[#8B7355] dark:text-[#C4A77D]' : 'text-slate-900 dark:text-white'}`}>
                         {style.label}
                       </p>
                       <p className="text-xs text-slate-500 dark:text-slate-400">{style.desc}</p>
@@ -436,7 +436,7 @@ Example:
             <button
               onClick={handleGenerate}
               disabled={isGenerating || !input.trim()}
-              className="w-full py-4 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 disabled:from-slate-300 disabled:to-slate-400 text-white font-semibold rounded-xl shadow-lg shadow-violet-500/25 disabled:shadow-none transition-all flex items-center justify-center gap-2"
+              className="w-full py-4 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] disabled:from-slate-300 disabled:to-slate-400 text-white font-semibold rounded-xl shadow-lg shadow-[#C4A77D]/25 disabled:shadow-none transition-all flex items-center justify-center gap-2"
             >
               {isGenerating ? (
                 <>
@@ -470,7 +470,7 @@ Example:
               {generatedCards.length > 0 && (
                 <button
                   onClick={handleSaveCards}
-                  className="px-4 py-2 bg-tribe-sage-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2"
+                  className="px-4 py-2 bg-gradient-to-r from-[#5B7B6D] to-[#2D5A4A] hover:from-[#2D5A4A] hover:to-[#5B7B6D] text-white font-medium rounded-lg transition-colors flex items-center gap-2"
                 >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -511,7 +511,7 @@ Example:
                         <textarea
                           value={card.front}
                           onChange={(e) => handleEditCard(index, 'front', e.target.value)}
-                          className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg text-sm resize-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                          className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg text-sm resize-none focus:ring-2 focus:ring-[#C4A77D] focus:border-[#C4A77D] bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
                           rows={2}
                         />
                       </div>
@@ -520,7 +520,7 @@ Example:
                         <textarea
                           value={card.back}
                           onChange={(e) => handleEditCard(index, 'back', e.target.value)}
-                          className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg text-sm resize-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                          className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg text-sm resize-none focus:ring-2 focus:ring-[#C4A77D] focus:border-[#C4A77D] bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
                           rows={2}
                         />
                       </div>
@@ -530,7 +530,7 @@ Example:
                           <textarea
                             value={card.explanation}
                             onChange={(e) => handleEditCard(index, 'explanation', e.target.value)}
-                            className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg text-sm resize-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-amber-50 dark:bg-amber-900/20 text-slate-900 dark:text-white"
+                            className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg text-sm resize-none focus:ring-2 focus:ring-[#C4A77D] focus:border-[#C4A77D] bg-amber-50 dark:bg-amber-900/20 text-slate-900 dark:text-white"
                             rows={2}
                           />
                         </div>

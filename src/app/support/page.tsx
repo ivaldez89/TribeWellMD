@@ -46,19 +46,19 @@ export default function SupportPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+    <div className="min-h-screen bg-[#F5F0E8] dark:bg-slate-900">
       <Header />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white mb-4">
+          <Link href="/" className="inline-flex items-center gap-2 text-[#8B7355] dark:text-[#C4A77D] hover:text-[#A89070] dark:hover:text-white mb-4">
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Back to Home
           </Link>
           <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Help & Support</h1>
-          <p className="text-slate-600 dark:text-slate-400 mt-2">We're here to help you succeed</p>
+          <p className="text-[#8B7355] dark:text-[#C4A77D] mt-2">We're here to help you succeed</p>
         </div>
 
         <div className="grid gap-8 lg:grid-cols-3">
@@ -66,63 +66,63 @@ export default function SupportPage() {
           <div className="lg:col-span-3 grid gap-4 sm:grid-cols-3 mb-4">
             <Link
               href="/faq"
-              className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 hover:border-tribe-sage-500 dark:hover:border-tribe-sage-500 transition-colors group"
+              className="bg-white dark:bg-slate-800 rounded-xl border border-[#D4C4B0] dark:border-slate-700 p-6 hover:border-[#C4A77D] dark:hover:border-[#C4A77D] transition-colors group"
             >
-              <div className="w-12 h-12 rounded-xl bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center mb-4 group-hover:bg-teal-200 dark:group-hover:bg-teal-900/50 transition-colors">
-                <svg className="w-6 h-6 text-tribe-sage-600 dark:text-tribe-sage-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-12 h-12 rounded-xl bg-[#F5F0E8] dark:bg-[#8B7355]/30 flex items-center justify-center mb-4 group-hover:bg-[#E8E0D5] dark:group-hover:bg-[#8B7355]/50 transition-colors">
+                <svg className="w-6 h-6 text-[#A89070] dark:text-[#C4A77D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
               <h3 className="font-semibold text-slate-900 dark:text-white mb-2">FAQ</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm">Find answers to common questions</p>
+              <p className="text-[#8B7355] dark:text-[#C4A77D] text-sm">Find answers to common questions</p>
             </Link>
 
             <a
               href="mailto:support@tribewellmd.com"
-              className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 hover:border-tribe-sage-500 dark:hover:border-tribe-sage-500 transition-colors group"
+              className="bg-white dark:bg-slate-800 rounded-xl border border-[#D4C4B0] dark:border-slate-700 p-6 hover:border-[#C4A77D] dark:hover:border-[#C4A77D] transition-colors group"
             >
-              <div className="w-12 h-12 rounded-xl bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center mb-4 group-hover:bg-cyan-200 dark:group-hover:bg-cyan-900/50 transition-colors">
-                <svg className="w-6 h-6 text-cyan-600 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-12 h-12 rounded-xl bg-[#E8E0D5] dark:bg-[#5B7B6D]/30 flex items-center justify-center mb-4 group-hover:bg-[#D4C4B0] dark:group-hover:bg-[#5B7B6D]/50 transition-colors">
+                <svg className="w-6 h-6 text-[#5B7B6D] dark:text-[#5B7B6D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
               <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Email Us</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm">support@tribewellmd.com</p>
+              <p className="text-[#8B7355] dark:text-[#C4A77D] text-sm">support@tribewellmd.com</p>
             </a>
 
             <Link
               href="/feedback"
-              className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 hover:border-tribe-sage-500 dark:hover:border-tribe-sage-500 transition-colors group"
+              className="bg-white dark:bg-slate-800 rounded-xl border border-[#D4C4B0] dark:border-slate-700 p-6 hover:border-[#C4A77D] dark:hover:border-[#C4A77D] transition-colors group"
             >
-              <div className="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-4 group-hover:bg-purple-200 dark:group-hover:bg-purple-900/50 transition-colors">
-                <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-12 h-12 rounded-xl bg-[#D4C4B0] dark:bg-[#A89070]/30 flex items-center justify-center mb-4 group-hover:bg-[#C4A77D] dark:group-hover:bg-[#A89070]/50 transition-colors">
+                <svg className="w-6 h-6 text-[#8B7355] dark:text-[#C4A77D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                 </svg>
               </div>
               <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Send Feedback</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm">Help us improve TribeWellMD</p>
+              <p className="text-[#8B7355] dark:text-[#C4A77D] text-sm">Help us improve TribeWellMD</p>
             </Link>
           </div>
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-8">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-[#D4C4B0] dark:border-slate-700 p-8">
               <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Contact Support</h2>
 
               {submitted ? (
                 <div className="text-center py-8">
-                  <div className="w-16 h-16 rounded-full bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-tribe-sage-600 dark:text-tribe-sage-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="w-16 h-16 rounded-full bg-[#F5F0E8] dark:bg-[#8B7355]/30 flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-[#A89070] dark:text-[#C4A77D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
                   <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Message Sent!</h3>
-                  <p className="text-slate-600 dark:text-slate-400 mb-6">
+                  <p className="text-[#8B7355] dark:text-[#C4A77D] mb-6">
                     Thanks for reaching out. We'll get back to you within 24-48 hours.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline"
+                    className="text-[#A89070] dark:text-[#C4A77D] hover:underline"
                   >
                     Send another message
                   </button>
@@ -131,7 +131,7 @@ export default function SupportPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid gap-6 sm:grid-cols-2">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label htmlFor="name" className="block text-sm font-medium text-[#8B7355] dark:text-[#C4A77D] mb-2">
                         Name
                       </label>
                       <input
@@ -139,12 +139,12 @@ export default function SupportPage() {
                         id="name"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent"
+                        className="w-full px-4 py-3 bg-[#F5F0E8] dark:bg-slate-700 border border-[#D4C4B0] dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-[#A89070] focus:outline-none focus:ring-2 focus:ring-[#C4A77D] focus:border-transparent"
                         placeholder="Your name"
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label htmlFor="email" className="block text-sm font-medium text-[#8B7355] dark:text-[#C4A77D] mb-2">
                         Email <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -153,21 +153,21 @@ export default function SupportPage() {
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent"
+                        className="w-full px-4 py-3 bg-[#F5F0E8] dark:bg-slate-700 border border-[#D4C4B0] dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-[#A89070] focus:outline-none focus:ring-2 focus:ring-[#C4A77D] focus:border-transparent"
                         placeholder="you@example.com"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label htmlFor="subject" className="block text-sm font-medium text-[#8B7355] dark:text-[#C4A77D] mb-2">
                       Subject
                     </label>
                     <select
                       id="subject"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent"
+                      className="w-full px-4 py-3 bg-[#F5F0E8] dark:bg-slate-700 border border-[#D4C4B0] dark:border-slate-600 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#C4A77D] focus:border-transparent"
                     >
                       <option value="">Select a topic</option>
                       <option value="Account Issues">Account Issues</option>
@@ -181,7 +181,7 @@ export default function SupportPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label htmlFor="message" className="block text-sm font-medium text-[#8B7355] dark:text-[#C4A77D] mb-2">
                       Message <span className="text-red-500">*</span>
                     </label>
                     <textarea
@@ -190,7 +190,7 @@ export default function SupportPage() {
                       rows={5}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent resize-none"
+                      className="w-full px-4 py-3 bg-[#F5F0E8] dark:bg-slate-700 border border-[#D4C4B0] dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-[#A89070] focus:outline-none focus:ring-2 focus:ring-[#C4A77D] focus:border-transparent resize-none"
                       placeholder="How can we help you?"
                     />
                   </div>
@@ -204,7 +204,7 @@ export default function SupportPage() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full px-6 py-3 bg-tribe-sage-500 hover:bg-tribe-sage-600 disabled:bg-teal-400 text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-2"
+                    className="w-full px-6 py-3 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2"
                   >
                     {loading ? (
                       <>
@@ -230,12 +230,12 @@ export default function SupportPage() {
 
           {/* Sidebar */}
           <div className="space-y-6">
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-[#D4C4B0] dark:border-slate-700 p-6">
               <h3 className="font-semibold text-slate-900 dark:text-white mb-4">Response Time</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm mb-4">
+              <p className="text-[#8B7355] dark:text-[#C4A77D] text-sm mb-4">
                 We typically respond within 24-48 hours during business days.
               </p>
-              <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+              <div className="flex items-center gap-2 text-sm text-[#A89070] dark:text-[#C4A77D]">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -243,9 +243,9 @@ export default function SupportPage() {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-tribe-sage-500 to-cyan-600 rounded-2xl p-6 text-white">
+            <div className="bg-gradient-to-br from-[#5B7B6D] to-[#2D5A4A] rounded-2xl p-6 text-white">
               <h3 className="font-semibold mb-2">Pro Tip</h3>
-              <p className="text-tribe-sage-100 text-sm">
+              <p className="text-[#E8E0D5] text-sm">
                 Check our FAQ page first - you might find an instant answer to your question!
               </p>
               <Link
@@ -259,13 +259,13 @@ export default function SupportPage() {
               </Link>
             </div>
 
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-[#D4C4B0] dark:border-slate-700 p-6">
               <h3 className="font-semibold text-slate-900 dark:text-white mb-4">Direct Contact</h3>
               <ul className="space-y-3 text-sm">
                 <li>
                   <a
                     href="mailto:support@tribewellmd.com"
-                    className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-tribe-sage-600 dark:hover:text-tribe-sage-400"
+                    className="flex items-center gap-2 text-[#8B7355] dark:text-[#C4A77D] hover:text-[#A89070] dark:hover:text-[#C4A77D]"
                   >
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -276,7 +276,7 @@ export default function SupportPage() {
                 <li>
                   <a
                     href="mailto:hello@tribewellmd.com"
-                    className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-tribe-sage-600 dark:hover:text-tribe-sage-400"
+                    className="flex items-center gap-2 text-[#8B7355] dark:text-[#C4A77D] hover:text-[#A89070] dark:hover:text-[#C4A77D]"
                   >
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -289,7 +289,7 @@ export default function SupportPage() {
           </div>
         </div>
 
-        <div className="mt-8 text-center text-sm text-slate-500 dark:text-slate-400">
+        <div className="mt-8 text-center text-sm text-[#A89070] dark:text-[#C4A77D]">
           <p>© {new Date().getFullYear()} TribeWellMD</p>
         </div>
       </main>

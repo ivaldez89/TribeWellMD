@@ -6,16 +6,16 @@ import { CalendarHub } from '@/components/calendar';
 
 export default function CalendarPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-white dark:from-slate-900 dark:to-[#3D4A44]">
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+          <h1 className="text-2xl font-bold text-[#3D3832] dark:text-[#F5F0E8]">
             Calendar
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-[#8B7355] dark:text-[#A89070] mt-1">
             View and manage your study sessions, tasks, and events
           </p>
         </div>

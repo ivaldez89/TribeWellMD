@@ -147,21 +147,26 @@ export default function ProgressPage() {
 
   function getActivityColor(cards: number): string {
     if (cards === 0) return 'bg-slate-100 dark:bg-slate-800';
-    if (cards < 10) return 'bg-emerald-200 dark:bg-tribe-sage-900';
-    if (cards < 25) return 'bg-emerald-400 dark:bg-emerald-700';
-    if (cards < 50) return 'bg-tribe-sage-500 dark:bg-tribe-sage-600';
-    return 'bg-tribe-sage-600 dark:bg-tribe-sage-500';
+    if (cards < 10) return 'bg-[#E8E0D5] dark:bg-[#5B7B6D]';
+    if (cards < 25) return 'bg-[#D4C4B0] dark:bg-[#5B7B6D]';
+    if (cards < 50) return 'bg-[#C4A77D] dark:bg-[#A89070]';
+    return 'bg-[#A89070] dark:bg-[#C4A77D]';
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-teal-50/30 dark:from-slate-900 dark:to-teal-950/20">
+    <div className="min-h-screen bg-[#E8DFD0] dark:from-slate-900 dark:to-[#3D5A4C]/20 relative">
+      {/* Subtle organic pattern overlay on sides */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+        <div className="absolute top-0 left-0 w-1/4 h-full bg-gradient-to-r from-[#D4C4B0]/30 to-transparent" />
+        <div className="absolute top-0 right-0 w-1/4 h-full bg-gradient-to-l from-[#D4C4B0]/30 to-transparent" />
+      </div>
       <Header />
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back Link */}
         <Link
           href="/study"
-          className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-tribe-sage-600 dark:hover:text-tribe-sage-400 mb-6 transition-colors"
+          className="inline-flex items-center gap-2 text-[#6B5344]/80 dark:text-slate-400 hover:text-[#5B7B6D] dark:hover:text-[#6B8B7D] mb-6 transition-colors"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -171,22 +176,22 @@ export default function ProgressPage() {
 
         {/* Hero Banner */}
         <section className="mb-8 animate-fade-in-up">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-tribe-sage-500 via-teal-500 to-cyan-600 p-8 md:p-10 shadow-2xl">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#5B7B6D] via-[#6B8B7D] to-[#7FA08F] p-8 md:p-10 shadow-2xl shadow-[#3D5A4C]/20">
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
               <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
-              <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-emerald-300/20 rounded-full blur-2xl" />
+              <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-[#F5EFE6]/20 rounded-full blur-2xl" />
             </div>
 
             <div className="relative z-10">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/20 backdrop-blur rounded-full text-white/90 text-sm font-medium mb-4">
-                <span className="w-2 h-2 bg-emerald-300 rounded-full animate-pulse" />
+                <span className="w-2 h-2 bg-[#F5F0E8] rounded-full animate-pulse" />
                 <span>Track Your Journey</span>
               </div>
 
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 leading-tight">
-                Your <span className="text-emerald-200">Progress</span>
+                Your <span className="text-[#F5F0E8]">Progress</span>
               </h1>
 
               <p className="text-white/80 text-lg max-w-2xl mb-6">
@@ -219,7 +224,7 @@ export default function ProgressPage() {
         </section>
 
         {/* Tab Navigation */}
-        <div className="flex gap-2 mb-6 border-b border-slate-200 dark:border-slate-700 overflow-x-auto animate-fade-in-up animation-delay-100">
+        <div className="flex gap-2 mb-6 border-b border-[#D4C4B0]/50 dark:border-slate-700 overflow-x-auto animate-fade-in-up animation-delay-100">
           {[
             { id: 'overview', label: 'Overview', icon: <Icons.Chart /> },
             { id: 'calendar', label: 'Study Activity', icon: <Icons.Calendar /> },
@@ -232,8 +237,8 @@ export default function ProgressPage() {
               onClick={() => setActiveTab(tab.id as typeof activeTab)}
               className={`flex items-center gap-2 px-4 py-3 font-medium text-sm transition-colors border-b-2 -mb-px whitespace-nowrap ${
                 activeTab === tab.id
-                  ? 'text-tribe-sage-600 dark:text-tribe-sage-400 border-tribe-sage-600 dark:border-teal-400'
-                  : 'text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-white'
+                  ? 'text-[#3D5A4C] dark:text-[#6B8B7D] border-[#5B7B6D] dark:border-[#6B8B7D]'
+                  : 'text-[#6B5344]/70 dark:text-slate-400 border-transparent hover:text-[#3D5A4C] dark:hover:text-white'
               }`}
             >
               <span className="w-5 h-5">{tab.icon}</span>
@@ -245,7 +250,7 @@ export default function ProgressPage() {
         {/* Overview Tab - All Metrics in One Place */}
         {activeTab === 'overview' && !streakData && (
           <div className="flex items-center justify-center py-16">
-            <div className="animate-spin w-8 h-8 border-4 border-tribe-sage-500 border-t-transparent rounded-full" />
+            <div className="animate-spin w-8 h-8 border-4 border-[#5B7B6D] border-t-transparent rounded-full" />
           </div>
         )}
         {activeTab === 'overview' && streakData && (
@@ -253,7 +258,7 @@ export default function ProgressPage() {
             {/* Main Stats Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* XP Card */}
-              <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-5 text-white">
+              <div className="bg-gradient-to-br from-[#5B7B6D] to-[#4A6B5D] rounded-2xl p-5 text-white shadow-lg shadow-[#3D5A4C]/20">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
                     <Icons.Lightning />
@@ -265,7 +270,7 @@ export default function ProgressPage() {
               </div>
 
               {/* Village Points Card */}
-              <div className="bg-gradient-to-br from-tribe-sage-500 to-tribe-sage-600 rounded-2xl p-5 text-white">
+              <div className="bg-gradient-to-br from-[#6B8B7D] to-[#5B7B6D] rounded-2xl p-5 text-white shadow-lg shadow-[#3D5A4C]/20">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
                     <Icons.Heart />
@@ -279,7 +284,7 @@ export default function ProgressPage() {
               </div>
 
               {/* Streak Card */}
-              <div className="bg-gradient-to-br from-orange-500 to-amber-600 rounded-2xl p-5 text-white">
+              <div className="bg-gradient-to-br from-[#8B7355] to-[#6B5344] rounded-2xl p-5 text-white shadow-lg shadow-[#6B5344]/20">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
                     <Icons.Fire />
@@ -291,7 +296,7 @@ export default function ProgressPage() {
               </div>
 
               {/* Cards Reviewed Card */}
-              <div className="bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl p-5 text-white">
+              <div className="bg-gradient-to-br from-[#7FA08F] to-[#6B8B7D] rounded-2xl p-5 text-white shadow-lg shadow-[#3D5A4C]/20">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
                     <Icons.Cards />
@@ -304,25 +309,25 @@ export default function ProgressPage() {
             </div>
 
             {/* Daily Progress */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6">
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Today's Progress</h3>
+            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-[#D4C4B0]/50 dark:border-slate-700 p-6 shadow-sm shadow-[#3D5A4C]/5">
+              <h3 className="text-lg font-semibold text-[#3D5A4C] dark:text-white mb-4">Today's Progress</h3>
               <div className="space-y-4">
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-slate-600 dark:text-slate-400">Daily XP Goal</span>
-                    <span className="font-medium text-slate-900 dark:text-white">
+                    <span className="text-[#6B5344]/80 dark:text-slate-400">Daily XP Goal</span>
+                    <span className="font-medium text-[#3D5A4C] dark:text-white">
                       {streakData.todayXP} / {streakData.dailyGoalXP} XP
                     </span>
                   </div>
-                  <div className="h-3 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                  <div className="h-3 bg-[#E8DFD0] dark:bg-slate-700 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-tribe-sage-500 to-tribe-sage-500 rounded-full transition-all"
+                      className="h-full bg-gradient-to-r from-[#5B7B6D] to-[#6B8B7D] rounded-full transition-all"
                       style={{ width: `${Math.min((streakData.todayXP / streakData.dailyGoalXP) * 100, 100)}%` }}
                     />
                   </div>
                 </div>
                 {streakData.todayXP >= streakData.dailyGoalXP && (
-                  <div className="flex items-center gap-2 text-tribe-sage-600 dark:text-tribe-sage-400">
+                  <div className="flex items-center gap-2 text-[#5B7B6D] dark:text-[#6B8B7D]">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -333,12 +338,12 @@ export default function ProgressPage() {
             </div>
 
             {/* Village Points Breakdown */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-[#D4C4B0]/50 dark:border-slate-700 p-6 shadow-sm shadow-[#3D5A4C]/5">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Village Points Breakdown</h3>
+                <h3 className="text-lg font-semibold text-[#3D5A4C] dark:text-white">Village Points Breakdown</h3>
                 <Link
                   href="/impact"
-                  className="text-sm text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline"
+                  className="text-sm text-[#5B7B6D] dark:text-[#6B8B7D] hover:underline"
                 >
                   Learn more
                 </Link>
@@ -347,23 +352,23 @@ export default function ProgressPage() {
                 {(Object.entries(streakData.villagePointsByTier) as [VerificationTier, number][]).map(([tier, points]) => (
                   <div
                     key={tier}
-                    className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl"
+                    className="p-4 bg-[#F5EFE6] dark:bg-slate-700/50 rounded-xl"
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm font-medium text-slate-900 dark:text-white capitalize">
+                      <span className="text-sm font-medium text-[#3D5A4C] dark:text-white capitalize">
                         {tier.replace('-', ' ')}
                       </span>
-                      <span className="text-xs px-2 py-0.5 bg-tribe-sage-100 dark:bg-tribe-sage-900/50 text-tribe-sage-700 dark:text-tribe-sage-300 rounded-full">
+                      <span className="text-xs px-2 py-0.5 bg-[#5B7B6D]/10 dark:bg-[#5B7B6D]/50 text-[#5B7B6D] dark:text-[#D4C4B0] rounded-full">
                         {VERIFICATION_MULTIPLIERS[tier]}x
                       </span>
                     </div>
-                    <p className="text-xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400">{points}</p>
+                    <p className="text-xl font-bold text-[#5B7B6D] dark:text-[#6B8B7D]">{points}</p>
                   </div>
                 ))}
               </div>
-              <div className="mt-4 p-4 bg-gradient-to-r from-teal-50 to-emerald-50 dark:from-teal-900/20 dark:to-emerald-900/20 rounded-xl border border-teal-200 dark:border-teal-800">
-                <p className="text-sm text-slate-600 dark:text-slate-400">
-                  This week: <span className="font-semibold text-tribe-sage-600 dark:text-tribe-sage-400">{streakData.weeklyVillagePoints} VP</span> earned
+              <div className="mt-4 p-4 bg-gradient-to-r from-[#F5EFE6] to-[#E8DFD0] dark:from-[#5B7B6D]/20 dark:to-[#3D5A4C]/20 rounded-xl border border-[#D4C4B0]/50 dark:border-[#5B7B6D]">
+                <p className="text-sm text-[#6B5344]/80 dark:text-slate-400">
+                  This week: <span className="font-semibold text-[#5B7B6D] dark:text-[#6B8B7D]">{streakData.weeklyVillagePoints} VP</span> earned
                   <span className="mx-2">•</span>
                   Conversion: 10 XP = 1 Village Point • 1,000 VP = $1 to charity
                 </p>
@@ -371,26 +376,26 @@ export default function ProgressPage() {
             </div>
 
             {/* Weekly Activity Summary */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6">
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">This Week</h3>
+            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-[#D4C4B0]/50 dark:border-slate-700 p-6 shadow-sm shadow-[#3D5A4C]/5">
+              <h3 className="text-lg font-semibold text-[#3D5A4C] dark:text-white mb-4">This Week</h3>
               <div className="flex items-center justify-between gap-2">
                 {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => {
                   const isActive = streakData.weeklyActivity[6 - i]; // weeklyActivity[0] = today
                   const isToday = i === new Date().getDay();
                   return (
                     <div key={i} className="flex-1 text-center">
-                      <p className={`text-xs mb-2 ${isToday ? 'font-bold text-tribe-sage-600' : 'text-slate-500'}`}>{day}</p>
+                      <p className={`text-xs mb-2 ${isToday ? 'font-bold text-[#5B7B6D]' : 'text-[#6B5344]/70'}`}>{day}</p>
                       <div className={`w-10 h-10 mx-auto rounded-full flex items-center justify-center ${
                         isActive
-                          ? 'bg-tribe-sage-500 text-white'
-                          : 'bg-slate-100 dark:bg-slate-700 text-slate-400'
+                          ? 'bg-[#5B7B6D] text-white'
+                          : 'bg-[#F5EFE6] dark:bg-slate-700 text-[#6B5344]/50'
                       }`}>
                         {isActive ? (
                           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                           </svg>
                         ) : (
-                          <span className="w-2 h-2 bg-slate-300 dark:bg-slate-600 rounded-full" />
+                          <span className="w-2 h-2 bg-[#D4C4B0] dark:bg-slate-600 rounded-full" />
                         )}
                       </div>
                     </div>
@@ -405,7 +410,7 @@ export default function ProgressPage() {
         {activeTab === 'calendar' && (
           <div className="space-y-6">
             {/* Calendar Card */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-[#D4C4B0]/50 dark:border-slate-700 shadow-sm shadow-[#3D5A4C]/5 overflow-hidden">
               {/* Calendar Header */}
               <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
                 <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
@@ -422,7 +427,7 @@ export default function ProgressPage() {
                   </button>
                   <button
                     onClick={() => setCurrentMonth(new Date())}
-                    className="px-3 py-1.5 text-sm font-medium text-tribe-sage-600 dark:text-tribe-sage-400 hover:bg-tribe-sage-50 dark:hover:bg-teal-900/20 rounded-lg transition-colors"
+                    className="px-3 py-1.5 text-sm font-medium text-[#8B7355] dark:text-[#C4A77D] hover:bg-[#F5F0E8] dark:hover:bg-[#5B7B6D]/20 rounded-lg transition-colors"
                   >
                     Today
                   </button>
@@ -457,7 +462,7 @@ export default function ProgressPage() {
                         day.isCurrentMonth
                           ? 'text-slate-900 dark:text-white'
                           : 'text-slate-400 dark:text-slate-600'
-                      } ${day.isToday ? 'ring-2 ring-tribe-sage-500' : ''}`}
+                      } ${day.isToday ? 'ring-2 ring-[#C4A77D]' : ''}`}
                     >
                       <div className={`w-full h-full rounded-md flex flex-col items-center justify-center ${
                         getActivityColor(day.cardsStudied)
@@ -484,10 +489,10 @@ export default function ProgressPage() {
                   <span>Less</span>
                   <div className="flex gap-1">
                     <div className="w-3 h-3 rounded bg-slate-100 dark:bg-slate-800"></div>
-                    <div className="w-3 h-3 rounded bg-emerald-200 dark:bg-tribe-sage-900"></div>
-                    <div className="w-3 h-3 rounded bg-emerald-400 dark:bg-emerald-700"></div>
-                    <div className="w-3 h-3 rounded bg-tribe-sage-500 dark:bg-tribe-sage-600"></div>
-                    <div className="w-3 h-3 rounded bg-tribe-sage-600 dark:bg-tribe-sage-500"></div>
+                    <div className="w-3 h-3 rounded bg-[#E8E0D5] dark:bg-[#5B7B6D]"></div>
+                    <div className="w-3 h-3 rounded bg-[#D4C4B0] dark:bg-[#5B7B6D]"></div>
+                    <div className="w-3 h-3 rounded bg-[#C4A77D] dark:bg-[#A89070]"></div>
+                    <div className="w-3 h-3 rounded bg-[#A89070] dark:bg-[#C4A77D]"></div>
                   </div>
                   <span>More</span>
                 </div>
@@ -497,15 +502,15 @@ export default function ProgressPage() {
             {/* Monthly Stats */}
             <div className="grid grid-cols-3 gap-4">
               <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4 text-center">
-                <p className="text-3xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400">{monthlyStats.totalCards}</p>
+                <p className="text-3xl font-bold text-[#8B7355] dark:text-[#C4A77D]">{monthlyStats.totalCards}</p>
                 <p className="text-sm text-slate-600 dark:text-slate-400">Cards This Month</p>
               </div>
               <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4 text-center">
-                <p className="text-3xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400">{monthlyStats.totalDays}</p>
+                <p className="text-3xl font-bold text-[#8B7355] dark:text-[#C4A77D]">{monthlyStats.totalDays}</p>
                 <p className="text-sm text-slate-600 dark:text-slate-400">Days Active</p>
               </div>
               <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4 text-center">
-                <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">
+                <p className="text-3xl font-bold text-[#5B7B6D] dark:text-[#C4A77D]">
                   {Math.round(monthlyStats.avgCorrectRate * 100) || 0}%
                 </p>
                 <p className="text-sm text-slate-600 dark:text-slate-400">Avg. Accuracy</p>
@@ -545,9 +550,9 @@ export default function ProgressPage() {
         {activeTab === 'schedule' && (
           <div className="space-y-6">
             {/* Info Banner */}
-            <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 rounded-2xl border border-indigo-200 dark:border-indigo-800/50 p-6">
+            <div className="bg-gradient-to-r from-[#F5F0E8] to-[#E8E0D5] dark:from-[#5B7B6D]/20 dark:to-[#2D5A4A]/20 rounded-2xl border border-[#D4C4B0] dark:border-[#5B7B6D] p-6">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                <div className="w-12 h-12 rounded-xl bg-[#E8E0D5] dark:bg-[#5B7B6D]/50 flex items-center justify-center text-[#8B7355] dark:text-[#C4A77D]">
                   <Icons.CalendarSchedule />
                 </div>
                 <div>
@@ -586,7 +591,7 @@ export default function ProgressPage() {
                     </div>
                     <div className="flex items-center justify-between py-2 border-b border-slate-100 dark:border-slate-700">
                       <span className="text-slate-600 dark:text-slate-400">Current Level</span>
-                      <span className="font-semibold text-indigo-600 dark:text-indigo-400">Level {stats.level}</span>
+                      <span className="font-semibold text-[#8B7355] dark:text-[#C4A77D]">Level {stats.level}</span>
                     </div>
                     <div className="flex items-center justify-between py-2">
                       <span className="text-slate-600 dark:text-slate-400">Total XP</span>
@@ -609,13 +614,13 @@ export default function ProgressPage() {
 
                       return (
                         <div key={day} className="flex items-center gap-3">
-                          <span className={`w-8 text-sm ${i === today ? 'font-bold text-tribe-sage-600' : 'text-slate-500'}`}>
+                          <span className={`w-8 text-sm ${i === today ? 'font-bold text-[#8B7355]' : 'text-slate-500'}`}>
                             {day}
                           </span>
                           <div className="flex-1 h-6 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
                             <div
                               className={`h-full rounded-full transition-all ${
-                                i === today ? 'bg-tribe-sage-500' : 'bg-emerald-400'
+                                i === today ? 'bg-[#C4A77D]' : 'bg-[#A89070]'
                               }`}
                               style={{ width: `${width}%` }}
                             />
@@ -645,7 +650,7 @@ export default function ProgressPage() {
         <div className="mt-8 text-center">
           <Link
             href="/study"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white font-semibold rounded-xl transition-colors shadow-lg"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] text-white font-semibold rounded-xl transition-colors shadow-lg"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />

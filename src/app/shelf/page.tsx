@@ -22,7 +22,7 @@ const shelfExams: ShelfExam[] = [
     name: 'Ambulatory Medicine',
     description: 'Outpatient care, preventive medicine, chronic disease management',
     icon: '🏥',
-    color: 'from-blue-500 to-cyan-500',
+    color: 'from-[#5B7B6D] to-[#2D5A4A]',
     systems: ['Preventive Medicine', 'Cardiology', 'Endocrinology', 'Pulmonology', 'Gastroenterology', 'General'],
     tags: ['preventive medicine', 'outpatient', 'screening', 'chronic disease']
   },
@@ -31,7 +31,7 @@ const shelfExams: ShelfExam[] = [
     name: 'Internal Medicine',
     description: 'Adult medicine, hospital medicine, subspecialty medicine',
     icon: '🩺',
-    color: 'from-tribe-sage-500 to-teal-500',
+    color: 'from-[#C4A77D] to-[#A89070]',
     systems: ['Cardiology', 'Pulmonology', 'Gastroenterology', 'Nephrology', 'Endocrinology', 'Hematology/Oncology', 'Infectious Disease', 'Rheumatology'],
     tags: ['internal medicine', 'inpatient', 'hospital']
   },
@@ -40,7 +40,7 @@ const shelfExams: ShelfExam[] = [
     name: 'Surgery',
     description: 'General surgery, trauma, surgical subspecialties',
     icon: '🔪',
-    color: 'from-red-500 to-orange-500',
+    color: 'from-[#8B7355] to-[#A89070]',
     systems: ['Surgery', 'Emergency Medicine', 'Gastroenterology'],
     tags: ['surgery', 'trauma', 'acute abdomen', 'surgical']
   },
@@ -49,7 +49,7 @@ const shelfExams: ShelfExam[] = [
     name: 'OB/GYN',
     description: 'Obstetrics, gynecology, reproductive health',
     icon: '🤰',
-    color: 'from-pink-500 to-rose-500',
+    color: 'from-[#D4C4B0] to-[#C4A77D]',
     systems: ['OB/GYN'],
     tags: ['obstetrics', 'gynecology', 'pregnancy', 'reproductive']
   },
@@ -58,7 +58,7 @@ const shelfExams: ShelfExam[] = [
     name: 'Pediatrics',
     description: 'Child health, development, pediatric diseases',
     icon: '👶',
-    color: 'from-amber-500 to-yellow-500',
+    color: 'from-[#C4A77D] to-[#D4C4B0]',
     systems: ['Pediatrics'],
     tags: ['pediatrics', 'child', 'infant', 'developmental']
   },
@@ -67,7 +67,7 @@ const shelfExams: ShelfExam[] = [
     name: 'Psychiatry',
     description: 'Mental health, behavioral disorders, psychopharmacology',
     icon: '🧠',
-    color: 'from-purple-500 to-violet-500',
+    color: 'from-[#A89070] to-[#8B7355]',
     systems: ['Psychiatry'],
     tags: ['psychiatry', 'mental health', 'depression', 'anxiety', 'psychosis']
   },
@@ -76,7 +76,7 @@ const shelfExams: ShelfExam[] = [
     name: 'Neurology',
     description: 'Neurological disorders, stroke, seizures',
     icon: '⚡',
-    color: 'from-indigo-500 to-blue-500',
+    color: 'from-[#5B7B6D] to-[#8B7355]',
     systems: ['Neurology'],
     tags: ['neurology', 'stroke', 'seizure', 'headache']
   },
@@ -85,7 +85,7 @@ const shelfExams: ShelfExam[] = [
     name: 'Family Medicine',
     description: 'Comprehensive primary care across all ages',
     icon: '👨‍👩‍👧‍👦',
-    color: 'from-green-500 to-tribe-sage-500',
+    color: 'from-[#2D5A4A] to-[#5B7B6D]',
     systems: ['Preventive Medicine', 'Cardiology', 'Endocrinology', 'Psychiatry', 'Pediatrics', 'General'],
     tags: ['family medicine', 'primary care', 'preventive']
   },
@@ -94,7 +94,7 @@ const shelfExams: ShelfExam[] = [
     name: 'Emergency Medicine',
     description: 'Acute care, trauma, emergency procedures',
     icon: '🚨',
-    color: 'from-orange-500 to-red-500',
+    color: 'from-[#A89070] to-[#C4A77D]',
     systems: ['Emergency Medicine', 'Surgery', 'Cardiology', 'Neurology'],
     tags: ['emergency', 'trauma', 'acute', 'critical care']
   }
@@ -125,16 +125,16 @@ export default function ShelfSelectorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5]">
       <Header />
 
       <main className="max-w-6xl mx-auto px-4 py-8">
         {/* Title */}
         <div className="text-center mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#2D5A4A] mb-3">
             Choose Your Shelf Exam
           </h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-[#5B7B6D] max-w-2xl mx-auto">
             Select a rotation to focus your study session. Cards will be filtered to show only relevant content.
           </p>
         </div>
@@ -150,9 +150,9 @@ export default function ShelfSelectorPage() {
                 key={exam.id}
                 className={`
                   relative group rounded-2xl border-2 overflow-hidden transition-all duration-300
-                  ${hasCards 
-                    ? 'border-slate-200 hover:border-slate-300 hover:shadow-xl cursor-pointer' 
-                    : 'border-slate-100 opacity-60'
+                  ${hasCards
+                    ? 'border-[#D4C4B0] hover:border-[#C4A77D] hover:shadow-xl cursor-pointer'
+                    : 'border-[#E8E0D5] opacity-60'
                   }
                 `}
               >
@@ -170,20 +170,20 @@ export default function ShelfSelectorPage() {
                 
                 {/* Content */}
                 <div className="bg-white p-5">
-                  <p className="text-sm text-slate-600 mb-4">{exam.description}</p>
+                  <p className="text-sm text-[#5B7B6D] mb-4">{exam.description}</p>
                   
                   {/* Systems covered */}
                   <div className="flex flex-wrap gap-1.5 mb-4">
                     {exam.systems.slice(0, 4).map(system => (
-                      <span 
+                      <span
                         key={system}
-                        className="px-2 py-0.5 text-xs bg-slate-100 text-slate-600 rounded-full"
+                        className="px-2 py-0.5 text-xs bg-[#F5F0E8] text-[#5B7B6D] rounded-full"
                       >
                         {system}
                       </span>
                     ))}
                     {exam.systems.length > 4 && (
-                      <span className="px-2 py-0.5 text-xs bg-slate-100 text-slate-500 rounded-full">
+                      <span className="px-2 py-0.5 text-xs bg-[#F5F0E8] text-[#8B7355] rounded-full">
                         +{exam.systems.length - 4} more
                       </span>
                     )}
@@ -202,7 +202,7 @@ export default function ShelfSelectorPage() {
                       <Link
                         href="/rapid-review"
                         onClick={() => handleSelectExam(exam)}
-                        className="py-2.5 px-4 bg-slate-100 text-slate-700 text-sm font-semibold rounded-xl hover:bg-slate-200 transition-colors flex items-center gap-1"
+                        className="py-2.5 px-4 bg-[#E8E0D5] text-[#5B7B6D] text-sm font-semibold rounded-xl hover:bg-[#D4C4B0] transition-colors flex items-center gap-1"
                       >
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -211,7 +211,7 @@ export default function ShelfSelectorPage() {
                       </Link>
                     </div>
                   ) : (
-                    <div className="py-2.5 px-4 bg-slate-100 text-slate-400 text-sm font-medium rounded-xl text-center">
+                    <div className="py-2.5 px-4 bg-[#E8E0D5] text-[#A89070] text-sm font-medium rounded-xl text-center">
                       No cards yet
                     </div>
                   )}
@@ -223,17 +223,17 @@ export default function ShelfSelectorPage() {
 
         {/* Quick actions */}
         <div className="mt-12 text-center">
-          <p className="text-slate-500 mb-4">Or study all cards together:</p>
+          <p className="text-[#8B7355] mb-4">Or study all cards together:</p>
           <div className="flex items-center justify-center gap-4">
             <Link
               href="/flashcards"
-              className="px-6 py-3 bg-slate-900 text-white font-semibold rounded-xl hover:bg-slate-800 transition-colors"
+              className="px-6 py-3 bg-[#2D5A4A] text-white font-semibold rounded-xl hover:bg-[#5B7B6D] transition-colors focus:ring-2 focus:ring-[#C4A77D] focus:outline-none"
             >
               Study All Cards
             </Link>
             <Link
               href="/rapid-review"
-              className="px-6 py-3 bg-amber-500 text-white font-semibold rounded-xl hover:bg-amber-600 transition-colors flex items-center gap-2"
+              className="px-6 py-3 bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white font-semibold rounded-xl hover:opacity-90 transition-opacity flex items-center gap-2 focus:ring-2 focus:ring-[#C4A77D] focus:outline-none"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -245,13 +245,13 @@ export default function ShelfSelectorPage() {
 
         {/* Import hint */}
         {stats.totalCards < 50 && (
-          <div className="mt-12 p-6 bg-blue-50 border border-blue-200 rounded-2xl text-center">
-            <p className="text-blue-800 mb-3">
+          <div className="mt-12 p-6 bg-[#F5F0E8] border border-[#D4C4B0] rounded-2xl text-center">
+            <p className="text-[#2D5A4A] mb-3">
               <strong>Tip:</strong> Import more cards to unlock additional shelf exams!
             </p>
             <Link
               href="/import"
-              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
+              className="inline-flex items-center gap-2 text-[#5B7B6D] hover:text-[#2D5A4A] font-medium focus:ring-2 focus:ring-[#C4A77D] focus:outline-none rounded"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />

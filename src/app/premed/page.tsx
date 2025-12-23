@@ -133,29 +133,29 @@ export default function PreMedPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+    <div className="min-h-screen bg-[#F5F0E8] dark:bg-slate-900">
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
         <section className="mb-8">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-tribe-sage-500 via-teal-500 to-cyan-500 p-8 md:p-10 shadow-2xl">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#5B7B6D] via-[#8B7355] to-[#A89070] p-8 md:p-10 shadow-2xl">
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
               <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
-              <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-emerald-300/20 rounded-full blur-2xl" />
+              <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-[#D4C4B0]/20 rounded-full blur-2xl" />
             </div>
 
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="text-center md:text-left">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/20 backdrop-blur rounded-full text-white/90 text-sm font-medium mb-4">
-                  <span className="w-2 h-2 bg-emerald-300 rounded-full animate-pulse" />
+                  <span className="w-2 h-2 bg-[#D4C4B0] rounded-full animate-pulse" />
                   <span>TribeWellPreMed - Coming Soon</span>
                 </div>
 
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 leading-tight">
-                  Your Journey to <span className="text-emerald-200">Medicine</span> Starts Here
+                  Your Journey to <span className="text-[#F5F0E8]">Medicine</span> Starts Here
                 </h1>
 
                 <p className="text-white/80 text-lg max-w-xl mb-6">
@@ -201,12 +201,12 @@ export default function PreMedPage() {
                       placeholder="Enter your email"
                       required
                       disabled={loading}
-                      className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:opacity-50"
+                      className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#C4A77D] disabled:opacity-50"
                     />
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full px-6 py-3 bg-white hover:bg-tribe-sage-50 text-tribe-sage-600 font-bold rounded-xl shadow-lg transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
+                      className="w-full px-6 py-3 bg-white hover:bg-[#F5F0E8] text-[#8B7355] font-bold rounded-xl shadow-lg transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
                     >
                       {loading ? 'Saving...' : 'Notify Me'}
                     </button>
@@ -221,27 +221,27 @@ export default function PreMedPage() {
 
         {/* Features Grid */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-8 text-center">
+          <h2 className="text-2xl font-bold text-[#8B7355] dark:text-white mb-8 text-center">
             What's Coming for Pre-Meds
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {PREMED_FEATURES.map((feature, index) => (
               <div
                 key={index}
-                className="relative p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700"
+                className="relative p-6 bg-white dark:bg-slate-800 rounded-2xl border border-[#D4C4B0] dark:border-[#5B7B6D]"
               >
-                <div className="absolute top-4 right-4 px-3 py-1 bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-600 dark:text-tribe-sage-400 text-xs font-medium rounded-full">
+                <div className="absolute top-4 right-4 px-3 py-1 bg-[#F5F0E8] dark:bg-[#8B7355]/30 text-[#8B7355] dark:text-[#D4C4B0] text-xs font-medium rounded-full">
                   {feature.status}
                 </div>
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center mb-4 text-tribe-sage-600 dark:text-tribe-sage-400">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#F5F0E8] to-[#E8E0D5] dark:from-[#8B7355]/30 dark:to-[#5B7B6D]/30 flex items-center justify-center mb-4 text-[#8B7355] dark:text-[#D4C4B0]">
                   {renderFeatureIcon(feature.icon)}
                 </div>
-                <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">{feature.title}</h3>
-                <p className="text-slate-600 dark:text-slate-400 mb-4">{feature.description}</p>
+                <h3 className="text-xl font-semibold text-[#8B7355] dark:text-white mb-2">{feature.title}</h3>
+                <p className="text-[#A89070] dark:text-[#D4C4B0] mb-4">{feature.description}</p>
                 <ul className="space-y-2">
                   {feature.features.map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-                      <svg className="w-4 h-4 text-tribe-sage-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <li key={idx} className="flex items-center gap-2 text-sm text-[#A89070] dark:text-[#D4C4B0]">
+                      <svg className="w-4 h-4 text-[#5B7B6D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                       {item}
@@ -255,27 +255,27 @@ export default function PreMedPage() {
 
         {/* The Pre-Med Journey */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-8 text-center">
+          <h2 className="text-2xl font-bold text-[#8B7355] dark:text-white mb-8 text-center">
             The Pre-Med Journey
           </h2>
           <div className="grid md:grid-cols-4 gap-4">
             {JOURNEY_STEPS.map((step, index) => (
               <div
                 key={index}
-                className="relative p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700"
+                className="relative p-6 bg-white dark:bg-slate-800 rounded-2xl border border-[#D4C4B0] dark:border-[#5B7B6D]"
               >
                 {index < JOURNEY_STEPS.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 -right-2 w-4 h-0.5 bg-emerald-300 dark:bg-emerald-700" />
+                  <div className="hidden md:block absolute top-1/2 -right-2 w-4 h-0.5 bg-[#D4C4B0] dark:bg-[#5B7B6D]" />
                 )}
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-tribe-sage-500 to-teal-500 flex items-center justify-center text-white font-bold mb-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#C4A77D] to-[#A89070] flex items-center justify-center text-white font-bold mb-3">
                   {index + 1}
                 </div>
-                <h3 className="font-bold text-slate-900 dark:text-white mb-1">{step.year}</h3>
-                <p className="text-sm text-tribe-sage-600 dark:text-tribe-sage-400 font-medium mb-3">{step.focus}</p>
+                <h3 className="font-bold text-[#8B7355] dark:text-white mb-1">{step.year}</h3>
+                <p className="text-sm text-[#8B7355] dark:text-[#D4C4B0] font-medium mb-3">{step.focus}</p>
                 <ul className="space-y-1">
                   {step.tasks.map((task, idx) => (
-                    <li key={idx} className="text-sm text-slate-500 dark:text-slate-400 flex items-start gap-2">
-                      <span className="text-tribe-sage-500 mt-1">•</span>
+                    <li key={idx} className="text-sm text-[#A89070] dark:text-[#D4C4B0] flex items-start gap-2">
+                      <span className="text-[#5B7B6D] mt-1">•</span>
                       {task}
                     </li>
                   ))}
@@ -291,19 +291,19 @@ export default function PreMedPage() {
             <h2 className="text-3xl font-bold mb-6">Why TribeWellPreMed?</h2>
             <div className="grid md:grid-cols-3 gap-8 mb-8">
               <div>
-                <div className="text-4xl font-bold text-tribe-sage-400 mb-2">53,000+</div>
-                <p className="text-slate-300">AMCAS applications per year</p>
+                <div className="text-4xl font-bold text-[#D4C4B0] mb-2">53,000+</div>
+                <p className="text-[#F5F0E8]/80">AMCAS applications per year</p>
               </div>
               <div>
-                <div className="text-4xl font-bold text-tribe-sage-400 mb-2">~40%</div>
-                <p className="text-slate-300">of applicants matriculate</p>
+                <div className="text-4xl font-bold text-[#D4C4B0] mb-2">~40%</div>
+                <p className="text-[#F5F0E8]/80">of applicants matriculate</p>
               </div>
               <div>
-                <div className="text-4xl font-bold text-tribe-sage-400 mb-2">4+ years</div>
-                <p className="text-slate-300">of preparation needed</p>
+                <div className="text-4xl font-bold text-[#D4C4B0] mb-2">4+ years</div>
+                <p className="text-[#F5F0E8]/80">of preparation needed</p>
               </div>
             </div>
-            <p className="text-slate-300 text-lg">
+            <p className="text-[#F5F0E8]/80 text-lg">
               The path to medicine is competitive, but you don't have to navigate it alone.
               TribeWellPreMed connects you with the guidance and community you need to succeed.
             </p>
@@ -312,20 +312,20 @@ export default function PreMedPage() {
 
         {/* Testimonials */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-8 text-center">
+          <h2 className="text-2xl font-bold text-[#8B7355] dark:text-white mb-8 text-center">
             What Pre-Meds & Med Students Say
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {TESTIMONIALS.map((testimonial, index) => (
               <div
                 key={index}
-                className="p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700"
+                className="p-6 bg-white dark:bg-slate-800 rounded-2xl border border-[#D4C4B0] dark:border-[#5B7B6D]"
               >
-                <div className="w-12 h-12 rounded-xl bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center mb-4 text-tribe-sage-600 dark:text-tribe-sage-400">
+                <div className="w-12 h-12 rounded-xl bg-[#F5F0E8] dark:bg-[#8B7355]/30 flex items-center justify-center mb-4 text-[#8B7355] dark:text-[#D4C4B0]">
                   {renderTestimonialIcon(testimonial.icon)}
                 </div>
-                <p className="text-slate-600 dark:text-slate-300 italic mb-4">"{testimonial.quote}"</p>
-                <p className="text-sm text-slate-500 dark:text-slate-400">- {testimonial.author}</p>
+                <p className="text-[#A89070] dark:text-[#D4C4B0] italic mb-4">"{testimonial.quote}"</p>
+                <p className="text-sm text-[#A89070] dark:text-[#D4C4B0]">- {testimonial.author}</p>
               </div>
             ))}
           </div>
@@ -333,7 +333,7 @@ export default function PreMedPage() {
 
         {/* Connection to TribeWellMD */}
         <section className="mb-8">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 p-8">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#5B7B6D] via-[#8B7355] to-[#A89070] p-8">
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
             </div>
@@ -343,7 +343,7 @@ export default function PreMedPage() {
                 <Icons.Hospital />
               </div>
               <h2 className="text-2xl font-bold text-white mb-2">Part of the TribeWellMD Family</h2>
-              <p className="text-tribe-sage-100 mb-6">
+              <p className="text-[#F5F0E8] mb-6">
                 TribeWellPreMed is your starting point. When you get into medical school,
                 you'll have seamless access to TribeWellMD's full suite of study tools,
                 wellness resources, and community features.
@@ -351,7 +351,7 @@ export default function PreMedPage() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
                   href="/"
-                  className="px-6 py-3 bg-white text-tribe-sage-600 font-semibold rounded-xl hover:bg-tribe-sage-50 transition-all hover:scale-105"
+                  className="px-6 py-3 bg-white text-[#8B7355] font-semibold rounded-xl hover:bg-[#F5F0E8] transition-all hover:scale-105"
                 >
                   Explore TribeWellMD
                 </Link>
@@ -368,16 +368,16 @@ export default function PreMedPage() {
 
         {/* CTA */}
         <section className="mb-8">
-          <div className="p-8 bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center text-tribe-sage-600 dark:text-tribe-sage-400">
+          <div className="p-8 bg-white dark:bg-slate-800 rounded-3xl border border-[#D4C4B0] dark:border-[#5B7B6D] text-center">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#F5F0E8] to-[#E8E0D5] dark:from-[#8B7355]/30 dark:to-[#5B7B6D]/30 flex items-center justify-center text-[#8B7355] dark:text-[#D4C4B0]">
               <Icons.Sparkles />
             </div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Ready to Start Your Journey?</h2>
-            <p className="text-slate-600 dark:text-slate-400 mb-6 max-w-2xl mx-auto">
+            <h2 className="text-2xl font-bold text-[#8B7355] dark:text-white mb-2">Ready to Start Your Journey?</h2>
+            <p className="text-[#A89070] dark:text-[#D4C4B0] mb-6 max-w-2xl mx-auto">
               Sign up for early access and be the first to know when TribeWellPreMed launches.
               Your future in medicine starts with a single step.
             </p>
-            <button className="px-8 py-4 bg-gradient-to-r from-tribe-sage-500 to-teal-500 hover:from-emerald-600 hover:to-tribe-sage-600 text-white font-bold rounded-xl shadow-lg shadow-tribe-sage-500/25 transition-all hover:scale-105">
+            <button className="px-8 py-4 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#C4A77D] text-white font-bold rounded-xl shadow-lg shadow-[#C4A77D]/25 transition-all hover:scale-105">
               Get Early Access
             </button>
           </div>

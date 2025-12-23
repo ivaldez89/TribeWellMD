@@ -119,27 +119,27 @@ export default function CreateCasePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5]">
       <Header />
 
       {/* Sub-header with page-specific actions */}
-      <div className="bg-white border-b border-slate-200 sticky top-0 z-10">
+      <div className="bg-white border-b border-[#D4C4B0] sticky top-0 z-10">
         <div className="max-w-5xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Link href="/cases" className="text-slate-400 hover:text-slate-600 transition-colors">
+              <Link href="/cases" className="text-[#A89070] hover:text-[#8B7355] transition-colors">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </Link>
-              <h1 className="text-xl font-bold text-slate-800">Create New Case</h1>
+              <h1 className="text-xl font-bold text-[#8B7355]">Create New Case</h1>
             </div>
 
             {/* Quick actions */}
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setShowImportModal(true)}
-                className="px-3 py-2 text-sm text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors flex items-center gap-1.5"
+                className="px-3 py-2 text-sm text-[#A89070] hover:text-[#8B7355] hover:bg-[#F5F0E8] rounded-lg transition-colors flex items-center gap-1.5"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
@@ -148,7 +148,7 @@ export default function CreateCasePage() {
               </button>
               <button
                 onClick={handleExport}
-                className="px-3 py-2 text-sm text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors flex items-center gap-1.5"
+                className="px-3 py-2 text-sm text-[#A89070] hover:text-[#8B7355] hover:bg-[#F5F0E8] rounded-lg transition-colors flex items-center gap-1.5"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -174,15 +174,15 @@ export default function CreateCasePage() {
       {showImportModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
-            <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-slate-800">Import Case</h2>
+            <div className="px-6 py-4 border-b border-[#D4C4B0] flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-[#8B7355]">Import Case</h2>
               <button
                 onClick={() => {
                   setShowImportModal(false);
                   setImportJson('');
                   setImportError(null);
                 }}
-                className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+                className="p-1.5 text-[#A89070] hover:text-[#8B7355] hover:bg-[#F5F0E8] rounded-lg transition-colors"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -202,19 +202,19 @@ export default function CreateCasePage() {
                 />
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="w-full py-8 border-2 border-dashed border-slate-300 rounded-xl hover:border-indigo-400 hover:bg-indigo-50/50 transition-colors flex flex-col items-center gap-2"
+                  className="w-full py-8 border-2 border-dashed border-[#D4C4B0] rounded-xl hover:border-[#C4A77D] hover:bg-[#F5F0E8]/50 transition-colors flex flex-col items-center gap-2"
                 >
-                  <svg className="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-8 h-8 text-[#A89070]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                   </svg>
-                  <span className="text-sm font-medium text-slate-600">Upload JSON file</span>
-                  <span className="text-xs text-slate-400">or paste JSON below</span>
+                  <span className="text-sm font-medium text-[#8B7355]">Upload JSON file</span>
+                  <span className="text-xs text-[#A89070]">or paste JSON below</span>
                 </button>
               </div>
 
               {/* JSON textarea */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
+                <label className="block text-sm font-medium text-[#8B7355] mb-1">
                   Paste JSON
                 </label>
                 <textarea
@@ -222,7 +222,7 @@ export default function CreateCasePage() {
                   onChange={(e) => setImportJson(e.target.value)}
                   placeholder='{"id": "...", "title": "...", "nodes": {...}}'
                   rows={8}
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 font-mono text-sm resize-y"
+                  className="w-full px-4 py-3 border border-[#D4C4B0] rounded-lg focus:ring-2 focus:ring-[#C4A77D] focus:border-[#C4A77D] font-mono text-sm resize-y"
                 />
               </div>
 
@@ -234,21 +234,21 @@ export default function CreateCasePage() {
               )}
             </div>
 
-            <div className="px-6 py-4 border-t border-slate-200 flex justify-end gap-3">
+            <div className="px-6 py-4 border-t border-[#D4C4B0] flex justify-end gap-3">
               <button
                 onClick={() => {
                   setShowImportModal(false);
                   setImportJson('');
                   setImportError(null);
                 }}
-                className="px-4 py-2 text-slate-700 hover:text-slate-900 font-medium rounded-lg hover:bg-slate-100 transition-colors"
+                className="px-4 py-2 text-[#8B7355] hover:text-[#5B7B6D] font-medium rounded-lg hover:bg-[#F5F0E8] transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleImport}
                 disabled={!importJson.trim()}
-                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Import
               </button>

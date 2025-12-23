@@ -583,10 +583,10 @@ export default function FlashcardsPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-[#E8DFD0] dark:bg-slate-900">
         <div className="flex flex-col items-center gap-4">
-          <div className="animate-spin w-10 h-10 border-4 border-tribe-sage-500 border-t-transparent rounded-full" />
-          <p className="text-slate-500">Loading cards...</p>
+          <div className="animate-spin w-10 h-10 border-4 border-[#5B7B6D] border-t-transparent rounded-full" />
+          <p className="text-[#6B5344]/80 dark:text-slate-400">Loading cards...</p>
         </div>
       </div>
     );
@@ -595,38 +595,38 @@ export default function FlashcardsPage() {
   // No cards due - show completion screen
   if (filteredDueCards.length === 0) {
     return (
-      <div className="min-h-screen">
+      <div className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900">
         <Header stats={stats} />
-        
+
         <main className="max-w-3xl mx-auto px-4 py-16 text-center">
           <div className="mb-8">
-            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center">
-              <svg className="w-12 h-12 text-tribe-sage-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#5B7B6D]/20 to-[#3D5A4C]/20 dark:from-[#5B7B6D]/30 dark:to-[#3D5A4C]/30 flex items-center justify-center">
+              <svg className="w-12 h-12 text-[#5B7B6D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            
+
             {hasActiveFilters && dueCards.length > 0 ? (
               <>
-                <h1 className="text-3xl font-bold text-slate-900 mb-4">
+                <h1 className="text-3xl font-bold text-[#3D5A4C] dark:text-white mb-4">
                   No Cards Match Filters
                 </h1>
-                <p className="text-lg text-slate-600 max-w-md mx-auto mb-6">
+                <p className="text-lg text-[#6B5344]/80 dark:text-slate-400 max-w-md mx-auto mb-6">
                   You have {dueCards.length} cards due, but none match your current filters.
                 </p>
                 <button
                   onClick={clearFilters}
-                  className="px-6 py-3 bg-tribe-sage-600 text-white font-medium rounded-xl hover:bg-emerald-700 transition-colors"
+                  className="px-6 py-3 bg-gradient-to-r from-[#5B7B6D] to-[#6B8B7D] text-white font-medium rounded-xl hover:from-[#4A6B5D] hover:to-[#5B7B6D] transition-colors shadow-lg shadow-[#5B7B6D]/20"
                 >
                   Clear Filters & Study All
                 </button>
               </>
             ) : (
               <>
-                <h1 className="text-3xl font-bold text-slate-900 mb-4">
+                <h1 className="text-3xl font-bold text-[#3D5A4C] dark:text-white mb-4">
                   All Caught Up!
                 </h1>
-                <p className="text-lg text-slate-600 max-w-md mx-auto">
+                <p className="text-lg text-[#6B5344]/80 dark:text-slate-400 max-w-md mx-auto">
                   You've reviewed all your due cards. Great work! Come back later for your next review session.
                 </p>
               </>
@@ -634,32 +634,32 @@ export default function FlashcardsPage() {
           </div>
           
           {session && session.cardsReviewed > 0 && (
-            <div className="mb-8 p-6 bg-white rounded-2xl border border-slate-200 shadow-sm inline-block">
-              <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-4">
+            <div className="mb-8 p-6 bg-white dark:bg-slate-800 rounded-2xl border border-[#D4C4B0]/50 dark:border-slate-700 shadow-sm shadow-[#3D5A4C]/5 inline-block">
+              <h2 className="text-sm font-semibold text-[#6B5344]/80 dark:text-slate-400 uppercase tracking-wide mb-4">
                 Session Summary
               </h2>
               <div className="flex items-center justify-center gap-8">
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-slate-900">{session.cardsReviewed}</p>
-                  <p className="text-sm text-slate-500">Reviewed</p>
+                  <p className="text-3xl font-bold text-[#3D5A4C] dark:text-white">{session.cardsReviewed}</p>
+                  <p className="text-sm text-[#6B5344]/70 dark:text-slate-400">Reviewed</p>
                 </div>
-                <div className="w-px h-12 bg-slate-200" />
+                <div className="w-px h-12 bg-[#D4C4B0]/50 dark:bg-slate-700" />
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-tribe-sage-600">{session.cardsCorrect}</p>
-                  <p className="text-sm text-slate-500">Correct</p>
+                  <p className="text-3xl font-bold text-[#5B7B6D]">{session.cardsCorrect}</p>
+                  <p className="text-sm text-[#6B5344]/70 dark:text-slate-400">Correct</p>
                 </div>
-                <div className="w-px h-12 bg-slate-200" />
+                <div className="w-px h-12 bg-[#D4C4B0]/50 dark:bg-slate-700" />
                 <div className="text-center">
                   <p className="text-3xl font-bold text-red-500">{session.cardsFailed}</p>
-                  <p className="text-sm text-slate-500">Again</p>
+                  <p className="text-sm text-[#6B5344]/70 dark:text-slate-400">Again</p>
                 </div>
               </div>
             </div>
           )}
-          
+
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-xl transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#F5EFE6] hover:bg-[#E8DFD0] dark:bg-slate-700 dark:hover:bg-slate-600 text-[#6B5344] dark:text-slate-300 font-medium rounded-xl transition-colors"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -672,7 +672,12 @@ export default function FlashcardsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 relative">
+    <div className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900 relative">
+      {/* Subtle organic pattern overlay on sides */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+        <div className="absolute top-0 left-0 w-1/4 h-full bg-gradient-to-r from-[#D4C4B0]/30 to-transparent" />
+        <div className="absolute top-0 right-0 w-1/4 h-full bg-gradient-to-l from-[#D4C4B0]/30 to-transparent" />
+      </div>
       <Header stats={stats} />
 
       {/* Background overlay - positioned below header and toolbar, behind all content */}
@@ -693,23 +698,23 @@ export default function FlashcardsPage() {
 
       <main className="relative max-w-5xl mx-auto px-4 py-8" style={{ zIndex: 2 }}>
         {/* Session progress bar - solid background to cover the scene */}
-        <div className="mb-6 flex items-center justify-between flex-wrap gap-2 bg-slate-50 py-2 -mx-4 px-4 -mt-8 pt-8">
+        <div className="mb-6 flex items-center justify-between flex-wrap gap-2 bg-[#E8DFD0] dark:bg-slate-900 py-2 -mx-4 px-4 -mt-8 pt-8">
           <div className="flex items-center gap-4">
             {session && (
               <>
                 <div className="flex items-center gap-2 text-sm">
-                  <span className="text-tribe-sage-600 font-medium">{session.cardsCorrect}</span>
-                  <span className="text-slate-400">correct</span>
+                  <span className="text-[#5B7B6D] font-medium">{session.cardsCorrect}</span>
+                  <span className="text-[#6B5344]/70 dark:text-slate-400">correct</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <span className="text-red-500 font-medium">{session.cardsFailed}</span>
-                  <span className="text-slate-400">again</span>
+                  <span className="text-[#6B5344]/70 dark:text-slate-400">again</span>
                 </div>
               </>
             )}
             
             {hasActiveFilters && (
-              <div className="flex items-center gap-2 text-sm px-2 py-1 bg-indigo-50 text-indigo-600 rounded-lg">
+              <div className="flex items-center gap-2 text-sm px-2 py-1 bg-[#5B7B6D]/10 dark:bg-[#5B7B6D]/20 text-[#5B7B6D] rounded-lg">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                 </svg>
@@ -735,18 +740,18 @@ export default function FlashcardsPage() {
               disabled={cramCards.length === 0}
               className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors ${
                 cramMode
-                  ? 'bg-orange-100 text-orange-700 border border-orange-300'
+                  ? 'bg-[#8B7355]/20 text-[#6B5344] border border-[#8B7355]/30 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-700'
                   : cramCards.length > 0
-                    ? 'text-slate-500 hover:text-slate-700 hover:bg-slate-100'
-                    : 'text-slate-300 cursor-not-allowed'
+                    ? 'text-[#6B5344]/70 dark:text-slate-400 hover:text-[#6B5344] dark:hover:text-slate-200 hover:bg-[#F5EFE6] dark:hover:bg-slate-700'
+                    : 'text-[#D4C4B0] dark:text-slate-600 cursor-not-allowed'
               }`}
               title={cramCards.length === 0 ? 'No cards to cram - you haven\'t missed any yet!' : `Cram ${cramCards.length} missed cards`}
             >
-              <span className="w-4 h-4 text-orange-500"><Icons.Fire /></span>
+              <span className="w-4 h-4 text-[#8B7355] dark:text-orange-500"><Icons.Fire /></span>
               <span>Cram</span>
               {cramCards.length > 0 && (
                 <span className={`text-xs px-1.5 py-0.5 rounded-full ${
-                  cramMode ? 'bg-orange-200' : 'bg-slate-200'
+                  cramMode ? 'bg-[#8B7355]/30 dark:bg-orange-800' : 'bg-[#E8DFD0] dark:bg-slate-700'
                 }`}>
                   {cramCards.length}
                 </span>
@@ -759,8 +764,8 @@ export default function FlashcardsPage() {
               onClick={() => setShowAmbient(!showAmbient)}
               className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors ${
                 showAmbient || isPlaying || isMusicPlaying
-                  ? 'bg-purple-100 text-purple-700'
-                  : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100'
+                  ? 'bg-[#5B7B6D]/20 text-[#3D5A4C] dark:bg-purple-900/30 dark:text-purple-300'
+                  : 'text-[#6B5344]/70 dark:text-slate-400 hover:text-[#6B5344] dark:hover:text-slate-200 hover:bg-[#F5EFE6] dark:hover:bg-slate-700'
               }`}
             >
               {isPlaying || isMusicPlaying ? (
@@ -795,9 +800,9 @@ export default function FlashcardsPage() {
             <button
               onClick={() => setShowFilters(!showFilters)}
               className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors ${
-                showFilters 
-                  ? 'bg-indigo-100 text-indigo-700' 
-                  : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100'
+                showFilters
+                  ? 'bg-[#5B7B6D]/20 text-[#3D5A4C] dark:bg-[#5B7B6D]/30 dark:text-[#6B8B7D]'
+                  : 'text-[#6B5344]/70 dark:text-slate-400 hover:text-[#6B5344] dark:hover:text-slate-200 hover:bg-[#F5EFE6] dark:hover:bg-slate-700'
               }`}
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -805,10 +810,10 @@ export default function FlashcardsPage() {
               </svg>
               Filters
             </button>
-            
+
             <button
               onClick={endSession}
-              className="text-sm text-slate-500 hover:text-slate-700 transition-colors"
+              className="text-sm text-[#6B5344]/70 dark:text-slate-400 hover:text-[#6B5344] dark:hover:text-slate-200 transition-colors"
             >
               End Session
             </button>
@@ -817,11 +822,11 @@ export default function FlashcardsPage() {
 
         {/* Audio Panel - Ambient Sounds & Music */}
         {showAmbient && (
-          <div ref={audioPanelRef} className="mb-6 p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+          <div ref={audioPanelRef} className="mb-6 p-4 bg-white dark:bg-slate-800 rounded-2xl border border-[#D4C4B0]/50 dark:border-slate-700 shadow-sm shadow-[#3D5A4C]/5">
             {/* Header with Stop button */}
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-slate-900 flex items-center gap-2">
-                <svg className="w-5 h-5 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <h3 className="font-semibold text-[#3D5A4C] dark:text-white flex items-center gap-2">
+                <svg className="w-5 h-5 text-[#5B7B6D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                 </svg>
                 Sounds & Music
@@ -829,7 +834,7 @@ export default function FlashcardsPage() {
               {(isPlaying || isMusicPlaying) && (
                 <button
                   onClick={stopAll}
-                  className="text-sm px-3 py-1 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
+                  className="text-sm px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors"
                 >
                   Stop All
                 </button>
@@ -838,7 +843,7 @@ export default function FlashcardsPage() {
 
             {/* Ambient Sounds Section */}
             <div className="mb-5">
-              <h4 className="text-sm font-medium text-slate-600 mb-2 flex items-center gap-2">
+              <h4 className="text-sm font-medium text-[#6B5344]/80 dark:text-slate-400 mb-2 flex items-center gap-2">
                 <Icons.Headphones /> Ambient Sounds
               </h4>
               <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-3">
@@ -848,21 +853,21 @@ export default function FlashcardsPage() {
                     onClick={() => playSound(sound.id)}
                     className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all ${
                       currentSound === sound.id && isPlaying
-                        ? 'bg-purple-100 border-2 border-purple-400 shadow-sm'
-                        : 'bg-slate-50 border-2 border-transparent hover:bg-slate-100'
+                        ? 'bg-[#5B7B6D]/20 border-2 border-[#5B7B6D] shadow-sm dark:bg-[#5B7B6D]/30'
+                        : 'bg-[#F5EFE6] dark:bg-slate-700 border-2 border-transparent hover:bg-[#E8DFD0] dark:hover:bg-slate-600'
                     }`}
                   >
                     <AudioIcon iconId={sound.icon} />
-                    <span className="text-xs font-medium text-slate-600">{sound.name}</span>
+                    <span className="text-xs font-medium text-[#6B5344] dark:text-slate-300">{sound.name}</span>
                     {currentSound === sound.id && isPlaying && (
-                      <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
+                      <span className="w-2 h-2 bg-[#5B7B6D] rounded-full animate-pulse" />
                     )}
                   </button>
                 ))}
               </div>
               {isPlaying && (
                 <div className="flex items-center gap-3">
-                  <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-4 h-4 text-[#6B5344]/60 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                   </svg>
                   <input
@@ -872,19 +877,19 @@ export default function FlashcardsPage() {
                     step="0.05"
                     value={volume}
                     onChange={(e) => setVolume(parseFloat(e.target.value))}
-                    className="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-purple-500"
+                    className="flex-1 h-2 bg-[#D4C4B0]/50 dark:bg-slate-600 rounded-lg appearance-none cursor-pointer accent-[#5B7B6D]"
                   />
-                  <span className="text-sm text-slate-500 w-12 text-right">{Math.round(volume * 100)}%</span>
+                  <span className="text-sm text-[#6B5344]/70 dark:text-slate-400 w-12 text-right">{Math.round(volume * 100)}%</span>
                 </div>
               )}
             </div>
 
             {/* Divider */}
-            <div className="border-t border-slate-200 my-4" />
+            <div className="border-t border-[#D4C4B0]/50 dark:border-slate-700 my-4" />
 
             {/* Study Music Section */}
             <div>
-              <h4 className="text-sm font-medium text-slate-600 mb-2 flex items-center gap-2">
+              <h4 className="text-sm font-medium text-[#6B5344]/80 dark:text-slate-400 mb-2 flex items-center gap-2">
                 <Icons.Music /> Study Music
               </h4>
               <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-3">
@@ -895,24 +900,24 @@ export default function FlashcardsPage() {
                     disabled={isMusicLoading && currentMusic !== music.id}
                     className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all ${
                       currentMusic === music.id && (isMusicPlaying || isMusicLoading)
-                        ? 'bg-indigo-100 border-2 border-indigo-400 shadow-sm'
-                        : 'bg-slate-50 border-2 border-transparent hover:bg-slate-100'
+                        ? 'bg-[#6B8B7D]/20 border-2 border-[#6B8B7D] shadow-sm dark:bg-[#6B8B7D]/30'
+                        : 'bg-[#F5EFE6] dark:bg-slate-700 border-2 border-transparent hover:bg-[#E8DFD0] dark:hover:bg-slate-600'
                     } ${isMusicLoading && currentMusic !== music.id ? 'opacity-50' : ''}`}
                   >
                     <AudioIcon iconId={music.icon} />
-                    <span className="text-xs font-medium text-slate-600">{music.name}</span>
+                    <span className="text-xs font-medium text-[#6B5344] dark:text-slate-300">{music.name}</span>
                     {currentMusic === music.id && isMusicLoading && (
-                      <span className="w-3 h-3 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+                      <span className="w-3 h-3 border-2 border-[#6B8B7D] border-t-transparent rounded-full animate-spin" />
                     )}
                     {currentMusic === music.id && isMusicPlaying && !isMusicLoading && (
-                      <span className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse" />
+                      <span className="w-2 h-2 bg-[#6B8B7D] rounded-full animate-pulse" />
                     )}
                   </button>
                 ))}
               </div>
               {isMusicPlaying && (
                 <div className="flex items-center gap-3">
-                  <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-4 h-4 text-[#6B5344]/60 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                   </svg>
                   <input
@@ -922,15 +927,15 @@ export default function FlashcardsPage() {
                     step="0.05"
                     value={musicVolume}
                     onChange={(e) => setMusicVolume(parseFloat(e.target.value))}
-                    className="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                    className="flex-1 h-2 bg-[#D4C4B0]/50 dark:bg-slate-600 rounded-lg appearance-none cursor-pointer accent-[#6B8B7D]"
                   />
-                  <span className="text-sm text-slate-500 w-12 text-right">{Math.round(musicVolume * 100)}%</span>
+                  <span className="text-sm text-[#6B5344]/70 dark:text-slate-400 w-12 text-right">{Math.round(musicVolume * 100)}%</span>
                 </div>
               )}
             </div>
 
             {/* Tips */}
-            <p className="mt-4 text-xs text-slate-400 flex items-start gap-1">
+            <p className="mt-4 text-xs text-[#6B5344]/60 dark:text-slate-500 flex items-start gap-1">
               <span className="w-4 h-4 flex-shrink-0"><Icons.Lightbulb /></span>
               <span>Ambient sounds are generated locally. Music streams from free internet radio stations.
               Use headphones for binaural beats (Focus 40Hz).</span>
@@ -957,16 +962,16 @@ export default function FlashcardsPage() {
         {cramMode && (
           <div className="mb-6">
             {/* Cram Mode Header */}
-            <div className="flex items-center justify-between mb-4 p-4 bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl border border-orange-200">
+            <div className="flex items-center justify-between mb-4 p-4 bg-gradient-to-r from-[#C4A77D]/20 to-[#A89070]/20 dark:from-[#8B7355]/30 dark:to-[#6B5344]/30 rounded-xl border border-[#C4A77D]/40 dark:border-[#8B7355]/50">
               <div className="flex items-center gap-3">
-                <span className="w-8 h-8 text-orange-500"><Icons.Fire /></span>
+                <span className="w-8 h-8 text-[#8B7355] dark:text-[#C4A77D]"><Icons.Fire /></span>
                 <div>
-                  <h2 className="font-semibold text-orange-900">Cram Mode</h2>
-                  <p className="text-sm text-orange-700">Reviewing cards you've missed before</p>
+                  <h2 className="font-semibold text-[#6B5344] dark:text-[#C4A77D]">Cram Mode</h2>
+                  <p className="text-sm text-[#8B7355] dark:text-[#A89070]">Reviewing cards you've missed before</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-sm text-orange-600">
+                <span className="text-sm text-[#8B7355] dark:text-[#A89070]">
                   {cramIndex + 1} of {cramCards.length}
                 </span>
                 <button
@@ -975,7 +980,7 @@ export default function FlashcardsPage() {
                     setCramIndex(0);
                     setCramRevealed(false);
                   }}
-                  className="text-sm px-3 py-1.5 bg-white border border-orange-300 text-orange-700 rounded-lg hover:bg-orange-50 transition-colors"
+                  className="text-sm px-3 py-1.5 bg-white dark:bg-slate-800 border border-[#C4A77D]/50 dark:border-[#8B7355]/50 text-[#6B5344] dark:text-[#C4A77D] rounded-lg hover:bg-[#F5EFE6] dark:hover:bg-slate-700 transition-colors"
                 >
                   Exit Cram
                 </button>
@@ -1009,7 +1014,7 @@ export default function FlashcardsPage() {
                           setCramRevealed(false);
                         }
                       }}
-                      className="px-8 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-medium rounded-xl hover:from-orange-600 hover:to-amber-600 transition-all shadow-lg"
+                      className="px-8 py-3 bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white font-medium rounded-xl hover:from-[#A89070] hover:to-[#8B7355] transition-all shadow-lg shadow-[#8B7355]/20"
                     >
                       {cramIndex < cramCards.length - 1 ? 'Next Card' : 'Finish Cram'}
                     </button>
@@ -1017,13 +1022,13 @@ export default function FlashcardsPage() {
                 )}
 
                 {/* Card Stats */}
-                <div className="mt-4 text-center text-sm text-slate-500">
+                <div className="mt-4 text-center text-sm text-[#6B5344]/70 dark:text-slate-400">
                   <span>This card has been missed {currentCramCard.spacedRepetition.lapses} time{currentCramCard.spacedRepetition.lapses !== 1 ? 's' : ''}</span>
                 </div>
               </>
             ) : (
               <div className="text-center py-12">
-                <p className="text-slate-500">No more cards to cram!</p>
+                <p className="text-[#6B5344]/70 dark:text-slate-400">No more cards to cram!</p>
               </div>
             )}
           </div>
@@ -1053,14 +1058,14 @@ export default function FlashcardsPage() {
 
         {/* Keyboard shortcuts help */}
         <div className="mt-8 text-center">
-          <p className="text-sm text-slate-400">
-            <kbd className="px-1.5 py-0.5 bg-slate-200 rounded text-xs font-mono">Space</kbd> to reveal
+          <p className="text-sm text-[#6B5344]/60 dark:text-slate-500">
+            <kbd className="px-1.5 py-0.5 bg-[#D4C4B0]/50 dark:bg-slate-700 rounded text-xs font-mono text-[#6B5344] dark:text-slate-300">Space</kbd> to reveal
             <span className="mx-2">•</span>
-            <kbd className="px-1.5 py-0.5 bg-slate-200 rounded text-xs font-mono">1-4</kbd> to rate
+            <kbd className="px-1.5 py-0.5 bg-[#D4C4B0]/50 dark:bg-slate-700 rounded text-xs font-mono text-[#6B5344] dark:text-slate-300">1-4</kbd> to rate
             {cramMode && (
               <>
                 <span className="mx-2">•</span>
-                <kbd className="px-1.5 py-0.5 bg-orange-200 rounded text-xs font-mono">Esc</kbd> exit cram
+                <kbd className="px-1.5 py-0.5 bg-[#C4A77D]/30 dark:bg-[#8B7355]/30 rounded text-xs font-mono text-[#8B7355] dark:text-[#C4A77D]">Esc</kbd> exit cram
               </>
             )}
           </p>

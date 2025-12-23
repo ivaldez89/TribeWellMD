@@ -495,12 +495,12 @@ export default function CasePlayerPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+      <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5]">
         <Header />
         <div className="flex items-center justify-center" style={{ minHeight: 'calc(100vh - 64px)' }}>
           <div className="text-center">
-            <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-            <p className="text-slate-600 font-medium">Loading case...</p>
+            <div className="w-12 h-12 border-4 border-[#C4A77D] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+            <p className="text-[#8B7355] font-medium">Loading case...</p>
           </div>
         </div>
       </div>
@@ -509,7 +509,7 @@ export default function CasePlayerPage() {
 
   if (error || !vignette) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+      <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5]">
         <Header />
         <div className="flex items-center justify-center p-4" style={{ minHeight: 'calc(100vh - 64px)' }}>
           <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md text-center">
@@ -518,11 +518,11 @@ export default function CasePlayerPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
             </div>
-            <h2 className="text-xl font-semibold text-slate-800 mb-2">Case Not Found</h2>
-            <p className="text-slate-600 mb-6">{error || 'The requested case could not be loaded.'}</p>
+            <h2 className="text-xl font-semibold text-[#8B7355] mb-2">Case Not Found</h2>
+            <p className="text-[#A89070] mb-6">{error || 'The requested case could not be loaded.'}</p>
             <button
               onClick={() => router.push('/cases')}
-              className="px-6 py-3 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded-xl transition-colors"
+              className="px-6 py-3 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] text-white font-medium rounded-xl transition-colors"
             >
               Back to Cases
             </button>
@@ -534,12 +534,12 @@ export default function CasePlayerPage() {
 
   if (!currentNode || !session) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+      <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5]">
         <Header />
         <div className="flex items-center justify-center" style={{ minHeight: 'calc(100vh - 64px)' }}>
           <div className="text-center">
-            <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-            <p className="text-slate-600 font-medium">Starting case...</p>
+            <div className="w-12 h-12 border-4 border-[#C4A77D] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+            <p className="text-[#8B7355] font-medium">Starting case...</p>
           </div>
         </div>
       </div>
@@ -551,7 +551,7 @@ export default function CasePlayerPage() {
     const wasOptimal = session.completedOptimally;
 
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 relative">
+      <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5] relative">
         <Header />
 
         {/* Background */}
@@ -576,13 +576,13 @@ export default function CasePlayerPage() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleBack}
-                  className="p-2 -ml-2 text-slate-400 hover:text-slate-600 hover:bg-white/80 rounded-lg transition-colors"
+                  className="p-2 -ml-2 text-[#A89070] hover:text-[#8B7355] hover:bg-white/80 rounded-lg transition-colors"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
                 </button>
-                <h1 className="text-xl font-semibold text-slate-800">{vignette.title}</h1>
+                <h1 className="text-xl font-semibold text-[#8B7355]">{vignette.title}</h1>
               </div>
               <BackgroundSelector
                 selectedBackground={selectedBackground}
@@ -594,13 +594,13 @@ export default function CasePlayerPage() {
             </div>
 
             {showProgress ? (
-              <div className="bg-white/95 backdrop-blur rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200 p-6 md:p-8">
+              <div className="bg-white/95 backdrop-blur rounded-2xl shadow-xl shadow-[#D4C4B0]/50 border border-[#D4C4B0] p-6 md:p-8">
                 <VignetteProgress session={session} vignette={vignette} />
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
                   <button
                     onClick={handleRestart}
-                    className="flex-1 py-3 px-6 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
+                    className="flex-1 py-3 px-6 bg-[#E8E0D5] hover:bg-[#D4C4B0] text-[#8B7355] font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
                   >
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -609,7 +609,7 @@ export default function CasePlayerPage() {
                   </button>
                   <button
                     onClick={handleFinish}
-                    className="flex-1 py-3 px-6 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
+                    className="flex-1 py-3 px-6 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] text-white font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
                   >
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -619,13 +619,13 @@ export default function CasePlayerPage() {
                 </div>
               </div>
             ) : (
-              <div className="bg-white/95 backdrop-blur rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200 overflow-hidden">
+              <div className="bg-white/95 backdrop-blur rounded-2xl shadow-xl shadow-[#D4C4B0]/50 border border-[#D4C4B0] overflow-hidden">
                 {/* Result header */}
                 <div className={`
                   px-6 py-8 text-center
                   ${wasOptimal
-                    ? 'bg-gradient-to-r from-tribe-sage-500 to-teal-500'
-                    : 'bg-gradient-to-r from-amber-500 to-orange-500'
+                    ? 'bg-gradient-to-r from-[#5B7B6D] to-[#2D5A4A]'
+                    : 'bg-gradient-to-r from-[#C4A77D] to-[#A89070]'
                   }
                 `}>
                   <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -653,28 +653,28 @@ export default function CasePlayerPage() {
                 {/* Outcome content */}
                 <div className="p-6 md:p-8">
                   <div className="prose prose-slate max-w-none">
-                    <p className="text-slate-700 leading-relaxed whitespace-pre-wrap text-[15px]">
+                    <p className="text-[#8B7355] leading-relaxed whitespace-pre-wrap text-[15px]">
                       {currentNode.content}
                     </p>
                   </div>
 
                   {/* Quick stats */}
                   <div className="mt-8 grid grid-cols-3 gap-4 text-center">
-                    <div className="p-4 bg-slate-50 rounded-xl">
-                      <div className="text-2xl font-bold text-slate-800">{session.decisions.length}</div>
-                      <div className="text-sm text-slate-500">Decisions</div>
+                    <div className="p-4 bg-[#F5F0E8] rounded-xl">
+                      <div className="text-2xl font-bold text-[#8B7355]">{session.decisions.length}</div>
+                      <div className="text-sm text-[#A89070]">Decisions</div>
                     </div>
-                    <div className="p-4 bg-tribe-sage-50 rounded-xl">
-                      <div className="text-2xl font-bold text-tribe-sage-600">
+                    <div className="p-4 bg-[#E8E0D5] rounded-xl">
+                      <div className="text-2xl font-bold text-[#5B7B6D]">
                         {session.decisions.filter(d => d.wasOptimal).length}
                       </div>
-                      <div className="text-sm text-slate-500">Optimal</div>
+                      <div className="text-sm text-[#A89070]">Optimal</div>
                     </div>
-                    <div className="p-4 bg-amber-50 rounded-xl">
-                      <div className="text-2xl font-bold text-amber-600">
+                    <div className="p-4 bg-[#D4C4B0] rounded-xl">
+                      <div className="text-2xl font-bold text-[#C4A77D]">
                         {session.decisions.filter(d => d.wasAcceptable && !d.wasOptimal).length}
                       </div>
-                      <div className="text-sm text-slate-500">Acceptable</div>
+                      <div className="text-sm text-[#A89070]">Acceptable</div>
                     </div>
                   </div>
 
@@ -682,7 +682,7 @@ export default function CasePlayerPage() {
                   <div className="mt-8 flex flex-col sm:flex-row gap-3">
                     <button
                       onClick={() => setShowProgress(true)}
-                      className="flex-1 py-3 px-6 border border-slate-300 hover:border-slate-400 text-slate-700 font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
+                      className="flex-1 py-3 px-6 border border-[#D4C4B0] hover:border-[#C4A77D] text-[#8B7355] font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
                     >
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -691,7 +691,7 @@ export default function CasePlayerPage() {
                     </button>
                     <button
                       onClick={handleRestart}
-                      className="flex-1 py-3 px-6 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
+                      className="flex-1 py-3 px-6 bg-[#E8E0D5] hover:bg-[#D4C4B0] text-[#8B7355] font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
                     >
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -700,7 +700,7 @@ export default function CasePlayerPage() {
                     </button>
                     <button
                       onClick={handleFinish}
-                      className="flex-1 py-3 px-6 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
+                      className="flex-1 py-3 px-6 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] text-white font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
                     >
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -718,7 +718,7 @@ export default function CasePlayerPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 relative">
+    <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5] relative">
       <Header />
 
       {/* Background */}
@@ -737,21 +737,21 @@ export default function CasePlayerPage() {
       )}
 
       {/* Case toolbar */}
-      <div className="sticky top-[64px] z-20 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 shadow-sm">
+      <div className="sticky top-[64px] z-20 bg-white/95 dark:bg-[#5B7B6D]/20 backdrop-blur-md border-b border-[#D4C4B0] dark:border-[#C4A77D] shadow-sm">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link
               href="/cases"
               onClick={handleBack}
-              className="p-2 -ml-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+              className="p-2 -ml-2 text-[#A89070] hover:text-[#8B7355] hover:bg-[#F5F0E8] rounded-lg transition-colors"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </Link>
             <div>
-              <h1 className="font-semibold text-slate-800 text-sm md:text-base line-clamp-1">{vignette.title}</h1>
-              <div className="flex items-center gap-2 text-xs text-slate-500">
+              <h1 className="font-semibold text-[#8B7355] text-sm md:text-base line-clamp-1">{vignette.title}</h1>
+              <div className="flex items-center gap-2 text-xs text-[#A89070]">
                 <span>{vignette.metadata.system}</span>
                 <span>-</span>
                 <span>Step {currentNodeIndex + 1} of {nodeCount}</span>
@@ -767,13 +767,13 @@ export default function CasePlayerPage() {
                 onClick={() => setShowAudio(!showAudio)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors ${
                   showAudio || isPlaying || isMusicPlaying
-                    ? 'bg-purple-100 text-purple-700'
-                    : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100'
+                    ? 'bg-[#E8E0D5] text-[#8B7355]'
+                    : 'text-[#A89070] hover:text-[#8B7355] hover:bg-[#F5F0E8]'
                 }`}
               >
                 {isPlaying || isMusicPlaying ? (
                   <span className="flex items-center gap-1">
-                    <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
+                    <span className="w-2 h-2 bg-[#C4A77D] rounded-full animate-pulse" />
                     {isPlaying
                       ? AMBIENT_SOUNDS.find(s => s.id === currentSound)?.emoji
                       : MUSIC_STREAMS.find(s => s.id === currentMusic)?.emoji
@@ -791,15 +791,15 @@ export default function CasePlayerPage() {
               {showAudio && (
                 <div
                   ref={audioPanelRef}
-                  className="absolute top-full right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-slate-200 z-50 overflow-hidden"
+                  className="absolute top-full right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-[#D4C4B0] z-50 overflow-hidden"
                 >
                   {/* Header */}
-                  <div className="px-4 py-3 border-b border-slate-100 flex items-center justify-between">
+                  <div className="px-4 py-3 border-b border-[#E8E0D5] flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <svg className="w-5 h-5 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-5 h-5 text-[#C4A77D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                       </svg>
-                      <span className="font-semibold text-slate-900">Audio</span>
+                      <span className="font-semibold text-[#8B7355]">Audio</span>
                     </div>
                     {(isPlaying || isMusicPlaying) && (
                       <button
@@ -814,7 +814,7 @@ export default function CasePlayerPage() {
                   <div className="p-4 space-y-4 max-h-[400px] overflow-y-auto">
                     {/* Ambient Sounds */}
                     <div>
-                      <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Ambient Sounds</h4>
+                      <h4 className="text-xs font-semibold text-[#A89070] uppercase tracking-wide mb-2">Ambient Sounds</h4>
                       <div className="grid grid-cols-3 gap-2">
                         {AMBIENT_SOUNDS.map((sound) => (
                           <button
@@ -823,22 +823,22 @@ export default function CasePlayerPage() {
                             className={`
                               flex flex-col items-center gap-1 p-3 rounded-xl transition-all text-center
                               ${currentSound === sound.id && isPlaying
-                                ? 'bg-purple-100 border-2 border-purple-400 shadow-sm'
-                                : 'bg-slate-50 hover:bg-slate-100 border-2 border-transparent'
+                                ? 'bg-[#E8E0D5] border-2 border-[#C4A77D] shadow-sm'
+                                : 'bg-[#F5F0E8] hover:bg-[#E8E0D5] border-2 border-transparent'
                               }
                             `}
                           >
                             <span className="text-xl">{sound.emoji}</span>
-                            <span className="text-xs font-medium text-slate-700 leading-tight">{sound.name}</span>
+                            <span className="text-xs font-medium text-[#8B7355] leading-tight">{sound.name}</span>
                             {currentSound === sound.id && isPlaying && (
-                              <span className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse" />
+                              <span className="w-1.5 h-1.5 bg-[#C4A77D] rounded-full animate-pulse" />
                             )}
                           </button>
                         ))}
                       </div>
                       {isPlaying && (
                         <div className="flex items-center gap-2 mt-3 px-1">
-                          <span className="text-xs text-slate-400">Vol</span>
+                          <span className="text-xs text-[#A89070]">Vol</span>
                           <input
                             type="range"
                             min="0"
@@ -846,16 +846,16 @@ export default function CasePlayerPage() {
                             step="0.05"
                             value={volume}
                             onChange={(e) => setVolume(parseFloat(e.target.value))}
-                            className="flex-1 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-purple-500"
+                            className="flex-1 h-1.5 bg-[#E8E0D5] rounded-lg appearance-none cursor-pointer accent-[#C4A77D]"
                           />
-                          <span className="text-xs text-slate-500 w-8">{Math.round(volume * 100)}%</span>
+                          <span className="text-xs text-[#A89070] w-8">{Math.round(volume * 100)}%</span>
                         </div>
                       )}
                     </div>
 
                     {/* Music Streams */}
                     <div>
-                      <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Study Music</h4>
+                      <h4 className="text-xs font-semibold text-[#A89070] uppercase tracking-wide mb-2">Study Music</h4>
                       <div className="grid grid-cols-3 gap-2">
                         {MUSIC_STREAMS.map((music) => (
                           <button
@@ -865,26 +865,26 @@ export default function CasePlayerPage() {
                             className={`
                               flex flex-col items-center gap-1 p-3 rounded-xl transition-all text-center
                               ${currentMusic === music.id && (isMusicPlaying || isMusicLoading)
-                                ? 'bg-indigo-100 border-2 border-indigo-400 shadow-sm'
-                                : 'bg-slate-50 hover:bg-slate-100 border-2 border-transparent'
+                                ? 'bg-[#E8E0D5] border-2 border-[#C4A77D] shadow-sm'
+                                : 'bg-[#F5F0E8] hover:bg-[#E8E0D5] border-2 border-transparent'
                               }
                               ${isMusicLoading && currentMusic !== music.id ? 'opacity-50' : ''}
                             `}
                           >
                             <span className="text-xl">{music.emoji}</span>
-                            <span className="text-xs font-medium text-slate-700 leading-tight">{music.name}</span>
+                            <span className="text-xs font-medium text-[#8B7355] leading-tight">{music.name}</span>
                             {currentMusic === music.id && isMusicLoading && (
-                              <span className="w-3 h-3 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+                              <span className="w-3 h-3 border-2 border-[#C4A77D] border-t-transparent rounded-full animate-spin" />
                             )}
                             {currentMusic === music.id && isMusicPlaying && !isMusicLoading && (
-                              <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full animate-pulse" />
+                              <span className="w-1.5 h-1.5 bg-[#C4A77D] rounded-full animate-pulse" />
                             )}
                           </button>
                         ))}
                       </div>
                       {isMusicPlaying && (
                         <div className="flex items-center gap-2 mt-3 px-1">
-                          <span className="text-xs text-slate-400">Vol</span>
+                          <span className="text-xs text-[#A89070]">Vol</span>
                           <input
                             type="range"
                             min="0"
@@ -892,9 +892,9 @@ export default function CasePlayerPage() {
                             step="0.05"
                             value={musicVolume}
                             onChange={(e) => setMusicVolume(parseFloat(e.target.value))}
-                            className="flex-1 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                            className="flex-1 h-1.5 bg-[#E8E0D5] rounded-lg appearance-none cursor-pointer accent-[#C4A77D]"
                           />
-                          <span className="text-xs text-slate-500 w-8">{Math.round(musicVolume * 100)}%</span>
+                          <span className="text-xs text-[#A89070] w-8">{Math.round(musicVolume * 100)}%</span>
                         </div>
                       )}
                     </div>
@@ -935,10 +935,10 @@ export default function CasePlayerPage() {
 
       {/* Keyboard shortcuts */}
       <div className="fixed bottom-4 left-0 right-0 text-center pointer-events-none z-10">
-        <p className="inline-block px-4 py-2 bg-white/90 backdrop-blur rounded-full text-xs text-slate-400 shadow-sm">
-          <kbd className="px-1.5 py-0.5 bg-slate-100 rounded font-mono">1-9</kbd> select choice
+        <p className="inline-block px-4 py-2 bg-white/90 backdrop-blur rounded-full text-xs text-[#A89070] shadow-sm">
+          <kbd className="px-1.5 py-0.5 bg-[#F5F0E8] rounded font-mono">1-9</kbd> select choice
           <span className="mx-2">-</span>
-          <kbd className="px-1.5 py-0.5 bg-slate-100 rounded font-mono">Enter</kbd> continue
+          <kbd className="px-1.5 py-0.5 bg-[#F5F0E8] rounded font-mono">Enter</kbd> continue
         </p>
       </div>
     </div>

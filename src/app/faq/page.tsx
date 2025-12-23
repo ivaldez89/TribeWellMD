@@ -193,7 +193,7 @@ export default function FAQPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search questions..."
-              className="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent"
+              className="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#C4A77D] focus:border-transparent"
             />
           </div>
 
@@ -204,8 +204,8 @@ export default function FAQPage() {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   selectedCategory === category
-                    ? 'bg-tribe-sage-500 text-white'
-                    : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 hover:border-tribe-sage-500 dark:hover:border-tribe-sage-500'
+                    ? 'bg-[#C4A77D] text-white'
+                    : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 hover:border-[#C4A77D] dark:hover:border-[#C4A77D]'
                 }`}
               >
                 {category}
@@ -228,7 +228,7 @@ export default function FAQPage() {
                   setSearchQuery('');
                   setSelectedCategory('All');
                 }}
-                className="text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline"
+                className="text-[#8B7355] dark:text-[#C4A77D] hover:underline"
               >
                 Clear filters
               </button>
@@ -244,7 +244,7 @@ export default function FAQPage() {
                   className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
                 >
                   <div className="flex-1 pr-4">
-                    <span className="text-xs font-medium text-tribe-sage-600 dark:text-tribe-sage-400 uppercase tracking-wide block mb-1">
+                    <span className="text-xs font-medium text-[#8B7355] dark:text-[#C4A77D] uppercase tracking-wide block mb-1">
                       {faq.category}
                     </span>
                     <span className="font-medium text-slate-900 dark:text-white">{faq.question}</span>
@@ -271,21 +271,21 @@ export default function FAQPage() {
         </div>
 
         {/* Still Need Help */}
-        <div className="mt-12 bg-gradient-to-br from-tribe-sage-500 to-cyan-600 rounded-2xl p-8 text-white text-center">
+        <div className="mt-12 bg-gradient-to-br from-[#5B7B6D] to-[#2D5A4A] rounded-2xl p-8 text-white text-center">
           <h2 className="text-2xl font-bold mb-3">Still have questions?</h2>
-          <p className="text-tribe-sage-100 mb-6 max-w-lg mx-auto">
+          <p className="text-[#D4C4B0] mb-6 max-w-lg mx-auto">
             Can't find what you're looking for? Our support team is here to help you succeed.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/support"
-              className="px-6 py-3 bg-white text-tribe-sage-600 font-semibold rounded-xl hover:bg-tribe-sage-50 transition-colors"
+              className="px-6 py-3 bg-white text-[#5B7B6D] font-semibold rounded-xl hover:bg-[#F5F0E8] transition-colors"
             >
               Contact Support
             </Link>
             <Link
               href="/feedback"
-              className="px-6 py-3 bg-teal-400/20 text-white font-semibold rounded-xl hover:bg-teal-400/30 transition-colors border border-white/20"
+              className="px-6 py-3 bg-[#C4A77D]/20 text-white font-semibold rounded-xl hover:bg-[#C4A77D]/30 transition-colors border border-white/20"
             >
               Send Feedback
             </Link>

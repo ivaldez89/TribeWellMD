@@ -127,11 +127,11 @@ export default function StudyRoomPage() {
   // Loading state
   if (isLoading || !userId) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+      <div className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900">
         <Header />
         <main className="max-w-7xl mx-auto px-4 py-8">
           <div className="flex items-center justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-tribe-sage-500" />
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#5B7B6D]" />
           </div>
         </main>
       </div>
@@ -141,7 +141,7 @@ export default function StudyRoomPage() {
   // Error or not found
   if (error || !session) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+      <div className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900">
         <Header />
         <main className="max-w-7xl mx-auto px-4 py-8">
           <div className="flex items-center justify-center py-20">
@@ -151,15 +151,15 @@ export default function StudyRoomPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
               </div>
-              <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+              <h2 className="text-xl font-semibold text-[#8B7355] dark:text-white mb-2">
                 {error || 'Room not found'}
               </h2>
-              <p className="text-slate-600 dark:text-slate-400 mb-4">
+              <p className="text-[#A89070] dark:text-[#D4C4B0] mb-4">
                 This study room may have ended or doesn&apos;t exist.
               </p>
               <Link
                 href="/study/rooms"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white font-medium rounded-xl transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] text-white font-medium rounded-xl transition-all shadow-sm"
               >
                 Back to Rooms
               </Link>
@@ -173,15 +173,15 @@ export default function StudyRoomPage() {
   // Session ended
   if (session.status === 'ended') {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+      <div className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900">
         <Header />
         <main className="max-w-7xl mx-auto px-4 py-8">
           <div className="flex items-center justify-center py-20">
             <div className="text-center">
-              <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+              <h2 className="text-xl font-semibold text-[#8B7355] dark:text-white mb-2">
                 Study Session Ended
               </h2>
-              <Link href="/study/rooms" className="inline-flex items-center gap-2 px-5 py-2.5 bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white font-medium rounded-xl transition-colors">
+              <Link href="/study/rooms" className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] text-white font-medium rounded-xl transition-all shadow-sm">
                 Find Another Room
               </Link>
             </div>
@@ -226,48 +226,48 @@ export default function StudyRoomPage() {
         );
       default:
         return (
-          <div className="h-full flex flex-col items-center justify-center bg-slate-50 dark:bg-slate-800/50 rounded-xl p-8">
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+          <div className="h-full flex flex-col items-center justify-center bg-[#F5F0E8] dark:bg-[#5B7B6D]/20 rounded-xl p-8">
+            <h3 className="text-lg font-semibold text-[#8B7355] dark:text-white mb-4">
               Choose a Study Tool
             </h3>
-            <p className="text-slate-600 dark:text-slate-400 mb-6 text-center max-w-md">
+            <p className="text-[#A89070] dark:text-[#D4C4B0] mb-6 text-center max-w-md">
               Select a study method to use during this session. Your progress will be tracked.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-lg">
               <button
                 onClick={() => setActiveTool('flashcards')}
-                className="flex flex-col items-center gap-3 p-6 bg-white dark:bg-slate-800 rounded-xl border-2 border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors group"
+                className="flex flex-col items-center gap-3 p-6 bg-white dark:bg-slate-800 rounded-xl border-2 border-[#D4C4B0] dark:border-[#8B7355]/50 hover:border-[#C4A77D] dark:hover:border-[#C4A77D] transition-colors group"
               >
-                <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center group-hover:bg-blue-200 dark:group-hover:bg-blue-900/50 transition-colors">
-                  <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="w-12 h-12 rounded-full bg-[#F5F0E8] dark:bg-[#8B7355]/30 flex items-center justify-center group-hover:bg-[#E8E0D5] dark:group-hover:bg-[#8B7355]/50 transition-colors">
+                  <svg className="w-6 h-6 text-[#8B7355] dark:text-[#C4A77D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                   </svg>
                 </div>
-                <span className="font-medium text-slate-900 dark:text-white">Flashcards</span>
+                <span className="font-medium text-[#8B7355] dark:text-white">Flashcards</span>
               </button>
 
               <button
                 onClick={() => setActiveTool('rapid-review')}
-                className="flex flex-col items-center gap-3 p-6 bg-white dark:bg-slate-800 rounded-xl border-2 border-slate-200 dark:border-slate-700 hover:border-green-500 dark:hover:border-green-500 transition-colors group"
+                className="flex flex-col items-center gap-3 p-6 bg-white dark:bg-slate-800 rounded-xl border-2 border-[#D4C4B0] dark:border-[#8B7355]/50 hover:border-[#5B7B6D] dark:hover:border-[#5B7B6D] transition-colors group"
               >
-                <div className="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center group-hover:bg-green-200 dark:group-hover:bg-green-900/50 transition-colors">
-                  <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="w-12 h-12 rounded-full bg-[#F5F0E8] dark:bg-[#2D5A4A]/30 flex items-center justify-center group-hover:bg-[#E8E0D5] dark:group-hover:bg-[#2D5A4A]/50 transition-colors">
+                  <svg className="w-6 h-6 text-[#2D5A4A] dark:text-[#5B7B6D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <span className="font-medium text-slate-900 dark:text-white">Rapid Review</span>
+                <span className="font-medium text-[#5B7B6D] dark:text-white">Rapid Review</span>
               </button>
 
               <button
                 onClick={() => setActiveTool('cases')}
-                className="flex flex-col items-center gap-3 p-6 bg-white dark:bg-slate-800 rounded-xl border-2 border-slate-200 dark:border-slate-700 hover:border-purple-500 dark:hover:border-purple-500 transition-colors group"
+                className="flex flex-col items-center gap-3 p-6 bg-white dark:bg-slate-800 rounded-xl border-2 border-[#D4C4B0] dark:border-[#8B7355]/50 hover:border-[#A89070] dark:hover:border-[#A89070] transition-colors group"
               >
-                <div className="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center group-hover:bg-purple-200 dark:group-hover:bg-purple-900/50 transition-colors">
-                  <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="w-12 h-12 rounded-full bg-[#F5F0E8] dark:bg-[#A89070]/30 flex items-center justify-center group-hover:bg-[#E8E0D5] dark:group-hover:bg-[#A89070]/50 transition-colors">
+                  <svg className="w-6 h-6 text-[#A89070] dark:text-[#D4C4B0]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                   </svg>
                 </div>
-                <span className="font-medium text-slate-900 dark:text-white">Cases</span>
+                <span className="font-medium text-[#A89070] dark:text-white">Cases</span>
               </button>
             </div>
           </div>
@@ -276,24 +276,24 @@ export default function StudyRoomPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col">
+    <div className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900 flex flex-col">
       {/* Header Bar */}
-      <div className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-4 py-3">
+      <div className="bg-white dark:bg-slate-800 border-b border-[#D4C4B0]/50 dark:border-slate-700 px-4 py-3">
         <div className="max-w-full mx-auto flex items-center justify-between">
           {/* Left: Room info */}
           <div className="flex items-center gap-4">
             <Link
               href="/study/rooms"
-              className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
+              className="p-2 hover:bg-[#F5F0E8] dark:hover:bg-slate-700 rounded-lg transition-colors"
             >
-              <svg className="w-5 h-5 text-slate-600 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5 text-[#A89070] dark:text-[#D4C4B0]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
             </Link>
             <div>
-              <h1 className="font-semibold text-slate-900 dark:text-white">{session.name}</h1>
-              <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-                <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`} />
+              <h1 className="font-semibold text-[#3D5A4C] dark:text-white">{session.name}</h1>
+              <div className="flex items-center gap-2 text-sm text-[#6B5344]/70 dark:text-[#D4C4B0]">
+                <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-[#5B7B6D]' : 'bg-red-500'}`} />
                 <span>{participants.filter(p => p.isOnline).length} online</span>
                 {session.inviteCode && (
                   <>
@@ -306,13 +306,13 @@ export default function StudyRoomPage() {
           </div>
 
           {/* Center: Study tool tabs */}
-          <div className="hidden md:flex items-center gap-1 bg-slate-100 dark:bg-slate-700 rounded-lg p-1">
+          <div className="hidden md:flex items-center gap-1 bg-[#F5EFE6] dark:bg-slate-700 rounded-lg p-1">
             <button
               onClick={() => setActiveTool('none')}
               className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
                 activeTool === 'none'
-                  ? 'bg-white dark:bg-slate-600 text-slate-900 dark:text-white shadow-sm'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  ? 'bg-white dark:bg-slate-600 text-[#3D5A4C] dark:text-white shadow-sm'
+                  : 'text-[#6B5344]/70 dark:text-[#D4C4B0] hover:text-[#3D5A4C] dark:hover:text-white'
               }`}
             >
               Overview
@@ -321,8 +321,8 @@ export default function StudyRoomPage() {
               onClick={() => setActiveTool('flashcards')}
               className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
                 activeTool === 'flashcards'
-                  ? 'bg-white dark:bg-slate-600 text-slate-900 dark:text-white shadow-sm'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  ? 'bg-white dark:bg-slate-600 text-[#3D5A4C] dark:text-white shadow-sm'
+                  : 'text-[#6B5344]/70 dark:text-[#D4C4B0] hover:text-[#3D5A4C] dark:hover:text-white'
               }`}
             >
               Flashcards
@@ -331,8 +331,8 @@ export default function StudyRoomPage() {
               onClick={() => setActiveTool('rapid-review')}
               className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
                 activeTool === 'rapid-review'
-                  ? 'bg-white dark:bg-slate-600 text-slate-900 dark:text-white shadow-sm'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  ? 'bg-white dark:bg-slate-600 text-[#3D5A4C] dark:text-white shadow-sm'
+                  : 'text-[#6B5344]/70 dark:text-[#D4C4B0] hover:text-[#3D5A4C] dark:hover:text-white'
               }`}
             >
               Rapid Review
@@ -341,8 +341,8 @@ export default function StudyRoomPage() {
               onClick={() => setActiveTool('cases')}
               className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
                 activeTool === 'cases'
-                  ? 'bg-white dark:bg-slate-600 text-slate-900 dark:text-white shadow-sm'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  ? 'bg-white dark:bg-slate-600 text-[#3D5A4C] dark:text-white shadow-sm'
+                  : 'text-[#6B5344]/70 dark:text-[#D4C4B0] hover:text-[#3D5A4C] dark:hover:text-white'
               }`}
             >
               Cases
@@ -353,7 +353,7 @@ export default function StudyRoomPage() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowInviteModal(true)}
-              className="px-3 py-1.5 text-sm font-medium bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white rounded-lg transition-colors flex items-center gap-1.5"
+              className="px-3 py-1.5 text-sm font-medium bg-gradient-to-r from-[#5B7B6D] to-[#6B8B7D] hover:from-[#4A6B5D] hover:to-[#5B7B6D] text-white rounded-lg transition-all shadow-sm flex items-center gap-1.5"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
@@ -370,7 +370,7 @@ export default function StudyRoomPage() {
             )}
             <button
               onClick={() => setShowLeaveConfirm(true)}
-              className="px-3 py-1.5 text-sm font-medium bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-300 rounded-lg transition-colors"
+              className="px-3 py-1.5 text-sm font-medium bg-[#F5EFE6] dark:bg-slate-700 hover:bg-[#E8DFD0] dark:hover:bg-slate-600 text-[#6B5344] dark:text-[#D4C4B0] rounded-lg transition-colors"
             >
               Leave
             </button>
@@ -408,16 +408,16 @@ export default function StudyRoomPage() {
         </div>
 
         {/* Right Sidebar: Participants + Chat */}
-        <div className={`${chatCollapsed ? 'w-16' : 'w-80'} flex-shrink-0 flex flex-col border-l border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-300`}>
+        <div className={`${chatCollapsed ? 'w-16' : 'w-80'} flex-shrink-0 flex flex-col border-l border-[#D4C4B0]/50 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-300`}>
           {/* Collapsed sidebar */}
           {chatCollapsed ? (
             <div className="flex flex-col items-center py-4 gap-4">
               <button
                 onClick={() => setChatCollapsed(false)}
-                className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
+                className="p-2 hover:bg-[#F5F0E8] dark:hover:bg-slate-700 rounded-lg transition-colors"
                 title="Expand Sidebar"
               >
-                <svg className="w-5 h-5 text-slate-600 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-5 h-5 text-[#A89070] dark:text-[#D4C4B0]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                 </svg>
               </button>
@@ -427,14 +427,14 @@ export default function StudyRoomPage() {
                 {participants.filter(p => p.isOnline).slice(0, 5).map((p) => (
                   <div
                     key={p.id}
-                    className="w-8 h-8 rounded-full bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center text-xs font-medium text-tribe-sage-700 dark:text-tribe-sage-300"
+                    className="w-8 h-8 rounded-full bg-[#F5F0E8] dark:bg-[#8B7355]/30 flex items-center justify-center text-xs font-medium text-[#8B7355] dark:text-[#D4C4B0]"
                     title={p.displayName}
                   >
                     {p.displayName.charAt(0).toUpperCase()}
                   </div>
                 ))}
                 {participants.filter(p => p.isOnline).length > 5 && (
-                  <div className="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-xs font-medium text-slate-600 dark:text-slate-400">
+                  <div className="w-8 h-8 rounded-full bg-[#E8E0D5] dark:bg-slate-700 flex items-center justify-center text-xs font-medium text-[#A89070] dark:text-[#D4C4B0]">
                     +{participants.filter(p => p.isOnline).length - 5}
                   </div>
                 )}
@@ -442,21 +442,21 @@ export default function StudyRoomPage() {
 
               {/* Unread indicator */}
               {!chatMuted && messages.length > 0 && (
-                <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse" />
+                <div className="w-3 h-3 bg-[#C4A77D] rounded-full animate-pulse" />
               )}
             </div>
           ) : (
             <>
               {/* Sidebar Header */}
-              <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-700">
-                <span className="font-medium text-slate-900 dark:text-white">Chat & Participants</span>
+              <div className="flex items-center justify-between px-4 py-3 border-b border-[#D4C4B0] dark:border-[#8B7355]/50">
+                <span className="font-medium text-[#8B7355] dark:text-white">Chat & Participants</span>
                 <div className="flex items-center gap-1">
                   <button
                     onClick={() => setChatMuted(!chatMuted)}
                     className={`p-1.5 rounded-lg transition-colors ${
                       chatMuted
                         ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
-                        : 'hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400'
+                        : 'hover:bg-[#F5F0E8] dark:hover:bg-slate-700 text-[#A89070] dark:text-[#D4C4B0]'
                     }`}
                     title={chatMuted ? 'Unmute' : 'Mute'}
                   >
@@ -473,10 +473,10 @@ export default function StudyRoomPage() {
                   </button>
                   <button
                     onClick={() => setChatCollapsed(true)}
-                    className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
+                    className="p-1.5 hover:bg-[#F5F0E8] dark:hover:bg-slate-700 rounded-lg transition-colors"
                     title="Collapse Sidebar"
                   >
-                    <svg className="w-4 h-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-4 h-4 text-[#A89070] dark:text-[#D4C4B0]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" />
                     </svg>
                   </button>
@@ -484,7 +484,7 @@ export default function StudyRoomPage() {
               </div>
 
               {/* Participants */}
-              <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-700">
+              <div className="px-4 py-3 border-b border-[#D4C4B0] dark:border-[#8B7355]/50">
                 <ParticipantsSidebar
                   participants={participants}
                   currentUserId={userId}
@@ -511,16 +511,16 @@ export default function StudyRoomPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/50" onClick={() => setShowLeaveConfirm(false)} />
           <div className="relative bg-white dark:bg-slate-800 rounded-2xl p-6 max-w-sm w-full shadow-xl">
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-[#8B7355] dark:text-white mb-2">
               Leave Study Room?
             </h3>
-            <p className="text-slate-600 dark:text-slate-400 mb-6">
+            <p className="text-[#A89070] dark:text-[#D4C4B0] mb-6">
               You can rejoin this room later using the invite code.
             </p>
             <div className="flex gap-3">
               <button
                 onClick={() => setShowLeaveConfirm(false)}
-                className="flex-1 px-4 py-2 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
+                className="flex-1 px-4 py-2 bg-[#E8E0D5] dark:bg-slate-700 text-[#8B7355] dark:text-[#D4C4B0] rounded-lg hover:bg-[#D4C4B0] dark:hover:bg-slate-600 transition-colors"
               >
                 Stay
               </button>

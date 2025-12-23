@@ -66,14 +66,14 @@ const roleOptions: RoleOption[] = [
     title: 'Medical Student',
     description: 'MS1, MS2, MS3, or MS4',
     icon: <StethoscopeIcon />,
-    color: 'from-tribe-sage-500 to-cyan-500',
+    color: 'from-[#C4A77D] to-[#A89070]',
   },
   {
     id: 'resident',
     title: 'Resident',
     description: 'In residency training',
     icon: <UserMdIcon />,
-    color: 'from-tribe-sage-500 to-green-500',
+    color: 'from-[#B89B78] to-[#9A8565]',
   },
   {
     id: 'fellow',
@@ -226,25 +226,25 @@ export default function RegisterPage() {
   const selectedRoleData = roleOptions.find(r => r.id === selectedRole);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-100 via-cyan-50 to-emerald-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#F5F0E8] via-[#E8E0D5] to-[#D4C4B0] dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center p-4">
       {/* Decorative background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-teal-200/40 to-cyan-200/40 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-emerald-200/40 to-teal-200/40 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-cyan-100/30 to-indigo-100/30 dark:from-cyan-900/10 dark:to-indigo-900/10 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-[#C4A77D]/40 to-[#A89070]/40 dark:from-[#C4A77D]/20 dark:to-[#A89070]/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-[#D4C4B0]/40 to-[#C4A77D]/40 dark:from-[#C4A77D]/20 dark:to-[#A89070]/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-[#E8E0D5]/30 to-[#D4C4B0]/30 dark:from-[#C4A77D]/10 dark:to-[#A89070]/10 rounded-full blur-3xl" />
       </div>
 
       <div className="relative w-full max-w-2xl">
         {/* Logo/Brand */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-4 shadow-xl shadow-tribe-sage-500/25 overflow-hidden">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-4 shadow-xl shadow-[#C4A77D]/25 overflow-hidden">
             <img src="/logo.jpeg" alt="TribeWellMD" className="w-full h-full object-cover" />
           </div>
           <h1 className="text-3xl font-bold mb-2">
             <span className="text-slate-900 dark:text-white">Join </span>
             <span className="text-slate-900 dark:text-white">Tribe</span>
-            <span className="text-tribe-sage-600 dark:text-tribe-sage-400">Well</span>
-            <span className="text-indigo-600 dark:text-indigo-400">MD</span>
+            <span className="text-[#8B7355] dark:text-[#C4A77D]">Well</span>
+            <span className="text-[#5B7B6D] dark:text-[#A89070]">MD</span>
           </h1>
           <p className="text-slate-600 dark:text-slate-400">
             {step === 'role' ? 'Select your role to get started' : 'Tell us about yourself'}
@@ -263,9 +263,9 @@ export default function RegisterPage() {
                     onClick={() => handleRoleSelect(role.id)}
                     className={`
                       relative p-4 rounded-xl border-2 text-left transition-all duration-200
-                      hover:border-tribe-sage-500 hover:shadow-lg hover:scale-[1.02]
+                      hover:border-[#C4A77D] hover:shadow-lg hover:scale-[1.02]
                       ${selectedRole === role.id
-                        ? 'border-tribe-sage-500 bg-tribe-sage-50 dark:bg-tribe-sage-900/20'
+                        ? 'border-[#C4A77D] bg-[#F5F0E8] dark:bg-[#C4A77D]/20'
                         : 'border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700/50'
                       }
                     `}
@@ -286,7 +286,7 @@ export default function RegisterPage() {
               <div className="pt-4 border-t border-slate-200 dark:border-slate-700 mt-6">
                 <p className="text-center text-sm text-slate-500 dark:text-slate-400">
                   Already have an account?{' '}
-                  <Link href="/login" className="text-tribe-sage-600 hover:text-tribe-sage-700 dark:text-tribe-sage-400 dark:hover:text-tribe-sage-300 font-medium">
+                  <Link href="/login" className="text-[#8B7355] hover:text-[#C4A77D] dark:text-[#C4A77D] dark:hover:text-[#B89B78] font-medium">
                     Sign in
                   </Link>
                 </p>
@@ -322,7 +322,7 @@ export default function RegisterPage() {
                     type="text"
                     value={formData.firstName}
                     onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-[#C4A77D] focus:border-transparent transition-all"
                     placeholder="John"
                     required
                   />
@@ -336,7 +336,7 @@ export default function RegisterPage() {
                     type="text"
                     value={formData.lastName}
                     onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-[#C4A77D] focus:border-transparent transition-all"
                     placeholder="Doe"
                     required
                   />
@@ -355,7 +355,7 @@ export default function RegisterPage() {
                   className={`w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:border-transparent transition-all ${
                     formData.email && !formData.email.toLowerCase().endsWith('.edu')
                       ? 'border-red-500 focus:ring-red-500'
-                      : 'border-slate-200 dark:border-slate-600 focus:ring-tribe-sage-500'
+                      : 'border-slate-200 dark:border-slate-600 focus:ring-[#C4A77D]'
                   }`}
                   placeholder="john.doe@school.edu"
                   required
@@ -377,7 +377,7 @@ export default function RegisterPage() {
                     type="password"
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-[#C4A77D] focus:border-transparent transition-all"
                     placeholder="Min 6 characters"
                     required
                     minLength={6}
@@ -392,7 +392,7 @@ export default function RegisterPage() {
                     type="password"
                     value={formData.confirmPassword}
                     onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-[#C4A77D] focus:border-transparent transition-all"
                     placeholder="Confirm password"
                     required
                     minLength={6}
@@ -498,7 +498,7 @@ export default function RegisterPage() {
                     type="text"
                     value={formData.jobTitle}
                     onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-[#C4A77D] focus:border-transparent transition-all"
                     placeholder="Dean of Student Wellness"
                     required
                   />
@@ -514,7 +514,7 @@ export default function RegisterPage() {
               {successMessage && (
                 <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl text-green-700 dark:text-green-400 text-sm text-center">
                   <p className="font-medium">{successMessage}</p>
-                  <Link href="/login" className="inline-block mt-2 text-tribe-sage-600 hover:text-tribe-sage-700 dark:text-tribe-sage-400 font-medium underline">
+                  <Link href="/login" className="inline-block mt-2 text-[#8B7355] hover:text-[#C4A77D] dark:text-[#C4A77D] font-medium underline">
                     Go to Login
                   </Link>
                 </div>
@@ -523,16 +523,16 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-4 bg-gradient-to-r from-tribe-sage-500 via-cyan-500 to-teal-500 hover:from-teal-600 hover:via-cyan-600 hover:to-tribe-sage-600 text-white font-bold rounded-xl shadow-lg shadow-tribe-sage-500/25 hover:shadow-tribe-sage-500/40 transition-all disabled:opacity-50"
+                className="w-full py-4 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#B89B78] hover:to-[#9A8565] text-white font-bold rounded-xl shadow-lg shadow-[#C4A77D]/25 hover:shadow-[#C4A77D]/40 transition-all disabled:opacity-50"
               >
                 {isLoading ? 'Creating account...' : 'Create Account'}
               </button>
 
               <p className="text-center text-sm text-slate-500 dark:text-slate-400">
                 By creating an account, you agree to our{' '}
-                <Link href="/terms" className="text-tribe-sage-600 hover:text-tribe-sage-700 dark:text-tribe-sage-400">Terms</Link>
+                <Link href="/terms" className="text-[#8B7355] hover:text-[#C4A77D] dark:text-[#C4A77D]">Terms</Link>
                 {' '}and{' '}
-                <Link href="/privacy" className="text-tribe-sage-600 hover:text-tribe-sage-700 dark:text-tribe-sage-400">Privacy Policy</Link>
+                <Link href="/privacy" className="text-[#8B7355] hover:text-[#C4A77D] dark:text-[#C4A77D]">Privacy Policy</Link>
               </p>
             </form>
           )}

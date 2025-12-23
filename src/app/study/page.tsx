@@ -548,15 +548,21 @@ export default function StudyPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-900">
-        <div className="animate-spin w-8 h-8 border-4 border-tribe-sage-500 border-t-transparent rounded-full" />
+      <div className="min-h-screen flex items-center justify-center bg-[#E8DFD0] dark:bg-slate-900">
+        <div className="animate-spin w-8 h-8 border-4 border-[#5B7B6D] border-t-transparent rounded-full" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 relative">
+    <div className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900 relative">
       <Header stats={stats} />
+
+      {/* Subtle organic pattern overlay on sides */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+        <div className="absolute top-0 left-0 w-1/4 h-full bg-gradient-to-r from-[#D4C4B0]/30 to-transparent" />
+        <div className="absolute top-0 right-0 w-1/4 h-full bg-gradient-to-l from-[#D4C4B0]/30 to-transparent" />
+      </div>
 
       {/* Background overlay when studying */}
       {isStudying && selectedBackground !== 'none' && (
@@ -986,7 +992,7 @@ export default function StudyPage() {
                 {/* Rapid Review */}
                 <Link
                   href="/study/rapid-review"
-                  className="group flex flex-col items-center gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-[#A89070] dark:hover:border-[#C4A77D] hover:shadow-lg transition-all text-center"
+                  className="group flex flex-col items-center gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl border border-[#D4C4B0]/50 dark:border-slate-700 hover:border-[#8B7355] dark:hover:border-[#C4A77D] hover:shadow-lg hover:shadow-[#8B7355]/10 transition-all text-center"
                 >
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#A89070] to-[#8B7355] flex items-center justify-center">
                     <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -994,15 +1000,15 @@ export default function StudyPage() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900 dark:text-white text-sm group-hover:text-[#8B7355] dark:group-hover:text-[#C4A77D] transition-colors">Rapid Review</h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Audio TTS mode</p>
+                    <h3 className="font-bold text-[#3D5A4C] dark:text-white text-sm group-hover:text-[#8B7355] dark:group-hover:text-[#C4A77D] transition-colors">Rapid Review</h3>
+                    <p className="text-xs text-[#6B5344]/70 dark:text-slate-400">Audio TTS mode</p>
                   </div>
                 </Link>
 
                 {/* AI Generate */}
                 <Link
                   href="/generate"
-                  className="group flex flex-col items-center gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-[#6B8B7D] dark:hover:border-[#7FA08F] hover:shadow-lg transition-all text-center"
+                  className="group flex flex-col items-center gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl border border-[#D4C4B0]/50 dark:border-slate-700 hover:border-[#5B7B6D] dark:hover:border-[#7FA08F] hover:shadow-lg hover:shadow-[#5B7B6D]/10 transition-all text-center"
                 >
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#6B8B7D] to-[#5B7B6D] flex items-center justify-center">
                     <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1010,15 +1016,15 @@ export default function StudyPage() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900 dark:text-white text-sm group-hover:text-[#5B7B6D] dark:group-hover:text-[#7FA08F] transition-colors">AI Generate</h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">From your notes</p>
+                    <h3 className="font-bold text-[#3D5A4C] dark:text-white text-sm group-hover:text-[#5B7B6D] dark:group-hover:text-[#7FA08F] transition-colors">AI Generate</h3>
+                    <p className="text-xs text-[#6B5344]/70 dark:text-slate-400">From your notes</p>
                   </div>
                 </Link>
 
                 {/* Import Cards */}
                 <Link
                   href="/import"
-                  className="group flex flex-col items-center gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-[#5B7B6D] dark:hover:border-[#7FA08F] hover:shadow-lg transition-all text-center"
+                  className="group flex flex-col items-center gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl border border-[#D4C4B0]/50 dark:border-slate-700 hover:border-[#5B7B6D] dark:hover:border-[#7FA08F] hover:shadow-lg hover:shadow-[#5B7B6D]/10 transition-all text-center"
                 >
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#5B7B6D] to-[#6B8B7D] flex items-center justify-center">
                     <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1026,15 +1032,15 @@ export default function StudyPage() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900 dark:text-white text-sm group-hover:text-[#5B7B6D] dark:group-hover:text-[#7FA08F] transition-colors">Import Cards</h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Anki or CSV</p>
+                    <h3 className="font-bold text-[#3D5A4C] dark:text-white text-sm group-hover:text-[#5B7B6D] dark:group-hover:text-[#7FA08F] transition-colors">Import Cards</h3>
+                    <p className="text-xs text-[#6B5344]/70 dark:text-slate-400">Anki or CSV</p>
                   </div>
                 </Link>
 
                 {/* Card Library */}
                 <Link
                   href="/library"
-                  className="group flex flex-col items-center gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-[#8B7355] dark:hover:border-[#A89070] hover:shadow-lg transition-all text-center"
+                  className="group flex flex-col items-center gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl border border-[#D4C4B0]/50 dark:border-slate-700 hover:border-[#8B7355] dark:hover:border-[#A89070] hover:shadow-lg hover:shadow-[#8B7355]/10 transition-all text-center"
                 >
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8B7355] to-[#6B5A48] flex items-center justify-center">
                     <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1042,8 +1048,8 @@ export default function StudyPage() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900 dark:text-white text-sm group-hover:text-[#8B7355] dark:group-hover:text-[#C4A77D] transition-colors">Card Library</h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Browse all cards</p>
+                    <h3 className="font-bold text-[#3D5A4C] dark:text-white text-sm group-hover:text-[#8B7355] dark:group-hover:text-[#C4A77D] transition-colors">Card Library</h3>
+                    <p className="text-xs text-[#6B5344]/70 dark:text-slate-400">Browse all cards</p>
                   </div>
                 </Link>
               </div>
@@ -1055,17 +1061,17 @@ export default function StudyPage() {
         {isStudying && (
           <>
             {/* Session toolbar */}
-            <div className="relative z-[60] mb-6 flex items-center justify-between flex-wrap gap-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur py-3 px-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div className="relative z-[60] mb-6 flex items-center justify-between flex-wrap gap-2 bg-white/90 dark:bg-slate-800/80 backdrop-blur py-3 px-4 rounded-xl border border-[#D4C4B0]/50 dark:border-slate-700 shadow-sm shadow-[#3D5A4C]/5">
               <div className="flex items-center gap-4">
                 {session && (
                   <>
                     <div className="flex items-center gap-2 text-sm">
-                      <span className="text-tribe-sage-600 font-medium">{session.cardsCorrect}</span>
-                      <span className="text-slate-400">correct</span>
+                      <span className="text-[#5B7B6D] font-medium">{session.cardsCorrect}</span>
+                      <span className="text-[#6B5344]/70 dark:text-slate-400">correct</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm">
                       <span className="text-red-500 font-medium">{session.cardsFailed}</span>
-                      <span className="text-slate-400">again</span>
+                      <span className="text-[#6B5344]/70 dark:text-slate-400">again</span>
                     </div>
                   </>
                 )}

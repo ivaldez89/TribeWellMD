@@ -112,13 +112,13 @@ export default function InvestorsPage() {
         <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
             <div className="max-w-4xl">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-tribe-sage-500/20 text-tribe-sage-300 rounded-full text-sm font-medium mb-6">
-                <span className="w-2 h-2 bg-teal-400 rounded-full animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#8B7355]/20 text-[#C4A77D] rounded-full text-sm font-medium mb-6">
+                <span className="w-2 h-2 bg-[#C4A77D] rounded-full animate-pulse" />
                 For Investors & Partners
               </div>
               <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 The Only Platform Where Studying for Step 2 CK{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-400">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C4A77D] to-[#A89070]">
                   Saves Lives
                 </span>{' '}
                 Through Charitable Giving
@@ -130,7 +130,7 @@ export default function InvestorsPage() {
               <div className="flex flex-wrap gap-4">
                 <a
                   href="mailto:invest@tribewellmd.com"
-                  className="px-8 py-4 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 text-white font-bold rounded-xl hover:from-teal-600 hover:to-cyan-600 transition-all shadow-lg"
+                  className="px-8 py-4 bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white font-bold rounded-xl hover:from-[#A89070] hover:to-[#8B7355] transition-all shadow-lg"
                 >
                   Request Pitch Deck
                 </a>
@@ -204,10 +204,10 @@ export default function InvestorsPage() {
         </section>
 
         {/* Solution */}
-        <section ref={solutionRef} className="bg-gradient-to-b from-teal-50/70 to-cyan-50/50 dark:from-slate-800/50 dark:to-slate-900 py-16 md:py-24">
+        <section ref={solutionRef} className="bg-gradient-to-b from-[#F5F0E8]/70 to-[#E8E0D5]/50 dark:from-slate-800/50 dark:to-slate-900 py-16 md:py-24">
           <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${solutionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="flex items-start gap-4 mb-8">
-              <div className="w-14 h-14 rounded-xl bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center text-tribe-sage-600 dark:text-tribe-sage-400 flex-shrink-0">
+              <div className="w-14 h-14 rounded-xl bg-[#D4C4B0]/30 dark:bg-[#8B7355]/30 flex items-center justify-center text-[#8B7355] dark:text-[#C4A77D] flex-shrink-0">
                 <Icons.Solution />
               </div>
               <div>
@@ -219,7 +219,7 @@ export default function InvestorsPage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-t-4 border-tribe-sage-500">
+              <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-t-4 border-[#5B7B6D]">
                 <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-3">AI-Powered Study</h3>
                 <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
                   <li>• <strong>FSRS</strong> (Free Spaced Repetition Scheduler) - next-gen algorithm outperforming SM-2</li>
@@ -228,7 +228,7 @@ export default function InvestorsPage() {
                   <li>• Step 2 CK & Shelf exam prep</li>
                 </ul>
               </div>
-              <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-t-4 border-rose-500">
+              <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-t-4 border-[#C4A77D]">
                 <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-3">Wellness Tracking</h3>
                 <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
                   <li>• Daily wellness challenges</li>
@@ -237,7 +237,7 @@ export default function InvestorsPage() {
                   <li>• Mental health resources</li>
                 </ul>
               </div>
-              <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-t-4 border-violet-500">
+              <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-t-4 border-[#8B7355]">
                 <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-3">Community & Tribes</h3>
                 <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
                   <li>• Peer study groups by specialty</li>
@@ -246,7 +246,7 @@ export default function InvestorsPage() {
                   <li>• Cross-institution connections</li>
                 </ul>
               </div>
-              <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-t-4 border-orange-500">
+              <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-t-4 border-[#A89070]">
                 <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-3">Social Impact</h3>
                 <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
                   <li>• Points convert to donations</li>
@@ -263,7 +263,7 @@ export default function InvestorsPage() {
         <section ref={landscapeRef} className="bg-white dark:bg-slate-900 py-16 md:py-24">
           <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${landscapeVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="flex items-start gap-4 mb-8">
-              <div className="w-14 h-14 rounded-xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 dark:text-amber-400 flex-shrink-0">
+              <div className="w-14 h-14 rounded-xl bg-[#E8E0D5] dark:bg-[#8B7355]/30 flex items-center justify-center text-[#A89070] dark:text-[#C4A77D] flex-shrink-0">
                 <Icons.Differentiator />
               </div>
               <div>
@@ -292,14 +292,14 @@ export default function InvestorsPage() {
                       <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700 dark:text-slate-300">Competitor</th>
                       <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700 dark:text-slate-300">Value Proposition</th>
                       <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700 dark:text-slate-300">Limitation</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-tribe-sage-600 dark:text-tribe-sage-400">TribeWellMD Advantage</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-[#5B7B6D] dark:text-[#C4A77D]">TribeWellMD Advantage</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                     <tr>
                       <td className="px-4 py-4">
                         <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-lg bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center text-tribe-sage-600 dark:text-tribe-sage-400">
+                          <div className="w-8 h-8 rounded-lg bg-[#D4C4B0]/30 dark:bg-[#8B7355]/30 flex items-center justify-center text-[#5B7B6D] dark:text-[#C4A77D]">
                             <Icons.Study />
                           </div>
                           <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Study</span>
@@ -308,12 +308,12 @@ export default function InvestorsPage() {
                       <td className="px-4 py-4 text-sm text-slate-900 dark:text-white">Anki, Quizlet</td>
                       <td className="px-4 py-4 text-sm text-slate-600 dark:text-slate-400">Spaced repetition flashcards</td>
                       <td className="px-4 py-4 text-sm text-slate-500 dark:text-slate-500">Single-purpose, no community</td>
-                      <td className="px-4 py-4 text-sm text-tribe-sage-600 dark:text-tribe-sage-400 font-medium">Study = Community Impact</td>
+                      <td className="px-4 py-4 text-sm text-[#5B7B6D] dark:text-[#C4A77D] font-medium">Study = Community Impact</td>
                     </tr>
                     <tr className="bg-slate-25 dark:bg-slate-800/50">
                       <td className="px-4 py-4">
                         <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-lg bg-rose-100 dark:bg-rose-900/30 flex items-center justify-center text-rose-600 dark:text-rose-400">
+                          <div className="w-8 h-8 rounded-lg bg-[#E8E0D5] dark:bg-[#C4A77D]/30 flex items-center justify-center text-[#C4A77D] dark:text-[#C4A77D]">
                             <Icons.Wellness />
                           </div>
                           <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Wellness</span>
@@ -322,12 +322,12 @@ export default function InvestorsPage() {
                       <td className="px-4 py-4 text-sm text-slate-900 dark:text-white">Headspace, Calm</td>
                       <td className="px-4 py-4 text-sm text-slate-600 dark:text-slate-400">Personal meditation & wellness</td>
                       <td className="px-4 py-4 text-sm text-slate-500 dark:text-slate-500">Individual focus, no external impact</td>
-                      <td className="px-4 py-4 text-sm text-tribe-sage-600 dark:text-tribe-sage-400 font-medium">Wellness → Charitable Giving</td>
+                      <td className="px-4 py-4 text-sm text-[#5B7B6D] dark:text-[#C4A77D] font-medium">Wellness → Charitable Giving</td>
                     </tr>
                     <tr>
                       <td className="px-4 py-4">
                         <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
+                          <div className="w-8 h-8 rounded-lg bg-[#D4C4B0] dark:bg-[#A89070]/30 flex items-center justify-center text-[#A89070] dark:text-[#C4A77D]">
                             <Icons.Fitness />
                           </div>
                           <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Fitness</span>
@@ -336,12 +336,12 @@ export default function InvestorsPage() {
                       <td className="px-4 py-4 text-sm text-slate-900 dark:text-white">Strava, Peloton</td>
                       <td className="px-4 py-4 text-sm text-slate-600 dark:text-slate-400">Fitness tracking & competition</td>
                       <td className="px-4 py-4 text-sm text-slate-500 dark:text-slate-500">General audience, no purpose</td>
-                      <td className="px-4 py-4 text-sm text-tribe-sage-600 dark:text-tribe-sage-400 font-medium">Fitness → Medical Education Causes</td>
+                      <td className="px-4 py-4 text-sm text-[#5B7B6D] dark:text-[#C4A77D] font-medium">Fitness → Medical Education Causes</td>
                     </tr>
                     <tr className="bg-slate-25 dark:bg-slate-800/50">
                       <td className="px-4 py-4">
                         <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-lg bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center text-violet-600 dark:text-violet-400">
+                          <div className="w-8 h-8 rounded-lg bg-[#E8E0D5] dark:bg-[#8B7355]/30 flex items-center justify-center text-[#8B7355] dark:text-[#C4A77D]">
                             <Icons.Charity />
                           </div>
                           <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Charity</span>
@@ -350,7 +350,7 @@ export default function InvestorsPage() {
                       <td className="px-4 py-4 text-sm text-slate-900 dark:text-white">Charity Miles</td>
                       <td className="px-4 py-4 text-sm text-slate-600 dark:text-slate-400">Walking/running for donations</td>
                       <td className="px-4 py-4 text-sm text-slate-500 dark:text-slate-500">Single activity type, low engagement</td>
-                      <td className="px-4 py-4 text-sm text-tribe-sage-600 dark:text-tribe-sage-400 font-medium">Holistic (Study + Wellness + Social)</td>
+                      <td className="px-4 py-4 text-sm text-[#5B7B6D] dark:text-[#C4A77D] font-medium">Holistic (Study + Wellness + Social)</td>
                     </tr>
                   </tbody>
                 </table>
@@ -359,7 +359,7 @@ export default function InvestorsPage() {
 
             {/* Key Differentiators */}
             <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="p-6 bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-2xl border border-teal-200 dark:border-teal-800">
+              <div className="p-6 bg-gradient-to-br from-[#F5F0E8] to-[#E8E0D5] dark:from-[#5B7B6D]/20 dark:to-[#2D5A4A]/20 rounded-2xl border border-[#D4C4B0] dark:border-[#5B7B6D]">
                 <div className="text-3xl mb-3">🎯</div>
                 <h4 className="font-bold text-slate-900 dark:text-white mb-2">Vertical Focus</h4>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -367,7 +367,7 @@ export default function InvestorsPage() {
                   horizontal competitors cannot match.
                 </p>
               </div>
-              <div className="p-6 bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-2xl border border-violet-200 dark:border-violet-800">
+              <div className="p-6 bg-gradient-to-br from-[#E8E0D5] to-[#D4C4B0] dark:from-[#8B7355]/20 dark:to-[#5B7B6D]/20 rounded-2xl border border-[#C4A77D] dark:border-[#8B7355]">
                 <div className="text-3xl mb-3">🔄</div>
                 <h4 className="font-bold text-slate-900 dark:text-white mb-2">Virtuous Cycle</h4>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -375,7 +375,7 @@ export default function InvestorsPage() {
                   Impact creates meaning that fuels continued study. Self-reinforcing flywheel.
                 </p>
               </div>
-              <div className="p-6 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl border border-amber-200 dark:border-amber-800">
+              <div className="p-6 bg-gradient-to-br from-[#D4C4B0] to-[#C4A77D] dark:from-[#A89070]/20 dark:to-[#8B7355]/20 rounded-2xl border border-[#A89070] dark:border-[#C4A77D]">
                 <div className="text-3xl mb-3">🤝</div>
                 <h4 className="font-bold text-slate-900 dark:text-white mb-2">Network Effects</h4>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -398,10 +398,10 @@ export default function InvestorsPage() {
         </section>
 
         {/* Market Opportunity */}
-        <section ref={marketRef} className="bg-gradient-to-b from-slate-100 to-slate-50 dark:from-slate-800/50 dark:to-slate-900 py-16 md:py-24">
+        <section ref={marketRef} className="bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5] dark:from-slate-800/50 dark:to-slate-900 py-16 md:py-24">
           <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${marketVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="flex items-start gap-4 mb-8">
-              <div className="w-14 h-14 rounded-xl bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center text-tribe-sage-600 dark:text-tribe-sage-400 flex-shrink-0">
+              <div className="w-14 h-14 rounded-xl bg-[#D4C4B0]/30 dark:bg-[#8B7355]/30 flex items-center justify-center text-[#5B7B6D] dark:text-[#C4A77D] flex-shrink-0">
                 <Icons.Market />
               </div>
               <div>
@@ -414,9 +414,9 @@ export default function InvestorsPage() {
 
             {/* TAM/SAM/SOM */}
             <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-l-4 border-tribe-sage-500">
+              <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-l-4 border-[#5B7B6D]">
                 <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Total Addressable Market (TAM)</p>
-                <div className="text-4xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400 mb-2">$12B+</div>
+                <div className="text-4xl font-bold text-[#5B7B6D] dark:text-[#C4A77D] mb-2">$12B+</div>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
                   Global medical education technology market, growing 17% CAGR
                 </p>
@@ -424,16 +424,16 @@ export default function InvestorsPage() {
                   Source: Grand View Research 2023
                 </p>
               </div>
-              <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-l-4 border-violet-500">
+              <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-l-4 border-[#8B7355]">
                 <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Serviceable Addressable Market (SAM)</p>
-                <div className="text-4xl font-bold text-violet-600 dark:text-violet-400 mb-2">$2B+</div>
+                <div className="text-4xl font-bold text-[#8B7355] dark:text-[#C4A77D] mb-2">$2B+</div>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
                   US medical student study tools + wellness apps + professional networking
                 </p>
               </div>
-              <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-l-4 border-amber-500">
+              <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-lg border-l-4 border-[#C4A77D]">
                 <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Serviceable Obtainable Market (SOM)</p>
-                <div className="text-4xl font-bold text-amber-600 dark:text-amber-400 mb-2">$200M</div>
+                <div className="text-4xl font-bold text-[#A89070] dark:text-[#C4A77D] mb-2">$200M</div>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
                   5-year target: 10% penetration of US medical students + residents
                 </p>
@@ -465,24 +465,24 @@ export default function InvestorsPage() {
             </div>
 
             {/* Revenue Model Preview */}
-            <div className="mt-8 p-6 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 rounded-2xl text-white">
+            <div className="mt-8 p-6 bg-gradient-to-r from-[#5B7B6D] to-[#2D5A4A] rounded-2xl text-white">
               <h3 className="font-bold text-lg mb-4">Revenue Model</h3>
               <div className="grid md:grid-cols-4 gap-4 text-sm">
                 <div className="p-3 bg-white/10 rounded-lg">
                   <p className="font-medium">Freemium SaaS</p>
-                  <p className="text-tribe-sage-100 text-xs mt-1">Core features free, premium tiers</p>
+                  <p className="text-[#E8E0D5] text-xs mt-1">Core features free, premium tiers</p>
                 </div>
                 <div className="p-3 bg-white/10 rounded-lg">
                   <p className="font-medium">Institutional Licenses</p>
-                  <p className="text-tribe-sage-100 text-xs mt-1">Medical school partnerships</p>
+                  <p className="text-[#E8E0D5] text-xs mt-1">Medical school partnerships</p>
                 </div>
                 <div className="p-3 bg-white/10 rounded-lg">
                   <p className="font-medium">Sponsor Matching</p>
-                  <p className="text-tribe-sage-100 text-xs mt-1">Charities & corporate sponsors</p>
+                  <p className="text-[#E8E0D5] text-xs mt-1">Charities & corporate sponsors</p>
                 </div>
                 <div className="p-3 bg-white/10 rounded-lg">
                   <p className="font-medium">Content Partnerships</p>
-                  <p className="text-tribe-sage-100 text-xs mt-1">QBank integrations, resources</p>
+                  <p className="text-[#E8E0D5] text-xs mt-1">QBank integrations, resources</p>
                 </div>
               </div>
             </div>
@@ -492,7 +492,7 @@ export default function InvestorsPage() {
         {/* Contact CTA */}
         <section ref={contactRef} className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-16 md:py-24">
           <div className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center transition-all duration-700 ${contactVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-tribe-sage-500/20 flex items-center justify-center text-tribe-sage-400">
+            <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-[#8B7355]/20 flex items-center justify-center text-[#C4A77D]">
               <Icons.Contact />
             </div>
             <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">
@@ -505,7 +505,7 @@ export default function InvestorsPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="mailto:invest@tribewellmd.com"
-                className="px-8 py-4 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 text-white font-bold rounded-xl hover:from-teal-600 hover:to-cyan-600 transition-all shadow-lg"
+                className="px-8 py-4 bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white font-bold rounded-xl hover:from-[#A89070] hover:to-[#8B7355] transition-all shadow-lg"
               >
                 Contact Us: invest@tribewellmd.com
               </a>

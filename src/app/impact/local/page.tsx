@@ -181,7 +181,7 @@ export default function LocalCharitiesPage() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-teal-600 via-cyan-600 to-emerald-700 py-16">
+        <section className="relative overflow-hidden bg-gradient-to-br from-[#5B7B6D] via-[#2D5A4A] to-[#8B7355] py-16">
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
             <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
@@ -217,7 +217,7 @@ export default function LocalCharitiesPage() {
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-white text-tribe-sage-700 font-semibold rounded-xl hover:bg-tribe-sage-50 transition-colors"
+                  className="px-6 py-3 bg-white text-[#8B7355] font-semibold rounded-xl hover:bg-[#F5F0E8] transition-colors"
                 >
                   Search
                 </button>
@@ -241,7 +241,7 @@ export default function LocalCharitiesPage() {
                   onClick={() => setSelectedCity(selectedCity === cityData.city ? null : cityData.city)}
                   className={`px-6 py-3 rounded-xl font-medium transition-all ${
                     selectedCity === cityData.city
-                      ? 'bg-tribe-sage-600 text-white shadow-lg shadow-tribe-sage-500/25'
+                      ? 'bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white shadow-lg shadow-[#C4A77D]/25'
                       : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600'
                   }`}
                 >
@@ -255,8 +255,8 @@ export default function LocalCharitiesPage() {
               {(selectedCity ? LOCAL_CHARITIES.filter(c => c.city === selectedCity) : LOCAL_CHARITIES).map((cityData) => (
                 <div key={cityData.city}>
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-full bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center">
-                      <svg className="w-5 h-5 text-tribe-sage-600 dark:text-tribe-sage-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="w-10 h-10 rounded-full bg-[#F5F0E8] dark:bg-[#8B7355]/30 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-[#A89070] dark:text-[#C4A77D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
@@ -270,12 +270,12 @@ export default function LocalCharitiesPage() {
                     {cityData.charities.map((charity, index) => (
                       <div
                         key={index}
-                        className="bg-slate-50 dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-700 hover:border-tribe-sage-500 dark:hover:border-tribe-sage-500 transition-colors"
+                        className="bg-slate-50 dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-700 hover:border-[#C4A77D] dark:hover:border-[#C4A77D] transition-colors"
                       >
                         <div className="flex items-start justify-between mb-2">
                           <h4 className="font-semibold text-slate-900 dark:text-white">{charity.name}</h4>
                         </div>
-                        <span className="inline-block px-2 py-1 bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-300 text-xs font-medium rounded-full mb-3">
+                        <span className="inline-block px-2 py-1 bg-[#F5F0E8] dark:bg-[#8B7355]/30 text-[#8B7355] dark:text-[#D4C4B0] text-xs font-medium rounded-full mb-3">
                           {charity.focus}
                         </span>
                         <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
@@ -285,7 +285,7 @@ export default function LocalCharitiesPage() {
                           href={charity.website}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline inline-flex items-center gap-1"
+                          className="text-sm text-[#A89070] dark:text-[#C4A77D] hover:underline inline-flex items-center gap-1"
                         >
                           Visit website
                           <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -334,7 +334,7 @@ export default function LocalCharitiesPage() {
             </h3>
             <Link
               href="/impact"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-tribe-sage-600 hover:bg-tribe-sage-700 text-white font-medium rounded-xl transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] text-white font-medium rounded-xl transition-colors"
             >
               View Partner Organizations
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
