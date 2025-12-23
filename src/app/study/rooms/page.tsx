@@ -63,18 +63,25 @@ export default function StudyRoomsPage() {
   }, [isAuthenticated]);
 
   const handleCreateRoom = async (data: CreateSessionData) => {
-    if (!userId) return;
+    if (!userId) {
+      console.error('No user ID - user may not be authenticated');
+      alert('Please log in to create a room');
+      return;
+    }
 
     setIsCreating(true);
     try {
+      console.log('Creating room with userId:', userId, 'displayName:', userDisplayName);
       const { session, error } = await createStudySession(data, userId, userDisplayName);
 
       if (error) {
         console.error('Error creating room:', error);
+        alert(`Failed to create room: ${error}`);
         return;
       }
 
       if (session) {
+        console.log('Room created successfully:', session.id);
         setShowCreateModal(false);
         router.push(`/study/room/${session.id}`);
       }
