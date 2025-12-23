@@ -125,6 +125,7 @@ function NavDropdown({ label, href, items }: NavDropdownProps) {
 // Dropdown menu configurations
 const studyDropdownItems: DropdownItem[] = [
   { label: 'Flashcards', href: '/study', description: 'Study sessions & Pomodoro timer' },
+  { label: 'Study Rooms', href: '/study/rooms', description: 'Collaborative study with chat & timers' },
   { label: 'Clinical Cases', href: '/cases', description: 'Interactive patient scenarios' },
   { label: 'AI Generator', href: '/generate', description: 'Create flashcards with AI' },
   { label: 'Rapid Review', href: '/study/rapid-review', description: 'Quick concept review' },
