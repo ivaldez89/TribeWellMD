@@ -60,7 +60,7 @@ const VERIFICATION_TIERS = [
     multiplier: '3x',
     description: 'Connected device data',
     examples: ['Step counts', 'Sleep tracking', 'Workout minutes'],
-    color: 'from-emerald-400 to-teal-500'
+    color: 'from-tribe-sage-400 to-teal-500'
   },
   {
     tier: 'Automatic',
@@ -146,10 +146,10 @@ export default function ImpactPage() {
               ].map((item) => (
                 <div key={item.step} className="relative">
                   <div className="bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 text-center h-full">
-                    <div className="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mx-auto mb-4">
+                    <div className="w-12 h-12 rounded-full bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center mx-auto mb-4">
                       <span className="text-2xl">{item.icon}</span>
                     </div>
-                    <div className="text-xs font-bold text-emerald-600 dark:text-emerald-400 mb-2">STEP {item.step}</div>
+                    <div className="text-xs font-bold text-tribe-sage-600 dark:text-tribe-sage-400 mb-2">STEP {item.step}</div>
                     <h3 className="font-semibold text-slate-900 dark:text-white mb-2">{item.title}</h3>
                     <p className="text-sm text-slate-600 dark:text-slate-400">{item.desc}</p>
                   </div>
@@ -244,7 +244,7 @@ export default function ImpactPage() {
                   onClick={() => setActiveCategory(cat.key as typeof activeCategory)}
                   className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
                     activeCategory === cat.key
-                      ? 'bg-emerald-600 text-white shadow-lg'
+                      ? 'bg-tribe-sage-600 text-white shadow-lg'
                       : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600'
                   }`}
                 >
@@ -271,13 +271,13 @@ export default function ImpactPage() {
                     <tr key={i} className="hover:bg-slate-100 dark:hover:bg-slate-800/50">
                       <td className="px-6 py-4 text-sm text-slate-700 dark:text-slate-300">{item.activity}</td>
                       <td className="px-6 py-4 text-center text-sm font-medium text-indigo-600 dark:text-indigo-400">{item.xp}</td>
-                      <td className="px-6 py-4 text-center text-sm font-medium text-emerald-600 dark:text-emerald-400">{item.villagePoints}</td>
+                      <td className="px-6 py-4 text-center text-sm font-medium text-tribe-sage-600 dark:text-tribe-sage-400">{item.villagePoints}</td>
                       <td className="px-6 py-4 text-center">
                         <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                           item.verification === 'automatic' ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300' :
                           item.verification === 'self-reported' ? 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300' :
                           item.verification === 'photo-verified' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300' :
-                          'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300'
+                          'bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-300'
                         }`}>
                           {item.verification === 'automatic' ? '🤖' :
                            item.verification === 'self-reported' ? '✋' :
@@ -312,7 +312,7 @@ export default function ImpactPage() {
                   </div>
                   <div className="text-2xl">=</div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">
+                    <div className="text-3xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400">
                       ${pointsToDollars(calcPoints)}
                     </div>
                     <div className="text-xs text-slate-500 dark:text-slate-400">to charity</div>
@@ -342,7 +342,7 @@ export default function ImpactPage() {
                   <div className="flex items-start justify-between mb-4">
                     <span className="text-4xl">{charity.icon}</span>
                     {charity.verified && (
-                      <span className="inline-flex items-center gap-1 px-2 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-medium rounded-full">
+                      <span className="inline-flex items-center gap-1 px-2 py-1 bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-300 text-xs font-medium rounded-full">
                         <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
@@ -351,13 +351,13 @@ export default function ImpactPage() {
                     )}
                   </div>
                   <h3 className="font-semibold text-slate-900 dark:text-white mb-1">{charity.name}</h3>
-                  <div className="text-xs text-emerald-600 dark:text-emerald-400 font-medium mb-2">{charity.focus}</div>
+                  <div className="text-xs text-tribe-sage-600 dark:text-tribe-sage-400 font-medium mb-2">{charity.focus}</div>
                   <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">{charity.description}</p>
                   <a
                     href={charity.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-teal-600 dark:text-teal-400 hover:underline"
+                    className="text-sm text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline"
                   >
                     Learn more →
                   </a>
@@ -368,7 +368,7 @@ export default function ImpactPage() {
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/impact/local"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-xl font-medium transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-tribe-sage-600 hover:bg-tribe-sage-700 text-white rounded-xl font-medium transition-colors"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -403,14 +403,14 @@ export default function ImpactPage() {
 
             <div className="grid md:grid-cols-3 gap-8">
               <div className="text-center">
-                <div className="text-5xl font-bold text-emerald-400 mb-2">1,000</div>
+                <div className="text-5xl font-bold text-tribe-sage-400 mb-2">1,000</div>
                 <div className="text-slate-400 mb-4">Active Students</div>
                 <div className="text-lg">× 100 points/week</div>
                 <div className="text-2xl font-bold text-white mt-2">$100/week</div>
                 <div className="text-sm text-slate-500">to charity</div>
               </div>
               <div className="text-center">
-                <div className="text-5xl font-bold text-teal-400 mb-2">10,000</div>
+                <div className="text-5xl font-bold text-tribe-sage-400 mb-2">10,000</div>
                 <div className="text-slate-400 mb-4">Active Students</div>
                 <div className="text-lg">× 100 points/week</div>
                 <div className="text-2xl font-bold text-white mt-2">$1,000/week</div>
@@ -478,25 +478,25 @@ export default function ImpactPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-16 bg-gradient-to-r from-emerald-600 to-teal-600">
+        <section className="py-16 bg-gradient-to-r from-emerald-600 to-tribe-sage-600">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl font-bold text-white mb-4">
               Ready to Make an Impact?
             </h2>
-            <p className="text-emerald-100 text-lg mb-8">
+            <p className="text-tribe-sage-100 text-lg mb-8">
               Start earning Village Points today. Your study session could help fund physician wellness programs,
               medical education scholarships, or healthcare access initiatives.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/study/flashcards"
-                className="px-8 py-4 bg-white text-emerald-700 font-semibold rounded-xl hover:bg-emerald-50 transition-colors"
+                className="px-8 py-4 bg-white text-tribe-sage-700 font-semibold rounded-xl hover:bg-tribe-sage-50 transition-colors"
               >
                 Start Studying
               </Link>
               <Link
                 href="/wellness"
-                className="px-8 py-4 bg-emerald-700 text-white font-semibold rounded-xl hover:bg-emerald-800 transition-colors border border-emerald-500"
+                className="px-8 py-4 bg-emerald-700 text-white font-semibold rounded-xl hover:bg-emerald-800 transition-colors border border-tribe-sage-500"
               >
                 Explore Wellness
               </Link>

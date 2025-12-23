@@ -61,10 +61,10 @@ export function SharedPomodoroTimer({
         };
       case 'shortBreak':
         return {
-          bg: 'from-emerald-500 to-green-600',
+          bg: 'from-tribe-sage-500 to-green-600',
           ring: 'stroke-emerald-500',
-          text: 'text-emerald-500',
-          tab: 'bg-emerald-500',
+          text: 'text-tribe-sage-500',
+          tab: 'bg-tribe-sage-500',
         };
       case 'longBreak':
         return {
@@ -404,8 +404,8 @@ export function SharedPomodoroTimer({
                   }}
                   className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
                     mode === 'shortBreak' && currentMinutes === mins
-                      ? 'bg-emerald-500 text-white'
-                      : 'bg-white dark:bg-slate-600 text-slate-700 dark:text-slate-200 hover:bg-emerald-100 dark:hover:bg-emerald-900/30'
+                      ? 'bg-tribe-sage-500 text-white'
+                      : 'bg-white dark:bg-slate-600 text-slate-700 dark:text-slate-200 hover:bg-tribe-sage-100 dark:hover:bg-emerald-900/30'
                   }`}
                 >
                   {mins}m

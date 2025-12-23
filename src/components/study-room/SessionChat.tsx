@@ -59,7 +59,7 @@ export function SessionChat({
       {/* Header */}
       <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-700 flex-shrink-0">
         <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-          <svg className="w-5 h-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-5 h-5 text-tribe-sage-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -140,12 +140,12 @@ export function SessionChat({
                 <div
                   className={`max-w-[75%] ${
                     isCurrentUser
-                      ? 'bg-teal-500 text-white rounded-2xl rounded-br-sm'
+                      ? 'bg-tribe-sage-500 text-white rounded-2xl rounded-br-sm'
                       : 'bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white rounded-2xl rounded-bl-sm'
                   } px-3 py-2`}
                 >
                   {!isCurrentUser && (
-                    <p className="text-xs font-medium text-teal-600 dark:text-teal-400 mb-0.5">
+                    <p className="text-xs font-medium text-tribe-sage-600 dark:text-tribe-sage-400 mb-0.5">
                       {message.senderName}
                     </p>
                   )}
@@ -178,12 +178,12 @@ export function SessionChat({
             onChange={(e) => setNewMessage(e.target.value.slice(0, 500))}
             placeholder={isConnected ? 'Type a message...' : 'Connecting...'}
             disabled={!isConnected}
-            className="flex-1 px-4 py-2 bg-slate-100 dark:bg-slate-700 border-0 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 disabled:opacity-50"
+            className="flex-1 px-4 py-2 bg-slate-100 dark:bg-slate-700 border-0 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={!newMessage.trim() || !isConnected}
-            className="px-4 py-2 bg-teal-500 hover:bg-teal-600 disabled:bg-slate-300 disabled:dark:bg-slate-600 text-white rounded-xl transition-colors disabled:cursor-not-allowed"
+            className="px-4 py-2 bg-tribe-sage-500 hover:bg-tribe-sage-600 disabled:bg-slate-300 disabled:dark:bg-slate-600 text-white rounded-xl transition-colors disabled:cursor-not-allowed"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path

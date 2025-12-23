@@ -123,7 +123,7 @@ export default function ImportPage() {
         {/* Back Link */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-slate-600 hover:text-emerald-600 mb-6 transition-colors"
+          className="inline-flex items-center gap-2 text-slate-600 hover:text-tribe-sage-600 mb-6 transition-colors"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -141,12 +141,12 @@ export default function ImportPage() {
           {importResult && (
             <div className={`mb-6 p-4 rounded-xl ${
               importResult.success 
-                ? 'bg-emerald-50 border border-emerald-200' 
+                ? 'bg-tribe-sage-50 border border-emerald-200' 
                 : 'bg-red-50 border border-red-200'
             }`}>
               <div className="flex items-center gap-3">
                 {importResult.success ? (
-                  <svg className="w-6 h-6 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-6 h-6 text-tribe-sage-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 ) : (
@@ -154,14 +154,14 @@ export default function ImportPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 )}
-                <span className={importResult.success ? 'text-emerald-700' : 'text-red-700'}>
+                <span className={importResult.success ? 'text-tribe-sage-700' : 'text-red-700'}>
                   {importResult.message}
                 </span>
               </div>
               {importResult.success && (
                 <Link
                   href="/flashcards"
-                  className="inline-flex items-center gap-2 mt-3 text-emerald-600 hover:text-emerald-700 font-medium"
+                  className="inline-flex items-center gap-2 mt-3 text-tribe-sage-600 hover:text-tribe-sage-700 font-medium"
                 >
                   Start studying new cards →
                 </Link>
@@ -198,7 +198,7 @@ export default function ImportPage() {
               value={jsonInput}
               onChange={(e) => setJsonInput(e.target.value)}
               placeholder={sampleFormat}
-              className="w-full h-64 p-4 font-mono text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all resize-none"
+              className="w-full h-64 p-4 font-mono text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500 transition-all resize-none"
             />
           </div>
 
@@ -206,7 +206,7 @@ export default function ImportPage() {
           <button
             onClick={handleImport}
             disabled={!jsonInput.trim() || isProcessing}
-            className="w-full py-3 px-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 disabled:from-slate-300 disabled:to-slate-400 text-white font-semibold rounded-xl shadow-lg shadow-emerald-500/25 disabled:shadow-none transition-all disabled:cursor-not-allowed"
+            className="w-full py-3 px-4 bg-gradient-to-r from-tribe-sage-500 to-teal-500 hover:from-emerald-600 hover:to-tribe-sage-600 disabled:from-slate-300 disabled:to-slate-400 text-white font-semibold rounded-xl shadow-lg shadow-tribe-sage-500/25 disabled:shadow-none transition-all disabled:cursor-not-allowed"
           >
             {isProcessing ? 'Importing...' : 'Import Cards'}
           </button>

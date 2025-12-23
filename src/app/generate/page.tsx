@@ -297,11 +297,11 @@ Return ONLY the JSON array, no other text.`;
 
         {/* Success message */}
         {savedCount > 0 && (
-          <div className="mb-6 p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl flex items-center gap-3">
-            <svg className="w-6 h-6 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="mb-6 p-4 bg-tribe-sage-50 dark:bg-tribe-sage-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl flex items-center gap-3">
+            <svg className="w-6 h-6 text-tribe-sage-600 dark:text-tribe-sage-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
-            <p className="text-emerald-800 dark:text-emerald-300">
+            <p className="text-emerald-800 dark:text-tribe-sage-300">
               Successfully added {savedCount} cards to your deck!{' '}
               <Link href="/flashcards" className="underline font-medium hover:text-emerald-900 dark:hover:text-emerald-200">Start studying →</Link>
             </p>
@@ -470,7 +470,7 @@ Example:
               {generatedCards.length > 0 && (
                 <button
                   onClick={handleSaveCards}
-                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2"
+                  className="px-4 py-2 bg-tribe-sage-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2"
                 >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />

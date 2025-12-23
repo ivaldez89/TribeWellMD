@@ -21,7 +21,7 @@ const HEALTH_PROVIDERS = [
     id: 'google_fit' as const,
     name: 'Google Fit',
     icon: '💚',
-    color: 'from-green-500 to-emerald-500',
+    color: 'from-green-500 to-tribe-sage-500',
     description: 'Connect your Android fitness data',
     available: true
   },
@@ -106,7 +106,7 @@ export function HealthConnect({ variant = 'full', onPointsEarned }: HealthConnec
       <div className="p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-xl border border-emerald-200 dark:border-emerald-800">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-tribe-sage-500 to-teal-500 flex items-center justify-center">
               <span className="text-xl">⌚</span>
             </div>
             <div>
@@ -121,13 +121,13 @@ export function HealthConnect({ variant = 'full', onPointsEarned }: HealthConnec
             </div>
           </div>
           {syncStatus?.isConnected ? (
-            <span className="px-2 py-1 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 text-xs font-medium rounded-full">
+            <span className="px-2 py-1 bg-tribe-sage-100 dark:bg-tribe-sage-900/50 text-tribe-sage-700 dark:text-tribe-sage-300 text-xs font-medium rounded-full">
               ✓ Synced
             </span>
           ) : (
             <button
               onClick={() => handleConnect('apple_health')}
-              className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium rounded-lg transition-colors"
+              className="px-3 py-1.5 bg-tribe-sage-600 hover:bg-emerald-700 text-white text-xs font-medium rounded-lg transition-colors"
             >
               Connect
             </button>
@@ -153,8 +153,8 @@ export function HealthConnect({ variant = 'full', onPointsEarned }: HealthConnec
         </div>
         {syncStatus?.isConnected && (
           <div className="text-right">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 text-sm font-medium rounded-full">
-              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-tribe-sage-100 dark:bg-tribe-sage-900/50 text-tribe-sage-700 dark:text-tribe-sage-300 text-sm font-medium rounded-full">
+              <span className="w-2 h-2 bg-tribe-sage-500 rounded-full animate-pulse" />
               Connected to {HEALTH_PROVIDERS.find(p => p.id === syncStatus.provider)?.name}
             </span>
             <p className="text-xs text-slate-500 mt-1">
@@ -229,7 +229,7 @@ export function HealthConnect({ variant = 'full', onPointsEarned }: HealthConnec
                 </p>
                 <p className="text-xs text-slate-600 dark:text-slate-400">steps</p>
                 {todaySummary?.stepsVerified && (
-                  <span className="inline-flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 mt-1">
+                  <span className="inline-flex items-center gap-1 text-xs text-tribe-sage-600 dark:text-tribe-sage-400 mt-1">
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
@@ -244,7 +244,7 @@ export function HealthConnect({ variant = 'full', onPointsEarned }: HealthConnec
                 </p>
                 <p className="text-xs text-slate-600 dark:text-slate-400">workout mins</p>
                 {todaySummary?.workoutVerified && (
-                  <span className="inline-flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 mt-1">
+                  <span className="inline-flex items-center gap-1 text-xs text-tribe-sage-600 dark:text-tribe-sage-400 mt-1">
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
@@ -259,7 +259,7 @@ export function HealthConnect({ variant = 'full', onPointsEarned }: HealthConnec
                 </p>
                 <p className="text-xs text-slate-600 dark:text-slate-400">hours sleep</p>
                 {todaySummary?.sleepVerified && (
-                  <span className="inline-flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 mt-1">
+                  <span className="inline-flex items-center gap-1 text-xs text-tribe-sage-600 dark:text-tribe-sage-400 mt-1">
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
@@ -274,7 +274,7 @@ export function HealthConnect({ variant = 'full', onPointsEarned }: HealthConnec
                 </p>
                 <p className="text-xs text-slate-600 dark:text-slate-400">mindful mins</p>
                 {todaySummary?.mindfulVerified && (
-                  <span className="inline-flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 mt-1">
+                  <span className="inline-flex items-center gap-1 text-xs text-tribe-sage-600 dark:text-tribe-sage-400 mt-1">
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
@@ -288,7 +288,7 @@ export function HealthConnect({ variant = 'full', onPointsEarned }: HealthConnec
             <div className="mt-4 pt-4 border-t border-emerald-200 dark:border-emerald-700">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-slate-600 dark:text-slate-400">Village Points from health today</span>
-                <span className="font-bold text-emerald-600 dark:text-emerald-400">
+                <span className="font-bold text-tribe-sage-600 dark:text-tribe-sage-400">
                   +{todaySummary?.villagePointsEarned || 0} pts
                 </span>
               </div>
@@ -299,7 +299,7 @@ export function HealthConnect({ variant = 'full', onPointsEarned }: HealthConnec
           <div className="p-5 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-semibold text-slate-900 dark:text-white">This Week</h3>
-              <span className="text-sm text-emerald-600 dark:text-emerald-400 font-medium">
+              <span className="text-sm text-tribe-sage-600 dark:text-tribe-sage-400 font-medium">
                 {weeklyPoints} pts earned
               </span>
             </div>
@@ -314,16 +314,16 @@ export function HealthConnect({ variant = 'full', onPointsEarned }: HealthConnec
                     <p className="text-xs text-slate-500 dark:text-slate-400 mb-2">{dayName}</p>
                     <div className={`h-16 rounded-lg relative overflow-hidden ${
                       hasActivity
-                        ? 'bg-emerald-100 dark:bg-emerald-900/30'
+                        ? 'bg-tribe-sage-100 dark:bg-tribe-sage-900/30'
                         : 'bg-slate-100 dark:bg-slate-700'
                     }`}>
                       <div
-                        className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-emerald-500 to-teal-400 transition-all"
+                        className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-tribe-sage-500 to-teal-400 transition-all"
                         style={{ height: `${stepsPercent}%` }}
                       />
                       {day.stepsVerified && (
                         <div className="absolute top-1 right-1">
-                          <svg className="w-3 h-3 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-3 h-3 text-tribe-sage-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
                         </div>
@@ -365,7 +365,7 @@ export function HealthConnect({ variant = 'full', onPointsEarned }: HealthConnec
           </div>
           <button
             onClick={() => setShowManualEntry(!showManualEntry)}
-            className="text-sm text-teal-600 dark:text-teal-400 hover:underline"
+            className="text-sm text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline"
           >
             {showManualEntry ? 'Cancel' : 'Add Entry'}
           </button>
@@ -389,7 +389,7 @@ export function HealthConnect({ variant = 'full', onPointsEarned }: HealthConnec
                     onClick={() => setManualData(prev => ({ ...prev, type: type.id as typeof prev.type }))}
                     className={`p-3 rounded-xl text-center transition-all ${
                       manualData.type === type.id
-                        ? 'bg-teal-100 dark:bg-teal-900/30 border-2 border-teal-500'
+                        ? 'bg-tribe-sage-100 dark:bg-tribe-sage-900/30 border-2 border-tribe-sage-500'
                         : 'bg-slate-100 dark:bg-slate-700 border-2 border-transparent'
                     }`}
                   >
@@ -416,7 +416,7 @@ export function HealthConnect({ variant = 'full', onPointsEarned }: HealthConnec
             <button
               onClick={handleManualSubmit}
               disabled={!manualData.value || parseFloat(manualData.value) <= 0}
-              className="w-full py-3 bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 disabled:from-slate-400 disabled:to-slate-500 text-white font-medium rounded-xl transition-all"
+              className="w-full py-3 bg-gradient-to-r from-tribe-sage-500 to-tribe-sage-500 hover:from-teal-600 hover:to-tribe-sage-600 disabled:from-slate-400 disabled:to-slate-500 text-white font-medium rounded-xl transition-all"
             >
               Add Entry (Self-Reported)
             </button>

@@ -122,7 +122,7 @@ export function ThemeToggle() {
             onClick={() => setTheme(option.value)}
             className={`p-2 rounded-md transition-all ${
               theme === option.value
-                ? 'bg-white dark:bg-slate-700 text-emerald-600 dark:text-emerald-400 shadow-sm'
+                ? 'bg-white dark:bg-slate-700 text-tribe-sage-600 dark:text-tribe-sage-400 shadow-sm'
                 : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'
             }`}
             title={option.label}

@@ -152,7 +152,7 @@ export function PomodoroTimer({ onSessionComplete }: PomodoroTimerProps) {
 
   const modeColors = {
     focus: 'from-red-500 to-orange-500',
-    shortBreak: 'from-green-500 to-emerald-500',
+    shortBreak: 'from-green-500 to-tribe-sage-500',
     longBreak: 'from-blue-500 to-cyan-500',
   };
 

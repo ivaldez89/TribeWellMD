@@ -165,7 +165,7 @@ export function StreakCounter({ variant = 'compact', showDropdown = true }: Stre
                 <div
                   className={`absolute inset-y-0 left-0 rounded-full transition-all duration-500 ${
                     goalComplete
-                      ? 'bg-gradient-to-r from-green-400 to-emerald-500'
+                      ? 'bg-gradient-to-r from-green-400 to-tribe-sage-500'
                       : 'bg-gradient-to-r from-amber-400 to-orange-500'
                   }`}
                   style={{ width: `${dailyProgress}%` }}
@@ -208,14 +208,14 @@ export function StreakCounter({ variant = 'compact', showDropdown = true }: Stre
             <div className="p-4 border-b border-slate-100 dark:border-slate-700 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 text-emerald-500"><Icons.HeartHand /></span>
+                  <span className="w-6 h-6 text-tribe-sage-500"><Icons.HeartHand /></span>
                   <div>
                     <div className="text-sm font-medium text-slate-700 dark:text-slate-300">Village Points</div>
                     <div className="text-xs text-slate-500 dark:text-slate-400">Your study helps the community</div>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">
+                  <div className="text-lg font-bold text-tribe-sage-600 dark:text-tribe-sage-400">
                     {(streakData.weeklyVillagePoints || 0).toLocaleString()}
                   </div>
                   <div className="text-xs text-slate-500 dark:text-slate-400">this week</div>
@@ -344,7 +344,7 @@ export function StreakCounter({ variant = 'compact', showDropdown = true }: Stre
             <div
               className={`absolute inset-y-0 left-0 rounded-full transition-all duration-500 ${
                 goalComplete
-                  ? 'bg-gradient-to-r from-green-400 to-emerald-500'
+                  ? 'bg-gradient-to-r from-green-400 to-tribe-sage-500'
                   : 'bg-gradient-to-r from-amber-400 to-orange-500'
               }`}
               style={{ width: `${dailyProgress}%` }}

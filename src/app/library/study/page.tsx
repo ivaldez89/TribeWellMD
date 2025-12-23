@@ -452,7 +452,7 @@ function LibraryStudyContent() {
           <p className="text-slate-600 dark:text-slate-400 mb-6">Please select a subcategory from the library.</p>
           <Link
             href="/library"
-            className="px-6 py-3 bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-xl transition-colors"
+            className="px-6 py-3 bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white font-medium rounded-xl transition-colors"
           >
             Back to Library
           </Link>
@@ -498,7 +498,7 @@ function LibraryStudyContent() {
         <main className="max-w-4xl mx-auto px-4 py-12">
           <div className="text-center">
             <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center">
-              <svg className="w-12 h-12 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-12 h-12 text-tribe-sage-600 dark:text-tribe-sage-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
@@ -520,7 +520,7 @@ function LibraryStudyContent() {
                 </div>
                 <div className="w-px h-12 bg-slate-200 dark:bg-slate-700" />
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-emerald-600">{sessionStats.correct}</p>
+                  <p className="text-3xl font-bold text-tribe-sage-600">{sessionStats.correct}</p>
                   <p className="text-sm text-slate-500 dark:text-slate-400">Correct</p>
                 </div>
                 <div className="w-px h-12 bg-slate-200 dark:bg-slate-700" />
@@ -530,7 +530,7 @@ function LibraryStudyContent() {
                 </div>
                 <div className="w-px h-12 bg-slate-200 dark:bg-slate-700" />
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-teal-600">{accuracy}%</p>
+                  <p className="text-3xl font-bold text-tribe-sage-600">{accuracy}%</p>
                   <p className="text-sm text-slate-500 dark:text-slate-400">Accuracy</p>
                 </div>
               </div>
@@ -545,7 +545,7 @@ function LibraryStudyContent() {
                   setIsComplete(false);
                   setSessionStats({ reviewed: 0, correct: 0, incorrect: 0 });
                 }}
-                className="px-6 py-3 bg-teal-500 hover:bg-teal-600 text-white font-semibold rounded-xl transition-colors"
+                className="px-6 py-3 bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white font-semibold rounded-xl transition-colors"
               >
                 Study Again
               </button>
@@ -587,7 +587,7 @@ function LibraryStudyContent() {
         <div className="relative z-[60] mb-6 flex items-center justify-between flex-wrap gap-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur py-3 px-4 rounded-xl border border-slate-200 dark:border-slate-700">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-sm">
-            <Link href={`/library?view=${viewType}`} className="text-slate-500 hover:text-teal-600 transition-colors">
+            <Link href={`/library?view=${viewType}`} className="text-slate-500 hover:text-tribe-sage-600 transition-colors">
               {viewType === 'shelves' ? 'Shelf Exams' : 'Topics'}
             </Link>
             <span className="text-slate-400">/</span>
@@ -603,7 +603,7 @@ function LibraryStudyContent() {
 
             {/* Progress indicator */}
             <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-100 dark:bg-slate-700 rounded-lg text-sm">
-              <span className="text-emerald-600 font-medium">{sessionStats.correct}</span>
+              <span className="text-tribe-sage-600 font-medium">{sessionStats.correct}</span>
               <span className="text-slate-400">/</span>
               <span className="text-red-500 font-medium">{sessionStats.incorrect}</span>
             </div>
@@ -770,7 +770,7 @@ export default function LibraryStudyPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-900">
-        <div className="animate-spin w-8 h-8 border-4 border-teal-500 border-t-transparent rounded-full" />
+        <div className="animate-spin w-8 h-8 border-4 border-tribe-sage-500 border-t-transparent rounded-full" />
       </div>
     }>
       <LibraryStudyContent />

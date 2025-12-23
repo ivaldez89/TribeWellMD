@@ -33,7 +33,7 @@ export function VignetteProgress({ session, vignette }: VignetteProgressProps) {
           <div className="text-sm text-slate-500">Decisions</div>
         </div>
         <div className="bg-white rounded-xl p-4 border border-slate-200 text-center">
-          <div className="text-2xl font-bold text-emerald-600">{optimalDecisions}</div>
+          <div className="text-2xl font-bold text-tribe-sage-600">{optimalDecisions}</div>
           <div className="text-sm text-slate-500">Optimal</div>
         </div>
         <div className="bg-white rounded-xl p-4 border border-slate-200 text-center">
@@ -73,7 +73,7 @@ export function VignetteProgress({ session, vignette }: VignetteProgressProps) {
                 strokeWidth="8"
                 fill="none"
                 strokeLinecap="round"
-                className={optimalPercentage >= 80 ? 'text-emerald-500' : optimalPercentage >= 50 ? 'text-amber-500' : 'text-red-500'}
+                className={optimalPercentage >= 80 ? 'text-tribe-sage-500' : optimalPercentage >= 50 ? 'text-amber-500' : 'text-red-500'}
                 strokeDasharray={`${(optimalPercentage / 100) * 251.2} 251.2`}
               />
             </svg>
@@ -161,7 +161,7 @@ function DecisionStep({
           className={`
             w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0
             ${wasOptimal
-              ? 'bg-emerald-100 text-emerald-600'
+              ? 'bg-tribe-sage-100 text-tribe-sage-600'
               : wasAcceptable
                 ? 'bg-amber-100 text-amber-600'
                 : 'bg-red-100 text-red-600'
@@ -201,7 +201,7 @@ function DecisionStep({
             className={`
               inline-flex px-2 py-0.5 text-xs font-medium rounded
               ${wasOptimal
-                ? 'bg-emerald-100 text-emerald-700'
+                ? 'bg-tribe-sage-100 text-tribe-sage-700'
                 : wasAcceptable
                   ? 'bg-amber-100 text-amber-700'
                   : 'bg-red-100 text-red-700'

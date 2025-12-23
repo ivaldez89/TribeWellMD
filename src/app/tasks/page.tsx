@@ -102,7 +102,7 @@ export default function TasksPage() {
           </div>
           <button
             onClick={() => setShowAddModal(true)}
-            className="flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-medium rounded-xl shadow-lg shadow-teal-500/25 transition-all"
+            className="flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-medium rounded-xl shadow-lg shadow-tribe-sage-500/25 transition-all"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -114,11 +114,11 @@ export default function TasksPage() {
         {/* Stats Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
           <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
-            <div className="text-2xl font-bold text-teal-600 dark:text-teal-400">{stats.pendingToday}</div>
+            <div className="text-2xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400">{stats.pendingToday}</div>
             <div className="text-sm text-slate-600 dark:text-slate-400">Due Today</div>
           </div>
           <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
-            <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{stats.completedToday}</div>
+            <div className="text-2xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400">{stats.completedToday}</div>
             <div className="text-sm text-slate-600 dark:text-slate-400">Completed</div>
           </div>
           <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
@@ -138,21 +138,21 @@ export default function TasksPage() {
           <div className="mb-6 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl">
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-tribe-sage-100 dark:bg-tribe-sage-900/50 flex items-center justify-center">
                   <span className="text-lg">💚</span>
                 </div>
                 <div>
                   <p className="text-sm font-medium text-emerald-800 dark:text-emerald-200">
                     Balance Suggestion
                   </p>
-                  <p className="text-sm text-emerald-600 dark:text-emerald-400">
+                  <p className="text-sm text-tribe-sage-600 dark:text-tribe-sage-400">
                     {wellnessSuggestion}
                   </p>
                 </div>
               </div>
               <button
                 onClick={handleAddWellnessTask}
-                className="px-3 py-1.5 text-sm font-medium text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/50 hover:bg-emerald-200 dark:hover:bg-emerald-900 rounded-lg transition-colors"
+                className="px-3 py-1.5 text-sm font-medium text-tribe-sage-700 dark:text-tribe-sage-300 bg-tribe-sage-100 dark:bg-tribe-sage-900/50 hover:bg-emerald-200 dark:hover:bg-emerald-900 rounded-lg transition-colors"
               >
                 Add Task
               </button>
@@ -221,7 +221,7 @@ export default function TasksPage() {
               </p>
               <button
                 onClick={() => setShowAddModal(true)}
-                className="mt-4 text-teal-600 dark:text-teal-400 hover:underline"
+                className="mt-4 text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline"
               >
                 Add your first task
               </button>
@@ -295,8 +295,8 @@ function TaskCard({
           onClick={onToggle}
           className={`flex-shrink-0 w-6 h-6 mt-0.5 rounded-full border-2 transition-colors flex items-center justify-center ${
             isCompleted
-              ? 'bg-emerald-500 border-emerald-500 text-white'
-              : 'border-slate-300 dark:border-slate-600 hover:border-teal-500'
+              ? 'bg-tribe-sage-500 border-tribe-sage-500 text-white'
+              : 'border-slate-300 dark:border-slate-600 hover:border-tribe-sage-500'
           }`}
         >
           {isCompleted && (
@@ -462,7 +462,7 @@ function TaskModal({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="What do you need to do?"
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent"
               autoFocus
             />
           </div>
@@ -477,7 +477,7 @@ function TaskModal({
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Add details..."
               rows={2}
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
+              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent resize-none"
             />
           </div>
 
@@ -494,7 +494,7 @@ function TaskModal({
                   onClick={() => setCategory(cat)}
                   className={`flex flex-col items-center gap-1 p-3 rounded-xl border-2 transition-all ${
                     category === cat
-                      ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/30'
+                      ? 'border-tribe-sage-500 bg-tribe-sage-50 dark:bg-tribe-sage-900/30'
                       : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
                   }`}
                 >
@@ -520,7 +520,7 @@ function TaskModal({
                   onClick={() => setPriority(p)}
                   className={`flex-1 px-3 py-2 text-sm font-medium rounded-lg border-2 transition-all ${
                     priority === p
-                      ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300'
+                      ? 'border-tribe-sage-500 bg-tribe-sage-50 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-300'
                       : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-slate-300'
                   }`}
                 >
@@ -540,7 +540,7 @@ function TaskModal({
                 type="date"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
-                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent"
               />
             </div>
             <div>
@@ -551,7 +551,7 @@ function TaskModal({
                 type="time"
                 value={dueTime}
                 onChange={(e) => setDueTime(e.target.value)}
-                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent"
               />
             </div>
           </div>
@@ -566,7 +566,7 @@ function TaskModal({
               value={linkedExam}
               onChange={(e) => setLinkedExam(e.target.value)}
               placeholder="e.g., Step 2 CK, IM Shelf"
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent"
             />
           </div>
 
@@ -592,7 +592,7 @@ function TaskModal({
             <button
               type="submit"
               disabled={!title.trim()}
-              className="flex-1 px-4 py-2 text-white bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-medium shadow-lg shadow-teal-500/25 transition-all"
+              className="flex-1 px-4 py-2 text-white bg-gradient-to-r from-tribe-sage-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-medium shadow-lg shadow-tribe-sage-500/25 transition-all"
             >
               {task ? 'Save Changes' : 'Add Task'}
             </button>

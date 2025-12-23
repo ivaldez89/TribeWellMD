@@ -55,7 +55,7 @@ export function TribeLeaderboard({ members, currentUserId = 'current-user' }: Tr
               onClick={() => setTimeFilter('all-time')}
               className={`px-3 py-1 text-sm rounded-md transition-colors ${
                 timeFilter === 'all-time'
-                  ? 'bg-teal-500 text-white'
+                  ? 'bg-tribe-sage-500 text-white'
                   : 'text-slate-600 hover:bg-slate-50'
               }`}
             >
@@ -65,7 +65,7 @@ export function TribeLeaderboard({ members, currentUserId = 'current-user' }: Tr
               onClick={() => setTimeFilter('weekly')}
               className={`px-3 py-1 text-sm rounded-md transition-colors ${
                 timeFilter === 'weekly'
-                  ? 'bg-teal-500 text-white'
+                  ? 'bg-tribe-sage-500 text-white'
                   : 'text-slate-600 hover:bg-slate-50'
               }`}
             >
@@ -77,8 +77,8 @@ export function TribeLeaderboard({ members, currentUserId = 'current-user' }: Tr
 
       {/* Current user's rank banner */}
       {currentUserRank >= 0 && (
-        <div className="px-4 py-3 bg-teal-50 border-b border-teal-100">
-          <p className="text-sm text-teal-700">
+        <div className="px-4 py-3 bg-tribe-sage-50 border-b border-teal-100">
+          <p className="text-sm text-tribe-sage-700">
             You&apos;re ranked <span className="font-bold">#{currentUserRank + 1}</span> with{' '}
             <span className="font-bold">{getPoints(sortedMembers[currentUserRank]).toLocaleString()}</span> points
             {timeFilter === 'weekly' && ' this week'}
@@ -98,7 +98,7 @@ export function TribeLeaderboard({ members, currentUserId = 'current-user' }: Tr
               <div
                 key={member.id}
                 className={`flex items-center gap-3 p-4 ${
-                  member.oderId === currentUserId ? 'bg-teal-50/50' : 'hover:bg-slate-50'
+                  member.oderId === currentUserId ? 'bg-tribe-sage-50/50' : 'hover:bg-slate-50'
                 } transition-colors`}
               >
                 {/* Rank */}
@@ -149,7 +149,7 @@ export function TribeLeaderboard({ members, currentUserId = 'current-user' }: Tr
 
                 {/* Points */}
                 <div className="text-right">
-                  <p className="font-bold text-teal-600 text-lg">
+                  <p className="font-bold text-tribe-sage-600 text-lg">
                     {points.toLocaleString()}
                   </p>
                   <p className="text-xs text-slate-400">points</p>

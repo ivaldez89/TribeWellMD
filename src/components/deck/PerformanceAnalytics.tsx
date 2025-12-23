@@ -15,7 +15,7 @@ export function PerformanceAnalytics({ topicPerformance }: PerformanceAnalyticsP
   const strengthColors = {
     weak: { bg: 'bg-red-100', text: 'text-red-700', border: 'border-red-200' },
     moderate: { bg: 'bg-amber-100', text: 'text-amber-700', border: 'border-amber-200' },
-    strong: { bg: 'bg-emerald-100', text: 'text-emerald-700', border: 'border-emerald-200' },
+    strong: { bg: 'bg-tribe-sage-100', text: 'text-tribe-sage-700', border: 'border-emerald-200' },
     new: { bg: 'bg-blue-100', text: 'text-blue-700', border: 'border-blue-200' }
   };
 
@@ -51,9 +51,9 @@ export function PerformanceAnalytics({ topicPerformance }: PerformanceAnalyticsP
           <p className="text-lg font-bold text-amber-600">{moderateTopics.length}</p>
           <p className="text-xs text-amber-600/80">Moderate</p>
         </div>
-        <div className="bg-emerald-50 px-3 py-2 text-center">
-          <p className="text-lg font-bold text-emerald-600">{strongTopics.length}</p>
-          <p className="text-xs text-emerald-600/80">Strong</p>
+        <div className="bg-tribe-sage-50 px-3 py-2 text-center">
+          <p className="text-lg font-bold text-tribe-sage-600">{strongTopics.length}</p>
+          <p className="text-xs text-tribe-sage-600/80">Strong</p>
         </div>
         <div className="bg-blue-50 px-3 py-2 text-center">
           <p className="text-lg font-bold text-blue-600">{newTopics.length}</p>
@@ -97,7 +97,7 @@ export function PerformanceAnalytics({ topicPerformance }: PerformanceAnalyticsP
         {/* Strong topics */}
         {strongTopics.length > 0 && (
           <div>
-            <p className="text-xs font-semibold text-emerald-600 uppercase tracking-wide mb-2 flex items-center gap-1">
+            <p className="text-xs font-semibold text-tribe-sage-600 uppercase tracking-wide mb-2 flex items-center gap-1">
               <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>

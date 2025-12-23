@@ -624,7 +624,7 @@ export default function CasePlayerPage() {
                 <div className={`
                   px-6 py-8 text-center
                   ${wasOptimal
-                    ? 'bg-gradient-to-r from-emerald-500 to-teal-500'
+                    ? 'bg-gradient-to-r from-tribe-sage-500 to-teal-500'
                     : 'bg-gradient-to-r from-amber-500 to-orange-500'
                   }
                 `}>
@@ -664,8 +664,8 @@ export default function CasePlayerPage() {
                       <div className="text-2xl font-bold text-slate-800">{session.decisions.length}</div>
                       <div className="text-sm text-slate-500">Decisions</div>
                     </div>
-                    <div className="p-4 bg-emerald-50 rounded-xl">
-                      <div className="text-2xl font-bold text-emerald-600">
+                    <div className="p-4 bg-tribe-sage-50 rounded-xl">
+                      <div className="text-2xl font-bold text-tribe-sage-600">
                         {session.decisions.filter(d => d.wasOptimal).length}
                       </div>
                       <div className="text-sm text-slate-500">Optimal</div>

@@ -69,7 +69,7 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
       <button
         ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
-        className="relative flex items-center gap-2 p-1 rounded-full transition-all duration-200 hover:ring-2 hover:ring-teal-500/30 focus:outline-none focus:ring-2 focus:ring-teal-500/50"
+        className="relative flex items-center gap-2 p-1 rounded-full transition-all duration-200 hover:ring-2 hover:ring-tribe-sage-500/30 focus:outline-none focus:ring-2 focus:ring-tribe-sage-500/50"
         aria-label="Profile menu"
       >
         {/* Avatar */}
@@ -86,7 +86,7 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
         )}
 
         {/* Online indicator */}
-        <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-slate-900 rounded-full" />
+        <span className="absolute bottom-0 right-0 w-3 h-3 bg-tribe-sage-500 border-2 border-white dark:border-slate-900 rounded-full" />
       </button>
 
       {/* Dropdown Panel */}
@@ -98,7 +98,7 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
           {/* Profile Header */}
           <div className="relative">
             {/* Gradient Banner */}
-            <div className="h-16 bg-gradient-to-r from-teal-500 via-cyan-500 to-indigo-500" />
+            <div className="h-16 bg-gradient-to-r from-tribe-sage-500 via-cyan-500 to-indigo-500" />
 
             {/* Avatar overlapping banner */}
             <div className="absolute -bottom-8 left-4">
@@ -137,7 +137,7 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
               <Link
                 href="/profile"
                 onClick={() => setIsOpen(false)}
-                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-sm font-medium text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30 hover:bg-teal-100 dark:hover:bg-teal-900/50 rounded-lg transition-colors"
+                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-sm font-medium text-tribe-sage-600 dark:text-tribe-sage-400 bg-tribe-sage-50 dark:bg-tribe-sage-900/30 hover:bg-tribe-sage-100 dark:hover:bg-teal-900/50 rounded-lg transition-colors"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -170,11 +170,11 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
                     </span>
                   </div>
                   {/* Total tribe members indicator */}
-                  <div className="flex items-center gap-1 px-2 py-0.5 bg-teal-50 dark:bg-teal-900/30 rounded-full">
-                    <span className="text-xs font-bold text-teal-600 dark:text-teal-400">
+                  <div className="flex items-center gap-1 px-2 py-0.5 bg-tribe-sage-50 dark:bg-tribe-sage-900/30 rounded-full">
+                    <span className="text-xs font-bold text-tribe-sage-600 dark:text-tribe-sage-400">
                       {userTribes.reduce((acc, t) => acc + (t.memberCount || 0), 0)}
                     </span>
-                    <span className="text-xs text-teal-500 dark:text-teal-500">members</span>
+                    <span className="text-xs text-tribe-sage-500 dark:text-tribe-sage-500">members</span>
                   </div>
                 </div>
                 <Link
@@ -204,7 +204,7 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
                 <div className="mt-2 p-2 rounded-lg bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border border-emerald-100 dark:border-emerald-800/50">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
+                      <div className="w-6 h-6 rounded-full bg-tribe-sage-100 dark:bg-tribe-sage-900/50 flex items-center justify-center">
                         <span className="text-xs">✨</span>
                       </div>
                       <div>
@@ -213,7 +213,7 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm font-bold text-emerald-600 dark:text-emerald-400">
+                      <p className="text-sm font-bold text-tribe-sage-600 dark:text-tribe-sage-400">
                         {userTribes.reduce((acc, t) => acc + (t.weeklyPoints || 0), 0)}
                       </p>
                       <p className="text-[10px] text-slate-500 dark:text-slate-400">this week</p>
@@ -227,7 +227,7 @@ export function ProfileDropdown({ className = '' }: ProfileDropdownProps) {
             {hasProfile && (
               <div className="flex gap-4 mt-3 pt-3 border-t border-slate-100 dark:border-slate-700">
                 <div className="text-center relative">
-                  <div className="text-lg font-bold text-teal-600 dark:text-teal-400">{connectionCount}</div>
+                  <div className="text-lg font-bold text-tribe-sage-600 dark:text-tribe-sage-400">{connectionCount}</div>
                   <div className="text-xs text-slate-500 dark:text-slate-400">Connections</div>
                   {pendingCount > 0 && (
                     <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">

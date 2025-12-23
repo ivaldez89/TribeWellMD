@@ -57,7 +57,7 @@ function CollapsibleHistoryCard({ entry, index }: { entry: HistoryEntry; index: 
           <span className={`
             flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold
             ${isOptimal
-              ? 'bg-emerald-500 text-white'
+              ? 'bg-tribe-sage-500 text-white'
               : isAcceptable
                 ? 'bg-amber-500 text-white'
                 : 'bg-red-500 text-white'
@@ -82,7 +82,7 @@ function CollapsibleHistoryCard({ entry, index }: { entry: HistoryEntry; index: 
           <span className={`
             px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide
             ${isOptimal
-              ? 'bg-emerald-100 text-emerald-700'
+              ? 'bg-tribe-sage-100 text-tribe-sage-700'
               : isAcceptable
                 ? 'bg-amber-100 text-amber-700'
                 : 'bg-red-100 text-red-700'
@@ -126,7 +126,7 @@ function CollapsibleHistoryCard({ entry, index }: { entry: HistoryEntry; index: 
           <div className={`
             p-3 rounded-lg mb-2
             ${isOptimal
-              ? 'bg-emerald-100/50'
+              ? 'bg-tribe-sage-100/50'
               : isAcceptable
                 ? 'bg-amber-100/50'
                 : 'bg-red-100/50'
@@ -265,7 +265,7 @@ export function VignetteViewer({
               ) : (
                 <>
                   {selectedChoice?.isOptimal ? (
-                    <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-tribe-sage-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   ) : selectedChoice?.isAcceptable ? (
@@ -279,7 +279,7 @@ export function VignetteViewer({
                   )}
                   <span className={`text-sm font-semibold ${
                     selectedChoice?.isOptimal
-                      ? 'text-emerald-700'
+                      ? 'text-tribe-sage-700'
                       : selectedChoice?.isAcceptable
                         ? 'text-amber-700'
                         : 'text-red-700'
@@ -293,7 +293,7 @@ export function VignetteViewer({
               px-2.5 py-1 rounded-full text-xs font-medium
               ${showFeedback
                 ? selectedChoice?.isOptimal
-                  ? 'bg-emerald-100 text-emerald-700'
+                  ? 'bg-tribe-sage-100 text-tribe-sage-700'
                   : selectedChoice?.isAcceptable
                     ? 'bg-amber-100 text-amber-700'
                     : 'bg-red-100 text-red-700'
@@ -355,7 +355,7 @@ export function VignetteViewer({
             <div className={`
               mt-5 p-5 rounded-xl border-2
               ${selectedChoice?.isOptimal
-                ? 'bg-emerald-50 border-emerald-200'
+                ? 'bg-tribe-sage-50 border-emerald-200'
                 : selectedChoice?.isAcceptable
                   ? 'bg-amber-50 border-amber-200'
                   : 'bg-red-50 border-red-200'
@@ -365,7 +365,7 @@ export function VignetteViewer({
                 <div className={`
                   w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0
                   ${selectedChoice?.isOptimal
-                    ? 'bg-emerald-500'
+                    ? 'bg-tribe-sage-500'
                     : selectedChoice?.isAcceptable
                       ? 'bg-amber-500'
                       : 'bg-red-500'
@@ -409,7 +409,7 @@ export function VignetteViewer({
               <div className={`
                 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium
                 ${selectedChoice.isOptimal
-                  ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                  ? 'bg-tribe-sage-100 text-emerald-800 border border-emerald-200'
                   : selectedChoice.isAcceptable
                     ? 'bg-amber-100 text-amber-800 border border-amber-200'
                     : 'bg-red-100 text-red-800 border border-red-200'
@@ -428,7 +428,7 @@ export function VignetteViewer({
             <div className={`
               p-4 rounded-xl mb-5
               ${selectedChoice.isOptimal
-                ? 'bg-emerald-100/50 border border-emerald-200'
+                ? 'bg-tribe-sage-100/50 border border-emerald-200'
                 : selectedChoice.isAcceptable
                   ? 'bg-amber-100/50 border border-amber-200'
                   : 'bg-red-100/50 border border-red-200'
@@ -497,7 +497,7 @@ export function VignetteViewer({
                   flex items-center justify-center gap-3
                   group
                   ${selectedChoice.isOptimal
-                    ? 'bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white shadow-emerald-200'
+                    ? 'bg-gradient-to-r from-tribe-sage-500 to-teal-500 hover:from-emerald-600 hover:to-tribe-sage-600 text-white shadow-emerald-200'
                     : selectedChoice.isAcceptable
                       ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-amber-200'
                       : 'bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white shadow-slate-200'

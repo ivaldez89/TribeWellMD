@@ -176,7 +176,7 @@ export default function ProfilePage() {
     badges.push({ icon: '🔥', label: '7+ Day Streak', color: 'from-orange-500 to-red-500' });
   }
   if (stats.totalCards >= 100) {
-    badges.push({ icon: '📚', label: '100+ Cards', color: 'from-teal-500 to-cyan-500' });
+    badges.push({ icon: '📚', label: '100+ Cards', color: 'from-tribe-sage-500 to-cyan-500' });
   }
   if (userTribes.length >= 3) {
     badges.push({ icon: '👥', label: 'Social Butterfly', color: 'from-violet-500 to-purple-500' });
@@ -200,7 +200,7 @@ export default function ProfilePage() {
         {/* Profile Header - Cover Photo Style */}
         <section className="relative mb-6">
           {/* Cover Photo */}
-          <div className="h-40 md:h-56 rounded-t-3xl bg-gradient-to-br from-teal-500 via-cyan-500 to-indigo-600 relative overflow-hidden">
+          <div className="h-40 md:h-56 rounded-t-3xl bg-gradient-to-br from-tribe-sage-500 via-cyan-500 to-indigo-600 relative overflow-hidden">
             {/* Decorative elements */}
             <div className="absolute inset-0">
               <div className="absolute top-10 right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
@@ -270,7 +270,7 @@ export default function ProfilePage() {
 
                 {/* Online indicator */}
                 {!avatarUploading && (
-                  <span className="absolute bottom-2 right-2 w-5 h-5 md:w-6 md:h-6 bg-emerald-500 border-3 border-white dark:border-slate-800 rounded-full" />
+                  <span className="absolute bottom-2 right-2 w-5 h-5 md:w-6 md:h-6 bg-tribe-sage-500 border-3 border-white dark:border-slate-800 rounded-full" />
                 )}
 
                 {/* Avatar error message */}
@@ -365,11 +365,11 @@ export default function ProfilePage() {
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <div className="text-center p-4 bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-xl">
-                  <p className="text-2xl font-bold text-teal-600 dark:text-teal-400">{stats.totalCards}</p>
+                  <p className="text-2xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400">{stats.totalCards}</p>
                   <p className="text-xs text-slate-600 dark:text-slate-400">Total Cards</p>
                 </div>
                 <div className="text-center p-4 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 rounded-xl">
-                  <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{stats.reviewCards}</p>
+                  <p className="text-2xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400">{stats.reviewCards}</p>
                   <p className="text-xs text-slate-600 dark:text-slate-400">Mastered</p>
                 </div>
                 <div className="text-center p-4 bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 rounded-xl">
@@ -388,7 +388,7 @@ export default function ProfilePage() {
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <span className="text-lg font-bold text-slate-900 dark:text-white">Level {streakData.level}</span>
-                      <span className="px-2 py-0.5 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-400 text-xs font-medium rounded-full">
+                      <span className="px-2 py-0.5 bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-400 text-xs font-medium rounded-full">
                         {streakData.level >= 10 ? 'Expert' : streakData.level >= 5 ? 'Scholar' : 'Learner'}
                       </span>
                     </div>
@@ -398,7 +398,7 @@ export default function ProfilePage() {
                   </div>
                   <div className="h-3 bg-slate-200 dark:bg-slate-600 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full transition-all"
+                      className="h-full bg-gradient-to-r from-tribe-sage-500 to-cyan-500 rounded-full transition-all"
                       style={{ width: `${(streakData.totalXP % 1000) / 10}%` }}
                     />
                   </div>
@@ -509,7 +509,7 @@ export default function ProfilePage() {
                       <div className="flex gap-1">
                         <button
                           onClick={() => handleAcceptRequest(user.id)}
-                          className="w-8 h-8 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center transition-colors"
+                          className="w-8 h-8 rounded-full bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white flex items-center justify-center transition-colors"
                         >
                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -555,7 +555,7 @@ export default function ProfilePage() {
                             {getInitials(user.firstName, user.lastName)}
                           </div>
                           {user.isOnline && (
-                            <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-slate-800 rounded-full" />
+                            <span className="absolute bottom-0 right-0 w-3 h-3 bg-tribe-sage-500 border-2 border-white dark:border-slate-800 rounded-full" />
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
@@ -566,7 +566,7 @@ export default function ProfilePage() {
                             {user.specialty || user.currentYear}
                           </p>
                         </div>
-                        <button className="w-8 h-8 rounded-full bg-teal-100 dark:bg-teal-900/30 hover:bg-teal-200 dark:hover:bg-teal-900/50 text-teal-600 dark:text-teal-400 flex items-center justify-center transition-colors">
+                        <button className="w-8 h-8 rounded-full bg-tribe-sage-100 dark:bg-tribe-sage-900/30 hover:bg-teal-200 dark:hover:bg-teal-900/50 text-tribe-sage-600 dark:text-tribe-sage-400 flex items-center justify-center transition-colors">
                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                           </svg>
@@ -577,7 +577,7 @@ export default function ProfilePage() {
                   {connections.length > 5 && (
                     <button
                       onClick={() => setShowAllConnections(!showAllConnections)}
-                      className="w-full mt-4 py-2 text-sm font-medium text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors"
+                      className="w-full mt-4 py-2 text-sm font-medium text-tribe-sage-600 dark:text-tribe-sage-400 hover:text-tribe-sage-700 dark:hover:text-tribe-sage-300 transition-colors"
                     >
                       {showAllConnections ? 'Show Less' : `View All ${connectionCount} Connections`}
                     </button>
@@ -597,7 +597,7 @@ export default function ProfilePage() {
 
               <Link
                 href="/profile/settings"
-                className="mt-4 block w-full px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white text-center rounded-xl font-medium text-sm transition-all shadow-md"
+                className="mt-4 block w-full px-4 py-2 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white text-center rounded-xl font-medium text-sm transition-all shadow-md"
               >
                 Find People to Connect
               </Link>

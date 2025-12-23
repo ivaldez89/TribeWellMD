@@ -104,7 +104,7 @@ export function DeckFilterPanel({
             </span>
           ))}
           {filters.tags.slice(0, 3).map(tag => (
-            <span key={tag} className="px-2 py-0.5 text-xs bg-emerald-100 text-emerald-700 rounded-full">
+            <span key={tag} className="px-2 py-0.5 text-xs bg-tribe-sage-100 text-tribe-sage-700 rounded-full">
               #{tag}
             </span>
           ))}
@@ -196,8 +196,8 @@ export function DeckFilterPanel({
                     onClick={() => toggleTag(tag)}
                     className={`px-3 py-1.5 text-sm rounded-lg border transition-all ${
                       filters.tags.includes(tag)
-                        ? 'bg-emerald-600 text-white border-emerald-600'
-                        : 'bg-white text-slate-700 border-slate-200 hover:border-emerald-300 hover:bg-emerald-50'
+                        ? 'bg-tribe-sage-600 text-white border-tribe-sage-600'
+                        : 'bg-white text-slate-700 border-slate-200 hover:border-emerald-300 hover:bg-tribe-sage-50'
                     }`}
                   >
                     #{tag}

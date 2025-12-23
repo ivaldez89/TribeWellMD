@@ -51,7 +51,7 @@ const DEMO_EVENTS: CalendarEvent[] = [
     title: 'Study Group - Cardiology',
     start: new Date(new Date().setHours(16, 0, 0, 0)),
     end: new Date(new Date().setHours(18, 0, 0, 0)),
-    color: 'bg-teal-500',
+    color: 'bg-tribe-sage-500',
     source: 'manual'
   },
   {

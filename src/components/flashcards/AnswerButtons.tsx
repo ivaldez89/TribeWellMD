@@ -43,10 +43,10 @@ const buttonConfigs: ButtonConfig[] = [
     rating: 'good',
     label: 'Good',
     shortcut: '3',
-    bgClass: 'bg-emerald-500',
-    hoverClass: 'hover:bg-emerald-600',
+    bgClass: 'bg-tribe-sage-500',
+    hoverClass: 'hover:bg-tribe-sage-600',
     textClass: 'text-white',
-    ringClass: 'focus:ring-emerald-500/50'
+    ringClass: 'focus:ring-tribe-sage-500/50'
   },
   {
     rating: 'easy',
@@ -140,7 +140,7 @@ export function AnswerButtons({ onRate, disabled, intervalPreview }: AnswerButto
             <span className="text-slate-600 ml-1">Significant difficulty</span>
           </div>
           <div>
-            <span className="font-medium text-emerald-600">Good:</span>
+            <span className="font-medium text-tribe-sage-600">Good:</span>
             <span className="text-slate-600 ml-1">Correct with effort</span>
           </div>
           <div>

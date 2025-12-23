@@ -128,7 +128,7 @@ export function SchoolSelector({
 
   const getTypeColor = (type: SchoolType) => {
     switch (type) {
-      case 'md': return 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400';
+      case 'md': return 'bg-tribe-sage-100 text-tribe-sage-700 dark:bg-tribe-sage-900/30 dark:text-tribe-sage-400';
       case 'do': return 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400';
       case 'undergrad': return 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400';
       case 'caribbean': return 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400';
@@ -142,7 +142,7 @@ export function SchoolSelector({
       {emailValidation && email && (
         <div className={`mb-2 px-3 py-2 rounded-lg text-sm flex items-center gap-2 ${
           emailValidation.isValid
-            ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800'
+            ? 'bg-tribe-sage-50 dark:bg-tribe-sage-900/20 text-tribe-sage-700 dark:text-tribe-sage-400 border border-emerald-200 dark:border-emerald-800'
             : 'bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800'
         }`}>
           {emailValidation.isValid ? (
@@ -160,11 +160,11 @@ export function SchoolSelector({
 
       {/* Selected School Badge */}
       {selectedSchool && !isOpen && (
-        <div className="mb-2 inline-flex items-center gap-2 px-3 py-1.5 bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800 rounded-lg">
+        <div className="mb-2 inline-flex items-center gap-2 px-3 py-1.5 bg-tribe-sage-50 dark:bg-tribe-sage-900/20 border border-teal-200 dark:border-teal-800 rounded-lg">
           <span className={`px-2 py-0.5 rounded text-xs font-medium ${getTypeColor(selectedSchool.type)}`}>
             {getSchoolTypeLabel(selectedSchool.type)}
           </span>
-          <span className="text-sm text-teal-700 dark:text-teal-400 font-medium">
+          <span className="text-sm text-tribe-sage-700 dark:text-tribe-sage-400 font-medium">
             {selectedSchool.shortName || selectedSchool.name}
           </span>
           {selectedSchool.state && (
@@ -204,7 +204,7 @@ export function SchoolSelector({
           onFocus={() => setIsOpen(true)}
           disabled={disabled}
           placeholder="Search for your school..."
-          className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+          className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
         />
       </div>
 
@@ -219,7 +219,7 @@ export function SchoolSelector({
                 onClick={() => setActiveFilter(filter)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
                   activeFilter === filter
-                    ? 'bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-400'
+                    ? 'bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-400'
                     : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'
                 }`}
               >
@@ -259,7 +259,7 @@ export function SchoolSelector({
                 </p>
                 <button
                   onClick={handleManualEntry}
-                  className="text-sm text-teal-600 dark:text-teal-400 hover:underline font-medium"
+                  className="text-sm text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline font-medium"
                 >
                   Use "{query}" anyway
                 </button>
@@ -276,7 +276,7 @@ export function SchoolSelector({
             <div className="p-3 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
               <button
                 onClick={handleManualEntry}
-                className="w-full text-center text-sm text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
+                className="w-full text-center text-sm text-slate-600 dark:text-slate-400 hover:text-tribe-sage-600 dark:hover:text-tribe-sage-400 transition-colors"
               >
                 School not listed? <span className="font-medium">Enter manually</span>
               </button>

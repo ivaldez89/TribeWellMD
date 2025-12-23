@@ -98,7 +98,7 @@ export default function TribePage() {
             </p>
             <a
               href="/tribes"
-              className="inline-block px-6 py-3 bg-teal-500 text-white rounded-xl font-medium hover:bg-teal-600 transition-colors"
+              className="inline-block px-6 py-3 bg-tribe-sage-500 text-white rounded-xl font-medium hover:bg-tribe-sage-600 transition-colors"
             >
               Browse Tribes
             </a>
@@ -132,7 +132,7 @@ export default function TribePage() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
                     activeTab === tab.id
-                      ? 'bg-teal-500 text-white shadow-sm'
+                      ? 'bg-tribe-sage-500 text-white shadow-sm'
                       : 'text-slate-600 hover:bg-slate-100'
                   }`}
                 >
@@ -157,7 +157,7 @@ export default function TribePage() {
                   {/* Recent Activity */}
                   <div className="bg-white rounded-xl border border-slate-200 p-6">
                     <h3 className="font-semibold text-slate-800 mb-4 flex items-center gap-2">
-                      <span className="w-5 h-5 text-teal-500"><Icons.Chart /></span>
+                      <span className="w-5 h-5 text-tribe-sage-500"><Icons.Chart /></span>
                       Recent Activity
                     </h3>
                     <div className="space-y-3">
@@ -200,7 +200,7 @@ export default function TribePage() {
                                 {member.firstName} {member.lastName}
                               </p>
                             </div>
-                            <span className="text-sm font-semibold text-teal-600">
+                            <span className="text-sm font-semibold text-tribe-sage-600">
                               {member.contributionPoints.toLocaleString()} pts
                             </span>
                           </div>
@@ -215,24 +215,24 @@ export default function TribePage() {
                 {/* Point earning guide */}
                 <div className="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-xl border border-teal-200 p-6">
                   <h3 className="font-semibold text-slate-800 mb-3 flex items-center gap-2">
-                    <span className="w-5 h-5 text-teal-600"><Icons.Lightbulb /></span>
+                    <span className="w-5 h-5 text-tribe-sage-600"><Icons.Lightbulb /></span>
                     How to Earn Points
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                     <div className="flex items-center gap-2 text-slate-600">
-                      <span className="w-4 h-4 text-teal-500"><Icons.Book /></span>
+                      <span className="w-4 h-4 text-tribe-sage-500"><Icons.Book /></span>
                       Complete flashcard sessions (+10 pts)
                     </div>
                     <div className="flex items-center gap-2 text-slate-600">
-                      <span className="w-4 h-4 text-teal-500"><Icons.Fire /></span>
+                      <span className="w-4 h-4 text-tribe-sage-500"><Icons.Fire /></span>
                       Maintain study streak (+5 pts/day)
                     </div>
                     <div className="flex items-center gap-2 text-slate-600">
-                      <span className="w-4 h-4 text-teal-500"><Icons.Meditation /></span>
+                      <span className="w-4 h-4 text-tribe-sage-500"><Icons.Meditation /></span>
                       Complete wellness challenges (+5-12 pts)
                     </div>
                     <div className="flex items-center gap-2 text-slate-600">
-                      <span className="w-4 h-4 text-teal-500"><Icons.Handshake /></span>
+                      <span className="w-4 h-4 text-tribe-sage-500"><Icons.Handshake /></span>
                       Help a peer (+15 pts)
                     </div>
                   </div>

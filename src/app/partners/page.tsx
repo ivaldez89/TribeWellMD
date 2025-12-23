@@ -112,7 +112,7 @@ export default function PartnersPage() {
         <section ref={pointsRef} className="bg-white dark:bg-slate-900 py-16 md:py-24">
           <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${pointsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="flex items-start gap-4 mb-8">
-              <div className="w-14 h-14 rounded-xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400 flex-shrink-0">
+              <div className="w-14 h-14 rounded-xl bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center text-tribe-sage-600 dark:text-tribe-sage-400 flex-shrink-0">
                 <Icons.Points />
               </div>
               <div>
@@ -239,8 +239,8 @@ export default function PartnersPage() {
               </div>
 
               {/* Tier 2 */}
-              <div className="p-6 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl border-2 border-emerald-200 dark:border-emerald-800 shadow-lg">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-200 dark:bg-emerald-800 rounded-full text-sm font-medium text-emerald-700 dark:text-emerald-300 mb-4">
+              <div className="p-6 bg-tribe-sage-50 dark:bg-tribe-sage-900/20 rounded-2xl border-2 border-emerald-200 dark:border-emerald-800 shadow-lg">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-200 dark:bg-emerald-800 rounded-full text-sm font-medium text-tribe-sage-700 dark:text-tribe-sage-300 mb-4">
                   Tier 2: Soft Verification
                 </div>
                 <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-3">Bonus Points (2-3x)</h3>
@@ -250,7 +250,7 @@ export default function PartnersPage() {
                   <li>• Healthy meals, workouts, groups</li>
                   <li>• AI verifies content authenticity</li>
                 </ul>
-                <p className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                <p className="text-xs text-tribe-sage-600 dark:text-tribe-sage-400 font-medium">
                   Coming in Phase 2
                 </p>
               </div>
@@ -317,7 +317,7 @@ export default function PartnersPage() {
                     </div>
                   </li>
                   <li className="flex items-start gap-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
-                    <div className="w-10 h-10 rounded-lg bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400 flex-shrink-0">
+                    <div className="w-10 h-10 rounded-lg bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center text-tribe-sage-600 dark:text-tribe-sage-400 flex-shrink-0">
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
@@ -356,31 +356,31 @@ export default function PartnersPage() {
                 <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-4">Benefits of Partnership</h3>
                 <ul className="space-y-3 text-slate-600 dark:text-slate-400 mb-6">
                   <li className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-tribe-sage-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     <span>501(c)(3) verification required</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-tribe-sage-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Monthly donation reports & transparency</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-tribe-sage-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Co-marketing opportunities with medical students</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-tribe-sage-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Featured on community impact dashboard</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-tribe-sage-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     <span>"TribeWellMD Community donated $X this month" messaging</span>

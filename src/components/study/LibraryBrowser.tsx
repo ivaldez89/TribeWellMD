@@ -85,14 +85,14 @@ export function LibraryBrowser({ defaultView = 'shelves', onStudySubcategory }: 
         <div className="flex items-center gap-2 text-sm">
           <button
             onClick={() => { setSelectedCategory(null); setSelectedSubcategory(null); }}
-            className="text-slate-500 hover:text-teal-600 transition-colors"
+            className="text-slate-500 hover:text-tribe-sage-600 transition-colors"
           >
             {view === 'shelves' ? 'Shelf Exams' : 'Topics'}
           </button>
           <span className="text-slate-400">/</span>
           <button
             onClick={() => setSelectedSubcategory(null)}
-            className="text-slate-500 hover:text-teal-600 transition-colors"
+            className="text-slate-500 hover:text-tribe-sage-600 transition-colors"
           >
             {selectedCategory.name}
           </button>
@@ -127,7 +127,7 @@ export function LibraryBrowser({ defaultView = 'shelves', onStudySubcategory }: 
             <p className="text-sm text-slate-500 dark:text-slate-400">Clinical Concepts</p>
           </div>
           <div className="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
-            <p className="text-2xl font-bold text-teal-600">{relatedCards.length}</p>
+            <p className="text-2xl font-bold text-tribe-sage-600">{relatedCards.length}</p>
             <p className="text-sm text-slate-500 dark:text-slate-400">Understanding Cards</p>
           </div>
           <div className="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
@@ -142,7 +142,7 @@ export function LibraryBrowser({ defaultView = 'shelves', onStudySubcategory }: 
         {relatedCards.length > 0 && (
           <button
             onClick={() => handleStudy(selectedSubcategory, selectedCategory)}
-            className="w-full py-4 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold rounded-xl shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 transition-all"
+            className="w-full py-4 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold rounded-xl shadow-lg shadow-tribe-sage-500/25 hover:shadow-tribe-sage-500/40 transition-all"
           >
             Let's Study {relatedCards.length} Cards
           </button>
@@ -167,7 +167,7 @@ export function LibraryBrowser({ defaultView = 'shelves', onStudySubcategory }: 
         <div className="flex items-center gap-2 text-sm">
           <button
             onClick={() => setSelectedCategory(null)}
-            className="text-slate-500 hover:text-teal-600 transition-colors"
+            className="text-slate-500 hover:text-tribe-sage-600 transition-colors"
           >
             {view === 'shelves' ? 'Shelf Exams' : 'Topics'}
           </button>
@@ -205,7 +205,7 @@ export function LibraryBrowser({ defaultView = 'shelves', onStudySubcategory }: 
           </div>
           <div className="w-px h-8 bg-slate-300 dark:bg-slate-600" />
           <div>
-            <span className="text-2xl font-bold text-teal-600">
+            <span className="text-2xl font-bold text-tribe-sage-600">
               {getCategoryConceptCount(selectedCategory)}
             </span>
             <span className="text-sm text-slate-500 ml-2">Concepts</span>
@@ -229,11 +229,11 @@ export function LibraryBrowser({ defaultView = 'shelves', onStudySubcategory }: 
               <button
                 key={subcategory.id}
                 onClick={() => setSelectedSubcategory(subcategory)}
-                className="group p-5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-600 hover:shadow-lg transition-all text-left"
+                className="group p-5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-tribe-sage-600 hover:shadow-lg transition-all text-left"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h3 className="font-semibold text-slate-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+                    <h3 className="font-semibold text-slate-900 dark:text-white group-hover:text-tribe-sage-600 dark:group-hover:text-tribe-sage-400 transition-colors">
                       {subcategory.name}
                     </h3>
                     <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
@@ -243,12 +243,12 @@ export function LibraryBrowser({ defaultView = 'shelves', onStudySubcategory }: 
                       <span className="text-xs px-2 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 rounded">
                         {conceptCount} concepts
                       </span>
-                      <span className="text-xs px-2 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 rounded">
+                      <span className="text-xs px-2 py-1 bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-300 rounded">
                         {cardCount} cards
                       </span>
                     </div>
                   </div>
-                  <svg className="w-5 h-5 text-slate-400 group-hover:text-teal-500 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-slate-400 group-hover:text-tribe-sage-500 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </div>
@@ -337,7 +337,7 @@ export function LibraryBrowser({ defaultView = 'shelves', onStudySubcategory }: 
                   <span className="text-xs px-2 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 rounded-full">
                     {category.subcategories?.length || 0} topics
                   </span>
-                  <span className="text-xs px-2 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 rounded-full">
+                  <span className="text-xs px-2 py-1 bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-300 rounded-full">
                     {conceptCount} concepts
                   </span>
                   {cardCount > 0 && (
@@ -349,7 +349,7 @@ export function LibraryBrowser({ defaultView = 'shelves', onStudySubcategory }: 
 
                 {/* Arrow indicator */}
                 <div className="absolute top-6 right-4">
-                  <svg className="w-5 h-5 text-slate-300 dark:text-slate-600 group-hover:text-teal-500 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-slate-300 dark:text-slate-600 group-hover:text-tribe-sage-500 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </div>
@@ -385,7 +385,7 @@ export function LibraryQuickNav() {
 
       <Link
         href="/library?view=topics"
-        className="group p-5 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 transition-all duration-300 text-white"
+        className="group p-5 bg-gradient-to-br from-tribe-sage-500 to-cyan-600 rounded-2xl shadow-lg shadow-tribe-sage-500/25 hover:shadow-tribe-sage-500/40 transition-all duration-300 text-white"
       >
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">

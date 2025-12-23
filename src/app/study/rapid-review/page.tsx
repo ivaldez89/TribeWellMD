@@ -694,17 +694,17 @@ export default function RapidReviewPage() {
               <div className="border-t border-slate-200 dark:border-slate-700">
                 <div className="p-6 md:p-8 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="px-3 py-1 text-xs font-bold bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-full">
+                    <span className="px-3 py-1 text-xs font-bold bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-400 rounded-full">
                       THEN THINK
                     </span>
                     {isSpeaking && isRevealed && (
-                      <span className="flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400">
-                        <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                      <span className="flex items-center gap-1.5 text-xs text-tribe-sage-600 dark:text-tribe-sage-400">
+                        <span className="w-2 h-2 bg-tribe-sage-500 rounded-full animate-pulse" />
                         Speaking...
                       </span>
                     )}
                   </div>
-                  <p className="text-xl md:text-2xl text-emerald-900 dark:text-emerald-100 leading-relaxed whitespace-pre-wrap">
+                  <p className="text-xl md:text-2xl text-emerald-900 dark:text-tribe-sage-100 leading-relaxed whitespace-pre-wrap">
                     {currentCard.content.back}
                   </p>
 

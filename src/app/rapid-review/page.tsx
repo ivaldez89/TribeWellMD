@@ -358,7 +358,7 @@ export default function RapidReviewPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-900">
-        <div className="animate-spin w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full" />
+        <div className="animate-spin w-8 h-8 border-4 border-tribe-sage-500 border-t-transparent rounded-full" />
       </div>
     );
   }
@@ -369,7 +369,7 @@ export default function RapidReviewPage() {
         <main className="max-w-3xl mx-auto px-4 py-16 text-center">
           <h1 className="text-2xl font-bold text-white mb-4">No Cards Available</h1>
           <p className="text-slate-400 mb-6">Import some cards first to use Rapid Review mode.</p>
-          <Link href="/" className="text-emerald-400 hover:underline">← Back to Dashboard</Link>
+          <Link href="/" className="text-tribe-sage-400 hover:underline">← Back to Dashboard</Link>
         </main>
       </div>
     );
@@ -396,7 +396,7 @@ export default function RapidReviewPage() {
       {/* Header */}
       <header className="border-b border-slate-700/50 bg-slate-900/50 backdrop-blur-sm">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-white hover:text-emerald-400 transition-colors">
+          <Link href="/" className="flex items-center gap-2 text-white hover:text-tribe-sage-400 transition-colors">
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
@@ -482,7 +482,7 @@ export default function RapidReviewPage() {
                         onClick={() => setVoiceFilter(filter)}
                         className={`flex-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors capitalize ${
                           voiceFilter === filter
-                            ? 'bg-emerald-600 text-white'
+                            ? 'bg-tribe-sage-600 text-white'
                             : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
                         }`}
                       >
@@ -501,7 +501,7 @@ export default function RapidReviewPage() {
                     <select
                       value={selectedVoiceIndex}
                       onChange={(e) => setSelectedVoiceIndex(parseInt(e.target.value))}
-                      className="flex-1 px-3 py-2 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-emerald-500 focus:outline-none text-sm"
+                      className="flex-1 px-3 py-2 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-tribe-sage-500 focus:outline-none text-sm"
                     >
                       {filteredVoices.map((voice, idx) => {
                         const originalIdx = voices.indexOf(voice);
@@ -534,7 +534,7 @@ export default function RapidReviewPage() {
                   <select
                     value={speechRate}
                     onChange={(e) => setSpeechRate(parseFloat(e.target.value))}
-                    className="w-full px-3 py-2 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-emerald-500 focus:outline-none text-sm"
+                    className="w-full px-3 py-2 bg-slate-700 text-white rounded-lg border border-slate-600 focus:border-tribe-sage-500 focus:outline-none text-sm"
                   >
                     {speedOptions.map((speed) => (
                       <option key={speed} value={speed}>
@@ -551,7 +551,7 @@ export default function RapidReviewPage() {
                     onClick={() => setAutoAdvance(!autoAdvance)}
                     className={`w-full px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
                       autoAdvance 
-                        ? 'bg-emerald-600 text-white' 
+                        ? 'bg-tribe-sage-600 text-white' 
                         : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
                     }`}
                   >
@@ -589,7 +589,7 @@ export default function RapidReviewPage() {
       {/* Progress Bar */}
       <div className="h-1 bg-slate-800">
         <div 
-          className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-300"
+          className="h-full bg-gradient-to-r from-tribe-sage-500 to-teal-500 transition-all duration-300"
           style={{ width: `${((currentIndex + 1) / reviewCards.length) * 100}%` }}
         />
       </div>
@@ -618,7 +618,7 @@ export default function RapidReviewPage() {
                   IF YOU SEE
                 </span>
                 {isSpeaking && !isRevealed && (
-                  <span className="flex items-center gap-1.5 text-xs text-emerald-400">
+                  <span className="flex items-center gap-1.5 text-xs text-tribe-sage-400">
                     <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
                     Speaking...
                   </span>
@@ -634,7 +634,7 @@ export default function RapidReviewPage() {
               <div className="px-6 md:px-8 pb-6 md:pb-8">
                 <button
                   onClick={handleReveal}
-                  className="w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
+                  className="w-full py-4 bg-gradient-to-r from-emerald-600 to-tribe-sage-600 hover:from-tribe-sage-500 hover:to-teal-500 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-tribe-sage-500/20"
                 >
                   <span>Reveal Answer</span>
                   <kbd className="px-2 py-0.5 bg-white/20 rounded text-xs">Space</kbd>
@@ -644,17 +644,17 @@ export default function RapidReviewPage() {
               <div className="border-t border-slate-700/50">
                 <div className="p-6 md:p-8 bg-emerald-900/20">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="px-3 py-1 text-xs font-bold bg-emerald-500/20 text-emerald-400 rounded-full">
+                    <span className="px-3 py-1 text-xs font-bold bg-tribe-sage-500/20 text-tribe-sage-400 rounded-full">
                       THEN THINK
                     </span>
                     {isSpeaking && isRevealed && (
-                      <span className="flex items-center gap-1.5 text-xs text-emerald-400">
+                      <span className="flex items-center gap-1.5 text-xs text-tribe-sage-400">
                         <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
                         Speaking...
                       </span>
                     )}
                   </div>
-                  <p className="text-xl md:text-2xl text-emerald-100 leading-relaxed whitespace-pre-wrap">
+                  <p className="text-xl md:text-2xl text-tribe-sage-100 leading-relaxed whitespace-pre-wrap">
                     {currentCard.content.back}
                   </p>
                   
@@ -690,7 +690,7 @@ export default function RapidReviewPage() {
             onClick={speakCurrent}
             className={`p-3 rounded-full transition-colors border ${
               isSpeaking 
-                ? 'bg-emerald-600 text-white border-emerald-500' 
+                ? 'bg-tribe-sage-600 text-white border-tribe-sage-500' 
                 : 'bg-slate-800 text-white hover:bg-slate-700 border-slate-700'
             }`}
             title="Read aloud"
@@ -706,7 +706,7 @@ export default function RapidReviewPage() {
             className={`p-4 rounded-full transition-colors shadow-lg ${
               isPlaying 
                 ? 'bg-amber-600 text-white shadow-amber-500/30' 
-                : 'bg-emerald-600 text-white hover:bg-emerald-500 shadow-emerald-500/30'
+                : 'bg-tribe-sage-600 text-white hover:bg-tribe-sage-500 shadow-tribe-sage-500/30'
             }`}
             title={isPlaying ? 'Pause auto-play' : 'Start auto-play'}
           >

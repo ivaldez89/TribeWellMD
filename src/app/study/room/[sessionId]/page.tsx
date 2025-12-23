@@ -131,7 +131,7 @@ export default function StudyRoomPage() {
         <Header />
         <main className="max-w-7xl mx-auto px-4 py-8">
           <div className="flex items-center justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-500" />
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-tribe-sage-500" />
           </div>
         </main>
       </div>
@@ -159,7 +159,7 @@ export default function StudyRoomPage() {
               </p>
               <Link
                 href="/study/rooms"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-xl transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white font-medium rounded-xl transition-colors"
               >
                 Back to Rooms
               </Link>
@@ -181,7 +181,7 @@ export default function StudyRoomPage() {
               <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
                 Study Session Ended
               </h2>
-              <Link href="/study/rooms" className="inline-flex items-center gap-2 px-5 py-2.5 bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-xl transition-colors">
+              <Link href="/study/rooms" className="inline-flex items-center gap-2 px-5 py-2.5 bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white font-medium rounded-xl transition-colors">
                 Find Another Room
               </Link>
             </div>
@@ -353,7 +353,7 @@ export default function StudyRoomPage() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowInviteModal(true)}
-              className="px-3 py-1.5 text-sm font-medium bg-teal-500 hover:bg-teal-600 text-white rounded-lg transition-colors flex items-center gap-1.5"
+              className="px-3 py-1.5 text-sm font-medium bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white rounded-lg transition-colors flex items-center gap-1.5"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
@@ -427,7 +427,7 @@ export default function StudyRoomPage() {
                 {participants.filter(p => p.isOnline).slice(0, 5).map((p) => (
                   <div
                     key={p.id}
-                    className="w-8 h-8 rounded-full bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-xs font-medium text-teal-700 dark:text-teal-300"
+                    className="w-8 h-8 rounded-full bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center text-xs font-medium text-tribe-sage-700 dark:text-tribe-sage-300"
                     title={p.displayName}
                   >
                     {p.displayName.charAt(0).toUpperCase()}

@@ -81,7 +81,7 @@ export default function DashboardPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Banner */}
         <section className="mb-8">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-teal-500 via-cyan-500 to-blue-500 p-8 md:p-10 shadow-2xl">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-tribe-sage-500 via-cyan-500 to-blue-500 p-8 md:p-10 shadow-2xl">
             {/* Animated background */}
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
@@ -90,7 +90,7 @@ export default function DashboardPage() {
 
             <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div>
-                <p className="text-teal-100 text-sm font-medium mb-1">{greeting}</p>
+                <p className="text-tribe-sage-100 text-sm font-medium mb-1">{greeting}</p>
                 <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
                   Your Dashboard
                 </h1>
@@ -151,7 +151,7 @@ export default function DashboardPage() {
             {/* Daily Goal */}
             <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-400 to-tribe-sage-500 flex items-center justify-center text-white">
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
@@ -163,7 +163,7 @@ export default function DashboardPage() {
               </div>
               <div className="h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-green-400 to-emerald-500 transition-all duration-500"
+                  className="h-full bg-gradient-to-r from-green-400 to-tribe-sage-500 transition-all duration-500"
                   style={{ width: `${dailyProgress}%` }}
                 />
               </div>
@@ -226,7 +226,7 @@ export default function DashboardPage() {
                 </h2>
                 <Link
                   href="/study/progress"
-                  className="text-sm text-teal-600 dark:text-teal-400 hover:underline font-medium"
+                  className="text-sm text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline font-medium"
                 >
                   View All →
                 </Link>
@@ -238,7 +238,7 @@ export default function DashboardPage() {
                     <p className="text-xs text-slate-500 dark:text-slate-400">Total Cards</p>
                   </div>
                   <div className="text-center p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl">
-                    <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{stats.reviewCards}</p>
+                    <p className="text-2xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400">{stats.reviewCards}</p>
                     <p className="text-xs text-slate-500 dark:text-slate-400">Review</p>
                   </div>
                   <div className="text-center p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl">
@@ -251,7 +251,7 @@ export default function DashboardPage() {
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href="/study"
-                    className="flex-1 min-w-[140px] px-4 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl text-center font-medium shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 transition-all"
+                    className="flex-1 min-w-[140px] px-4 py-3 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 text-white rounded-xl text-center font-medium shadow-lg shadow-tribe-sage-500/25 hover:shadow-tribe-sage-500/40 transition-all"
                   >
                     Start Flashcards
                   </Link>
@@ -340,14 +340,14 @@ export default function DashboardPage() {
                       key={challenge.id}
                       className={`p-3 rounded-xl border transition-all ${
                         challenge.completed
-                          ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800'
+                          ? 'bg-tribe-sage-50 dark:bg-tribe-sage-900/20 border-emerald-200 dark:border-emerald-800'
                           : 'bg-slate-50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-600'
                       }`}
                     >
                       <div className="flex items-start gap-3">
                         <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
                           challenge.completed
-                            ? 'bg-emerald-500 text-white'
+                            ? 'bg-tribe-sage-500 text-white'
                             : 'border-2 border-slate-300 dark:border-slate-500'
                         }`}>
                           {challenge.completed && (
@@ -359,7 +359,7 @@ export default function DashboardPage() {
                         <div className="flex-1 min-w-0">
                           <p className={`text-sm font-medium ${
                             challenge.completed
-                              ? 'text-emerald-700 dark:text-emerald-300 line-through'
+                              ? 'text-tribe-sage-700 dark:text-tribe-sage-300 line-through'
                               : 'text-slate-700 dark:text-slate-200'
                           }`}>
                             {challenge.title}
@@ -442,7 +442,7 @@ export default function DashboardPage() {
                           <div
                             className={`w-full aspect-square rounded-lg flex items-center justify-center transition-all ${
                               isActive
-                                ? 'bg-gradient-to-br from-emerald-400 to-green-500 text-white'
+                                ? 'bg-gradient-to-br from-tribe-sage-400 to-green-500 text-white'
                                 : isToday
                                   ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 ring-2 ring-amber-400'
                                   : 'bg-slate-100 dark:bg-slate-700 text-slate-400'

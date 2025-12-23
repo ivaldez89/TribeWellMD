@@ -85,7 +85,7 @@ export function CreateRoomModal({
               onChange={(e) => setName(e.target.value.slice(0, 50))}
               placeholder="e.g., Cardiology Review"
               required
-              className="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-700 border-0 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-700 border-0 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-tribe-sage-500"
             />
             <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 text-right">
               {name.length}/50
@@ -102,7 +102,7 @@ export function CreateRoomModal({
               onChange={(e) => setDescription(e.target.value.slice(0, 200))}
               placeholder="What will you be studying?"
               rows={2}
-              className="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-700 border-0 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 resize-none"
+              className="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-700 border-0 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 resize-none"
             />
             <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 text-right">
               {description.length}/200
@@ -142,7 +142,7 @@ export function CreateRoomModal({
               type="button"
               onClick={() => setIsPrivate(!isPrivate)}
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                isPrivate ? 'bg-teal-500' : 'bg-slate-300 dark:bg-slate-600'
+                isPrivate ? 'bg-tribe-sage-500' : 'bg-slate-300 dark:bg-slate-600'
               }`}
             >
               <span
@@ -157,7 +157,7 @@ export function CreateRoomModal({
           <button
             type="submit"
             disabled={!name.trim() || isCreating}
-            className="w-full py-3 bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white font-medium rounded-xl transition-all shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full py-3 bg-gradient-to-r from-tribe-sage-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white font-medium rounded-xl transition-all shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {isCreating ? (
               <>

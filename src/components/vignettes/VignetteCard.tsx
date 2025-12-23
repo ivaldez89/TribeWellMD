@@ -22,14 +22,14 @@ export function VignetteCard({ vignette, progress }: VignetteCardProps) {
 
   // Difficulty colors
   const difficultyStyles = {
-    beginner: 'bg-emerald-100 text-emerald-700',
+    beginner: 'bg-tribe-sage-100 text-tribe-sage-700',
     intermediate: 'bg-amber-100 text-amber-700',
     advanced: 'bg-red-100 text-red-700'
   };
 
   // Mastery colors
   const masteryColors = {
-    mastered: 'from-emerald-500 to-teal-500',
+    mastered: 'from-tribe-sage-500 to-teal-500',
     familiar: 'from-amber-500 to-orange-500',
     learning: 'from-slate-300 to-slate-400'
   };

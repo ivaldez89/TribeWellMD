@@ -287,10 +287,10 @@ export default function HomePage() {
         </section>
 
         {/* Platform Pillars */}
-        <section className="bg-teal-50/80 dark:bg-slate-800/50" ref={pillarsRef}>
+        <section className="bg-tribe-sage-50/80 dark:bg-slate-800/50" ref={pillarsRef}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className={`text-center mb-12 transition-all duration-700 ${pillarsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <span className="text-sm font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">Platform Features</span>
+              <span className="text-sm font-semibold text-tribe-sage-600 dark:text-tribe-sage-400 uppercase tracking-wider">Platform Features</span>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 mb-4">
                 Everything You Need to Thrive
               </h2>
@@ -370,12 +370,12 @@ export default function HomePage() {
         </section>
 
         {/* Find Local Charities CTA */}
-        <section className="bg-teal-50/80 dark:bg-slate-800/50 py-16 md:py-20">
+        <section className="bg-tribe-sage-50/80 dark:bg-slate-800/50 py-16 md:py-20">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             {/* TribeWellMD Logo */}
             <div className="relative inline-block mb-6">
-              <div className="absolute -inset-3 bg-gradient-to-r from-teal-500/20 via-cyan-500/20 to-emerald-500/20 blur-2xl rounded-full" />
-              <div className="relative w-16 h-16 mx-auto rounded-2xl shadow-xl shadow-teal-500/30 overflow-hidden">
+              <div className="absolute -inset-3 bg-gradient-to-r from-tribe-sage-500/20 via-cyan-500/20 to-tribe-sage-500/20 blur-2xl rounded-full" />
+              <div className="relative w-16 h-16 mx-auto rounded-2xl shadow-xl shadow-tribe-sage-500/30 overflow-hidden">
                 <img src="/logo.jpeg" alt="TribeWellMD" className="w-full h-full object-cover" />
               </div>
             </div>
@@ -387,7 +387,7 @@ export default function HomePage() {
             {/* Main CTA Button */}
             <Link
               href="/impact/local"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-teal-500 via-cyan-500 to-teal-500 hover:from-teal-600 hover:via-cyan-600 hover:to-teal-600 text-white font-bold text-lg rounded-2xl shadow-xl shadow-teal-500/30 hover:shadow-teal-500/50 hover:scale-105 transition-all duration-300"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-tribe-sage-500 via-cyan-500 to-teal-500 hover:from-teal-600 hover:via-cyan-600 hover:to-tribe-sage-600 text-white font-bold text-lg rounded-2xl shadow-xl shadow-tribe-sage-500/30 hover:shadow-tribe-sage-500/50 hover:scale-105 transition-all duration-300"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -401,7 +401,7 @@ export default function HomePage() {
 
             {/* Inspirational Tagline */}
             <p className="mt-8 text-xl font-serif italic text-slate-700 dark:text-slate-300">
-              &ldquo;Transform your study sessions and <span className="font-bold text-teal-600 dark:text-teal-400 not-italic">individual</span> goals into <span className="font-bold text-teal-600 dark:text-teal-400 not-italic">community</span> impact.&rdquo;
+              &ldquo;Transform your study sessions and <span className="font-bold text-tribe-sage-600 dark:text-tribe-sage-400 not-italic">individual</span> goals into <span className="font-bold text-tribe-sage-600 dark:text-tribe-sage-400 not-italic">community</span> impact.&rdquo;
             </p>
           </div>
         </section>
@@ -410,7 +410,7 @@ export default function HomePage() {
         <section className="bg-white dark:bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className="text-center mb-12">
-              <span className="text-sm font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">Our Community</span>
+              <span className="text-sm font-semibold text-tribe-sage-600 dark:text-tribe-sage-400 uppercase tracking-wider">Our Community</span>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2 mb-4">
                 For Everyone in Medicine
               </h2>
@@ -454,7 +454,7 @@ export default function HomePage() {
             <div className="max-w-md mx-auto mb-10">
               <p className="text-white font-medium mb-3">Join the Village</p>
               {ctaSubscribed ? (
-                <div className="flex items-center justify-center gap-2 text-teal-400">
+                <div className="flex items-center justify-center gap-2 text-tribe-sage-400">
                   <Icons.Check />
                   <span className="font-medium">Welcome to the village!</span>
                 </div>
@@ -467,12 +467,12 @@ export default function HomePage() {
                     placeholder="Enter your email"
                     required
                     disabled={ctaLoading}
-                    className="flex-1 px-4 py-3 bg-white/10 backdrop-blur border border-slate-600 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:opacity-50"
+                    className="flex-1 px-4 py-3 bg-white/10 backdrop-blur border border-slate-600 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent disabled:opacity-50"
                   />
                   <button
                     type="submit"
                     disabled={ctaLoading}
-                    className="px-6 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-bold rounded-xl transition-all disabled:opacity-50 shadow-lg"
+                    className="px-6 py-3 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-bold rounded-xl transition-all disabled:opacity-50 shadow-lg"
                   >
                     {ctaLoading ? '...' : 'Join'}
                   </button>
@@ -484,7 +484,7 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/register"
-                className="px-8 py-4 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold rounded-xl hover:from-teal-600 hover:to-cyan-600 transition-all shadow-lg hover:scale-105"
+                className="px-8 py-4 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 text-white font-bold rounded-xl hover:from-teal-600 hover:to-cyan-600 transition-all shadow-lg hover:scale-105"
               >
                 Create Your Account
               </Link>

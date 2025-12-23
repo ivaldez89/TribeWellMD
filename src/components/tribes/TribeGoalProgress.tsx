@@ -47,7 +47,7 @@ export function TribeGoalProgress({ goal, color }: TribeGoalProgressProps) {
             </div>
           </div>
           {isCompleted && (
-            <span className="px-3 py-1 bg-white text-emerald-600 rounded-full text-sm font-semibold flex items-center gap-1">
+            <span className="px-3 py-1 bg-white text-tribe-sage-600 rounded-full text-sm font-semibold flex items-center gap-1">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
@@ -65,7 +65,7 @@ export function TribeGoalProgress({ goal, color }: TribeGoalProgressProps) {
         <div className="mb-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium text-slate-700">Progress</span>
-            <span className="text-sm font-bold text-teal-600">{progress}%</span>
+            <span className="text-sm font-bold text-tribe-sage-600">{progress}%</span>
           </div>
           <div className="h-4 bg-slate-100 rounded-full overflow-hidden">
             <div
@@ -82,7 +82,7 @@ export function TribeGoalProgress({ goal, color }: TribeGoalProgressProps) {
         {/* Stats grid */}
         <div className="grid grid-cols-3 gap-4 mb-4">
           <div className="text-center p-3 bg-slate-50 rounded-lg">
-            <p className="text-2xl font-bold text-teal-600">
+            <p className="text-2xl font-bold text-tribe-sage-600">
               {goal.currentPoints.toLocaleString()}
             </p>
             <p className="text-xs text-slate-500">Current Points</p>

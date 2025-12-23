@@ -66,14 +66,14 @@ const roleOptions: RoleOption[] = [
     title: 'Medical Student',
     description: 'MS1, MS2, MS3, or MS4',
     icon: <StethoscopeIcon />,
-    color: 'from-teal-500 to-cyan-500',
+    color: 'from-tribe-sage-500 to-cyan-500',
   },
   {
     id: 'resident',
     title: 'Resident',
     description: 'In residency training',
     icon: <UserMdIcon />,
-    color: 'from-emerald-500 to-green-500',
+    color: 'from-tribe-sage-500 to-green-500',
   },
   {
     id: 'fellow',
@@ -237,13 +237,13 @@ export default function RegisterPage() {
       <div className="relative w-full max-w-2xl">
         {/* Logo/Brand */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-4 shadow-xl shadow-teal-500/25 overflow-hidden">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-4 shadow-xl shadow-tribe-sage-500/25 overflow-hidden">
             <img src="/logo.jpeg" alt="TribeWellMD" className="w-full h-full object-cover" />
           </div>
           <h1 className="text-3xl font-bold mb-2">
             <span className="text-slate-900 dark:text-white">Join </span>
             <span className="text-slate-900 dark:text-white">Tribe</span>
-            <span className="text-teal-600 dark:text-teal-400">Well</span>
+            <span className="text-tribe-sage-600 dark:text-tribe-sage-400">Well</span>
             <span className="text-indigo-600 dark:text-indigo-400">MD</span>
           </h1>
           <p className="text-slate-600 dark:text-slate-400">
@@ -263,9 +263,9 @@ export default function RegisterPage() {
                     onClick={() => handleRoleSelect(role.id)}
                     className={`
                       relative p-4 rounded-xl border-2 text-left transition-all duration-200
-                      hover:border-teal-500 hover:shadow-lg hover:scale-[1.02]
+                      hover:border-tribe-sage-500 hover:shadow-lg hover:scale-[1.02]
                       ${selectedRole === role.id
-                        ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/20'
+                        ? 'border-tribe-sage-500 bg-tribe-sage-50 dark:bg-tribe-sage-900/20'
                         : 'border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700/50'
                       }
                     `}
@@ -286,7 +286,7 @@ export default function RegisterPage() {
               <div className="pt-4 border-t border-slate-200 dark:border-slate-700 mt-6">
                 <p className="text-center text-sm text-slate-500 dark:text-slate-400">
                   Already have an account?{' '}
-                  <Link href="/login" className="text-teal-600 hover:text-teal-700 dark:text-teal-400 dark:hover:text-teal-300 font-medium">
+                  <Link href="/login" className="text-tribe-sage-600 hover:text-tribe-sage-700 dark:text-tribe-sage-400 dark:hover:text-tribe-sage-300 font-medium">
                     Sign in
                   </Link>
                 </p>
@@ -322,7 +322,7 @@ export default function RegisterPage() {
                     type="text"
                     value={formData.firstName}
                     onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent transition-all"
                     placeholder="John"
                     required
                   />
@@ -336,7 +336,7 @@ export default function RegisterPage() {
                     type="text"
                     value={formData.lastName}
                     onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent transition-all"
                     placeholder="Doe"
                     required
                   />
@@ -355,7 +355,7 @@ export default function RegisterPage() {
                   className={`w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:border-transparent transition-all ${
                     formData.email && !formData.email.toLowerCase().endsWith('.edu')
                       ? 'border-red-500 focus:ring-red-500'
-                      : 'border-slate-200 dark:border-slate-600 focus:ring-teal-500'
+                      : 'border-slate-200 dark:border-slate-600 focus:ring-tribe-sage-500'
                   }`}
                   placeholder="john.doe@school.edu"
                   required
@@ -377,7 +377,7 @@ export default function RegisterPage() {
                     type="password"
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent transition-all"
                     placeholder="Min 6 characters"
                     required
                     minLength={6}
@@ -392,7 +392,7 @@ export default function RegisterPage() {
                     type="password"
                     value={formData.confirmPassword}
                     onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent transition-all"
                     placeholder="Confirm password"
                     required
                     minLength={6}
@@ -409,7 +409,7 @@ export default function RegisterPage() {
                   type="text"
                   value={formData.institution}
                   onChange={(e) => setFormData({ ...formData, institution: e.target.value })}
-                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent transition-all"
                   placeholder={selectedRole === 'institution' ? 'University of Example' : 'Example Medical School'}
                   required
                 />
@@ -424,7 +424,7 @@ export default function RegisterPage() {
                     id="currentYear"
                     value={formData.currentYear}
                     onChange={(e) => setFormData({ ...formData, currentYear: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent transition-all"
                     required
                   >
                     <option value="">Select your year...</option>
@@ -446,7 +446,7 @@ export default function RegisterPage() {
                       id="specialty"
                       value={formData.specialty}
                       onChange={(e) => setFormData({ ...formData, specialty: e.target.value })}
-                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent transition-all"
                       required
                     >
                       <option value="">Select specialty...</option>
@@ -474,7 +474,7 @@ export default function RegisterPage() {
                       id="pgyYear"
                       value={formData.pgyYear}
                       onChange={(e) => setFormData({ ...formData, pgyYear: e.target.value })}
-                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent transition-all"
                     >
                       <option value="">Select PGY year...</option>
                       <option value="PGY-1">PGY-1</option>
@@ -498,7 +498,7 @@ export default function RegisterPage() {
                     type="text"
                     value={formData.jobTitle}
                     onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent transition-all"
                     placeholder="Dean of Student Wellness"
                     required
                   />
@@ -514,7 +514,7 @@ export default function RegisterPage() {
               {successMessage && (
                 <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl text-green-700 dark:text-green-400 text-sm text-center">
                   <p className="font-medium">{successMessage}</p>
-                  <Link href="/login" className="inline-block mt-2 text-teal-600 hover:text-teal-700 dark:text-teal-400 font-medium underline">
+                  <Link href="/login" className="inline-block mt-2 text-tribe-sage-600 hover:text-tribe-sage-700 dark:text-tribe-sage-400 font-medium underline">
                     Go to Login
                   </Link>
                 </div>
@@ -523,16 +523,16 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-4 bg-gradient-to-r from-teal-500 via-cyan-500 to-teal-500 hover:from-teal-600 hover:via-cyan-600 hover:to-teal-600 text-white font-bold rounded-xl shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 transition-all disabled:opacity-50"
+                className="w-full py-4 bg-gradient-to-r from-tribe-sage-500 via-cyan-500 to-teal-500 hover:from-teal-600 hover:via-cyan-600 hover:to-tribe-sage-600 text-white font-bold rounded-xl shadow-lg shadow-tribe-sage-500/25 hover:shadow-tribe-sage-500/40 transition-all disabled:opacity-50"
               >
                 {isLoading ? 'Creating account...' : 'Create Account'}
               </button>
 
               <p className="text-center text-sm text-slate-500 dark:text-slate-400">
                 By creating an account, you agree to our{' '}
-                <Link href="/terms" className="text-teal-600 hover:text-teal-700 dark:text-teal-400">Terms</Link>
+                <Link href="/terms" className="text-tribe-sage-600 hover:text-tribe-sage-700 dark:text-tribe-sage-400">Terms</Link>
                 {' '}and{' '}
-                <Link href="/privacy" className="text-teal-600 hover:text-teal-700 dark:text-teal-400">Privacy Policy</Link>
+                <Link href="/privacy" className="text-tribe-sage-600 hover:text-tribe-sage-700 dark:text-tribe-sage-400">Privacy Policy</Link>
               </p>
             </form>
           )}

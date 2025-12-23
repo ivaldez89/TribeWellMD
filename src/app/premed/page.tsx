@@ -139,7 +139,7 @@ export default function PreMedPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
         <section className="mb-8">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 p-8 md:p-10 shadow-2xl">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-tribe-sage-500 via-teal-500 to-cyan-500 p-8 md:p-10 shadow-2xl">
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
@@ -206,7 +206,7 @@ export default function PreMedPage() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full px-6 py-3 bg-white hover:bg-emerald-50 text-emerald-600 font-bold rounded-xl shadow-lg transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
+                      className="w-full px-6 py-3 bg-white hover:bg-tribe-sage-50 text-tribe-sage-600 font-bold rounded-xl shadow-lg transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
                     >
                       {loading ? 'Saving...' : 'Notify Me'}
                     </button>
@@ -230,10 +230,10 @@ export default function PreMedPage() {
                 key={index}
                 className="relative p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700"
               >
-                <div className="absolute top-4 right-4 px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-xs font-medium rounded-full">
+                <div className="absolute top-4 right-4 px-3 py-1 bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-600 dark:text-tribe-sage-400 text-xs font-medium rounded-full">
                   {feature.status}
                 </div>
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center mb-4 text-emerald-600 dark:text-emerald-400">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center mb-4 text-tribe-sage-600 dark:text-tribe-sage-400">
                   {renderFeatureIcon(feature.icon)}
                 </div>
                 <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">{feature.title}</h3>
@@ -241,7 +241,7 @@ export default function PreMedPage() {
                 <ul className="space-y-2">
                   {feature.features.map((item, idx) => (
                     <li key={idx} className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-                      <svg className="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-4 h-4 text-tribe-sage-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                       {item}
@@ -267,15 +267,15 @@ export default function PreMedPage() {
                 {index < JOURNEY_STEPS.length - 1 && (
                   <div className="hidden md:block absolute top-1/2 -right-2 w-4 h-0.5 bg-emerald-300 dark:bg-emerald-700" />
                 )}
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-white font-bold mb-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-tribe-sage-500 to-teal-500 flex items-center justify-center text-white font-bold mb-3">
                   {index + 1}
                 </div>
                 <h3 className="font-bold text-slate-900 dark:text-white mb-1">{step.year}</h3>
-                <p className="text-sm text-emerald-600 dark:text-emerald-400 font-medium mb-3">{step.focus}</p>
+                <p className="text-sm text-tribe-sage-600 dark:text-tribe-sage-400 font-medium mb-3">{step.focus}</p>
                 <ul className="space-y-1">
                   {step.tasks.map((task, idx) => (
                     <li key={idx} className="text-sm text-slate-500 dark:text-slate-400 flex items-start gap-2">
-                      <span className="text-emerald-500 mt-1">•</span>
+                      <span className="text-tribe-sage-500 mt-1">•</span>
                       {task}
                     </li>
                   ))}
@@ -291,15 +291,15 @@ export default function PreMedPage() {
             <h2 className="text-3xl font-bold mb-6">Why TribeWellPreMed?</h2>
             <div className="grid md:grid-cols-3 gap-8 mb-8">
               <div>
-                <div className="text-4xl font-bold text-emerald-400 mb-2">53,000+</div>
+                <div className="text-4xl font-bold text-tribe-sage-400 mb-2">53,000+</div>
                 <p className="text-slate-300">AMCAS applications per year</p>
               </div>
               <div>
-                <div className="text-4xl font-bold text-emerald-400 mb-2">~40%</div>
+                <div className="text-4xl font-bold text-tribe-sage-400 mb-2">~40%</div>
                 <p className="text-slate-300">of applicants matriculate</p>
               </div>
               <div>
-                <div className="text-4xl font-bold text-emerald-400 mb-2">4+ years</div>
+                <div className="text-4xl font-bold text-tribe-sage-400 mb-2">4+ years</div>
                 <p className="text-slate-300">of preparation needed</p>
               </div>
             </div>
@@ -321,7 +321,7 @@ export default function PreMedPage() {
                 key={index}
                 className="p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700"
               >
-                <div className="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-4 text-emerald-600 dark:text-emerald-400">
+                <div className="w-12 h-12 rounded-xl bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center mb-4 text-tribe-sage-600 dark:text-tribe-sage-400">
                   {renderTestimonialIcon(testimonial.icon)}
                 </div>
                 <p className="text-slate-600 dark:text-slate-300 italic mb-4">"{testimonial.quote}"</p>
@@ -343,7 +343,7 @@ export default function PreMedPage() {
                 <Icons.Hospital />
               </div>
               <h2 className="text-2xl font-bold text-white mb-2">Part of the TribeWellMD Family</h2>
-              <p className="text-emerald-100 mb-6">
+              <p className="text-tribe-sage-100 mb-6">
                 TribeWellPreMed is your starting point. When you get into medical school,
                 you'll have seamless access to TribeWellMD's full suite of study tools,
                 wellness resources, and community features.
@@ -351,7 +351,7 @@ export default function PreMedPage() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
                   href="/"
-                  className="px-6 py-3 bg-white text-emerald-600 font-semibold rounded-xl hover:bg-emerald-50 transition-all hover:scale-105"
+                  className="px-6 py-3 bg-white text-tribe-sage-600 font-semibold rounded-xl hover:bg-tribe-sage-50 transition-all hover:scale-105"
                 >
                   Explore TribeWellMD
                 </Link>
@@ -369,7 +369,7 @@ export default function PreMedPage() {
         {/* CTA */}
         <section className="mb-8">
           <div className="p-8 bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center text-tribe-sage-600 dark:text-tribe-sage-400">
               <Icons.Sparkles />
             </div>
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Ready to Start Your Journey?</h2>
@@ -377,7 +377,7 @@ export default function PreMedPage() {
               Sign up for early access and be the first to know when TribeWellPreMed launches.
               Your future in medicine starts with a single step.
             </p>
-            <button className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/25 transition-all hover:scale-105">
+            <button className="px-8 py-4 bg-gradient-to-r from-tribe-sage-500 to-teal-500 hover:from-emerald-600 hover:to-tribe-sage-600 text-white font-bold rounded-xl shadow-lg shadow-tribe-sage-500/25 transition-all hover:scale-105">
               Get Early Access
             </button>
           </div>

@@ -39,8 +39,8 @@ export default function AccessibilityPage() {
                 We aim to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 at Level AA. These guidelines
                 explain how to make web content more accessible for people with disabilities and more user-friendly for everyone.
               </p>
-              <div className="p-4 bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800 rounded-xl">
-                <p className="text-teal-800 dark:text-teal-300">
+              <div className="p-4 bg-tribe-sage-50 dark:bg-tribe-sage-900/20 border border-teal-200 dark:border-teal-800 rounded-xl">
+                <p className="text-teal-800 dark:text-tribe-sage-300">
                   <strong>Our Goal:</strong> To provide a website that is perceivable, operable, understandable,
                   and robust for all users, regardless of ability or technology used.
                 </p>
@@ -54,49 +54,49 @@ export default function AccessibilityPage() {
               </p>
               <ul className="space-y-2 text-slate-600 dark:text-slate-300">
                 <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-teal-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-tribe-sage-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   <span><strong>Keyboard Navigation:</strong> All interactive elements are accessible via keyboard</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-teal-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-tribe-sage-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   <span><strong>Dark Mode:</strong> Reduced eye strain option with full dark theme support</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-teal-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-tribe-sage-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   <span><strong>Color Contrast:</strong> Text and interactive elements meet WCAG contrast requirements</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-teal-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-tribe-sage-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   <span><strong>Semantic HTML:</strong> Proper heading hierarchy and landmark regions</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-teal-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-tribe-sage-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   <span><strong>ARIA Labels:</strong> Screen reader support with descriptive labels</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-teal-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-tribe-sage-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   <span><strong>Responsive Design:</strong> Works across all device sizes and zoom levels</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-teal-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-tribe-sage-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   <span><strong>Focus Indicators:</strong> Visible focus states for keyboard navigation</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-teal-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-tribe-sage-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   <span><strong>Alt Text:</strong> Descriptive alternative text for images</span>
@@ -141,7 +141,7 @@ export default function AccessibilityPage() {
               <div className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl space-y-3">
                 <p className="text-slate-700 dark:text-slate-300">
                   <strong>Email:</strong>{' '}
-                  <a href="mailto:support@tribewellmd.com" className="text-teal-600 dark:text-teal-400 hover:underline">
+                  <a href="mailto:support@tribewellmd.com" className="text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline">
                     support@tribewellmd.com
                   </a>
                 </p>
@@ -171,7 +171,7 @@ export default function AccessibilityPage() {
         </div>
 
         <div className="mt-8 flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
-          <Link href="/support" className="hover:text-teal-600 dark:hover:text-teal-400">
+          <Link href="/support" className="hover:text-tribe-sage-600 dark:hover:text-tribe-sage-400">
             Need Help? Visit Support →
           </Link>
           <p>© {new Date().getFullYear()} TribeWellMD</p>

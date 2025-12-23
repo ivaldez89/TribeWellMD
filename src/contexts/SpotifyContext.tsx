@@ -30,14 +30,14 @@ export const STUDY_PLAYLISTS = [
     name: 'Peaceful Piano',
     description: 'Relaxing piano melodies',
     spotifyUri: '37i9dQZF1DX4sWSpwq3LiO',
-    color: 'from-teal-500 to-cyan-600',
+    color: 'from-tribe-sage-500 to-cyan-600',
   },
   {
     id: 'nature',
     name: 'Nature Sounds',
     description: 'Calming nature ambience',
     spotifyUri: '37i9dQZF1DX4PP3DA4J0N8',
-    color: 'from-emerald-500 to-green-600',
+    color: 'from-tribe-sage-500 to-green-600',
   },
   {
     id: 'jazz',

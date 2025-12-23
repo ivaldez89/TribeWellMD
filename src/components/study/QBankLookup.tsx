@@ -71,13 +71,13 @@ export function QBankLookup({ onAddToStudyQueue, variant = 'full' }: QBankLookup
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="UWorld QID or AMBOSS code..."
-              className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 dark:text-white"
+              className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 dark:text-white"
             />
           </div>
           <button
             onClick={handleLookup}
             disabled={isLoading}
-            className="px-4 py-2 bg-teal-500 hover:bg-teal-600 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50"
+            className="px-4 py-2 bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50"
           >
             {isLoading ? 'Looking...' : 'Lookup'}
           </button>
@@ -85,7 +85,7 @@ export function QBankLookup({ onAddToStudyQueue, variant = 'full' }: QBankLookup
         {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
         {result && (
           <div className="mt-3 text-sm">
-            <span className="text-teal-600 dark:text-teal-400 font-medium">
+            <span className="text-tribe-sage-600 dark:text-tribe-sage-400 font-medium">
               Found {result.concepts.length} concept{result.concepts.length !== 1 ? 's' : ''}
             </span>
           </div>
@@ -99,7 +99,7 @@ export function QBankLookup({ onAddToStudyQueue, variant = 'full' }: QBankLookup
       {/* Header */}
       <div className="p-6 border-b border-slate-200 dark:border-slate-700">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-tribe-sage-500 to-cyan-500 flex items-center justify-center">
             <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
@@ -132,7 +132,7 @@ export function QBankLookup({ onAddToStudyQueue, variant = 'full' }: QBankLookup
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="e.g., 4911 (UWorld) or z5ar5O (AMBOSS)"
-              className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent transition-all"
             />
             {input && (
               <button
@@ -148,7 +148,7 @@ export function QBankLookup({ onAddToStudyQueue, variant = 'full' }: QBankLookup
           <button
             onClick={handleLookup}
             disabled={isLoading || !input.trim()}
-            className="px-6 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-medium rounded-xl shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+            className="px-6 py-3 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-medium rounded-xl shadow-lg shadow-tribe-sage-500/25 hover:shadow-tribe-sage-500/40 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:scale-[1.02] active:scale-[0.98]"
           >
             {isLoading ? (
               <span className="flex items-center gap-2">
@@ -244,7 +244,7 @@ export function QBankLookup({ onAddToStudyQueue, variant = 'full' }: QBankLookup
                   {onAddToStudyQueue && (
                     <button
                       onClick={handleAddCards}
-                      className="px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-sm font-medium rounded-lg hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors"
+                      className="px-4 py-2 bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-300 text-sm font-medium rounded-lg hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors"
                     >
                       Add to Study Queue
                     </button>
@@ -298,7 +298,7 @@ function ConceptCard({ concept }: { concept: ClinicalConcept }) {
             <span className="text-xs text-slate-400">{concept.topic}</span>
           </div>
           <h4 className="font-semibold text-slate-900 dark:text-white mb-1">{concept.name}</h4>
-          <p className="text-sm text-teal-600 dark:text-teal-400 font-medium">
+          <p className="text-sm text-tribe-sage-600 dark:text-tribe-sage-400 font-medium">
             {concept.clinicalDecision}
           </p>
         </div>
@@ -319,7 +319,7 @@ function ConceptCard({ concept }: { concept: ClinicalConcept }) {
             <ul className="space-y-1">
               {concept.testableAngles.map((angle, i) => (
                 <li key={i} className="text-sm text-slate-600 dark:text-slate-300 flex items-start gap-2">
-                  <span className="text-teal-500 mt-1">-</span>
+                  <span className="text-tribe-sage-500 mt-1">-</span>
                   {angle}
                 </li>
               ))}
@@ -373,7 +373,7 @@ function FlashcardPreview({ card }: { card: Flashcard }) {
       <div className="text-sm text-slate-700 dark:text-slate-300">
         {showBack ? (
           <div className="space-y-2">
-            <div className="p-3 bg-teal-50 dark:bg-teal-900/20 rounded-lg">
+            <div className="p-3 bg-tribe-sage-50 dark:bg-tribe-sage-900/20 rounded-lg">
               <p className="font-medium text-teal-800 dark:text-teal-200 whitespace-pre-wrap">
                 {card.content.back.substring(0, 200)}...
               </p>

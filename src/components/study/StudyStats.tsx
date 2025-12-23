@@ -268,8 +268,8 @@ export function StudyStatsDisplay() {
           </p>
           <p className="text-xs text-slate-600">Day Streak</p>
         </div>
-        <div className="text-center p-3 bg-emerald-50 rounded-xl">
-          <p className="text-2xl font-bold text-emerald-600">{stats.totalCardsReviewed}</p>
+        <div className="text-center p-3 bg-tribe-sage-50 rounded-xl">
+          <p className="text-2xl font-bold text-tribe-sage-600">{stats.totalCardsReviewed}</p>
           <p className="text-xs text-slate-600">Cards Reviewed</p>
         </div>
         <div className="text-center p-3 bg-blue-50 rounded-xl">
@@ -296,7 +296,7 @@ export function StudyStatsDisplay() {
                       ? 'bg-emerald-200' 
                       : day.count < 30 
                         ? 'bg-emerald-400' 
-                        : 'bg-emerald-600'
+                        : 'bg-tribe-sage-600'
                 }`}
               >
                 {day.count > 0 && (
@@ -305,7 +305,7 @@ export function StudyStatsDisplay() {
                   </span>
                 )}
               </div>
-              <span className={`text-xs ${day.isToday ? 'font-bold text-emerald-600' : 'text-slate-400'}`}>
+              <span className={`text-xs ${day.isToday ? 'font-bold text-tribe-sage-600' : 'text-slate-400'}`}>
                 {day.label}
               </span>
             </div>

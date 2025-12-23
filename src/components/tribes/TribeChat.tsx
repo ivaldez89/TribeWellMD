@@ -68,7 +68,7 @@ export function TribeChat({
         <div
           className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-white text-xs font-medium ${
             isCurrentUser
-              ? 'bg-gradient-to-br from-teal-500 to-cyan-500'
+              ? 'bg-gradient-to-br from-tribe-sage-500 to-cyan-500'
               : 'bg-gradient-to-br from-indigo-500 to-purple-500'
           }`}
         >
@@ -83,7 +83,7 @@ export function TribeChat({
           <div
             className={`inline-block px-4 py-2 rounded-2xl ${
               isCurrentUser
-                ? 'bg-teal-500 text-white rounded-br-sm'
+                ? 'bg-tribe-sage-500 text-white rounded-br-sm'
                 : 'bg-slate-100 text-slate-800 rounded-bl-sm'
             }`}
           >
@@ -132,13 +132,13 @@ export function TribeChat({
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               placeholder="Type a message..."
-              className="flex-1 px-4 py-2 border border-slate-200 rounded-full focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+              className="flex-1 px-4 py-2 border border-slate-200 rounded-full focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500"
               maxLength={500}
             />
             <button
               type="submit"
               disabled={!newMessage.trim()}
-              className="px-4 py-2 bg-teal-500 text-white rounded-full hover:bg-teal-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2 bg-tribe-sage-500 text-white rounded-full hover:bg-tribe-sage-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path

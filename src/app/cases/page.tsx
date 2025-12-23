@@ -15,7 +15,7 @@ const SHELF_CATEGORIES = [
   { id: 'pediatrics', name: 'Pediatrics', icon: '👶', color: 'from-pink-500 to-fuchsia-600' },
   { id: 'obgyn', name: 'OB/GYN', icon: '🤰', color: 'from-purple-500 to-violet-600' },
   { id: 'psychiatry', name: 'Psychiatry', icon: '🧠', color: 'from-indigo-500 to-purple-600' },
-  { id: 'family-medicine', name: 'Family Medicine', icon: '👨‍👩‍👧', color: 'from-green-500 to-emerald-600' },
+  { id: 'family-medicine', name: 'Family Medicine', icon: '👨‍👩‍👧', color: 'from-green-500 to-tribe-sage-600' },
   { id: 'neurology', name: 'Neurology', icon: '⚡', color: 'from-yellow-500 to-amber-600' },
   { id: 'emergency', name: 'Emergency Medicine', icon: '🚑', color: 'from-orange-500 to-red-600' },
 ];
@@ -228,7 +228,7 @@ export default function CasesPage() {
                   className={`group relative p-6 rounded-2xl shadow-lg transition-all duration-300 overflow-hidden ${
                     hasWeakTopics
                       ? 'bg-gradient-to-br from-orange-500 to-red-600 shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02] cursor-pointer'
-                      : 'bg-gradient-to-br from-emerald-500 to-teal-600 shadow-emerald-500/25'
+                      : 'bg-gradient-to-br from-tribe-sage-500 to-tribe-sage-600 shadow-tribe-sage-500/25'
                   } text-white`}
                 >
                   <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
@@ -392,7 +392,7 @@ export default function CasesPage() {
             {/* Box 3: Progress */}
             <Link
               href="/study/progress"
-              className="group relative p-6 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] transition-all duration-300 text-white overflow-hidden"
+              className="group relative p-6 bg-gradient-to-br from-tribe-sage-500 to-tribe-sage-600 rounded-2xl shadow-lg shadow-tribe-sage-500/25 hover:shadow-tribe-sage-500/40 hover:scale-[1.02] transition-all duration-300 text-white overflow-hidden"
             >
               <div className="relative z-10">
                 <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center mb-4">

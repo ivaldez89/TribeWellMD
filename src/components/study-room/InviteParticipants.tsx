@@ -119,7 +119,7 @@ export function InviteParticipants({
                 </div>
                 <button
                   onClick={copyInviteLink}
-                  className="px-4 py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-lg font-medium transition-colors flex items-center gap-2"
+                  className="px-4 py-2.5 bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white rounded-lg font-medium transition-colors flex items-center gap-2"
                 >
                   {copied ? (
                     <>
@@ -161,11 +161,11 @@ export function InviteParticipants({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search by name..."
-                  className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent"
                 />
                 {isSearching && (
                   <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-teal-500 border-t-transparent" />
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-tribe-sage-500 border-t-transparent" />
                   </div>
                 )}
               </div>
@@ -206,8 +206,8 @@ export function InviteParticipants({
                         disabled={invitedUsers.has(user.id)}
                         className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
                           invitedUsers.has(user.id)
-                            ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 cursor-default'
-                            : 'bg-teal-500 hover:bg-teal-600 text-white'
+                            ? 'bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-600 dark:text-tribe-sage-400 cursor-default'
+                            : 'bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white'
                         }`}
                       >
                         {invitedUsers.has(user.id) ? 'Invited' : 'Invite'}

@@ -26,7 +26,7 @@ export function TribeCard({ tribe, isMember = false, onJoin }: TribeCardProps) {
   const typeStyles: Record<Tribe['type'], string> = {
     study: 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300',
     specialty: 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300',
-    wellness: 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300',
+    wellness: 'bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-300',
     cause: 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300',
   };
 
@@ -110,7 +110,7 @@ export function TribeCard({ tribe, isMember = false, onJoin }: TribeCardProps) {
           <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-700">
             <div className="text-xs text-slate-400">
               {tribe.weeklyPoints > 0 && (
-                <span className="text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-1">
+                <span className="text-tribe-sage-600 dark:text-tribe-sage-400 font-medium flex items-center gap-1">
                   <span className="w-3 h-3"><Icons.Fire /></span>
                   +{tribe.weeklyPoints} this week
                 </span>
@@ -118,7 +118,7 @@ export function TribeCard({ tribe, isMember = false, onJoin }: TribeCardProps) {
             </div>
 
             {isMember ? (
-              <span className="px-3 py-1 text-xs font-medium bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 rounded-full flex items-center gap-1">
+              <span className="px-3 py-1 text-xs font-medium bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-300 rounded-full flex items-center gap-1">
                 <span className="w-3 h-3"><Icons.Check /></span>
                 Member
               </span>

@@ -118,7 +118,7 @@ export default function HomePage() {
           description: 'Reviewed 25 cards in Cardiology',
           timestamp: new Date(Date.now() - 1000 * 60 * 30),
           iconType: 'book',
-          color: 'from-teal-500 to-cyan-500'
+          color: 'from-tribe-sage-500 to-cyan-500'
         },
         {
           id: '2',
@@ -226,7 +226,7 @@ export default function HomePage() {
                         {initials}
                       </div>
                     )}
-                    <span className="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 border-2 border-white rounded-full" />
+                    <span className="absolute -bottom-1 -right-1 w-5 h-5 bg-tribe-sage-500 border-2 border-white rounded-full" />
                   </div>
                 </Link>
                 <div>
@@ -319,7 +319,7 @@ export default function HomePage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               <Link
                 href="/study"
-                className="group relative overflow-hidden p-4 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl text-white shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 hover:scale-[1.02] transition-all"
+                className="group relative overflow-hidden p-4 bg-gradient-to-br from-tribe-sage-500 to-cyan-600 rounded-2xl text-white shadow-lg shadow-tribe-sage-500/25 hover:shadow-tribe-sage-500/40 hover:scale-[1.02] transition-all"
               >
                 <div className="relative z-10">
                   <div className="w-8 h-8 mb-2">
@@ -415,7 +415,7 @@ export default function HomePage() {
               <div className="px-6 py-3 bg-slate-50 dark:bg-slate-700/50 text-center">
                 <Link
                   href="/study/progress"
-                  className="text-sm text-teal-600 dark:text-teal-400 hover:underline font-medium"
+                  className="text-sm text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline font-medium"
                 >
                   View Full Progress
                 </Link>
@@ -426,14 +426,14 @@ export default function HomePage() {
             <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
               <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between">
                 <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                  <div className="w-6 h-6 text-teal-500">
+                  <div className="w-6 h-6 text-tribe-sage-500">
                     <Icons.Chart />
                   </div>
                   Study Stats
                 </h2>
                 <Link
                   href="/study/progress"
-                  className="text-sm text-teal-600 dark:text-teal-400 hover:underline font-medium"
+                  className="text-sm text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline font-medium"
                 >
                   Details
                 </Link>
@@ -445,7 +445,7 @@ export default function HomePage() {
                     <p className="text-xs text-slate-500 dark:text-slate-400">Total Cards</p>
                   </div>
                   <div className="text-center p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl">
-                    <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{stats.reviewCards}</p>
+                    <p className="text-2xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400">{stats.reviewCards}</p>
                     <p className="text-xs text-slate-500 dark:text-slate-400">Mastered</p>
                   </div>
                   <div className="text-center p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl">
@@ -458,11 +458,11 @@ export default function HomePage() {
                 <div className="mb-4">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Daily Goal</span>
-                    <span className="text-sm font-bold text-teal-600 dark:text-teal-400">{dailyProgress}%</span>
+                    <span className="text-sm font-bold text-tribe-sage-600 dark:text-tribe-sage-400">{dailyProgress}%</span>
                   </div>
                   <div className="h-3 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full transition-all duration-500"
+                      className="h-full bg-gradient-to-r from-tribe-sage-500 to-cyan-500 rounded-full transition-all duration-500"
                       style={{ width: `${dailyProgress}%` }}
                     />
                   </div>
@@ -472,7 +472,7 @@ export default function HomePage() {
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href="/study"
-                    className="flex-1 min-w-[120px] px-4 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl text-center font-medium shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 transition-all text-sm"
+                    className="flex-1 min-w-[120px] px-4 py-3 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 text-white rounded-xl text-center font-medium shadow-lg shadow-tribe-sage-500/25 hover:shadow-tribe-sage-500/40 transition-all text-sm"
                   >
                     Start Studying
                   </Link>
@@ -589,7 +589,7 @@ export default function HomePage() {
                             {user.firstName[0]}{user.lastName[0]}
                           </div>
                           {user.isOnline && (
-                            <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-slate-800 rounded-full" />
+                            <span className="absolute bottom-0 right-0 w-3 h-3 bg-tribe-sage-500 border-2 border-white dark:border-slate-800 rounded-full" />
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
@@ -636,14 +636,14 @@ export default function HomePage() {
                     key={challenge.id}
                     className={`p-3 rounded-xl border transition-all ${
                       challenge.completed
-                        ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800'
+                        ? 'bg-tribe-sage-50 dark:bg-tribe-sage-900/20 border-emerald-200 dark:border-emerald-800'
                         : 'bg-slate-50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-600'
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${
                         challenge.completed
-                          ? 'bg-emerald-500 text-white'
+                          ? 'bg-tribe-sage-500 text-white'
                           : 'border-2 border-slate-300 dark:border-slate-500'
                       }`}>
                         {challenge.completed && (
@@ -655,7 +655,7 @@ export default function HomePage() {
                       <div className="flex-1 min-w-0">
                         <p className={`text-sm font-medium truncate ${
                           challenge.completed
-                            ? 'text-emerald-700 dark:text-emerald-300 line-through'
+                            ? 'text-tribe-sage-700 dark:text-tribe-sage-300 line-through'
                             : 'text-slate-700 dark:text-slate-200'
                         }`}>
                           {challenge.title}
@@ -683,7 +683,7 @@ export default function HomePage() {
               <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
                 <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-700">
                   <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                    <div className="w-6 h-6 text-emerald-500">
+                    <div className="w-6 h-6 text-tribe-sage-500">
                       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
                       </svg>
@@ -701,7 +701,7 @@ export default function HomePage() {
                           <div
                             className={`w-full aspect-square rounded-lg flex items-center justify-center transition-all ${
                               isActive
-                                ? 'bg-gradient-to-br from-emerald-400 to-green-500 text-white'
+                                ? 'bg-gradient-to-br from-tribe-sage-400 to-green-500 text-white'
                                 : isToday
                                   ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 ring-2 ring-amber-400'
                                   : 'bg-slate-100 dark:bg-slate-700 text-slate-400'

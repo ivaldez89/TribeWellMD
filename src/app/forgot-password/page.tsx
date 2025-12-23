@@ -41,12 +41,12 @@ export default function ForgotPasswordPage() {
       <div className="relative w-full max-w-md">
         {/* Logo/Brand */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-4 shadow-xl shadow-teal-500/25 overflow-hidden">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-4 shadow-xl shadow-tribe-sage-500/25 overflow-hidden">
             <img src="/logo.jpeg" alt="TribeWellMD" className="w-full h-full object-cover" />
           </div>
           <h1 className="text-3xl font-bold mb-2">
             <span className="text-slate-900 dark:text-white">Tribe</span>
-            <span className="text-teal-600 dark:text-teal-400">Well</span>
+            <span className="text-tribe-sage-600 dark:text-tribe-sage-400">Well</span>
             <span className="text-indigo-600 dark:text-indigo-400">MD</span>
           </h1>
           <p className="text-slate-600 dark:text-slate-400">Reset your password</p>
@@ -70,7 +70,7 @@ export default function ForgotPasswordPage() {
               </p>
               <Link
                 href="/login"
-                className="inline-block mt-4 text-teal-600 hover:text-teal-700 dark:text-teal-400 dark:hover:text-teal-300 font-medium"
+                className="inline-block mt-4 text-tribe-sage-600 hover:text-tribe-sage-700 dark:text-tribe-sage-400 dark:hover:text-tribe-sage-300 font-medium"
               >
                 Back to login
               </Link>
@@ -90,7 +90,7 @@ export default function ForgotPasswordPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-teal-500 focus:border-transparent focus:bg-white dark:focus:bg-slate-700 transition-all"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent focus:bg-white dark:focus:bg-slate-700 transition-all"
                   placeholder="you@school.edu"
                   required
                 />
@@ -105,14 +105,14 @@ export default function ForgotPasswordPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-4 bg-gradient-to-r from-teal-500 via-cyan-500 to-teal-500 hover:from-teal-600 hover:via-cyan-600 hover:to-teal-600 text-white font-bold rounded-xl shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 transition-all disabled:opacity-50"
+                className="w-full py-4 bg-gradient-to-r from-tribe-sage-500 via-cyan-500 to-teal-500 hover:from-teal-600 hover:via-cyan-600 hover:to-tribe-sage-600 text-white font-bold rounded-xl shadow-lg shadow-tribe-sage-500/25 hover:shadow-tribe-sage-500/40 transition-all disabled:opacity-50"
               >
                 {isLoading ? 'Sending...' : 'Send Reset Link'}
               </button>
 
               <p className="text-center text-sm text-slate-500 dark:text-slate-400">
                 Remember your password?{' '}
-                <Link href="/login" className="text-teal-600 hover:text-teal-700 dark:text-teal-400 dark:hover:text-teal-300 font-medium">
+                <Link href="/login" className="text-tribe-sage-600 hover:text-tribe-sage-700 dark:text-tribe-sage-400 dark:hover:text-tribe-sage-300 font-medium">
                   Sign in
                 </Link>
               </p>

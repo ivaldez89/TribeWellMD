@@ -47,7 +47,7 @@ export function FlashcardViewer({
 
   // Get difficulty color
   const difficultyColors = {
-    easy: 'bg-emerald-100 text-emerald-700 border-emerald-200',
+    easy: 'bg-tribe-sage-100 text-tribe-sage-700 border-emerald-200',
     medium: 'bg-amber-100 text-amber-700 border-amber-200',
     hard: 'bg-red-100 text-red-700 border-red-200'
   };
@@ -97,7 +97,7 @@ export function FlashcardViewer({
           <span className="font-medium">{cardNumber} / {totalCards}</span>
           <div className="w-24 h-1.5 bg-slate-200 rounded-full overflow-hidden">
             <div 
-              className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transition-all duration-300"
+              className="h-full bg-gradient-to-r from-tribe-sage-500 to-teal-500 rounded-full transition-all duration-300"
               style={{ width: `${(cardNumber / totalCards) * 100}%` }}
             />
           </div>
@@ -115,7 +115,7 @@ export function FlashcardViewer({
           className={`
             bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200
             overflow-hidden transition-all duration-300
-            ${isRevealed ? 'ring-2 ring-emerald-500/20' : ''}
+            ${isRevealed ? 'ring-2 ring-tribe-sage-500/20' : ''}
           `}
         >
           {/* System tag header - only show after reveal */}
@@ -145,8 +145,8 @@ export function FlashcardViewer({
           {/* Question (Front) */}
           <div className="p-6 md:p-8">
             <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center">
-                <span className="text-emerald-600 font-bold text-sm">Q</span>
+              <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-tribe-sage-100 flex items-center justify-center">
+                <span className="text-tribe-sage-600 font-bold text-sm">Q</span>
               </div>
               <div className="flex-1">
                 <p className="text-lg text-slate-800 leading-relaxed whitespace-pre-wrap">
@@ -176,10 +176,10 @@ export function FlashcardViewer({
                 onClick={handleReveal}
                 className="
                   w-full py-4 px-6 
-                  bg-gradient-to-r from-emerald-500 to-teal-500
-                  hover:from-emerald-600 hover:to-teal-600
+                  bg-gradient-to-r from-tribe-sage-500 to-teal-500
+                  hover:from-emerald-600 hover:to-tribe-sage-600
                   text-white font-semibold rounded-xl
-                  shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40
+                  shadow-lg shadow-tribe-sage-500/25 hover:shadow-tribe-sage-500/40
                   transform hover:scale-[1.02] active:scale-[0.98]
                   transition-all duration-200
                   flex items-center justify-center gap-2
@@ -198,7 +198,7 @@ export function FlashcardViewer({
             <div className="border-t border-slate-200">
               <div className="p-6 md:p-8 bg-gradient-to-b from-emerald-50/50 to-white">
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-tribe-sage-600 flex items-center justify-center">
                     <span className="text-white font-bold text-sm">A</span>
                   </div>
                   <div className="flex-1 space-y-4">

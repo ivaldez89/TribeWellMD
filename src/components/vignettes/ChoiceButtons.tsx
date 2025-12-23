@@ -48,7 +48,7 @@ export function ChoiceButtons({
               ${disabled ? 'cursor-not-allowed' : 'cursor-pointer hover:scale-[1.005]'}
               ${isSelected
                 ? choice.isOptimal
-                  ? 'border-emerald-400 bg-emerald-50/80'
+                  ? 'border-emerald-400 bg-tribe-sage-50/80'
                   : choice.isAcceptable
                     ? 'border-amber-400 bg-amber-50/80'
                     : 'border-red-400 bg-red-50/80'
@@ -63,7 +63,7 @@ export function ChoiceButtons({
                   flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center font-medium text-sm
                   ${isSelected
                     ? choice.isOptimal
-                      ? 'bg-emerald-500 text-white'
+                      ? 'bg-tribe-sage-500 text-white'
                       : choice.isAcceptable
                         ? 'bg-amber-500 text-white'
                         : 'bg-red-500 text-white'
@@ -95,10 +95,10 @@ export function ChoiceButtons({
                   <div className="mt-2 flex items-center gap-1.5">
                     {choice.isOptimal ? (
                       <>
-                        <svg className="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-4 h-4 text-tribe-sage-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
-                        <span className="text-xs font-medium text-emerald-700">Optimal</span>
+                        <span className="text-xs font-medium text-tribe-sage-700">Optimal</span>
                       </>
                     ) : choice.isAcceptable ? (
                       <>

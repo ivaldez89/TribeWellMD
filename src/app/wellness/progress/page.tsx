@@ -242,7 +242,7 @@ export default function WellnessProgressPage() {
                   </div>
                 </div>
                 {dailyChallenges.filter(c => c.completed).length === dailyChallenges.length && dailyChallenges.length > 0 && (
-                  <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
+                  <div className="flex items-center gap-2 text-tribe-sage-600 dark:text-tribe-sage-400">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -334,7 +334,7 @@ export default function WellnessProgressPage() {
                           <p className="text-xs text-slate-500">{tribe.memberCount} members</p>
                         </div>
                         {primaryTribe?.id === tribe.id && (
-                          <span className="ml-auto px-2 py-0.5 bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 text-xs rounded-full">
+                          <span className="ml-auto px-2 py-0.5 bg-tribe-sage-100 dark:bg-tribe-sage-900/50 text-tribe-sage-700 dark:text-tribe-sage-300 text-xs rounded-full">
                             Primary
                           </span>
                         )}

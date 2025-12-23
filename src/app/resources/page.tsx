@@ -270,7 +270,7 @@ export default function ResourcesPage() {
         {/* Medical School Guides */}
         <section className="mb-12 animate-fade-in-up animation-delay-200">
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-            <span className="text-emerald-500"><Icons.Book /></span> Medical School Survival Guides
+            <span className="text-tribe-sage-500"><Icons.Book /></span> Medical School Survival Guides
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {GUIDES.map((guide, index) => (
@@ -281,7 +281,7 @@ export default function ResourcesPage() {
                 <div className="absolute top-4 right-4 px-3 py-1 bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400 text-xs font-medium rounded-full">
                   Coming Soon
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center mb-4 text-emerald-600 dark:text-emerald-400">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center mb-4 text-tribe-sage-600 dark:text-tribe-sage-400">
                   {renderGuideIcon(guide.icon)}
                 </div>
                 <h3 className="font-semibold text-slate-900 dark:text-white mb-2">{guide.title}</h3>

@@ -29,7 +29,7 @@ export function PersistentSpotifyPlayer() {
     >
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
         {/* Header */}
-        <div className="px-3 py-2 bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-between">
+        <div className="px-3 py-2 bg-gradient-to-r from-green-500 to-tribe-sage-600 flex items-center justify-between">
           <div className="flex items-center gap-2 min-w-0">
             <span className="w-2 h-2 bg-white rounded-full animate-pulse flex-shrink-0" />
             <svg className="w-4 h-4 text-white flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">

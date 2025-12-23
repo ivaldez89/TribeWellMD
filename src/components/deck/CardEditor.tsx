@@ -120,7 +120,7 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
             <textarea
               value={editedCard.content.front}
               onChange={(e) => handleContentChange('front', e.target.value)}
-              className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 resize-none"
+              className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500 resize-none"
               rows={4}
               placeholder="Enter the question..."
             />
@@ -134,7 +134,7 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
             <textarea
               value={editedCard.content.back}
               onChange={(e) => handleContentChange('back', e.target.value)}
-              className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 resize-none"
+              className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500 resize-none"
               rows={4}
               placeholder="Enter the answer..."
             />
@@ -148,7 +148,7 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
             <textarea
               value={editedCard.content.explanation || ''}
               onChange={(e) => handleContentChange('explanation', e.target.value)}
-              className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 resize-none"
+              className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500 resize-none"
               rows={3}
               placeholder="Additional explanation..."
             />
@@ -179,7 +179,7 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
               ))}
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="w-20 h-20 border-2 border-dashed border-slate-300 rounded-lg flex flex-col items-center justify-center text-slate-400 hover:border-emerald-400 hover:text-emerald-500 transition-colors"
+                className="w-20 h-20 border-2 border-dashed border-slate-300 rounded-lg flex flex-col items-center justify-center text-slate-400 hover:border-emerald-400 hover:text-tribe-sage-500 transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -206,7 +206,7 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
               <select
                 value={editedCard.metadata.system}
                 onChange={(e) => handleMetadataChange('system', e.target.value)}
-                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white"
+                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500 bg-white"
               >
                 {systems.map(s => (
                   <option key={s} value={s}>{s}</option>
@@ -222,7 +222,7 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
               <select
                 value={editedCard.metadata.difficulty}
                 onChange={(e) => handleMetadataChange('difficulty', e.target.value)}
-                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white"
+                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500 bg-white"
               >
                 {difficulties.map(d => (
                   <option key={d} value={d}>{d.charAt(0).toUpperCase() + d.slice(1)}</option>
@@ -240,7 +240,7 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
               type="text"
               value={editedCard.metadata.topic}
               onChange={(e) => handleMetadataChange('topic', e.target.value)}
-              className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500"
               placeholder="e.g., Hypertension, Diabetes..."
             />
           </div>
@@ -274,7 +274,7 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
                 value={newTag}
                 onChange={(e) => setNewTag(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
-                className="flex-1 px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                className="flex-1 px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500"
                 placeholder="Add a tag..."
               />
               <button
@@ -327,7 +327,7 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
             </button>
             <button
               onClick={handleSave}
-              className="px-6 py-2 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700 transition-colors"
+              className="px-6 py-2 bg-tribe-sage-600 text-white font-medium rounded-lg hover:bg-emerald-700 transition-colors"
             >
               Save Changes
             </button>

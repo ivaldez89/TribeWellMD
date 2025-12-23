@@ -144,7 +144,7 @@ export default function StudyRoomsPage() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div>
             <h1 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
-              <span className="p-2 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-xl text-white">
+              <span className="p-2 bg-gradient-to-br from-tribe-sage-500 to-cyan-600 rounded-xl text-white">
                 <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
@@ -163,7 +163,7 @@ export default function StudyRoomsPage() {
 
           <button
             onClick={() => (isAuthenticated ? setShowCreateModal(true) : router.push('/login'))}
-            className="px-5 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white font-medium rounded-xl transition-all shadow-md hover:shadow-lg flex items-center gap-2"
+            className="px-5 py-2.5 bg-gradient-to-r from-tribe-sage-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white font-medium rounded-xl transition-all shadow-md hover:shadow-lg flex items-center gap-2"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -189,12 +189,12 @@ export default function StudyRoomsPage() {
                   }}
                   placeholder="Enter 6-letter code"
                   maxLength={6}
-                  className="flex-1 px-4 py-2.5 bg-slate-100 dark:bg-slate-700 border-0 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 uppercase tracking-widest font-mono"
+                  className="flex-1 px-4 py-2.5 bg-slate-100 dark:bg-slate-700 border-0 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 uppercase tracking-widest font-mono"
                 />
                 <button
                   onClick={handleJoinByCode}
                   disabled={joinCode.length < 6 || isJoining || !isAuthenticated}
-                  className="px-5 py-2.5 bg-teal-500 hover:bg-teal-600 disabled:bg-slate-300 dark:disabled:bg-slate-600 text-white font-medium rounded-xl transition-colors disabled:cursor-not-allowed"
+                  className="px-5 py-2.5 bg-tribe-sage-500 hover:bg-tribe-sage-600 disabled:bg-slate-300 dark:disabled:bg-slate-600 text-white font-medium rounded-xl transition-colors disabled:cursor-not-allowed"
                 >
                   {isJoining ? 'Joining...' : 'Join'}
                 </button>
@@ -204,7 +204,7 @@ export default function StudyRoomsPage() {
               )}
               {!isAuthenticated && (
                 <p className="text-xs text-slate-400 mt-1">
-                  <Link href="/login" className="text-teal-500 hover:underline">
+                  <Link href="/login" className="text-tribe-sage-500 hover:underline">
                     Sign in
                   </Link>{' '}
                   to join rooms
@@ -237,7 +237,7 @@ export default function StudyRoomsPage() {
         {/* Public Rooms */}
         <section>
           <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-            <svg className="w-5 h-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-5 h-5 text-tribe-sage-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -281,7 +281,7 @@ export default function StudyRoomsPage() {
               </p>
               <button
                 onClick={() => (isAuthenticated ? setShowCreateModal(true) : router.push('/login'))}
-                className="px-5 py-2 bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-xl transition-colors"
+                className="px-5 py-2 bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white font-medium rounded-xl transition-colors"
               >
                 Create Room
               </button>
@@ -320,7 +320,7 @@ function RoomCard({
   return (
     <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-lg transition-shadow">
       {/* Header with gradient */}
-      <div className="h-2 bg-gradient-to-r from-teal-500 to-cyan-600" />
+      <div className="h-2 bg-gradient-to-r from-tribe-sage-500 to-cyan-600" />
 
       <div className="p-5">
         {/* Title & Status */}
@@ -385,7 +385,7 @@ function RoomCard({
           onClick={onJoin}
           className={`w-full py-2.5 font-medium rounded-xl transition-colors ${
             isMember
-              ? 'bg-teal-500 hover:bg-teal-600 text-white'
+              ? 'bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white'
               : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-white'
           }`}
         >

@@ -194,14 +194,14 @@ function WellnessPageContent() {
                     key={challenge.id}
                     className={`p-5 rounded-2xl border transition-all ${
                       challenge.completed
-                        ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800'
+                        ? 'bg-tribe-sage-50 dark:bg-tribe-sage-900/20 border-emerald-200 dark:border-emerald-800'
                         : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:shadow-lg hover:border-purple-300'
                     }`}
                   >
                     <div className="flex items-start justify-between mb-3">
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
                         challenge.completed
-                          ? 'bg-emerald-500 text-white'
+                          ? 'bg-tribe-sage-500 text-white'
                           : `bg-gradient-to-br ${WELLNESS_DOMAINS[challenge.domain].gradient} text-white`
                       }`}>
                         {challenge.completed ? <Icons.Check /> : (() => {
@@ -215,7 +215,7 @@ function WellnessPageContent() {
                         <span className="text-xs text-[#8B7355] dark:text-[#B89B78]">+{challenge.villagePointsReward} VP</span>
                       </div>
                     </div>
-                    <h3 className={`font-semibold mb-1 ${challenge.completed ? 'text-emerald-700 dark:text-emerald-300 line-through' : 'text-slate-900 dark:text-white'}`}>
+                    <h3 className={`font-semibold mb-1 ${challenge.completed ? 'text-tribe-sage-700 dark:text-tribe-sage-300 line-through' : 'text-slate-900 dark:text-white'}`}>
                       {challenge.title}
                     </h3>
                     <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">{challenge.description}</p>
@@ -308,12 +308,12 @@ function WellnessPageContent() {
               <section className="mb-8">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                    <span className="w-3 h-3 bg-teal-500 rounded-full" />
+                    <span className="w-3 h-3 bg-tribe-sage-500 rounded-full" />
                     My Tribes
                   </h2>
                   <Link
                     href="/tribes"
-                    className="text-sm text-teal-600 dark:text-teal-400 hover:underline font-medium"
+                    className="text-sm text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline font-medium"
                   >
                     View All Tribes
                   </Link>
@@ -326,13 +326,13 @@ function WellnessPageContent() {
                         key={tribe.id}
                         className={`relative p-5 rounded-2xl border transition-all ${
                           isPrimary
-                            ? 'bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 border-teal-300 dark:border-teal-700 ring-2 ring-teal-500/50'
+                            ? 'bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 border-teal-300 dark:border-teal-700 ring-2 ring-tribe-sage-500/50'
                             : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:shadow-lg'
                         }`}
                       >
                         {/* Primary Badge */}
                         {isPrimary && (
-                          <div className="absolute -top-2 -right-2 px-2 py-1 bg-gradient-to-r from-teal-500 to-cyan-500 text-white text-xs font-bold rounded-full shadow-lg flex items-center gap-1">
+                          <div className="absolute -top-2 -right-2 px-2 py-1 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 text-white text-xs font-bold rounded-full shadow-lg flex items-center gap-1">
                             <Icons.Star /> PRIMARY
                           </div>
                         )}
@@ -349,7 +349,7 @@ function WellnessPageContent() {
                               <h3 className="font-semibold text-slate-900 dark:text-white truncate">{tribe.name}</h3>
                               <p className="text-xs text-slate-500 dark:text-slate-400 capitalize mb-2">{tribe.type}</p>
                               <div className="flex items-center gap-3 text-xs">
-                                <span className="text-teal-600 dark:text-teal-400">{tribe.memberCount} members</span>
+                                <span className="text-tribe-sage-600 dark:text-tribe-sage-400">{tribe.memberCount} members</span>
                                 <span className="text-cyan-600 dark:text-cyan-400">{tribe.totalPoints} pts</span>
                               </div>
                             </div>
@@ -360,13 +360,13 @@ function WellnessPageContent() {
                             <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-700">
                               <div className="flex items-center justify-between text-xs mb-1">
                                 <span className="text-slate-600 dark:text-slate-400">{tribe.currentGoal.title}</span>
-                                <span className="font-medium text-teal-600 dark:text-teal-400">
+                                <span className="font-medium text-tribe-sage-600 dark:text-tribe-sage-400">
                                   {Math.round((tribe.currentGoal.currentPoints / tribe.currentGoal.targetPoints) * 100)}%
                                 </span>
                               </div>
                               <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
                                 <div
-                                  className="h-full bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full transition-all"
+                                  className="h-full bg-gradient-to-r from-tribe-sage-500 to-cyan-500 rounded-full transition-all"
                                   style={{ width: `${Math.min((tribe.currentGoal.currentPoints / tribe.currentGoal.targetPoints) * 100, 100)}%` }}
                                 />
                               </div>
@@ -378,7 +378,7 @@ function WellnessPageContent() {
                         {!isPrimary && (
                           <button
                             onClick={() => setUserPrimaryTribe(tribe.id)}
-                            className="mt-3 w-full py-2 bg-slate-100 dark:bg-slate-700 hover:bg-teal-100 dark:hover:bg-teal-900/30 text-slate-600 dark:text-slate-400 hover:text-teal-700 dark:hover:text-teal-300 text-xs font-medium rounded-lg transition-all"
+                            className="mt-3 w-full py-2 bg-slate-100 dark:bg-slate-700 hover:bg-tribe-sage-100 dark:hover:bg-teal-900/30 text-slate-600 dark:text-slate-400 hover:text-tribe-sage-700 dark:hover:text-tribe-sage-300 text-xs font-medium rounded-lg transition-all"
                           >
                             Set as Primary
                           </button>
@@ -389,7 +389,7 @@ function WellnessPageContent() {
                 </div>
 
                 {/* Explore More Tribes CTA */}
-                <div className="mt-4 p-4 bg-gradient-to-r from-teal-500/10 to-cyan-500/10 rounded-xl border border-teal-200 dark:border-teal-800">
+                <div className="mt-4 p-4 bg-gradient-to-r from-tribe-sage-500/10 to-cyan-500/10 rounded-xl border border-teal-200 dark:border-teal-800">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm font-medium text-slate-900 dark:text-white">Looking for more communities?</p>
@@ -397,7 +397,7 @@ function WellnessPageContent() {
                     </div>
                     <Link
                       href="/tribes"
-                      className="px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white text-sm font-medium rounded-lg hover:from-teal-600 hover:to-cyan-600 transition-all"
+                      className="px-4 py-2 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 text-white text-sm font-medium rounded-lg hover:from-teal-600 hover:to-cyan-600 transition-all"
                     >
                       Explore Tribes
                     </Link>
@@ -410,7 +410,7 @@ function WellnessPageContent() {
             {userTribes.length === 0 && (
               <section className="mb-8">
                 <div className="p-8 bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-2xl border border-teal-200 dark:border-teal-800 text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center text-white">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-tribe-sage-500 to-cyan-500 flex items-center justify-center text-white">
                     <Icons.Village />
                   </div>
                   <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Join Your First Tribe</h3>
@@ -419,7 +419,7 @@ function WellnessPageContent() {
                   </p>
                   <Link
                     href="/tribes"
-                    className="inline-block px-8 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-medium rounded-xl transition-all"
+                    className="inline-block px-8 py-3 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-medium rounded-xl transition-all"
                   >
                     Explore Tribes
                   </Link>

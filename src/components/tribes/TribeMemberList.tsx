@@ -86,7 +86,7 @@ export function TribeMemberList({ members, currentUserId = 'current-user' }: Tri
             placeholder="Search members..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+            className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500"
           />
         </div>
 
@@ -97,7 +97,7 @@ export function TribeMemberList({ members, currentUserId = 'current-user' }: Tri
               onClick={() => setRoleFilter(role)}
               className={`px-3 py-1 text-sm rounded-lg transition-colors ${
                 roleFilter === role
-                  ? 'bg-teal-100 text-teal-700 font-medium'
+                  ? 'bg-tribe-sage-100 text-tribe-sage-700 font-medium'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
@@ -120,7 +120,7 @@ export function TribeMemberList({ members, currentUserId = 'current-user' }: Tri
             <div
               key={member.id}
               className={`flex items-center gap-3 p-4 hover:bg-slate-50 transition-colors ${
-                member.oderId === currentUserId ? 'bg-teal-50/50' : ''
+                member.oderId === currentUserId ? 'bg-tribe-sage-50/50' : ''
               }`}
             >
               {/* Avatar */}
@@ -129,7 +129,7 @@ export function TribeMemberList({ members, currentUserId = 'current-user' }: Tri
                   {member.avatar || getInitials(member.firstName, member.lastName)}
                 </div>
                 {member.isOnline && (
-                  <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full" />
+                  <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-tribe-sage-500 border-2 border-white rounded-full" />
                 )}
               </div>
 
@@ -151,12 +151,12 @@ export function TribeMemberList({ members, currentUserId = 'current-user' }: Tri
 
               {/* Points */}
               <div className="text-right">
-                <p className="font-semibold text-teal-600">
+                <p className="font-semibold text-tribe-sage-600">
                   {member.contributionPoints.toLocaleString()}
                 </p>
                 <p className="text-xs text-slate-400">points</p>
                 {member.weeklyContribution > 0 && (
-                  <p className="text-xs text-emerald-500">
+                  <p className="text-xs text-tribe-sage-500">
                     +{member.weeklyContribution} this week
                   </p>
                 )}

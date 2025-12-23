@@ -103,7 +103,7 @@ function getUrgencyStyles(daysRemaining: number | null) {
   if (daysRemaining <= 7) return { bg: 'bg-red-50 border-red-200', text: 'text-red-600', gradient: 'from-red-500 to-rose-500' };
   if (daysRemaining <= 30) return { bg: 'bg-orange-50 border-orange-200', text: 'text-orange-600', gradient: 'from-orange-500 to-amber-500' };
   if (daysRemaining <= 60) return { bg: 'bg-amber-50 border-amber-200', text: 'text-amber-600', gradient: 'from-amber-500 to-yellow-500' };
-  return { bg: 'bg-emerald-50 border-emerald-200', text: 'text-emerald-600', gradient: 'from-teal-500 to-emerald-500' };
+  return { bg: 'bg-tribe-sage-50 border-emerald-200', text: 'text-tribe-sage-600', gradient: 'from-tribe-sage-500 to-tribe-sage-500' };
 }
 
 interface ExamCountdownProps {
@@ -256,7 +256,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                   </h3>
                   <button
                     onClick={() => setShowAddModal(true)}
-                    className="text-xs px-2 py-1 bg-teal-100 text-teal-700 rounded-lg hover:bg-teal-200 transition-colors"
+                    className="text-xs px-2 py-1 bg-tribe-sage-100 text-tribe-sage-700 rounded-lg hover:bg-teal-200 transition-colors"
                   >
                     + Add Exam
                   </button>
@@ -272,7 +272,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                     <p className="text-sm text-slate-500 mb-3">No exams scheduled</p>
                     <button
                       onClick={() => setShowAddModal(true)}
-                      className="text-sm text-teal-600 hover:underline"
+                      className="text-sm text-tribe-sage-600 hover:underline"
                     >
                       Add your first exam
                     </button>
@@ -294,7 +294,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                                   {getExamDisplayName(exam)}
                                 </h4>
                                 {exam.isPrimary && (
-                                  <span className="px-1.5 py-0.5 bg-teal-500 text-white text-[10px] rounded-full">PRIMARY</span>
+                                  <span className="px-1.5 py-0.5 bg-tribe-sage-500 text-white text-[10px] rounded-full">PRIMARY</span>
                                 )}
                               </div>
                               <div className="flex items-center gap-2 mt-1">
@@ -323,7 +323,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                               {!exam.isPrimary && (
                                 <button
                                   onClick={() => handleSetPrimary(exam.id)}
-                                  className="p-1 text-slate-400 hover:text-teal-600 transition-colors"
+                                  className="p-1 text-slate-400 hover:text-tribe-sage-600 transition-colors"
                                   title="Set as primary"
                                 >
                                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -383,7 +383,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
               className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="px-6 py-4 border-b border-slate-200 bg-gradient-to-r from-teal-500 to-emerald-500">
+              <div className="px-6 py-4 border-b border-slate-200 bg-gradient-to-r from-tribe-sage-500 to-tribe-sage-500">
                 <h3 className="text-lg font-semibold text-white">Add Exam</h3>
                 <p className="text-sm text-white/80">
                   Plan your upcoming exams
@@ -401,7 +401,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                         onClick={() => setNewExamType(type)}
                         className={`px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                           newExamType === type
-                            ? 'border-teal-500 bg-teal-50 text-teal-700'
+                            ? 'border-tribe-sage-500 bg-tribe-sage-50 text-tribe-sage-700'
                             : 'border-slate-200 hover:border-slate-300 text-slate-700'
                         }`}
                       >
@@ -421,7 +421,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                     <select
                       value={newShelfCategory}
                       onChange={(e) => setNewShelfCategory(e.target.value)}
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tribe-sage-500"
                     >
                       {SHELF_CATEGORIES.map(cat => (
                         <option key={cat} value={cat}>{cat}</option>
@@ -438,7 +438,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                       onClick={() => setNewDateType('exact')}
                       className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                         newDateType === 'exact'
-                          ? 'border-teal-500 bg-teal-50 text-teal-700'
+                          ? 'border-tribe-sage-500 bg-tribe-sage-50 text-tribe-sage-700'
                           : 'border-slate-200 hover:border-slate-300 text-slate-700'
                       }`}
                     >
@@ -451,7 +451,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                       onClick={() => setNewDateType('approximate')}
                       className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                         newDateType === 'approximate'
-                          ? 'border-teal-500 bg-teal-50 text-teal-700'
+                          ? 'border-tribe-sage-500 bg-tribe-sage-50 text-tribe-sage-700'
                           : 'border-slate-200 hover:border-slate-300 text-slate-700'
                       }`}
                     >
@@ -468,7 +468,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                       value={newExactDate}
                       onChange={(e) => setNewExactDate(e.target.value)}
                       min={new Date().toISOString().split('T')[0]}
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tribe-sage-500"
                     />
                   ) : (
                     <div className="grid grid-cols-3 gap-2">
@@ -478,7 +478,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                           onClick={() => setNewTimeRange(range)}
                           className={`px-2 py-2 text-xs rounded-lg border-2 transition-all ${
                             newTimeRange === range
-                              ? 'border-teal-500 bg-teal-50 text-teal-700'
+                              ? 'border-tribe-sage-500 bg-tribe-sage-50 text-tribe-sage-700'
                               : 'border-slate-200 hover:border-slate-300 text-slate-700'
                           }`}
                         >
@@ -503,7 +503,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                 <button
                   onClick={handleAddExam}
                   disabled={newDateType === 'exact' && !newExactDate}
-                  className="flex-1 py-2 bg-teal-600 text-white text-sm font-medium rounded-lg hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 py-2 bg-tribe-sage-600 text-white text-sm font-medium rounded-lg hover:bg-tribe-sage-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Add Exam
                 </button>
@@ -573,7 +573,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                   </h3>
                   <button
                     onClick={() => setShowAddModal(true)}
-                    className="text-xs px-2 py-1 bg-teal-100 text-teal-700 rounded-lg hover:bg-teal-200 transition-colors"
+                    className="text-xs px-2 py-1 bg-tribe-sage-100 text-tribe-sage-700 rounded-lg hover:bg-teal-200 transition-colors"
                   >
                     + Add Exam
                   </button>
@@ -589,7 +589,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                     <p className="text-sm text-slate-500 mb-3">No exams scheduled</p>
                     <button
                       onClick={() => setShowAddModal(true)}
-                      className="text-sm text-teal-600 hover:underline"
+                      className="text-sm text-tribe-sage-600 hover:underline"
                     >
                       Add your first exam
                     </button>
@@ -611,7 +611,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                                   {getExamDisplayName(exam)}
                                 </h4>
                                 {exam.isPrimary && (
-                                  <span className="px-1.5 py-0.5 bg-teal-500 text-white text-[10px] rounded-full">PRIMARY</span>
+                                  <span className="px-1.5 py-0.5 bg-tribe-sage-500 text-white text-[10px] rounded-full">PRIMARY</span>
                                 )}
                               </div>
                               <div className="flex items-center gap-2 mt-1">
@@ -640,7 +640,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                               {!exam.isPrimary && (
                                 <button
                                   onClick={() => handleSetPrimary(exam.id)}
-                                  className="p-1 text-slate-400 hover:text-teal-600 transition-colors"
+                                  className="p-1 text-slate-400 hover:text-tribe-sage-600 transition-colors"
                                   title="Set as primary"
                                 >
                                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -700,7 +700,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
               className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="px-6 py-4 border-b border-slate-200 bg-gradient-to-r from-teal-500 to-emerald-500">
+              <div className="px-6 py-4 border-b border-slate-200 bg-gradient-to-r from-tribe-sage-500 to-tribe-sage-500">
                 <h3 className="text-lg font-semibold text-white">Add Exam</h3>
                 <p className="text-sm text-white/80">
                   Plan your upcoming exams
@@ -718,7 +718,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                         onClick={() => setNewExamType(type)}
                         className={`px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                           newExamType === type
-                            ? 'border-teal-500 bg-teal-50 text-teal-700'
+                            ? 'border-tribe-sage-500 bg-tribe-sage-50 text-tribe-sage-700'
                             : 'border-slate-200 hover:border-slate-300 text-slate-700'
                         }`}
                       >
@@ -738,7 +738,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                     <select
                       value={newShelfCategory}
                       onChange={(e) => setNewShelfCategory(e.target.value)}
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tribe-sage-500"
                     >
                       {SHELF_CATEGORIES.map(cat => (
                         <option key={cat} value={cat}>{cat}</option>
@@ -755,7 +755,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                       onClick={() => setNewDateType('exact')}
                       className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                         newDateType === 'exact'
-                          ? 'border-teal-500 bg-teal-50 text-teal-700'
+                          ? 'border-tribe-sage-500 bg-tribe-sage-50 text-tribe-sage-700'
                           : 'border-slate-200 hover:border-slate-300 text-slate-700'
                       }`}
                     >
@@ -768,7 +768,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                       onClick={() => setNewDateType('approximate')}
                       className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                         newDateType === 'approximate'
-                          ? 'border-teal-500 bg-teal-50 text-teal-700'
+                          ? 'border-tribe-sage-500 bg-tribe-sage-50 text-tribe-sage-700'
                           : 'border-slate-200 hover:border-slate-300 text-slate-700'
                       }`}
                     >
@@ -785,7 +785,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                       value={newExactDate}
                       onChange={(e) => setNewExactDate(e.target.value)}
                       min={new Date().toISOString().split('T')[0]}
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tribe-sage-500"
                     />
                   ) : (
                     <div className="grid grid-cols-3 gap-2">
@@ -795,7 +795,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                           onClick={() => setNewTimeRange(range)}
                           className={`px-2 py-2 text-xs rounded-lg border-2 transition-all ${
                             newTimeRange === range
-                              ? 'border-teal-500 bg-teal-50 text-teal-700'
+                              ? 'border-tribe-sage-500 bg-tribe-sage-50 text-tribe-sage-700'
                               : 'border-slate-200 hover:border-slate-300 text-slate-700'
                           }`}
                         >
@@ -820,7 +820,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                 <button
                   onClick={handleAddExam}
                   disabled={newDateType === 'exact' && !newExactDate}
-                  className="flex-1 py-2 bg-teal-600 text-white text-sm font-medium rounded-lg hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 py-2 bg-tribe-sage-600 text-white text-sm font-medium rounded-lg hover:bg-tribe-sage-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Add Exam
                 </button>
@@ -835,7 +835,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
   // Full variant for dashboard/dedicated section
   return (
     <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-      <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700 bg-gradient-to-r from-teal-500 to-emerald-500">
+      <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700 bg-gradient-to-r from-tribe-sage-500 to-tribe-sage-500">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="font-semibold text-white text-lg flex items-center gap-2">
@@ -861,7 +861,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
         {exams.length === 0 ? (
           <div className="text-center py-8">
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-teal-100 to-emerald-100 flex items-center justify-center">
-              <svg className="w-8 h-8 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-8 h-8 text-tribe-sage-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
             </div>
@@ -871,7 +871,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
             </p>
             <button
               onClick={() => setShowAddModal(true)}
-              className="px-6 py-2 bg-teal-600 text-white font-medium rounded-lg hover:bg-teal-700 transition-colors"
+              className="px-6 py-2 bg-tribe-sage-600 text-white font-medium rounded-lg hover:bg-tribe-sage-700 transition-colors"
             >
               Add Your First Exam
             </button>
@@ -883,7 +883,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
               <div className={`p-4 rounded-xl border ${styles.bg}`}>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-medium text-slate-600">Primary Exam</span>
-                  <span className="px-2 py-0.5 bg-teal-500 text-white text-xs rounded-full">COUNTDOWN</span>
+                  <span className="px-2 py-0.5 bg-tribe-sage-500 text-white text-xs rounded-full">COUNTDOWN</span>
                 </div>
                 <h4 className="text-xl font-bold text-slate-900 mb-1">{getExamDisplayName(primaryExam)}</h4>
                 <div className={`text-4xl font-bold ${styles.text}`}>
@@ -936,7 +936,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => handleSetPrimary(exam.id)}
-                            className="p-2 text-slate-400 hover:text-teal-600 transition-colors"
+                            className="p-2 text-slate-400 hover:text-tribe-sage-600 transition-colors"
                             title="Set as primary"
                           >
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -976,7 +976,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
             className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700 bg-gradient-to-r from-teal-500 to-emerald-500">
+            <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700 bg-gradient-to-r from-tribe-sage-500 to-tribe-sage-500">
               <h3 className="text-lg font-semibold text-white">Add Exam</h3>
               <p className="text-sm text-white/80">
                 Plan your upcoming exams
@@ -994,7 +994,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                       onClick={() => setNewExamType(type)}
                       className={`px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                         newExamType === type
-                          ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300'
+                          ? 'border-tribe-sage-500 bg-tribe-sage-50 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-300'
                           : 'border-slate-200 dark:border-slate-600 hover:border-slate-300 text-slate-700 dark:text-slate-300'
                       }`}
                     >
@@ -1014,7 +1014,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                   <select
                     value={newShelfCategory}
                     onChange={(e) => setNewShelfCategory(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
                   >
                     {SHELF_CATEGORIES.map(cat => (
                       <option key={cat} value={cat}>{cat}</option>
@@ -1031,7 +1031,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                     onClick={() => setNewDateType('exact')}
                     className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                       newDateType === 'exact'
-                        ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300'
+                        ? 'border-tribe-sage-500 bg-tribe-sage-50 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-300'
                         : 'border-slate-200 dark:border-slate-600 hover:border-slate-300 text-slate-700 dark:text-slate-300'
                     }`}
                   >
@@ -1044,7 +1044,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                     onClick={() => setNewDateType('approximate')}
                     className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm rounded-lg border-2 transition-all ${
                       newDateType === 'approximate'
-                        ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300'
+                        ? 'border-tribe-sage-500 bg-tribe-sage-50 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-300'
                         : 'border-slate-200 dark:border-slate-600 hover:border-slate-300 text-slate-700 dark:text-slate-300'
                     }`}
                   >
@@ -1061,7 +1061,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                     value={newExactDate}
                     onChange={(e) => setNewExactDate(e.target.value)}
                     min={new Date().toISOString().split('T')[0]}
-                    className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
                   />
                 ) : (
                   <div className="grid grid-cols-3 gap-2">
@@ -1071,7 +1071,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
                         onClick={() => setNewTimeRange(range)}
                         className={`px-2 py-2 text-xs rounded-lg border-2 transition-all ${
                           newTimeRange === range
-                            ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300'
+                            ? 'border-tribe-sage-500 bg-tribe-sage-50 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-300'
                             : 'border-slate-200 dark:border-slate-600 hover:border-slate-300 text-slate-700 dark:text-slate-300'
                         }`}
                       >
@@ -1096,7 +1096,7 @@ export function ExamCountdown({ variant = 'full' }: ExamCountdownProps) {
               <button
                 onClick={handleAddExam}
                 disabled={newDateType === 'exact' && !newExactDate}
-                className="flex-1 py-2 bg-teal-600 text-white text-sm font-medium rounded-lg hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 py-2 bg-tribe-sage-600 text-white text-sm font-medium rounded-lg hover:bg-tribe-sage-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Add Exam
               </button>

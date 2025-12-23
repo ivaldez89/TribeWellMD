@@ -426,7 +426,7 @@ export function ChatBubble() {
             ? 'bg-gradient-to-br from-slate-500 via-slate-600 to-slate-700 shadow-slate-500/30 hover:shadow-slate-500/50'
             : activeTab === 'studybuddy'
             ? 'bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-500 shadow-purple-500/30 hover:shadow-purple-500/50'
-            : 'bg-gradient-to-br from-teal-500 via-cyan-500 to-indigo-500 shadow-teal-500/30 hover:shadow-teal-500/50'
+            : 'bg-gradient-to-br from-tribe-sage-500 via-cyan-500 to-indigo-500 shadow-tribe-sage-500/30 hover:shadow-tribe-sage-500/50'
         }`}
         aria-label="Open chat"
       >
@@ -514,7 +514,7 @@ export function ChatBubble() {
               onClick={() => { setActiveTab('messages'); setSelectedConversation(null); }}
               className={`flex-1 py-3 px-4 text-sm font-medium transition-colors relative ${
                 activeTab === 'messages'
-                  ? 'text-teal-600 dark:text-teal-400'
+                  ? 'text-tribe-sage-600 dark:text-tribe-sage-400'
                   : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'
               }`}
             >
@@ -530,7 +530,7 @@ export function ChatBubble() {
                 )}
               </div>
               {activeTab === 'messages' && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-teal-500" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-tribe-sage-500" />
               )}
             </button>
             <button
@@ -560,7 +560,7 @@ export function ChatBubble() {
                 // Conversation View
                 <>
                   {/* Conversation Header */}
-                  <div className={`flex items-center gap-3 p-4 ${isInFocusMode ? 'bg-gradient-to-r from-slate-600 via-slate-700 to-slate-800' : 'bg-gradient-to-r from-teal-500 via-cyan-500 to-indigo-500'}`}>
+                  <div className={`flex items-center gap-3 p-4 ${isInFocusMode ? 'bg-gradient-to-r from-slate-600 via-slate-700 to-slate-800' : 'bg-gradient-to-r from-tribe-sage-500 via-cyan-500 to-indigo-500'}`}>
                     <button
                       onClick={() => setSelectedConversation(null)}
                       className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
@@ -611,7 +611,7 @@ export function ChatBubble() {
                           <div
                             className={`max-w-[80%] px-4 py-2.5 rounded-2xl ${
                               isMe
-                                ? 'bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-br-md'
+                                ? 'bg-gradient-to-r from-tribe-sage-500 to-cyan-500 text-white rounded-br-md'
                                 : 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm rounded-bl-md'
                             }`}
                           >
@@ -650,12 +650,12 @@ export function ChatBubble() {
                         onChange={(e) => setNewMessage(e.target.value)}
                         onKeyPress={handleKeyPress}
                         placeholder="Type a message..."
-                        className="flex-1 px-4 py-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/50"
+                        className="flex-1 px-4 py-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-tribe-sage-500/50"
                       />
                       <button
                         onClick={handleSendMessage}
                         disabled={!newMessage.trim()}
-                        className="w-10 h-10 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-10 h-10 rounded-full bg-gradient-to-r from-tribe-sage-500 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-tribe-sage-500/25 hover:shadow-tribe-sage-500/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
@@ -668,7 +668,7 @@ export function ChatBubble() {
                 // Conversations List
                 <>
                   {/* Header */}
-                  <div className={`p-4 ${isInFocusMode ? 'bg-gradient-to-r from-slate-600 via-slate-700 to-slate-800' : 'bg-gradient-to-r from-teal-500 via-cyan-500 to-indigo-500'}`}>
+                  <div className={`p-4 ${isInFocusMode ? 'bg-gradient-to-r from-slate-600 via-slate-700 to-slate-800' : 'bg-gradient-to-r from-tribe-sage-500 via-cyan-500 to-indigo-500'}`}>
                     <div className="flex items-center justify-between">
                       <div>
                         <h2 className="text-lg font-bold text-white">Messages</h2>
@@ -711,7 +711,7 @@ export function ChatBubble() {
                                   onClick={() => handleSetFocusMode(mode.id)}
                                   className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left ${
                                     focusMode === mode.id
-                                      ? 'bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300'
+                                      ? 'bg-tribe-sage-50 dark:bg-tribe-sage-900/30 text-tribe-sage-700 dark:text-tribe-sage-300'
                                       : 'hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300'
                                   }`}
                                 >
@@ -721,7 +721,7 @@ export function ChatBubble() {
                                     <p className="text-xs text-slate-500 dark:text-slate-400">{mode.description}</p>
                                   </div>
                                   {focusMode === mode.id && (
-                                    <svg className="w-5 h-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg className="w-5 h-5 text-tribe-sage-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                     </svg>
                                   )}
@@ -762,7 +762,7 @@ export function ChatBubble() {
                       <input
                         type="text"
                         placeholder="Search conversations..."
-                        className="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-full text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/50"
+                        className="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-full text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-tribe-sage-500/50"
                       />
                     </div>
                   </div>
@@ -794,7 +794,7 @@ export function ChatBubble() {
                                 {participantInfo ? getInitials(participantInfo.firstName, participantInfo.lastName) : '?'}
                               </div>
                               {participantInfo?.isOnline && (
-                                <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-white dark:border-slate-900 rounded-full" />
+                                <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-tribe-sage-500 border-2 border-white dark:border-slate-900 rounded-full" />
                               )}
                             </div>
 
@@ -810,7 +810,7 @@ export function ChatBubble() {
                               </div>
 
                               {participantInfo && (
-                                <p className="text-xs text-teal-600 dark:text-teal-400 mb-1">
+                                <p className="text-xs text-tribe-sage-600 dark:text-tribe-sage-400 mb-1">
                                   {participantInfo.currentYear} • {participantInfo.specialty}
                                 </p>
                               )}
@@ -818,13 +818,13 @@ export function ChatBubble() {
                               <div className="flex items-center justify-between gap-2">
                                 <p className={`text-sm truncate ${convo.unreadCount > 0 && !isInFocusMode ? 'text-slate-900 dark:text-white font-medium' : 'text-slate-500 dark:text-slate-400'}`}>
                                   {convo.lastMessage?.senderId === 'current-user' && (
-                                    <span className="text-teal-500 mr-1">You:</span>
+                                    <span className="text-tribe-sage-500 mr-1">You:</span>
                                   )}
                                   {convo.lastMessage?.content || 'No messages yet'}
                                 </p>
 
                                 {convo.unreadCount > 0 && !isInFocusMode && (
-                                  <span className="flex-shrink-0 w-5 h-5 bg-teal-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
+                                  <span className="flex-shrink-0 w-5 h-5 bg-tribe-sage-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
                                     {convo.unreadCount}
                                   </span>
                                 )}
@@ -841,7 +841,7 @@ export function ChatBubble() {
                     <button className={`w-full py-2.5 font-medium rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 ${
                       isInFocusMode
                         ? 'bg-gradient-to-r from-slate-600 to-slate-700 text-white shadow-slate-500/25 hover:shadow-slate-500/40'
-                        : 'bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-teal-500/25 hover:shadow-teal-500/40'
+                        : 'bg-gradient-to-r from-tribe-sage-500 to-cyan-500 text-white shadow-tribe-sage-500/25 hover:shadow-tribe-sage-500/40'
                     }`}>
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />

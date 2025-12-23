@@ -52,7 +52,7 @@ export function NodeEditor({
 
   const nodeTypeColors = {
     decision: 'border-indigo-300 bg-indigo-50',
-    outcome: 'border-emerald-300 bg-emerald-50',
+    outcome: 'border-emerald-300 bg-tribe-sage-50',
     information: 'border-amber-300 bg-amber-50'
   };
 
@@ -232,7 +232,7 @@ function ChoiceEditor({ choice, index, onChange, onDelete, availableNodeIds }: C
         </div>
         <div className="flex items-center gap-2">
           {choice.isOptimal && (
-            <span className="px-1.5 py-0.5 text-xs font-medium bg-emerald-100 text-emerald-700 rounded">
+            <span className="px-1.5 py-0.5 text-xs font-medium bg-tribe-sage-100 text-tribe-sage-700 rounded">
               Optimal
             </span>
           )}
@@ -287,7 +287,7 @@ function ChoiceEditor({ choice, index, onChange, onDelete, availableNodeIds }: C
                   isOptimal: e.target.checked,
                   isAcceptable: e.target.checked ? true : choice.isAcceptable
                 })}
-                className="w-4 h-4 text-emerald-600 border-slate-300 rounded focus:ring-emerald-500"
+                className="w-4 h-4 text-tribe-sage-600 border-slate-300 rounded focus:ring-tribe-sage-500"
               />
               <span className="text-slate-700">Optimal</span>
             </label>

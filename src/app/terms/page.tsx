@@ -140,7 +140,7 @@ export default function TermsPage() {
               <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">12. Contact</h2>
               <p className="text-slate-600 dark:text-slate-300">
                 For questions about these Terms, please contact us at{' '}
-                <a href="mailto:legal@tribewellmd.com" className="text-teal-600 dark:text-teal-400 hover:underline">
+                <a href="mailto:legal@tribewellmd.com" className="text-tribe-sage-600 dark:text-tribe-sage-400 hover:underline">
                   legal@tribewellmd.com
                 </a>
               </p>
@@ -150,7 +150,7 @@ export default function TermsPage() {
         </div>
 
         <div className="mt-8 flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
-          <Link href="/privacy" className="hover:text-teal-600 dark:hover:text-teal-400">
+          <Link href="/privacy" className="hover:text-tribe-sage-600 dark:hover:text-tribe-sage-400">
             View Privacy Policy →
           </Link>
           <p>© {new Date().getFullYear()} TribeWellMD</p>

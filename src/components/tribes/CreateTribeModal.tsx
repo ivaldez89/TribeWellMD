@@ -13,7 +13,7 @@ const TRIBE_ICONS = ['🌊', '🔬', '🧘', '📚', '❤️', '🌱', '🎯', '
 
 const TRIBE_COLORS = [
   { value: 'from-cyan-500 to-blue-600', label: 'Ocean' },
-  { value: 'from-emerald-500 to-teal-600', label: 'Forest' },
+  { value: 'from-tribe-sage-500 to-tribe-sage-600', label: 'Forest' },
   { value: 'from-purple-500 to-indigo-600', label: 'Galaxy' },
   { value: 'from-red-500 to-rose-600', label: 'Ruby' },
   { value: 'from-amber-500 to-orange-600', label: 'Sunset' },
@@ -110,7 +110,7 @@ export function CreateTribeModal({ isOpen, onClose, onCreate }: CreateTribeModal
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g., Future Cardiologists"
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500"
                   maxLength={50}
                 />
                 <p className="text-xs text-slate-400 mt-1">{formData.name.length}/50 characters</p>
@@ -125,7 +125,7 @@ export function CreateTribeModal({ isOpen, onClose, onCreate }: CreateTribeModal
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="What is this tribe about?"
                   rows={3}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500"
                   maxLength={200}
                 />
                 <p className="text-xs text-slate-400 mt-1">{formData.description.length}/200 characters</p>
@@ -143,7 +143,7 @@ export function CreateTribeModal({ isOpen, onClose, onCreate }: CreateTribeModal
                       onClick={() => setFormData({ ...formData, type })}
                       className={`px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${
                         formData.type === type
-                          ? 'border-teal-500 bg-teal-50 text-teal-700'
+                          ? 'border-tribe-sage-500 bg-tribe-sage-50 text-tribe-sage-700'
                           : 'border-slate-200 hover:border-slate-300'
                       }`}
                     >
@@ -168,7 +168,7 @@ export function CreateTribeModal({ isOpen, onClose, onCreate }: CreateTribeModal
                       onClick={() => setFormData({ ...formData, visibility: vis })}
                       className={`flex-1 px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${
                         formData.visibility === vis
-                          ? 'border-teal-500 bg-teal-50 text-teal-700'
+                          ? 'border-tribe-sage-500 bg-tribe-sage-50 text-tribe-sage-700'
                           : 'border-slate-200 hover:border-slate-300'
                       }`}
                     >
@@ -196,7 +196,7 @@ export function CreateTribeModal({ isOpen, onClose, onCreate }: CreateTribeModal
                   onChange={(e) => setFormData({ ...formData, mission: e.target.value })}
                   placeholder="What impact do you want to make?"
                   rows={3}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500"
                   maxLength={300}
                 />
                 <p className="text-xs text-slate-400 mt-1">{formData.mission.length}/300 characters</p>
@@ -214,7 +214,7 @@ export function CreateTribeModal({ isOpen, onClose, onCreate }: CreateTribeModal
                       onClick={() => setFormData({ ...formData, icon })}
                       className={`w-10 h-10 text-xl rounded-lg border transition-colors ${
                         formData.icon === icon
-                          ? 'border-teal-500 bg-teal-50'
+                          ? 'border-tribe-sage-500 bg-tribe-sage-50'
                           : 'border-slate-200 hover:border-slate-300'
                       }`}
                     >
@@ -236,7 +236,7 @@ export function CreateTribeModal({ isOpen, onClose, onCreate }: CreateTribeModal
                       onClick={() => setFormData({ ...formData, color: color.value })}
                       className={`p-3 rounded-lg border transition-colors ${
                         formData.color === color.value
-                          ? 'ring-2 ring-teal-500 ring-offset-2'
+                          ? 'ring-2 ring-tribe-sage-500 ring-offset-2'
                           : ''
                       }`}
                     >
@@ -257,7 +257,7 @@ export function CreateTribeModal({ isOpen, onClose, onCreate }: CreateTribeModal
                   id="includeGoal"
                   checked={includeGoal}
                   onChange={(e) => setIncludeGoal(e.target.checked)}
-                  className="w-5 h-5 text-teal-600 rounded focus:ring-teal-500"
+                  className="w-5 h-5 text-tribe-sage-600 rounded focus:ring-tribe-sage-500"
                 />
                 <label htmlFor="includeGoal" className="flex-1">
                   <span className="font-medium text-slate-700">Add a Social Impact Goal</span>
@@ -276,7 +276,7 @@ export function CreateTribeModal({ isOpen, onClose, onCreate }: CreateTribeModal
                       value={formData.goalTitle || ''}
                       onChange={(e) => setFormData({ ...formData, goalTitle: e.target.value })}
                       placeholder="e.g., Beach Cleanup Drive"
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500"
                     />
                   </div>
 
@@ -289,7 +289,7 @@ export function CreateTribeModal({ isOpen, onClose, onCreate }: CreateTribeModal
                       onChange={(e) => setFormData({ ...formData, goalDescription: e.target.value })}
                       placeholder="Describe what you're working toward..."
                       rows={2}
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500"
                     />
                   </div>
 
@@ -305,7 +305,7 @@ export function CreateTribeModal({ isOpen, onClose, onCreate }: CreateTribeModal
                           onClick={() => setFormData({ ...formData, goalCause: cause.value })}
                           className={`px-3 py-2 rounded-lg border text-sm transition-colors ${
                             formData.goalCause === cause.value
-                              ? 'border-teal-500 bg-teal-50 text-teal-700'
+                              ? 'border-tribe-sage-500 bg-tribe-sage-50 text-tribe-sage-700'
                               : 'border-slate-200 hover:border-slate-300'
                           }`}
                         >
@@ -326,7 +326,7 @@ export function CreateTribeModal({ isOpen, onClose, onCreate }: CreateTribeModal
                       placeholder="5000"
                       min={100}
                       max={100000}
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500"
                     />
                     <p className="text-xs text-slate-400 mt-1">
                       Members earn points through study and wellness activities
@@ -376,7 +376,7 @@ export function CreateTribeModal({ isOpen, onClose, onCreate }: CreateTribeModal
                 type="button"
                 onClick={() => setStep(step + 1)}
                 disabled={step === 1 ? !isStep1Valid : !isStep2Valid}
-                className="px-6 py-2 bg-teal-500 text-white rounded-lg font-medium hover:bg-teal-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-6 py-2 bg-tribe-sage-500 text-white rounded-lg font-medium hover:bg-tribe-sage-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 Next
               </button>
@@ -384,7 +384,7 @@ export function CreateTribeModal({ isOpen, onClose, onCreate }: CreateTribeModal
               <button
                 type="submit"
                 disabled={!isStep3Valid}
-                className="px-6 py-2 bg-teal-500 text-white rounded-lg font-medium hover:bg-teal-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-6 py-2 bg-tribe-sage-500 text-white rounded-lg font-medium hover:bg-tribe-sage-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 Create Tribe
               </button>

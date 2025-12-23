@@ -31,7 +31,7 @@ const shelfExams: ShelfExam[] = [
     name: 'Internal Medicine',
     description: 'Adult medicine, hospital medicine, subspecialty medicine',
     icon: '🩺',
-    color: 'from-emerald-500 to-teal-500',
+    color: 'from-tribe-sage-500 to-teal-500',
     systems: ['Cardiology', 'Pulmonology', 'Gastroenterology', 'Nephrology', 'Endocrinology', 'Hematology/Oncology', 'Infectious Disease', 'Rheumatology'],
     tags: ['internal medicine', 'inpatient', 'hospital']
   },
@@ -85,7 +85,7 @@ const shelfExams: ShelfExam[] = [
     name: 'Family Medicine',
     description: 'Comprehensive primary care across all ages',
     icon: '👨‍👩‍👧‍👦',
-    color: 'from-green-500 to-emerald-500',
+    color: 'from-green-500 to-tribe-sage-500',
     systems: ['Preventive Medicine', 'Cardiology', 'Endocrinology', 'Psychiatry', 'Pediatrics', 'General'],
     tags: ['family medicine', 'primary care', 'preventive']
   },

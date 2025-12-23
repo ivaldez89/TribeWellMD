@@ -201,7 +201,7 @@ export default function ProfilePage() {
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
         <Header />
         <div className="flex items-center justify-center h-[calc(100vh-64px)]">
-          <div className="w-8 h-8 border-4 border-teal-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-4 border-tribe-sage-500 border-t-transparent rounded-full animate-spin" />
         </div>
       </div>
     );
@@ -214,7 +214,7 @@ export default function ProfilePage() {
       {/* Success Message Toast */}
       {saveMessage && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-2">
-          <div className="flex items-center gap-2 px-4 py-3 bg-emerald-500 text-white rounded-xl shadow-lg">
+          <div className="flex items-center gap-2 px-4 py-3 bg-tribe-sage-500 text-white rounded-xl shadow-lg">
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
@@ -227,7 +227,7 @@ export default function ProfilePage() {
         {/* Profile Header Card */}
         <div className="relative bg-white dark:bg-slate-800 rounded-3xl shadow-xl overflow-hidden mb-8">
           {/* Gradient Banner */}
-          <div className="h-32 md:h-40 bg-gradient-to-r from-teal-500 via-cyan-500 to-indigo-500 relative">
+          <div className="h-32 md:h-40 bg-gradient-to-r from-tribe-sage-500 via-cyan-500 to-indigo-500 relative">
             {/* Decorative pattern */}
             <div className="absolute inset-0 opacity-20">
               <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -285,7 +285,7 @@ export default function ProfilePage() {
                 />
 
                 {/* Online indicator */}
-                <span className="absolute bottom-2 right-2 w-5 h-5 bg-emerald-500 border-3 border-white dark:border-slate-800 rounded-full" />
+                <span className="absolute bottom-2 right-2 w-5 h-5 bg-tribe-sage-500 border-3 border-white dark:border-slate-800 rounded-full" />
               </div>
 
               {/* Name & Info */}
@@ -321,7 +321,7 @@ export default function ProfilePage() {
                     <button
                       onClick={handleSave}
                       disabled={isSaving}
-                      className="px-6 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold rounded-xl shadow-lg shadow-teal-500/25 transition-all flex items-center gap-2"
+                      className="px-6 py-2 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-semibold rounded-xl shadow-lg shadow-tribe-sage-500/25 transition-all flex items-center gap-2"
                     >
                       {isSaving ? (
                         <>
@@ -361,8 +361,8 @@ export default function ProfilePage() {
             {/* Basic Information */}
             <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-6">
               <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center">
-                  <svg className="w-4 h-4 text-teal-600 dark:text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="w-8 h-8 rounded-lg bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center">
+                  <svg className="w-4 h-4 text-tribe-sage-600 dark:text-tribe-sage-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
                 </div>
@@ -380,7 +380,7 @@ export default function ProfilePage() {
                     onChange={(e) => setProfile({ ...profile, firstName: e.target.value })}
                     disabled={!isEditing}
                     placeholder="Enter first name"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
                   />
                 </div>
                 <div>
@@ -393,7 +393,7 @@ export default function ProfilePage() {
                     onChange={(e) => setProfile({ ...profile, lastName: e.target.value })}
                     disabled={!isEditing}
                     placeholder="Enter last name"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
                   />
                 </div>
                 <div className="sm:col-span-2">
@@ -406,7 +406,7 @@ export default function ProfilePage() {
                     onChange={(e) => setProfile({ ...profile, email: e.target.value })}
                     disabled={!isEditing}
                     placeholder="your.email@school.edu"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
                   />
                 </div>
                 <div className="sm:col-span-2">
@@ -419,7 +419,7 @@ export default function ProfilePage() {
                     disabled={!isEditing}
                     placeholder="Tell others about yourself..."
                     rows={3}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all resize-none"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all resize-none"
                   />
                 </div>
               </div>
@@ -447,7 +447,7 @@ export default function ProfilePage() {
                     value={profile.currentYear || ''}
                     onChange={(e) => setProfile({ ...profile, currentYear: e.target.value as UserProfile['currentYear'] })}
                     disabled={!isEditing}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
                   >
                     <option value="">Select year...</option>
                     {ACADEMIC_YEARS.map(year => (
@@ -467,7 +467,7 @@ export default function ProfilePage() {
                     placeholder="2027"
                     min={2020}
                     max={2040}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
                   />
                 </div>
                 <div className="sm:col-span-2">
@@ -597,7 +597,7 @@ export default function ProfilePage() {
                                 {getInitials(user.firstName, user.lastName)}
                               </div>
                               {user.isOnline && (
-                                <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-slate-800 rounded-full" />
+                                <span className="absolute bottom-0 right-0 w-3 h-3 bg-tribe-sage-500 border-2 border-white dark:border-slate-800 rounded-full" />
                               )}
                             </div>
                             <div className="flex-1 min-w-0">
@@ -615,7 +615,7 @@ export default function ProfilePage() {
                             </div>
                             <div className="flex-shrink-0">
                               {status === 'connected' ? (
-                                <span className="px-2.5 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-xs font-medium rounded-full">
+                                <span className="px-2.5 py-1 bg-tribe-sage-100 dark:bg-tribe-sage-900/30 text-tribe-sage-600 dark:text-tribe-sage-400 text-xs font-medium rounded-full">
                                   Connected
                                 </span>
                               ) : status === 'pending-sent' ? (
@@ -625,14 +625,14 @@ export default function ProfilePage() {
                               ) : status === 'pending-received' ? (
                                 <button
                                   onClick={() => handleAcceptRequest(user.id)}
-                                  className="px-3 py-1 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-medium rounded-full transition-colors"
+                                  className="px-3 py-1 bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white text-xs font-medium rounded-full transition-colors"
                                 >
                                   Accept
                                 </button>
                               ) : (
                                 <button
                                   onClick={() => handleSendRequest(user.id)}
-                                  className="px-3 py-1 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-teal-600 text-white text-xs font-medium rounded-full shadow-sm transition-all"
+                                  className="px-3 py-1 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-600 hover:to-tribe-sage-600 text-white text-xs font-medium rounded-full shadow-sm transition-all"
                                 >
                                   Connect
                                 </button>
@@ -686,7 +686,7 @@ export default function ProfilePage() {
                         <div className="flex gap-1">
                           <button
                             onClick={() => handleAcceptRequest(user.id)}
-                            className="w-8 h-8 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center transition-colors"
+                            className="w-8 h-8 rounded-full bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white flex items-center justify-center transition-colors"
                             title="Accept"
                           >
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -726,7 +726,7 @@ export default function ProfilePage() {
                             {getInitials(user.firstName, user.lastName)}
                           </div>
                           {user.isOnline && (
-                            <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-slate-700 rounded-full" />
+                            <span className="absolute bottom-0 right-0 w-3 h-3 bg-tribe-sage-500 border-2 border-white dark:border-slate-700 rounded-full" />
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
@@ -737,7 +737,7 @@ export default function ProfilePage() {
                             {user.specialty}
                           </p>
                         </div>
-                        <button className="w-8 h-8 rounded-full bg-teal-100 dark:bg-teal-900/30 hover:bg-teal-200 dark:hover:bg-teal-900/50 text-teal-600 dark:text-teal-400 flex items-center justify-center transition-colors">
+                        <button className="w-8 h-8 rounded-full bg-tribe-sage-100 dark:bg-tribe-sage-900/30 hover:bg-teal-200 dark:hover:bg-teal-900/50 text-tribe-sage-600 dark:text-tribe-sage-400 flex items-center justify-center transition-colors">
                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                           </svg>
@@ -748,7 +748,7 @@ export default function ProfilePage() {
                   {connections.length > 3 && (
                     <button
                       onClick={() => setShowAllConnections(!showAllConnections)}
-                      className="w-full mt-3 py-2 text-sm font-medium text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors"
+                      className="w-full mt-3 py-2 text-sm font-medium text-tribe-sage-600 dark:text-tribe-sage-400 hover:text-tribe-sage-700 dark:hover:text-tribe-sage-300 transition-colors"
                     >
                       {showAllConnections ? 'Show Less' : `View All ${connectionCount} Connections`}
                     </button>
@@ -771,8 +771,8 @@ export default function ProfilePage() {
             <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-6">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center">
-                    <svg className="w-4 h-4 text-teal-600 dark:text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="w-8 h-8 rounded-lg bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center">
+                    <svg className="w-4 h-4 text-tribe-sage-600 dark:text-tribe-sage-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                   </div>
@@ -816,7 +816,7 @@ export default function ProfilePage() {
                             e.stopPropagation();
                             handleSetPrimaryTribe(tribe.id);
                           }}
-                          className="px-2 py-1 text-xs text-teal-600 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/30 rounded-lg transition-colors"
+                          className="px-2 py-1 text-xs text-tribe-sage-600 dark:text-tribe-sage-400 hover:bg-tribe-sage-50 dark:hover:bg-teal-900/30 rounded-lg transition-colors"
                           title="Set as primary tribe"
                         >
                           Set Primary
@@ -839,7 +839,7 @@ export default function ProfilePage() {
 
               <a
                 href="/tribes"
-                className="flex items-center justify-center gap-2 w-full mt-4 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-medium rounded-xl transition-all text-sm"
+                className="flex items-center justify-center gap-2 w-full mt-4 py-2.5 bg-gradient-to-r from-tribe-sage-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-medium rounded-xl transition-all text-sm"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -862,7 +862,7 @@ export default function ProfilePage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-3 bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-xl">
                   <span className="text-slate-600 dark:text-slate-300">Cards Studied</span>
-                  <span className="text-xl font-bold text-teal-600 dark:text-teal-400">0</span>
+                  <span className="text-xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400">0</span>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl">
                   <span className="text-slate-600 dark:text-slate-300">Cases Completed</span>
@@ -897,7 +897,7 @@ export default function ProfilePage() {
                     onChange={(e) => setProfile({ ...profile, linkedIn: e.target.value })}
                     disabled={!isEditing}
                     placeholder="linkedin.com/in/username"
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
                   />
                 </div>
                 <div>
@@ -910,7 +910,7 @@ export default function ProfilePage() {
                     onChange={(e) => setProfile({ ...profile, twitter: e.target.value })}
                     disabled={!isEditing}
                     placeholder="@username"
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
                   />
                 </div>
               </div>
@@ -936,7 +936,7 @@ export default function ProfilePage() {
                     value={profile.profileVisibility}
                     onChange={(e) => setProfile({ ...profile, profileVisibility: e.target.value as UserProfile['profileVisibility'] })}
                     disabled={!isEditing}
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-tribe-sage-500 focus:border-transparent disabled:opacity-60 disabled:cursor-not-allowed transition-all"
                   >
                     <option value="public">Public</option>
                     <option value="connections">Connections Only</option>
@@ -951,7 +951,7 @@ export default function ProfilePage() {
                     disabled={!isEditing}
                     className={`
                       relative w-12 h-7 rounded-full transition-colors duration-200
-                      ${profile.showStudyStats ? 'bg-teal-500' : 'bg-slate-300 dark:bg-slate-600'}
+                      ${profile.showStudyStats ? 'bg-tribe-sage-500' : 'bg-slate-300 dark:bg-slate-600'}
                       ${!isEditing ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}
                     `}
                   >

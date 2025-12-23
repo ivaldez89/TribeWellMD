@@ -256,8 +256,8 @@ export function BackgroundSelector({
         className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors ${
           showPanel || selectedBackground !== 'none'
             ? isDark
-              ? 'bg-teal-900/50 text-teal-400'
-              : 'bg-teal-100 text-teal-700'
+              ? 'bg-teal-900/50 text-tribe-sage-400'
+              : 'bg-tribe-sage-100 text-tribe-sage-700'
             : isDark
               ? 'text-slate-400 hover:text-white hover:bg-slate-700'
               : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100'
@@ -300,8 +300,8 @@ export function BackgroundSelector({
                       className={`relative flex flex-col items-center gap-1 p-2 rounded-lg transition-all cursor-pointer ${
                         selectedBackground === 'custom'
                           ? isDark
-                            ? 'bg-teal-900/50 border-2 border-teal-500'
-                            : 'bg-teal-50 border-2 border-teal-500'
+                            ? 'bg-teal-900/50 border-2 border-tribe-sage-500'
+                            : 'bg-tribe-sage-50 border-2 border-tribe-sage-500'
                           : isDark
                             ? 'bg-slate-700 border-2 border-transparent hover:bg-slate-600'
                             : 'bg-slate-50 border-2 border-transparent hover:bg-slate-100'
@@ -325,7 +325,7 @@ export function BackgroundSelector({
                           isDark ? 'bg-slate-600' : 'bg-slate-200'
                         }`}>
                           {isUploading ? (
-                            <span className="w-4 h-4 border-2 border-teal-500 border-t-transparent rounded-full animate-spin" />
+                            <span className="w-4 h-4 border-2 border-tribe-sage-500 border-t-transparent rounded-full animate-spin" />
                           ) : (
                             <span className="text-lg">{bg.emoji}</span>
                           )}
@@ -344,8 +344,8 @@ export function BackgroundSelector({
                       className={`relative flex flex-col items-center gap-1 p-2 rounded-lg transition-all ${
                         selectedBackground === bg.id
                           ? isDark
-                            ? 'bg-teal-900/50 border-2 border-teal-500'
-                            : 'bg-teal-50 border-2 border-teal-500'
+                            ? 'bg-teal-900/50 border-2 border-tribe-sage-500'
+                            : 'bg-tribe-sage-50 border-2 border-tribe-sage-500'
                           : isDark
                             ? 'bg-slate-700 border-2 border-transparent hover:bg-slate-600'
                             : 'bg-slate-50 border-2 border-transparent hover:bg-slate-100'

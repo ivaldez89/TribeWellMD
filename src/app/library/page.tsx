@@ -254,8 +254,8 @@ export default function LibraryPage() {
                     <p className="text-lg font-bold text-blue-600 dark:text-blue-400">{stats.uworldLinked}</p>
                     <p className="text-xs text-slate-500 dark:text-slate-400">UWorld</p>
                   </div>
-                  <div className="px-4 py-2 bg-teal-50 dark:bg-teal-900/30 rounded-lg">
-                    <p className="text-lg font-bold text-teal-600 dark:text-teal-400">{stats.ambossLinked}</p>
+                  <div className="px-4 py-2 bg-tribe-sage-50 dark:bg-tribe-sage-900/30 rounded-lg">
+                    <p className="text-lg font-bold text-tribe-sage-600 dark:text-tribe-sage-400">{stats.ambossLinked}</p>
                     <p className="text-xs text-slate-500 dark:text-slate-400">AMBOSS</p>
                   </div>
                 </div>

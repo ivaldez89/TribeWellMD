@@ -18,7 +18,7 @@ export function StudyToolsPanel() {
         </svg>
       ),
       href: '/study',
-      color: 'from-teal-500 to-cyan-600',
+      color: 'from-tribe-sage-500 to-cyan-600',
       available: true,
     },
     {
@@ -91,7 +91,7 @@ export function StudyToolsPanel() {
   return (
     <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-4">
       <h3 className="font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-        <svg className="w-5 h-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="w-5 h-5 text-tribe-sage-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
