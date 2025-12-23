@@ -1,6 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { ChatBubble } from '@/components/chat/ChatBubble';
 import { GlobalSpotifyPlayer } from '@/components/music/GlobalSpotifyPlayer';
 import { useIsAuthenticated } from '@/hooks/useAuth';
@@ -21,9 +22,20 @@ const HIDE_SPOTIFY_PATTERNS = [
 export function GlobalUI() {
   const pathname = usePathname();
   const isAuthenticated = useIsAuthenticated();
+  const [isInIframe, setIsInIframe] = useState(false);
+
+  // Check if we're inside an iframe
+  useEffect(() => {
+    setIsInIframe(window.self !== window.top);
+  }, []);
 
   // Don't render on auth pages
   if (AUTH_PAGES.includes(pathname)) {
+    return null;
+  }
+
+  // Don't render if we're inside an iframe (e.g., study room embeds)
+  if (isInIframe) {
     return null;
   }
 
