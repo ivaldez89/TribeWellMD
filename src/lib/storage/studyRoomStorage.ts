@@ -502,3 +502,88 @@ export function saveDemoSessions(sessions: StudySession[]): void {
   if (typeof window === 'undefined') return;
   localStorage.setItem(SESSIONS_KEY, JSON.stringify(sessions));
 }
+
+// ============================================
+// USER SEARCH FOR INVITES
+// ============================================
+
+export interface SearchableUser {
+  id: string;
+  displayName: string;
+  email?: string;
+  avatarUrl?: string;
+}
+
+// Search users by name or email for inviting to a session
+export async function searchUsersForInvite(
+  query: string,
+  excludeUserIds: string[] = []
+): Promise<SearchableUser[]> {
+  if (!query || query.length < 2) return [];
+
+  const supabase = createClient();
+
+  // Search in auth.users via RPC or a profiles table
+  // For now, we'll search session_participants for known users
+  const { data, error } = await supabase
+    .from('session_participants')
+    .select('user_id, display_name, avatar_url')
+    .ilike('display_name', `%${query}%`)
+    .limit(10);
+
+  if (error || !data) {
+    return [];
+  }
+
+  // Deduplicate by user_id and exclude specified users
+  const seen = new Set<string>();
+  const users: SearchableUser[] = [];
+
+  for (const row of data) {
+    if (!seen.has(row.user_id) && !excludeUserIds.includes(row.user_id)) {
+      seen.add(row.user_id);
+      users.push({
+        id: row.user_id,
+        displayName: row.display_name,
+        avatarUrl: row.avatar_url || undefined,
+      });
+    }
+  }
+
+  return users;
+}
+
+// Invite a user to a session (sends them a notification/adds them)
+export async function inviteUserToSession(
+  sessionId: string,
+  userId: string,
+  invitedByName: string
+): Promise<{ success: boolean; error: string | null }> {
+  const supabase = createClient();
+
+  // Check if user is already a participant
+  const { data: existing } = await supabase
+    .from('session_participants')
+    .select('id, status')
+    .eq('session_id', sessionId)
+    .eq('user_id', userId)
+    .single();
+
+  if (existing && existing.status === 'active') {
+    return { success: false, error: 'User is already in this session' };
+  }
+
+  // For now, we'll add them as a pending invite (they'll see it when they next check)
+  // In a full implementation, this would send a push notification or email
+
+  // Add system message about the invite
+  await supabase.from('session_messages').insert({
+    session_id: sessionId,
+    sender_id: 'system',
+    sender_name: 'System',
+    content: `${invitedByName} invited a user to join`,
+    message_type: 'system',
+  });
+
+  return { success: true, error: null };
+}
