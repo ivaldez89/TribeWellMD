@@ -12,7 +12,8 @@ import {
 } from '@/components/study-room';
 import { useStudyRoom } from '@/hooks/useStudyRoom';
 import { useIsAuthenticated } from '@/hooks/useAuth';
-import { getUserProfile, getCurrentUserId } from '@/lib/storage/profileStorage';
+import { getUserProfile } from '@/lib/storage/profileStorage';
+import { createClient } from '@/lib/supabase/client';
 import { joinStudySession } from '@/lib/storage/studyRoomStorage';
 
 export default function StudyRoomPage() {
@@ -29,18 +30,25 @@ export default function StudyRoomPage() {
 
   // Load user info
   useEffect(() => {
-    const id = getCurrentUserId();
-    setUserId(id);
+    const fetchUser = async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
 
-    const profile = getUserProfile();
-    if (profile?.firstName && profile?.lastName) {
-      setUserDisplayName(`${profile.firstName} ${profile.lastName}`);
-    } else {
-      setUserDisplayName('Anonymous');
-    }
-    if (profile?.avatar) {
-      setUserAvatarUrl(profile.avatar);
-    }
+      if (user) {
+        setUserId(user.id);
+      }
+
+      const profile = getUserProfile();
+      if (profile?.firstName && profile?.lastName) {
+        setUserDisplayName(`${profile.firstName} ${profile.lastName}`);
+      } else {
+        setUserDisplayName('Anonymous');
+      }
+      if (profile?.avatar) {
+        setUserAvatarUrl(profile.avatar);
+      }
+    };
+    fetchUser();
   }, []);
 
   // Auto-join on load

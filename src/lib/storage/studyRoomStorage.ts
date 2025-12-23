@@ -82,7 +82,7 @@ export async function createStudySession(
     sender_id: userId,
     sender_name: 'System',
     content: `${userDisplayName} created the study room`,
-    type: 'system',
+    message_type: 'system',
   });
 
   return { session: transformSessionRow(sessionData), error: null };
@@ -248,7 +248,7 @@ export async function joinStudySession(
     sender_id: userId,
     sender_name: 'System',
     content: `${userDisplayName} joined the room`,
-    type: 'system',
+    message_type: 'system',
   });
 
   return { success: true, error: null };
@@ -274,7 +274,7 @@ export async function leaveStudySession(
     sender_id: userId,
     sender_name: 'System',
     content: `${userDisplayName} left the room`,
-    type: 'system',
+    message_type: 'system',
   });
 }
 

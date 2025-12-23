@@ -13,7 +13,8 @@ import {
   getSessionByInviteCode,
   getDemoSessions,
 } from '@/lib/storage/studyRoomStorage';
-import { getUserProfile, getCurrentUserId } from '@/lib/storage/profileStorage';
+import { getUserProfile } from '@/lib/storage/profileStorage';
+import { createClient } from '@/lib/supabase/client';
 import { StudySession, CreateSessionData, formatTimerDisplay } from '@/types/studyRoom';
 
 export default function StudyRoomsPage() {
@@ -31,15 +32,22 @@ export default function StudyRoomsPage() {
   const [userDisplayName, setUserDisplayName] = useState('');
 
   useEffect(() => {
-    const id = getCurrentUserId();
-    setUserId(id);
+    const fetchUser = async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
 
-    const profile = getUserProfile();
-    if (profile?.firstName && profile?.lastName) {
-      setUserDisplayName(`${profile.firstName} ${profile.lastName}`);
-    } else {
-      setUserDisplayName('Anonymous');
-    }
+      if (user) {
+        setUserId(user.id);
+      }
+
+      const profile = getUserProfile();
+      if (profile?.firstName && profile?.lastName) {
+        setUserDisplayName(`${profile.firstName} ${profile.lastName}`);
+      } else {
+        setUserDisplayName('Anonymous');
+      }
+    };
+    fetchUser();
   }, []);
 
   // Get rooms
