@@ -36,11 +36,11 @@ const POINT_CONVERSIONS = {
   ]
 };
 
-// Verification tier info
+// Verification tier info - icons are SVG component names from Icons.tsx
 const VERIFICATION_TIERS = [
   {
     tier: 'Self-Reported',
-    icon: '✋',
+    icon: 'Hand',
     multiplier: '1x',
     description: 'Honor system - we trust you',
     examples: ['Mood check-ins', 'Gratitude journaling', 'Breathing exercises'],
@@ -48,27 +48,27 @@ const VERIFICATION_TIERS = [
   },
   {
     tier: 'Photo Verified',
-    icon: '📸',
+    icon: 'Camera',
     multiplier: '2x',
     description: 'AI-analyzed photo evidence',
     examples: ['Healthy meals', 'Group study selfies', 'Workout photos'],
-    color: 'from-blue-400 to-indigo-500'
+    color: 'from-[#6B8B7D] to-[#5B7B6D]'
   },
   {
     tier: 'Health App Verified',
-    icon: '⌚',
+    icon: 'Watch',
     multiplier: '3x',
     description: 'Connected device data',
     examples: ['Step counts', 'Sleep tracking', 'Workout minutes'],
-    color: 'from-tribe-sage-400 to-teal-500'
+    color: 'from-[#5B7B6D] to-[#4A6A5C]'
   },
   {
     tier: 'Automatic',
-    icon: '🤖',
+    icon: 'Sparkles',
     multiplier: '1x',
     description: 'Tracked by the platform',
     examples: ['Flashcard reviews', 'Case completions', 'Streaks'],
-    color: 'from-purple-400 to-pink-500'
+    color: 'from-[#8B7355] to-[#7A6348]'
   }
 ];
 
@@ -86,7 +86,7 @@ export default function ImpactPage() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-700 py-20">
+        <section className="relative overflow-hidden bg-gradient-to-br from-[#5B7B6D] via-[#6B8B7D] to-[#7FA08F] py-20">
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
             <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
@@ -94,13 +94,13 @@ export default function ImpactPage() {
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur rounded-full text-white/90 text-sm font-medium mb-6">
-              <span className="w-2 h-2 bg-emerald-300 rounded-full animate-pulse" />
+              <span className="w-2 h-2 bg-[#C4A77D] rounded-full animate-pulse" />
               Your growth fuels community impact
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              How Your <span className="text-emerald-200">Self-Care</span><br />
-              Becomes <span className="text-cyan-200">Charity</span>
+              How Your <span className="text-[#E8E0D5]">Self-Care</span><br />
+              Becomes <span className="text-[#C4A77D]">Charity</span>
             </h1>
 
             <p className="text-xl text-white/80 max-w-3xl mx-auto mb-8">
@@ -139,17 +139,22 @@ export default function ImpactPage() {
 
             <div className="grid md:grid-cols-4 gap-6">
               {[
-                { step: 1, icon: '📚', title: 'Study & Practice', desc: 'Review flashcards, complete cases, maintain your streak' },
-                { step: 2, icon: '🧘', title: 'Wellness Activities', desc: 'Exercise, meditate, sleep well, eat healthy' },
-                { step: 3, icon: '💎', title: 'Earn Village Points', desc: 'Every activity generates points based on verification tier' },
-                { step: 4, icon: '💚', title: 'Impact Charity', desc: 'Points pool together and convert to real donations' }
+                { step: 1, icon: 'Book', title: 'Study & Practice', desc: 'Review flashcards, complete cases, maintain your streak' },
+                { step: 2, icon: 'Meditation', title: 'Wellness Activities', desc: 'Exercise, meditate, sleep well, eat healthy' },
+                { step: 3, icon: 'Sparkles', title: 'Earn Village Points', desc: 'Every activity generates points based on verification tier' },
+                { step: 4, icon: 'Heart', title: 'Impact Charity', desc: 'Points pool together and convert to real donations' }
               ].map((item) => (
                 <div key={item.step} className="relative">
                   <div className="bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 text-center h-full">
-                    <div className="w-12 h-12 rounded-full bg-tribe-sage-100 dark:bg-tribe-sage-900/30 flex items-center justify-center mx-auto mb-4">
-                      <span className="text-2xl">{item.icon}</span>
+                    <div className="w-12 h-12 rounded-full bg-[#E8E0D5] dark:bg-[#3D4A44] flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-6 h-6 text-[#5B7B6D] dark:text-[#7FA08F]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        {item.icon === 'Book' && <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />}
+                        {item.icon === 'Meditation' && <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18zM12 6v6l4 2" />}
+                        {item.icon === 'Sparkles' && <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />}
+                        {item.icon === 'Heart' && <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />}
+                      </svg>
                     </div>
-                    <div className="text-xs font-bold text-tribe-sage-600 dark:text-tribe-sage-400 mb-2">STEP {item.step}</div>
+                    <div className="text-xs font-bold text-[#5B7B6D] dark:text-[#7FA08F] mb-2">STEP {item.step}</div>
                     <h3 className="font-semibold text-slate-900 dark:text-white mb-2">{item.title}</h3>
                     <p className="text-sm text-slate-600 dark:text-slate-400">{item.desc}</p>
                   </div>
@@ -478,25 +483,25 @@ export default function ImpactPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-16 bg-gradient-to-r from-emerald-600 to-tribe-sage-600">
+        <section className="py-16 bg-gradient-to-r from-[#5B7B6D] to-[#7FA08F]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl font-bold text-white mb-4">
               Ready to Make an Impact?
             </h2>
-            <p className="text-tribe-sage-100 text-lg mb-8">
+            <p className="text-white/80 text-lg mb-8">
               Start earning Village Points today. Your study session could help fund physician wellness programs,
               medical education scholarships, or healthcare access initiatives.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/study/flashcards"
-                className="px-8 py-4 bg-white text-tribe-sage-700 font-semibold rounded-xl hover:bg-tribe-sage-50 transition-colors"
+                className="px-8 py-4 bg-white text-[#5B7B6D] font-semibold rounded-xl hover:bg-[#F5F0E8] transition-colors"
               >
                 Start Studying
               </Link>
               <Link
                 href="/wellness"
-                className="px-8 py-4 bg-emerald-700 text-white font-semibold rounded-xl hover:bg-emerald-800 transition-colors border border-tribe-sage-500"
+                className="px-8 py-4 bg-[#4A6A5C] text-white font-semibold rounded-xl hover:bg-[#3D5A4C] transition-colors border border-white/20"
               >
                 Explore Wellness
               </Link>
