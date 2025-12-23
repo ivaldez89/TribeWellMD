@@ -50,6 +50,7 @@ interface UseStudyRoomReturn {
 
   // Timer state (computed from session)
   timerMode: TimerMode;
+  timerDuration: number;
   timerRemaining: number;
   timerIsRunning: boolean;
   timerProgress: number;
@@ -61,6 +62,7 @@ interface UseStudyRoomReturn {
   pauseTimer: () => Promise<void>;
   resetTimer: () => Promise<void>;
   switchTimerMode: (mode: TimerMode) => Promise<void>;
+  setDuration: (mode: TimerMode, minutes: number) => Promise<void>;
   leaveRoom: () => Promise<void>;
   endRoom: () => Promise<void>;
 
@@ -410,6 +412,34 @@ export function useStudyRoom(options: UseStudyRoomOptions): UseStudyRoomReturn {
     [isHost, sessionId, broadcastTimerUpdate]
   );
 
+  // Set custom duration for a mode
+  const setDuration = useCallback(
+    async (mode: TimerMode, minutes: number) => {
+      if (!isHost || !sessionId) return;
+
+      const durationSeconds = minutes * 60;
+
+      // If we're changing the current mode, update the timer
+      if (mode === timerMode) {
+        await updateSessionTimer(sessionId, {
+          timerDuration: durationSeconds,
+          timerRemaining: durationSeconds,
+          timerIsRunning: false,
+          timerStartedAt: null,
+        });
+
+        setLocalTimerRemaining(durationSeconds);
+
+        broadcastTimerUpdate('timer_reset', {
+          duration: durationSeconds,
+          remaining: durationSeconds,
+          isRunning: false,
+        });
+      }
+    },
+    [isHost, sessionId, timerMode, broadcastTimerUpdate]
+  );
+
   // Leave room action
   const leaveRoom = useCallback(async () => {
     if (!sessionId) return;
@@ -451,6 +481,7 @@ export function useStudyRoom(options: UseStudyRoomOptions): UseStudyRoomReturn {
 
     // Timer state
     timerMode,
+    timerDuration,
     timerRemaining: localTimerRemaining,
     timerIsRunning,
     timerProgress,
@@ -462,6 +493,7 @@ export function useStudyRoom(options: UseStudyRoomOptions): UseStudyRoomReturn {
     pauseTimer,
     resetTimer,
     switchTimerMode,
+    setDuration,
     leaveRoom,
     endRoom,
 

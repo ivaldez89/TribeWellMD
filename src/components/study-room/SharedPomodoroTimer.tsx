@@ -1,11 +1,12 @@
 'use client';
 
-import { useCallback, useRef, useEffect } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { TimerMode, TIMER_MODE_LABELS } from '@/types/studyRoom';
 
 interface SharedPomodoroTimerProps {
   mode: TimerMode;
   remaining: number;
+  duration: number;
   isRunning: boolean;
   progress: number;
   sessionsCompleted: number;
@@ -14,12 +15,19 @@ interface SharedPomodoroTimerProps {
   onPause: () => void;
   onReset: () => void;
   onModeChange: (mode: TimerMode) => void;
+  onDurationChange?: (mode: TimerMode, minutes: number) => void;
   formatTime: (seconds: number) => string;
 }
+
+// Preset options for focus time (in minutes)
+const FOCUS_PRESETS = [15, 25, 30, 45, 50, 60, 90];
+const SHORT_BREAK_PRESETS = [5, 10, 15];
+const LONG_BREAK_PRESETS = [15, 20, 30];
 
 export function SharedPomodoroTimer({
   mode,
   remaining,
+  duration,
   isRunning,
   progress,
   sessionsCompleted,
@@ -28,9 +36,14 @@ export function SharedPomodoroTimer({
   onPause,
   onReset,
   onModeChange,
+  onDurationChange,
   formatTime,
 }: SharedPomodoroTimerProps) {
+  const [showSettings, setShowSettings] = useState(false);
   const audioContextRef = useRef<AudioContext | null>(null);
+
+  // Get current duration in minutes
+  const currentMinutes = Math.round(duration / 60);
 
   // Get colors based on mode
   const getModeColors = () => {
@@ -227,13 +240,122 @@ export function SharedPomodoroTimer({
         )}
       </div>
 
-      {/* Session Counter */}
-      <div className="text-center">
+      {/* Session Counter & Settings */}
+      <div className="flex items-center justify-center gap-3">
         <span className="inline-flex items-center gap-2 px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 rounded-full text-sm">
           <span>🍅</span>
-          <span>{sessionsCompleted} Pomodoro{sessionsCompleted !== 1 ? 's' : ''} completed</span>
+          <span>{sessionsCompleted} Pomodoro{sessionsCompleted !== 1 ? 's' : ''}</span>
         </span>
+
+        {isHost && onDurationChange && (
+          <button
+            onClick={() => setShowSettings(!showSettings)}
+            disabled={isRunning}
+            className={`p-2 rounded-lg transition-colors ${
+              showSettings
+                ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+                : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600'
+            } ${isRunning ? 'opacity-50 cursor-not-allowed' : ''}`}
+            title="Timer Settings"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </button>
+        )}
       </div>
+
+      {/* Settings Panel */}
+      {showSettings && isHost && onDurationChange && !isRunning && (
+        <div className="mt-4 p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl space-y-4">
+          <h4 className="text-sm font-medium text-slate-700 dark:text-slate-300">
+            Timer Duration
+          </h4>
+
+          {/* Focus Time */}
+          <div>
+            <label className="text-xs text-slate-500 dark:text-slate-400 mb-2 block">
+              Focus Time
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {FOCUS_PRESETS.map((mins) => (
+                <button
+                  key={mins}
+                  onClick={() => {
+                    onDurationChange('focus', mins);
+                    if (mode === 'focus') onReset();
+                  }}
+                  className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                    mode === 'focus' && currentMinutes === mins
+                      ? 'bg-rose-500 text-white'
+                      : 'bg-white dark:bg-slate-600 text-slate-700 dark:text-slate-200 hover:bg-rose-100 dark:hover:bg-rose-900/30'
+                  }`}
+                >
+                  {mins}m
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Short Break */}
+          <div>
+            <label className="text-xs text-slate-500 dark:text-slate-400 mb-2 block">
+              Short Break
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {SHORT_BREAK_PRESETS.map((mins) => (
+                <button
+                  key={mins}
+                  onClick={() => {
+                    onDurationChange('shortBreak', mins);
+                    if (mode === 'shortBreak') onReset();
+                  }}
+                  className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                    mode === 'shortBreak' && currentMinutes === mins
+                      ? 'bg-emerald-500 text-white'
+                      : 'bg-white dark:bg-slate-600 text-slate-700 dark:text-slate-200 hover:bg-emerald-100 dark:hover:bg-emerald-900/30'
+                  }`}
+                >
+                  {mins}m
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Long Break */}
+          <div>
+            <label className="text-xs text-slate-500 dark:text-slate-400 mb-2 block">
+              Long Break
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {LONG_BREAK_PRESETS.map((mins) => (
+                <button
+                  key={mins}
+                  onClick={() => {
+                    onDurationChange('longBreak', mins);
+                    if (mode === 'longBreak') onReset();
+                  }}
+                  className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                    mode === 'longBreak' && currentMinutes === mins
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-white dark:bg-slate-600 text-slate-700 dark:text-slate-200 hover:bg-blue-100 dark:hover:bg-blue-900/30'
+                  }`}
+                >
+                  {mins}m
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <button
+            onClick={() => setShowSettings(false)}
+            className="w-full py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg transition-colors"
+          >
+            Done
+          </button>
+        </div>
+      )}
 
       {/* Host indicator */}
       {!isHost && (

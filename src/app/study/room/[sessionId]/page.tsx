@@ -74,6 +74,7 @@ export default function StudyRoomPage() {
     isConnected,
     isHost,
     timerMode,
+    timerDuration,
     timerRemaining,
     timerIsRunning,
     timerProgress,
@@ -83,6 +84,7 @@ export default function StudyRoomPage() {
     pauseTimer,
     resetTimer,
     switchTimerMode,
+    setDuration,
     leaveRoom,
     endRoom,
     formatTime,
@@ -285,6 +287,7 @@ export default function StudyRoomPage() {
             <SharedPomodoroTimer
               mode={timerMode}
               remaining={timerRemaining}
+              duration={timerDuration}
               isRunning={timerIsRunning}
               progress={timerProgress}
               sessionsCompleted={pomodorosCompleted}
@@ -293,6 +296,7 @@ export default function StudyRoomPage() {
               onPause={pauseTimer}
               onReset={resetTimer}
               onModeChange={switchTimerMode}
+              onDurationChange={setDuration}
               formatTime={formatTime}
             />
 
