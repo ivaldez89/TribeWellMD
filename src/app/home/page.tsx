@@ -410,7 +410,7 @@ export default function HomePage() {
                   {/* Quick Actions */}
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     <Link
-                      href="/progress/flashcards"
+                      href="/progress"
                       className="px-4 py-3 bg-gradient-to-r from-[#3D5A4C] to-[#5B7B6D] text-white rounded-xl text-center font-medium shadow-md shadow-[#3D5A4C]/20 hover:shadow-lg hover:shadow-[#3D5A4C]/30 transition-all text-sm"
                     >
                       Flashcards
