@@ -65,9 +65,9 @@ export function UnifiedCalendarHub() {
 
   return (
     <div className="flex h-full bg-slate-50 dark:bg-slate-900">
-      {/* Main Calendar Area - use calc to guarantee space for sidebar */}
-      <div className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ${sidebarCollapsed ? 'mr-12' : 'mr-80'}`} style={{ maxWidth: sidebarCollapsed ? 'calc(100% - 48px)' : 'calc(100% - 320px)' }}>
-        {/* Header */}
+      {/* Left Column: Calendar Area */}
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Header - Navigation and View Switcher only */}
         <div className="flex items-center justify-between px-6 py-4 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
           {/* Left: Navigation */}
           <div className="flex items-center gap-3">
@@ -102,7 +102,7 @@ export function UnifiedCalendarHub() {
             </h2>
           </div>
 
-          {/* Center: View Switcher */}
+          {/* Right: View Switcher */}
           <div className="flex items-center bg-slate-100 dark:bg-slate-700 rounded-lg p-1">
             {(['month', 'week', 'day', 'agenda'] as const).map((v) => (
               <button
@@ -120,21 +120,10 @@ export function UnifiedCalendarHub() {
               </button>
             ))}
           </div>
-
-          {/* Right: Create Button */}
-          <button
-            onClick={() => handleDateClick(new Date())}
-            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-tribe-sage-500 to-cyan-600 text-white rounded-lg hover:from-teal-600 hover:to-cyan-700 shadow-md hover:shadow-lg transition-all"
-          >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-            </svg>
-            <span className="font-medium">Create</span>
-          </button>
         </div>
 
         {/* Calendar Content */}
-        <div className="flex-1 overflow-hidden bg-white dark:bg-slate-800 m-4 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+        <div className="flex-1 overflow-hidden bg-white dark:bg-slate-800 m-4 mb-2 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
           {isLoadingEvents ? (
             <div className="flex items-center justify-center h-full">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-tribe-sage-600" />
@@ -174,10 +163,23 @@ export function UnifiedCalendarHub() {
             </>
           )}
         </div>
+
+        {/* Create Button - Below calendar, right-aligned */}
+        <div className="flex justify-end px-4 pb-4">
+          <button
+            onClick={() => handleDateClick(new Date())}
+            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-tribe-sage-500 to-cyan-600 text-white rounded-xl hover:from-teal-600 hover:to-cyan-700 shadow-md hover:shadow-lg transition-all"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+            <span className="font-medium">Create</span>
+          </button>
+        </div>
       </div>
 
-      {/* Right Sidebar - Fixed position to prevent overlap */}
-      <div className={`fixed right-0 top-0 h-full flex flex-col bg-white dark:bg-slate-800 border-l border-slate-200 dark:border-slate-700 transition-all duration-300 ${sidebarCollapsed ? 'w-12' : 'w-80'}`} style={{ marginTop: '64px', height: 'calc(100vh - 64px)' }}>
+      {/* Right Column: Tasks + Events Sidebar */}
+      <div className={`flex-shrink-0 flex flex-col bg-white dark:bg-slate-800 border-l border-slate-200 dark:border-slate-700 transition-all duration-300 ${sidebarCollapsed ? 'w-12' : 'w-80'}`}>
         {/* Task Sidebar */}
         <TaskSidebar
           tasks={tasks}
