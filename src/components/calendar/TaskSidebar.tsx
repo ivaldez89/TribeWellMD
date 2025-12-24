@@ -1,8 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Task, TASK_CATEGORIES, TASK_PRIORITIES } from '@/types/tasks';
-import { QuickTaskInput } from './QuickTaskInput';
 
 interface TaskSidebarProps {
   tasks: Task[];
@@ -28,7 +27,6 @@ export function TaskSidebar({
   getTasksByCategory,
 }: TaskSidebarProps) {
   const [activeFilter, setActiveFilter] = useState<TaskFilter>('today');
-  const [showQuickAdd, setShowQuickAdd] = useState(false);
 
   const todayTasks = getTasksByCategory('today');
   const upcomingTasks = getTasksByCategory('upcoming');
@@ -125,60 +123,29 @@ export function TaskSidebar({
         </div>
       </div>
 
-      {/* Quick Add - fixed, non-scrolling, below filter pills */}
-      <div className="flex-shrink-0 px-4 py-3 border-b border-slate-200 dark:border-slate-700">
-        {showQuickAdd ? (
-          <QuickTaskInput
-            onSubmit={(title) => {
-              const today = new Date().toISOString().split('T')[0];
-              onQuickAddTask(title, today);
-              setShowQuickAdd(false);
-            }}
-            onCancel={() => setShowQuickAdd(false)}
-          />
-        ) : (
-          <button
-            onClick={() => setShowQuickAdd(true)}
-            className="w-full flex items-center gap-3 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors text-left"
-          >
-            <div className="w-6 h-6 rounded-full bg-violet-500 flex items-center justify-center flex-shrink-0">
-              <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
-            </div>
-            <span className="text-sm text-slate-500 dark:text-slate-400">Add a task...</span>
-          </button>
-        )}
-      </div>
-
       {/* Task List - scrollable area */}
       <div className="flex-1 min-h-0 overflow-y-auto">
-        {filteredTasks.length === 0 ? (
+        {filteredTasks.length === 0 && (activeFilter === 'completed' || activeFilter === 'overdue') ? (
           <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
             <div className="w-12 h-12 mb-4 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center">
               {activeFilter === 'completed' ? (
                 <svg className="w-6 h-6 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-              ) : activeFilter === 'overdue' ? (
+              ) : (
                 <svg className="w-6 h-6 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              ) : (
-                <svg className="w-6 h-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
               )}
             </div>
             <p className="text-sm text-slate-500 dark:text-slate-400">
-              {activeFilter === 'today' && 'No tasks for today'}
-              {activeFilter === 'upcoming' && 'No upcoming tasks'}
               {activeFilter === 'overdue' && 'No overdue tasks'}
               {activeFilter === 'completed' && 'No completed tasks yet'}
             </p>
           </div>
         ) : (
           <div className="py-2">
+            {/* Task items */}
             {filteredTasks.map((task) => (
               <TaskItem
                 key={task.id}
@@ -188,6 +155,16 @@ export function TaskSidebar({
                 onEdit={() => onEditTask(task)}
               />
             ))}
+
+            {/* Inline Add Task - always visible at bottom of list */}
+            {activeFilter !== 'completed' && activeFilter !== 'overdue' && (
+              <InlineTaskInput
+                onSubmit={(title) => {
+                  const today = new Date().toISOString().split('T')[0];
+                  onQuickAddTask(title, today);
+                }}
+              />
+            )}
           </div>
         )}
       </div>
@@ -296,6 +273,51 @@ function TaskItem({
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
+      </div>
+    </div>
+  );
+}
+
+// Inline Task Input - always visible, type directly into it
+function InlineTaskInput({ onSubmit }: { onSubmit: (title: string) => void }) {
+  const [value, setValue] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (value.trim()) {
+      onSubmit(value.trim());
+      setValue('');
+      // Keep focus on input for adding more tasks
+      inputRef.current?.focus();
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e);
+    }
+  };
+
+  return (
+    <div className="px-4 py-2">
+      <div className="flex items-center gap-3">
+        {/* Circle with plus */}
+        <div className="w-5 h-5 rounded-full bg-violet-500 flex items-center justify-center flex-shrink-0">
+          <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
+          </svg>
+        </div>
+        {/* Input field */}
+        <input
+          ref={inputRef}
+          type="text"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="Add a task..."
+          className="flex-1 bg-transparent border-0 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-0 py-1"
+        />
       </div>
     </div>
   );
