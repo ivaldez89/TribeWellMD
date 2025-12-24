@@ -7,9 +7,10 @@ import { CalendarEvent, formatEventTime, getEventColor } from '@/types/calendar'
 interface EventsSidebarProps {
   events: CalendarEvent[];
   onEventClick: (event: CalendarEvent) => void;
+  onDeleteEvent: (eventId: string) => void;
 }
 
-export function EventsSidebar({ events, onEventClick }: EventsSidebarProps) {
+export function EventsSidebar({ events, onEventClick, onDeleteEvent }: EventsSidebarProps) {
   const today = new Date().toISOString().split('T')[0];
 
   // Get today's events and upcoming events
@@ -84,6 +85,7 @@ export function EventsSidebar({ events, onEventClick }: EventsSidebarProps) {
                 event={event}
                 showDate={todayEvents.length === 0}
                 onClick={() => onEventClick(event)}
+                onDelete={() => onDeleteEvent(event.id)}
               />
             ))}
           </div>
@@ -98,17 +100,29 @@ function EventItem({
   event,
   showDate,
   onClick,
+  onDelete,
 }: {
   event: CalendarEvent;
   showDate: boolean;
   onClick: () => void;
+  onDelete: () => void;
 }) {
   const color = getEventColor(event);
   const isGroupSession = event.type === 'study-room' || event.linkedRoomId;
+  const isTask = event.type === 'task';
+  const canDelete = !isTask && !isGroupSession; // Can't delete tasks or study rooms from here
 
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr + 'T00:00:00');
     return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  };
+
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (confirm('Delete this event?')) {
+      onDelete();
+    }
   };
 
   const content = (
@@ -136,6 +150,11 @@ function EventItem({
                 Group
               </span>
             )}
+            {isTask && (
+              <span className="flex-shrink-0 text-xs px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded">
+                Task
+              </span>
+            )}
           </div>
 
           <div className="flex items-center gap-2 mt-0.5">
@@ -149,6 +168,19 @@ function EventItem({
             )}
           </div>
         </div>
+
+        {/* Delete button for regular events */}
+        {canDelete && (
+          <button
+            onClick={handleDelete}
+            className="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-red-500 rounded transition-all flex-shrink-0"
+            title="Delete event"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        )}
 
         {/* Arrow for group sessions */}
         {isGroupSession && (

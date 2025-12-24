@@ -42,6 +42,7 @@ export function UnifiedCalendarHub() {
     handleTimeSlotClick,
     handleEventClick,
     handleCreateEvent,
+    handleDeleteEvent,
 
     // Task handlers
     getTasksByCategory,
@@ -197,6 +198,7 @@ export function UnifiedCalendarHub() {
           <EventsSidebar
             events={events}
             onEventClick={handleEventClick}
+            onDeleteEvent={handleDeleteEvent}
           />
         )}
       </div>

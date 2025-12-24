@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { CalendarEvent, CalendarView, dateToString } from '@/types/calendar';
 import { Task } from '@/types/tasks';
-import { getAllCalendarItems, createCalendarEvent } from '@/lib/storage/calendarStorage';
+import { getAllCalendarItems, createCalendarEvent, deleteCalendarEvent, deleteLocalEvent } from '@/lib/storage/calendarStorage';
 import { getTasks, createTask, updateTask, completeTask, uncompleteTask, deleteTask, getTaskStats } from '@/lib/storage/taskStorage';
 import { createClient } from '@/lib/supabase/client';
 
@@ -206,6 +206,17 @@ export function useCalendarHub() {
     }
   };
 
+  const handleDeleteEvent = async (eventId: string) => {
+    // Handle local events (prefixed with 'local-')
+    if (eventId.startsWith('local-')) {
+      deleteLocalEvent(eventId);
+    } else {
+      // Handle Supabase events
+      await deleteCalendarEvent(eventId);
+    }
+    await loadEvents();
+  };
+
   // Task handlers
   const handleToggleTask = (task: Task) => {
     if (task.status === 'completed') {
@@ -290,6 +301,7 @@ export function useCalendarHub() {
     handleTimeSlotClick,
     handleEventClick,
     handleCreateEvent,
+    handleDeleteEvent,
 
     // Task handlers
     getTasksByCategory,
