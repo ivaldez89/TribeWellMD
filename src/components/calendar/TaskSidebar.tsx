@@ -46,7 +46,7 @@ export function TaskSidebar({
 
   if (isCollapsed) {
     return (
-      <div className="w-12 h-full bg-white dark:bg-slate-800 border-l border-slate-200 dark:border-slate-700 flex flex-col items-center py-4 gap-4">
+      <div className="flex-1 flex flex-col items-center py-4 gap-4">
         <button
           onClick={onToggleCollapse}
           className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
@@ -73,7 +73,7 @@ export function TaskSidebar({
   }
 
   return (
-    <div className="w-80 h-full bg-white dark:bg-slate-800 border-l border-slate-200 dark:border-slate-700 flex flex-col overflow-hidden">
+    <div className="flex-1 flex flex-col overflow-hidden min-h-0">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-700">
         <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">

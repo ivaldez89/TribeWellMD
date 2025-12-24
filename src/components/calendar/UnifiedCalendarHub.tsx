@@ -8,6 +8,7 @@ import { DayView } from './DayView';
 import { AgendaView } from './AgendaView';
 import { EventModal } from './EventModal';
 import { TaskSidebar } from './TaskSidebar';
+import { EventsSidebar } from './EventsSidebar';
 import { TaskModal } from './TaskModal';
 import { formatMonthYear } from '@/types/calendar';
 
@@ -64,10 +65,10 @@ export function UnifiedCalendarHub() {
 
   return (
     <div className="flex h-full bg-slate-50 dark:bg-slate-900">
-      {/* Main Calendar Area */}
-      <div className={`flex-1 flex flex-col min-w-0 transition-all duration-300`}>
+      {/* Main Calendar Area - use calc to guarantee space for sidebar */}
+      <div className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ${sidebarCollapsed ? 'mr-12' : 'mr-80'}`} style={{ maxWidth: sidebarCollapsed ? 'calc(100% - 48px)' : 'calc(100% - 320px)' }}>
         {/* Header */}
-        <div className="relative z-10 flex items-center justify-between px-6 py-4 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+        <div className="flex items-center justify-between px-6 py-4 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
           {/* Left: Navigation */}
           <div className="flex items-center gap-3">
             <button
@@ -175,17 +176,28 @@ export function UnifiedCalendarHub() {
         </div>
       </div>
 
-      {/* Task Sidebar */}
-      <TaskSidebar
-        tasks={tasks}
-        isCollapsed={sidebarCollapsed}
-        onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
-        onToggleTask={handleToggleTask}
-        onDeleteTask={handleDeleteTask}
-        onEditTask={openEditTaskModal}
-        onQuickAddTask={handleQuickAddTask}
-        getTasksByCategory={getTasksByCategory}
-      />
+      {/* Right Sidebar - Fixed position to prevent overlap */}
+      <div className={`fixed right-0 top-0 h-full flex flex-col bg-white dark:bg-slate-800 border-l border-slate-200 dark:border-slate-700 transition-all duration-300 ${sidebarCollapsed ? 'w-12' : 'w-80'}`} style={{ marginTop: '64px', height: 'calc(100vh - 64px)' }}>
+        {/* Task Sidebar */}
+        <TaskSidebar
+          tasks={tasks}
+          isCollapsed={sidebarCollapsed}
+          onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
+          onToggleTask={handleToggleTask}
+          onDeleteTask={handleDeleteTask}
+          onEditTask={openEditTaskModal}
+          onQuickAddTask={handleQuickAddTask}
+          getTasksByCategory={getTasksByCategory}
+        />
+
+        {/* Events Sidebar */}
+        {!sidebarCollapsed && (
+          <EventsSidebar
+            events={events}
+            onEventClick={handleEventClick}
+          />
+        )}
+      </div>
 
       {/* Event Modal */}
       <EventModal
