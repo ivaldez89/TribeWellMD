@@ -332,7 +332,7 @@ export default function ProfilePage() {
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold text-slate-900 dark:text-white">{userTribes.length}</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Tribes</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Groups</p>
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold text-slate-900 dark:text-white">{streakData?.currentStreak || 0}</p>
@@ -416,16 +416,16 @@ export default function ProfilePage() {
               )}
             </div>
 
-            {/* My Tribes */}
+            {/* My Groups */}
             {userTribes.length > 0 && (
               <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
                     <svg className="w-5 h-5 text-[#5B7B6D]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-                    My Tribes
+                    My Groups
                   </h2>
                   <Link
-                    href="/tribes"
+                    href="/groups"
                     className="text-sm text-[#8B7355] dark:text-[#C4A77D] hover:underline font-medium"
                   >
                     View All
@@ -435,7 +435,7 @@ export default function ProfilePage() {
                   {userTribes.slice(0, 4).map((tribe) => (
                     <Link
                       key={tribe.id}
-                      href={`/tribes/${tribe.id}`}
+                      href={`/groups/${tribe.id}`}
                       className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
                     >
                       <div
