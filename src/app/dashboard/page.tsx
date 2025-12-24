@@ -33,8 +33,8 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5] dark:from-slate-900 dark:to-slate-800">
       <Header />
-      <main className="max-w-[1400px] mx-auto px-4 py-6">
-        <div className="h-[600px] bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+      <main className="max-w-5xl mx-auto px-4 py-6">
+        <div className="h-[700px] bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
           <UnifiedCalendarHub />
         </div>
       </main>
