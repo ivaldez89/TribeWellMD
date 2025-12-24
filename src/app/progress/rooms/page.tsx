@@ -83,7 +83,7 @@ export default function StudyRoomsPage() {
       if (session) {
         console.log('Room created successfully:', session.id);
         setShowCreateModal(false);
-        router.push(`/study/room/${session.id}`);
+        router.push(`/progress/room/${session.id}`);
       }
     } finally {
       setIsCreating(false);
@@ -115,7 +115,7 @@ export default function StudyRoomsPage() {
         return;
       }
 
-      router.push(`/study/room/${session.id}`);
+      router.push(`/progress/room/${session.id}`);
     } finally {
       setIsJoining(false);
     }
@@ -129,7 +129,7 @@ export default function StudyRoomsPage() {
 
     const { success } = await joinStudySession(sessionId, userId, userDisplayName);
     if (success) {
-      router.push(`/study/room/${sessionId}`);
+      router.push(`/progress/room/${sessionId}`);
     }
   };
 
@@ -231,7 +231,7 @@ export default function StudyRoomsPage() {
                 <RoomCard
                   key={room.id}
                   room={room}
-                  onJoin={() => router.push(`/study/room/${room.id}`)}
+                  onJoin={() => router.push(`/progress/room/${room.id}`)}
                   isMember
                 />
               ))}
