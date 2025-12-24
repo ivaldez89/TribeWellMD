@@ -115,6 +115,101 @@ export const PARTNER_CHARITIES: Charity[] = [
       { label: 'Community health workers', value: '12,000+' }
     ],
     categories: ['global-health', 'healthcare-access']
+  },
+  {
+    id: 'doctors-without-borders',
+    name: 'Doctors Without Borders (MSF)',
+    shortName: 'MSF',
+    description: 'Providing emergency medical care in crisis zones worldwide',
+    mission: 'To provide lifesaving medical care to those most in need, regardless of race, religion, or political affiliation.',
+    focus: 'Global Health & Crisis Response',
+    icon: 'Globe',
+    website: 'https://www.doctorswithoutborders.org',
+    ein: '13-3433452',
+    verified: true,
+    featured: true,
+    impactMetrics: [
+      { label: 'Countries with projects', value: '70+' },
+      { label: 'Outpatient consultations', value: '11M+' },
+      { label: 'Staff worldwide', value: '63,000+' }
+    ],
+    categories: ['global-health', 'healthcare-access']
+  },
+  {
+    id: 'american-heart-association',
+    name: 'American Heart Association',
+    shortName: 'AHA',
+    description: 'Fighting heart disease and stroke through research and education',
+    mission: 'To be a relentless force for a world of longer, healthier lives through groundbreaking research, advocacy, and community programs.',
+    focus: 'Cardiovascular Health',
+    icon: 'Heart',
+    website: 'https://www.heart.org',
+    ein: '13-5613797',
+    verified: true,
+    featured: true,
+    impactMetrics: [
+      { label: 'Research funding', value: '$5B+' },
+      { label: 'CPR trainings annually', value: '22M+' },
+      { label: 'Lives saved through research', value: 'Millions' }
+    ],
+    categories: ['healthcare-access', 'medical-education']
+  },
+  {
+    id: 'st-jude',
+    name: 'St. Jude Children\'s Research Hospital',
+    shortName: 'St. Jude',
+    description: 'Leading the way the world understands, treats and defeats childhood cancer',
+    mission: 'To advance cures and means of prevention for pediatric catastrophic diseases through research and treatment.',
+    focus: 'Pediatric Cancer Research',
+    icon: 'Heart',
+    website: 'https://www.stjude.org',
+    ein: '62-0646012',
+    verified: true,
+    featured: true,
+    impactMetrics: [
+      { label: 'Survival rate improvement', value: '20% to 80%+' },
+      { label: 'Countries sharing protocols', value: '80+' },
+      { label: 'Families never billed', value: '100%' }
+    ],
+    categories: ['medical-education', 'healthcare-access']
+  },
+  {
+    id: 'american-cancer-society',
+    name: 'American Cancer Society',
+    shortName: 'ACS',
+    description: 'Dedicated to eliminating cancer through research, education, and patient support',
+    mission: 'To save lives, celebrate lives, and lead the fight for a world without cancer.',
+    focus: 'Cancer Research & Support',
+    icon: 'Heart',
+    website: 'https://www.cancer.org',
+    ein: '13-1788491',
+    verified: true,
+    featured: false,
+    impactMetrics: [
+      { label: 'Research grants funded', value: '$5B+' },
+      { label: '24/7 helpline calls', value: '1M+ annually' },
+      { label: 'Free lodging nights', value: '2M+' }
+    ],
+    categories: ['healthcare-access', 'medical-education']
+  },
+  {
+    id: 'direct-relief',
+    name: 'Direct Relief',
+    shortName: 'Direct Relief',
+    description: 'Improving health and lives of people affected by poverty and emergencies',
+    mission: 'To improve the health and lives of people affected by poverty or emergency situations by mobilizing and providing essential medical resources.',
+    focus: 'Medical Aid & Disaster Response',
+    icon: 'Hospital',
+    website: 'https://www.directrelief.org',
+    ein: '95-1831116',
+    verified: true,
+    featured: false,
+    impactMetrics: [
+      { label: 'Countries reached', value: '100+' },
+      { label: 'Medical aid value', value: '$2B+ annually' },
+      { label: 'Healthcare facilities supported', value: '3,000+' }
+    ],
+    categories: ['healthcare-access', 'global-health']
   }
 ];
 
