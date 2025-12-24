@@ -65,7 +65,7 @@ export function UnifiedCalendarHub() {
   };
 
   return (
-    <div className="flex h-full bg-slate-50 dark:bg-slate-900">
+    <div className="flex h-[calc(100vh-120px)] min-h-[600px] bg-slate-50 dark:bg-slate-900">
       {/* Left Column: Calendar Area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header - Navigation and View Switcher only */}

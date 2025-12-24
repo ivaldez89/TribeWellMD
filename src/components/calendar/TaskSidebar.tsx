@@ -71,7 +71,7 @@ export function TaskSidebar({
   }
 
   return (
-    <div className="h-[60%] flex-shrink-0 flex flex-col overflow-hidden">
+    <div className="flex-1 flex flex-col overflow-hidden">
       {/* Header - fixed, non-scrolling */}
       <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-700">
         <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
