@@ -73,9 +73,9 @@ export function TaskSidebar({
   }
 
   return (
-    <div className="flex-1 flex flex-col overflow-hidden min-h-0">
-      {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-700">
+    <div className="flex-1 flex flex-col overflow-hidden min-h-0 max-h-[60%]">
+      {/* Header - fixed, non-scrolling */}
+      <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-700">
         <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
           <svg className="w-5 h-5 text-violet-600 dark:text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
@@ -104,9 +104,9 @@ export function TaskSidebar({
         </div>
       </div>
 
-      {/* Quick Add */}
+      {/* Quick Add - fixed, non-scrolling */}
       {showQuickAdd && (
-        <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-700">
+        <div className="flex-shrink-0 px-4 py-3 border-b border-slate-200 dark:border-slate-700">
           <QuickTaskInput
             onSubmit={(title) => {
               const today = new Date().toISOString().split('T')[0];
@@ -118,8 +118,8 @@ export function TaskSidebar({
         </div>
       )}
 
-      {/* Filter Pills */}
-      <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-700">
+      {/* Filter Pills - fixed, non-scrolling */}
+      <div className="flex-shrink-0 px-4 py-3 border-b border-slate-200 dark:border-slate-700">
         <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
           {filters.map((filter) => (
             <button
@@ -150,8 +150,8 @@ export function TaskSidebar({
         </div>
       </div>
 
-      {/* Task List */}
-      <div className="flex-1 overflow-y-auto">
+      {/* Task List - scrollable area */}
+      <div className="flex-1 min-h-0 overflow-y-auto">
         {filteredTasks.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
             <div className="w-12 h-12 mb-4 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center">
@@ -199,8 +199,8 @@ export function TaskSidebar({
         )}
       </div>
 
-      {/* Footer Stats */}
-      <div className="px-4 py-3 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
+      {/* Footer Stats - fixed, non-scrolling */}
+      <div className="flex-shrink-0 px-4 py-3 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
         <div className="flex justify-between items-center text-sm">
           <span className="text-slate-500 dark:text-slate-400">Total Tasks</span>
           <span className="font-medium text-slate-900 dark:text-white">{tasks.filter(t => t.status !== 'completed').length}</span>

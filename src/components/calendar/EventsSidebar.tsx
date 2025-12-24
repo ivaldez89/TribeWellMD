@@ -49,9 +49,9 @@ export function EventsSidebar({ events, onEventClick }: EventsSidebarProps) {
   const headerTitle = todayEvents.length > 0 ? 'Today' : 'Upcoming';
 
   return (
-    <div className="flex-shrink-0 flex flex-col border-t border-slate-200 dark:border-slate-700 max-h-[40%]">
-      {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
+    <div className="flex-1 flex flex-col border-t border-slate-200 dark:border-slate-700 overflow-hidden min-h-0 max-h-[50%]">
+      {/* Header - fixed, non-scrolling */}
+      <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
         <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
           <svg className="w-5 h-5 text-teal-600 dark:text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -63,8 +63,8 @@ export function EventsSidebar({ events, onEventClick }: EventsSidebarProps) {
         </span>
       </div>
 
-      {/* Events List */}
-      <div className="flex-1 overflow-y-auto">
+      {/* Events List - scrollable area */}
+      <div className="flex-1 min-h-0 overflow-y-auto">
         {displayEvents.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-8 px-4 text-center">
             <div className="w-10 h-10 mb-3 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center">
