@@ -82,26 +82,15 @@ export function TaskSidebar({
           </svg>
           Tasks
         </h2>
-        <div className="flex items-center gap-1">
-          <button
-            onClick={() => setShowQuickAdd(true)}
-            className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
-            title="Add task"
-          >
-            <svg className="w-5 h-5 text-slate-600 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-            </svg>
-          </button>
-          <button
-            onClick={onToggleCollapse}
-            className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
-            title="Collapse sidebar"
-          >
-            <svg className="w-5 h-5 text-slate-600 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
+        <button
+          onClick={onToggleCollapse}
+          className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
+          title="Collapse sidebar"
+        >
+          <svg className="w-5 h-5 text-slate-600 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+          </svg>
+        </button>
       </div>
 
       {/* Filter Pills - fixed, non-scrolling */}
@@ -175,14 +164,6 @@ export function TaskSidebar({
               {activeFilter === 'overdue' && 'No overdue tasks'}
               {activeFilter === 'completed' && 'No completed tasks yet'}
             </p>
-            {activeFilter !== 'completed' && activeFilter !== 'overdue' && (
-              <button
-                onClick={() => setShowQuickAdd(true)}
-                className="mt-3 text-sm text-violet-600 dark:text-violet-400 hover:underline"
-              >
-                Add a task
-              </button>
-            )}
           </div>
         ) : (
           <div className="py-2">
