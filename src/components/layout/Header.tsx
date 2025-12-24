@@ -421,7 +421,7 @@ export function Header({ stats }: HeaderProps) {
                   <MobileNavLink href="/flashcards" onClick={() => setMobileMenuOpen(false)}>Flashcards</MobileNavLink>
                   <MobileNavLink href="/cases" onClick={() => setMobileMenuOpen(false)}>Clinical Cases</MobileNavLink>
                   <MobileNavLink href="/generate" onClick={() => setMobileMenuOpen(false)}>AI Generator</MobileNavLink>
-                  <MobileNavLink href="/library" onClick={() => setMobileMenuOpen(false)}>Card Library</MobileNavLink>
+                  <MobileNavLink href="/import" onClick={() => setMobileMenuOpen(false)}>Import Cards</MobileNavLink>
                 </div>
 
                 {/* Tools Section */}

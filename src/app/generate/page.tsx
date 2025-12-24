@@ -244,7 +244,7 @@ Return ONLY the JSON array, no other text.`;
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5] dark:from-slate-900 dark:to-slate-800">
       <Header stats={stats} />
       
       <main className="max-w-5xl mx-auto px-4 py-8">
