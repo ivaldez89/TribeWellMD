@@ -179,8 +179,8 @@ export function UnifiedCalendarHub() {
         </div>
       </div>
 
-      {/* Right Column: Tasks + Events Sidebar */}
-      <div className={`flex-shrink-0 flex flex-col bg-white dark:bg-slate-800 border-l border-slate-200 dark:border-slate-700 transition-all duration-300 ${sidebarCollapsed ? 'w-12' : 'w-80'}`}>
+      {/* Right Column: Tasks + Events Sidebar - fixed height, no growth */}
+      <div className={`flex-shrink-0 h-full flex flex-col overflow-hidden bg-white dark:bg-slate-800 border-l border-slate-200 dark:border-slate-700 transition-all duration-300 ${sidebarCollapsed ? 'w-12' : 'w-80'}`}>
         {/* Task Sidebar */}
         <TaskSidebar
           tasks={tasks}
