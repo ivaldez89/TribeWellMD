@@ -1,32 +1,21 @@
 'use client';
 
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { CalendarHub } from '@/components/calendar';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function CalendarPage() {
+export default function CalendarRedirectPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace('/dashboard');
+  }, [router]);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-white dark:from-slate-900 dark:to-[#3D4A44]">
-      <Header />
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Page Header */}
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-[#3D3832] dark:text-[#F5F0E8]">
-            Calendar
-          </h1>
-          <p className="text-[#8B7355] dark:text-[#A89070] mt-1">
-            View and manage your study sessions, tasks, and events
-          </p>
-        </div>
-
-        {/* Calendar Hub */}
-        <div className="h-[calc(100vh-280px)] min-h-[600px]">
-          <CalendarHub />
-        </div>
-      </main>
-
-      <Footer />
+    <div className="min-h-screen bg-[#F5F0E8] dark:bg-slate-900 flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin w-8 h-8 border-3 border-[#5B7B6D] border-t-transparent rounded-full mx-auto mb-4" />
+        <p className="text-slate-600 dark:text-slate-400">Redirecting to Dashboard...</p>
+      </div>
     </div>
   );
 }

@@ -153,8 +153,8 @@ export default function HomePage() {
         {
           id: '3',
           type: 'tribe',
-          title: 'Tribe milestone reached',
-          description: 'Cardiology Study Group hit 1,000 collective points',
+          title: 'Group milestone reached',
+          description: 'Cardiology Study Group hit 50 members',
           timestamp: new Date(Date.now() - 1000 * 60 * 60 * 5),
           iconType: 'target',
           color: 'from-[#6B5344] to-[#8B7355]'
@@ -518,18 +518,18 @@ export default function HomePage() {
                     <div className="w-6 h-6"><Icons.Users /></div>
                     Community
                   </h2>
-                  <Link href="/tribes" className="text-sm text-white/80 hover:text-white font-medium">
+                  <Link href="/groups" className="text-sm text-white/80 hover:text-white font-medium">
                     View All →
                   </Link>
                 </div>
                 <div className="p-6">
                   <div className="grid md:grid-cols-2 gap-6">
-                    {/* My Primary Tribe */}
+                    {/* My Primary Group */}
                     <div>
-                      <h3 className="text-sm font-medium text-[#6B5344]/80 dark:text-slate-400 mb-3">My Primary Tribe</h3>
+                      <h3 className="text-sm font-medium text-[#6B5344]/80 dark:text-slate-400 mb-3">My Primary Group</h3>
                       {primaryTribe ? (
                         <Link
-                          href={`/tribes/${primaryTribe.id}`}
+                          href={`/groups/${primaryTribe.id}`}
                           className="block p-4 bg-[#F5EFE6] dark:bg-slate-700/50 rounded-xl hover:bg-[#E8DFD0] dark:hover:bg-slate-600/50 transition-colors border border-[#D4C4B0]/50 dark:border-slate-600"
                         >
                           <div className="flex items-center gap-3 mb-3">
@@ -560,12 +560,12 @@ export default function HomePage() {
                         </Link>
                       ) : (
                         <div className="p-4 bg-[#F5EFE6] dark:bg-slate-700/50 rounded-xl text-center border border-[#D4C4B0]/50 dark:border-slate-600">
-                          <p className="text-sm text-[#6B5344]/70 dark:text-slate-400 mb-3">Join a tribe to study together</p>
+                          <p className="text-sm text-[#6B5344]/70 dark:text-slate-400 mb-3">Join a group to connect with peers</p>
                           <Link
-                            href="/tribes"
+                            href="/groups"
                             className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#6B5344] to-[#8B7355] text-white font-medium rounded-xl text-sm"
                           >
-                            Explore Tribes
+                            Explore Groups
                           </Link>
                         </div>
                       )}

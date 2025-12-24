@@ -9,6 +9,8 @@ interface TribeCardProps {
   tribe: Tribe;
   isMember?: boolean;
   onJoin?: (tribeId: string) => void;
+  hidePoints?: boolean;
+  linkPrefix?: string;
 }
 
 // Forest theme colors - only these are allowed
@@ -46,7 +48,7 @@ const typeIcons: Record<Tribe['type'], React.ReactNode> = {
   cause: <Icons.HeartHand />,
 };
 
-export function TribeCard({ tribe, isMember = false, onJoin }: TribeCardProps) {
+export function TribeCard({ tribe, isMember = false, onJoin, hidePoints = false, linkPrefix = '/tribes' }: TribeCardProps) {
   const goalProgress = tribe.currentGoal ? getGoalProgress(tribe.currentGoal) : 0;
   const tribeColor = getForestColor(tribe.color, tribe.type);
 
@@ -67,7 +69,7 @@ export function TribeCard({ tribe, isMember = false, onJoin }: TribeCardProps) {
   };
 
   return (
-    <Link href={`/tribes/${tribe.id}`}>
+    <Link href={`${linkPrefix}/${tribe.id}`}>
       <div className="group bg-white dark:bg-slate-800 rounded-2xl shadow-md hover:shadow-xl border border-[#D4C4B0]/50 dark:border-slate-700 hover:border-[#8B7355] dark:hover:border-[#A89070] transition-all duration-200 overflow-hidden cursor-pointer">
         {/* Header with gradient */}
         <div className={`px-4 py-4 bg-gradient-to-r ${tribeColor}`}>
@@ -114,8 +116,8 @@ export function TribeCard({ tribe, isMember = false, onJoin }: TribeCardProps) {
             )}
           </div>
 
-          {/* Goal progress */}
-          {tribe.currentGoal && (
+          {/* Goal progress - hidden for interest groups */}
+          {!hidePoints && tribe.currentGoal && (
             <div className="mb-3">
               <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mb-1">
                 <span className="font-medium truncate pr-2">{tribe.currentGoal.title}</span>
@@ -137,7 +139,7 @@ export function TribeCard({ tribe, isMember = false, onJoin }: TribeCardProps) {
           {/* Footer */}
           <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-700">
             <div className="text-xs text-slate-400">
-              {tribe.weeklyPoints > 0 && (
+              {!hidePoints && tribe.weeklyPoints > 0 && (
                 <span className="text-tribe-sage-600 dark:text-tribe-sage-400 font-medium flex items-center gap-1">
                   <span className="w-3 h-3"><Icons.Fire /></span>
                   +{tribe.weeklyPoints} this week
@@ -155,7 +157,7 @@ export function TribeCard({ tribe, isMember = false, onJoin }: TribeCardProps) {
                 onClick={handleJoinClick}
                 className="px-3 py-1.5 text-xs font-medium bg-gradient-to-r from-[#5B7B6D] to-[#3D5A4C] text-white rounded-full hover:from-[#3D5A4C] hover:to-[#2D4A3C] transition-colors shadow-sm"
               >
-                Join Tribe
+                Join Group
               </button>
             )}
           </div>

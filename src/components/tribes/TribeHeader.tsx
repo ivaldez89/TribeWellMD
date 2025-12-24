@@ -37,6 +37,8 @@ interface TribeHeaderProps {
   onJoin?: () => void;
   onLeave?: () => void;
   onSetPrimary?: () => void;
+  hidePoints?: boolean;
+  label?: 'Tribe' | 'Group';
 }
 
 export function TribeHeader({
@@ -46,6 +48,8 @@ export function TribeHeader({
   onJoin,
   onLeave,
   onSetPrimary,
+  hidePoints = false,
+  label = 'Tribe',
 }: TribeHeaderProps) {
   const tribeColor = getForestColor(tribe.color, tribe.type);
 
@@ -54,13 +58,13 @@ export function TribeHeader({
       {/* Back button */}
       <div className="px-4 py-3 bg-black/10">
         <Link
-          href="/tribes"
+          href={label === 'Group' ? '/groups' : '/tribes'}
           className="inline-flex items-center gap-2 text-white/90 hover:text-white text-sm font-medium"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          Back to Tribes
+          Back to {label === 'Group' ? 'Groups' : 'Tribes'}
         </Link>
       </div>
 
@@ -127,7 +131,7 @@ export function TribeHeader({
                   onClick={onLeave}
                   className="px-4 py-2 bg-white/20 hover:bg-[#6B5344]/50 text-white rounded-lg text-sm font-medium transition-colors"
                 >
-                  Leave Tribe
+                  Leave {label}
                 </button>
               </>
             ) : (
@@ -135,7 +139,7 @@ export function TribeHeader({
                 onClick={onJoin}
                 className="px-6 py-2 bg-white text-slate-800 rounded-lg font-semibold hover:bg-white/90 transition-colors shadow-lg"
               >
-                Join Tribe
+                Join {label}
               </button>
             )}
           </div>
@@ -147,21 +151,34 @@ export function TribeHeader({
           <p className="text-white text-sm md:text-base">{tribe.mission}</p>
         </div>
 
-        {/* Stats row */}
-        <div className="mt-4 grid grid-cols-3 gap-4">
-          <div className="text-center p-3 bg-white/10 rounded-xl">
-            <p className="text-2xl font-bold text-white">{tribe.totalPoints.toLocaleString()}</p>
-            <p className="text-xs text-white/70">Total Points</p>
+        {/* Stats row - simplified for Groups (no points) */}
+        {hidePoints ? (
+          <div className="mt-4 grid grid-cols-2 gap-4">
+            <div className="text-center p-3 bg-white/10 rounded-xl">
+              <p className="text-2xl font-bold text-white">{tribe.memberCount}</p>
+              <p className="text-xs text-white/70">Members</p>
+            </div>
+            <div className="text-center p-3 bg-white/10 rounded-xl">
+              <p className="text-2xl font-bold text-white">{tribe.maxMembers}</p>
+              <p className="text-xs text-white/70">Max Capacity</p>
+            </div>
           </div>
-          <div className="text-center p-3 bg-white/10 rounded-xl">
-            <p className="text-2xl font-bold text-white">+{tribe.weeklyPoints.toLocaleString()}</p>
-            <p className="text-xs text-white/70">This Week</p>
+        ) : (
+          <div className="mt-4 grid grid-cols-3 gap-4">
+            <div className="text-center p-3 bg-white/10 rounded-xl">
+              <p className="text-2xl font-bold text-white">{tribe.totalPoints.toLocaleString()}</p>
+              <p className="text-xs text-white/70">Total Points</p>
+            </div>
+            <div className="text-center p-3 bg-white/10 rounded-xl">
+              <p className="text-2xl font-bold text-white">+{tribe.weeklyPoints.toLocaleString()}</p>
+              <p className="text-xs text-white/70">This Week</p>
+            </div>
+            <div className="text-center p-3 bg-white/10 rounded-xl">
+              <p className="text-2xl font-bold text-white">{tribe.memberCount}/{tribe.maxMembers}</p>
+              <p className="text-xs text-white/70">Members</p>
+            </div>
           </div>
-          <div className="text-center p-3 bg-white/10 rounded-xl">
-            <p className="text-2xl font-bold text-white">{tribe.memberCount}/{tribe.maxMembers}</p>
-            <p className="text-xs text-white/70">Members</p>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

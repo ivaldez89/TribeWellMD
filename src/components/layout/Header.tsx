@@ -182,9 +182,7 @@ const studyDropdownItems: DropdownItem[] = [
 ];
 
 const toolsDropdownItems: DropdownItem[] = [
-  { label: 'Dashboard', href: '/dashboard', description: 'Your daily command center' },
-  { label: 'My Tasks', href: '/tasks', description: 'Manage your to-do list' },
-  { label: 'My Calendar', href: '/calendar', description: 'Schedule & achievements' },
+  { label: 'Dashboard', href: '/dashboard', description: 'Your unified calendar & tasks hub' },
 ];
 
 const wellnessDropdownItems: DropdownItem[] = [
@@ -197,7 +195,8 @@ const wellnessDropdownItems: DropdownItem[] = [
 const communityDropdownItems: DropdownItem[] = [
   { label: 'My Village', href: '/village', description: 'Your charity community' },
   { label: 'Connections', href: '/connections', description: 'Build meaningful relationships' },
-  { label: 'My Tribes', href: '/tribes', description: 'Your study communities' },
+  { label: 'My Impact', href: '/my-impact', description: 'Track your charitable contributions' },
+  { label: 'My Groups', href: '/groups', description: 'Your interest communities' },
   { label: 'PreMed', href: '/premed', description: 'Resources for pre-med students' },
   { label: 'How It Works', href: '/impact', description: 'Village Points & charitable giving' },
   { label: 'Find Charities', href: '/impact/local', description: 'Discover local nonprofits' },
@@ -307,7 +306,7 @@ export function Header({ stats }: HeaderProps) {
                 />
                 {/* Community */}
                 <IconNavLink
-                  href="/tribes"
+                  href="/village"
                   label="Community"
                   matchPrefix
                   icon={
@@ -431,8 +430,6 @@ export function Header({ stats }: HeaderProps) {
                 <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
                   <p className="px-4 py-1 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Tools</p>
                   <MobileNavLink href="/dashboard" onClick={() => setMobileMenuOpen(false)}>Dashboard</MobileNavLink>
-                  <MobileNavLink href="/tasks" onClick={() => setMobileMenuOpen(false)}>My Tasks</MobileNavLink>
-                  <MobileNavLink href="/calendar" onClick={() => setMobileMenuOpen(false)}>My Calendar</MobileNavLink>
                 </div>
 
                 {/* Wellness Section */}
@@ -448,7 +445,8 @@ export function Header({ stats }: HeaderProps) {
                   <p className="px-4 py-1 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Community</p>
                   <MobileNavLink href="/village" onClick={() => setMobileMenuOpen(false)}>My Village</MobileNavLink>
                   <MobileNavLink href="/connections" onClick={() => setMobileMenuOpen(false)}>Connections</MobileNavLink>
-                  <MobileNavLink href="/tribes" onClick={() => setMobileMenuOpen(false)}>My Tribes</MobileNavLink>
+                  <MobileNavLink href="/my-impact" onClick={() => setMobileMenuOpen(false)}>My Impact</MobileNavLink>
+                  <MobileNavLink href="/groups" onClick={() => setMobileMenuOpen(false)}>My Groups</MobileNavLink>
                   <MobileNavLink href="/premed" onClick={() => setMobileMenuOpen(false)}>PreMed</MobileNavLink>
                   <MobileNavLink href="/impact" onClick={() => setMobileMenuOpen(false)}>How It Works</MobileNavLink>
                   <MobileNavLink href="/impact/local" onClick={() => setMobileMenuOpen(false)}>Find Charities</MobileNavLink>

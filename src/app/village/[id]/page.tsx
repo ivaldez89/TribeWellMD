@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { getCharityById } from '@/data/charities';
-import { getCurrentVillageId, getUserProfile } from '@/lib/storage/profileStorage';
+import { getCurrentVillageId, getUserProfile, switchVillage } from '@/lib/storage/profileStorage';
 import { getVillagePosts, getVillageMembers, createPost } from '@/lib/storage/communityStorage';
 import { useWellness } from '@/hooks/useWellness';
 import { VillagePostCard } from '@/components/village/VillagePostCard';
@@ -79,6 +79,18 @@ export default function VillageCommunityPage() {
     setShowMessages(true);
   }
 
+  function handleSwitchVillage() {
+    if (confirm(`Are you sure you want to switch to ${charity?.shortName}? Your points will stay with your current Village.`)) {
+      const success = switchVillage(villageId);
+      if (success) {
+        router.refresh();
+        window.location.reload();
+      } else {
+        alert('Failed to switch Village. Please try again.');
+      }
+    }
+  }
+
   if (!charity) {
     return (
       <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
@@ -136,20 +148,28 @@ export default function VillageCommunityPage() {
                 Visit Website
               </a>
               {isUserVillage && (
-                <Link
-                  href="/connections"
-                  className="px-4 py-2 bg-white text-[#5B7B6D] text-sm font-medium rounded-lg hover:bg-white/90 transition-colors"
-                >
-                  Find Connections
-                </Link>
+                <>
+                  <Link
+                    href="/connections"
+                    className="px-4 py-2 bg-white text-[#5B7B6D] text-sm font-medium rounded-lg hover:bg-white/90 transition-colors"
+                  >
+                    Find Connections
+                  </Link>
+                  <Link
+                    href="/impact"
+                    className="px-4 py-2 bg-white/20 hover:bg-white/30 text-white text-sm font-medium rounded-lg transition-colors"
+                  >
+                    Switch Village
+                  </Link>
+                </>
               )}
               {!isUserVillage && (
-                <Link
-                  href="/register"
+                <button
+                  onClick={handleSwitchVillage}
                   className="px-4 py-2 bg-white text-[#5B7B6D] text-sm font-medium rounded-lg hover:bg-white/90 transition-colors"
                 >
-                  Join Village
-                </Link>
+                  Switch to This Village
+                </button>
               )}
             </div>
           </div>
