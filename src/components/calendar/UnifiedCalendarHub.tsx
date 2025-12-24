@@ -122,8 +122,8 @@ export function UnifiedCalendarHub() {
           </div>
         </div>
 
-        {/* Calendar Content */}
-        <div className="flex-1 overflow-hidden bg-white dark:bg-slate-800 m-4 mb-2 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+        {/* Calendar Content - Fixed height container with internal scrolling */}
+        <div className="flex-1 min-h-0 overflow-hidden bg-white dark:bg-slate-800 m-4 mb-2 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
           {isLoadingEvents ? (
             <div className="flex items-center justify-center h-full">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-tribe-sage-600" />
