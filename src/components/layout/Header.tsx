@@ -8,6 +8,13 @@ import { ProfileDropdown } from '@/components/profile/ProfileDropdown';
 import { StreakCounter } from '@/components/gamification/StreakCounter';
 import { useIsAuthenticated } from '@/hooks/useAuth';
 
+/**
+ * Header Component
+ *
+ * Uses SEMANTIC color tokens - no hardcoded hex values.
+ * All colors reference CSS variables via Tailwind classes.
+ */
+
 interface NavLinkProps {
   href: string;
   children: React.ReactNode;
@@ -25,8 +32,8 @@ function NavLink({ href, children, onClick }: NavLinkProps) {
       className={`
         px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
         ${isActive
-          ? 'bg-tribe-sage-500 text-white shadow-soft'
-          : 'text-slate-600 dark:text-slate-300 hover:text-tribe-sage-600 dark:hover:text-tribe-sage-400 hover:bg-tribe-sage-50 dark:hover:bg-tribe-sage-900/20'
+          ? 'bg-primary text-primary-foreground shadow-soft'
+          : 'text-content-secondary hover:text-primary hover:bg-primary-light'
         }
       `}
     >
@@ -35,13 +42,12 @@ function NavLink({ href, children, onClick }: NavLinkProps) {
   );
 }
 
-// Icon-based nav link (Facebook-style) - label only shows on hover
 interface IconNavLinkProps {
   href: string;
   label: string;
   icon: React.ReactNode;
   activeIcon?: React.ReactNode;
-  matchPrefix?: boolean; // Match any path starting with href
+  matchPrefix?: boolean;
 }
 
 function IconNavLink({ href, label, icon, activeIcon, matchPrefix }: IconNavLinkProps) {
@@ -60,7 +66,7 @@ function IconNavLink({ href, label, icon, activeIcon, matchPrefix }: IconNavLink
         absolute inset-x-1 inset-y-0 rounded-xl transition-all duration-200
         ${isActive
           ? 'bg-transparent'
-          : 'group-hover:bg-teal-50 dark:group-hover:bg-teal-900/20'
+          : 'group-hover:bg-primary-light'
         }
       `} />
 
@@ -68,15 +74,15 @@ function IconNavLink({ href, label, icon, activeIcon, matchPrefix }: IconNavLink
       <div className={`
         relative z-10 w-7 h-7 flex items-center justify-center transition-colors duration-200
         ${isActive
-          ? 'text-tribe-sage-600 dark:text-tribe-sage-400'
-          : 'text-slate-500 dark:text-slate-400 group-hover:text-tribe-sage-600 dark:group-hover:text-tribe-sage-400'
+          ? 'text-primary'
+          : 'text-content-muted group-hover:text-primary'
         }
       `}>
         {isActive && activeIcon ? activeIcon : icon}
       </div>
 
       {/* Label - only shows on hover */}
-      <span className="relative z-10 text-[10px] font-medium transition-all duration-200 opacity-0 group-hover:opacity-100 h-0 group-hover:h-auto group-hover:mt-0.5 text-tribe-sage-600 dark:text-tribe-sage-400">
+      <span className="relative z-10 text-[10px] font-medium transition-all duration-200 opacity-0 group-hover:opacity-100 h-0 group-hover:h-auto group-hover:mt-0.5 text-primary">
         {label}
       </span>
     </Link>
@@ -136,8 +142,8 @@ function NavDropdown({ label, href, items }: NavDropdownProps) {
         className={`
           flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
           ${isActive
-            ? 'bg-tribe-sage-500 text-white shadow-soft'
-            : 'text-slate-600 dark:text-slate-300 hover:text-tribe-sage-600 dark:hover:text-tribe-sage-400 hover:bg-tribe-sage-50 dark:hover:bg-tribe-sage-900/20'
+            ? 'bg-primary text-primary-foreground shadow-soft'
+            : 'text-content-secondary hover:text-primary hover:bg-primary-light'
           }
         `}
       >
@@ -149,17 +155,17 @@ function NavDropdown({ label, href, items }: NavDropdownProps) {
 
       {isOpen && (
         <div className="absolute top-full left-0 pt-1 w-64 z-[110]">
-          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-soft-lg border border-slate-100 dark:border-slate-700 py-2">
+          <div className="bg-surface rounded-xl shadow-soft-lg border border-border-light py-2">
             {items.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="block px-4 py-3 border-l-2 border-transparent hover:border-tribe-sage-500 hover:bg-gradient-to-r hover:from-tribe-sage-50 hover:to-transparent dark:hover:from-tribe-sage-900/20 dark:hover:to-transparent transition-all duration-200"
+                className="block px-4 py-3 border-l-2 border-transparent hover:border-primary hover:bg-primary-light transition-all duration-200"
                 onClick={() => setIsOpen(false)}
               >
-                <span className="block text-sm font-medium text-slate-900 dark:text-white">{item.label}</span>
+                <span className="block text-sm font-medium text-content">{item.label}</span>
                 {item.description && (
-                  <span className="block text-xs text-slate-500 dark:text-slate-400 mt-0.5">{item.description}</span>
+                  <span className="block text-xs text-content-muted mt-0.5">{item.description}</span>
                 )}
               </Link>
             ))}
@@ -221,22 +227,22 @@ export function Header({ stats }: HeaderProps) {
 
   return (
     <>
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 shadow-sm">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-md border-b border-border-light shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo - goes to appropriate home based on auth status */}
+          {/* Logo */}
           <Link href={isAuthenticated ? "/home" : "/"} className="flex items-center gap-2 sm:gap-3 group flex-shrink-0">
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl shadow-soft group-hover:shadow-soft-md transition-shadow overflow-hidden">
               <img src="/logo.jpeg" alt="TribeWellMD" className="w-full h-full object-cover" />
             </div>
             <div>
-              <span className="text-base sm:text-xl font-bold text-slate-900 dark:text-white">Tribe</span>
-              <span className="text-base sm:text-xl font-bold text-tribe-sage-600 dark:text-tribe-sage-400">Well</span>
-              <span className="text-base sm:text-xl font-light text-tribe-sky-600 dark:text-tribe-sky-400">MD</span>
+              <span className="text-base sm:text-xl font-bold text-content">Tribe</span>
+              <span className="text-base sm:text-xl font-bold text-primary">Well</span>
+              <span className="text-base sm:text-xl font-light text-info">MD</span>
             </div>
           </Link>
 
-          {/* Navigation - different for logged in vs logged out */}
+          {/* Navigation */}
           <nav className="hidden md:flex items-center gap-2">
             {isAuthenticated ? (
               <>
@@ -343,19 +349,19 @@ export function Header({ stats }: HeaderProps) {
             {/* Stats Badge - only when authenticated */}
             {isAuthenticated && stats && stats.dueToday > 0 && (
               <>
-                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 rounded-full">
+                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-warning-light border border-warning rounded-full">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-warning opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-warning"></span>
                   </span>
-                  <span className="text-sm font-medium text-amber-700 dark:text-amber-300">
+                  <span className="text-sm font-medium text-content-secondary">
                     {stats.dueToday} due
                   </span>
                 </div>
 
                 <Link
                   href="/flashcards"
-                  className="md:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-tribe-sage-500 text-white shadow-soft hover:shadow-soft-md transition-shadow"
+                  className="md:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground shadow-soft hover:shadow-soft-md transition-shadow"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -366,7 +372,6 @@ export function Header({ stats }: HeaderProps) {
 
             {/* Show Profile Dropdown when authenticated, Login/Register when not */}
             {isAuthenticated === null ? (
-              // Loading state - show nothing to prevent flash
               <div className="w-9 h-9" />
             ) : isAuthenticated ? (
               <ProfileDropdown />
@@ -374,13 +379,13 @@ export function Header({ stats }: HeaderProps) {
               <div className="hidden sm:flex items-center gap-2">
                 <Link
                   href="/login"
-                  className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-tribe-sage-600 dark:hover:text-tribe-sage-400 transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-content-secondary hover:text-primary transition-colors"
                 >
                   Sign In
                 </Link>
                 <Link
                   href="/register"
-                  className="px-4 py-2 text-sm font-medium text-white bg-tribe-sage-500 hover:bg-tribe-sage-600 rounded-lg shadow-soft hover:shadow-soft-md transition-all"
+                  className="px-4 py-2 text-sm font-medium text-primary-foreground bg-primary hover:bg-primary-hover rounded-lg shadow-soft hover:shadow-soft-md transition-all"
                 >
                   Get Started
                 </Link>
@@ -390,7 +395,7 @@ export function Header({ stats }: HeaderProps) {
             {/* Mobile hamburger menu button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-content-secondary hover:bg-surface-muted transition-colors"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
@@ -409,15 +414,15 @@ export function Header({ stats }: HeaderProps) {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900">
+        <div className="md:hidden border-t border-border-light bg-surface">
           <div className="max-w-7xl mx-auto px-4 py-4 space-y-2">
             {isAuthenticated ? (
               <>
                 <MobileNavLink href="/home" onClick={() => setMobileMenuOpen(false)}>Home</MobileNavLink>
 
                 {/* Study Section */}
-                <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
-                  <p className="px-4 py-1 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Study</p>
+                <div className="pt-2 border-t border-border-light">
+                  <p className="px-4 py-1 text-xs font-semibold text-content-muted uppercase tracking-wider">Study</p>
                   <MobileNavLink href="/flashcards" onClick={() => setMobileMenuOpen(false)}>Flashcards</MobileNavLink>
                   <MobileNavLink href="/cases" onClick={() => setMobileMenuOpen(false)}>Clinical Cases</MobileNavLink>
                   <MobileNavLink href="/generate" onClick={() => setMobileMenuOpen(false)}>AI Generator</MobileNavLink>
@@ -425,22 +430,22 @@ export function Header({ stats }: HeaderProps) {
                 </div>
 
                 {/* Tools Section */}
-                <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
-                  <p className="px-4 py-1 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Tools</p>
+                <div className="pt-2 border-t border-border-light">
+                  <p className="px-4 py-1 text-xs font-semibold text-content-muted uppercase tracking-wider">Tools</p>
                   <MobileNavLink href="/dashboard" onClick={() => setMobileMenuOpen(false)}>Dashboard</MobileNavLink>
                 </div>
 
                 {/* Wellness Section */}
-                <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
-                  <p className="px-4 py-1 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Wellness</p>
+                <div className="pt-2 border-t border-border-light">
+                  <p className="px-4 py-1 text-xs font-semibold text-content-muted uppercase tracking-wider">Wellness</p>
                   <MobileNavLink href="/wellness" onClick={() => setMobileMenuOpen(false)}>Wellness Hub</MobileNavLink>
                   <MobileNavLink href="/wellness?tab=journey" onClick={() => setMobileMenuOpen(false)}>My Journey</MobileNavLink>
                   <MobileNavLink href="/wellness?tab=skills" onClick={() => setMobileMenuOpen(false)}>Social Skills</MobileNavLink>
                 </div>
 
                 {/* Community Section */}
-                <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
-                  <p className="px-4 py-1 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Community</p>
+                <div className="pt-2 border-t border-border-light">
+                  <p className="px-4 py-1 text-xs font-semibold text-content-muted uppercase tracking-wider">Community</p>
                   <MobileNavLink href="/village" onClick={() => setMobileMenuOpen(false)}>My Village</MobileNavLink>
                   <MobileNavLink href="/connections" onClick={() => setMobileMenuOpen(false)}>Connections</MobileNavLink>
                   <MobileNavLink href="/my-impact" onClick={() => setMobileMenuOpen(false)}>My Impact</MobileNavLink>
@@ -456,18 +461,18 @@ export function Header({ stats }: HeaderProps) {
                 <MobileNavLink href="/about" onClick={() => setMobileMenuOpen(false)}>About</MobileNavLink>
                 <MobileNavLink href="/investors" onClick={() => setMobileMenuOpen(false)}>For Investors</MobileNavLink>
                 <MobileNavLink href="/partners" onClick={() => setMobileMenuOpen(false)}>For Partners</MobileNavLink>
-                <div className="pt-4 border-t border-slate-200 dark:border-slate-700 space-y-2">
+                <div className="pt-4 border-t border-border space-y-2">
                   <Link
                     href="/login"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full px-4 py-3 text-center text-sm font-medium text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                    className="block w-full px-4 py-3 text-center text-sm font-medium text-content-secondary border border-border rounded-lg hover:bg-surface-muted transition-colors"
                   >
                     Sign In
                   </Link>
                   <Link
                     href="/register"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full px-4 py-3 text-center text-sm font-medium text-white bg-tribe-sage-500 hover:bg-tribe-sage-600 rounded-lg shadow-soft transition-all"
+                    className="block w-full px-4 py-3 text-center text-sm font-medium text-primary-foreground bg-primary hover:bg-primary-hover rounded-lg shadow-soft transition-all"
                   >
                     Get Started
                   </Link>
@@ -496,8 +501,8 @@ function MobileNavLink({ href, children, onClick }: { href: string; children: Re
       className={`
         block px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200
         ${isActive
-          ? 'bg-tribe-sage-500 text-white'
-          : 'text-slate-700 dark:text-slate-200 hover:bg-tribe-sage-50 dark:hover:bg-tribe-sage-900/20'
+          ? 'bg-primary text-primary-foreground'
+          : 'text-content hover:bg-primary-light'
         }
       `}
     >

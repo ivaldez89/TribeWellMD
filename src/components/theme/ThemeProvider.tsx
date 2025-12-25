@@ -1,33 +1,69 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback } from 'react';
 
-type Theme = 'light' | 'dark' | 'system';
+/**
+ * TribeWellMD Theme Provider
+ *
+ * Manages light/dark mode switching for the Forest Theme.
+ *
+ * Architecture:
+ * - Single theme (Forest Theme) with light/dark modes
+ * - CSS variables defined in globals.css
+ * - Tailwind's 'class' strategy for dark mode
+ *
+ * Future Extension:
+ * - To add new color themes, add a `colorTheme` state
+ * - Apply via data-theme attribute: [data-theme="ocean"]
+ * - Define new CSS variable sets in globals.css
+ */
+
+// =============================================================================
+// TYPES
+// =============================================================================
+
+type ColorMode = 'light' | 'dark' | 'system';
 
 interface ThemeContextType {
-  theme: Theme;
-  resolvedTheme: 'light' | 'dark';
-  setTheme: (theme: Theme) => void;
+  /** Current color mode setting */
+  mode: ColorMode;
+  /** Resolved mode (light or dark, after system preference resolution) */
+  resolvedMode: 'light' | 'dark';
+  /** Set the color mode */
+  setMode: (mode: ColorMode) => void;
+  /** Toggle between light and dark (ignores system) */
+  toggleMode: () => void;
 }
+
+// =============================================================================
+// CONTEXT
+// =============================================================================
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>('system');
-  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
+// Storage key for persistence
+const STORAGE_KEY = 'tribewellmd_theme_mode';
 
-  // Load saved theme on mount
+// =============================================================================
+// PROVIDER
+// =============================================================================
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [mode, setModeState] = useState<ColorMode>('system');
+  const [resolvedMode, setResolvedMode] = useState<'light' | 'dark'>('light');
+
+  // Load saved preference on mount
   useEffect(() => {
-    const saved = localStorage.getItem('step2_theme') as Theme | null;
-    if (saved) {
-      setThemeState(saved);
+    const saved = localStorage.getItem(STORAGE_KEY) as ColorMode | null;
+    if (saved && ['light', 'dark', 'system'].includes(saved)) {
+      setModeState(saved);
     }
   }, []);
 
-  // Resolve theme and apply to document
+  // Resolve and apply theme
   useEffect(() => {
-    const applyTheme = (isDark: boolean) => {
-      setResolvedTheme(isDark ? 'dark' : 'light');
+    const applyMode = (isDark: boolean) => {
+      setResolvedMode(isDark ? 'dark' : 'light');
       if (isDark) {
         document.documentElement.classList.add('dark');
       } else {
@@ -35,32 +71,42 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
-    if (theme === 'system') {
-      // Check system preference
+    if (mode === 'system') {
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      applyTheme(mediaQuery.matches);
+      applyMode(mediaQuery.matches);
 
-      // Listen for system changes
-      const handler = (e: MediaQueryListEvent) => applyTheme(e.matches);
+      const handler = (e: MediaQueryListEvent) => applyMode(e.matches);
       mediaQuery.addEventListener('change', handler);
       return () => mediaQuery.removeEventListener('change', handler);
     } else {
-      applyTheme(theme === 'dark');
+      applyMode(mode === 'dark');
     }
-  }, [theme]);
+  }, [mode]);
 
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
-    localStorage.setItem('step2_theme', newTheme);
-  };
+  const setMode = useCallback((newMode: ColorMode) => {
+    setModeState(newMode);
+    localStorage.setItem(STORAGE_KEY, newMode);
+  }, []);
+
+  const toggleMode = useCallback(() => {
+    const newMode = resolvedMode === 'dark' ? 'light' : 'dark';
+    setMode(newMode);
+  }, [resolvedMode, setMode]);
 
   return (
-    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme }}>
+    <ThemeContext.Provider value={{ mode, resolvedMode, setMode, toggleMode }}>
       {children}
     </ThemeContext.Provider>
   );
 }
 
+// =============================================================================
+// HOOKS
+// =============================================================================
+
+/**
+ * Hook to access theme state and controls
+ */
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (context === undefined) {
@@ -69,12 +115,17 @@ export function useTheme() {
   return context;
 }
 
-// Theme toggle component
+// =============================================================================
+// COMPONENTS
+// =============================================================================
+
+/**
+ * Full theme toggle with light/dark/system options
+ */
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { mode, setMode } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Avoid hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -83,7 +134,7 @@ export function ThemeToggle() {
     return <div className="w-9 h-9" />;
   }
 
-  const options: { value: Theme; icon: React.ReactNode; label: string }[] = [
+  const options: { value: ColorMode; icon: React.ReactNode; label: string }[] = [
     {
       value: 'light',
       label: 'Light',
@@ -115,15 +166,15 @@ export function ThemeToggle() {
 
   return (
     <div className="relative">
-      <div className="flex items-center gap-1 p-1 bg-slate-100 dark:bg-slate-800 rounded-lg">
+      <div className="flex items-center gap-1 p-1 bg-surface-muted rounded-lg">
         {options.map((option) => (
           <button
             key={option.value}
-            onClick={() => setTheme(option.value)}
+            onClick={() => setMode(option.value)}
             className={`p-2 rounded-md transition-all ${
-              theme === option.value
-                ? 'bg-white dark:bg-slate-700 text-tribe-sage-600 dark:text-tribe-sage-400 shadow-sm'
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'
+              mode === option.value
+                ? 'bg-surface text-primary shadow-sm'
+                : 'text-content-muted hover:text-content-secondary'
             }`}
             title={option.label}
           >
@@ -135,9 +186,12 @@ export function ThemeToggle() {
   );
 }
 
-// Compact theme toggle for mobile/tight spaces
+/**
+ * Compact theme toggle for mobile/tight spaces
+ * Cycles through: light → dark → system
+ */
 export function ThemeToggleCompact() {
-  const { theme, resolvedTheme, setTheme } = useTheme();
+  const { mode, resolvedMode, setMode } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -148,26 +202,60 @@ export function ThemeToggleCompact() {
     return <div className="w-9 h-9" />;
   }
 
-  const cycleTheme = () => {
-    const themes: Theme[] = ['light', 'dark', 'system'];
-    const currentIndex = themes.indexOf(theme);
-    const nextIndex = (currentIndex + 1) % themes.length;
-    setTheme(themes[nextIndex]);
+  const cycleMode = () => {
+    const modes: ColorMode[] = ['light', 'dark', 'system'];
+    const currentIndex = modes.indexOf(mode);
+    const nextIndex = (currentIndex + 1) % modes.length;
+    setMode(modes[nextIndex]);
   };
 
   return (
     <button
-      onClick={cycleTheme}
-      className="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-      title={`Theme: ${theme} (click to change)`}
+      onClick={cycleMode}
+      className="p-2 rounded-lg text-content-muted hover:bg-surface-muted transition-colors"
+      title={`Theme: ${mode} (click to change)`}
     >
-      {resolvedTheme === 'dark' ? (
+      {resolvedMode === 'dark' ? (
         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
         </svg>
       ) : (
         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+      )}
+    </button>
+  );
+}
+
+/**
+ * Simple toggle button (light ↔ dark only)
+ */
+export function ThemeToggleSimple() {
+  const { resolvedMode, toggleMode } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className="w-9 h-9" />;
+  }
+
+  return (
+    <button
+      onClick={toggleMode}
+      className="p-2 rounded-lg bg-surface-muted hover:bg-surface text-content-secondary hover:text-content transition-colors"
+      title={`Switch to ${resolvedMode === 'dark' ? 'light' : 'dark'} mode`}
+    >
+      {resolvedMode === 'dark' ? (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+      ) : (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
         </svg>
       )}
     </button>

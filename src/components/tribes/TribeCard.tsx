@@ -5,6 +5,17 @@ import type { Tribe } from '@/types/tribes';
 import { getGoalProgress, getTypeLabel } from '@/lib/storage/tribeStorage';
 import { Icons } from '@/components/ui/Icons';
 
+/**
+ * TribeCard Component
+ *
+ * Uses SEMANTIC color tokens - no hardcoded hex values.
+ * All colors come from CSS variables via Tailwind classes.
+ *
+ * Gradient mappings use the raw palette colors (forest-*, sand-*, etc.)
+ * which are defined in tailwind.config.ts but should ONLY be used
+ * for gradient definitions, not general styling.
+ */
+
 interface TribeCardProps {
   tribe: Tribe;
   isMember?: boolean;
@@ -13,52 +24,51 @@ interface TribeCardProps {
   linkPrefix?: string;
 }
 
-// Forest theme colors - only these are allowed
-const FOREST_THEME_COLORS = [
-  'from-[#3D5A4C] to-[#2D4A3C]', // Deep Forest
-  'from-[#5B7B6D] to-[#3D5A4C]', // Forest
-  'from-[#6B8B7D] to-[#5B7B6D]', // Sage
-  'from-[#8B7355] to-[#6B5344]', // Bark
-  'from-[#A89070] to-[#8B7355]', // Sand
-  'from-[#C4A77D] to-[#A89070]', // Wheat
-];
+// Gradient classes using raw palette (allowed for gradients only)
+// These map to the Forest Theme color palette
+const GRADIENT_CLASSES = {
+  forest: 'from-forest-600 to-forest-700',
+  sage: 'from-sage-500 to-sage-600',
+  earth: 'from-earth-500 to-earth-600',
+  sand: 'from-sand-600 to-sand-700',
+  teal: 'from-teal-600 to-teal-700',
+  burgundy: 'from-burgundy-500 to-burgundy-600',
+} as const;
 
-// Map tribe types to forest theme colors (fallback)
-const TYPE_COLORS: Record<Tribe['type'], string> = {
-  study: 'from-[#A89070] to-[#8B7355]',    // Sand
-  specialty: 'from-[#8B7355] to-[#6B5344]', // Bark
-  wellness: 'from-[#6B8B7D] to-[#5B7B6D]',  // Sage
-  cause: 'from-[#5B7B6D] to-[#3D5A4C]',     // Forest
+type GradientKey = keyof typeof GRADIENT_CLASSES;
+
+// Map tribe types to gradient styles
+const TYPE_GRADIENTS: Record<Tribe['type'], GradientKey> = {
+  study: 'sand',
+  specialty: 'earth',
+  wellness: 'sage',
+  cause: 'forest',
 };
 
-// Validate and get forest theme color
-function getForestColor(color: string | undefined, type: Tribe['type']): string {
-  if (color && FOREST_THEME_COLORS.includes(color)) {
-    return color;
-  }
-  // Fallback to type-based color
-  return TYPE_COLORS[type] || 'from-[#5B7B6D] to-[#3D5A4C]';
-}
-
-// Map tribe types to appropriate icons
-const typeIcons: Record<Tribe['type'], React.ReactNode> = {
+// Map tribe types to icons
+const TYPE_ICONS: Record<Tribe['type'], React.ReactNode> = {
   study: <Icons.Book />,
   specialty: <Icons.Stethoscope />,
   wellness: <Icons.Heart />,
   cause: <Icons.HeartHand />,
 };
 
-export function TribeCard({ tribe, isMember = false, onJoin, hidePoints = false, linkPrefix = '/tribes' }: TribeCardProps) {
-  const goalProgress = tribe.currentGoal ? getGoalProgress(tribe.currentGoal) : 0;
-  const tribeColor = getForestColor(tribe.color, tribe.type);
+// Get gradient class for a tribe
+function getTribeGradient(tribe: Tribe): string {
+  // If tribe has a stored gradient key, use it
+  const gradientKey = TYPE_GRADIENTS[tribe.type];
+  return GRADIENT_CLASSES[gradientKey];
+}
 
-  // Type badge styles with forest theme colors
-  const typeStyles: Record<Tribe['type'], string> = {
-    study: 'bg-[#E8E0D5] dark:bg-[#A89070]/20 text-[#6B5344] dark:text-[#C4A77D]',
-    specialty: 'bg-[#E8E0D5] dark:bg-[#8B7355]/20 text-[#6B5344] dark:text-[#A89070]',
-    wellness: 'bg-[#E8E0D5] dark:bg-[#5B7B6D]/20 text-[#3D5A4C] dark:text-[#6B8B7D]',
-    cause: 'bg-[#E8E0D5] dark:bg-[#6B8B7D]/20 text-[#3D5A4C] dark:text-[#7FA08F]',
-  };
+export function TribeCard({
+  tribe,
+  isMember = false,
+  onJoin,
+  hidePoints = false,
+  linkPrefix = '/tribes'
+}: TribeCardProps) {
+  const goalProgress = tribe.currentGoal ? getGoalProgress(tribe.currentGoal) : 0;
+  const gradientClass = getTribeGradient(tribe);
 
   const handleJoinClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -70,13 +80,13 @@ export function TribeCard({ tribe, isMember = false, onJoin, hidePoints = false,
 
   return (
     <Link href={`${linkPrefix}/${tribe.id}`}>
-      <div className="group bg-white dark:bg-slate-800 rounded-2xl shadow-md hover:shadow-xl border border-[#D4C4B0]/50 dark:border-slate-700 hover:border-[#8B7355] dark:hover:border-[#A89070] transition-all duration-200 overflow-hidden cursor-pointer">
-        {/* Header with gradient */}
-        <div className={`px-4 py-4 bg-gradient-to-r ${tribeColor}`}>
+      <div className="group card hover:border-secondary overflow-hidden cursor-pointer">
+        {/* Header with gradient - uses raw palette for gradient effect */}
+        <div className={`px-4 py-4 bg-gradient-to-r ${gradientClass}`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center text-white">
-                {typeIcons[tribe.type] || <Icons.Village />}
+                {TYPE_ICONS[tribe.type] || <Icons.Village />}
               </div>
               <div>
                 <h3 className="font-semibold text-white text-sm drop-shadow-sm">
@@ -96,40 +106,40 @@ export function TribeCard({ tribe, isMember = false, onJoin, hidePoints = false,
           </div>
         </div>
 
-        {/* Content */}
+        {/* Content - uses semantic tokens */}
         <div className="p-4">
           {/* Description */}
-          <p className="text-sm text-slate-600 dark:text-slate-400 mb-3 line-clamp-2">
+          <p className="text-sm text-content-secondary mb-3 line-clamp-2">
             {tribe.description}
           </p>
 
-          {/* Type badge */}
+          {/* Type badge - uses semantic tokens */}
           <div className="flex items-center gap-2 mb-3">
-            <span className={`px-2 py-0.5 rounded text-xs font-medium ${typeStyles[tribe.type]}`}>
+            <span className="px-2 py-0.5 rounded text-xs font-medium bg-secondary-light text-content-secondary">
               {getTypeLabel(tribe.type)}
             </span>
             {tribe.rank > 0 && tribe.rank <= 10 && (
-              <span className="px-2 py-0.5 rounded text-xs font-medium bg-[#C4A77D]/20 dark:bg-[#C4A77D]/20 text-[#8B7355] dark:text-[#C4A77D] flex items-center gap-1">
+              <span className="px-2 py-0.5 rounded text-xs font-medium bg-warning-light text-content-secondary flex items-center gap-1">
                 <span className="w-3 h-3"><Icons.Trophy /></span>
                 #{tribe.rank}
               </span>
             )}
           </div>
 
-          {/* Goal progress - hidden for interest groups */}
+          {/* Goal progress */}
           {!hidePoints && tribe.currentGoal && (
             <div className="mb-3">
-              <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mb-1">
+              <div className="flex items-center justify-between text-xs text-content-muted mb-1">
                 <span className="font-medium truncate pr-2">{tribe.currentGoal.title}</span>
                 <span className="whitespace-nowrap">{goalProgress}%</span>
               </div>
-              <div className="h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+              <div className="h-2 bg-surface-muted rounded-full overflow-hidden">
                 <div
-                  className={`h-full bg-gradient-to-r ${tribeColor} rounded-full transition-all duration-300`}
+                  className={`h-full bg-gradient-to-r ${gradientClass} rounded-full transition-all duration-300`}
                   style={{ width: `${goalProgress}%` }}
                 />
               </div>
-              <div className="flex items-center justify-between text-xs text-slate-400 dark:text-slate-500 mt-1">
+              <div className="flex items-center justify-between text-xs text-content-muted mt-1">
                 <span>{tribe.currentGoal.currentPoints.toLocaleString()} pts</span>
                 <span>{tribe.currentGoal.targetPoints.toLocaleString()} goal</span>
               </div>
@@ -137,10 +147,10 @@ export function TribeCard({ tribe, isMember = false, onJoin, hidePoints = false,
           )}
 
           {/* Footer */}
-          <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-700">
-            <div className="text-xs text-slate-400">
+          <div className="flex items-center justify-between pt-2 border-t border-border-light">
+            <div className="text-xs text-content-muted">
               {!hidePoints && tribe.weeklyPoints > 0 && (
-                <span className="text-tribe-sage-600 dark:text-tribe-sage-400 font-medium flex items-center gap-1">
+                <span className="text-success font-medium flex items-center gap-1">
                   <span className="w-3 h-3"><Icons.Fire /></span>
                   +{tribe.weeklyPoints} this week
                 </span>
@@ -148,14 +158,14 @@ export function TribeCard({ tribe, isMember = false, onJoin, hidePoints = false,
             </div>
 
             {isMember ? (
-              <span className="px-3 py-1 text-xs font-medium bg-[#5B7B6D]/10 dark:bg-[#5B7B6D]/20 text-[#3D5A4C] dark:text-[#6B8B7D] rounded-full flex items-center gap-1">
+              <span className="px-3 py-1 text-xs font-medium bg-primary-light text-primary rounded-full flex items-center gap-1">
                 <span className="w-3 h-3"><Icons.Check /></span>
                 Member
               </span>
             ) : (
               <button
                 onClick={handleJoinClick}
-                className="px-3 py-1.5 text-xs font-medium bg-gradient-to-r from-[#5B7B6D] to-[#3D5A4C] text-white rounded-full hover:from-[#3D5A4C] hover:to-[#2D4A3C] transition-colors shadow-sm"
+                className="px-3 py-1.5 text-xs font-medium bg-primary hover:bg-primary-hover text-primary-foreground rounded-full transition-colors shadow-sm"
               >
                 Join Group
               </button>

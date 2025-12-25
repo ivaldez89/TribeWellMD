@@ -2,10 +2,183 @@
 @tailwind components;
 @tailwind utilities;
 
+/* =============================================================================
+   FOREST THEME - Design Tokens (CSS Variables)
+
+   This is the SINGLE SOURCE OF TRUTH for theme colors.
+   All Tailwind semantic classes reference these variables.
+
+   Architecture:
+   - Light mode: :root defines Forest Theme light mode
+   - Dark mode: .dark defines Forest Theme dark mode
+   - Future themes: Add [data-theme="new-theme"] blocks
+
+   Color Palette (from logo):
+   - Forest greens: #3D5A4C, #5B7B6D, #6B8B7D
+   - Earth/terracotta: #A65D4D, #8B4A3D
+   - Burgundy: #8B3A3A, #4A1F1F
+   - Teal: #2D4A5A, #4A8A96
+   - Sand/bark: #C4A77D, #8B7355, #6B5344
+   - Sage: #5DB075 (brand green)
+   ============================================================================= */
+
 :root {
+  /* Fonts */
   --font-inter: 'Inter', system-ui, sans-serif;
   --font-source-serif: 'Source Serif 4', Georgia, serif;
+
+  /* ==========================================================================
+     SURFACES - Cards, inputs, containers
+     White is used for surfaces in light mode (per requirements)
+     ========================================================================== */
+  --surface-default: #FFFFFF;
+  --surface-elevated: #FFFFFF;
+  --surface-muted: #F9F6F2;      /* sand-100 */
+  --surface-subtle: #FDFCFA;     /* sand-50 */
+
+  /* ==========================================================================
+     BACKGROUNDS - Page-level backgrounds
+     ========================================================================== */
+  --bg-primary: #FDFCFA;         /* sand-50 - warm off-white */
+  --bg-secondary: #F9F6F2;       /* sand-100 */
+
+  /* ==========================================================================
+     PRIMARY - Main brand color (CTAs, active states)
+     Forest green from logo
+     ========================================================================== */
+  --primary: #3D5A4C;            /* forest-600 */
+  --primary-hover: #2D4A3C;      /* forest-700 */
+  --primary-light: #E8EFE9;      /* forest-100 */
+  --primary-foreground: #FFFFFF;
+
+  /* ==========================================================================
+     SECONDARY - Supporting brand color
+     Sand/bark tones from logo
+     ========================================================================== */
+  --secondary: #A89070;          /* sand-600 */
+  --secondary-hover: #8B7355;    /* sand-700 */
+  --secondary-light: #F9F6F2;    /* sand-100 */
+  --secondary-foreground: #FFFFFF;
+
+  /* ==========================================================================
+     ACCENT - Highlights, emphasis
+     Terracotta/earth from logo
+     ========================================================================== */
+  --accent: #A65D4D;             /* earth-500 */
+  --accent-hover: #8B4A3D;       /* earth-600 */
+  --accent-light: #F5E8E6;       /* earth-100 */
+  --accent-foreground: #FFFFFF;
+
+  /* ==========================================================================
+     TEXT COLORS
+     ========================================================================== */
+  --text-primary: #152E22;       /* forest-900 */
+  --text-secondary: #2D4A3C;     /* forest-700 */
+  --text-muted: #5B7B6D;         /* forest-500 */
+  --text-inverse: #FFFFFF;
+
+  /* ==========================================================================
+     BORDERS
+     ========================================================================== */
+  --border: #E4D8C9;             /* sand-300 */
+  --border-light: #F0E9E0;       /* sand-200 */
+  --border-focus: #5B7B6D;       /* forest-500 */
+
+  /* ==========================================================================
+     STATUS COLORS
+     ========================================================================== */
+  --success: #5DB075;            /* sage-500 */
+  --success-light: #E6F2EC;      /* sage-100 */
+
+  --warning: #C4A77D;            /* sand-500 */
+  --warning-light: #F9F6F2;      /* sand-100 */
+
+  --error: #8B3A3A;              /* burgundy-500 */
+  --error-light: #F5E6E6;        /* burgundy-100 */
+
+  --info: #4A8A96;               /* teal-500 */
+  --info-light: #E4EEF0;         /* teal-100 */
+
+  /* ==========================================================================
+     GRADIENTS - Pre-defined gradient stops for bg-gradient-to-*
+     ========================================================================== */
+  --gradient-primary-from: #3D5A4C;
+  --gradient-primary-to: #2D4A3C;
+  --gradient-secondary-from: #A89070;
+  --gradient-secondary-to: #8B7355;
+  --gradient-accent-from: #A65D4D;
+  --gradient-accent-to: #8B4A3D;
 }
+
+/* =============================================================================
+   DARK MODE - Forest Theme
+   ============================================================================= */
+
+.dark {
+  /* Surfaces */
+  --surface-default: #152E22;    /* forest-900 */
+  --surface-elevated: #1E3D2F;   /* forest-800 */
+  --surface-muted: #1E3D2F;      /* forest-800 */
+  --surface-subtle: #0A1A12;     /* forest-950 */
+
+  /* Backgrounds */
+  --bg-primary: #0A1A12;         /* forest-950 */
+  --bg-secondary: #152E22;       /* forest-900 */
+
+  /* Primary */
+  --primary: #6B8B7D;            /* forest-400 - lighter for dark mode */
+  --primary-hover: #9BBAA1;      /* forest-300 */
+  --primary-light: #1E3D2F;      /* forest-800 */
+  --primary-foreground: #0A1A12;
+
+  /* Secondary */
+  --secondary: #C4A77D;          /* sand-500 */
+  --secondary-hover: #D4C4B0;    /* sand-400 */
+  --secondary-light: #4A3A30;    /* sand-900 */
+  --secondary-foreground: #0A1A12;
+
+  /* Accent */
+  --accent: #B87D73;             /* earth-400 */
+  --accent-hover: #D4ADA5;       /* earth-300 */
+  --accent-light: #4A2920;       /* earth-800 */
+  --accent-foreground: #0A1A12;
+
+  /* Text */
+  --text-primary: #FDFCFA;       /* sand-50 */
+  --text-secondary: #F0E9E0;     /* sand-200 */
+  --text-muted: #D4C4B0;         /* sand-400 */
+  --text-inverse: #152E22;       /* forest-900 */
+
+  /* Borders */
+  --border: #2D4A3C;             /* forest-700 */
+  --border-light: #1E3D2F;       /* forest-800 */
+  --border-focus: #6B8B7D;       /* forest-400 */
+
+  /* Status (slightly lighter for dark mode) */
+  --success: #73B89A;            /* sage-400 */
+  --success-light: #2C5338;      /* sage-900 */
+
+  --warning: #D4C4B0;            /* sand-400 */
+  --warning-light: #4A3A30;      /* sand-900 */
+
+  --error: #B87373;              /* burgundy-400 */
+  --error-light: #3A1818;        /* burgundy-900 */
+
+  --info: #6BA3AD;               /* teal-400 */
+  --info-light: #1E3D47;         /* teal-900 */
+
+  /* Gradients */
+  --gradient-primary-from: #5B7B6D;
+  --gradient-primary-to: #3D5A4C;
+  --gradient-secondary-from: #C4A77D;
+  --gradient-secondary-to: #A89070;
+  --gradient-accent-from: #B87D73;
+  --gradient-accent-to: #A65D4D;
+}
+
+/* =============================================================================
+   BASE STYLES
+   ============================================================================= */
 
 @layer base {
   html {
@@ -15,56 +188,84 @@
   }
 
   body {
-    @apply bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100;
+    @apply bg-background text-content;
     overflow-x: hidden;
     position: relative;
   }
-  
-  /* Custom scrollbar - Light */
+
+  /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
-  
+
   ::-webkit-scrollbar-track {
-    @apply bg-slate-100 dark:bg-slate-800;
+    background: var(--surface-muted);
   }
-  
+
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-300 dark:bg-slate-600 rounded-full;
+    background: var(--border);
+    border-radius: 9999px;
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-400 dark:bg-slate-500;
+    background: var(--text-muted);
   }
 }
 
+/* =============================================================================
+   COMPONENT LAYER - Semantic component styles
+   ============================================================================= */
+
 @layer components {
-  /* TribeWell Brand Button - Primary sage green */
-  .btn-tribe {
-    @apply px-6 py-3 bg-tribe-sage-500 hover:bg-tribe-sage-600 text-white font-medium rounded-xl shadow-soft transition-all duration-200;
+  /* Primary Button */
+  .btn-primary {
+    @apply px-6 py-3 bg-primary hover:bg-primary-hover text-primary-foreground font-medium rounded-xl shadow-soft transition-all duration-200;
   }
 
-  .btn-tribe:hover {
+  .btn-primary:hover {
     @apply shadow-soft-md transform -translate-y-0.5;
   }
 
-  .btn-tribe:active {
+  .btn-primary:active {
     @apply transform translate-y-0 shadow-soft;
   }
 
-  /* TribeWell Card - soft shadows and subtle borders */
+  /* Secondary Button */
+  .btn-secondary {
+    @apply px-6 py-3 bg-secondary hover:bg-secondary-hover text-secondary-foreground font-medium rounded-xl shadow-soft transition-all duration-200;
+  }
+
+  /* Card - uses white surface */
+  .card {
+    @apply bg-surface rounded-2xl border border-border-light shadow-card transition-all duration-200;
+  }
+
+  .card:hover {
+    @apply shadow-card-hover border-border;
+  }
+
+  /* Input - uses white surface */
+  .input {
+    @apply bg-surface border border-border rounded-lg px-4 py-2 text-content focus:outline-none focus:ring-2 focus:ring-border-focus focus:border-transparent transition-all;
+  }
+
+  /* Focus ring for accessibility */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-border-focus focus:ring-offset-2;
+  }
+
+  /* Legacy class aliases (for backward compatibility during migration) */
+  .btn-tribe {
+    @apply btn-primary;
+  }
+
   .card-tribe {
-    @apply bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-card transition-all duration-200;
+    @apply card;
   }
 
-  .card-tribe:hover {
-    @apply shadow-card-hover border-slate-200 dark:border-slate-600;
-  }
-
-  /* TribeWell Text accent */
   .text-tribe-accent {
-    @apply text-tribe-sage-500 dark:text-tribe-sage-400;
+    @apply text-primary;
   }
 
   /* Card animations */
@@ -79,43 +280,47 @@
 
   /* Loading skeleton */
   .skeleton {
-    @apply animate-pulse bg-slate-200 dark:bg-slate-700 rounded;
-  }
-
-  /* Focus ring for accessibility - using tribe sage */
-  .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900;
+    @apply animate-pulse rounded;
+    background: var(--surface-muted);
   }
 }
+
+/* =============================================================================
+   UTILITY LAYER
+   ============================================================================= */
 
 @layer utilities {
   /* Perspective for 3D effects */
   .perspective-1000 {
     perspective: 1000px;
   }
-  
+
   /* Text balance for better typography */
   .text-balance {
     text-wrap: balance;
   }
-  
-  /* Gradient text - TribeWell sage green */
+
+  /* Gradient text - using theme colors */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-tribe-sage-500 to-tribe-sage-700 dark:from-tribe-sage-400 dark:to-tribe-sage-500;
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, var(--primary), var(--primary-hover));
   }
-  
+
   /* Hide scrollbar but keep functionality */
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
 }
 
-/* Animation keyframes */
+/* =============================================================================
+   ANIMATIONS
+   ============================================================================= */
+
 @keyframes float {
   0%, 100% {
     transform: translateY(0);
@@ -187,7 +392,7 @@
   animation: gradient-shift 8s ease infinite;
 }
 
-/* Glassmorphism */
+/* Glassmorphism - using theme colors */
 .glass {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
@@ -196,7 +401,7 @@
 }
 
 .dark .glass {
-  background: rgba(15, 23, 42, 0.7);
+  background: rgba(21, 46, 34, 0.7); /* forest-900 with opacity */
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -209,18 +414,14 @@
 }
 
 .dark .glass-card {
-  background: rgba(30, 41, 59, 0.6);
+  background: rgba(30, 61, 47, 0.6); /* forest-800 with opacity */
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-/* Warm background */
+/* Warm background - using theme sand colors */
 .bg-warm {
-  background: linear-gradient(135deg, #faf8f5 0%, #f5f3ef 50%, #faf8f5 100%);
-}
-
-.dark .bg-warm {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  background: linear-gradient(135deg, var(--surface-subtle) 0%, var(--surface-muted) 50%, var(--surface-subtle) 100%);
 }
 
 /* Floating orbs for background effect */
@@ -245,11 +446,11 @@
 .text-shimmer {
   background: linear-gradient(
     90deg,
-    #0d9488 0%,
-    #06b6d4 25%,
-    #6366f1 50%,
-    #06b6d4 75%,
-    #0d9488 100%
+    var(--primary) 0%,
+    var(--info) 25%,
+    var(--accent) 50%,
+    var(--info) 75%,
+    var(--primary) 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
