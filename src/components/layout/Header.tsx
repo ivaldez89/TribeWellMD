@@ -32,8 +32,8 @@ function NavLink({ href, children, onClick }: NavLinkProps) {
       className={`
         px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
         ${isActive
-          ? 'bg-primary text-primary-foreground shadow-soft'
-          : 'text-content-secondary hover:text-primary hover:bg-primary-light'
+          ? 'bg-white/20 text-primary-foreground shadow-soft dark:bg-white/20 dark:text-white'
+          : 'text-content-secondary dark:text-primary-foreground/80 hover:text-primary dark:hover:text-white hover:bg-primary-light dark:hover:bg-white/10'
         }
       `}
     >
@@ -66,7 +66,7 @@ function IconNavLink({ href, label, icon, activeIcon, matchPrefix }: IconNavLink
         absolute inset-x-1 inset-y-0 rounded-xl transition-all duration-200
         ${isActive
           ? 'bg-transparent'
-          : 'group-hover:bg-primary-light'
+          : 'group-hover:bg-primary-light dark:group-hover:bg-white/10'
         }
       `} />
 
@@ -74,15 +74,15 @@ function IconNavLink({ href, label, icon, activeIcon, matchPrefix }: IconNavLink
       <div className={`
         relative z-10 w-7 h-7 flex items-center justify-center transition-colors duration-200
         ${isActive
-          ? 'text-primary'
-          : 'text-content-muted group-hover:text-primary'
+          ? 'text-primary dark:text-white'
+          : 'text-content-muted dark:text-primary-foreground/70 group-hover:text-primary dark:group-hover:text-white'
         }
       `}>
         {isActive && activeIcon ? activeIcon : icon}
       </div>
 
       {/* Label - only shows on hover */}
-      <span className="relative z-10 text-[10px] font-medium transition-all duration-200 opacity-0 group-hover:opacity-100 h-0 group-hover:h-auto group-hover:mt-0.5 text-primary">
+      <span className="relative z-10 text-[10px] font-medium transition-all duration-200 opacity-0 group-hover:opacity-100 h-0 group-hover:h-auto group-hover:mt-0.5 text-primary dark:text-white">
         {label}
       </span>
     </Link>
@@ -236,9 +236,9 @@ export function Header({ stats }: HeaderProps) {
               <img src="/logo.jpeg" alt="TribeWellMD" className="w-full h-full object-cover" />
             </div>
             <div>
-              <span className="text-base sm:text-xl font-bold text-content">Tribe</span>
-              <span className="text-base sm:text-xl font-bold text-primary">Well</span>
-              <span className="text-base sm:text-xl font-light text-info">MD</span>
+              <span className="text-base sm:text-xl font-bold text-content dark:text-primary-foreground">Tribe</span>
+              <span className="text-base sm:text-xl font-bold text-primary dark:text-white">Well</span>
+              <span className="text-base sm:text-xl font-light text-info dark:text-primary-foreground">MD</span>
             </div>
           </Link>
 
@@ -349,19 +349,19 @@ export function Header({ stats }: HeaderProps) {
             {/* Stats Badge - only when authenticated */}
             {isAuthenticated && stats && stats.dueToday > 0 && (
               <>
-                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-warning-light border border-warning rounded-full">
+                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-warning-light dark:bg-white/20 border border-warning dark:border-white/30 rounded-full">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-warning opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-warning"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-warning dark:bg-white opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-warning dark:bg-white"></span>
                   </span>
-                  <span className="text-sm font-medium text-content-secondary">
+                  <span className="text-sm font-medium text-content-secondary dark:text-primary-foreground">
                     {stats.dueToday} due
                   </span>
                 </div>
 
                 <Link
                   href="/flashcards"
-                  className="md:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground shadow-soft hover:shadow-soft-md transition-shadow"
+                  className="md:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-primary dark:bg-white/20 text-primary-foreground shadow-soft hover:shadow-soft-md transition-shadow"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -379,13 +379,13 @@ export function Header({ stats }: HeaderProps) {
               <div className="hidden sm:flex items-center gap-2">
                 <Link
                   href="/login"
-                  className="px-4 py-2 text-sm font-medium text-content-secondary hover:text-primary transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-content-secondary dark:text-primary-foreground/80 hover:text-primary dark:hover:text-white transition-colors"
                 >
                   Sign In
                 </Link>
                 <Link
                   href="/register"
-                  className="px-4 py-2 text-sm font-medium text-primary-foreground bg-primary hover:bg-primary-hover rounded-lg shadow-soft hover:shadow-soft-md transition-all"
+                  className="px-4 py-2 text-sm font-medium text-primary-foreground bg-primary dark:bg-white dark:text-primary hover:bg-primary-hover dark:hover:bg-white/90 rounded-lg shadow-soft hover:shadow-soft-md transition-all"
                 >
                   Get Started
                 </Link>
@@ -395,7 +395,7 @@ export function Header({ stats }: HeaderProps) {
             {/* Mobile hamburger menu button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-content-secondary hover:bg-surface-muted transition-colors"
+              className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-content-secondary dark:text-primary-foreground hover:bg-surface-muted dark:hover:bg-white/10 transition-colors"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
@@ -414,15 +414,15 @@ export function Header({ stats }: HeaderProps) {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border-light bg-surface dark:bg-primary">
+        <div className="md:hidden border-t border-border-light dark:border-white/20 bg-surface dark:bg-primary">
           <div className="max-w-7xl mx-auto px-4 py-4 space-y-2">
             {isAuthenticated ? (
               <>
                 <MobileNavLink href="/home" onClick={() => setMobileMenuOpen(false)}>Home</MobileNavLink>
 
                 {/* Study Section */}
-                <div className="pt-2 border-t border-border-light">
-                  <p className="px-4 py-1 text-xs font-semibold text-content-muted uppercase tracking-wider">Study</p>
+                <div className="pt-2 border-t border-border-light dark:border-white/20">
+                  <p className="px-4 py-1 text-xs font-semibold text-content-muted dark:text-primary-foreground/60 uppercase tracking-wider">Study</p>
                   <MobileNavLink href="/flashcards" onClick={() => setMobileMenuOpen(false)}>Flashcards</MobileNavLink>
                   <MobileNavLink href="/cases" onClick={() => setMobileMenuOpen(false)}>Clinical Cases</MobileNavLink>
                   <MobileNavLink href="/generate" onClick={() => setMobileMenuOpen(false)}>AI Generator</MobileNavLink>
@@ -430,22 +430,22 @@ export function Header({ stats }: HeaderProps) {
                 </div>
 
                 {/* Tools Section */}
-                <div className="pt-2 border-t border-border-light">
-                  <p className="px-4 py-1 text-xs font-semibold text-content-muted uppercase tracking-wider">Tools</p>
+                <div className="pt-2 border-t border-border-light dark:border-white/20">
+                  <p className="px-4 py-1 text-xs font-semibold text-content-muted dark:text-primary-foreground/60 uppercase tracking-wider">Tools</p>
                   <MobileNavLink href="/dashboard" onClick={() => setMobileMenuOpen(false)}>Dashboard</MobileNavLink>
                 </div>
 
                 {/* Wellness Section */}
-                <div className="pt-2 border-t border-border-light">
-                  <p className="px-4 py-1 text-xs font-semibold text-content-muted uppercase tracking-wider">Wellness</p>
+                <div className="pt-2 border-t border-border-light dark:border-white/20">
+                  <p className="px-4 py-1 text-xs font-semibold text-content-muted dark:text-primary-foreground/60 uppercase tracking-wider">Wellness</p>
                   <MobileNavLink href="/wellness" onClick={() => setMobileMenuOpen(false)}>Wellness Hub</MobileNavLink>
                   <MobileNavLink href="/wellness?tab=journey" onClick={() => setMobileMenuOpen(false)}>My Journey</MobileNavLink>
                   <MobileNavLink href="/wellness?tab=skills" onClick={() => setMobileMenuOpen(false)}>Social Skills</MobileNavLink>
                 </div>
 
                 {/* Community Section */}
-                <div className="pt-2 border-t border-border-light">
-                  <p className="px-4 py-1 text-xs font-semibold text-content-muted uppercase tracking-wider">Community</p>
+                <div className="pt-2 border-t border-border-light dark:border-white/20">
+                  <p className="px-4 py-1 text-xs font-semibold text-content-muted dark:text-primary-foreground/60 uppercase tracking-wider">Community</p>
                   <MobileNavLink href="/village" onClick={() => setMobileMenuOpen(false)}>My Village</MobileNavLink>
                   <MobileNavLink href="/connections" onClick={() => setMobileMenuOpen(false)}>Connections</MobileNavLink>
                   <MobileNavLink href="/my-impact" onClick={() => setMobileMenuOpen(false)}>My Impact</MobileNavLink>
@@ -461,18 +461,18 @@ export function Header({ stats }: HeaderProps) {
                 <MobileNavLink href="/about" onClick={() => setMobileMenuOpen(false)}>About</MobileNavLink>
                 <MobileNavLink href="/investors" onClick={() => setMobileMenuOpen(false)}>For Investors</MobileNavLink>
                 <MobileNavLink href="/partners" onClick={() => setMobileMenuOpen(false)}>For Partners</MobileNavLink>
-                <div className="pt-4 border-t border-border space-y-2">
+                <div className="pt-4 border-t border-border dark:border-white/20 space-y-2">
                   <Link
                     href="/login"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full px-4 py-3 text-center text-sm font-medium text-content-secondary border border-border rounded-lg hover:bg-surface-muted transition-colors"
+                    className="block w-full px-4 py-3 text-center text-sm font-medium text-content-secondary dark:text-primary-foreground border border-border dark:border-white/30 rounded-lg hover:bg-surface-muted dark:hover:bg-white/10 transition-colors"
                   >
                     Sign In
                   </Link>
                   <Link
                     href="/register"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full px-4 py-3 text-center text-sm font-medium text-primary-foreground bg-primary hover:bg-primary-hover rounded-lg shadow-soft transition-all"
+                    className="block w-full px-4 py-3 text-center text-sm font-medium text-primary-foreground dark:text-primary bg-primary dark:bg-white hover:bg-primary-hover dark:hover:bg-white/90 rounded-lg shadow-soft transition-all"
                   >
                     Get Started
                   </Link>
@@ -501,8 +501,8 @@ function MobileNavLink({ href, children, onClick }: { href: string; children: Re
       className={`
         block px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200
         ${isActive
-          ? 'bg-primary text-primary-foreground'
-          : 'text-content hover:bg-primary-light'
+          ? 'bg-primary dark:bg-white/20 text-primary-foreground'
+          : 'text-content dark:text-primary-foreground hover:bg-primary-light dark:hover:bg-white/10'
         }
       `}
     >
