@@ -34,6 +34,16 @@ import {
   calculateStats,
   previewSchedule
 } from '@/lib/spaced-repetition/fsrs';
+import {
+  flashcardLogger,
+  sessionLogger,
+  metrics,
+  METRIC_NAMES,
+  withRetry,
+  checkCircuitBreaker,
+  recordSuccess,
+  recordFailure,
+} from '@/lib/observability';
 
 interface UseFlashcardsReturn {
   // State
@@ -83,6 +93,10 @@ const defaultFilters: DeckFilter = {
   difficulties: []
 };
 
+// Circuit breaker names
+const CB_FLASHCARD_WRITE = 'flashcard-write';
+const CB_SESSION = 'session';
+
 export function useFlashcards(): UseFlashcardsReturn {
   const [cards, setCards] = useState<Flashcard[]>([]);
   const [dueCards, setDueCards] = useState<Flashcard[]>([]);
@@ -101,7 +115,9 @@ export function useFlashcards(): UseFlashcardsReturn {
   // Load cards on mount - checks auth and handles migration
   useEffect(() => {
     const loadData = async () => {
+      const loadStart = performance.now();
       setIsLoading(true);
+      flashcardLogger.info('Loading flashcards');
 
       try {
         const supabase = createClient();
@@ -109,25 +125,44 @@ export function useFlashcards(): UseFlashcardsReturn {
 
         if (user) {
           setIsAuthenticated(true);
+          flashcardLogger.debug('User authenticated', { userId: user.id });
 
           // Check if migration is needed
           if (hasLocalStorageData() && !isMigrationComplete()) {
-            console.log('Starting localStorage to Supabase migration...');
+            flashcardLogger.info('Migration needed, starting...');
             const result = await migrateLocalStorageToSupabase();
             if (result.success) {
-              console.log(`Migration complete: ${result.migratedCount} cards migrated`);
+              flashcardLogger.info('Migration complete', {
+                count: result.migratedCount,
+                metadata: { skipped: result.skippedCount, failed: result.failedCount },
+              });
             } else {
-              console.error('Migration failed:', result.error);
+              flashcardLogger.error('Migration failed', { error: result.error });
             }
           }
 
-          // Fetch cards from Supabase
-          try {
-            const fetchedCards = await fetchFlashcards();
-            setCards(fetchedCards);
-            setDueCards(getDueCards(fetchedCards));
-          } catch (err) {
-            console.error('Failed to fetch from Supabase, falling back to localStorage:', err);
+          // Fetch cards from Supabase with retry
+          const fetchResult = await withRetry(
+            'fetchFlashcards',
+            async () => fetchFlashcards(),
+            { maxRetries: 2 }
+          );
+
+          if (fetchResult.success && fetchResult.result) {
+            setCards(fetchResult.result);
+            setDueCards(getDueCards(fetchResult.result));
+            recordSuccess(CB_FLASHCARD_WRITE);
+            const duration = Math.round(performance.now() - loadStart);
+            metrics.record(METRIC_NAMES.FLASHCARD_LOAD, duration, { count: fetchResult.result.length });
+            flashcardLogger.info('Loaded cards from Supabase', {
+              count: fetchResult.result.length,
+              duration,
+            });
+          } else {
+            recordFailure(CB_FLASHCARD_WRITE);
+            flashcardLogger.warn('Supabase fetch failed, falling back to localStorage', {
+              error: fetchResult.error?.message,
+            });
             // Fallback to localStorage if Supabase fails
             const localCards = getLocalFlashcards();
             setCards(localCards);
@@ -135,6 +170,7 @@ export function useFlashcards(): UseFlashcardsReturn {
           }
         } else {
           setIsAuthenticated(false);
+          flashcardLogger.debug('User not authenticated, using localStorage');
           // Not authenticated - use localStorage
           seedFlashcards();
           const loadedCards = getLocalFlashcards();
@@ -148,7 +184,9 @@ export function useFlashcards(): UseFlashcardsReturn {
           setFiltersState(savedFilters);
         }
       } catch (err) {
-        console.error('Error loading flashcards:', err);
+        flashcardLogger.error('Error loading flashcards', {
+          error: err instanceof Error ? err.message : 'Unknown error',
+        });
         // Fallback to localStorage
         seedFlashcards();
         const loadedCards = getLocalFlashcards();
@@ -282,13 +320,31 @@ export function useFlashcards(): UseFlashcardsReturn {
 
   // Refresh cards from storage
   const refreshCards = useCallback(async () => {
+    flashcardLogger.debug('Refreshing cards');
+
     if (isAuthenticated) {
-      try {
-        const fetchedCards = await fetchFlashcards();
-        setCards(fetchedCards);
-        setDueCards(getDueCards(fetchedCards));
-      } catch (err) {
-        console.error('Error refreshing cards:', err);
+      const { canRetry } = checkCircuitBreaker(CB_FLASHCARD_WRITE);
+      if (!canRetry) {
+        flashcardLogger.warn('Circuit breaker open, using cached cards');
+        return;
+      }
+
+      const refreshResult = await withRetry(
+        'refreshFlashcards',
+        async () => fetchFlashcards(),
+        { maxRetries: 2 }
+      );
+
+      if (refreshResult.success && refreshResult.result) {
+        setCards(refreshResult.result);
+        setDueCards(getDueCards(refreshResult.result));
+        recordSuccess(CB_FLASHCARD_WRITE);
+        flashcardLogger.debug('Cards refreshed', { count: refreshResult.result.length });
+      } else {
+        recordFailure(CB_FLASHCARD_WRITE);
+        flashcardLogger.error('Error refreshing cards', {
+          error: refreshResult.error?.message,
+        });
       }
     } else {
       const loadedCards = getLocalFlashcards();
@@ -337,6 +393,12 @@ export function useFlashcards(): UseFlashcardsReturn {
   const rateCard = useCallback(async (rating: Rating) => {
     if (!currentCard) return;
 
+    const reviewStart = performance.now();
+    flashcardLogger.debug('Rating card', {
+      operation: 'rateCard',
+      metadata: { cardId: currentCard.id, rating },
+    });
+
     // Calculate new scheduling
     const result = scheduleCard(currentCard, rating);
 
@@ -365,27 +427,54 @@ export function useFlashcards(): UseFlashcardsReturn {
 
     // Save to appropriate storage
     if (isAuthenticated) {
-      try {
-        await updateFlashcardSR(currentCard.id, updatedCard.spacedRepetition);
+      const { canRetry } = checkCircuitBreaker(CB_FLASHCARD_WRITE);
 
-        // Record review if session active
-        if (sessionId && reviewStartTime) {
-          const timeSpentMs = Date.now() - reviewStartTime;
-          await recordReview(
-            sessionId,
-            currentCard.id,
-            rating,
-            timeSpentMs,
-            previousState,
-            result.state,
-            srBefore,
-            { interval: result.interval, ease: result.ease }
-          );
-        }
-      } catch (err) {
-        console.error('Error saving to Supabase:', err);
-        // Fallback to localStorage
+      if (!canRetry) {
+        flashcardLogger.warn('Circuit breaker open, saving to localStorage', {
+          metadata: { cardId: currentCard.id },
+        });
         saveLocalFlashcard(updatedCard);
+      } else {
+        const saveResult = await withRetry(
+          'updateFlashcardSR',
+          async () => {
+            await updateFlashcardSR(currentCard.id, updatedCard.spacedRepetition);
+
+            // Record review if session active
+            if (sessionId && reviewStartTime) {
+              const timeSpentMs = Date.now() - reviewStartTime;
+              await recordReview(
+                sessionId,
+                currentCard.id,
+                rating,
+                timeSpentMs,
+                previousState,
+                result.state,
+                srBefore,
+                { interval: result.interval, ease: result.ease }
+              );
+            }
+          },
+          { maxRetries: 2 }
+        );
+
+        if (saveResult.success) {
+          recordSuccess(CB_FLASHCARD_WRITE);
+          const duration = Math.round(performance.now() - reviewStart);
+          metrics.record(METRIC_NAMES.FLASHCARD_REVIEW, duration, { rating });
+          flashcardLogger.debug('Card rated successfully', {
+            duration,
+            metadata: { cardId: currentCard.id, rating, newState: result.state },
+          });
+        } else {
+          recordFailure(CB_FLASHCARD_WRITE);
+          flashcardLogger.warn('Supabase save failed, falling back to localStorage', {
+            error: saveResult.error?.message,
+            metadata: { cardId: currentCard.id },
+          });
+          // Fallback to localStorage
+          saveLocalFlashcard(updatedCard);
+        }
       }
     } else {
       saveLocalFlashcard(updatedCard);
@@ -471,13 +560,33 @@ export function useFlashcards(): UseFlashcardsReturn {
   // Session management
   const startSession = useCallback(async () => {
     sessionStartTimeRef.current = Date.now();
+    sessionLogger.info('Starting review session');
+    metrics.record(METRIC_NAMES.SESSION_START, 1);
 
     if (isAuthenticated) {
-      try {
-        const newSessionId = await startReviewSession('review');
-        setSessionId(newSessionId);
-      } catch (err) {
-        console.error('Error starting Supabase session:', err);
+      const { canRetry } = checkCircuitBreaker(CB_SESSION);
+
+      if (canRetry) {
+        const sessionResult = await withRetry(
+          'startReviewSession',
+          async () => startReviewSession('review'),
+          { maxRetries: 2 }
+        );
+
+        if (sessionResult.success && sessionResult.result) {
+          setSessionId(sessionResult.result);
+          recordSuccess(CB_SESSION);
+          sessionLogger.info('Supabase session started', {
+            metadata: { sessionId: sessionResult.result },
+          });
+        } else {
+          recordFailure(CB_SESSION);
+          sessionLogger.warn('Failed to start Supabase session', {
+            error: sessionResult.error?.message,
+          });
+        }
+      } else {
+        sessionLogger.warn('Circuit breaker open, session not tracked in Supabase');
       }
     }
 
@@ -496,25 +605,48 @@ export function useFlashcards(): UseFlashcardsReturn {
 
   const endSessionFn = useCallback(async () => {
     if (session) {
+      const totalTimeMs = sessionStartTimeRef.current
+        ? Date.now() - sessionStartTimeRef.current
+        : 0;
+
+      sessionLogger.info('Ending review session', {
+        duration: totalTimeMs,
+        metadata: {
+          cardsReviewed: session.cardsReviewed,
+          cardsCorrect: session.cardsCorrect,
+          cardsFailed: session.cardsFailed,
+        },
+      });
+      metrics.record(METRIC_NAMES.SESSION_END, totalTimeMs, {
+        cardsReviewed: session.cardsReviewed,
+      });
+
       const endedSession: ReviewSession = {
         ...session,
         endedAt: new Date().toISOString()
       };
 
       if (isAuthenticated && sessionId) {
-        try {
-          const totalTimeMs = sessionStartTimeRef.current
-            ? Date.now() - sessionStartTimeRef.current
-            : 0;
-
-          await endReviewSession(sessionId, {
+        const endResult = await withRetry(
+          'endReviewSession',
+          async () => endReviewSession(sessionId, {
             cardsReviewed: session.cardsReviewed,
             cardsCorrect: session.cardsCorrect,
             cardsFailed: session.cardsFailed,
             totalTimeMs
+          }),
+          { maxRetries: 2 }
+        );
+
+        if (endResult.success) {
+          recordSuccess(CB_SESSION);
+          sessionLogger.info('Session ended in Supabase');
+        } else {
+          recordFailure(CB_SESSION);
+          sessionLogger.warn('Failed to end Supabase session, saving locally', {
+            error: endResult.error?.message,
           });
-        } catch (err) {
-          console.error('Error ending Supabase session:', err);
+          saveLocalSession(endedSession);
         }
       } else {
         saveLocalSession(endedSession);
@@ -529,6 +661,7 @@ export function useFlashcards(): UseFlashcardsReturn {
   const addCard = useCallback(async (
     cardData: Omit<Flashcard, 'id' | 'schemaVersion' | 'createdAt' | 'updatedAt'>
   ) => {
+    const saveStart = performance.now();
     const now = new Date().toISOString();
     const newCard: Flashcard = {
       ...cardData,
@@ -538,14 +671,45 @@ export function useFlashcards(): UseFlashcardsReturn {
       updatedAt: now
     };
 
+    flashcardLogger.debug('Adding new card', {
+      operation: 'addCard',
+      metadata: { cardId: newCard.id },
+    });
+
     if (isAuthenticated) {
-      try {
-        const createdCard = await createFlashcardApi(newCard);
-        const updatedCards = [...cards, createdCard];
+      const { canRetry } = checkCircuitBreaker(CB_FLASHCARD_WRITE);
+
+      if (!canRetry) {
+        flashcardLogger.warn('Circuit breaker open, saving to localStorage');
+        saveLocalFlashcard(newCard);
+        const updatedCards = [...cards, newCard];
         setCards(updatedCards);
         setDueCards(getDueCards(updatedCards));
-      } catch (err) {
-        console.error('Error creating card in Supabase:', err);
+        return;
+      }
+
+      const createResult = await withRetry(
+        'createFlashcard',
+        async () => createFlashcardApi(newCard),
+        { maxRetries: 2 }
+      );
+
+      if (createResult.success && createResult.result) {
+        recordSuccess(CB_FLASHCARD_WRITE);
+        const duration = Math.round(performance.now() - saveStart);
+        metrics.record(METRIC_NAMES.FLASHCARD_SAVE, duration);
+        flashcardLogger.info('Card created in Supabase', {
+          duration,
+          metadata: { cardId: createResult.result.id },
+        });
+        const updatedCards = [...cards, createResult.result];
+        setCards(updatedCards);
+        setDueCards(getDueCards(updatedCards));
+      } else {
+        recordFailure(CB_FLASHCARD_WRITE);
+        flashcardLogger.warn('Supabase create failed, saving to localStorage', {
+          error: createResult.error?.message,
+        });
         // Fallback to localStorage
         saveLocalFlashcard(newCard);
         const updatedCards = [...cards, newCard];
@@ -572,19 +736,46 @@ export function useFlashcards(): UseFlashcardsReturn {
     });
 
     if (uniqueNewCards.length === 0) {
-      console.log('No new unique cards to add');
+      flashcardLogger.debug('No new unique cards to add');
       return;
     }
 
+    flashcardLogger.info('Adding multiple cards', {
+      count: uniqueNewCards.length,
+      metadata: { total: newCards.length, duplicates: newCards.length - uniqueNewCards.length },
+    });
+
     if (isAuthenticated) {
-      try {
-        const createdCards = await createFlashcardsApi(uniqueNewCards);
-        const mergedCards = [...cards, ...createdCards];
+      const { canRetry } = checkCircuitBreaker(CB_FLASHCARD_WRITE);
+
+      if (!canRetry) {
+        flashcardLogger.warn('Circuit breaker open, saving to localStorage');
+        const mergedCards = [...cards, ...uniqueNewCards];
+        saveLocalFlashcards(mergedCards);
         setCards(mergedCards);
         setDueCards(getDueCards(mergedCards));
-        console.log(`Added ${createdCards.length} new cards to Supabase`);
-      } catch (err) {
-        console.error('Error creating cards in Supabase:', err);
+        return;
+      }
+
+      const createResult = await withRetry(
+        'createFlashcards',
+        async () => createFlashcardsApi(uniqueNewCards),
+        { maxRetries: 2 }
+      );
+
+      if (createResult.success && createResult.result) {
+        recordSuccess(CB_FLASHCARD_WRITE);
+        flashcardLogger.info('Cards created in Supabase', {
+          count: createResult.result.length,
+        });
+        const mergedCards = [...cards, ...createResult.result];
+        setCards(mergedCards);
+        setDueCards(getDueCards(mergedCards));
+      } else {
+        recordFailure(CB_FLASHCARD_WRITE);
+        flashcardLogger.warn('Supabase batch create failed, saving to localStorage', {
+          error: createResult.error?.message,
+        });
         // Fallback to localStorage
         const mergedCards = [...cards, ...uniqueNewCards];
         saveLocalFlashcards(mergedCards);
@@ -596,7 +787,7 @@ export function useFlashcards(): UseFlashcardsReturn {
       saveLocalFlashcards(mergedCards);
       setCards(mergedCards);
       setDueCards(getDueCards(mergedCards));
-      console.log(`Added ${uniqueNewCards.length} new cards to localStorage`);
+      flashcardLogger.debug('Cards saved to localStorage', { count: uniqueNewCards.length });
     }
   }, [cards, isAuthenticated]);
 
@@ -604,14 +795,42 @@ export function useFlashcards(): UseFlashcardsReturn {
   const updateCard = useCallback(async (updatedCard: Flashcard) => {
     const updated = { ...updatedCard, updatedAt: new Date().toISOString() };
 
+    flashcardLogger.debug('Updating card', {
+      operation: 'updateCard',
+      metadata: { cardId: updatedCard.id },
+    });
+
     if (isAuthenticated) {
-      try {
-        const result = await updateFlashcardApi(updatedCard.id, updated);
-        const updatedCards = cards.map(c => c.id === result.id ? result : c);
+      const { canRetry } = checkCircuitBreaker(CB_FLASHCARD_WRITE);
+
+      if (!canRetry) {
+        flashcardLogger.warn('Circuit breaker open, saving to localStorage');
+        saveLocalFlashcard(updated);
+        const updatedCards = cards.map(c => c.id === updated.id ? updated : c);
         setCards(updatedCards);
         setDueCards(getDueCards(updatedCards));
-      } catch (err) {
-        console.error('Error updating card in Supabase:', err);
+        return;
+      }
+
+      const updateResult = await withRetry(
+        'updateFlashcard',
+        async () => updateFlashcardApi(updatedCard.id, updated),
+        { maxRetries: 2 }
+      );
+
+      if (updateResult.success && updateResult.result) {
+        recordSuccess(CB_FLASHCARD_WRITE);
+        flashcardLogger.debug('Card updated in Supabase', {
+          metadata: { cardId: updateResult.result.id },
+        });
+        const updatedCards = cards.map(c => c.id === updateResult.result!.id ? updateResult.result! : c);
+        setCards(updatedCards);
+        setDueCards(getDueCards(updatedCards));
+      } else {
+        recordFailure(CB_FLASHCARD_WRITE);
+        flashcardLogger.warn('Supabase update failed, saving to localStorage', {
+          error: updateResult.error?.message,
+        });
         // Fallback to localStorage
         saveLocalFlashcard(updated);
         const updatedCards = cards.map(c => c.id === updated.id ? updated : c);
@@ -628,11 +847,29 @@ export function useFlashcards(): UseFlashcardsReturn {
 
   // Delete card
   const deleteCard = useCallback(async (id: string) => {
+    flashcardLogger.debug('Deleting card', {
+      operation: 'deleteCard',
+      metadata: { cardId: id },
+    });
+
     if (isAuthenticated) {
-      try {
-        await deleteFlashcardApi(id);
-      } catch (err) {
-        console.error('Error deleting card from Supabase:', err);
+      const deleteResult = await withRetry(
+        'deleteFlashcard',
+        async () => deleteFlashcardApi(id),
+        { maxRetries: 2 }
+      );
+
+      if (deleteResult.success) {
+        recordSuccess(CB_FLASHCARD_WRITE);
+        flashcardLogger.debug('Card deleted from Supabase', {
+          metadata: { cardId: id },
+        });
+      } else {
+        recordFailure(CB_FLASHCARD_WRITE);
+        flashcardLogger.warn('Supabase delete failed', {
+          error: deleteResult.error?.message,
+          metadata: { cardId: id },
+        });
       }
     }
 
