@@ -33,16 +33,16 @@ const getIconComponent = (iconName: string) => {
   return iconMap[iconName] || iconMap.Default;
 };
 
-// Shelf categories for browsing - using icon names instead of emojis
+// Shelf categories for browsing - using semantic gradient colors
 const SHELF_CATEGORIES = [
-  { id: 'internal-medicine', name: 'Internal Medicine', icon: 'Stethoscope', color: 'from-[#5B7B6D] to-[#6B8B7D]' },
-  { id: 'surgery', name: 'Surgery', icon: 'Scalpel', color: 'from-[#8B7355] to-[#A89070]' },
-  { id: 'pediatrics', name: 'Pediatrics', icon: 'Baby', color: 'from-[#7FA08F] to-[#8BA89A]' },
-  { id: 'obgyn', name: 'OB/GYN', icon: 'Heart', color: 'from-[#A89070] to-[#C4A77D]' },
-  { id: 'psychiatry', name: 'Psychiatry', icon: 'Brain', color: 'from-[#6B8B7D] to-[#7FA08F]' },
-  { id: 'family-medicine', name: 'Family Medicine', icon: 'Users', color: 'from-[#5B7B6D] to-[#7FA08F]' },
-  { id: 'neurology', name: 'Neurology', icon: 'Zap', color: 'from-[#8B7355] to-[#C4A77D]' },
-  { id: 'emergency', name: 'Emergency Medicine', icon: 'Ambulance', color: 'from-[#A89070] to-[#8B7355]' },
+  { id: 'internal-medicine', name: 'Internal Medicine', icon: 'Stethoscope', color: 'from-forest-500 to-forest-400' },
+  { id: 'surgery', name: 'Surgery', icon: 'Scalpel', color: 'from-sand-700 to-sand-600' },
+  { id: 'pediatrics', name: 'Pediatrics', icon: 'Baby', color: 'from-forest-400 to-forest-300' },
+  { id: 'obgyn', name: 'OB/GYN', icon: 'Heart', color: 'from-sand-600 to-sand-500' },
+  { id: 'psychiatry', name: 'Psychiatry', icon: 'Brain', color: 'from-forest-400 to-forest-300' },
+  { id: 'family-medicine', name: 'Family Medicine', icon: 'Users', color: 'from-forest-500 to-forest-400' },
+  { id: 'neurology', name: 'Neurology', icon: 'Zap', color: 'from-sand-700 to-sand-500' },
+  { id: 'emergency', name: 'Emergency Medicine', icon: 'Ambulance', color: 'from-sand-600 to-sand-700' },
 ];
 
 // System/Category options for browsing (matches MedicalSystem type) - using icon names
@@ -115,12 +115,12 @@ export default function CasesPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5] dark:from-slate-900 dark:to-slate-800">
+      <div className="min-h-screen bg-background">
         <Header />
         <div className="flex items-center justify-center" style={{ minHeight: 'calc(100vh - 64px)' }}>
           <div className="text-center">
-            <div className="w-12 h-12 border-4 border-[#5B7B6D] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-            <p className="text-[#5B7B6D] dark:text-slate-400">Loading cases...</p>
+            <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+            <p className="text-content-muted">Loading cases...</p>
           </div>
         </div>
       </div>
@@ -128,15 +128,15 @@ export default function CasesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5] dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-background">
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
         <section className="mb-8 animate-fade-in-up">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#5B7B6D] via-[#6B8B7D] to-[#7FA08F] p-8 md:p-10 shadow-2xl">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-forest-500 via-forest-400 to-forest-300 p-8 md:p-10 shadow-2xl">
             {/* Animated background elements */}
-            <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
               <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
               <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-white/10 to-transparent rounded-full" />
@@ -148,7 +148,7 @@ export default function CasesPage() {
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/20 backdrop-blur rounded-full text-white/90 text-sm font-medium mb-4">
                   {dueCases.length > 0 ? (
                     <>
-                      <span className="w-2 h-2 bg-yellow-300 rounded-full animate-pulse" />
+                      <span className="w-2 h-2 bg-warning rounded-full animate-pulse" />
                       <span>{dueCases.length} cases due for review</span>
                     </>
                   ) : (
@@ -162,7 +162,7 @@ export default function CasesPage() {
                 </div>
 
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 leading-tight">
-                  Clinical <span className="text-[#C4A77D]">Cases</span>
+                  Clinical <span className="text-sand-200">Cases</span>
                 </h1>
 
                 <p className="text-white/80 text-lg max-w-md">
@@ -189,28 +189,20 @@ export default function CasesPage() {
               </div>
 
               {/* Right side - CTA Button */}
-              <div className="flex flex-col items-center gap-4">
+              <div>
                 {dueCases.length > 0 ? (
                   <button
                     onClick={handleStartDue}
-                    className="group relative px-10 py-5 bg-white hover:bg-[#F5F0E8] text-slate-900 font-bold text-xl rounded-2xl shadow-2xl hover:shadow-[#5B7B6D]/25 transition-all duration-300 hover:scale-105"
+                    className="px-8 py-4 bg-surface border border-border rounded-xl"
                   >
-                    <span className="flex items-center gap-3">
-                      Start Review
-                      <span className="px-3 py-1 bg-[#5B7B6D] text-white text-base rounded-full">
-                        {dueCases.length}
-                      </span>
-                      <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
+                    <span className="text-lg font-semibold text-content">Start Review</span>
+                    <span className="ml-3 px-2.5 py-1 bg-primary text-primary-foreground text-sm font-medium rounded-full">
+                      {dueCases.length}
                     </span>
                   </button>
                 ) : (
-                  <div className="px-10 py-5 bg-white/20 backdrop-blur text-white font-semibold text-xl rounded-2xl flex items-center gap-3">
-                    <svg className="w-6 h-6 text-[#C4A77D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    All Caught Up!
+                  <div className="px-8 py-4 bg-surface border border-border rounded-xl">
+                    <span className="text-lg font-semibold text-content">All Caught Up!</span>
                   </div>
                 )}
               </div>
@@ -252,8 +244,8 @@ export default function CasesPage() {
                   }}
                   className={`group relative p-6 rounded-2xl shadow-lg transition-all duration-300 overflow-hidden ${
                     hasWeakTopics
-                      ? 'bg-gradient-to-br from-[#8B7355] to-[#A89070] shadow-[#8B7355]/25 hover:shadow-[#8B7355]/40 hover:scale-[1.02] cursor-pointer'
-                      : 'bg-gradient-to-br from-[#5B7B6D] to-[#6B8B7D] shadow-[#5B7B6D]/25'
+                      ? 'bg-gradient-to-br from-sand-700 to-sand-600 shadow-sand-700/25 hover:shadow-sand-700/40 hover:scale-[1.02] cursor-pointer'
+                      : 'bg-gradient-to-br from-forest-500 to-forest-400 shadow-forest-500/25'
                   } text-white`}
                 >
                   <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
@@ -277,7 +269,7 @@ export default function CasesPage() {
                     </p>
                     {hasWeakTopics ? (
                       <div className="space-y-1">
-                        {weakTopics.map((topic, i) => (
+                        {weakTopics.map((topic) => (
                           <div key={topic.id} className="flex items-center gap-2 text-sm">
                             <span className="w-4 h-4">{getIconComponent(topic.icon)}</span>
                             <span className="text-white/80">{topic.name}</span>
@@ -301,7 +293,7 @@ export default function CasesPage() {
             })()}
 
             {/* Box 2: Browse by Shelf / Category */}
-            <div className="relative p-6 bg-gradient-to-br from-[#6B8B7D] to-[#7FA08F] rounded-2xl shadow-lg shadow-[#6B8B7D]/25 text-white">
+            <div className="relative p-6 bg-gradient-to-br from-forest-400 to-forest-300 rounded-2xl shadow-lg shadow-forest-400/25 text-white">
               {/* Background decoration - separate from content */}
               <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
                 <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
@@ -352,21 +344,21 @@ export default function CasesPage() {
                 </div>
               </div>
 
-              {/* Shelf Dropdown Menu - positioned outside overflow context */}
+              {/* Shelf Dropdown Menu */}
               {showShelfDropdown && (
                 <>
                   <div
                     className="fixed inset-0 z-[100]"
                     onClick={() => setShowShelfDropdown(false)}
                   />
-                  <div className="absolute left-6 right-6 top-[calc(100%-3.5rem)] mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-[110] max-h-64 overflow-y-auto">
+                  <div className="absolute left-6 right-6 top-[calc(100%-3.5rem)] mt-2 bg-surface rounded-xl shadow-2xl border border-border z-[110] max-h-64 overflow-y-auto">
                     {SHELF_CATEGORIES.map((shelf) => (
                       <button
                         key={shelf.id}
                         onClick={() => handleShelfSelect(shelf.id)}
-                        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-left text-slate-900 dark:text-white first:rounded-t-xl last:rounded-b-xl"
+                        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-surface-muted transition-colors text-left text-content first:rounded-t-xl last:rounded-b-xl"
                       >
-                        <span className="w-5 h-5 text-[#5B7B6D]">{getIconComponent(shelf.icon)}</span>
+                        <span className="w-5 h-5 text-primary">{getIconComponent(shelf.icon)}</span>
                         <span className="text-sm font-medium">{shelf.name}</span>
                       </button>
                     ))}
@@ -374,14 +366,14 @@ export default function CasesPage() {
                 </>
               )}
 
-              {/* Category Dropdown Menu - positioned outside overflow context */}
+              {/* Category Dropdown Menu */}
               {showCategoryDropdown && (
                 <>
                   <div
                     className="fixed inset-0 z-[100]"
                     onClick={() => setShowCategoryDropdown(false)}
                   />
-                  <div className="absolute left-6 right-6 top-full mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-[110] max-h-64 overflow-y-auto">
+                  <div className="absolute left-6 right-6 top-full mt-2 bg-surface rounded-xl shadow-2xl border border-border z-[110] max-h-64 overflow-y-auto">
                     {SYSTEM_CATEGORIES.map((cat) => {
                       const count = getCasesBySystem(cat.id).length;
                       return (
@@ -391,18 +383,18 @@ export default function CasesPage() {
                           disabled={count === 0}
                           className={`w-full flex items-center justify-between px-4 py-3 transition-colors text-left first:rounded-t-xl last:rounded-b-xl ${
                             count > 0
-                              ? 'hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-900 dark:text-white'
-                              : 'text-slate-400 dark:text-slate-600 cursor-not-allowed'
+                              ? 'hover:bg-surface-muted text-content'
+                              : 'text-content-muted/50 cursor-not-allowed'
                           }`}
                         >
                           <div className="flex items-center gap-3">
-                            <span className="w-5 h-5 text-[#5B7B6D]">{getIconComponent(cat.icon)}</span>
+                            <span className="w-5 h-5 text-primary">{getIconComponent(cat.icon)}</span>
                             <span className="text-sm font-medium">{cat.name}</span>
                           </div>
                           <span className={`text-xs px-2 py-0.5 rounded-full ${
                             count > 0
-                              ? 'bg-[#E8E0D5] dark:bg-[#3D4A44] text-[#5B7B6D] dark:text-[#7FA08F]'
-                              : 'bg-slate-100 dark:bg-slate-800 text-slate-400'
+                              ? 'bg-primary-light text-primary'
+                              : 'bg-surface-muted text-content-muted'
                           }`}>
                             {count}
                           </span>
@@ -417,7 +409,7 @@ export default function CasesPage() {
             {/* Box 3: Progress */}
             <Link
               href="/progress/progress"
-              className="group relative p-6 bg-gradient-to-br from-[#A89070] to-[#C4A77D] rounded-2xl shadow-lg shadow-[#A89070]/25 hover:shadow-[#A89070]/40 hover:scale-[1.02] transition-all duration-300 text-white overflow-hidden"
+              className="group relative p-6 bg-gradient-to-br from-sand-600 to-sand-500 rounded-2xl shadow-lg shadow-sand-600/25 hover:shadow-sand-600/40 hover:scale-[1.02] transition-all duration-300 text-white overflow-hidden"
             >
               <div className="relative z-10">
                 <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center mb-4">
@@ -455,7 +447,7 @@ export default function CasesPage() {
         {/* Daily Challenge Section */}
         {vignettes.length > 0 && (
           <section className="mb-8 animate-fade-in-up animation-delay-200">
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#8B7355] via-[#A89070] to-[#C4A77D] p-6 shadow-lg">
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-sand-700 via-sand-600 to-sand-500 p-6 shadow-lg">
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute -top-20 -right-20 w-48 h-48 bg-white/10 rounded-full blur-3xl" />
                 <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
@@ -501,7 +493,7 @@ export default function CasesPage() {
                       router.push(`/cases/${challengeCase.id}`);
                     }
                   }}
-                  className="px-6 py-3 bg-white hover:bg-[#F5F0E8] text-[#8B7355] font-bold rounded-xl shadow-lg transition-all hover:scale-105"
+                  className="px-6 py-3 bg-surface text-content font-bold rounded-xl shadow-lg transition-all hover:scale-105"
                 >
                   Start Challenge
                 </button>
@@ -515,20 +507,20 @@ export default function CasesPage() {
           <section className="mb-8">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <h2 className="text-lg font-bold text-slate-900 dark:text-white">Recommended For You</h2>
-                <span className="px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-xs font-medium rounded-full flex items-center gap-1">
+                <h2 className="text-lg font-bold text-content">Recommended For You</h2>
+                <span className="px-2 py-1 bg-warning-light text-secondary text-xs font-medium rounded-full flex items-center gap-1">
                   <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                   Personalized
                 </span>
               </div>
-              <span className="text-sm text-slate-500 dark:text-slate-400">{vignettes.length} cases total</span>
+              <span className="text-sm text-content-muted">{vignettes.length} cases total</span>
             </div>
 
             {/* Recommendation Explanation */}
-            <div className="mb-4 p-3 bg-gradient-to-r from-[#E8E0D5] to-[#F5F0E8] dark:from-[#3D4A44] dark:to-[#4A5A50] rounded-xl border border-[#C4A77D] dark:border-[#8B7355]">
-              <p className="text-sm text-[#5B7B6D] dark:text-[#7FA08F] flex items-center gap-2">
+            <div className="mb-4 p-3 bg-surface-muted rounded-xl border border-secondary/30">
+              <p className="text-sm text-primary flex items-center gap-2">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
@@ -572,19 +564,19 @@ export default function CasesPage() {
                     <Link
                       key={vignette.id}
                       href={`/cases/${vignette.id}`}
-                      className="group p-5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-[#5B7B6D] dark:hover:border-[#7FA08F] hover:shadow-lg transition-all relative overflow-hidden"
+                      className="group p-5 bg-surface rounded-xl border border-border hover:border-primary hover:shadow-lg transition-all relative overflow-hidden"
                     >
                       {/* Recommendation Badge */}
                       {isNew && (
                         <div className="absolute top-0 right-0">
-                          <div className="bg-gradient-to-r from-[#8B7355] to-[#A89070] text-white text-xs font-bold px-3 py-1 rounded-bl-xl">
+                          <div className="bg-gradient-to-r from-sand-700 to-sand-600 text-white text-xs font-bold px-3 py-1 rounded-bl-xl">
                             NEW
                           </div>
                         </div>
                       )}
                       {!isNew && mastery === 'learning' && (
                         <div className="absolute top-0 right-0">
-                          <div className="bg-gradient-to-r from-[#5B7B6D] to-[#6B8B7D] text-white text-xs font-bold px-3 py-1 rounded-bl-xl">
+                          <div className="bg-gradient-to-r from-forest-500 to-forest-400 text-white text-xs font-bold px-3 py-1 rounded-bl-xl">
                             REVIEW
                           </div>
                         </div>
@@ -592,45 +584,45 @@ export default function CasesPage() {
 
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-2">
-                          <span className="w-5 h-5 text-[#5B7B6D]">{getIconComponent(systemIconName)}</span>
-                          <span className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                          <span className="w-5 h-5 text-primary">{getIconComponent(systemIconName)}</span>
+                          <span className="text-xs font-medium text-content-muted uppercase tracking-wide">
                             {vignette.metadata.system}
                           </span>
                         </div>
                         {progress && progress.completions > 0 && (
                           <span className={`px-2 py-1 text-xs font-medium rounded-full ${
                             mastery === 'mastered'
-                              ? 'bg-[#E8E0D5] dark:bg-[#3D4A44] text-[#5B7B6D] dark:text-[#7FA08F]'
+                              ? 'bg-primary-light text-primary'
                               : mastery === 'familiar'
-                                ? 'bg-[#E8E0D5] dark:bg-[#3D4A44] text-[#6B8B7D] dark:text-[#8BA89A]'
-                                : 'bg-[#F5F0E8] dark:bg-[#3D3832] text-[#8B7355] dark:text-[#C4A77D]'
+                                ? 'bg-primary-light text-primary'
+                                : 'bg-secondary-light text-secondary'
                           }`}>
                             {mastery === 'mastered' ? 'Mastered' : mastery === 'familiar' ? 'Familiar' : 'Learning'}
                           </span>
                         )}
                       </div>
-                      <h3 className="font-semibold text-slate-900 dark:text-white mb-2 group-hover:text-[#5B7B6D] dark:group-hover:text-[#7FA08F] transition-colors">
+                      <h3 className="font-semibold text-content mb-2 group-hover:text-primary transition-colors">
                         {vignette.title}
                       </h3>
-                      <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
+                      <div className="flex items-center gap-3 text-xs text-content-muted">
                         <span className={`px-2 py-0.5 rounded-full ${
                           vignette.metadata.difficulty === 'beginner'
-                            ? 'bg-[#E8E0D5] dark:bg-[#3D4A44] text-[#5B7B6D] dark:text-[#7FA08F]'
+                            ? 'bg-success-light text-success'
                             : vignette.metadata.difficulty === 'intermediate'
-                              ? 'bg-[#F5F0E8] dark:bg-[#3D3832] text-[#8B7355] dark:text-[#C4A77D]'
-                              : 'bg-[#E8E0D5] dark:bg-[#3D3832] text-[#A89070] dark:text-[#C4A77D]'
+                              ? 'bg-warning-light text-secondary'
+                              : 'bg-accent-light text-accent'
                         }`}>
                           {vignette.metadata.difficulty}
                         </span>
                         <span>~{vignette.metadata.estimatedMinutes || 5} min</span>
                         {progress && progress.completions > 0 && (
-                          <span className="text-slate-400">• {progress.completions}x completed</span>
+                          <span className="text-content-muted">• {progress.completions}x completed</span>
                         )}
                       </div>
 
                       {/* Why Recommended - subtle hint */}
-                      <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-700">
-                        <p className="text-xs text-slate-400 dark:text-slate-500 italic flex items-center gap-1">
+                      <div className="mt-3 pt-3 border-t border-border-light">
+                        <p className="text-xs text-content-muted italic flex items-center gap-1">
                           <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                           </svg>
@@ -652,7 +644,7 @@ export default function CasesPage() {
               <div className="text-center mt-4">
                 <button
                   onClick={() => setShowCategoryDropdown(true)}
-                  className="text-sm text-[#5B7B6D] dark:text-[#7FA08F] hover:text-[#4A6A5C] dark:hover:text-[#8FA8A0] font-medium"
+                  className="text-sm text-primary hover:text-primary-hover font-medium"
                 >
                   Browse all {vignettes.length} cases
                 </button>

@@ -119,27 +119,27 @@ export default function CreateCasePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5]">
+    <div className="min-h-screen bg-background">
       <Header />
 
       {/* Sub-header with page-specific actions */}
-      <div className="bg-white border-b border-[#D4C4B0] sticky top-0 z-10">
+      <div className="bg-surface border-b border-border sticky top-0 z-10">
         <div className="max-w-5xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Link href="/cases" className="text-[#A89070] hover:text-[#8B7355] transition-colors">
+              <Link href="/cases" className="text-content-muted hover:text-content-secondary transition-colors">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </Link>
-              <h1 className="text-xl font-bold text-[#8B7355]">Create New Case</h1>
+              <h1 className="text-xl font-bold text-secondary">Create New Case</h1>
             </div>
 
             {/* Quick actions */}
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setShowImportModal(true)}
-                className="px-3 py-2 text-sm text-[#A89070] hover:text-[#8B7355] hover:bg-[#F5F0E8] rounded-lg transition-colors flex items-center gap-1.5"
+                className="px-3 py-2 text-sm text-content-muted hover:text-content-secondary hover:bg-surface-muted rounded-lg transition-colors flex items-center gap-1.5"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
@@ -148,7 +148,7 @@ export default function CreateCasePage() {
               </button>
               <button
                 onClick={handleExport}
-                className="px-3 py-2 text-sm text-[#A89070] hover:text-[#8B7355] hover:bg-[#F5F0E8] rounded-lg transition-colors flex items-center gap-1.5"
+                className="px-3 py-2 text-sm text-content-muted hover:text-content-secondary hover:bg-surface-muted rounded-lg transition-colors flex items-center gap-1.5"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -173,16 +173,16 @@ export default function CreateCasePage() {
       {/* Import Modal */}
       {showImportModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
-            <div className="px-6 py-4 border-b border-[#D4C4B0] flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-[#8B7355]">Import Case</h2>
+          <div className="bg-surface rounded-2xl shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
+            <div className="px-6 py-4 border-b border-border flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-secondary">Import Case</h2>
               <button
                 onClick={() => {
                   setShowImportModal(false);
                   setImportJson('');
                   setImportError(null);
                 }}
-                className="p-1.5 text-[#A89070] hover:text-[#8B7355] hover:bg-[#F5F0E8] rounded-lg transition-colors"
+                className="p-1.5 text-content-muted hover:text-content-secondary hover:bg-surface-muted rounded-lg transition-colors"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -202,19 +202,19 @@ export default function CreateCasePage() {
                 />
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="w-full py-8 border-2 border-dashed border-[#D4C4B0] rounded-xl hover:border-[#C4A77D] hover:bg-[#F5F0E8]/50 transition-colors flex flex-col items-center gap-2"
+                  className="w-full py-8 border-2 border-dashed border-border rounded-xl hover:border-secondary hover:bg-surface-muted/50 transition-colors flex flex-col items-center gap-2"
                 >
-                  <svg className="w-8 h-8 text-[#A89070]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-8 h-8 text-content-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                   </svg>
-                  <span className="text-sm font-medium text-[#8B7355]">Upload JSON file</span>
-                  <span className="text-xs text-[#A89070]">or paste JSON below</span>
+                  <span className="text-sm font-medium text-secondary">Upload JSON file</span>
+                  <span className="text-xs text-content-muted">or paste JSON below</span>
                 </button>
               </div>
 
               {/* JSON textarea */}
               <div>
-                <label className="block text-sm font-medium text-[#8B7355] mb-1">
+                <label className="block text-sm font-medium text-secondary mb-1">
                   Paste JSON
                 </label>
                 <textarea
@@ -222,33 +222,33 @@ export default function CreateCasePage() {
                   onChange={(e) => setImportJson(e.target.value)}
                   placeholder='{"id": "...", "title": "...", "nodes": {...}}'
                   rows={8}
-                  className="w-full px-4 py-3 border border-[#D4C4B0] rounded-lg focus:ring-2 focus:ring-[#C4A77D] focus:border-[#C4A77D] font-mono text-sm resize-y"
+                  className="w-full px-4 py-3 bg-surface border border-border rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary font-mono text-sm text-content resize-y"
                 />
               </div>
 
               {/* Error display */}
               {importError && (
-                <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                <div className="p-3 bg-error-light border border-error/30 rounded-lg text-sm text-error">
                   {importError}
                 </div>
               )}
             </div>
 
-            <div className="px-6 py-4 border-t border-[#D4C4B0] flex justify-end gap-3">
+            <div className="px-6 py-4 border-t border-border flex justify-end gap-3">
               <button
                 onClick={() => {
                   setShowImportModal(false);
                   setImportJson('');
                   setImportError(null);
                 }}
-                className="px-4 py-2 text-[#8B7355] hover:text-[#5B7B6D] font-medium rounded-lg hover:bg-[#F5F0E8] transition-colors"
+                className="px-4 py-2 text-secondary hover:text-primary font-medium rounded-lg hover:bg-surface-muted transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleImport}
                 disabled={!importJson.trim()}
-                className="px-4 py-2 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-gradient-to-r from-sand-500 to-sand-600 hover:from-sand-600 hover:to-sand-700 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Import
               </button>
