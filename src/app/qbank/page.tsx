@@ -13,18 +13,26 @@ interface QuestionSummary {
 
 // Map internal batch names to user-friendly Shelf Exam names
 const SHELF_EXAM_LABELS: Record<string, string> = {
-  'Batch 1': 'Internal Medicine',
-  'Batch 2': 'Surgery',
-  'Batch 3': 'Pediatrics',
-  'Batch 4': 'OB/GYN',
-  'Batch 5': 'Psychiatry',
-  'Batch 6': 'Family Medicine',
-  'Batch 7': 'Neurology',
-  'Batch 8': 'Emergency Medicine',
+  'Batch1': 'Internal Medicine',
+  'Batch2': 'Surgery',
+  'Batch3': 'Pediatrics',
+  'Batch4': 'OB/GYN',
+  'Batch5': 'Psychiatry',
+  'Batch6': 'Family Medicine',
+  'Batch7': 'Neurology',
+  'Batch8': 'Emergency Medicine',
 };
 
-function getShelfLabel(batch: string): string {
-  return SHELF_EXAM_LABELS[batch] || batch;
+function getShelfLabel(batchId: string): string {
+  // If it's already mapped, return the label
+  if (SHELF_EXAM_LABELS[batchId]) {
+    return SHELF_EXAM_LABELS[batchId];
+  }
+  // Fallback: try to make any batch ID more readable (remove "Batch" prefix if present)
+  if (batchId.toLowerCase().startsWith('batch')) {
+    return `Set ${batchId.replace(/batch/i, '').trim()}`;
+  }
+  return batchId;
 }
 
 export default function QBankPage() {
