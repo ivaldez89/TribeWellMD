@@ -112,36 +112,41 @@
 
 /* =============================================================================
    DARK MODE - Forest Theme
+
+   Background Strategy:
+   - Page backgrounds use slate/navy tones for better readability during
+     long study sessions (aligned with Home page dark:bg-slate-900)
+   - Surfaces, accents, and gradients retain Forest palette colors
    ============================================================================= */
 
 .dark {
-  /* Surfaces */
-  --surface-default: #152E22;    /* forest-900 */
-  --surface-elevated: #1E3D2F;   /* forest-800 */
-  --surface-muted: #1E3D2F;      /* forest-800 */
-  --surface-subtle: #0A1A12;     /* forest-950 */
+  /* Surfaces - slate-tinted for cards/containers */
+  --surface-default: #1e293b;    /* slate-800 - card backgrounds */
+  --surface-elevated: #334155;   /* slate-700 - elevated cards */
+  --surface-muted: #1e293b;      /* slate-800 - muted surfaces */
+  --surface-subtle: #0f172a;     /* slate-900 - subtle backgrounds */
 
-  /* Backgrounds */
-  --bg-primary: #0A1A12;         /* forest-950 */
-  --bg-secondary: #152E22;       /* forest-900 */
+  /* Backgrounds - slate/navy for calm, readable dark mode */
+  --bg-primary: #0f172a;         /* slate-900 - main page background */
+  --bg-secondary: #1e293b;       /* slate-800 - secondary backgrounds */
 
-  /* Primary */
+  /* Primary - Forest green tones for brand identity */
   --primary: #6B8B7D;            /* forest-400 - lighter for dark mode */
   --primary-hover: #9BBAA1;      /* forest-300 */
-  --primary-light: #1E3D2F;      /* forest-800 */
-  --primary-foreground: #0A1A12;
+  --primary-light: #1e3a2f;      /* forest-tinted slate for subtle bg */
+  --primary-foreground: #0f172a;
 
-  /* Secondary */
+  /* Secondary - Sand/bark tones */
   --secondary: #C4A77D;          /* sand-500 */
   --secondary-hover: #D4C4B0;    /* sand-400 */
-  --secondary-light: #4A3A30;    /* sand-900 */
-  --secondary-foreground: #0A1A12;
+  --secondary-light: #3d3428;    /* sand-tinted dark */
+  --secondary-foreground: #0f172a;
 
-  /* Accent */
+  /* Accent - Earth/terracotta tones */
   --accent: #B87D73;             /* earth-400 */
   --accent-hover: #D4ADA5;       /* earth-300 */
-  --accent-light: #4A2920;       /* earth-800 */
-  --accent-foreground: #0A1A12;
+  --accent-light: #3d2820;       /* earth-tinted dark */
+  --accent-foreground: #0f172a;
 
   /* Text */
   --text-primary: #FDFCFA;       /* sand-50 */
@@ -149,10 +154,10 @@
   --text-muted: #D4C4B0;         /* sand-400 */
   --text-inverse: #152E22;       /* forest-900 */
 
-  /* Borders */
-  --border: #2D4A3C;             /* forest-700 */
-  --border-light: #1E3D2F;       /* forest-800 */
-  --border-focus: #6B8B7D;       /* forest-400 */
+  /* Borders - slate-based to complement backgrounds */
+  --border: #334155;             /* slate-700 */
+  --border-light: #1e293b;       /* slate-800 */
+  --border-focus: #6B8B7D;       /* forest-400 - keeps Forest accent */
 
   /* Status (slightly lighter for dark mode) */
   --success: #73B89A;            /* sage-400 */

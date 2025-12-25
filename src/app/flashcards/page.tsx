@@ -122,8 +122,8 @@ export default function FlashcardsPage() {
         {/* Hero Section */}
         <section className="mb-8 animate-fade-in-up">
           <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-sand-500 via-sand-600 to-sand-700 p-8 md:p-10 shadow-2xl">
-            {/* Animated background elements */}
-            <div className="absolute inset-0 overflow-hidden">
+            {/* Animated background elements - pointer-events-none ensures no interference */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
               <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
               <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-white/10 to-transparent rounded-full" />
@@ -176,28 +176,20 @@ export default function FlashcardsPage() {
               </div>
 
               {/* Right side - CTA Button */}
-              <div className="flex flex-col items-center gap-4">
+              <div>
                 {dueCards.length > 0 ? (
                   <button
                     onClick={handleStartStudy}
-                    className="group relative px-10 py-5 bg-white hover:bg-sand-50 text-content font-bold text-xl rounded-2xl shadow-2xl hover:shadow-sand-700/25 transition-all duration-300 hover:scale-105"
+                    className="px-8 py-4 bg-surface border border-border rounded-xl"
                   >
-                    <span className="flex items-center gap-3">
-                      Start Studying
-                      <span className="px-3 py-1 bg-secondary text-white text-base rounded-full">
-                        {dueCards.length}
-                      </span>
-                      <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
+                    <span className="text-lg font-semibold text-content">Start Studying</span>
+                    <span className="ml-3 px-2.5 py-1 bg-primary text-primary-foreground text-sm font-medium rounded-full">
+                      {dueCards.length}
                     </span>
                   </button>
                 ) : (
-                  <div className="px-10 py-5 bg-white/20 backdrop-blur text-white font-semibold text-xl rounded-2xl flex items-center gap-3">
-                    <svg className="w-6 h-6 text-sand-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    All Caught Up!
+                  <div className="px-8 py-4 bg-surface border border-border rounded-xl">
+                    <span className="text-lg font-semibold text-content">All Caught Up!</span>
                   </div>
                 )}
               </div>
