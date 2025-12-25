@@ -55,7 +55,7 @@ class NoiseGenerator {
 
   start(type: string, volume: number) {
     this.stop();
-    
+
     this.audioContext = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
     this.gainNode = this.audioContext.createGain();
     this.gainNode.gain.value = volume;
@@ -81,21 +81,21 @@ class NoiseGenerator {
         this.createBinaural();
         break;
     }
-    
+
     this.isPlaying = true;
   }
 
   private createWhiteNoise() {
     if (!this.audioContext || !this.gainNode) return;
-    
+
     const bufferSize = 2 * this.audioContext.sampleRate;
     const buffer = this.audioContext.createBuffer(1, bufferSize, this.audioContext.sampleRate);
     const output = buffer.getChannelData(0);
-    
+
     for (let i = 0; i < bufferSize; i++) {
       output[i] = Math.random() * 2 - 1;
     }
-    
+
     this.noiseNode = this.audioContext.createBufferSource();
     this.noiseNode.buffer = buffer;
     this.noiseNode.loop = true;
@@ -105,11 +105,11 @@ class NoiseGenerator {
 
   private createPinkNoise() {
     if (!this.audioContext || !this.gainNode) return;
-    
+
     const bufferSize = 2 * this.audioContext.sampleRate;
     const buffer = this.audioContext.createBuffer(1, bufferSize, this.audioContext.sampleRate);
     const output = buffer.getChannelData(0);
-    
+
     let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
     for (let i = 0; i < bufferSize; i++) {
       const white = Math.random() * 2 - 1;
@@ -122,7 +122,7 @@ class NoiseGenerator {
       output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.11;
       b6 = white * 0.115926;
     }
-    
+
     this.noiseNode = this.audioContext.createBufferSource();
     this.noiseNode.buffer = buffer;
     this.noiseNode.loop = true;
@@ -132,11 +132,11 @@ class NoiseGenerator {
 
   private createBrownNoise() {
     if (!this.audioContext || !this.gainNode) return;
-    
+
     const bufferSize = 2 * this.audioContext.sampleRate;
     const buffer = this.audioContext.createBuffer(1, bufferSize, this.audioContext.sampleRate);
     const output = buffer.getChannelData(0);
-    
+
     let lastOut = 0;
     for (let i = 0; i < bufferSize; i++) {
       const white = Math.random() * 2 - 1;
@@ -144,7 +144,7 @@ class NoiseGenerator {
       lastOut = output[i];
       output[i] *= 3.5;
     }
-    
+
     this.noiseNode = this.audioContext.createBufferSource();
     this.noiseNode.buffer = buffer;
     this.noiseNode.loop = true;
@@ -154,11 +154,11 @@ class NoiseGenerator {
 
   private createRain() {
     if (!this.audioContext || !this.gainNode) return;
-    
+
     const bufferSize = 2 * this.audioContext.sampleRate;
     const buffer = this.audioContext.createBuffer(1, bufferSize, this.audioContext.sampleRate);
     const output = buffer.getChannelData(0);
-    
+
     let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
     for (let i = 0; i < bufferSize; i++) {
       const white = Math.random() * 2 - 1;
@@ -170,20 +170,20 @@ class NoiseGenerator {
       b5 = -0.7616 * b5 - white * 0.0168980;
       output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.11;
       b6 = white * 0.115926;
-      
+
       if (Math.random() > 0.9997) {
         output[i] += (Math.random() - 0.5) * 0.3;
       }
     }
-    
+
     this.noiseNode = this.audioContext.createBufferSource();
     this.noiseNode.buffer = buffer;
     this.noiseNode.loop = true;
-    
+
     const filter = this.audioContext.createBiquadFilter();
     filter.type = 'lowpass';
     filter.frequency.value = 3000;
-    
+
     this.noiseNode.connect(filter);
     filter.connect(this.gainNode);
     this.noiseNode.start();
@@ -191,11 +191,11 @@ class NoiseGenerator {
 
   private createWind() {
     if (!this.audioContext || !this.gainNode) return;
-    
+
     const bufferSize = 4 * this.audioContext.sampleRate;
     const buffer = this.audioContext.createBuffer(1, bufferSize, this.audioContext.sampleRate);
     const output = buffer.getChannelData(0);
-    
+
     let lastOut = 0;
     for (let i = 0; i < bufferSize; i++) {
       const white = Math.random() * 2 - 1;
@@ -204,15 +204,15 @@ class NoiseGenerator {
       const mod = 0.7 + 0.3 * Math.sin(i / (this.audioContext!.sampleRate * 3));
       output[i] *= 3.5 * mod;
     }
-    
+
     this.noiseNode = this.audioContext.createBufferSource();
     this.noiseNode.buffer = buffer;
     this.noiseNode.loop = true;
-    
+
     const filter = this.audioContext.createBiquadFilter();
     filter.type = 'lowpass';
     filter.frequency.value = 800;
-    
+
     this.noiseNode.connect(filter);
     filter.connect(this.gainNode);
     this.noiseNode.start();
@@ -220,32 +220,32 @@ class NoiseGenerator {
 
   private createBinaural() {
     if (!this.audioContext || !this.gainNode) return;
-    
+
     const baseFreq = 200;
     const beatFreq = 40;
-    
+
     const leftOsc = this.audioContext.createOscillator();
     const rightOsc = this.audioContext.createOscillator();
-    
+
     leftOsc.frequency.value = baseFreq;
     rightOsc.frequency.value = baseFreq + beatFreq;
-    
+
     leftOsc.type = 'sine';
     rightOsc.type = 'sine';
-    
+
     const leftPan = this.audioContext.createStereoPanner();
     const rightPan = this.audioContext.createStereoPanner();
     leftPan.pan.value = -1;
     rightPan.pan.value = 1;
-    
+
     leftOsc.connect(leftPan);
     rightOsc.connect(rightPan);
     leftPan.connect(this.gainNode);
     rightPan.connect(this.gainNode);
-    
+
     leftOsc.start();
     rightOsc.start();
-    
+
     this.oscillators = [leftOsc, rightOsc];
   }
 
@@ -261,23 +261,23 @@ class NoiseGenerator {
       this.noiseNode.disconnect();
       this.noiseNode = null;
     }
-    
+
     this.oscillators.forEach(osc => {
       osc.stop();
       osc.disconnect();
     });
     this.oscillators = [];
-    
+
     if (this.gainNode) {
       this.gainNode.disconnect();
       this.gainNode = null;
     }
-    
+
     if (this.audioContext) {
       this.audioContext.close();
       this.audioContext = null;
     }
-    
+
     this.isPlaying = false;
   }
 
@@ -327,7 +327,7 @@ export default function FlashcardsPage() {
 
   // Study background state
   const { selectedBackground, setSelectedBackground, opacity, setOpacity } = useStudyBackground();
-  
+
   // Ambient sound state
   const [currentSound, setCurrentSound] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -508,29 +508,29 @@ export default function FlashcardsPage() {
   const handleRateCard = (rating: Rating) => {
     // Record the review for stats/achievements
     const { newAchievements } = recordCardReview();
-    
+
     // Show achievement notification if any
     if (newAchievements.length > 0) {
       setNewAchievement(newAchievements[0]);
     }
-    
+
     // Call the original rate function
     rateCard(rating);
   };
 
-  const hasActiveFilters = 
-    filters.tags.length > 0 || 
-    filters.systems.length > 0 || 
+  const hasActiveFilters =
+    filters.tags.length > 0 ||
+    filters.systems.length > 0 ||
     filters.rotations.length > 0 ||
     filters.states.length > 0 ||
     filters.difficulties.length > 0;
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5] dark:from-slate-900 dark:to-slate-800 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="animate-spin w-10 h-10 border-4 border-[#8B7355] border-t-transparent rounded-full" />
-          <p className="text-slate-500">Loading cards...</p>
+          <div className="animate-spin w-10 h-10 border-4 border-secondary border-t-transparent rounded-full" />
+          <p className="text-content-muted">Loading cards...</p>
         </div>
       </div>
     );
@@ -539,72 +539,72 @@ export default function FlashcardsPage() {
   // No cards due - show completion screen
   if (filteredDueCards.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5] dark:from-slate-900 dark:to-slate-800">
+      <div className="min-h-screen bg-background">
         <Header stats={stats} />
 
         <main className="max-w-5xl mx-auto px-4 py-6">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-8 text-center">
+          <div className="bg-surface rounded-2xl shadow-sm border border-border p-8 text-center">
           <div className="mb-8">
-            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#E8E0D5] to-[#D4C4B0] flex items-center justify-center">
-              <svg className="w-12 h-12 text-[#5B7B6D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-sand-200 to-sand-300 flex items-center justify-center">
+              <svg className="w-12 h-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            
+
             {hasActiveFilters && dueCards.length > 0 ? (
               <>
-                <h1 className="text-3xl font-bold text-slate-900 mb-4">
+                <h1 className="text-3xl font-bold text-content mb-4">
                   No Cards Match Filters
                 </h1>
-                <p className="text-lg text-slate-600 max-w-md mx-auto mb-6">
+                <p className="text-lg text-content-muted max-w-md mx-auto mb-6">
                   You have {dueCards.length} cards due, but none match your current filters.
                 </p>
                 <button
                   onClick={clearFilters}
-                  className="px-6 py-3 bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white font-medium rounded-xl hover:from-[#A89070] hover:to-[#8B7355] transition-all shadow-lg"
+                  className="px-6 py-3 bg-gradient-to-r from-sand-500 to-sand-600 text-white font-medium rounded-xl hover:from-sand-600 hover:to-sand-700 transition-all shadow-lg"
                 >
                   Clear Filters & Study All
                 </button>
               </>
             ) : (
               <>
-                <h1 className="text-3xl font-bold text-slate-900 mb-4">
+                <h1 className="text-3xl font-bold text-content mb-4">
                   All Caught Up! 🎉
                 </h1>
-                <p className="text-lg text-slate-600 max-w-md mx-auto">
+                <p className="text-lg text-content-muted max-w-md mx-auto">
                   You've reviewed all your due cards. Great work! Come back later for your next review session.
                 </p>
               </>
             )}
           </div>
-          
+
           {session && session.cardsReviewed > 0 && (
-            <div className="mb-8 p-6 bg-white rounded-2xl border border-slate-200 shadow-sm inline-block">
-              <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-4">
+            <div className="mb-8 p-6 bg-surface rounded-2xl border border-border shadow-sm inline-block">
+              <h2 className="text-sm font-semibold text-content-muted uppercase tracking-wide mb-4">
                 Session Summary
               </h2>
               <div className="flex items-center justify-center gap-8">
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-slate-900">{session.cardsReviewed}</p>
-                  <p className="text-sm text-slate-500">Reviewed</p>
+                  <p className="text-3xl font-bold text-content">{session.cardsReviewed}</p>
+                  <p className="text-sm text-content-muted">Reviewed</p>
                 </div>
-                <div className="w-px h-12 bg-slate-200" />
+                <div className="w-px h-12 bg-border" />
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-[#5B7B6D]">{session.cardsCorrect}</p>
-                  <p className="text-sm text-slate-500">Correct</p>
+                  <p className="text-3xl font-bold text-primary">{session.cardsCorrect}</p>
+                  <p className="text-sm text-content-muted">Correct</p>
                 </div>
-                <div className="w-px h-12 bg-slate-200" />
+                <div className="w-px h-12 bg-border" />
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-red-500">{session.cardsFailed}</p>
-                  <p className="text-sm text-slate-500">Again</p>
+                  <p className="text-3xl font-bold text-error">{session.cardsFailed}</p>
+                  <p className="text-sm text-content-muted">Again</p>
                 </div>
               </div>
             </div>
           )}
-          
+
           <Link
             href="/home"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-xl transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-surface-muted hover:bg-surface text-content-secondary font-medium rounded-xl transition-colors"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -618,7 +618,7 @@ export default function FlashcardsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5] dark:from-slate-900 dark:to-slate-800 relative">
+    <div className="min-h-screen bg-background relative">
       <Header stats={stats} />
 
       {/* Background overlay - positioned below header, behind all content */}
@@ -639,25 +639,25 @@ export default function FlashcardsPage() {
 
       <main className="relative max-w-5xl mx-auto px-4 py-8" style={{ zIndex: 2 }}>
         {/* Session progress bar - solid background to cover the scene */}
-        <div className="mb-6 bg-slate-50/95 dark:bg-slate-800/95 backdrop-blur-sm py-3 -mx-4 px-4 -mt-8 pt-8 rounded-b-xl">
+        <div className="mb-6 bg-surface-muted/95 backdrop-blur-sm py-3 -mx-4 px-4 -mt-8 pt-8 rounded-b-xl">
           {/* Top row: Stats */}
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
               {session && (
                 <>
                   <div className="flex items-center gap-1.5 text-sm">
-                    <span className="text-[#5B7B6D] font-medium">{session.cardsCorrect}</span>
-                    <span className="text-slate-400">correct</span>
+                    <span className="text-primary font-medium">{session.cardsCorrect}</span>
+                    <span className="text-content-muted">correct</span>
                   </div>
                   <div className="flex items-center gap-1.5 text-sm">
-                    <span className="text-red-500 font-medium">{session.cardsFailed}</span>
-                    <span className="text-slate-400">again</span>
+                    <span className="text-error font-medium">{session.cardsFailed}</span>
+                    <span className="text-content-muted">again</span>
                   </div>
                 </>
               )}
 
               {hasActiveFilters && (
-                <div className="flex items-center gap-1.5 text-xs px-2 py-1 bg-indigo-50 text-indigo-600 rounded-lg">
+                <div className="flex items-center gap-1.5 text-xs px-2 py-1 bg-info-light text-info rounded-lg">
                   <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                   </svg>
@@ -668,7 +668,7 @@ export default function FlashcardsPage() {
 
             <button
               onClick={endSession}
-              className="text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300 transition-colors"
+              className="text-sm text-content-muted hover:text-content-secondary transition-colors"
             >
               End
             </button>
@@ -692,10 +692,10 @@ export default function FlashcardsPage() {
               disabled={cramCards.length === 0}
               className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors whitespace-nowrap flex-shrink-0 ${
                 cramMode
-                  ? 'bg-orange-100 text-orange-700 border border-orange-300'
+                  ? 'bg-accent-light text-accent border border-accent'
                   : cramCards.length > 0
-                    ? 'text-slate-500 hover:text-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
-                    : 'text-slate-300 cursor-not-allowed'
+                    ? 'text-content-muted hover:text-content-secondary hover:bg-surface-muted'
+                    : 'text-content-muted/50 cursor-not-allowed'
               }`}
               title={cramCards.length === 0 ? 'No cards to cram - you haven\'t missed any yet!' : `Cram ${cramCards.length} missed cards`}
             >
@@ -703,7 +703,7 @@ export default function FlashcardsPage() {
               <span className="hidden sm:inline">Cram</span>
               {cramCards.length > 0 && (
                 <span className={`text-xs px-1.5 py-0.5 rounded-full ${
-                  cramMode ? 'bg-orange-200' : 'bg-slate-200'
+                  cramMode ? 'bg-accent/20' : 'bg-surface-muted'
                 }`}>
                   {cramCards.length}
                 </span>
@@ -715,13 +715,13 @@ export default function FlashcardsPage() {
               onClick={() => setShowAmbient(!showAmbient)}
               className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors whitespace-nowrap flex-shrink-0 ${
                 showAmbient || isPlaying || isMusicPlaying
-                  ? 'bg-purple-100 text-purple-700'
-                  : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
+                  ? 'bg-info-light text-info'
+                  : 'text-content-muted hover:text-content-secondary hover:bg-surface-muted'
               }`}
             >
               {isPlaying || isMusicPlaying ? (
                 <span className="flex items-center gap-1">
-                  <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
+                  <span className="w-2 h-2 bg-info rounded-full animate-pulse" />
                   {isPlaying
                     ? AMBIENT_SOUNDS.find(s => s.id === currentSound)?.emoji
                     : MUSIC_STREAMS.find(s => s.id === currentMusic)?.emoji
@@ -749,8 +749,8 @@ export default function FlashcardsPage() {
               onClick={() => setShowFilters(!showFilters)}
               className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors whitespace-nowrap flex-shrink-0 ${
                 showFilters
-                  ? 'bg-indigo-100 text-indigo-700'
-                  : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
+                  ? 'bg-info-light text-info'
+                  : 'text-content-muted hover:text-content-secondary hover:bg-surface-muted'
               }`}
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -763,11 +763,11 @@ export default function FlashcardsPage() {
 
         {/* Audio Panel - Ambient Sounds & Music */}
         {showAmbient && (
-          <div className="mb-6 p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+          <div className="mb-6 p-4 bg-surface rounded-2xl border border-border shadow-sm">
             {/* Header with Stop button */}
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-slate-900 flex items-center gap-2">
-                <svg className="w-5 h-5 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <h3 className="font-semibold text-content flex items-center gap-2">
+                <svg className="w-5 h-5 text-info" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                 </svg>
                 Sounds & Music
@@ -775,7 +775,7 @@ export default function FlashcardsPage() {
               {(isPlaying || isMusicPlaying) && (
                 <button
                   onClick={stopAll}
-                  className="text-sm px-3 py-1 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
+                  className="text-sm px-3 py-1 bg-error-light text-error rounded-lg hover:bg-error/20 transition-colors"
                 >
                   Stop All
                 </button>
@@ -784,7 +784,7 @@ export default function FlashcardsPage() {
 
             {/* Ambient Sounds Section */}
             <div className="mb-5">
-              <h4 className="text-sm font-medium text-slate-600 mb-2 flex items-center gap-2">
+              <h4 className="text-sm font-medium text-content-muted mb-2 flex items-center gap-2">
                 <span>🎧</span> Ambient Sounds
               </h4>
               <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-3">
@@ -794,21 +794,21 @@ export default function FlashcardsPage() {
                     onClick={() => playSound(sound.id)}
                     className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all ${
                       currentSound === sound.id && isPlaying
-                        ? 'bg-purple-100 border-2 border-purple-400 shadow-sm'
-                        : 'bg-slate-50 border-2 border-transparent hover:bg-slate-100'
+                        ? 'bg-info-light border-2 border-info shadow-sm'
+                        : 'bg-surface-muted border-2 border-transparent hover:bg-surface'
                     }`}
                   >
                     <span className="text-2xl">{sound.emoji}</span>
-                    <span className="text-xs font-medium text-slate-600">{sound.name}</span>
+                    <span className="text-xs font-medium text-content-muted">{sound.name}</span>
                     {currentSound === sound.id && isPlaying && (
-                      <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
+                      <span className="w-2 h-2 bg-info rounded-full animate-pulse" />
                     )}
                   </button>
                 ))}
               </div>
               {isPlaying && (
                 <div className="flex items-center gap-3">
-                  <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-4 h-4 text-content-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                   </svg>
                   <input
@@ -818,19 +818,19 @@ export default function FlashcardsPage() {
                     step="0.05"
                     value={volume}
                     onChange={(e) => setVolume(parseFloat(e.target.value))}
-                    className="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-purple-500"
+                    className="flex-1 h-2 bg-border rounded-lg appearance-none cursor-pointer accent-info"
                   />
-                  <span className="text-sm text-slate-500 w-12 text-right">{Math.round(volume * 100)}%</span>
+                  <span className="text-sm text-content-muted w-12 text-right">{Math.round(volume * 100)}%</span>
                 </div>
               )}
             </div>
 
             {/* Divider */}
-            <div className="border-t border-slate-200 my-4" />
+            <div className="border-t border-border my-4" />
 
             {/* Study Music Section */}
             <div>
-              <h4 className="text-sm font-medium text-slate-600 mb-2 flex items-center gap-2">
+              <h4 className="text-sm font-medium text-content-muted mb-2 flex items-center gap-2">
                 <span>🎵</span> Study Music
               </h4>
               <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-3">
@@ -841,24 +841,24 @@ export default function FlashcardsPage() {
                     disabled={isMusicLoading && currentMusic !== music.id}
                     className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all ${
                       currentMusic === music.id && (isMusicPlaying || isMusicLoading)
-                        ? 'bg-indigo-100 border-2 border-indigo-400 shadow-sm'
-                        : 'bg-slate-50 border-2 border-transparent hover:bg-slate-100'
+                        ? 'bg-primary-light border-2 border-primary shadow-sm'
+                        : 'bg-surface-muted border-2 border-transparent hover:bg-surface'
                     } ${isMusicLoading && currentMusic !== music.id ? 'opacity-50' : ''}`}
                   >
                     <span className="text-2xl">{music.emoji}</span>
-                    <span className="text-xs font-medium text-slate-600">{music.name}</span>
+                    <span className="text-xs font-medium text-content-muted">{music.name}</span>
                     {currentMusic === music.id && isMusicLoading && (
-                      <span className="w-3 h-3 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+                      <span className="w-3 h-3 border-2 border-primary border-t-transparent rounded-full animate-spin" />
                     )}
                     {currentMusic === music.id && isMusicPlaying && !isMusicLoading && (
-                      <span className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse" />
+                      <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
                     )}
                   </button>
                 ))}
               </div>
               {isMusicPlaying && (
                 <div className="flex items-center gap-3">
-                  <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-4 h-4 text-content-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                   </svg>
                   <input
@@ -868,15 +868,15 @@ export default function FlashcardsPage() {
                     step="0.05"
                     value={musicVolume}
                     onChange={(e) => setMusicVolume(parseFloat(e.target.value))}
-                    className="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                    className="flex-1 h-2 bg-border rounded-lg appearance-none cursor-pointer accent-primary"
                   />
-                  <span className="text-sm text-slate-500 w-12 text-right">{Math.round(musicVolume * 100)}%</span>
+                  <span className="text-sm text-content-muted w-12 text-right">{Math.round(musicVolume * 100)}%</span>
                 </div>
               )}
             </div>
 
             {/* Tips */}
-            <p className="mt-4 text-xs text-slate-400">
+            <p className="mt-4 text-xs text-content-muted">
               💡 Ambient sounds are generated locally. Music streams from free internet radio stations.
               Use headphones for binaural beats (Focus 40Hz).
             </p>
@@ -897,21 +897,21 @@ export default function FlashcardsPage() {
             />
           </div>
         )}
-        
+
         {/* Cram Mode UI */}
         {cramMode && (
           <div className="mb-6">
             {/* Cram Mode Header */}
-            <div className="flex items-center justify-between mb-4 p-4 bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl border border-orange-200">
+            <div className="flex items-center justify-between mb-4 p-4 bg-gradient-to-r from-accent-light to-warning-light rounded-xl border border-accent">
               <div className="flex items-center gap-3">
                 <span className="text-2xl">🔥</span>
                 <div>
-                  <h2 className="font-semibold text-orange-900">Cram Mode</h2>
-                  <p className="text-sm text-orange-700">Reviewing cards you've missed before</p>
+                  <h2 className="font-semibold text-accent">Cram Mode</h2>
+                  <p className="text-sm text-secondary">Reviewing cards you've missed before</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-sm text-orange-600">
+                <span className="text-sm text-secondary">
                   {cramIndex + 1} of {cramCards.length}
                 </span>
                 <button
@@ -920,7 +920,7 @@ export default function FlashcardsPage() {
                     setCramIndex(0);
                     setCramRevealed(false);
                   }}
-                  className="text-sm px-3 py-1.5 bg-white border border-orange-300 text-orange-700 rounded-lg hover:bg-orange-50 transition-colors"
+                  className="text-sm px-3 py-1.5 bg-surface border border-accent text-accent rounded-lg hover:bg-accent-light transition-colors"
                 >
                   Exit Cram
                 </button>
@@ -954,7 +954,7 @@ export default function FlashcardsPage() {
                           setCramRevealed(false);
                         }
                       }}
-                      className="px-8 py-3 bg-gradient-to-r from-[#C4A77D] to-[#A89070] text-white font-medium rounded-xl hover:from-[#A89070] hover:to-[#8B7355] transition-all shadow-lg"
+                      className="px-8 py-3 bg-gradient-to-r from-sand-500 to-sand-600 text-white font-medium rounded-xl hover:from-sand-600 hover:to-sand-700 transition-all shadow-lg"
                     >
                       {cramIndex < cramCards.length - 1 ? 'Next Card' : 'Finish Cram'}
                     </button>
@@ -962,13 +962,13 @@ export default function FlashcardsPage() {
                 )}
 
                 {/* Card Stats */}
-                <div className="mt-4 text-center text-sm text-slate-500">
+                <div className="mt-4 text-center text-sm text-content-muted">
                   <span>This card has been missed {currentCramCard.spacedRepetition.lapses} time{currentCramCard.spacedRepetition.lapses !== 1 ? 's' : ''}</span>
                 </div>
               </>
             ) : (
               <div className="text-center py-12">
-                <p className="text-slate-500">No more cards to cram!</p>
+                <p className="text-content-muted">No more cards to cram!</p>
               </div>
             )}
           </div>
@@ -998,14 +998,14 @@ export default function FlashcardsPage() {
 
         {/* Keyboard shortcuts help */}
         <div className="mt-8 text-center">
-          <p className="text-sm text-slate-400">
-            <kbd className="px-1.5 py-0.5 bg-slate-200 rounded text-xs font-mono">Space</kbd> to reveal
+          <p className="text-sm text-content-muted">
+            <kbd className="px-1.5 py-0.5 bg-surface-muted rounded text-xs font-mono">Space</kbd> to reveal
             <span className="mx-2">•</span>
-            <kbd className="px-1.5 py-0.5 bg-slate-200 rounded text-xs font-mono">1-4</kbd> to rate
+            <kbd className="px-1.5 py-0.5 bg-surface-muted rounded text-xs font-mono">1-4</kbd> to rate
             {cramMode && (
               <>
                 <span className="mx-2">•</span>
-                <kbd className="px-1.5 py-0.5 bg-orange-200 rounded text-xs font-mono">Esc</kbd> exit cram
+                <kbd className="px-1.5 py-0.5 bg-accent-light rounded text-xs font-mono">Esc</kbd> exit cram
               </>
             )}
           </p>
