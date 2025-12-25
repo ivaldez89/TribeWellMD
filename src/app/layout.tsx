@@ -17,7 +17,7 @@ const sourceSerif = Source_Serif_4({
 });
 
 export const viewport: Viewport = {
-  themeColor: '#0d9488',
+  themeColor: '#556B5E', // Forest primary
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
@@ -54,7 +54,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${sourceSerif.variable}`} suppressHydrationWarning>
-      <body className="font-sans antialiased bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen transition-colors">
+      <body className="font-sans antialiased bg-background text-content min-h-screen transition-colors">
         <Providers>
           {children}
           <GlobalUI />
