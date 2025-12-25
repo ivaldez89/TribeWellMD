@@ -83,9 +83,9 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
     const currentImages = editedCard.content.images || [];
     setEditedCard({
       ...editedCard,
-      content: { 
-        ...editedCard.content, 
-        images: currentImages.filter((_, i) => i !== index) 
+      content: {
+        ...editedCard.content,
+        images: currentImages.filter((_, i) => i !== index)
       }
     });
   };
@@ -96,15 +96,15 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+      <div className="bg-surface rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-slate-900">Edit Card</h2>
+        <div className="px-6 py-4 border-b border-border flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-content">Edit Card</h2>
           <button
             onClick={onCancel}
-            className="p-1 hover:bg-slate-100 rounded-lg transition-colors"
+            className="p-1 hover:bg-surface-muted rounded-lg transition-colors"
           >
-            <svg className="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-5 h-5 text-content-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
@@ -114,13 +114,13 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
         <div className="flex-1 overflow-y-auto p-6 space-y-5">
           {/* Question */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-content-secondary mb-1">
               Question (Front)
             </label>
             <textarea
               value={editedCard.content.front}
               onChange={(e) => handleContentChange('front', e.target.value)}
-              className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500 resize-none"
+              className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-surface text-content resize-none"
               rows={4}
               placeholder="Enter the question..."
             />
@@ -128,13 +128,13 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
 
           {/* Answer */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-content-secondary mb-1">
               Answer (Back)
             </label>
             <textarea
               value={editedCard.content.back}
               onChange={(e) => handleContentChange('back', e.target.value)}
-              className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500 resize-none"
+              className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-surface text-content resize-none"
               rows={4}
               placeholder="Enter the answer..."
             />
@@ -142,13 +142,13 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
 
           {/* Explanation */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-content-secondary mb-1">
               Explanation (Optional)
             </label>
             <textarea
               value={editedCard.content.explanation || ''}
               onChange={(e) => handleContentChange('explanation', e.target.value)}
-              className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500 resize-none"
+              className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-surface text-content resize-none"
               rows={3}
               placeholder="Additional explanation..."
             />
@@ -156,20 +156,20 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
 
           {/* Images */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">
+            <label className="block text-sm font-medium text-content-secondary mb-2">
               Images
             </label>
             <div className="flex flex-wrap gap-2 mb-2">
               {(editedCard.content.images || []).map((img, idx) => (
                 <div key={idx} className="relative group">
-                  <img 
-                    src={img} 
+                  <img
+                    src={img}
                     alt={`Card image ${idx + 1}`}
-                    className="w-20 h-20 object-cover rounded-lg border border-slate-200"
+                    className="w-20 h-20 object-cover rounded-lg border border-border"
                   />
                   <button
                     onClick={() => removeImage(idx)}
-                    className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute -top-2 -right-2 w-5 h-5 bg-error text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                   >
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -179,7 +179,7 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
               ))}
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="w-20 h-20 border-2 border-dashed border-slate-300 rounded-lg flex flex-col items-center justify-center text-slate-400 hover:border-emerald-400 hover:text-tribe-sage-500 transition-colors"
+                className="w-20 h-20 border-2 border-dashed border-border rounded-lg flex flex-col items-center justify-center text-content-muted hover:border-primary hover:text-primary transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -200,13 +200,13 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
           <div className="grid grid-cols-2 gap-4">
             {/* System */}
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-content-secondary mb-1">
                 System
               </label>
               <select
                 value={editedCard.metadata.system}
                 onChange={(e) => handleMetadataChange('system', e.target.value)}
-                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500 bg-white"
+                className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-surface text-content"
               >
                 {systems.map(s => (
                   <option key={s} value={s}>{s}</option>
@@ -216,13 +216,13 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
 
             {/* Difficulty */}
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-content-secondary mb-1">
                 Difficulty
               </label>
               <select
                 value={editedCard.metadata.difficulty}
                 onChange={(e) => handleMetadataChange('difficulty', e.target.value)}
-                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500 bg-white"
+                className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-surface text-content"
               >
                 {difficulties.map(d => (
                   <option key={d} value={d}>{d.charAt(0).toUpperCase() + d.slice(1)}</option>
@@ -233,33 +233,33 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
 
           {/* Topic */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-content-secondary mb-1">
               Topic
             </label>
             <input
               type="text"
               value={editedCard.metadata.topic}
               onChange={(e) => handleMetadataChange('topic', e.target.value)}
-              className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500"
+              className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-surface text-content"
               placeholder="e.g., Hypertension, Diabetes..."
             />
           </div>
 
           {/* Tags */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-content-secondary mb-1">
               Tags
             </label>
             <div className="flex flex-wrap gap-2 mb-2">
               {editedCard.metadata.tags.map(tag => (
-                <span 
+                <span
                   key={tag}
-                  className="px-2.5 py-1 text-sm bg-slate-100 text-slate-700 rounded-lg flex items-center gap-1"
+                  className="px-2.5 py-1 text-sm bg-surface-muted text-content-secondary rounded-lg flex items-center gap-1"
                 >
                   #{tag}
                   <button
                     onClick={() => removeTag(tag)}
-                    className="ml-1 text-slate-400 hover:text-red-500"
+                    className="ml-1 text-content-muted hover:text-error"
                   >
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -274,12 +274,12 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
                 value={newTag}
                 onChange={(e) => setNewTag(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
-                className="flex-1 px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-tribe-sage-500 focus:border-tribe-sage-500"
+                className="flex-1 px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary bg-surface text-content"
                 placeholder="Add a tag..."
               />
               <button
                 onClick={addTag}
-                className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors"
+                className="px-4 py-2 bg-surface-muted text-content-secondary rounded-lg hover:bg-surface hover:text-content transition-colors"
               >
                 Add
               </button>
@@ -288,21 +288,21 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-slate-200 flex items-center justify-between">
+        <div className="px-6 py-4 border-t border-border flex items-center justify-between">
           {onDelete && (
             <div>
               {showDeleteConfirm ? (
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-red-600">Delete this card?</span>
+                  <span className="text-sm text-error">Delete this card?</span>
                   <button
                     onClick={() => onDelete(card.id)}
-                    className="px-3 py-1.5 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700"
+                    className="px-3 py-1.5 bg-error text-white text-sm rounded-lg hover:bg-error/90"
                   >
                     Yes, delete
                   </button>
                   <button
                     onClick={() => setShowDeleteConfirm(false)}
-                    className="px-3 py-1.5 text-sm text-slate-600 hover:text-slate-900"
+                    className="px-3 py-1.5 text-sm text-content-muted hover:text-content"
                   >
                     Cancel
                   </button>
@@ -310,24 +310,24 @@ export function CardEditor({ card, onSave, onCancel, onDelete }: CardEditorProps
               ) : (
                 <button
                   onClick={() => setShowDeleteConfirm(true)}
-                  className="text-sm text-red-600 hover:text-red-700"
+                  className="text-sm text-error hover:text-error/80"
                 >
                   Delete card
                 </button>
               )}
             </div>
           )}
-          
+
           <div className="flex items-center gap-3 ml-auto">
             <button
               onClick={onCancel}
-              className="px-4 py-2 text-slate-600 hover:text-slate-900 transition-colors"
+              className="px-4 py-2 text-content-muted hover:text-content transition-colors"
             >
               Cancel
             </button>
             <button
               onClick={handleSave}
-              className="px-6 py-2 bg-tribe-sage-600 text-white font-medium rounded-lg hover:bg-emerald-700 transition-colors"
+              className="px-6 py-2 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary-hover transition-colors"
             >
               Save Changes
             </button>
