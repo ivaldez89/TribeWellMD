@@ -531,33 +531,6 @@ export default function HomePage() {
         </nav>
       </div>
 
-      {/* Groups */}
-      {userTribes.length > 0 && (
-        <div className={CARD_STYLES.containerWithPadding}>
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="font-semibold text-slate-900 dark:text-white">Your Groups</h3>
-            <Link href="/groups" className="text-sm text-[#5B7B6D] hover:underline">See all</Link>
-          </div>
-          <div className="space-y-2">
-            {userTribes.slice(0, 3).map((tribe) => (
-              <Link
-                key={tribe.id}
-                href={`/groups/${tribe.id}`}
-                className="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
-              >
-                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${tribe.color || 'from-orange-400 to-amber-500'} flex items-center justify-center text-lg`}>
-                  <span className="text-lg">{tribe.icon || ''}</span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-medium text-slate-700 dark:text-slate-200 truncate">{tribe.name}</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">{tribe.memberCount} members</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* Interests */}
       {profile?.interestedSpecialties && profile.interestedSpecialties.length > 0 && (
         <div className={CARD_STYLES.containerWithPadding}>
