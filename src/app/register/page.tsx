@@ -174,8 +174,10 @@ export default function RegisterPage() {
       return;
     }
 
-    // Require .edu email for student verification
-    if (!formData.email.toLowerCase().endsWith('.edu')) {
+    // Require .edu email for student verification (with whitelist for team members)
+    const allowedEmails = ['marie@tribewellz.com'];
+    const isAllowedEmail = allowedEmails.includes(formData.email.toLowerCase());
+    if (!isAllowedEmail && !formData.email.toLowerCase().endsWith('.edu')) {
       setError('Please use your school email address (.edu) to register');
       setIsLoading(false);
       return;
