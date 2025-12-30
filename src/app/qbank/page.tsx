@@ -4,11 +4,23 @@ import { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { ThreeColumnLayout, CARD_STYLES, ThreeColumnLayoutSkeleton } from '@/components/layout/ThreeColumnLayout';
 import { createClient } from '@/lib/supabase/client';
+import { getShelfIcon, getSystemIcon } from '@/components/icons/MedicalIcons';
 
 interface QuestionSummary {
   batch: string;
   system: string;
   count: number;
+}
+
+interface PreviousTest {
+  id: string;
+  date: string;
+  shelves: string[];
+  systems: string[];
+  questionCount: number;
+  answeredCount: number;
+  correctCount: number;
+  mode: 'tutor' | 'timed';
 }
 
 // Map internal batch names to user-friendly Shelf Exam names
@@ -48,6 +60,21 @@ export default function QBankPage() {
   const [questionCount, setQuestionCount] = useState(20);
   const [mode, setMode] = useState<'tutor' | 'timed'>('tutor');
   const [questionCode, setQuestionCode] = useState('');
+  const [showShelfDropdown, setShowShelfDropdown] = useState(false);
+  const [showSystemDropdown, setShowSystemDropdown] = useState(false);
+  const [previousTests, setPreviousTests] = useState<PreviousTest[]>([]);
+
+  // Load previous tests from localStorage
+  useEffect(() => {
+    const stored = localStorage.getItem('qbank-previous-tests');
+    if (stored) {
+      try {
+        setPreviousTests(JSON.parse(stored));
+      } catch (e) {
+        console.error('Failed to parse previous tests:', e);
+      }
+    }
+  }, []);
 
   // Fetch question summary from Supabase
   useEffect(() => {
@@ -99,7 +126,9 @@ export default function QBankPage() {
   }, [questionSummary]);
 
   const systems = useMemo(() => {
-    const uniqueSystems = Array.from(new Set(questionSummary.map(q => q.system))).sort();
+    const uniqueSystems = Array.from(new Set(questionSummary.map(q => q.system)))
+      .filter(system => system && system.trim() !== '') // Filter out empty/blank systems
+      .sort();
     return uniqueSystems.map(system => ({
       name: system,
       count: questionSummary.filter(q => q.system === system).reduce((sum, q) => sum + q.count, 0)
@@ -272,25 +301,26 @@ export default function QBankPage() {
       <div className={CARD_STYLES.containerWithPadding}>
         <h3 className="font-medium text-content dark:text-white mb-4 text-sm">Test Settings</h3>
 
-        {/* Question Count */}
+        {/* Question Count - Manual Input */}
         <div className="mb-5">
           <label className="block text-xs text-content-muted mb-2">
-            Questions
+            Number of Questions
           </label>
-          <div className="flex gap-2">
-            {[10, 20, 40].map((count) => (
-              <button
-                key={count}
-                onClick={() => setQuestionCount(Math.min(count, availableQuestions))}
-                className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                  questionCount === count
-                    ? 'bg-primary text-white'
-                    : 'bg-surface-muted dark:bg-slate-800 text-content-secondary dark:text-slate-300 hover:bg-primary/10 dark:hover:bg-slate-700'
-                }`}
-              >
-                {count}
-              </button>
-            ))}
+          <div className="flex items-center gap-2">
+            <input
+              type="number"
+              min={1}
+              max={availableQuestions}
+              value={questionCount}
+              onChange={(e) => {
+                const val = parseInt(e.target.value) || 1;
+                setQuestionCount(Math.min(Math.max(1, val), availableQuestions));
+              }}
+              className="flex-1 px-3 py-2.5 rounded-xl bg-surface-muted dark:bg-slate-800 border border-border text-content dark:text-white text-center font-medium focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
+            />
+            <span className="text-xs text-content-muted whitespace-nowrap">
+              of {availableQuestions}
+            </span>
           </div>
         </div>
 
@@ -347,22 +377,17 @@ export default function QBankPage() {
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Start Button */}
-      <div className={CARD_STYLES.containerWithPadding}>
+        {/* Start Button - integrated */}
         <button
           onClick={handleStartPractice}
           disabled={availableQuestions === 0}
-          className="w-full py-4 bg-primary hover:bg-primary-hover text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full mt-5 py-4 bg-primary hover:bg-primary-hover text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Start Practice
         </button>
-        <p className="text-center text-xs text-content-muted mt-3">
-          {Math.min(questionCount, availableQuestions)} questions in {mode === 'tutor' ? 'tutor' : 'timed'} mode
-        </p>
-        <p className="text-center text-xs text-content-muted mt-1">
-          You can change settings during review
+        <p className="text-center text-xs text-content-muted mt-2">
+          {questionCount} questions in {mode === 'tutor' ? 'tutor' : 'timed'} mode
         </p>
       </div>
     </>
@@ -422,120 +447,198 @@ export default function QBankPage() {
       leftSidebar={leftSidebar}
       rightSidebar={rightSidebar}
     >
-      {/* Main Card - Build Your Practice Test */}
-      <div className={CARD_STYLES.containerWithPadding + ' space-y-8'}>
-        {/* Header */}
-        <div>
-          <h1 className="text-xl font-semibold text-content dark:text-white mb-1">
-            Build Your Practice Test
-          </h1>
-          <p className="text-sm text-content-muted">
-            Select shelf exams and systems to customize your question set
-          </p>
+      {/* Browse Questions Card */}
+      <div className={CARD_STYLES.containerWithPadding}>
+        <div className="flex items-center gap-2 mb-4">
+          <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <h2 className="text-lg font-semibold text-content dark:text-white">Browse Questions</h2>
+          <span className="ml-auto text-sm text-content-muted">{totalQuestions} total</span>
         </div>
 
-        {/* Shelf Exam Section */}
-        <div>
-          <h2 className="text-sm font-medium text-content dark:text-white mb-3 flex items-center gap-2">
-            <svg className="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-            </svg>
-            Shelf Exam
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {shelves.map((shelf) => {
-              const isSelected = selectedShelves.includes(shelf.id);
-              return (
-                <button
-                  key={shelf.id}
-                  onClick={() => toggleShelf(shelf.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                    isSelected
-                      ? 'bg-primary/10 text-primary border border-primary'
-                      : 'bg-surface-muted dark:bg-slate-800 text-content-secondary dark:text-slate-300 border border-border hover:border-primary/50'
-                  }`}
-                >
-                  {shelf.label}
-                  <span className={`ml-1.5 ${isSelected ? 'text-primary/70' : 'text-content-muted'}`}>
-                    ({shelf.count})
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* System / Topic Section */}
-        <div>
-          <h2 className="text-sm font-medium text-content dark:text-white mb-3 flex items-center gap-2">
-            <svg className="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-            </svg>
-            System / Topic
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {systems.map((system) => {
-              const isSelected = selectedSystems.includes(system.name);
-              return (
-                <button
-                  key={system.name}
-                  onClick={() => toggleSystem(system.name)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                    isSelected
-                      ? 'bg-primary/10 text-primary border border-primary'
-                      : 'bg-surface-muted dark:bg-slate-800 text-content-secondary dark:text-slate-300 border border-border hover:border-primary/50'
-                  }`}
-                >
-                  {system.name}
-                  <span className={`ml-1.5 ${isSelected ? 'text-primary/70' : 'text-content-muted'}`}>
-                    ({system.count})
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Question Code Lookup */}
-        <div>
-          <h2 className="text-sm font-medium text-content dark:text-white mb-3 flex items-center gap-2">
-            <svg className="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            Question Code Lookup
-          </h2>
+        {/* Dropdown Buttons */}
+        <div className="grid grid-cols-2 gap-3">
+          {/* Shelf Dropdown */}
           <div className="relative">
-            <input
-              type="text"
-              value={questionCode}
-              onChange={(e) => setQuestionCode(e.target.value)}
-              placeholder="Enter UWorld or AMBOSS question ID..."
-              className="w-full px-4 py-3 rounded-xl bg-surface-muted dark:bg-slate-800 border border-border text-content dark:text-white placeholder:text-content-muted focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
-            />
-            {questionCode && (
-              <p className="mt-2 text-xs text-content-muted">
-                Question code lookup coming soon
-              </p>
+            <button
+              onClick={() => {
+                setShowShelfDropdown(!showShelfDropdown);
+                setShowSystemDropdown(false);
+              }}
+              className="w-full flex items-center justify-between px-4 py-3 bg-gradient-to-br from-[#5B7B6D] to-[#6B8B7D] hover:from-[#4A6A5C] hover:to-[#5B7B6D] rounded-xl transition-colors text-sm font-medium text-white"
+            >
+              <span>By Shelf Exam</span>
+              <svg className={`w-4 h-4 transition-transform ${showShelfDropdown ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {/* Shelf Dropdown Menu */}
+            {showShelfDropdown && (
+              <>
+                <div
+                  className="fixed inset-0 z-[100]"
+                  onClick={() => setShowShelfDropdown(false)}
+                />
+                <div className="absolute left-0 right-0 top-full mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-600 z-[110] max-h-64 overflow-y-auto">
+                  {shelves.map((shelf) => {
+                    const ShelfIcon = getShelfIcon(shelf.label);
+                    return (
+                      <button
+                        key={shelf.id}
+                        onClick={() => {
+                          setSelectedShelves([shelf.id]);
+                          setSelectedSystems([]);
+                          setShowShelfDropdown(false);
+                        }}
+                        className="w-full flex items-center justify-between px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors text-left first:rounded-t-xl last:rounded-b-xl"
+                      >
+                        <div className="flex items-center gap-3">
+                          <ShelfIcon className="w-5 h-5 text-[#5B7B6D]" />
+                          <span className="text-sm font-medium">{shelf.label}</span>
+                        </div>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                          {shelf.count}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* System Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => {
+                setShowSystemDropdown(!showSystemDropdown);
+                setShowShelfDropdown(false);
+              }}
+              className="w-full flex items-center justify-between px-4 py-3 bg-gradient-to-br from-[#C4A77D] to-[#D4B78D] hover:from-[#B39870] hover:to-[#C4A77D] rounded-xl transition-colors text-sm font-medium text-white"
+            >
+              <span>By System</span>
+              <svg className={`w-4 h-4 transition-transform ${showSystemDropdown ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {/* System Dropdown Menu */}
+            {showSystemDropdown && (
+              <>
+                <div
+                  className="fixed inset-0 z-[100]"
+                  onClick={() => setShowSystemDropdown(false)}
+                />
+                <div className="absolute left-0 right-0 top-full mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-600 z-[110] max-h-64 overflow-y-auto">
+                  {systems.map((system) => {
+                    // For combined systems like "Endocrinology, Nephrology", use the first part
+                    const primarySystem = system.name.split(',')[0].trim();
+                    const SystemIcon = getSystemIcon(primarySystem);
+                    return (
+                      <button
+                        key={system.name}
+                        onClick={() => {
+                          setSelectedSystems([system.name]);
+                          setSelectedShelves([]);
+                          setShowSystemDropdown(false);
+                        }}
+                        className="w-full flex items-center justify-between px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors text-left first:rounded-t-xl last:rounded-b-xl"
+                      >
+                        <div className="flex items-center gap-3">
+                          <SystemIcon className="w-5 h-5 text-[#C4A77D]" />
+                          <span className="text-sm font-medium">{system.name}</span>
+                        </div>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-[#C4A77D]/10 text-[#C4A77D]">
+                          {system.count}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
             )}
           </div>
         </div>
       </div>
 
-      {/* Mobile Start Button */}
-      <div className="lg:hidden">
-        <div className={CARD_STYLES.containerWithPadding}>
-          <button
-            onClick={handleStartPractice}
-            disabled={availableQuestions === 0}
-            className="w-full py-4 bg-primary hover:bg-primary-hover text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Start Practice ({Math.min(questionCount, availableQuestions)} Qs)
-          </button>
-          <p className="text-center text-xs text-content-muted mt-2">
-            You can change settings during review
-          </p>
+      {/* Previous Tests Section */}
+      <div className={CARD_STYLES.containerWithPadding}>
+        <div className="flex items-center gap-2 mb-4">
+          <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <h2 className="text-lg font-semibold text-content dark:text-white">Previous Tests</h2>
         </div>
+
+        {previousTests.length === 0 ? (
+          <div className="text-center py-8">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-surface-muted dark:bg-slate-800 flex items-center justify-center">
+              <svg className="w-8 h-8 text-content-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+            </div>
+            <p className="text-content-muted text-sm">No previous tests yet</p>
+            <p className="text-content-muted text-xs mt-1">Complete a practice session to see your history</p>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {previousTests.slice(0, 5).map((test) => {
+              const score = test.answeredCount > 0 ? Math.round((test.correctCount / test.answeredCount) * 100) : 0;
+              const dateStr = new Date(test.date).toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit'
+              });
+              const filterLabel = test.shelves.length > 0
+                ? test.shelves.map(s => getShelfLabel(s)).join(', ')
+                : test.systems.length > 0
+                  ? test.systems.join(', ')
+                  : 'All Questions';
+
+              return (
+                <div
+                  key={test.id}
+                  className="p-4 rounded-xl bg-surface-muted dark:bg-slate-800 border border-border hover:border-primary/30 transition-colors"
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-content dark:text-white text-sm truncate">
+                        {filterLabel}
+                      </p>
+                      <p className="text-xs text-content-muted">{dateStr}</p>
+                    </div>
+                    <div className={`px-2.5 py-1 rounded-full text-xs font-medium ${
+                      score >= 80
+                        ? 'bg-success/10 text-success'
+                        : score >= 60
+                          ? 'bg-warning/10 text-warning'
+                          : 'bg-error/10 text-error'
+                    }`}>
+                      {score}%
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 text-xs text-content-muted">
+                    <span>{test.answeredCount}/{test.questionCount} answered</span>
+                    <span>•</span>
+                    <span>{test.correctCount} correct</span>
+                    <span>•</span>
+                    <span className="capitalize">{test.mode}</span>
+                  </div>
+                </div>
+              );
+            })}
+            {previousTests.length > 5 && (
+              <p className="text-center text-xs text-content-muted pt-2">
+                + {previousTests.length - 5} more tests
+              </p>
+            )}
+          </div>
+        )}
       </div>
+
     </ThreeColumnLayout>
   );
 }

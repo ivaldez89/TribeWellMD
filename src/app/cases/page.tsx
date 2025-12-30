@@ -479,7 +479,7 @@ export default function CasesPage() {
               }}
               className={`group relative p-5 rounded-2xl shadow-lg transition-all duration-300 overflow-hidden ${
                 hasWeakTopics
-                  ? 'bg-gradient-to-br from-sand-700 to-sand-600 shadow-sand-700/25 hover:shadow-sand-700/40 hover:scale-[1.02] cursor-pointer'
+                  ? 'bg-gradient-to-br from-[#8B3A3A] to-[#A04040] shadow-[#8B3A3A]/25 hover:shadow-[#8B3A3A]/40 hover:scale-[1.02] cursor-pointer'
                   : 'bg-gradient-to-br from-forest-500 to-forest-400 shadow-forest-500/25'
               } text-white`}
             >

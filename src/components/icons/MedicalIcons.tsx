@@ -342,11 +342,13 @@ export const SYSTEM_ICONS: Record<string, React.FC<IconProps>> = {
   'Cardiology': CardiologyIcon,
   'Pulmonology': PulmonologyIcon,
   'Gastroenterology': GastroenterologyIcon,
+  'Gastrointestinal': GastroenterologyIcon,
   'Neurology': NeurologyIcon,
   'Endocrinology': EndocrinologyIcon,
   'Nephrology': NephrologyIcon,
   'Rheumatology': RheumatologyIcon,
   'Hematology/Oncology': HematologyOncologyIcon,
+  'Hematology': HematologyOncologyIcon,
   'Infectious Disease': InfectiousDiseaseIcon,
   'Dermatology': DermatologyIcon,
   'Psychiatry': PsychiatryIcon,
@@ -354,6 +356,8 @@ export const SYSTEM_ICONS: Record<string, React.FC<IconProps>> = {
   'OB/GYN': ObGynIcon,
   'Surgery': SurgeryIcon,
   'Emergency Medicine': EmergencyMedicineIcon,
+  'Internal Medicine': InternalMedicineIcon,
+  'Family Medicine': FamilyMedicineIcon,
 };
 
 // Helper function to get icon by ID
