@@ -106,7 +106,13 @@ export function StreakCounter({ variant = 'compact', showDropdown = true }: Stre
 
         {/* Dropdown panel */}
         {isOpen && showDropdown && (
-          <div className="absolute top-full right-0 mt-2 w-80 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden z-50">
+          <>
+            {/* Mobile backdrop */}
+            <div
+              className="fixed inset-0 bg-black/20 z-40 sm:hidden"
+              onClick={() => setIsOpen(false)}
+            />
+            <div className="fixed sm:absolute inset-x-4 sm:inset-x-auto top-20 sm:top-full sm:right-0 sm:mt-2 sm:w-80 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden z-50 max-h-[calc(100vh-6rem)] overflow-y-auto">
             {/* Header with streak */}
             <div className={`p-4 ${
               hasStreak
@@ -276,6 +282,7 @@ export function StreakCounter({ variant = 'compact', showDropdown = true }: Stre
               </div>
             </div>
           </div>
+          </>
         )}
       </div>
     );
