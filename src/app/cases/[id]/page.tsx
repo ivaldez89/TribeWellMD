@@ -736,8 +736,8 @@ export default function CasePlayerPage() {
         />
       )}
 
-      {/* Case toolbar */}
-      <div className="sticky top-[64px] z-20 bg-surface/95 backdrop-blur-md border-b border-border shadow-sm">
+      {/* Case toolbar - fixed position like header */}
+      <div className="fixed top-[64px] left-0 right-0 z-20 bg-surface border-b border-border shadow-md">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link
@@ -918,8 +918,8 @@ export default function CasePlayerPage() {
         </div>
       </div>
 
-      {/* Main content */}
-      <main className="relative z-[1] max-w-4xl mx-auto px-4 py-6">
+      {/* Main content - add top padding to account for fixed header (64px) + fixed toolbar (~56px) */}
+      <main className="relative z-[1] max-w-4xl mx-auto px-4 py-6 pt-[140px]">
         <VignetteViewer
           vignette={vignette}
           currentNode={currentNode}

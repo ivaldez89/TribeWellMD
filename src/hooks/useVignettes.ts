@@ -12,9 +12,11 @@ import {
   saveVignette,
   saveVignettes,
   deleteVignette as deleteVignetteFromStorage,
-  getVignetteProgress
+  getVignetteProgress,
+  getSampleVignettesVersion,
+  setSampleVignettesVersion
 } from '@/lib/storage/vignetteStorage';
-import { sampleVignettes } from '@/data/sample-vignettes';
+import { sampleVignettes, SAMPLE_VIGNETTES_VERSION } from '@/data/sample-vignettes';
 
 interface VignetteStats {
   total: number;
@@ -62,13 +64,27 @@ export function useVignettes(): UseVignettesReturn {
     const loadData = () => {
       setIsLoading(true);
       try {
-        const loadedVignettes = getVignettes();
+        let loadedVignettes = getVignettes();
         const loadedProgress = getVignetteProgress();
+        const storedVersion = getSampleVignettesVersion();
+
+        // Check if we need to update sample vignettes
+        const needsUpdate = storedVersion < SAMPLE_VIGNETTES_VERSION;
 
         // Seed sample vignettes if none exist
         if (loadedVignettes.length === 0) {
           saveVignettes(sampleVignettes);
+          setSampleVignettesVersion(SAMPLE_VIGNETTES_VERSION);
           setVignettes(sampleVignettes);
+        } else if (needsUpdate) {
+          // Update existing sample vignettes with new content
+          const sampleIds = new Set(sampleVignettes.map(v => v.id));
+          // Keep user's custom vignettes, replace sample ones
+          const userVignettes = loadedVignettes.filter(v => !sampleIds.has(v.id));
+          const updatedVignettes = [...userVignettes, ...sampleVignettes];
+          saveVignettes(updatedVignettes);
+          setSampleVignettesVersion(SAMPLE_VIGNETTES_VERSION);
+          setVignettes(updatedVignettes);
         } else {
           setVignettes(loadedVignettes);
         }
@@ -87,12 +103,22 @@ export function useVignettes(): UseVignettesReturn {
   const loadData = useCallback(() => {
     setIsLoading(true);
     try {
-      const loadedVignettes = getVignettes();
+      let loadedVignettes = getVignettes();
       const loadedProgress = getVignetteProgress();
+      const storedVersion = getSampleVignettesVersion();
+      const needsUpdate = storedVersion < SAMPLE_VIGNETTES_VERSION;
 
       if (loadedVignettes.length === 0) {
         saveVignettes(sampleVignettes);
+        setSampleVignettesVersion(SAMPLE_VIGNETTES_VERSION);
         setVignettes(sampleVignettes);
+      } else if (needsUpdate) {
+        const sampleIds = new Set(sampleVignettes.map(v => v.id));
+        const userVignettes = loadedVignettes.filter(v => !sampleIds.has(v.id));
+        const updatedVignettes = [...userVignettes, ...sampleVignettes];
+        saveVignettes(updatedVignettes);
+        setSampleVignettesVersion(SAMPLE_VIGNETTES_VERSION);
+        setVignettes(updatedVignettes);
       } else {
         setVignettes(loadedVignettes);
       }

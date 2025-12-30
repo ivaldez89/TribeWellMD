@@ -12,6 +12,7 @@ const STORAGE_KEYS = {
   VIGNETTES: 'tribewellmd_vignettes',
   VIGNETTE_PROGRESS: 'tribewellmd_vignette_progress',
   VIGNETTE_SESSIONS: 'tribewellmd_vignette_sessions',
+  SAMPLE_VIGNETTES_VERSION: 'tribewellmd_sample_vignettes_version',
 } as const;
 
 function isBrowser(): boolean {
@@ -157,6 +158,25 @@ export function getSessionsForVignette(vignetteId: string): VignetteSession[] {
 export function clearVignetteData(): void {
   if (!isBrowser()) return;
   Object.values(STORAGE_KEYS).forEach(key => localStorage.removeItem(key));
+}
+
+// ============================================
+// Sample Vignettes Version Tracking
+// ============================================
+
+export function getSampleVignettesVersion(): number {
+  if (!isBrowser()) return 0;
+  try {
+    const version = localStorage.getItem(STORAGE_KEYS.SAMPLE_VIGNETTES_VERSION);
+    return version ? parseInt(version, 10) : 0;
+  } catch {
+    return 0;
+  }
+}
+
+export function setSampleVignettesVersion(version: number): void {
+  if (!isBrowser()) return;
+  localStorage.setItem(STORAGE_KEYS.SAMPLE_VIGNETTES_VERSION, version.toString());
 }
 
 export function exportVignetteData(): string {

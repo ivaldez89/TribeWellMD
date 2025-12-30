@@ -4,6 +4,10 @@
 
 import type { ClinicalVignette } from '@/types';
 
+// Increment this version when sample vignette content changes
+// This will trigger an update for existing users
+export const SAMPLE_VIGNETTES_VERSION = 2;
+
 const now = new Date().toISOString();
 
 export const sampleVignettes: ClinicalVignette[] = [
@@ -14,18 +18,16 @@ export const sampleVignettes: ClinicalVignette[] = [
     createdAt: now,
     updatedAt: now,
     title: 'Acute Stroke Workup',
-    initialScenario: `72M with HTN and atrial fibrillation (not anticoagulated) presents with sudden left-sided weakness and slurred speech. Last seen normal 6 hours ago.
+    initialScenario: `A 72-year-old man with a history of hypertension and atrial fibrillation (not on anticoagulation) is brought to the ED by his wife after she noticed sudden left-sided weakness and slurred speech. She reports he was last seen normal about 6 hours ago when she left for errands.
 
-VS: BP 178/95, HR 88 (irregular), RR 16, SpO2 96% RA
-
-Exam: Left facial droop, left hemiparesis (2/5), dysarthria. Alert but difficulty following commands.`,
+On exam, his blood pressure is 178/95, heart rate 88 and irregular, respiratory rate 16, and oxygen saturation 96% on room air. He has a left facial droop, left-sided weakness (2/5 strength), and dysarthria. He is alert but has difficulty following commands.`,
     rootNodeId: 'node-1',
     nodes: {
       'node-1': {
         id: 'node-1',
         type: 'decision',
-        content: 'Non-contrast CT head shows no hemorrhage.',
-        question: 'What is your next step?',
+        content: 'A non-contrast CT of the head is obtained and shows no evidence of hemorrhage.',
+        question: 'What is the best next step in evaluation?',
         choices: [
           {
             id: 'choice-1a',
@@ -69,8 +71,8 @@ Exam: Left facial droop, left hemiparesis (2/5), dysarthria. Alert but difficult
       'node-2': {
         id: 'node-2',
         type: 'decision',
-        content: 'CTA: Right M1 occlusion with good collaterals. CT perfusion shows small core infarct with large penumbra (mismatch >1.8). Now 7 hours from LKW.',
-        question: 'What do you recommend?',
+        content: 'CTA of the head and neck reveals a right M1 occlusion with good collateral circulation. CT perfusion imaging demonstrates a small core infarct with a large ischemic penumbra (mismatch ratio >1.8). It is now approximately 7 hours since he was last seen normal.',
+        question: 'What is the most appropriate next step in management?',
         choices: [
           {
             id: 'choice-2a',
@@ -105,8 +107,8 @@ Exam: Left facial droop, left hemiparesis (2/5), dysarthria. Alert but difficult
       'node-3': {
         id: 'node-3',
         type: 'decision',
-        content: 'Post-thrombectomy day 1: Improved strength (4/5 left arm), can walk with assistance. Persistent AFib. CHA₂DS₂-VASc = 5.',
-        question: 'What is your anticoagulation plan?',
+        content: 'The patient is now post-thrombectomy day 1. His left arm strength has improved to 4/5 and he is able to walk with assistance. He remains in atrial fibrillation with a CHA₂DS₂-VASc score of 5.',
+        question: 'What is the most appropriate long-term antithrombotic strategy?',
         choices: [
           {
             id: 'choice-3a',
@@ -171,18 +173,16 @@ Exam: Left facial droop, left hemiparesis (2/5), dysarthria. Alert but difficult
     createdAt: now,
     updatedAt: now,
     title: 'Chest Pain in the ED',
-    initialScenario: `58M with DM2, HTN, HLD presents with 2 hours of substernal chest pressure radiating to left arm. 7/10 "squeezing" pain with diaphoresis and dyspnea. Began while mowing lawn, not relieved by rest.
+    initialScenario: `A 58-year-old man with a history of type 2 diabetes, hypertension, and hyperlipidemia presents to the emergency department with 2 hours of substernal chest pressure radiating to his left arm. He describes the pain as 7/10 in intensity with a "squeezing" quality, accompanied by diaphoresis and shortness of breath. The symptoms began while he was mowing his lawn and have not improved with rest.
 
-VS: BP 145/88, HR 92, RR 18, SpO2 97% RA
-
-Exam: Uncomfortable, diaphoretic. Heart regular, no murmurs. Lungs clear.`,
+On exam, his blood pressure is 145/88, heart rate 92, respiratory rate 18, and oxygen saturation 97% on room air. He appears uncomfortable and diaphoretic. Cardiac exam reveals a regular rhythm without murmurs, and his lungs are clear to auscultation.`,
     rootNodeId: 'cp-node-1',
     nodes: {
       'cp-node-1': {
         id: 'cp-node-1',
         type: 'decision',
-        content: 'ECG shows ST elevations in V1-V4 with reciprocal ST depressions in inferior leads.',
-        question: 'What is your immediate priority?',
+        content: 'An ECG is obtained and shows ST-segment elevations in leads V1-V4 with reciprocal ST depressions in the inferior leads.',
+        question: 'What is the most appropriate immediate next step in management?',
         choices: [
           {
             id: 'cp-choice-1a',
@@ -226,8 +226,8 @@ Exam: Uncomfortable, diaphoretic. Heart regular, no murmurs. Lungs clear.`,
       'cp-node-2': {
         id: 'cp-node-2',
         type: 'decision',
-        content: 'Patient received aspirin 325 mg. BP 142/85, HR 88. No drug allergies.',
-        question: 'Which additional medications should you give?',
+        content: 'The cath lab is activated. The patient has received aspirin 325 mg. His blood pressure is now 142/85 and heart rate 88. He has no known drug allergies.',
+        question: 'Which of the following is the most appropriate additional pharmacotherapy at this time?',
         choices: [
           {
             id: 'cp-choice-2a',
@@ -262,8 +262,8 @@ Exam: Uncomfortable, diaphoretic. Heart regular, no murmurs. Lungs clear.`,
       'cp-node-3': {
         id: 'cp-node-3',
         type: 'decision',
-        content: 'Successful PCI with DES to 99% proximal LAD. Door-to-balloon 68 min. Pain resolved. Peak troponin 45. Echo: EF 45% with anterior hypokinesis.',
-        question: 'What medical therapy before discharge?',
+        content: 'The patient undergoes successful PCI with placement of a drug-eluting stent to a 99% proximal LAD lesion. Door-to-balloon time was 68 minutes. His chest pain has completely resolved. Peak troponin was 45 ng/mL. An echocardiogram shows an ejection fraction of 45% with anterior wall hypokinesis.',
+        question: 'Which of the following is the most appropriate discharge medication regimen?',
         choices: [
           {
             id: 'cp-choice-3a',
@@ -328,18 +328,16 @@ Exam: Uncomfortable, diaphoretic. Heart regular, no murmurs. Lungs clear.`,
     createdAt: now,
     updatedAt: now,
     title: 'DKA Management',
-    initialScenario: `24F with T1DM presents with 2 days of nausea, vomiting, abdominal pain. Ran out of insulin 3 days ago, couldn't afford refills. Ill-appearing, dry mucous membranes, Kussmaul breathing.
+    initialScenario: `A 24-year-old woman with type 1 diabetes mellitus presents to the emergency department with 2 days of nausea, vomiting, and diffuse abdominal pain. She reports that she ran out of insulin 3 days ago and could not afford to refill her prescription. On exam, she appears ill with dry mucous membranes and deep, labored breathing (Kussmaul respirations).
 
-VS: BP 98/62, HR 118, RR 28, Temp 99.1, SpO2 98% RA
-
-Labs: Glucose 486, pH 7.18, HCO3 10, AG 24, K 5.4, BUN/Cr 28/1.4, beta-hydroxybutyrate elevated.`,
+Her vital signs show a blood pressure of 98/62, heart rate 118, respiratory rate 28, temperature 99.1°F, and oxygen saturation 98% on room air. Laboratory studies reveal a glucose of 486 mg/dL, arterial pH 7.18, bicarbonate 10 mEq/L, anion gap 24, potassium 5.4 mEq/L, BUN 28 mg/dL, creatinine 1.4 mg/dL, and elevated beta-hydroxybutyrate.`,
     rootNodeId: 'dka-node-1',
     nodes: {
       'dka-node-1': {
         id: 'dka-node-1',
         type: 'decision',
-        content: 'DKA confirmed: hyperglycemia, acidosis, ketonemia. Estimated fluid deficit 5-6 liters.',
-        question: 'What is your initial priority?',
+        content: 'The clinical picture and laboratory findings confirm diabetic ketoacidosis with hyperglycemia, metabolic acidosis, and ketonemia. You estimate her total body fluid deficit to be approximately 5-6 liters.',
+        question: 'What is the most appropriate initial step in management?',
         choices: [
           {
             id: 'dka-choice-1a',
@@ -383,8 +381,8 @@ Labs: Glucose 486, pH 7.18, HCO3 10, AG 24, K 5.4, BUN/Cr 28/1.4, beta-hydroxybu
       'dka-node-2': {
         id: 'dka-node-2',
         type: 'decision',
-        content: 'After 1L NS: BP 106/68, HR 108. Glucose 420, K 5.1 (down from 5.4).',
-        question: 'How do you manage insulin and potassium?',
+        content: 'After receiving 1 liter of normal saline, her blood pressure has improved to 106/68 and heart rate is 108. Repeat labs show glucose 420 mg/dL and potassium 5.1 mEq/L (down from 5.4).',
+        question: 'What is the most appropriate next step in management?',
         choices: [
           {
             id: 'dka-choice-2a',
@@ -428,8 +426,8 @@ Labs: Glucose 486, pH 7.18, HCO3 10, AG 24, K 5.4, BUN/Cr 28/1.4, beta-hydroxybu
       'dka-node-3': {
         id: 'dka-node-3',
         type: 'decision',
-        content: '4 hours later: Patient more alert. Glucose 195, pH 7.28, HCO3 16, AG 14, K 4.0.',
-        question: 'How should you adjust therapy?',
+        content: 'Four hours into treatment, the patient appears more alert and is feeling better. Repeat laboratory studies show glucose 195 mg/dL, pH 7.28, bicarbonate 16 mEq/L, anion gap 14, and potassium 4.0 mEq/L.',
+        question: 'What is the most appropriate adjustment to her current therapy?',
         choices: [
           {
             id: 'dka-choice-3a',

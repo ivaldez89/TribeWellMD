@@ -479,10 +479,10 @@ const STORAGE_KEY_BG = 'step2_study_background';
 const STORAGE_KEY_OPACITY = 'step2_study_bg_opacity';
 const STORAGE_KEY_CUSTOM_BG = 'step2_custom_background';
 const STORAGE_KEY_VERSION = 'step2_study_bg_version';
-const CURRENT_VERSION = '3'; // Increment to reset to new defaults
+const CURRENT_VERSION = '4'; // Increment to reset to new defaults - changed default to mountains
 
-// Default values - medical library theme at full intensity
-const DEFAULT_BACKGROUND = 'library';
+// Default values - mountains theme at full intensity
+const DEFAULT_BACKGROUND = 'mountains';
 const DEFAULT_OPACITY = 1.0;
 
 // Hook to manage background state with localStorage persistence
