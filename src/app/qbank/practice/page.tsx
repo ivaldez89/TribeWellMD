@@ -919,7 +919,7 @@ function QBankPracticeContent() {
   }
 
   return (
-    <div className="min-h-screen bg-background relative">
+    <div className="min-h-screen bg-background relative overflow-x-auto">
       {/* Consolidated Header with Practice Session Info */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-surface dark:bg-primary backdrop-blur-md border-b border-border-light shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1184,12 +1184,19 @@ function QBankPracticeContent() {
         </div>
       )}
 
-      {/* Main content - responsive split-screen layout */}
-      <main className={`relative z-[1] px-4 py-6 lg:pl-20 transition-all duration-300 ${
+      {/* Main content - Fixed width question card that slides left when sidebar opens */}
+      {/* The card maintains 896px width and shifts position rather than shrinking */}
+      <main className={`relative z-[1] py-6 transition-all duration-300 ease-in-out ${
         showLabsReference
-          ? 'lg:pr-[400px]'
-          : 'max-w-4xl mx-auto'
+          ? 'lg:ml-[56px] lg:mr-[380px]'  /* Slide left to make room for 380px sidebar */
+          : 'lg:ml-[56px]'                 /* Normal position with left sidebar offset */
       }`}>
+        {/* Fixed-width container - never shrinks below 896px */}
+        <div className={`mx-auto px-4 transition-all duration-300 ${
+          showLabsReference
+            ? 'w-[896px] max-w-[896px]'   /* Lock to exact width when sidebar open */
+            : 'max-w-4xl'                  /* max-w-4xl = 896px, centered when closed */
+        }`}>
         {/* Question Presentation Card */}
         <div className="bg-surface rounded-2xl shadow-xl shadow-border/50 border border-border overflow-hidden mb-6">
           {/* Card header */}
@@ -1281,6 +1288,7 @@ function QBankPracticeContent() {
             </button>
           </div>
         </div>
+        </div>{/* End fixed-width container */}
       </main>
 
       {/* Keyboard shortcuts */}

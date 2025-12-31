@@ -435,7 +435,8 @@ interface InlineExplanationProps {
 
 export function InlineExplanation({ label, reason, isCorrect, isSelected }: InlineExplanationProps) {
   // Clean the reason text - remove AI filler phrases and tautologies
-  // STRICT RULE: Never use "does not address the key clinical finding" or "is not the correct answer"
+  // HARD RULE: Explain the clinical presentation and pathophysiology, NOT test logic
+  // Every explanation should help differentiate this from other diagnoses/treatments
   const cleanedReason = useMemo(() => {
     if (!reason) return '';
 
@@ -444,12 +445,23 @@ export function InlineExplanation({ label, reason, isCorrect, isSelected }: Inli
       .replace(/\b(this is not the correct answer|this is incorrect|this is the correct answer|this is correct)\b[.,:;]?\s*/gi, '')
       .replace(/\b(incorrect because|correct because)[:\s]*/gi, '')
       .replace(/\b(the answer is|would be|represents?|indicates?)\s+(incorrect|wrong|not correct|correct)\b[.,:;]?\s*/gi, '')
+      // Remove "does not address" and similar non-clinical phrases
       .replace(/\bdoes not address the key clinical finding[^.]*\./gi, '')
-      .replace(/\bis not the (correct|best|appropriate) (answer|choice|option)[^.]*\./gi, '')
-      .replace(/\bwould not be appropriate here[^.]*\./gi, '')
-      .replace(/\bis incorrect in this (case|scenario|context)[^.]*\./gi, '')
-      .replace(/^\s*[-–—•]\s*/, '') // Remove leading bullets
-      .replace(/^(A|B|C|D|E)[\.\):\s]+/i, '') // Remove option labels at start
+      .replace(/\bdoes not (fit|match|explain|account for)[^.]*\./gi, '')
+      .replace(/\bis not the (correct|best|appropriate|right) (answer|choice|option|response)[^.]*\./gi, '')
+      .replace(/\bwould not be (appropriate|correct|indicated) (here|in this case|for this patient)[^.]*\./gi, '')
+      .replace(/\bis incorrect in this (case|scenario|context|situation)[^.]*\./gi, '')
+      .replace(/\bis not (indicated|appropriate|recommended) (here|in this case|for this)[^.]*\./gi, '')
+      // Remove generic "wrong answer" language
+      .replace(/\bthis (option|choice|answer) is (wrong|incorrect|not right)[^.]*\./gi, '')
+      .replace(/\bnot the (best|correct|right|appropriate) (choice|answer|option)[^.]*\./gi, '')
+      .replace(/\bwrong (choice|answer|option) because[^.]*\./gi, '')
+      // Remove "doesn't fit the clinical picture" type phrases
+      .replace(/\bdoesn't fit (the|this) (clinical|overall) (picture|presentation|scenario)[^.]*\./gi, '')
+      .replace(/\bnot consistent with (the|this) (clinical|patient's) (picture|presentation|findings)[^.]*\./gi, '')
+      // Remove leading/trailing formatting
+      .replace(/^\s*[-–—•]\s*/, '')
+      .replace(/^(A|B|C|D|E)[\.\):\s]+/i, '')
       .trim();
   }, [reason]);
 
