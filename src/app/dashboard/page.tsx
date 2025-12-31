@@ -8,6 +8,7 @@ import { UnifiedCalendarHub } from '@/components/calendar/UnifiedCalendarHub';
 import { useIsAuthenticated } from '@/hooks/useAuth';
 import { useCalendarHub } from '@/hooks/useCalendarHub';
 import { CalendarIcon, SparklesIcon } from '@/components/icons/MedicalIcons';
+import { getEventColor, formatEventTime, type CalendarEvent } from '@/types/calendar';
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -22,10 +23,11 @@ export default function DashboardPage() {
   }, [isAuthenticated, router]);
 
   // Get today's and upcoming events/tasks
-  const { todayEvents, upcomingTasks, upcomingEvents } = useMemo(() => {
+  const { todayEvents, upcomingTasks, upcomingEvents, displayEvents, eventsHeaderTitle } = useMemo(() => {
     const now = new Date();
     const todayStr = now.toISOString().split('T')[0];
 
+    // All events for today (not just non-tasks)
     const todayEvts = events
       .filter(e => e.startDate === todayStr)
       .sort((a, b) => {
@@ -35,6 +37,7 @@ export default function DashboardPage() {
       })
       .slice(0, 5);
 
+    // Tasks for next 7 days
     const tasks = events
       .filter(e => e.type === 'task')
       .filter(e => {
@@ -45,6 +48,7 @@ export default function DashboardPage() {
       .sort((a, b) => a.startDate.localeCompare(b.startDate))
       .slice(0, 5);
 
+    // Upcoming events (non-task) for next 7 days
     const upcoming = events
       .filter(e => e.type !== 'task')
       .filter(e => {
@@ -55,7 +59,25 @@ export default function DashboardPage() {
       .sort((a, b) => a.startDate.localeCompare(b.startDate))
       .slice(0, 5);
 
-    return { todayEvents: todayEvts, upcomingTasks: tasks, upcomingEvents: upcoming };
+    // For Events sidebar box: today's non-task events OR upcoming non-task events
+    const todayNonTaskEvents = events
+      .filter(e => e.startDate === todayStr && e.type !== 'task')
+      .sort((a, b) => {
+        if (!a.startTime) return -1;
+        if (!b.startTime) return 1;
+        return a.startTime.localeCompare(b.startTime);
+      });
+
+    const displayEvts = todayNonTaskEvents.length > 0 ? todayNonTaskEvents : upcoming;
+    const headerTitle = todayNonTaskEvents.length > 0 ? 'Today' : 'Upcoming';
+
+    return {
+      todayEvents: todayEvts,
+      upcomingTasks: tasks,
+      upcomingEvents: upcoming,
+      displayEvents: displayEvts,
+      eventsHeaderTitle: headerTitle
+    };
   }, [events]);
 
   // Format date for display
@@ -253,6 +275,43 @@ export default function DashboardPage() {
           </p>
         </div>
       </div>
+
+      {/* Events - Moved from calendar */}
+      <div className={CARD_STYLES.container + ' overflow-hidden'}>
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
+          <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+            <svg className="w-5 h-5 text-teal-600 dark:text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Events
+          </h3>
+          <span className="text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
+            {eventsHeaderTitle}
+          </span>
+        </div>
+
+        {/* Events List */}
+        <div className="max-h-[200px] overflow-y-auto">
+          {displayEvents.length === 0 ? (
+            <div className="flex items-center justify-center py-6 px-4 text-center">
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                No upcoming events
+              </p>
+            </div>
+          ) : (
+            <div className="divide-y divide-slate-100 dark:divide-slate-700">
+              {displayEvents.map((event) => (
+                <EventItem
+                  key={event.id}
+                  event={event}
+                  showDate={eventsHeaderTitle !== 'Today'}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
     </>
   );
 
@@ -270,4 +329,73 @@ export default function DashboardPage() {
       </div>
     </ThreeColumnLayout>
   );
+}
+
+// Individual Event Item for sidebar display
+function EventItem({
+  event,
+  showDate,
+}: {
+  event: CalendarEvent;
+  showDate: boolean;
+}) {
+  const color = getEventColor(event);
+  const isGroupSession = event.type === 'study-room' || event.linkedRoomId;
+
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr + 'T00:00:00');
+    return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  };
+
+  const content = (
+    <div className="group px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors flex items-center gap-3">
+      {/* Color indicator */}
+      <div
+        className="w-1 h-10 rounded-full flex-shrink-0"
+        style={{ backgroundColor: color }}
+      />
+
+      {/* Content */}
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2">
+          <p className="text-sm font-medium text-slate-900 dark:text-white truncate">
+            {event.title}
+          </p>
+          {isGroupSession && (
+            <span className="flex-shrink-0 text-xs px-1.5 py-0.5 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded">
+              Group
+            </span>
+          )}
+        </div>
+
+        <div className="flex items-center gap-2 mt-0.5">
+          <span className="text-xs text-slate-500 dark:text-slate-400">
+            {formatEventTime(event)}
+          </span>
+          {showDate && (
+            <span className="text-xs text-slate-400 dark:text-slate-500">
+              • {formatDate(event.startDate)}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Arrow for group sessions */}
+      {isGroupSession && (
+        <svg className="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      )}
+    </div>
+  );
+
+  if (isGroupSession && event.linkedRoomId) {
+    return (
+      <Link href={`/progress/room/${event.linkedRoomId}`}>
+        {content}
+      </Link>
+    );
+  }
+
+  return content;
 }
