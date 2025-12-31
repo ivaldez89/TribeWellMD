@@ -12,7 +12,7 @@ import {
   type StructuredExplanationData
 } from '@/components/study/StructuredExplanation';
 import { QuestionNavigationGrid } from '@/components/study/QuestionNavigationGrid';
-import { LabReferenceModal } from '@/components/study/LabReferenceModal';
+import { LabReferencePanel } from '@/components/study/LabReferencePanel';
 import { createClient } from '@/lib/supabase/client';
 
 // Question type matching Supabase schema
@@ -904,15 +904,15 @@ function QBankPracticeContent() {
                 />
               </div>
 
-              {/* Labs Reference button */}
+              {/* Labs Reference button - toggles sidebar */}
               <button
-                onClick={() => setShowLabsReference(true)}
+                onClick={() => setShowLabsReference(!showLabsReference)}
                 className={`flex items-center gap-1.5 px-2 sm:px-3 py-1.5 text-sm rounded-lg transition-colors ${
                   showLabsReference
-                    ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300'
+                    ? 'bg-sand-100 dark:bg-sand-900/40 text-sand-700 dark:text-sand-300'
                     : 'text-content-muted hover:text-secondary hover:bg-surface-muted dark:text-primary-foreground/70 dark:hover:text-white dark:hover:bg-white/10'
                 }`}
-                title="NBME Reference Values (L)"
+                title="Lab Reference (L)"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
@@ -1103,8 +1103,12 @@ function QBankPracticeContent() {
         </div>
       )}
 
-      {/* Main content - centered on screen with sidebar padding */}
-      <main className="relative z-[1] max-w-4xl px-4 py-6 lg:pl-20 mx-auto">
+      {/* Main content - responsive split-screen layout */}
+      <main className={`relative z-[1] px-4 py-6 lg:pl-20 transition-all duration-300 ${
+        showLabsReference
+          ? 'lg:pr-[400px]'
+          : 'max-w-4xl mx-auto'
+      }`}>
         {/* Question Presentation Card */}
         <div className="bg-surface rounded-2xl shadow-xl shadow-border/50 border border-border overflow-hidden mb-6">
           {/* Card header */}
@@ -1209,8 +1213,8 @@ function QBankPracticeContent() {
         </p>
       </div>
 
-      {/* Labs Reference Modal */}
-      <LabReferenceModal
+      {/* Labs Reference Panel - Right Sidebar */}
+      <LabReferencePanel
         isOpen={showLabsReference}
         onClose={() => setShowLabsReference(false)}
       />
