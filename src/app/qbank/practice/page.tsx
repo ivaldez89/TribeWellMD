@@ -11,6 +11,8 @@ import {
   InlineExplanation,
   type StructuredExplanationData
 } from '@/components/study/StructuredExplanation';
+import { LabTable } from '@/components/study/LabTable';
+import { QuestionNavigationGrid } from '@/components/study/QuestionNavigationGrid';
 import { createClient } from '@/lib/supabase/client';
 
 // Question type matching Supabase schema
@@ -433,15 +435,15 @@ function AnswerOptionsWithExplanations({
         })}
       </div>
 
-      {/* Submit Button */}
+      {/* Submit Button - Always visible once a selection is made (opacity-100, no hover-dependency) */}
       {!isSubmitted && (
         <button
           onClick={onSubmit}
           disabled={!currentState?.selectedAnswer}
-          className={`w-full mt-6 py-4 rounded-xl font-medium transition-all ${
+          className={`w-full mt-6 py-4 rounded-xl font-medium transition-all transform ${
             currentState?.selectedAnswer
-              ? 'bg-gradient-to-r from-sand-500 to-sand-600 hover:from-sand-600 hover:to-sand-700 text-white'
-              : 'bg-surface-muted text-content-muted cursor-not-allowed'
+              ? 'opacity-100 bg-gradient-to-r from-sand-500 to-sand-600 hover:from-sand-600 hover:to-sand-700 text-white shadow-lg hover:shadow-xl hover:scale-[1.01] active:scale-[0.99]'
+              : 'opacity-50 bg-surface-muted text-content-muted cursor-not-allowed'
           }`}
         >
           Submit Answer
@@ -871,6 +873,16 @@ function QBankPracticeContent() {
               </div>
             )}
 
+            {/* UWorld-style Question Navigator Grid */}
+            <QuestionNavigationGrid
+              totalQuestions={filteredQuestions.length}
+              currentIndex={currentIndex}
+              questionStates={questionStates}
+              isMarked={isMarked}
+              questionIds={filteredQuestions.map(q => q.id)}
+              onNavigate={setCurrentIndex}
+            />
+
             {/* Audio dropdown */}
             <div className="relative">
               <button
@@ -1023,6 +1035,9 @@ function QBankPracticeContent() {
 
           {/* Question content */}
           <div className="p-6 md:p-8">
+            {/* Lab Table - extracted from question stem */}
+            <LabTable text={currentQuestion.stem} />
+
             {formatStem(currentQuestion.stem)}
           </div>
         </div>
@@ -1052,21 +1067,19 @@ function QBankPracticeContent() {
               Previous
             </button>
 
-            {/* Progress dots */}
-            <div className="hidden sm:flex flex-wrap gap-1 max-w-[200px] justify-center">
-              {filteredQuestions.slice(Math.max(0, currentIndex - 3), Math.min(filteredQuestions.length, currentIndex + 4)).map((q, idx) => {
-                const actualIdx = Math.max(0, currentIndex - 3) + idx;
-                const state = questionStates[q.id];
-                const marked = isMarked[q.id];
-                const isCurrent = actualIdx === currentIndex;
-                let dotClass = 'bg-border';
-                if (state?.isSubmitted) dotClass = state.isCorrect ? 'bg-success' : 'bg-error';
-                else if (marked) dotClass = 'bg-warning';
-                else if (isCurrent) dotClass = 'bg-primary';
-                return (
-                  <button key={q.id} onClick={() => setCurrentIndex(actualIdx)} className={`w-2.5 h-2.5 rounded-full transition-all ${dotClass} ${isCurrent ? 'ring-2 ring-primary ring-offset-1' : 'hover:opacity-70'}`} />
-                );
-              })}
+            {/* Progress indicator - simplified since we have the grid above */}
+            <div className="hidden sm:flex items-center gap-3 text-sm text-content-muted">
+              <span className="tabular-nums font-medium text-secondary">
+                {currentIndex + 1} / {filteredQuestions.length}
+              </span>
+              {answeredCount > 0 && (
+                <span className="flex items-center gap-1.5 text-xs">
+                  <span className="w-2 h-2 rounded-full bg-success" />
+                  {correctCount}
+                  <span className="w-2 h-2 rounded-full bg-error ml-1" />
+                  {answeredCount - correctCount}
+                </span>
+              )}
             </div>
 
             <button
