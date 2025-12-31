@@ -435,17 +435,12 @@ function AnswerOptionsWithExplanations({
         })}
       </div>
 
-      {/* Submit Button - Always 100% visible once a selection is made */}
-      {!isSubmitted && (
-        <div className={`sticky bottom-4 mt-6 ${currentState?.selectedAnswer ? 'z-30' : ''}`}>
+      {/* Submit Button - Always 100% visible and sticky once a selection is made */}
+      {!isSubmitted && currentState?.selectedAnswer && (
+        <div className="sticky bottom-4 mt-6 z-30">
           <button
             onClick={onSubmit}
-            disabled={!currentState?.selectedAnswer}
-            className={`w-full py-4 rounded-xl font-semibold text-lg transition-all transform ${
-              currentState?.selectedAnswer
-                ? 'opacity-100 bg-gradient-to-r from-sand-500 to-sand-600 hover:from-sand-600 hover:to-sand-700 text-white shadow-xl hover:shadow-2xl hover:scale-[1.01] active:scale-[0.99] ring-2 ring-sand-400/50'
-                : 'opacity-50 bg-surface-muted text-content-muted cursor-not-allowed'
-            }`}
+            className="w-full py-4 rounded-xl font-semibold text-lg transition-all transform opacity-100 bg-gradient-to-r from-primary to-primary-hover hover:from-primary-hover hover:to-primary text-white shadow-xl hover:shadow-2xl hover:scale-[1.01] active:scale-[0.99] ring-2 ring-primary/30"
           >
             Submit Answer
           </button>

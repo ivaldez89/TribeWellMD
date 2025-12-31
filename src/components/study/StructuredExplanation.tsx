@@ -201,8 +201,23 @@ export function parseExplanation(
           }
         }
 
+        // If still no reason found, try harder to extract something meaningful
         if (!reason) {
-          reason = `Not the best answer for this clinical scenario.`;
+          // Search the entire explanation for any sentence mentioning this option
+          const sentences = rawExplanation.split(/(?<=[.!?])\s+/);
+          for (const sentence of sentences) {
+            if (sentence.toLowerCase().includes(keyTerm.toLowerCase()) && sentence.length > 20) {
+              reason = sentence.trim();
+              break;
+            }
+          }
+        }
+
+        // Last resort: provide context based on the correct answer
+        if (!reason) {
+          const correctOpt = options.find(o => o.label === correctAnswer);
+          const correctTerm = correctOpt?.text?.split(/[,.(]/)[0]?.trim() || 'the correct answer';
+          reason = `${option.text.split(/[,.(]/)[0]?.trim()} does not address the key clinical finding that points to ${correctTerm}.`;
         }
       }
     }
@@ -414,8 +429,27 @@ interface InlineExplanationProps {
 }
 
 export function InlineExplanation({ label, reason, isCorrect, isSelected }: InlineExplanationProps) {
+  // Clean the reason text - remove AI filler phrases
+  const cleanedReason = useMemo(() => {
+    if (!reason) return '';
+
+    return reason
+      // Remove common AI filler phrases
+      .replace(/\b(this is not the correct answer|this is incorrect|this is the correct answer|this is correct)\b[.,:;]?\s*/gi, '')
+      .replace(/\b(incorrect because|correct because)[:\s]*/gi, '')
+      .replace(/\b(the answer is|would be|represents?|indicates?)\s+(incorrect|wrong|not correct|correct)\b[.,:;]?\s*/gi, '')
+      .replace(/^\s*[-–—•]\s*/, '') // Remove leading bullets
+      .replace(/^(A|B|C|D|E)[\.\):\s]+/i, '') // Remove option labels at start
+      .trim();
+  }, [reason]);
+
+  // Don't render if there's no meaningful content after cleaning
+  if (!cleanedReason || cleanedReason.length < 10) {
+    return null;
+  }
+
   // Determine background color based on correct/incorrect/selected state
-  let bgClass = 'bg-gray-50 border-gray-200';
+  let bgClass = 'bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700';
   let textClass = 'text-content-muted';
 
   if (isCorrect) {
@@ -427,15 +461,78 @@ export function InlineExplanation({ label, reason, isCorrect, isSelected }: Inli
   }
 
   return (
-    <div className={`mt-3 px-4 py-3 rounded-lg border ${bgClass} transition-all`}>
+    <div className={`mt-2 ml-14 px-4 py-2.5 rounded-lg border ${bgClass} transition-all`}>
       <p className={`text-xs leading-relaxed ${textClass}`}>
-        {applyMedicalBolding(reason, true)}
+        {applyMedicalBolding(cleanedReason, true)}
       </p>
     </div>
   );
 }
 
-// Summary component for bottom section (Mechanisms & High-Yield only)
+// Learning Objective component - single styled box at bottom of card
+// Stripped down: No more "MECHANISMS & EVIDENCE" or "WHY NOT THE OTHERS" blocks
+// Per-choice explanations are shown inline under each answer choice
+interface LearningObjectiveProps {
+  explanation: string;
+  options: { label: string; text: string }[];
+  correctAnswer: string;
+}
+
+export function LearningObjective({
+  explanation,
+  options,
+  correctAnswer
+}: LearningObjectiveProps) {
+  const structured = useMemo(() => {
+    return parseExplanation(explanation, options, correctAnswer);
+  }, [explanation, options, correctAnswer]);
+
+  // Generate a concise learning objective from the high-yield takeaway
+  const learningObjective = useMemo(() => {
+    if (structured.highYieldTakeaway) {
+      // Clean up the takeaway - remove filler phrases
+      let objective = structured.highYieldTakeaway
+        .replace(/^(remember|key point|takeaway|high-yield|board tip)[:\s]*/i, '')
+        .replace(/\b(this is|the answer is)\b/gi, '')
+        .trim();
+
+      // Capitalize first letter
+      if (objective.length > 0) {
+        objective = objective.charAt(0).toUpperCase() + objective.slice(1);
+      }
+
+      return objective;
+    }
+
+    // Generate from correct answer if no high-yield found
+    const correctOption = options.find(o => o.label === correctAnswer);
+    const correctTerm = correctOption?.text?.split(/[,.(]/)[0]?.trim() || correctAnswer;
+
+    return `Recognize when ${correctTerm} is the appropriate choice based on the clinical presentation.`;
+  }, [structured, options, correctAnswer]);
+
+  return (
+    <div className="p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border border-blue-200 dark:border-blue-800">
+      <div className="flex items-start gap-3">
+        <div className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center flex-shrink-0">
+          <svg className="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          </svg>
+        </div>
+        <div>
+          <h4 className="text-xs font-semibold text-blue-800 dark:text-blue-200 uppercase tracking-wide mb-1">
+            Learning Objective
+          </h4>
+          <p className="text-sm text-blue-900 dark:text-blue-100 leading-relaxed font-medium">
+            {learningObjective}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Legacy ExplanationSummary - kept for backward compatibility but now simplified
 interface ExplanationSummaryProps {
   explanation: string;
   options: { label: string; text: string }[];
@@ -451,131 +548,13 @@ export function ExplanationSummary({
   isCorrect,
   cognitiveError
 }: ExplanationSummaryProps) {
-  const structured = useMemo(() => {
-    return parseExplanation(explanation, options, correctAnswer);
-  }, [explanation, options, correctAnswer]);
-
+  // Now just renders the Learning Objective - no more verbose sections
   return (
-    <div className="space-y-5">
-      {/* Result Header */}
-      <div className={`flex items-center gap-3 pb-4 border-b ${isCorrect ? 'border-success/30' : 'border-warning/30'}`}>
-        <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-          isCorrect ? 'bg-success/20' : 'bg-warning/20'
-        }`}>
-          {isCorrect ? (
-            <svg className="w-5 h-5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-          ) : (
-            <svg className="w-5 h-5 text-warning" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-          )}
-        </div>
-        <div>
-          <p className={`text-sm font-medium ${isCorrect ? 'text-success' : 'text-warning'}`}>
-            {isCorrect ? 'Correct!' : 'Incorrect'}
-          </p>
-          <p className="text-xs text-content-muted">
-            {isCorrect
-              ? 'Great job identifying the right answer'
-              : `The correct answer was ${structured.correctAnswer.label}. ${structured.correctAnswer.term}`
-            }
-          </p>
-        </div>
-      </div>
-
-      {/* Mechanisms & Evidence */}
-      <div>
-        <h4 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2 flex items-center gap-2">
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-          </svg>
-          Mechanisms & Evidence
-        </h4>
-        <div className="p-4 rounded-xl bg-surface-muted/50">
-          <p className="text-sm text-secondary leading-relaxed">
-            {applyMedicalBolding(structured.mechanismsAndEvidence, true)}
-          </p>
-        </div>
-      </div>
-
-      {/* Comparison Table - Auto-generated when trigger keywords found */}
-      {structured.comparisonTable.length > 0 && (
-        <div>
-          <h4 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2 flex items-center gap-2">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-            </svg>
-            Quick Comparison
-          </h4>
-          <div className="overflow-x-auto rounded-xl border border-border">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-surface-muted/50">
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-content-muted uppercase tracking-wide border-b border-border">
-                    Option
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-content-muted uppercase tracking-wide border-b border-border">
-                    Key Characteristic
-                  </th>
-                  {structured.comparisonTable.some(r => r.caveat) && (
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-content-muted uppercase tracking-wide border-b border-border">
-                      Clinical Caveat
-                    </th>
-                  )}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {structured.comparisonTable.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-surface-muted/30 transition-colors">
-                    <td className="px-4 py-3 font-medium text-secondary whitespace-nowrap">
-                      {row.option}
-                    </td>
-                    <td className="px-4 py-3 text-content-muted">
-                      {applyMedicalBolding(row.characteristic, true)}
-                    </td>
-                    {structured.comparisonTable.some(r => r.caveat) && (
-                      <td className="px-4 py-3 text-content-muted text-xs">
-                        {row.caveat ? applyMedicalBolding(row.caveat, true) : '—'}
-                      </td>
-                    )}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
-
-      {/* High-Yield Takeaway */}
-      {structured.highYieldTakeaway && (
-        <div className="p-4 rounded-xl bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20">
-          <h4 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2 flex items-center gap-2">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            High-Yield Takeaway
-          </h4>
-          <p className="text-sm text-secondary font-medium leading-relaxed">
-            {applyMedicalBolding(structured.highYieldTakeaway, true)}
-          </p>
-        </div>
-      )}
-
-      {/* Cognitive Error (if provided) */}
-      {cognitiveError && (
-        <div className="p-3 rounded-xl bg-warning/5 border border-warning/20">
-          <h4 className="text-xs font-semibold text-warning uppercase tracking-wide mb-1 flex items-center gap-2">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            Common Cognitive Error
-          </h4>
-          <p className="text-xs text-content-muted">{cognitiveError}</p>
-        </div>
-      )}
-    </div>
+    <LearningObjective
+      explanation={explanation}
+      options={options}
+      correctAnswer={correctAnswer}
+    />
   );
 }
 
