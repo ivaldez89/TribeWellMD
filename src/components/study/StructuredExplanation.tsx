@@ -394,25 +394,66 @@ interface StructuredExplanationProps {
   cognitiveError?: string | null;
 }
 
-// Main component
-export function StructuredExplanation({
+// Hook to get structured explanation data for inline use
+export function useStructuredExplanation(
+  explanation: string,
+  options: { label: string; text: string }[],
+  correctAnswer: string
+): StructuredExplanationData {
+  return useMemo(() => {
+    return parseExplanation(explanation, options, correctAnswer);
+  }, [explanation, options, correctAnswer]);
+}
+
+// Inline explanation component for individual answer choices
+interface InlineExplanationProps {
+  label: string;
+  reason: string;
+  isCorrect: boolean;
+  isSelected: boolean;
+}
+
+export function InlineExplanation({ label, reason, isCorrect, isSelected }: InlineExplanationProps) {
+  // Determine background color based on correct/incorrect/selected state
+  let bgClass = 'bg-gray-50 border-gray-200';
+  let textClass = 'text-content-muted';
+
+  if (isCorrect) {
+    bgClass = 'bg-success/8 border-success/20';
+    textClass = 'text-success';
+  } else if (isSelected) {
+    bgClass = 'bg-error/8 border-error/20';
+    textClass = 'text-error/80';
+  }
+
+  return (
+    <div className={`mt-3 px-4 py-3 rounded-lg border ${bgClass} transition-all`}>
+      <p className={`text-xs leading-relaxed ${textClass}`}>
+        {applyMedicalBolding(reason, true)}
+      </p>
+    </div>
+  );
+}
+
+// Summary component for bottom section (Mechanisms & High-Yield only)
+interface ExplanationSummaryProps {
+  explanation: string;
+  options: { label: string; text: string }[];
+  correctAnswer: string;
+  isCorrect: boolean;
+  cognitiveError?: string | null;
+}
+
+export function ExplanationSummary({
   explanation,
   options,
   correctAnswer,
-  selectedAnswer,
   isCorrect,
-  isAnswered, // RULE 2: Bolding only applies when this is true
   cognitiveError
-}: StructuredExplanationProps) {
-  // Parse the explanation into structured format
+}: ExplanationSummaryProps) {
   const structured = useMemo(() => {
     return parseExplanation(explanation, options, correctAnswer);
   }, [explanation, options, correctAnswer]);
-
-  // Don't render anything if not answered yet
-  if (!isAnswered) {
-    return null;
-  }
 
   return (
     <div className="space-y-5">
@@ -444,21 +485,6 @@ export function StructuredExplanation({
         </div>
       </div>
 
-      {/* The Correct Answer */}
-      <div>
-        <h4 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2 flex items-center gap-2">
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          The Correct Answer
-        </h4>
-        <div className="p-3 rounded-xl bg-success/5 border border-success/20">
-          <p className="text-sm text-secondary">
-            <strong className="font-semibold">{structured.correctAnswer.label}. {structured.correctAnswer.term}</strong>
-          </p>
-        </div>
-      </div>
-
       {/* Mechanisms & Evidence */}
       <div>
         <h4 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2 flex items-center gap-2">
@@ -469,84 +495,12 @@ export function StructuredExplanation({
         </h4>
         <div className="p-4 rounded-xl bg-surface-muted/50">
           <p className="text-sm text-secondary leading-relaxed">
-            {/* RULE 2: Pass isAnswered to control bolding */}
-            {applyMedicalBolding(structured.mechanismsAndEvidence, isAnswered)}
+            {applyMedicalBolding(structured.mechanismsAndEvidence, true)}
           </p>
         </div>
       </div>
 
-      {/* RULE 1: Why Not - Distractor Analysis - VERTICAL LIST with line breaks */}
-      <div>
-        <h4 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2 flex items-center gap-2">
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          Why Not the Others?
-        </h4>
-        {/* RULE 1: Vertical list with clear separation - each option on its own line */}
-        <div className="flex flex-col gap-3">
-          {structured.distractorAnalysis.map((distractor) => {
-            const isSelected = selectedAnswer === distractor.label;
-            const bgClass = distractor.isCorrect
-              ? 'bg-success/5 border-success/30'
-              : isSelected
-                ? 'bg-error/5 border-error/30'
-                : 'bg-surface-muted/30 border-border/50';
-
-            return (
-              <div
-                key={distractor.label}
-                className={`p-3 rounded-xl border ${bgClass} transition-all`}
-              >
-                {/* RULE 1: Each option A-E on its own line with clear visual separation */}
-                <div className="flex flex-col gap-2">
-                  {/* Option header line */}
-                  <div className="flex items-center gap-3">
-                    <span className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                      distractor.isCorrect
-                        ? 'bg-success/20 text-success'
-                        : isSelected
-                          ? 'bg-error/20 text-error'
-                          : 'bg-border text-content-muted'
-                    }`}>
-                      {distractor.label}
-                    </span>
-                    <p className="text-sm font-medium text-secondary flex-1">
-                      {distractor.text}
-                    </p>
-                    {distractor.isCorrect && (
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-success/20 text-success font-medium">
-                        Correct
-                      </span>
-                    )}
-                    {isSelected && !distractor.isCorrect && (
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-error/20 text-error font-medium">
-                        Your Answer
-                      </span>
-                    )}
-                  </div>
-                  {/* Reason line - separate from header for clarity */}
-                  <div className="pl-11">
-                    <p className="text-xs leading-relaxed">
-                      {distractor.isCorrect ? (
-                        <span className="text-success">
-                          {applyMedicalBolding(distractor.reason, isAnswered)}
-                        </span>
-                      ) : (
-                        <span className="text-content-muted">
-                          {applyMedicalBolding(distractor.reason, isAnswered)}
-                        </span>
-                      )}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* RULE 3: Comparison Table - Auto-generated when trigger keywords found */}
+      {/* Comparison Table - Auto-generated when trigger keywords found */}
       {structured.comparisonTable.length > 0 && (
         <div>
           <h4 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2 flex items-center gap-2">
@@ -579,11 +533,11 @@ export function StructuredExplanation({
                       {row.option}
                     </td>
                     <td className="px-4 py-3 text-content-muted">
-                      {applyMedicalBolding(row.characteristic, isAnswered)}
+                      {applyMedicalBolding(row.characteristic, true)}
                     </td>
                     {structured.comparisonTable.some(r => r.caveat) && (
                       <td className="px-4 py-3 text-content-muted text-xs">
-                        {row.caveat ? applyMedicalBolding(row.caveat, isAnswered) : '—'}
+                        {row.caveat ? applyMedicalBolding(row.caveat, true) : '—'}
                       </td>
                     )}
                   </tr>
@@ -604,7 +558,7 @@ export function StructuredExplanation({
             High-Yield Takeaway
           </h4>
           <p className="text-sm text-secondary font-medium leading-relaxed">
-            {applyMedicalBolding(structured.highYieldTakeaway, isAnswered)}
+            {applyMedicalBolding(structured.highYieldTakeaway, true)}
           </p>
         </div>
       )}
@@ -622,6 +576,32 @@ export function StructuredExplanation({
         </div>
       )}
     </div>
+  );
+}
+
+// Main component (kept for backward compatibility, but now deprecated in favor of inline approach)
+export function StructuredExplanation({
+  explanation,
+  options,
+  correctAnswer,
+  selectedAnswer,
+  isCorrect,
+  isAnswered,
+  cognitiveError
+}: StructuredExplanationProps) {
+  // Use the new ExplanationSummary component
+  if (!isAnswered) {
+    return null;
+  }
+
+  return (
+    <ExplanationSummary
+      explanation={explanation}
+      options={options}
+      correctAnswer={correctAnswer}
+      isCorrect={isCorrect}
+      cognitiveError={cognitiveError}
+    />
   );
 }
 

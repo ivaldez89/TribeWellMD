@@ -5,7 +5,12 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { BackgroundSelector, useStudyBackground, getBackgroundUrl } from '@/components/study/BackgroundSelector';
-import { StructuredExplanation } from '@/components/study/StructuredExplanation';
+import {
+  ExplanationSummary,
+  useStructuredExplanation,
+  InlineExplanation,
+  type StructuredExplanationData
+} from '@/components/study/StructuredExplanation';
 import { createClient } from '@/lib/supabase/client';
 
 // Question type matching Supabase schema
@@ -328,6 +333,135 @@ function formatStem(stem: string): React.ReactNode {
   }
 
   return <div className="space-y-0">{elements}</div>;
+}
+
+// Answer Options Component with Inline Explanations
+interface AnswerOptionsProps {
+  question: Question;
+  currentState: QuestionState | null;
+  urlMode: string;
+  onSelectAnswer: (label: string) => void;
+  onSubmit: () => void;
+}
+
+function AnswerOptionsWithExplanations({
+  question,
+  currentState,
+  urlMode,
+  onSelectAnswer,
+  onSubmit
+}: AnswerOptionsProps) {
+  // Get structured explanation data using the hook
+  const structured = useStructuredExplanation(
+    question.explanation,
+    question.options,
+    question.correct_answer
+  );
+
+  const isSubmitted = currentState?.isSubmitted || false;
+  const isTutorMode = urlMode === 'tutor';
+
+  // Find the distractor analysis for each option
+  const getOptionExplanation = (label: string) => {
+    return structured.distractorAnalysis.find(d => d.label === label);
+  };
+
+  return (
+    <div className="bg-surface rounded-2xl shadow-xl shadow-border/50 border border-border p-6 md:p-8 mb-6">
+      <div className="space-y-4">
+        {question.options.map((option) => {
+          const isSelected = currentState?.selectedAnswer === option.label;
+          const isCorrect = option.label === question.correct_answer;
+          const optionExplanation = getOptionExplanation(option.label);
+
+          // Container styling
+          let containerClass = 'bg-surface border-border hover:border-primary/50';
+          let bubbleClass = 'border-border-strong text-content-muted';
+
+          if (isSubmitted) {
+            if (isCorrect) {
+              containerClass = 'bg-success/5 border-success';
+              bubbleClass = 'bg-success border-success text-white';
+            } else if (isSelected) {
+              containerClass = 'bg-error/5 border-error';
+              bubbleClass = 'bg-error border-error text-white';
+            } else {
+              containerClass = 'bg-surface-muted/50 border-border opacity-70';
+            }
+          } else if (isSelected) {
+            containerClass = 'bg-primary/5 border-primary';
+            bubbleClass = 'bg-primary border-primary text-white';
+          }
+
+          return (
+            <div key={option.label} className="space-y-0">
+              {/* Answer Choice Button */}
+              <button
+                onClick={() => onSelectAnswer(option.label)}
+                disabled={isSubmitted}
+                className={`w-full flex items-start gap-4 p-4 rounded-xl border-2 transition-all text-left ${containerClass} ${isSubmitted ? 'cursor-default' : 'cursor-pointer'}`}
+              >
+                <div className={`w-10 h-10 rounded-full border-2 flex items-center justify-center flex-shrink-0 font-medium transition-all ${bubbleClass}`}>
+                  {isSubmitted && isCorrect ? (
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : isSubmitted && isSelected && !isCorrect ? (
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  ) : (
+                    option.label
+                  )}
+                </div>
+                <p className={`flex-1 pt-2 text-base leading-relaxed ${isSubmitted && !isCorrect && !isSelected ? 'text-content-muted' : 'text-secondary'}`}>
+                  {option.text}
+                </p>
+              </button>
+
+              {/* Inline Explanation - Shown directly beneath each choice after submission */}
+              {isSubmitted && isTutorMode && optionExplanation && (
+                <InlineExplanation
+                  label={option.label}
+                  reason={optionExplanation.reason}
+                  isCorrect={isCorrect}
+                  isSelected={isSelected}
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Submit Button */}
+      {!isSubmitted && (
+        <button
+          onClick={onSubmit}
+          disabled={!currentState?.selectedAnswer}
+          className={`w-full mt-6 py-4 rounded-xl font-medium transition-all ${
+            currentState?.selectedAnswer
+              ? 'bg-gradient-to-r from-sand-500 to-sand-600 hover:from-sand-600 hover:to-sand-700 text-white'
+              : 'bg-surface-muted text-content-muted cursor-not-allowed'
+          }`}
+        >
+          Submit Answer
+        </button>
+      )}
+
+      {/* Summary Section - Mechanisms & High-Yield at the bottom */}
+      {isSubmitted && isTutorMode && (
+        <div className="mt-8 pt-6 border-t border-border">
+          <ExplanationSummary
+            explanation={question.explanation}
+            options={question.options}
+            correctAnswer={question.correct_answer}
+            isCorrect={currentState?.isCorrect || false}
+            cognitiveError={question.cognitive_error}
+          />
+        </div>
+      )}
+    </div>
+  );
 }
 
 function QBankPracticeContent() {
@@ -893,90 +1027,14 @@ function QBankPracticeContent() {
           </div>
         </div>
 
-        {/* Answer Options Card */}
-        <div className="bg-surface rounded-2xl shadow-xl shadow-border/50 border border-border p-6 md:p-8 mb-6">
-          <div className="space-y-3">
-            {currentQuestion.options.map((option) => {
-              const isSelected = currentState?.selectedAnswer === option.label;
-              const isSubmitted = currentState?.isSubmitted;
-              const isCorrect = option.label === currentQuestion.correct_answer;
-
-              let containerClass = 'bg-surface border-border hover:border-primary/50';
-              let bubbleClass = 'border-border-strong text-content-muted';
-
-              if (isSubmitted) {
-                if (isCorrect) {
-                  containerClass = 'bg-success/5 border-success';
-                  bubbleClass = 'bg-success border-success text-white';
-                } else if (isSelected) {
-                  containerClass = 'bg-error/5 border-error';
-                  bubbleClass = 'bg-error border-error text-white';
-                } else {
-                  containerClass = 'bg-surface-muted/50 border-border opacity-60';
-                }
-              } else if (isSelected) {
-                containerClass = 'bg-primary/5 border-primary';
-                bubbleClass = 'bg-primary border-primary text-white';
-              }
-
-              return (
-                <button
-                  key={option.label}
-                  onClick={() => handleSelectAnswer(option.label)}
-                  disabled={isSubmitted}
-                  className={`w-full flex items-start gap-4 p-4 rounded-xl border-2 transition-all text-left ${containerClass} ${isSubmitted ? 'cursor-default' : 'cursor-pointer'}`}
-                >
-                  <div className={`w-10 h-10 rounded-full border-2 flex items-center justify-center flex-shrink-0 font-medium transition-all ${bubbleClass}`}>
-                    {isSubmitted && isCorrect ? (
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                    ) : isSubmitted && isSelected && !isCorrect ? (
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    ) : (
-                      option.label
-                    )}
-                  </div>
-                  <p className={`flex-1 pt-2 text-base leading-relaxed ${isSubmitted && !isCorrect && !isSelected ? 'text-content-muted' : 'text-secondary'}`}>
-                    {option.text}
-                  </p>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Submit Button */}
-          {!currentState?.isSubmitted && (
-            <button
-              onClick={handleSubmit}
-              disabled={!currentState?.selectedAnswer}
-              className={`w-full mt-6 py-4 rounded-xl font-medium transition-all ${
-                currentState?.selectedAnswer
-                  ? 'bg-gradient-to-r from-sand-500 to-sand-600 hover:from-sand-600 hover:to-sand-700 text-white'
-                  : 'bg-surface-muted text-content-muted cursor-not-allowed'
-              }`}
-            >
-              Submit Answer
-            </button>
-          )}
-
-          {/* Structured Explanation - Only shown in tutor mode after submission */}
-          {currentState?.isSubmitted && urlMode === 'tutor' && (
-            <div className="mt-6 p-5 rounded-xl border border-border bg-surface-muted/30">
-              <StructuredExplanation
-                explanation={currentQuestion.explanation}
-                options={currentQuestion.options}
-                correctAnswer={currentQuestion.correct_answer}
-                selectedAnswer={currentState.selectedAnswer}
-                isCorrect={currentState.isCorrect || false}
-                isAnswered={currentState.isSubmitted}
-                cognitiveError={currentQuestion.cognitive_error}
-              />
-            </div>
-          )}
-        </div>
+        {/* Answer Options Card with Inline Explanations */}
+        <AnswerOptionsWithExplanations
+          question={currentQuestion}
+          currentState={currentState}
+          urlMode={urlMode}
+          onSelectAnswer={handleSelectAnswer}
+          onSubmit={handleSubmit}
+        />
 
         {/* Navigation */}
         <div className="bg-surface rounded-2xl shadow-xl shadow-border/50 border border-border p-4">
