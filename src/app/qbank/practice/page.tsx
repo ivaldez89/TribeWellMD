@@ -11,8 +11,8 @@ import {
   InlineExplanation,
   type StructuredExplanationData
 } from '@/components/study/StructuredExplanation';
-import { LabTable } from '@/components/study/LabTable';
 import { QuestionNavigationGrid } from '@/components/study/QuestionNavigationGrid';
+import { LabReferenceModal } from '@/components/study/LabReferenceModal';
 import { createClient } from '@/lib/supabase/client';
 
 // Question type matching Supabase schema
@@ -230,6 +230,7 @@ class NoiseGenerator {
 }
 
 // Format question stem with proper styling for lab values
+// Labs are displayed as a clean, simple table without background colors
 function formatStem(stem: string): React.ReactNode {
   const lines = stem.split('\n');
   const elements: React.ReactNode[] = [];
@@ -242,7 +243,7 @@ function formatStem(stem: string): React.ReactNode {
     if (trimmed.toLowerCase().includes('laboratory') || trimmed.toLowerCase().includes('lab studies') || trimmed.toLowerCase().includes('studies show')) {
       inLabSection = true;
       elements.push(
-        <p key={`line-${idx}`} className="mt-4 mb-2 font-medium text-secondary">
+        <p key={`line-${idx}`} className="mt-4 mb-2 text-xs font-semibold text-content-muted uppercase tracking-wide">
           {trimmed}
         </p>
       );
@@ -262,27 +263,29 @@ function formatStem(stem: string): React.ReactNode {
       if (cleanValue.length > 0) labValues.push(cleanValue);
     } else {
       if (labValues.length > 0) {
+        // Render labs as a clean table (no background colors per request)
         elements.push(
-          <div key={`lab-${idx}`} className="my-4 p-4 bg-surface-muted rounded-xl border border-border">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5">
-              {labValues.map((val, i) => {
-                const parts = val.split(':');
-                if (parts.length === 2) {
+          <div key={`lab-${idx}`} className="my-4">
+            <table className="w-full text-sm border-collapse">
+              <tbody>
+                {labValues.map((val, i) => {
+                  const parts = val.split(':');
+                  if (parts.length === 2) {
+                    return (
+                      <tr key={i} className="border-b border-border/50 last:border-0">
+                        <td className="py-1.5 pr-4 text-content-muted">{parts[0].trim()}</td>
+                        <td className="py-1.5 text-right font-medium text-secondary tabular-nums">{parts[1].trim()}</td>
+                      </tr>
+                    );
+                  }
                   return (
-                    <div key={i} className="flex justify-between items-baseline py-1 border-b border-border/50 last:border-0">
-                      <span className="text-content-muted text-sm">{parts[0].trim()}</span>
-                      <span className="font-medium text-secondary text-sm tabular-nums">{parts[1].trim()}</span>
-                    </div>
+                    <tr key={i} className="border-b border-border/50 last:border-0">
+                      <td colSpan={2} className="py-1.5 text-content-muted">{val}</td>
+                    </tr>
                   );
-                }
-                return (
-                  <div key={i} className="flex items-baseline py-1 text-sm text-content-muted">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary mr-2 flex-shrink-0 mt-1.5" />
-                    {val}
-                  </div>
-                );
-              })}
-            </div>
+                })}
+              </tbody>
+            </table>
           </div>
         );
         labValues = [];
@@ -310,26 +313,27 @@ function formatStem(stem: string): React.ReactNode {
 
   if (labValues.length > 0) {
     elements.push(
-      <div key="lab-final" className="my-4 p-4 bg-surface-muted rounded-xl border border-border">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5">
-          {labValues.map((val, i) => {
-            const parts = val.split(':');
-            if (parts.length === 2) {
+      <div key="lab-final" className="my-4">
+        <table className="w-full text-sm border-collapse">
+          <tbody>
+            {labValues.map((val, i) => {
+              const parts = val.split(':');
+              if (parts.length === 2) {
+                return (
+                  <tr key={i} className="border-b border-border/50 last:border-0">
+                    <td className="py-1.5 pr-4 text-content-muted">{parts[0].trim()}</td>
+                    <td className="py-1.5 text-right font-medium text-secondary tabular-nums">{parts[1].trim()}</td>
+                  </tr>
+                );
+              }
               return (
-                <div key={i} className="flex justify-between items-baseline py-1 border-b border-border/50 last:border-0">
-                  <span className="text-content-muted text-sm">{parts[0].trim()}</span>
-                  <span className="font-medium text-secondary text-sm tabular-nums">{parts[1].trim()}</span>
-                </div>
+                <tr key={i} className="border-b border-border/50 last:border-0">
+                  <td colSpan={2} className="py-1.5 text-content-muted">{val}</td>
+                </tr>
               );
-            }
-            return (
-              <div key={i} className="flex items-baseline py-1 text-sm text-content-muted">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary mr-2 flex-shrink-0 mt-1.5" />
-                {val}
-              </div>
-            );
-          })}
-        </div>
+            })}
+          </tbody>
+        </table>
       </div>
     );
   }
@@ -486,10 +490,8 @@ function QBankPracticeContent() {
   const audioPanelRef = useRef<HTMLDivElement>(null);
   const audioButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Labs panel state
-  const [showLabs, setShowLabs] = useState(false);
-  const labsPanelRef = useRef<HTMLDivElement>(null);
-  const labsButtonRef = useRef<HTMLButtonElement>(null);
+  // Labs reference modal state
+  const [showLabsReference, setShowLabsReference] = useState(false);
 
   // Music stream state
   const [currentMusic, setCurrentMusic] = useState<string | null>(null);
@@ -562,19 +564,6 @@ function QBankPracticeContent() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showAudio]);
 
-  // Close labs panel when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (showLabs && labsPanelRef.current && labsButtonRef.current &&
-          !labsPanelRef.current.contains(event.target as Node) &&
-          !labsButtonRef.current.contains(event.target as Node)) {
-        setShowLabs(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [showLabs]);
-
   // Fetch questions from Supabase
   useEffect(() => {
     async function fetchQuestions() {
@@ -614,7 +603,7 @@ function QBankPracticeContent() {
     return () => clearInterval(timer);
   }, [isTimed, isPaused, timeRemaining, currentIndex]);
 
-  // Keyboard shortcuts effect (for Labs toggle)
+  // Keyboard shortcuts effect (for Labs reference modal and Escape to close)
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       // Don't trigger if user is typing in an input
@@ -622,12 +611,16 @@ function QBankPracticeContent() {
 
       if (e.key.toLowerCase() === 'l') {
         e.preventDefault();
-        setShowLabs(prev => !prev);
+        setShowLabsReference(prev => !prev);
+      }
+
+      if (e.key === 'Escape' && showLabsReference) {
+        setShowLabsReference(false);
       }
     }
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [showLabsReference]);
 
   const filteredQuestions = questions;
   const currentQuestion = filteredQuestions[currentIndex];
@@ -911,48 +904,21 @@ function QBankPracticeContent() {
                 />
               </div>
 
-              {/* Labs button */}
-              <div className="relative">
-                <button
-                  ref={labsButtonRef}
-                  onClick={() => setShowLabs(!showLabs)}
-                  className={`flex items-center gap-1.5 px-2 sm:px-3 py-1.5 text-sm rounded-lg transition-colors ${
-                    showLabs
-                      ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300'
-                      : 'text-content-muted hover:text-secondary hover:bg-surface-muted dark:text-primary-foreground/70 dark:hover:text-white dark:hover:bg-white/10'
-                  }`}
-                >
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
-                  </svg>
-                  <span className="hidden sm:inline">Labs</span>
-                </button>
-
-                {/* Labs dropdown panel */}
-                {showLabs && (
-                  <div ref={labsPanelRef} className="absolute top-full right-0 mt-2 w-80 sm:w-96 bg-surface rounded-xl shadow-xl border border-border z-50 overflow-hidden">
-                    <div className="px-4 py-3 border-b border-border-light bg-blue-50 dark:bg-blue-900/20 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
-                        </svg>
-                        <span className="font-semibold text-blue-800 dark:text-blue-200">Lab Values</span>
-                      </div>
-                      <button onClick={() => setShowLabs(false)} className="text-content-muted hover:text-secondary">
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                      </button>
-                    </div>
-                    <div className="p-4 max-h-[60vh] overflow-y-auto">
-                      <LabTable text={currentQuestion?.stem || ''} />
-                      {!currentQuestion?.stem && (
-                        <p className="text-sm text-content-muted text-center py-4">No lab values in this question</p>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
+              {/* Labs Reference button */}
+              <button
+                onClick={() => setShowLabsReference(true)}
+                className={`flex items-center gap-1.5 px-2 sm:px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                  showLabsReference
+                    ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300'
+                    : 'text-content-muted hover:text-secondary hover:bg-surface-muted dark:text-primary-foreground/70 dark:hover:text-white dark:hover:bg-white/10'
+                }`}
+                title="NBME Reference Values (L)"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                </svg>
+                <span className="hidden sm:inline">Labs</span>
+              </button>
 
               {/* Audio dropdown */}
               <div className="relative">
@@ -1137,8 +1103,8 @@ function QBankPracticeContent() {
         </div>
       )}
 
-      {/* Main content - centered with sidebar offset */}
-      <main className="relative z-[1] max-w-4xl mx-auto px-4 py-6 lg:ml-14">
+      {/* Main content - centered on screen with sidebar padding */}
+      <main className="relative z-[1] max-w-4xl px-4 py-6 lg:pl-20 mx-auto">
         {/* Question Presentation Card */}
         <div className="bg-surface rounded-2xl shadow-xl shadow-border/50 border border-border overflow-hidden mb-6">
           {/* Card header */}
@@ -1169,11 +1135,8 @@ function QBankPracticeContent() {
             </button>
           </div>
 
-          {/* Question content */}
+          {/* Question content - labs are formatted inline via formatStem */}
           <div className="p-6 md:p-8">
-            {/* Lab Table - extracted from question stem */}
-            <LabTable text={currentQuestion.stem} />
-
             {formatStem(currentQuestion.stem)}
           </div>
         </div>
@@ -1236,7 +1199,7 @@ function QBankPracticeContent() {
       </main>
 
       {/* Keyboard shortcuts */}
-      <div className="fixed bottom-4 left-0 lg:left-14 right-0 text-center pointer-events-none z-10">
+      <div className="fixed bottom-4 left-0 right-0 text-center pointer-events-none z-10">
         <p className="inline-block px-4 py-2 bg-surface/90 backdrop-blur rounded-full text-xs text-content-muted shadow-sm">
           <kbd className="px-1.5 py-0.5 bg-surface-muted rounded font-mono">A-E</kbd> select
           <span className="mx-1.5">•</span>
@@ -1245,6 +1208,12 @@ function QBankPracticeContent() {
           <kbd className="px-1.5 py-0.5 bg-surface-muted rounded font-mono">L</kbd> labs
         </p>
       </div>
+
+      {/* Labs Reference Modal */}
+      <LabReferenceModal
+        isOpen={showLabsReference}
+        onClose={() => setShowLabsReference(false)}
+      />
     </div>
   );
 }

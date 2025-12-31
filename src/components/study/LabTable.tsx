@@ -246,4 +246,34 @@ export function LabBadges({ text, className = '' }: LabTableProps) {
   );
 }
 
+// Simple inline table for scenario labs (no background colors, clean table)
+export function InlineLabTable({ text, className = '' }: LabTableProps) {
+  const labs = useMemo(() => parseLabs(text), [text]);
+
+  if (labs.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className={`my-4 ${className}`}>
+      <div className="text-xs font-semibold text-content-muted uppercase tracking-wide mb-2">Laboratory Values</div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm border-collapse">
+          <tbody>
+            {labs.map((lab, idx) => (
+              <tr key={idx} className="border-b border-border/50 last:border-0">
+                <td className="py-1.5 pr-4 text-content-muted">{lab.name}</td>
+                <td className="py-1.5 text-right font-medium text-secondary tabular-nums">
+                  {lab.value}
+                  {lab.unit && <span className="text-content-muted font-normal ml-1">{lab.unit}</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
 export default LabTable;
