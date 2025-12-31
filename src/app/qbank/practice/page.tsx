@@ -491,6 +491,11 @@ function QBankPracticeContent() {
   const audioPanelRef = useRef<HTMLDivElement>(null);
   const audioButtonRef = useRef<HTMLButtonElement>(null);
 
+  // Labs panel state
+  const [showLabs, setShowLabs] = useState(false);
+  const labsPanelRef = useRef<HTMLDivElement>(null);
+  const labsButtonRef = useRef<HTMLButtonElement>(null);
+
   // Music stream state
   const [currentMusic, setCurrentMusic] = useState<string | null>(null);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
@@ -562,6 +567,19 @@ function QBankPracticeContent() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showAudio]);
 
+  // Close labs panel when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (showLabs && labsPanelRef.current && labsButtonRef.current &&
+          !labsPanelRef.current.contains(event.target as Node) &&
+          !labsButtonRef.current.contains(event.target as Node)) {
+        setShowLabs(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showLabs]);
+
   // Fetch questions from Supabase
   useEffect(() => {
     async function fetchQuestions() {
@@ -600,6 +618,21 @@ function QBankPracticeContent() {
     }, 1000);
     return () => clearInterval(timer);
   }, [isTimed, isPaused, timeRemaining, currentIndex]);
+
+  // Keyboard shortcuts effect (for Labs toggle)
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      // Don't trigger if user is typing in an input
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+
+      if (e.key.toLowerCase() === 'l') {
+        e.preventDefault();
+        setShowLabs(prev => !prev);
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const filteredQuestions = questions;
   const currentQuestion = filteredQuestions[currentIndex];
@@ -818,7 +851,217 @@ function QBankPracticeContent() {
 
   return (
     <div className="min-h-screen bg-background relative">
-      <Header />
+      {/* Consolidated Header with Practice Session Info */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-surface dark:bg-primary backdrop-blur-md border-b border-border-light shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Left: Back button + Logo */}
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Link href="/qbank" onClick={() => stopAll()} className="p-2 -ml-2 text-content-muted hover:text-secondary hover:bg-surface-muted rounded-lg transition-colors">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </Link>
+              <Link href="/home" className="flex items-center gap-2 group flex-shrink-0">
+                <div className="w-8 h-8 rounded-lg shadow-soft group-hover:shadow-soft-md transition-shadow overflow-hidden">
+                  <img src="/logo.jpeg" alt="TribeWellMD" className="w-full h-full object-cover" />
+                </div>
+                <div className="hidden sm:block">
+                  <span className="text-base font-bold text-content dark:text-primary-foreground">Tribe</span>
+                  <span className="text-base font-bold text-primary dark:text-white">Well</span>
+                  <span className="text-base font-light text-info dark:text-primary-foreground">MD</span>
+                </div>
+              </Link>
+            </div>
+
+            {/* Center: Question # and Timer */}
+            <div className="flex items-center gap-3 sm:gap-4">
+              {/* Question Number */}
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-surface-muted dark:bg-white/10 rounded-lg">
+                <span className="text-xs text-content-muted dark:text-primary-foreground/70 hidden sm:inline">Question</span>
+                <span className="font-bold text-secondary dark:text-white tabular-nums">
+                  {currentIndex + 1}<span className="text-content-muted dark:text-primary-foreground/60 font-normal">/{filteredQuestions.length}</span>
+                </span>
+              </div>
+
+              {/* Timer for timed mode */}
+              {isTimed && (
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-surface-muted dark:bg-white/10 rounded-lg">
+                  <svg className="w-4 h-4 text-content-muted dark:text-primary-foreground/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className={`font-mono font-bold tabular-nums ${timeRemaining <= 10 ? 'text-error' : 'text-secondary dark:text-white'}`}>
+                    {formatTime(timeRemaining)}
+                  </span>
+                  <button onClick={() => setIsPaused(true)} className="text-content-muted hover:text-secondary dark:text-primary-foreground/70 dark:hover:text-white">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Right: Tools (Labs, Audio, Scene) + Mobile Nav */}
+            <div className="flex items-center gap-1 sm:gap-2">
+              {/* Mobile-only Question Navigator Grid */}
+              <div className="lg:hidden">
+                <QuestionNavigationGrid
+                  totalQuestions={filteredQuestions.length}
+                  currentIndex={currentIndex}
+                  questionStates={questionStates}
+                  isMarked={isMarked}
+                  questionIds={filteredQuestions.map(q => q.id)}
+                  onNavigate={setCurrentIndex}
+                />
+              </div>
+
+              {/* Labs button */}
+              <div className="relative">
+                <button
+                  ref={labsButtonRef}
+                  onClick={() => setShowLabs(!showLabs)}
+                  className={`flex items-center gap-1.5 px-2 sm:px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                    showLabs
+                      ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300'
+                      : 'text-content-muted hover:text-secondary hover:bg-surface-muted dark:text-primary-foreground/70 dark:hover:text-white dark:hover:bg-white/10'
+                  }`}
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                  </svg>
+                  <span className="hidden sm:inline">Labs</span>
+                </button>
+
+                {/* Labs dropdown panel */}
+                {showLabs && (
+                  <div ref={labsPanelRef} className="absolute top-full right-0 mt-2 w-80 sm:w-96 bg-surface rounded-xl shadow-xl border border-border z-50 overflow-hidden">
+                    <div className="px-4 py-3 border-b border-border-light bg-blue-50 dark:bg-blue-900/20 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                        </svg>
+                        <span className="font-semibold text-blue-800 dark:text-blue-200">Lab Values</span>
+                      </div>
+                      <button onClick={() => setShowLabs(false)} className="text-content-muted hover:text-secondary">
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+                    <div className="p-4 max-h-[60vh] overflow-y-auto">
+                      <LabTable text={currentQuestion?.stem || ''} />
+                      {!currentQuestion?.stem && (
+                        <p className="text-sm text-content-muted text-center py-4">No lab values in this question</p>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Audio dropdown */}
+              <div className="relative">
+                <button
+                  ref={audioButtonRef}
+                  onClick={() => setShowAudio(!showAudio)}
+                  className={`flex items-center gap-1.5 px-2 sm:px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                    showAudio || isPlaying || isMusicPlaying
+                      ? 'bg-surface-muted dark:bg-white/20 text-secondary dark:text-white'
+                      : 'text-content-muted hover:text-secondary hover:bg-surface-muted dark:text-primary-foreground/70 dark:hover:text-white dark:hover:bg-white/10'
+                  }`}
+                >
+                  {isPlaying || isMusicPlaying ? (
+                    <span className="flex items-center gap-1">
+                      <span className="w-2 h-2 bg-secondary dark:bg-white rounded-full animate-pulse" />
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                      </svg>
+                    </span>
+                  ) : (
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                    </svg>
+                  )}
+                  <span className="hidden sm:inline">Audio</span>
+                </button>
+
+                {/* Audio dropdown panel */}
+                {showAudio && (
+                  <div ref={audioPanelRef} className="absolute top-full right-0 mt-2 w-80 bg-surface rounded-xl shadow-xl border border-border z-50 overflow-hidden">
+                    <div className="px-4 py-3 border-b border-border-light flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <svg className="w-5 h-5 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                        </svg>
+                        <span className="font-semibold text-secondary">Audio</span>
+                      </div>
+                      {(isPlaying || isMusicPlaying) && (
+                        <button onClick={stopAll} className="text-xs px-2 py-1 bg-error-light text-error rounded-lg hover:bg-error/20 transition-colors">Stop</button>
+                      )}
+                    </div>
+                    <div className="p-4 space-y-4 max-h-[400px] overflow-y-auto">
+                      <div>
+                        <h4 className="text-xs font-semibold text-content-muted uppercase tracking-wide mb-2">Ambient Sounds</h4>
+                        <div className="grid grid-cols-3 gap-2">
+                          {AMBIENT_SOUNDS.map((sound) => (
+                            <button key={sound.id} onClick={() => playSound(sound.id)} className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all text-center ${currentSound === sound.id && isPlaying ? 'bg-surface-muted border-2 border-secondary shadow-sm' : 'bg-surface-muted/50 hover:bg-surface-muted border-2 border-transparent'}`}>
+                              <svg className="w-5 h-5 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                              </svg>
+                              <span className="text-xs font-medium text-secondary leading-tight">{sound.name}</span>
+                              {currentSound === sound.id && isPlaying && <span className="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse" />}
+                            </button>
+                          ))}
+                        </div>
+                        {isPlaying && (
+                          <div className="flex items-center gap-2 mt-3 px-1">
+                            <span className="text-xs text-content-muted">Vol</span>
+                            <input type="range" min="0" max="1" step="0.05" value={volume} onChange={(e) => setVolume(parseFloat(e.target.value))} className="flex-1 h-1.5 bg-surface-muted rounded-lg appearance-none cursor-pointer accent-secondary" />
+                            <span className="text-xs text-content-muted w-8">{Math.round(volume * 100)}%</span>
+                          </div>
+                        )}
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-semibold text-content-muted uppercase tracking-wide mb-2">Study Music</h4>
+                        <div className="grid grid-cols-3 gap-2">
+                          {MUSIC_STREAMS.map((music) => (
+                            <button key={music.id} onClick={() => playMusic(music.id)} disabled={isMusicLoading && currentMusic !== music.id} className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all text-center ${currentMusic === music.id && (isMusicPlaying || isMusicLoading) ? 'bg-surface-muted border-2 border-secondary shadow-sm' : 'bg-surface-muted/50 hover:bg-surface-muted border-2 border-transparent'} ${isMusicLoading && currentMusic !== music.id ? 'opacity-50' : ''}`}>
+                              <svg className="w-5 h-5 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                              </svg>
+                              <span className="text-xs font-medium text-secondary leading-tight">{music.name}</span>
+                              {currentMusic === music.id && isMusicLoading && <span className="w-3 h-3 border-2 border-secondary border-t-transparent rounded-full animate-spin" />}
+                              {currentMusic === music.id && isMusicPlaying && !isMusicLoading && <span className="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse" />}
+                            </button>
+                          ))}
+                        </div>
+                        {isMusicPlaying && (
+                          <div className="flex items-center gap-2 mt-3 px-1">
+                            <span className="text-xs text-content-muted">Vol</span>
+                            <input type="range" min="0" max="1" step="0.05" value={musicVolume} onChange={(e) => setMusicVolume(parseFloat(e.target.value))} className="flex-1 h-1.5 bg-surface-muted rounded-lg appearance-none cursor-pointer accent-secondary" />
+                            <span className="text-xs text-content-muted w-8">{Math.round(musicVolume * 100)}%</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Scene selector */}
+              <BackgroundSelector
+                selectedBackground={selectedBackground}
+                opacity={opacity}
+                onBackgroundChange={setSelectedBackground}
+                onOpacityChange={setOpacity}
+                variant="light"
+              />
+            </div>
+          </div>
+        </div>
+      </header>
+      {/* Spacer for fixed header */}
+      <div className="h-16" />
 
       {/* Background */}
       {selectedBackground !== 'none' && (
@@ -835,11 +1078,11 @@ function QBankPracticeContent() {
         />
       )}
 
-      {/* Left Sidebar - Persistent Question Navigation */}
-      <aside className="fixed left-0 top-[64px] bottom-0 w-20 bg-surface border-r border-border z-20 overflow-y-auto hidden lg:block">
-        <div className="p-3">
-          <div className="text-xs font-semibold text-content-muted text-center mb-3 uppercase tracking-wide">Questions</div>
-          <div className="grid grid-cols-2 gap-1.5">
+      {/* Left Sidebar - Persistent Question Navigation - Single Column */}
+      <aside className="fixed left-0 top-[64px] bottom-0 w-14 bg-surface border-r border-border z-20 overflow-y-auto hidden lg:block">
+        <div className="p-2">
+          <div className="text-[10px] font-semibold text-content-muted text-center mb-2 uppercase tracking-wide">Q's</div>
+          <div className="flex flex-col gap-1">
             {filteredQuestions.map((q, idx) => {
               const state = questionStates[q.id];
               const marked = isMarked[q.id];
@@ -862,7 +1105,7 @@ function QBankPracticeContent() {
                 <button
                   key={idx}
                   onClick={() => setCurrentIndex(idx)}
-                  className={`w-8 h-8 rounded-lg font-medium text-xs transition-all flex items-center justify-center ${buttonClass} ${
+                  className={`w-10 h-8 mx-auto rounded-lg font-medium text-xs transition-all flex items-center justify-center ${buttonClass} ${
                     isCurrent ? 'ring-2 ring-blue-500 ring-offset-1 ring-offset-surface' : ''
                   }`}
                 >
@@ -871,186 +1114,16 @@ function QBankPracticeContent() {
               );
             })}
           </div>
-          {/* Legend */}
-          <div className="mt-4 pt-3 border-t border-border space-y-1.5">
-            <div className="flex items-center gap-1.5 text-[10px] text-content-muted">
-              <span className="w-2.5 h-2.5 rounded bg-green-500" />
-              <span>Correct</span>
+          {/* Compact Legend */}
+          <div className="mt-3 pt-2 border-t border-border space-y-1">
+            <div className="flex items-center justify-center gap-1 text-[9px] text-content-muted">
+              <span className="w-2 h-2 rounded bg-green-500" />
+              <span className="w-2 h-2 rounded bg-red-500" />
+              <span className="w-2 h-2 rounded bg-yellow-400" />
             </div>
-            <div className="flex items-center gap-1.5 text-[10px] text-content-muted">
-              <span className="w-2.5 h-2.5 rounded bg-red-500" />
-              <span>Incorrect</span>
-            </div>
-            <div className="flex items-center gap-1.5 text-[10px] text-content-muted">
-              <span className="w-2.5 h-2.5 rounded bg-yellow-400" />
-              <span>Flagged</span>
-            </div>
-          </div>
-          {/* Stats */}
-          <div className="mt-3 pt-3 border-t border-border text-center">
-            <div className="text-lg font-bold text-secondary">{answeredCount}/{filteredQuestions.length}</div>
-            <div className="text-[10px] text-content-muted">Answered</div>
-            {answeredCount > 0 && (
-              <div className="mt-1 text-xs font-medium text-green-600 dark:text-green-400">
-                {Math.round((correctCount / answeredCount) * 100)}%
-              </div>
-            )}
           </div>
         </div>
       </aside>
-
-      {/* Fixed toolbar */}
-      <div className="fixed top-[64px] left-0 lg:left-20 right-0 z-20 bg-surface border-b border-border shadow-md">
-        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link href="/qbank" onClick={() => stopAll()} className="p-2 -ml-2 text-content-muted hover:text-secondary hover:bg-surface-muted rounded-lg transition-colors">
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </Link>
-            <div>
-              <h1 className="font-semibold text-secondary text-sm md:text-base">Practice Session</h1>
-              <div className="flex items-center gap-2 text-xs text-content-muted">
-                <span>{currentQuestion?.system || 'QBank'}</span>
-                <span>-</span>
-                <span>Q {currentIndex + 1} of {filteredQuestions.length}</span>
-                {answeredCount > 0 && (
-                  <>
-                    <span>-</span>
-                    <span className="text-primary">{correctCount}/{answeredCount} correct</span>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            {/* Timer for timed mode */}
-            {isTimed && (
-              <div className="flex items-center gap-2 px-3 py-1.5 bg-surface-muted rounded-lg">
-                <span className={`font-mono font-bold ${timeRemaining <= 10 ? 'text-error' : 'text-secondary'}`}>
-                  {formatTime(timeRemaining)}
-                </span>
-                <button onClick={() => setIsPaused(true)} className="text-content-muted hover:text-secondary">
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </button>
-              </div>
-            )}
-
-            {/* Mobile-only Question Navigator Grid (hidden on desktop where sidebar shows) */}
-            <div className="lg:hidden">
-              <QuestionNavigationGrid
-                totalQuestions={filteredQuestions.length}
-                currentIndex={currentIndex}
-                questionStates={questionStates}
-                isMarked={isMarked}
-                questionIds={filteredQuestions.map(q => q.id)}
-                onNavigate={setCurrentIndex}
-              />
-            </div>
-
-            {/* Audio dropdown */}
-            <div className="relative">
-              <button
-                ref={audioButtonRef}
-                onClick={() => setShowAudio(!showAudio)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors ${
-                  showAudio || isPlaying || isMusicPlaying
-                    ? 'bg-surface-muted text-secondary'
-                    : 'text-content-muted hover:text-secondary hover:bg-surface-muted'
-                }`}
-              >
-                {isPlaying || isMusicPlaying ? (
-                  <span className="flex items-center gap-1">
-                    <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                    </svg>
-                  </span>
-                ) : (
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                  </svg>
-                )}
-                <span className="hidden sm:inline">Audio</span>
-              </button>
-
-              {/* Audio dropdown panel */}
-              {showAudio && (
-                <div ref={audioPanelRef} className="absolute top-full right-0 mt-2 w-80 bg-surface rounded-xl shadow-xl border border-border z-50 overflow-hidden">
-                  <div className="px-4 py-3 border-b border-border-light flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <svg className="w-5 h-5 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                      </svg>
-                      <span className="font-semibold text-secondary">Audio</span>
-                    </div>
-                    {(isPlaying || isMusicPlaying) && (
-                      <button onClick={stopAll} className="text-xs px-2 py-1 bg-error-light text-error rounded-lg hover:bg-error/20 transition-colors">Stop</button>
-                    )}
-                  </div>
-                  <div className="p-4 space-y-4 max-h-[400px] overflow-y-auto">
-                    <div>
-                      <h4 className="text-xs font-semibold text-content-muted uppercase tracking-wide mb-2">Ambient Sounds</h4>
-                      <div className="grid grid-cols-3 gap-2">
-                        {AMBIENT_SOUNDS.map((sound) => (
-                          <button key={sound.id} onClick={() => playSound(sound.id)} className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all text-center ${currentSound === sound.id && isPlaying ? 'bg-surface-muted border-2 border-secondary shadow-sm' : 'bg-surface-muted/50 hover:bg-surface-muted border-2 border-transparent'}`}>
-                            <svg className="w-5 h-5 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                            </svg>
-                            <span className="text-xs font-medium text-secondary leading-tight">{sound.name}</span>
-                            {currentSound === sound.id && isPlaying && <span className="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse" />}
-                          </button>
-                        ))}
-                      </div>
-                      {isPlaying && (
-                        <div className="flex items-center gap-2 mt-3 px-1">
-                          <span className="text-xs text-content-muted">Vol</span>
-                          <input type="range" min="0" max="1" step="0.05" value={volume} onChange={(e) => setVolume(parseFloat(e.target.value))} className="flex-1 h-1.5 bg-surface-muted rounded-lg appearance-none cursor-pointer accent-secondary" />
-                          <span className="text-xs text-content-muted w-8">{Math.round(volume * 100)}%</span>
-                        </div>
-                      )}
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-semibold text-content-muted uppercase tracking-wide mb-2">Study Music</h4>
-                      <div className="grid grid-cols-3 gap-2">
-                        {MUSIC_STREAMS.map((music) => (
-                          <button key={music.id} onClick={() => playMusic(music.id)} disabled={isMusicLoading && currentMusic !== music.id} className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all text-center ${currentMusic === music.id && (isMusicPlaying || isMusicLoading) ? 'bg-surface-muted border-2 border-secondary shadow-sm' : 'bg-surface-muted/50 hover:bg-surface-muted border-2 border-transparent'} ${isMusicLoading && currentMusic !== music.id ? 'opacity-50' : ''}`}>
-                            <svg className="w-5 h-5 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                            </svg>
-                            <span className="text-xs font-medium text-secondary leading-tight">{music.name}</span>
-                            {currentMusic === music.id && isMusicLoading && <span className="w-3 h-3 border-2 border-secondary border-t-transparent rounded-full animate-spin" />}
-                            {currentMusic === music.id && isMusicPlaying && !isMusicLoading && <span className="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse" />}
-                          </button>
-                        ))}
-                      </div>
-                      {isMusicPlaying && (
-                        <div className="flex items-center gap-2 mt-3 px-1">
-                          <span className="text-xs text-content-muted">Vol</span>
-                          <input type="range" min="0" max="1" step="0.05" value={musicVolume} onChange={(e) => setMusicVolume(parseFloat(e.target.value))} className="flex-1 h-1.5 bg-surface-muted rounded-lg appearance-none cursor-pointer accent-secondary" />
-                          <span className="text-xs text-content-muted w-8">{Math.round(musicVolume * 100)}%</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Scene selector */}
-            <BackgroundSelector
-              selectedBackground={selectedBackground}
-              opacity={opacity}
-              onBackgroundChange={setSelectedBackground}
-              onOpacityChange={setOpacity}
-              variant="light"
-            />
-          </div>
-        </div>
-      </div>
 
       {/* End session confirmation modal */}
       {showEndConfirm && (
@@ -1069,8 +1142,8 @@ function QBankPracticeContent() {
         </div>
       )}
 
-      {/* Main content */}
-      <main className="relative z-[1] max-w-4xl mx-auto px-4 py-6 pt-[140px] lg:ml-20">
+      {/* Main content - centered with sidebar offset */}
+      <main className="relative z-[1] max-w-4xl mx-auto px-4 py-6 lg:ml-14">
         {/* Question Presentation Card */}
         <div className="bg-surface rounded-2xl shadow-xl shadow-border/50 border border-border overflow-hidden mb-6">
           {/* Card header */}
@@ -1168,11 +1241,13 @@ function QBankPracticeContent() {
       </main>
 
       {/* Keyboard shortcuts */}
-      <div className="fixed bottom-4 left-0 lg:left-20 right-0 text-center pointer-events-none z-10">
+      <div className="fixed bottom-4 left-0 lg:left-14 right-0 text-center pointer-events-none z-10">
         <p className="inline-block px-4 py-2 bg-surface/90 backdrop-blur rounded-full text-xs text-content-muted shadow-sm">
-          <kbd className="px-1.5 py-0.5 bg-surface-muted rounded font-mono">A-E</kbd> select choice
-          <span className="mx-2">-</span>
+          <kbd className="px-1.5 py-0.5 bg-surface-muted rounded font-mono">A-E</kbd> select
+          <span className="mx-1.5">•</span>
           <kbd className="px-1.5 py-0.5 bg-surface-muted rounded font-mono">Enter</kbd> submit
+          <span className="mx-1.5">•</span>
+          <kbd className="px-1.5 py-0.5 bg-surface-muted rounded font-mono">L</kbd> labs
         </p>
       </div>
     </div>
