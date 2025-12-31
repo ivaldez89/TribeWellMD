@@ -71,7 +71,7 @@ export function LabReferencePanel({ isOpen, onClose }: LabReferencePanelProps) {
             </svg>
           </div>
           <div>
-            <h2 className="text-sm font-bold text-secondary">Lab Reference</h2>
+            <h2 className="text-sm font-bold text-secondary">TribeWell Lab Reference</h2>
             <p className="text-[10px] text-content-muted">Clinical reference ranges</p>
           </div>
         </div>

@@ -213,11 +213,15 @@ export function parseExplanation(
           }
         }
 
-        // Last resort: provide context based on the correct answer
+        // Last resort: Generate medical reasoning instead of tautology
+        // NEVER say "does not address the key clinical finding" - explain the medicine
         if (!reason) {
+          const optionTerm = option.text.split(/[,.(]/)[0]?.trim();
           const correctOpt = options.find(o => o.label === correctAnswer);
-          const correctTerm = correctOpt?.text?.split(/[,.(]/)[0]?.trim() || 'the correct answer';
-          reason = `${option.text.split(/[,.(]/)[0]?.trim()} does not address the key clinical finding that points to ${correctTerm}.`;
+          const correctTerm = correctOpt?.text?.split(/[,.(]/)[0]?.trim() || '';
+
+          // Generate a clinically meaningful fallback
+          reason = `${optionTerm} would be appropriate in a different clinical context. In this scenario, the presentation and findings are more consistent with a condition requiring ${correctTerm}.`;
         }
       }
     }
@@ -421,6 +425,7 @@ export function useStructuredExplanation(
 }
 
 // Inline explanation component for individual answer choices
+// "Medical Professor" reasoning: Explain the medicine, not the test logic
 interface InlineExplanationProps {
   label: string;
   reason: string;
@@ -429,15 +434,20 @@ interface InlineExplanationProps {
 }
 
 export function InlineExplanation({ label, reason, isCorrect, isSelected }: InlineExplanationProps) {
-  // Clean the reason text - remove AI filler phrases
+  // Clean the reason text - remove AI filler phrases and tautologies
+  // STRICT RULE: Never use "does not address the key clinical finding" or "is not the correct answer"
   const cleanedReason = useMemo(() => {
     if (!reason) return '';
 
     return reason
-      // Remove common AI filler phrases
+      // Remove tautological phrases (test logic, not medicine)
       .replace(/\b(this is not the correct answer|this is incorrect|this is the correct answer|this is correct)\b[.,:;]?\s*/gi, '')
       .replace(/\b(incorrect because|correct because)[:\s]*/gi, '')
       .replace(/\b(the answer is|would be|represents?|indicates?)\s+(incorrect|wrong|not correct|correct)\b[.,:;]?\s*/gi, '')
+      .replace(/\bdoes not address the key clinical finding[^.]*\./gi, '')
+      .replace(/\bis not the (correct|best|appropriate) (answer|choice|option)[^.]*\./gi, '')
+      .replace(/\bwould not be appropriate here[^.]*\./gi, '')
+      .replace(/\bis incorrect in this (case|scenario|context)[^.]*\./gi, '')
       .replace(/^\s*[-–—•]\s*/, '') // Remove leading bullets
       .replace(/^(A|B|C|D|E)[\.\):\s]+/i, '') // Remove option labels at start
       .trim();
@@ -469,9 +479,9 @@ export function InlineExplanation({ label, reason, isCorrect, isSelected }: Inli
   );
 }
 
-// Learning Objective component - single styled box at bottom of card
-// Stripped down: No more "MECHANISMS & EVIDENCE" or "WHY NOT THE OTHERS" blocks
-// Per-choice explanations are shown inline under each answer choice
+// Clinical Pearl component - High-Yield Learning Objective
+// Format: "The most effective management for [Condition] in the setting of [Finding] is [Treatment] because [Mechanism]."
+// Must be a standalone fact usable on a real exam
 interface LearningObjectiveProps {
   explanation: string;
   options: { label: string; text: string }[];
@@ -487,44 +497,99 @@ export function LearningObjective({
     return parseExplanation(explanation, options, correctAnswer);
   }, [explanation, options, correctAnswer]);
 
-  // Generate a concise learning objective from the high-yield takeaway
-  const learningObjective = useMemo(() => {
-    if (structured.highYieldTakeaway) {
-      // Clean up the takeaway - remove filler phrases
-      let objective = structured.highYieldTakeaway
-        .replace(/^(remember|key point|takeaway|high-yield|board tip)[:\s]*/i, '')
-        .replace(/\b(this is|the answer is)\b/gi, '')
-        .trim();
-
-      // Capitalize first letter
-      if (objective.length > 0) {
-        objective = objective.charAt(0).toUpperCase() + objective.slice(1);
-      }
-
-      return objective;
-    }
-
-    // Generate from correct answer if no high-yield found
+  // Generate a Clinical Pearl in the required format
+  const clinicalPearl = useMemo(() => {
     const correctOption = options.find(o => o.label === correctAnswer);
     const correctTerm = correctOption?.text?.split(/[,.(]/)[0]?.trim() || correctAnswer;
 
-    return `Recognize when ${correctTerm} is the appropriate choice based on the clinical presentation.`;
-  }, [structured, options, correctAnswer]);
+    // Try to extract condition, finding, and mechanism from explanation
+    const explanationLower = explanation.toLowerCase();
+
+    // Extract condition (what the patient has)
+    let condition = '';
+    const conditionPatterns = [
+      /(?:diagnosed with|has|presenting with|suffering from)\s+([^,.]+)/i,
+      /(?:patient with)\s+([^,.]+)/i,
+      /(?:this is|consistent with|suggests?)\s+([^,.]+)/i,
+    ];
+    for (const pattern of conditionPatterns) {
+      const match = explanation.match(pattern);
+      if (match && match[1].length < 60) {
+        condition = match[1].trim();
+        break;
+      }
+    }
+
+    // Extract key clinical finding
+    let finding = '';
+    const findingPatterns = [
+      /(?:in the setting of|with|showing|demonstrates?)\s+([^,.]+(?:and|,)[^,.]+|[^,.]+)/i,
+      /(?:laboratory|labs?|imaging|exam)\s+(?:shows?|reveals?|demonstrates?)\s+([^,.]+)/i,
+      /(?:presents? with)\s+([^,.]+)/i,
+    ];
+    for (const pattern of findingPatterns) {
+      const match = explanation.match(pattern);
+      if (match && match[1].length < 80 && match[1].length > 5) {
+        finding = match[1].trim();
+        break;
+      }
+    }
+
+    // Extract mechanism (why this treatment works)
+    let mechanism = '';
+    const mechanismPatterns = [
+      /(?:because|due to|as it|since it|which)\s+([^.]+)/i,
+      /(?:works by|acts by|mechanism)\s+([^.]+)/i,
+      /(?:by)\s+(inhibiting|blocking|activating|increasing|decreasing|reducing)\s+([^.]+)/i,
+    ];
+    for (const pattern of mechanismPatterns) {
+      const match = explanation.match(pattern);
+      if (match) {
+        mechanism = match[1]?.trim() || (match[2] ? `${match[1]} ${match[2]}`.trim() : '');
+        if (mechanism.length > 10 && mechanism.length < 100) break;
+        mechanism = '';
+      }
+    }
+
+    // Build the Clinical Pearl
+    if (condition && finding && mechanism) {
+      return `The most effective management for ${condition} in the setting of ${finding} is ${correctTerm} because ${mechanism}.`;
+    } else if (condition && mechanism) {
+      return `For ${condition}, ${correctTerm} is the treatment of choice because ${mechanism}.`;
+    } else if (finding && mechanism) {
+      return `When a patient presents with ${finding}, ${correctTerm} is indicated because ${mechanism}.`;
+    } else if (condition) {
+      return `${correctTerm} is first-line therapy for ${condition}.`;
+    } else if (structured.highYieldTakeaway && structured.highYieldTakeaway.length > 20) {
+      // Use existing high-yield if available and meaningful
+      let pearl = structured.highYieldTakeaway
+        .replace(/^(remember|key point|takeaway|high-yield|board tip)[:\s]*/i, '')
+        .replace(/\b(this is|the answer is)\b/gi, '')
+        .trim();
+      if (pearl.length > 0) {
+        pearl = pearl.charAt(0).toUpperCase() + pearl.slice(1);
+      }
+      return pearl;
+    }
+
+    // Fallback: Generate a usable clinical fact
+    return `${correctTerm} is the appropriate choice when the clinical presentation and findings point to this diagnosis or require this intervention.`;
+  }, [structured, options, correctAnswer, explanation]);
 
   return (
-    <div className="p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border border-blue-200 dark:border-blue-800">
+    <div className="p-4 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 border border-amber-200 dark:border-amber-800">
       <div className="flex items-start gap-3">
-        <div className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center flex-shrink-0">
-          <svg className="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        <div className="w-8 h-8 rounded-lg bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center flex-shrink-0">
+          <svg className="w-4 h-4 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
           </svg>
         </div>
         <div>
-          <h4 className="text-xs font-semibold text-blue-800 dark:text-blue-200 uppercase tracking-wide mb-1">
-            Learning Objective
+          <h4 className="text-xs font-semibold text-amber-800 dark:text-amber-200 uppercase tracking-wide mb-1">
+            Clinical Pearl
           </h4>
-          <p className="text-sm text-blue-900 dark:text-blue-100 leading-relaxed font-medium">
-            {learningObjective}
+          <p className="text-sm text-amber-900 dark:text-amber-100 leading-relaxed font-medium">
+            {clinicalPearl}
           </p>
         </div>
       </div>

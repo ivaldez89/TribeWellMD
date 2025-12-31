@@ -467,6 +467,22 @@ function AnswerOptionsWithExplanations({
   );
 }
 
+// Session storage key generator based on URL params
+function getSessionKey(batches: string[], systems: string[], count: number, mode: string): string {
+  const key = `qbank-session-${batches.sort().join(',')}-${systems.sort().join(',')}-${count}-${mode}`;
+  return key.replace(/[^a-zA-Z0-9-]/g, '_');
+}
+
+// Session state interface for localStorage
+interface SessionState {
+  currentIndex: number;
+  questionStates: Record<string, QuestionState>;
+  isMarked: Record<string, boolean>;
+  questionIds: string[];
+  timeRemaining?: number;
+  lastUpdated: number;
+}
+
 function QBankPracticeContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -477,6 +493,7 @@ function QBankPracticeContent() {
   const [questionStates, setQuestionStates] = useState<Record<string, QuestionState>>({});
   const [isMarked, setIsMarked] = useState<Record<string, boolean>>({});
   const [showEndConfirm, setShowEndConfirm] = useState(false);
+  const [sessionRestored, setSessionRestored] = useState(false);
 
   // Study background state
   const { selectedBackground, setSelectedBackground, opacity, setOpacity } = useStudyBackground();
@@ -564,7 +581,13 @@ function QBankPracticeContent() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showAudio]);
 
-  // Fetch questions from Supabase
+  // Session key for localStorage persistence
+  const sessionKey = useMemo(() =>
+    getSessionKey(urlBatches, urlSystems, urlCount, urlMode),
+    [urlBatches, urlSystems, urlCount, urlMode]
+  );
+
+  // Fetch questions from Supabase and restore session state
   useEffect(() => {
     async function fetchQuestions() {
       try {
@@ -576,11 +599,46 @@ function QBankPracticeContent() {
         const { data, error } = await query;
         if (error) { setError(error.message); return; }
         let filteredData = data || [];
-        if (urlCount > 0 && filteredData.length > urlCount) {
+
+        // Try to restore session state from localStorage
+        try {
+          const savedSession = localStorage.getItem(sessionKey);
+          if (savedSession) {
+            const session: SessionState = JSON.parse(savedSession);
+            // Check if session is less than 24 hours old
+            const isRecent = Date.now() - session.lastUpdated < 24 * 60 * 60 * 1000;
+
+            if (isRecent && session.questionIds.length > 0) {
+              // Restore questions in the same order as the saved session
+              const questionMap = new Map(filteredData.map(q => [q.id, q]));
+              const orderedQuestions = session.questionIds
+                .map(id => questionMap.get(id))
+                .filter((q): q is Question => q !== undefined);
+
+              if (orderedQuestions.length === session.questionIds.length) {
+                // Successfully restored all questions in order
+                filteredData = orderedQuestions;
+                setCurrentIndex(session.currentIndex);
+                setQuestionStates(session.questionStates);
+                setIsMarked(session.isMarked);
+                if (isTimed && session.timeRemaining) {
+                  setTimeRemaining(session.timeRemaining);
+                }
+                setSessionRestored(true);
+              }
+            }
+          }
+        } catch (e) {
+          console.warn('Failed to restore session:', e);
+        }
+
+        // If no session restored, randomize if count specified
+        if (!sessionRestored && urlCount > 0 && filteredData.length > urlCount) {
           filteredData = filteredData.sort(() => Math.random() - 0.5).slice(0, urlCount);
         }
+
         setQuestions(filteredData);
-        if (isTimed && filteredData.length > 0) setTimeRemaining(90);
+        if (isTimed && filteredData.length > 0 && !sessionRestored) setTimeRemaining(90);
       } catch (err) {
         console.error('Failed to load questions:', err);
         setError('Failed to load questions');
@@ -590,6 +648,26 @@ function QBankPracticeContent() {
     }
     fetchQuestions();
   }, []);
+
+  // Save session state to localStorage whenever it changes
+  useEffect(() => {
+    if (questions.length === 0) return;
+
+    const session: SessionState = {
+      currentIndex,
+      questionStates,
+      isMarked,
+      questionIds: questions.map(q => q.id),
+      timeRemaining: isTimed ? timeRemaining : undefined,
+      lastUpdated: Date.now()
+    };
+
+    try {
+      localStorage.setItem(sessionKey, JSON.stringify(session));
+    } catch (e) {
+      console.warn('Failed to save session:', e);
+    }
+  }, [currentIndex, questionStates, isMarked, questions, timeRemaining, sessionKey, isTimed]);
 
   // Timer effect
   useEffect(() => {
@@ -741,6 +819,9 @@ function QBankPracticeContent() {
       // Add new test at the beginning, keep only last 20
       const updatedTests = [testResult, ...previousTests].slice(0, 20);
       localStorage.setItem('qbank-previous-tests', JSON.stringify(updatedTests));
+
+      // Clear the session state since we're ending
+      localStorage.removeItem(sessionKey);
     } catch (e) {
       console.error('Failed to save test result:', e);
     }
