@@ -435,19 +435,21 @@ function AnswerOptionsWithExplanations({
         })}
       </div>
 
-      {/* Submit Button - Always visible once a selection is made (opacity-100, no hover-dependency) */}
+      {/* Submit Button - Always 100% visible once a selection is made */}
       {!isSubmitted && (
-        <button
-          onClick={onSubmit}
-          disabled={!currentState?.selectedAnswer}
-          className={`w-full mt-6 py-4 rounded-xl font-medium transition-all transform ${
-            currentState?.selectedAnswer
-              ? 'opacity-100 bg-gradient-to-r from-sand-500 to-sand-600 hover:from-sand-600 hover:to-sand-700 text-white shadow-lg hover:shadow-xl hover:scale-[1.01] active:scale-[0.99]'
-              : 'opacity-50 bg-surface-muted text-content-muted cursor-not-allowed'
-          }`}
-        >
-          Submit Answer
-        </button>
+        <div className={`sticky bottom-4 mt-6 ${currentState?.selectedAnswer ? 'z-30' : ''}`}>
+          <button
+            onClick={onSubmit}
+            disabled={!currentState?.selectedAnswer}
+            className={`w-full py-4 rounded-xl font-semibold text-lg transition-all transform ${
+              currentState?.selectedAnswer
+                ? 'opacity-100 bg-gradient-to-r from-sand-500 to-sand-600 hover:from-sand-600 hover:to-sand-700 text-white shadow-xl hover:shadow-2xl hover:scale-[1.01] active:scale-[0.99] ring-2 ring-sand-400/50'
+                : 'opacity-50 bg-surface-muted text-content-muted cursor-not-allowed'
+            }`}
+          >
+            Submit Answer
+          </button>
+        </div>
       )}
 
       {/* Summary Section - Mechanisms & High-Yield at the bottom */}
@@ -833,8 +835,72 @@ function QBankPracticeContent() {
         />
       )}
 
+      {/* Left Sidebar - Persistent Question Navigation */}
+      <aside className="fixed left-0 top-[64px] bottom-0 w-20 bg-surface border-r border-border z-20 overflow-y-auto hidden lg:block">
+        <div className="p-3">
+          <div className="text-xs font-semibold text-content-muted text-center mb-3 uppercase tracking-wide">Questions</div>
+          <div className="grid grid-cols-2 gap-1.5">
+            {filteredQuestions.map((q, idx) => {
+              const state = questionStates[q.id];
+              const marked = isMarked[q.id];
+              const isCurrent = idx === currentIndex;
+
+              // Determine button style based on state
+              let buttonClass = 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600';
+
+              if (state?.isSubmitted) {
+                if (state.isCorrect) {
+                  buttonClass = 'bg-green-500 text-white hover:bg-green-600';
+                } else {
+                  buttonClass = 'bg-red-500 text-white hover:bg-red-600';
+                }
+              } else if (marked) {
+                buttonClass = 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-300 hover:bg-yellow-200 dark:hover:bg-yellow-900/60';
+              }
+
+              return (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentIndex(idx)}
+                  className={`w-8 h-8 rounded-lg font-medium text-xs transition-all flex items-center justify-center ${buttonClass} ${
+                    isCurrent ? 'ring-2 ring-blue-500 ring-offset-1 ring-offset-surface' : ''
+                  }`}
+                >
+                  {idx + 1}
+                </button>
+              );
+            })}
+          </div>
+          {/* Legend */}
+          <div className="mt-4 pt-3 border-t border-border space-y-1.5">
+            <div className="flex items-center gap-1.5 text-[10px] text-content-muted">
+              <span className="w-2.5 h-2.5 rounded bg-green-500" />
+              <span>Correct</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-[10px] text-content-muted">
+              <span className="w-2.5 h-2.5 rounded bg-red-500" />
+              <span>Incorrect</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-[10px] text-content-muted">
+              <span className="w-2.5 h-2.5 rounded bg-yellow-400" />
+              <span>Flagged</span>
+            </div>
+          </div>
+          {/* Stats */}
+          <div className="mt-3 pt-3 border-t border-border text-center">
+            <div className="text-lg font-bold text-secondary">{answeredCount}/{filteredQuestions.length}</div>
+            <div className="text-[10px] text-content-muted">Answered</div>
+            {answeredCount > 0 && (
+              <div className="mt-1 text-xs font-medium text-green-600 dark:text-green-400">
+                {Math.round((correctCount / answeredCount) * 100)}%
+              </div>
+            )}
+          </div>
+        </div>
+      </aside>
+
       {/* Fixed toolbar */}
-      <div className="fixed top-[64px] left-0 right-0 z-20 bg-surface border-b border-border shadow-md">
+      <div className="fixed top-[64px] left-0 lg:left-20 right-0 z-20 bg-surface border-b border-border shadow-md">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/qbank" onClick={() => stopAll()} className="p-2 -ml-2 text-content-muted hover:text-secondary hover:bg-surface-muted rounded-lg transition-colors">
@@ -873,15 +939,17 @@ function QBankPracticeContent() {
               </div>
             )}
 
-            {/* UWorld-style Question Navigator Grid */}
-            <QuestionNavigationGrid
-              totalQuestions={filteredQuestions.length}
-              currentIndex={currentIndex}
-              questionStates={questionStates}
-              isMarked={isMarked}
-              questionIds={filteredQuestions.map(q => q.id)}
-              onNavigate={setCurrentIndex}
-            />
+            {/* Mobile-only Question Navigator Grid (hidden on desktop where sidebar shows) */}
+            <div className="lg:hidden">
+              <QuestionNavigationGrid
+                totalQuestions={filteredQuestions.length}
+                currentIndex={currentIndex}
+                questionStates={questionStates}
+                isMarked={isMarked}
+                questionIds={filteredQuestions.map(q => q.id)}
+                onNavigate={setCurrentIndex}
+              />
+            </div>
 
             {/* Audio dropdown */}
             <div className="relative">
@@ -1002,7 +1070,7 @@ function QBankPracticeContent() {
       )}
 
       {/* Main content */}
-      <main className="relative z-[1] max-w-4xl mx-auto px-4 py-6 pt-[140px]">
+      <main className="relative z-[1] max-w-4xl mx-auto px-4 py-6 pt-[140px] lg:ml-20">
         {/* Question Presentation Card */}
         <div className="bg-surface rounded-2xl shadow-xl shadow-border/50 border border-border overflow-hidden mb-6">
           {/* Card header */}
@@ -1100,7 +1168,7 @@ function QBankPracticeContent() {
       </main>
 
       {/* Keyboard shortcuts */}
-      <div className="fixed bottom-4 left-0 right-0 text-center pointer-events-none z-10">
+      <div className="fixed bottom-4 left-0 lg:left-20 right-0 text-center pointer-events-none z-10">
         <p className="inline-block px-4 py-2 bg-surface/90 backdrop-blur rounded-full text-xs text-content-muted shadow-sm">
           <kbd className="px-1.5 py-0.5 bg-surface-muted rounded font-mono">A-E</kbd> select choice
           <span className="mx-2">-</span>
