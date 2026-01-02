@@ -5,32 +5,32 @@
     "concept_id": "b1-01-diabetic-ketoacidosis-dka-initial-management",
     "batch": "Batch1",
     "system": "Endocrinology",
-    "stem": "A 28-year-old woman with type 1 diabetes mellitus presents to the emergency department with nausea, vomiting, and abdominal pain for 12 hours. She \nran out of insulin 2 days ago. On examination, she is lethargic but arousable. Temperature is 37.1°C (98.8°F), blood pressure is 92/58 mm Hg, pulse is \n118/min, and respirations are 26/min with deep, labored breathing. Mucous membranes are dry, and skin turgor is decreased. \nLaboratory studies show: \n• \nSerum glucose: 486 mg/dL \n• \nSerum sodium: 131 mEq/L \n• \nSerum potassium: 5.4 mEq/L \n• \nSerum bicarbonate: 10 mEq/L \n• \nBUN: 38 mg/dL \n• \nCreatinine: 1.6 mg/dL \n• \nArterial pH: 7.18 \n• \nSerum ketones: positive\n\nWhich of the following is the most appropriate initial step in management?",
+    "stem": "A 28-year-old woman with type 1 diabetes mellitus comes to the emergency department because of 12 hours of nausea, vomiting, and diffuse abdominal pain. She has had poor oral intake and has missed multiple insulin doses over the past 2 days. \n\nTemperature is 37.2°C (99.0°F), blood pressure is 92/58 mm Hg, pulse is 118/min, and respirations are 24/min. She appears dehydrated and lethargic. \n\nLaboratory studies show:\n- Serum glucose: 520 mg/dL (70–110)\n- Serum sodium: 130 mEq/L (135–145)\n- Serum potassium: 5.2 mEq/L (3.5–5.0)\n- Serum bicarbonate: 9 mEq/L (22–28)\n- Anion gap: 26 mEq/L (8–12)\n- BUN: 38 mg/dL (7–20)\n- Creatinine: 1.6 mg/dL (0.6–1.3)\n- Arterial pH: 7.15 (7.35–7.45)\n- Serum beta-hydroxybutyrate: elevated\n\nWhich of the following is the most appropriate initial management step?",
     "options": [
       {
-        "text": "Intravenous regular insulin bolus followed by continuous infusion",
-        "label": "A"
+        "label": "A",
+        "text": "Begin intravenous regular insulin infusion immediately"
       },
       {
-        "text": "Intravenous normal saline bolus",
-        "label": "B"
+        "label": "B",
+        "text": "Administer a bolus of intravenous 0.9% saline"
       },
       {
-        "text": "Intravenous sodium bicarbonate",
-        "label": "C"
+        "label": "C",
+        "text": "Administer intravenous sodium bicarbonate"
       },
       {
-        "text": "Subcutaneous rapid-acting insulin",
-        "label": "D"
+        "label": "D",
+        "text": "Give subcutaneous rapid-acting insulin and reassess in 1 hour"
       },
       {
-        "text": "Intravenous potassium chloride",
-        "label": "E"
+        "label": "E",
+        "text": "Administer intravenous potassium chloride supplementation"
       }
     ],
     "correct_answer": "B",
-    "explanation": "This patient presents with classic DKA: hyperglycemia (>250 mg/dL), anion gap metabolic acidosis (pH <7.30, bicarbonate <18), and ketonemia. The critical initial management decision is fluid resuscitation before insulin. Why fluids first? • DKA causes profound volume depletion (average deficit 5–7 L) due to osmotic diuresis • Hypotension and tachycardia indicate hemodynamic compromise requiring immediate volume expansion • Insulin administration before adequate fluid resuscitation can precipitate cardiovascular collapse and hypokalemia • Initial NS bolus (15–20 mL/kg/hr or 1–1.5 L in first hour) restores perfusion Why not insulin first (A, D)? • Insulin drives potassium intracellularly; giving insulin before confirming adequate potassium (>3.3 mEq/L) and before fluid resuscitation risks fatal arrhythmia • This patient's potassium of 5.4 mEq/L is falsely elevated due to acidosis — total body potassium is depleted Why not bicarbonate (C)? • Bicarbonate is reserved for pH <6.9 or severe hyperkalemia with ECG changes • Routine bicarbonate worsens intracellular acidosis and delays ketone clearance Why not potassium first (E)? • Potassium is 5.4 mEq/L (>5.2); potassium replacement begins once K+ falls below 5.2 mEq/L during treatment Clinical pearl: The sequence in DKA is: Fluids → Potassium assessment → Insulin. This order reduces mortality.",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Diabetic ketoacidosis is caused by absolute insulin deficiency with increased counterregulatory hormones, leading to lipolysis and ketone production with a high–anion gap metabolic acidosis. Hyperglycemia causes osmotic diuresis, resulting in severe intravascular volume depletion and total-body electrolyte deficits.\n\nCorrect Answer Rationale: This patient has DKA with hypotension, tachycardia, elevated BUN/creatinine, low bicarbonate, high anion gap, and ketonemia. The first priority is restoring circulating volume with isotonic IV fluids, which improves renal perfusion and lowers glucose before insulin is started; insulin therapy is initiated after initial resuscitation and confirmation that serum potassium is not dangerously low.\n\nDistractor Analysis:\n- Option A (if not correct): Giving insulin before fluid resuscitation can precipitate rapid potassium shifts and worsen hypotension; insulin should follow initial IV fluids and potassium assessment.\n- Option B (if not correct): Correct; initial therapy is aggressive isotonic saline to treat hypovolemia.\n- Option C (if not correct): Bicarbonate is generally reserved for severe acidemia (typically pH <6.9) because routine use does not improve outcomes and can worsen hypokalemia.\n- Option D (if not correct): Subcutaneous insulin is inappropriate in severe DKA with altered mental status and hemodynamic compromise; IV insulin allows controlled titration after resuscitation.\n- Option E (if not correct): Although total-body potassium is depleted in DKA, this patient’s serum potassium is elevated; potassium is replaced only after it falls (and must be ≥3.3 before insulin).\n\nClinical Pearl: DKA: start with IV 0.9% saline; begin IV insulin only after initial fluids and K ≥3.3 mEq/L.",
+    "cognitive_error": "premature_closure",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -42,32 +42,32 @@
     "concept_id": "b1-02-thyroid-storm-recognition-and-immediate-treatment",
     "batch": "Batch1",
     "system": "Endocrinology",
-    "stem": "A 42-year-old woman is brought to the emergency department by her family for confusion and agitation. She has a history of Graves disease but \nstopped taking her methimazole 3 weeks ago. Yesterday she developed fever, diarrhea, and palpitations. Today she became disoriented and combative. \nOn examination, temperature is 39.8°C (103.6°F), blood pressure is 168/70 mm Hg, pulse is 152/min and irregularly irregular, and respirations are 24/min. \nShe is diaphoretic with a fine tremor, lid lag, and diffuse thyroid enlargement. \nLaboratory studies show: \n• \nTSH: <0.01 mIU/L \n• \nFree T4: 6.8 ng/dL (normal 0.8–1.8) \n• \nFree T3: 892 pg/dL (normal 230–420) \nECG shows atrial fibrillation with rapid ventricular response.\n\nIn addition to supportive care and cooling measures, which of the following is the most appropriate FIRST pharmacologic intervention?",
+    "stem": "A 42-year-old woman is brought to the emergency department because of agitation and confusion. She has had several weeks of heat intolerance, diarrhea, and unintentional weight loss. She stopped taking her prescribed medication for hyperthyroidism 1 month ago.\n\nTemperature is 40.0°C (104.0°F), blood pressure is 142/76 mm Hg, pulse is 156/min and irregular, and respirations are 20/min. Examination shows tremor and moist, warm skin. An ECG shows atrial fibrillation with rapid ventricular response. \n\nLaboratory studies show:\n- TSH: <0.01 mIU/L (0.4–4.5)\n- Free T4: 4.2 ng/dL (0.8–1.8)\n\nWhich of the following medications should be administered first?",
     "options": [
       {
-        "text": "Propylthiouracil",
-        "label": "A"
+        "label": "A",
+        "text": "Propylthiouracil"
       },
       {
-        "text": "Propranolol",
-        "label": "B"
+        "label": "B",
+        "text": "Propranolol"
       },
       {
-        "text": "Lugol iodine solution",
-        "label": "C"
+        "label": "C",
+        "text": "Potassium iodide solution"
       },
       {
-        "text": "Hydrocortisone",
-        "label": "D"
+        "label": "D",
+        "text": "Hydrocortisone"
       },
       {
-        "text": "Radioactive iodine ablation",
-        "label": "E"
+        "label": "E",
+        "text": "Radioactive iodine ablation"
       }
     ],
     "correct_answer": "B",
-    "explanation": "This patient has thyroid storm (Burch-Wartofsky score would be >45), a life-threatening exacerbation of hyperthyroidism characterized by: • Fever (>39°C) • CNS dysfunction (confusion, agitation) • Cardiovascular compromise (tachycardia, atrial fibrillation, widened pulse pressure) • GI symptoms (diarrhea) • Precipitating event (medication discontinuation) Treatment sequence matters: 1. Beta-blocker FIRST (Propranolol) • Controls life-threatening sympathetic hyperactivity • Propranolol specifically also inhibits peripheral T4→T3 conversion • Addresses immediate mortality risk from arrhythmia and cardiovascular collapse • Must be given before iodine to prevent iodine from fueling further hormone synthesis 2. Thionamide (PTU preferred in storm) • Blocks new hormone synthesis • PTU also inhibits peripheral T4→T3 conversion • Given after beta-blockade is initiated 3. Iodine (Lugol's or SSKI) — given 1 hour AFTER thionamide • Blocks hormone release (Wolff-Chaikoff effect) • Must wait until thionamide has blocked synthesis; otherwise iodine provides substrate for more hormone production 4. Glucocorticoids • Block peripheral T4→T3 conversion • Treat potential concurrent adrenal insufficiency • Given as adjunct, not first-line Why not (A) PTU first? • While essential, it does not address immediate cardiovascular crisis • Beta-blockade provides faster symptomatic control Why not (C) Iodine first? • Giving iodine before thionamide can worsen thyrotoxicosis (Jod-Basedow phenomenon) Why not (E)? • Radioactive iodine is contraindicated in thyroid storm — would release preformed hormone",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Thyroid storm is an acute, life-threatening exacerbation of thyrotoxicosis with marked adrenergic overactivity and hypermetabolism. Excess thyroid hormone increases beta-adrenergic receptor sensitivity, predisposing to tachyarrhythmias, hyperthermia, and high-output cardiovascular stress.\n\nCorrect Answer Rationale: The patient has severe thyrotoxicosis with hyperthermia, altered mental status, and atrial fibrillation with rapid ventricular response. Immediate beta-blockade is the first pharmacologic step to rapidly control heart rate and reduce peripheral conversion of T4 to T3 (with propranolol), while additional therapies (thionamide, iodine, and glucocorticoids) are initiated thereafter.\n\nDistractor Analysis:\n- Option A (if not correct): Thionamides (PTU/methimazole) reduce new thyroid hormone synthesis but do not provide rapid control of life-threatening tachyarrhythmia; beta-blockade comes first.\n- Option B (if not correct): Correct; propranolol provides rapid adrenergic control and decreases peripheral T4→T3 conversion.\n- Option C (if not correct): Iodide blocks thyroid hormone release but should be given only after a thionamide to avoid providing substrate for new hormone synthesis (Jod-Basedow).\n- Option D (if not correct): Glucocorticoids decrease peripheral conversion and treat possible adrenal insufficiency, but they do not rapidly control the dangerous tachyarrhythmia.\n- Option E (if not correct): Radioactive iodine is not used in acute thyroid storm and has delayed onset.\n\nClinical Pearl: Thyroid storm: beta-blocker first, then thionamide, then iodine; add steroids and supportive care.",
+    "cognitive_error": "anchoring_bias",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -79,32 +79,32 @@
     "concept_id": "b1-03-primary-adrenal-insufficiency-addison-disease-diagnosis",
     "batch": "Batch1",
     "system": "Endocrinology",
-    "stem": "A 34-year-old woman comes to the clinic with a 4-month history of progressive fatigue, 7-kg (15-lb) unintentional weight loss, and intermittent nausea. \nShe also reports light-headedness when standing. She has no significant medical history and takes no medications. \n\nOn examination, blood pressure is 94/62 mm Hg supine and 78/50 mm Hg standing with pulse increasing from 72 to 98/min. Hyperpigmentation is \nnoted on the palmar creases, buccal mucosa, and a recent surgical scar. \nLaboratory studies show: \n• \nSerum sodium: 128 mEq/L \n• \nSerum potassium: 5.8 mEq/L \n• \nFasting glucose: 64 mg/dL \n• \nMorning cortisol: 2.1 µg/dL (normal 5–25) \n• \nACTH: 892 pg/mL (normal 10–60)\n\nWhich of the following is the most appropriate next step to confirm the diagnosis?",
+    "stem": "A 34-year-old woman comes to the clinic because of 6 months of progressive fatigue, lightheadedness when standing, and unintentional weight loss. She also reports salt craving and intermittent abdominal discomfort. She has no history of glucocorticoid use.\n\nBlood pressure is 96/60 mm Hg supine and 78/52 mm Hg standing; pulse increases from 84/min to 112/min with standing. Physical examination shows diffuse hyperpigmentation, including on the palmar creases and buccal mucosa.\n\nLaboratory studies show:\n- Serum sodium: 128 mEq/L (135–145)\n- Serum potassium: 5.7 mEq/L (3.5–5.0)\n- Glucose: 62 mg/dL (70–110)\n- 8 a.m. serum cortisol: 2 µg/dL (5–25)\n\nWhich of the following is the best test to confirm the diagnosis?",
     "options": [
       {
-        "text": "24-hour urine free cortisol",
-        "label": "A"
+        "label": "A",
+        "text": "24-hour urine free cortisol measurement"
       },
       {
-        "text": "Low-dose dexamethasone suppression test",
-        "label": "B"
+        "label": "B",
+        "text": "Low-dose dexamethasone suppression test"
       },
       {
-        "text": "Cosyntropin stimulation test",
-        "label": "C"
+        "label": "C",
+        "text": "Cosyntropin stimulation test"
       },
       {
-        "text": "CT of the adrenal glands",
-        "label": "D"
+        "label": "D",
+        "text": "CT scan of the adrenal glands"
       },
       {
-        "text": "Adrenal vein sampling",
-        "label": "E"
+        "label": "E",
+        "text": "Adrenal vein sampling"
       }
     ],
     "correct_answer": "C",
-    "explanation": "This patient presents with classic features of primary adrenal insufficiency (Addison disease): Clinical features: • Fatigue, weight loss, nausea (chronic glucocorticoid deficiency) • Orthostatic hypotension (mineralocorticoid deficiency → salt wasting) • Hyperpigmentation in sun-exposed and pressure areas (elevated ACTH stimulates melanocortin receptors) Laboratory findings supporting primary adrenal insufficiency: • Hyponatremia (mineralocorticoid deficiency) • Hyperkalemia (aldosterone deficiency) • Hypoglycemia (cortisol deficiency) • Low morning cortisol (<5 µg/dL is highly suggestive) • Elevated ACTH (confirms primary, not secondary) Confirmatory test: The cosyntropin (ACTH) stimulation test is the gold standard: • 250 µg synthetic ACTH given IV/IM • Cortisol measured at 30 and 60 minutes • Normal response: cortisol ≥18–20 µg/dL • Failure to rise confirms adrenal insufficiency Why not other options? (A) 24-hour urine free cortisol — Used to diagnose Cushing syndrome (cortisol excess), not deficiency (B) Dexamethasone suppression test — Also for Cushing syndrome workup (D) CT of adrenal glands — May be done after biochemical confirmation to identify etiology (autoimmune, hemorrhage, infection, metastasis) but is not the confirmatory diagnostic test (E) Adrenal vein sampling — Used in primary hyperaldosteronism workup to lateralize adenoma After confirmation: Most common cause in developed countries is autoimmune adrenalitis (check 21-hydroxylase antibodies). Start glucocorticoid (hydrocortisone) and mineralocorticoid (fludrocortisone) replacement.",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Primary adrenal insufficiency results from adrenal cortex failure, causing low cortisol and often low aldosterone. Low cortisol leads to fatigue, hypoglycemia, and increased ACTH (which causes hyperpigmentation), while aldosterone deficiency causes hyponatremia and hyperkalemia.\n\nCorrect Answer Rationale: This patient’s orthostatic hypotension, hyperpigmentation, hyponatremia, hyperkalemia, and low morning cortisol suggest primary adrenal insufficiency. The confirmatory test is a cosyntropin (ACTH) stimulation test, which shows an inadequate rise in serum cortisol due to adrenal gland failure.\n\nDistractor Analysis:\n- Option A (if not correct): Urine free cortisol evaluates hypercortisolism (Cushing syndrome), not adrenal insufficiency.\n- Option B (if not correct): Low-dose dexamethasone suppression is used for Cushing syndrome screening and does not assess adrenal reserve.\n- Option C (if not correct): Correct; lack of cortisol rise after cosyntropin confirms adrenal insufficiency.\n- Option D (if not correct): Adrenal imaging may be used after biochemical confirmation to evaluate etiology but does not confirm functional adrenal failure.\n- Option E (if not correct): Adrenal vein sampling is used in select hyperaldosteronism cases, not suspected adrenal insufficiency.\n\nClinical Pearl: Addison disease: confirm with cosyntropin stimulation (blunted cortisol response).",
+    "cognitive_error": "availability_heuristic",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -116,32 +116,32 @@
     "concept_id": "b1-04-hyperosmolar-hyperglycemic-state-hhs-vs-dka-differentiation-",
     "batch": "Batch1",
     "system": "Endocrinology",
-    "stem": "A 72-year-old man with type 2 diabetes mellitus is brought to the emergency department from a nursing home with altered mental status. Staff report \nhe has had decreased oral intake and increasing lethargy over the past week following a urinary tract infection treated with antibiotics. \nOn examination, he is obtunded and responds only to painful stimuli. Temperature is 37.4°C (99.3°F), blood pressure is 88/52 mm Hg, pulse is 112/min, \nand respirations are 18/min. Mucous membranes are severely dry, and skin tenting is present. \nLaboratory studies show: \n• \nSerum glucose: 928 mg/dL \n• \nSerum sodium: 149 mEq/L (corrected: 162 mEq/L) \n• \nSerum potassium: 4.8 mEq/L \n• \nSerum bicarbonate: 21 mEq/L \n• \nBUN: 68 mg/dL \n• \nCreatinine: 2.4 mg/dL \n• \nArterial pH: 7.32 \n• \nSerum osmolality: 384 mOsm/kg \n• \nSerum ketones: trace \n• \nUrine: positive for bacteria and WBCs\n\nWhich of the following is the most appropriate initial treatment?",
+    "stem": "A 72-year-old man with type 2 diabetes mellitus is brought to the emergency department because of increasing confusion and weakness for 2 days. Family reports polyuria and poor oral intake for the past week. He takes metformin but has been unable to keep medications down due to nausea.\n\nTemperature is 37.6°C (99.7°F), blood pressure is 96/54 mm Hg, pulse is 114/min, and respirations are 18/min. Mucous membranes are dry.\n\nLaboratory studies show:\n- Serum glucose: 980 mg/dL (70–110)\n- Serum sodium: 152 mEq/L (135–145)\n- Serum bicarbonate: 22 mEq/L (22–28)\n- Arterial pH: 7.36 (7.35–7.45)\n- Serum ketones: negative\n- Effective serum osmolality: 340 mOsm/kg (275–295)\n\nWhich of the following is the most appropriate initial step in management?",
     "options": [
       {
-        "text": "Intravenous regular insulin bolus",
-        "label": "A"
+        "label": "A",
+        "text": "Administer an intravenous regular insulin bolus"
       },
       {
-        "text": "Intravenous 0.45% saline at 250 mL/hr",
-        "label": "B"
+        "label": "B",
+        "text": "Infuse intravenous 0.45% saline at 250 mL/hr"
       },
       {
-        "text": "Intravenous 0.9% saline at 1 L/hr",
-        "label": "C"
+        "label": "C",
+        "text": "Infuse intravenous 0.9% saline at 1 L/hr"
       },
       {
-        "text": "Intravenous 5% dextrose with 0.45% saline",
-        "label": "D"
+        "label": "D",
+        "text": "Infuse intravenous 5% dextrose in 0.45% saline"
       },
       {
-        "text": "Subcutaneous long-acting insulin",
-        "label": "E"
+        "label": "E",
+        "text": "Start subcutaneous long-acting insulin"
       }
     ],
     "correct_answer": "C",
-    "explanation": "This patient has Hyperosmolar Hyperglycemic State (HHS), distinguished from DKA by: Feature HHS DKA Glucose >600 mg/dL (often >1000) >250 mg/dL Osmolality >320 mOsm/kg Variable pH >7.30 <7.30 Bicarbonate >18 mEq/L <18 mEq/L Feature HHS DKA Ketones Absent/trace Moderate-large Mental status Often severely altered Variable Key management principles: 1. Aggressive fluid resuscitation is the FIRST priority • HHS patients have more profound volume depletion than DKA (average 8–10 L deficit vs 5–7 L) • Start with isotonic saline (0.9% NS) regardless of sodium level • Initial rate: 1–1.5 L in first hour • This patient is hypotensive — isotonic fluid is essential to restore intravascular volume 2. Switch to hypotonic saline (0.45%) AFTER: • Hemodynamic stability is achieved • Corrected sodium is evaluated (if elevated, use 0.45% NS; if low/normal, continue 0.9% NS) Why not (A) insulin bolus? • Fluid resuscitation alone will lower glucose significantly in HHS • Insulin is started at lower doses (0.025–0.05 units/kg/hr) and only after initial fluids • Rapid glucose correction risks cerebral edema Why not (B) 0.45% saline? • Hypotonic saline is inappropriate initial therapy in hypotensive patients • Need isotonic fluid first to restore perfusion Why not (D) D5 with 0.45% NS? • Dextrose-containing fluids are added later when glucose reaches 250–300 mg/dL • Not appropriate initially with glucose of 928 mg/dL Mortality in HHS (10–20%) exceeds DKA (1–5%) — often due to delayed recognition, underlying precipitant (infection, MI), and thromboembolic complications.",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Hyperosmolar hyperglycemic state is due to relative insulin deficiency that allows extreme hyperglycemia but suppresses significant ketogenesis. Marked hyperglycemia causes profound osmotic diuresis leading to severe dehydration and hyperosmolality, which drives neurologic symptoms.\n\nCorrect Answer Rationale: This patient has HHS (glucose 980 mg/dL, high effective osmolality, minimal acidosis, and negative ketones) with hypotension and dehydration. Initial management is aggressive volume resuscitation with isotonic 0.9% saline to restore perfusion; insulin therapy is started after initial fluids (and potassium evaluation) once intravascular volume is improving.\n\nDistractor Analysis:\n- Option A (if not correct): Insulin without first restoring volume can worsen hypotension and cause rapid electrolyte shifts; fluids are the initial priority.\n- Option B (if not correct): 0.45% saline may be used later if corrected sodium is high and hemodynamics are stable, but initial resuscitation should be isotonic.\n- Option C (if not correct): Correct; start with isotonic saline for severe dehydration and hemodynamic compromise.\n- Option D (if not correct): Dextrose-containing fluids are added only after glucose falls (e.g., ~300 mg/dL in HHS) to prevent hypoglycemia during insulin therapy.\n- Option E (if not correct): Long-acting subcutaneous insulin is not appropriate for initial management of HHS in an acutely ill, dehydrated patient.\n\nClinical Pearl: HHS: treat dehydration first with IV 0.9% saline; add insulin after initial resuscitation and electrolyte check.",
+    "cognitive_error": "premature_closure",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -153,32 +153,32 @@
     "concept_id": "b1-05-pheochromocytoma-preoperative-management",
     "batch": "Batch1",
     "system": "Endocrinology",
-    "stem": "A 38-year-old woman is evaluated for episodes of severe headache, palpitations, and diaphoresis occurring several times per week for the past 3 months. \nDuring these episodes, she feels intense anxiety and her face becomes flushed. Her blood pressure between episodes is 142/92 mm Hg. Family history is \nnotable for a brother who had thyroid cancer. \n\nEvaluation reveals elevated 24-hour urine catecholamines and metanephrines. CT of the abdomen shows a 4.2-cm right adrenal mass with high \nattenuation.\n\nSurgical resection is planned. Which of the following is the most appropriate preoperative management?",
+    "stem": "A 38-year-old woman is evaluated for episodic palpitations, tremulousness, and severe headaches. During episodes, her blood pressure has been recorded as high as 210/110 mm Hg. Plasma free metanephrines are markedly elevated, and CT scan shows a 3-cm adrenal mass consistent with pheochromocytoma. She is scheduled for adrenalectomy.\n\nWhich of the following is the most appropriate preoperative pharmacologic approach?",
     "options": [
       {
-        "text": "Initiate propranolol followed by phenoxybenzamine",
-        "label": "A"
+        "label": "A",
+        "text": "Initiate propranolol therapy, then add phenoxybenzamine prior to surgery"
       },
       {
-        "text": "Initiate phenoxybenzamine followed by propranolol",
-        "label": "B"
+        "label": "B",
+        "text": "Initiate phenoxybenzamine therapy, then add propranolol after adequate alpha blockade"
       },
       {
-        "text": "Initiate propranolol alone",
-        "label": "C"
+        "label": "C",
+        "text": "Initiate nicardipine therapy alone until the day of surgery"
       },
       {
-        "text": "Initiate labetalol alone",
-        "label": "D"
+        "label": "D",
+        "text": "Initiate labetalol therapy alone prior to surgery"
       },
       {
-        "text": "Proceed directly to surgery without pharmacologic preparation",
-        "label": "E"
+        "label": "E",
+        "text": "Proceed directly to surgery without preoperative antihypertensive therapy"
       }
     ],
     "correct_answer": "B",
-    "explanation": "This patient has classic pheochromocytoma — episodic catecholamine release causing the triad of: • Headache • Palpitations • Diaphoresis (+ hypertension) The family history of thyroid cancer raises concern for MEN2 syndrome (medullary thyroid cancer + pheochromocytoma ± hyperparathyroidism). Preoperative alpha-blockade is MANDATORY before surgery: Why alpha-blockade FIRST (phenoxybenzamine)? • Blocks α1 receptors → vasodilation → controls hypertension • Allows intravascular volume expansion (catecholamine-induced vasoconstriction causes chronic volume contraction) • Prevents intraoperative hypertensive crisis during tumor manipulation • Started 10–14 days before surgery; liberal salt/fluid intake encouraged Why beta-blockade SECOND? • Beta-blockade controls reflex tachycardia that occurs after alpha-blockade • NEVER give beta-blockers before alpha-blockade — this causes unopposed alpha stimulation → severe hypertensive crisis • Typically added 2–3 days after alpha-blockade is established Why not (A)? • Propranolol (beta-blocker) before alpha-blockade is dangerous • Allows unopposed alpha-adrenergic vasoconstriction → hypertensive emergency Why not (C) propranolol alone? • Same rationale — no alpha coverage leads to crisis Why not (D) labetalol alone? • Labetalol has both alpha and beta effects, but beta effects predominate • Not reliable for adequate alpha-blockade in pheochromocytoma Why not (E)? • Surgery without preoperative blockade has historically high mortality from intraoperative hypertensive crisis, arrhythmias, and cardiovascular collapse Metyrosine (inhibits catecholamine synthesis) is sometimes added in refractory cases.",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Pheochromocytomas secrete catecholamines episodically, causing vasoconstriction, tachycardia, and hypertensive crises. Preoperative alpha-adrenergic blockade reduces vasoconstriction and intravascular volume depletion, preventing perioperative catecholamine-induced hypertension.\n\nCorrect Answer Rationale: She has biochemically confirmed pheochromocytoma planned for adrenalectomy. Alpha blockade (e.g., phenoxybenzamine or doxazosin) must be started first to control blood pressure and expand volume; a beta-blocker can be added afterward for tachyarrhythmias once adequate alpha blockade is established.\n\nDistractor Analysis:\n- Option A (if not correct): Starting a beta-blocker first can cause unopposed alpha-adrenergic vasoconstriction and precipitate severe hypertension.\n- Option B (if not correct): Correct; alpha blockade first, then beta blockade if needed.\n- Option C (if not correct): Calcium channel blockers can be adjuncts but do not replace the required preoperative alpha blockade for catecholamine tumor surgery.\n- Option D (if not correct): Labetalol has beta-blocking effects and can still provoke unopposed alpha activity; it is not the preferred sole preoperative strategy.\n- Option E (if not correct): Proceeding without alpha blockade risks life-threatening intraoperative hypertensive crisis.\n\nClinical Pearl: Pheochromocytoma: alpha-blockade first (phenoxybenzamine/doxazosin), then add beta-blocker.",
+    "cognitive_error": "anchoring_bias",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -190,32 +190,32 @@
     "concept_id": "b1-06-myxedema-coma-emergency-recognition-and-treatment",
     "batch": "Batch1",
     "system": "Endocrinology",
-    "stem": "A 68-year-old woman is brought to the emergency department by her daughter who found her minimally responsive at home. The daughter reports her \nmother has seemed increasingly confused and lethargic over the past 2 weeks. The patient has a history of hypothyroidism but has not been taking her \nlevothyroxine for \"several months.\" \nOn examination, the patient is obtunded. Temperature is 34.2°C (93.6°F), blood pressure is 88/58 mm Hg, pulse is 48/min, and respirations are 8/min. She \nhas periorbital edema, macroglossia, dry coarse skin, and delayed relaxation of deep tendon reflexes. \nLaboratory studies show: \n• \nTSH: 89 mIU/L (normal 0.5–4.5) \n• \nFree T4: <0.2 ng/dL (normal 0.8–1.8) \n• \nSerum sodium: 118 mEq/L \n• \nSerum glucose: 52 mg/dL \n• \nSerum cortisol: 8 µg/dL \nIn addition to supportive care including warming and airway management, which of the following is the most appropriate pharmacologic\n\ntreatment?",
+    "stem": "A 68-year-old woman is brought to the emergency department in winter because of confusion and progressive lethargy. She has a history of hypothyroidism but has not taken her medication for several months. \n\nTemperature is 34.6°C (94.3°F), blood pressure is 88/50 mm Hg, pulse is 42/min, and respirations are 10/min. She is somnolent. Physical examination shows cool, dry skin and periorbital edema.\n\nLaboratory studies show:\n- Serum sodium: 126 mEq/L (135–145)\n- Glucose: 64 mg/dL (70–110)\n- TSH: 32 mIU/L (0.4–4.5)\n- Free T4: 0.3 ng/dL (0.8–1.8)\n\nWhich of the following is the most appropriate initial treatment?",
     "options": [
       {
-        "text": "Oral levothyroxine",
-        "label": "A"
+        "label": "A",
+        "text": "Administer oral levothyroxine"
       },
       {
-        "text": "Intravenous levothyroxine alone",
-        "label": "B"
+        "label": "B",
+        "text": "Administer intravenous levothyroxine alone"
       },
       {
-        "text": "Intravenous levothyroxine plus intravenous hydrocortisone",
-        "label": "C"
+        "label": "C",
+        "text": "Administer intravenous levothyroxine plus intravenous hydrocortisone"
       },
       {
-        "text": "Intravenous liothyronine (T3) alone",
-        "label": "D"
+        "label": "D",
+        "text": "Administer intravenous liothyronine (T3) alone"
       },
       {
-        "text": "Radioactive iodine",
-        "label": "E"
+        "label": "E",
+        "text": "Administer radioactive iodine"
       }
     ],
     "correct_answer": "C",
-    "explanation": "This patient has myxedema coma, a life-threatening decompensation of severe hypothyroidism characterized by: • Altered mental status (cardinal feature) • Hypothermia • Bradycardia • Hypotension • Hypoventilation • Hyponatremia (impaired free water excretion) • Hypoglycemia Treatment must address two critical issues: 1. Thyroid hormone replacement (IV levothyroxine) • Oral absorption is unreliable in critically ill patients • Loading dose: 200–400 µg IV, then 50–100 µg/day • Some protocols add IV T3 (liothyronine) for faster onset 2. Glucocorticoid coverage (IV hydrocortisone) — CRITICAL • Severe hypothyroidism impairs adrenal function • Additionally, thyroid hormone replacement increases cortisol metabolism • Starting levothyroxine without glucocorticoids can precipitate adrenal crisis • Give hydrocortisone 100 mg IV, then 50–100 mg q8h until adrenal function confirmed Why must steroids be given with thyroid hormone? • Hypothyroidism reduces cortisol clearance, masking underlying adrenal insufficiency • Giving T4 alone accelerates cortisol metabolism → relative adrenal insufficiency → cardiovascular collapse Why not (A)? • Oral administration is inappropriate in obtunded patient with GI hypomotility Why not (B)? • Missing the crucial glucocorticoid coverage Why not (D)? • T3 alone without T4 provides no sustained hormone levels • T3 may be added as adjunct to T4, not as sole therapy Precipitants to identify: infection (most common), cold exposure, sedatives, surgery, trauma Mortality remains 30–60% even with treatment — emphasizes the emergency nature.",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Myxedema coma is severe decompensated hypothyroidism causing hypothermia, bradycardia, hypoventilation, and altered mental status due to markedly reduced metabolic activity. Patients may have concomitant adrenal insufficiency; giving thyroid hormone alone can precipitate adrenal crisis by increasing metabolic demands.\n\nCorrect Answer Rationale: This patient has classic myxedema coma features (hypothermia, bradycardia, hypotension, hyponatremia, very high TSH with low free T4, and altered mental status). Initial treatment is IV levothyroxine because GI absorption is unreliable, plus empiric IV hydrocortisone until adrenal insufficiency is excluded; supportive care and treatment of triggers are also essential.\n\nDistractor Analysis:\n- Option A (if not correct): Oral levothyroxine has unreliable absorption in myxedema coma and delays adequate hormone replacement.\n- Option B (if not correct): IV levothyroxine without steroids risks precipitating adrenal crisis if concomitant adrenal insufficiency is present.\n- Option C (if not correct): Correct; IV levothyroxine plus IV hydrocortisone is standard initial therapy.\n- Option D (if not correct): T3 alone carries higher arrhythmia risk and is not first-line as monotherapy.\n- Option E (if not correct): Radioactive iodine is used for hyperthyroidism, not hypothyroid emergencies.\n\nClinical Pearl: Myxedema coma: treat with IV levothyroxine + empiric IV hydrocortisone, plus aggressive supportive care.",
+    "cognitive_error": "premature_closure",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -227,32 +227,32 @@
     "concept_id": "b1-07-siadh-vs-cerebral-salt-wasting-volume-status-differentiation",
     "batch": "Batch1",
     "system": "Endocrinology, Nephrology",
-    "stem": "A 52-year-old man is hospitalized following surgical clipping of a ruptured intracranial aneurysm 5 days ago. He initially did well postoperatively but now \nhas mild confusion. \nVital signs show blood pressure 108/68 mm Hg (baseline 132/84), pulse 98/min, and temperature 37.0°C. Physical examination reveals dry mucous \nmembranes and flat neck veins. Skin turgor is mildly decreased. \n\nLaboratory studies show: \n• \nSerum sodium: 124 mEq/L \n• \nSerum osmolality: 258 mOsm/kg \n• \nUrine sodium: 85 mEq/L \n• \nUrine osmolality: 420 mOsm/kg \n• \nBUN: 28 mg/dL \n• \nCreatinine: 1.1 mg/dL \n• \nUric acid: 2.1 mg/dL\n\nWhich of the following is the most appropriate treatment?",
+    "stem": "A 52-year-old man is hospitalized 5 days after surgical clipping of a ruptured cerebral aneurysm. He initially improved but now has mild confusion and dizziness when sitting up.\n\nBlood pressure is 108/68 mm Hg (baseline 132/84), pulse is 104/min, and temperature is 37.0°C (98.6°F). Examination shows dry mucous membranes and flat neck veins.\n\nLaboratory studies show:\n- Serum sodium: 124 mEq/L (135–145)\n- Serum osmolality: 258 mOsm/kg (275–295)\n- Urine sodium: 85 mEq/L\n- Urine osmolality: 420 mOsm/kg (50–1200)\n- BUN: 28 mg/dL (7–20)\n\nWhich of the following is the most appropriate treatment?",
     "options": [
       {
-        "text": "Fluid restriction to 1 L/day",
-        "label": "A"
+        "label": "A",
+        "text": "Restrict free water intake"
       },
       {
-        "text": "Intravenous 0.9% normal saline",
-        "label": "B"
+        "label": "B",
+        "text": "Administer intravenous 0.9% saline"
       },
       {
-        "text": "Demeclocycline",
-        "label": "C"
+        "label": "C",
+        "text": "Start demeclocycline"
       },
       {
-        "text": "Oral salt tablets with fluid restriction",
-        "label": "D"
+        "label": "D",
+        "text": "Give oral salt tablets and restrict free water"
       },
       {
-        "text": "Conivaptan",
-        "label": "E"
+        "label": "E",
+        "text": "Start a vasopressin receptor antagonist (vaptan)"
       }
     ],
     "correct_answer": "B",
-    "explanation": "This patient has hyponatremia in the setting of neurosurgery — the differential includes SIADH and cerebral salt wasting (CSW). Both share: • Hypotonic hyponatremia • Inappropriately concentrated urine (osmolality >100) • Elevated urine sodium (>40 mEq/L) • Low serum uric acid The KEY differentiator is VOLUME STATUS: Feature SIADH CSW Volume status Euvolemic Hypovolemic BP/HR Normal ↓BP, ↑HR Physical exam No edema, no dehydration Dry mucosa, poor turgor, flat JVP BUN/Cr Normal or low Elevated (hemoconcentration) Urine output Normal/decreased Increased This patient has CSW: • Decreased BP from baseline • Tachycardia • Dry mucous membranes • Flat neck veins • Elevated BUN (28) with normal creatinine suggests volume depletion Treatment differs completely: CSW (hypovolemic) → Volume replacement with isotonic saline • Replace sodium and water losses • Restores intravascular volume • Correct hyponatremia gradually (<8–10 mEq/L per 24 hours to prevent osmotic demyelination) SIADH (euvolemic) → Fluid restriction • Excess free water is the problem • NS would worsen hyponatremia in SIADH (kidneys excrete sodium, retain water) Why not (A) fluid restriction? • This would be appropriate for SIADH but dangerous in hypovolemic CSW • Would worsen volume depletion and potentially cause hypotension/shock Why not (C) or (E)? • Demeclocycline and vaptans are used for chronic SIADH, not CSW • Vaptans cause aquaresis (free water loss) — harmful in already volume-depleted patient Clinical pearl: Post-neurosurgical hyponatremia requires careful volume assessment. Getting this wrong can be fatal — fluid restriction in CSW worsens dehydration; fluids in SIADH worsen hyponatremia.",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Cerebral salt wasting occurs after intracranial disease and involves natriuresis with loss of sodium and water, leading to hypovolemic hyponatremia. In contrast, SIADH causes euvolemic hyponatremia from excess ADH-mediated water retention.\n\nCorrect Answer Rationale: This patient has hyponatremia with inappropriately high urine sodium and osmolality after subarachnoid hemorrhage, plus clinical hypovolemia (dry mucosa, flat neck veins, lower blood pressure) and elevated BUN. These findings favor cerebral salt wasting, so treatment is volume and sodium repletion with isotonic saline (and sometimes salt tablets or fludrocortisone), not fluid restriction.\n\nDistractor Analysis:\n- Option A (if not correct): Fluid restriction is appropriate for SIADH but would worsen hypovolemia and hyponatremia in cerebral salt wasting.\n- Option B (if not correct): Correct; isotonic saline replaces both volume and sodium losses in cerebral salt wasting.\n- Option C (if not correct): Demeclocycline treats chronic SIADH by inducing nephrogenic diabetes insipidus and is inappropriate in hypovolemic hyponatremia.\n- Option D (if not correct): Salt tablets with fluid restriction may worsen hypovolemia; volume repletion is required.\n- Option E (if not correct): Vaptans are used for euvolemic hyponatremia (SIADH) and can worsen volume depletion in cerebral salt wasting.\n\nClinical Pearl: Post-SAH hyponatremia + hypovolemia suggests cerebral salt wasting—treat with isotonic/hypertonic saline, not water restriction.",
+    "cognitive_error": "anchoring_bias",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -264,32 +264,32 @@
     "concept_id": "b1-08-subclinical-hypothyroidism-treatment-decision",
     "batch": "Batch1",
     "system": "Endocrinology",
-    "stem": "A 58-year-old woman comes to the clinic for routine follow-up. She feels well and has no specific complaints. She has a history of hypertension \ncontrolled with lisinopril. She denies fatigue, constipation, cold intolerance, or weight changes. \nPhysical examination shows blood pressure 128/78 mm Hg, pulse 72/min, and BMI 26 kg/m². Thyroid is normal in size without nodules. Deep tendon \nreflexes are normal. \nScreening laboratory studies show: \n• \nTSH: 8.2 mIU/L (normal 0.5–4.5) \n• \nFree T4: 1.1 ng/dL (normal 0.8–1.8) \nRepeat testing 6 weeks later confirms: \n• \nTSH: 7.8 mIU/L \n• \nFree T4: 1.0 ng/dL \n• \nAnti-TPO antibodies: positive\n\nWhich of the following is the most appropriate management?",
+    "stem": "A 58-year-old woman comes to the clinic for routine follow-up. She reports mild fatigue but attributes it to a busy work schedule. She has no neck pain and takes no amiodarone or lithium.\n\nPhysical examination is unremarkable. Repeat thyroid testing (6 weeks apart) shows:\n- TSH: 12.4 mIU/L and 11.8 mIU/L (0.4–4.5)\n- Free T4: 1.0 ng/dL and 1.1 ng/dL (0.8–1.8)\n- Anti–thyroid peroxidase (anti-TPO) antibodies: positive\n\nWhich of the following is the most appropriate management?",
     "options": [
       {
-        "text": "Initiate levothyroxine",
-        "label": "A"
+        "label": "A",
+        "text": "Initiate levothyroxine therapy"
       },
       {
-        "text": "Observation with repeat TSH in 6–12 months",
-        "label": "B"
+        "label": "B",
+        "text": "Observe and repeat TSH in 6–12 months without treatment"
       },
       {
-        "text": "Radioactive iodine uptake scan",
-        "label": "C"
+        "label": "C",
+        "text": "Order a radioactive iodine uptake scan"
       },
       {
-        "text": "Thyroid ultrasound",
-        "label": "D"
+        "label": "D",
+        "text": "Order thyroid ultrasound to evaluate for malignancy"
       },
       {
-        "text": "Trial of liothyronine (T3)",
-        "label": "E"
+        "label": "E",
+        "text": "Start liothyronine (T3) therapy"
       }
     ],
     "correct_answer": "A",
-    "explanation": "This patient has subclinical hypothyroidism: elevated TSH with normal free T4. The decision to treat depends on several factors: Indications to TREAT subclinical hypothyroidism: 1. TSH >10 mIU/L — treat regardless of symptoms 2. TSH 5–10 mIU/L with: • Symptoms of hypothyroidism • Positive TPO antibodies (predicts progression to overt hypothyroidism) • Goiter • Pregnancy or planning pregnancy • Dyslipidemia • Significant cardiovascular disease • Age <65–70 years This patient should be treated because: • Persistent elevation (confirmed on repeat testing) • TSH 7.8 mIU/L (approaching 10) • Positive anti-TPO antibodies — key factor; indicates autoimmune thyroiditis with ~4.3% annual progression rate to overt hypothyroidism • Age 58 (younger patients benefit more from treatment) • Cardiovascular risk factors (hypertension) Treatment: Low-dose levothyroxine (25–50 µg daily), titrate to normalize TSH Why not (B) observation alone? • Would be appropriate if: • TSH only mildly elevated (5–7) AND • No TPO antibodies AND • No symptoms or risk factors • Positive antibodies change the calculation — progression likely Why not (C) or (D)? • RAI uptake scan is for hyperthyroidism workup • Ultrasound indicated if nodule suspected; not needed for straightforward subclinical hypothyroidism Why not (E)? • T3 monotherapy is not standard treatment for hypothyroidism • Levothyroxine (T4) is the standard of care In elderly patients (>70–80 years): More conservative approach; TSH targets may be higher, as overtreatment risks atrial fibrillation and bone loss.",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Subclinical hypothyroidism is defined by elevated TSH with normal free T4, reflecting early thyroid failure and increased pituitary drive. Patients with persistent TSH elevation—especially ≥10 mIU/L and/or positive anti-TPO antibodies—have higher risk of progression to overt hypothyroidism and may benefit from replacement therapy.\n\nCorrect Answer Rationale: Her TSH is persistently >10 mIU/L on repeat testing with normal free T4 and positive anti-TPO antibodies, consistent with subclinical hypothyroidism likely due to autoimmune thyroiditis. Levothyroxine is recommended in persistent TSH ≥10 mIU/L to reduce symptoms and progression risk.\n\nDistractor Analysis:\n- Option A (if not correct): Correct; levothyroxine is indicated with persistent TSH ≥10 mIU/L (especially with anti-TPO positivity).\n- Option B (if not correct): Observation may be reasonable for mild TSH elevation (<10) without symptoms, but this patient has persistent TSH >10.\n- Option C (if not correct): Radioactive iodine uptake scans are used to evaluate hyperthyroidism, not hypothyroidism with elevated TSH.\n- Option D (if not correct): Ultrasound is reserved for suspected nodules/goiter or concerning exam; it does not address management of biochemical hypothyroidism.\n- Option E (if not correct): T3 therapy is not first-line for hypothyroidism and can cause fluctuating levels and adverse cardiac effects.\n\nClinical Pearl: Treat subclinical hypothyroidism when TSH ≥10 mIU/L (or pregnancy/infertility or symptomatic with TPO+).",
+    "cognitive_error": "premature_closure",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -301,32 +301,32 @@
     "concept_id": "b1-09-acute-coronary-syndrome-stemi-door-to-balloon-time",
     "batch": "Batch1",
     "system": "Cardiology",
-    "stem": "A 62-year-old man presents to a rural emergency department with 45 minutes of severe substernal chest pressure radiating to his left arm, associated \nwith diaphoresis and nausea. He has a history of hypertension and smoking. \nOn examination, he appears anxious and diaphoretic. Blood pressure is 148/92 mm Hg, pulse is 96/min, respirations are 20/min. Lungs are clear, and \nthere is no jugular venous distension. \nECG shows 4-mm ST-segment elevation in leads V1–V4 with reciprocal ST depression in leads II, III, and aVF. \nThe nearest PCI-capable facility is 95 minutes away by ambulance. The current facility does not have cardiac catheterization capabilities.\n\nWhich of the following is the most appropriate immediate management?",
+    "stem": "A 62-year-old man presents to a rural emergency department with 60 minutes of crushing substernal chest pressure radiating to the left arm. He has diaphoresis and nausea. He has no history of intracranial hemorrhage or recent surgery.\n\nBlood pressure is 128/74 mm Hg, pulse is 92/min, and oxygen saturation is 97% on room air. ECG shows ST-segment elevations in leads II, III, and aVF with reciprocal changes in I and aVL. The nearest percutaneous coronary intervention (PCI) center is 3 hours away by ground transport.\n\nWhich of the following is the most appropriate immediate reperfusion strategy?",
     "options": [
       {
-        "text": "Administer fibrinolytic therapy now",
-        "label": "A"
+        "label": "A",
+        "text": "Administer fibrinolytic therapy and arrange transfer for coronary angiography"
       },
       {
-        "text": "Transfer immediately for primary PCI",
-        "label": "B"
+        "label": "B",
+        "text": "Transfer immediately for primary PCI without fibrinolytic therapy"
       },
       {
-        "text": "Administer aspirin and heparin only, then transfer",
-        "label": "C"
+        "label": "C",
+        "text": "Administer aspirin and heparin and manage medically without reperfusion"
       },
       {
-        "text": "Obtain serial troponins before deciding on treatment",
-        "label": "D"
+        "label": "D",
+        "text": "Obtain serial troponins before initiating reperfusion therapy"
       },
       {
-        "text": "Perform stress testing before intervention",
-        "label": "E"
+        "label": "E",
+        "text": "Perform stress testing prior to discharge"
       }
     ],
     "correct_answer": "A",
-    "explanation": "This patient has an anterior STEMI (ST elevation V1–V4 with reciprocal changes). Immediate reperfusion is critical — \"time is myocardium.\" Decision framework for reperfusion strategy: Primary PCI is preferred if: • Door-to-balloon time <90 minutes at PCI-capable hospital • Door-to-balloon time <120 minutes if transfer required (including transfer time) Fibrinolysis is indicated when: • PCI not available within 120 minutes of first medical contact • No contraindications to fibrinolytics • Symptom onset <12 hours (ideally <3 hours for maximum benefit) This case: • Transfer time alone is 95 minutes • Add door-to-door time, door-to-balloon time at receiving facility → likely >120 minutes total • Patient has clear STEMI with symptoms for only 45 minutes • No stated contraindications to fibrinolytics Fibrinolysis should be administered within 30 minutes of arrival (\"door-to-needle\") Adjunctive therapy with either strategy: • Aspirin 325 mg (chewed) • P2Y12 inhibitor (clopidogrel if fibrinolysis; ticagrelor/prasugrel if PCI) • Anticoagulation (heparin) • Consider transfer for rescue PCI after fibrinolysis Why not (B)? • Would exceed the 120-minute window • Delays reperfusion → larger infarct → higher mortality Why not (C)? • Incomplete therapy — aspirin and heparin alone don't provide reperfusion Why not (D) or (E)? • STEMI is a clinical and ECG diagnosis • Troponins take time and should not delay reperfusion • Stress testing is contraindicated in acute MI Key time targets: • Door-to-needle: ≤30 minutes • Door-to-balloon: ≤90 minutes (same hospital) or ≤120 minutes (transfer)",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: ST-elevation myocardial infarction is caused by acute coronary artery occlusion leading to transmural ischemia and myocardial necrosis. Rapid reperfusion with PCI or fibrinolysis limits infarct size and reduces mortality; delays increase myocardial loss (“time is muscle”).\n\nCorrect Answer Rationale: He has an inferior STEMI on ECG with symptom onset 1 hour ago. Because a PCI-capable center is 3 hours away, the expected delay to primary PCI exceeds recommended thresholds, so fibrinolytic therapy should be given promptly (if no contraindications) and the patient should then be transferred for early coronary angiography.\n\nDistractor Analysis:\n- Option A (if not correct): Correct; fibrinolysis is appropriate when timely PCI is not feasible and there are no contraindications.\n- Option B (if not correct): Primary PCI is preferred when it can be performed rapidly; in this setting, delay is excessive and outcomes worsen without earlier reperfusion.\n- Option C (if not correct): Medical therapy alone without reperfusion is inappropriate for STEMI unless both PCI and fibrinolysis are contraindicated.\n- Option D (if not correct): Troponins may be negative early and should not delay ECG-based STEMI reperfusion.\n- Option E (if not correct): Stress testing is contraindicated in acute STEMI and delays definitive therapy.\n\nClinical Pearl: STEMI: if PCI delay >120 min and no contraindications, give fibrinolysis (door-to-needle ≤30 min) and transfer.",
+    "cognitive_error": "premature_closure",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -338,32 +338,32 @@
     "concept_id": "b1-10-heart-failure-with-reduced-ejection-fraction-mortality-reduc",
     "batch": "Batch1",
     "system": "Cardiology",
-    "stem": "A 64-year-old man with ischemic cardiomyopathy returns for follow-up. His last echocardiogram showed left ventricular ejection fraction of 30%. He \nreports New York Heart Association class II symptoms — dyspnea with moderate exertion but comfortable at rest. \nCurrent medications: \n• \nLisinopril 20 mg daily \n• \nCarvedilol 25 mg twice daily \n• \nFurosemide 40 mg daily \n• \nAtorvastatin 40 mg daily \nVital signs: blood pressure 118/72 mm Hg, pulse 64/min. Physical examination shows no peripheral edema, jugular venous pressure is normal, and lungs \nare clear. \nLaboratory studies: \n\n• \nSerum potassium: 4.2 mEq/L \n• \nSerum creatinine: 1.1 mg/dL \n• \neGFR: 72 mL/min/1.73m²\n\nWhich of the following additional medications would provide a mortality benefit?",
+    "stem": "A 64-year-old man with ischemic cardiomyopathy is seen in follow-up. Despite adherence to guideline-directed therapy, he has dyspnea with climbing one flight of stairs. Echocardiography shows a left ventricular ejection fraction of 30%. Current medications include lisinopril and carvedilol. \n\nLaboratory studies show:\n- Potassium: 4.3 mEq/L (3.5–5.0)\n- Creatinine: 1.1 mg/dL (0.6–1.3)\n\nWhich of the following medications, when added, is most likely to reduce mortality in this patient?",
     "options": [
       {
-        "text": "Digoxin",
-        "label": "A"
+        "label": "A",
+        "text": "Digoxin"
       },
       {
-        "text": "Hydralazine",
-        "label": "B"
+        "label": "B",
+        "text": "Hydralazine"
       },
       {
-        "text": "Spironolactone",
-        "label": "C"
+        "label": "C",
+        "text": "Spironolactone"
       },
       {
-        "text": "Amlodipine",
-        "label": "D"
+        "label": "D",
+        "text": "Amlodipine"
       },
       {
-        "text": "Isosorbide dinitrate",
-        "label": "E"
+        "label": "E",
+        "text": "Isosorbide dinitrate"
       }
     ],
     "correct_answer": "C",
-    "explanation": "This patient has HFrEF (EF ≤40%) on suboptimal GDMT. The \"four pillars\" of mortality-reducing therapy in HFrEF are: Drug Class Example Mortality Benefit ACE-I/ARB/ARNI Lisinopril, Sacubitril-valsartan ✓ Yes Beta-blocker Carvedilol, Metoprolol succinate, Bisoprolol ✓ Yes MRA Spironolactone, Eplerenone ✓ Yes SGLT2 inhibitor Dapagliflozin, Empagliflozin ✓ Yes This patient is missing an MRA (mineralocorticoid receptor antagonist) Evidence for spironolactone (RALES trial): • 30% reduction in mortality in NYHA III–IV HF • Also reduces hospitalizations • Indicated for EF ≤35% (some extend to ≤40%) with NYHA II–IV symptoms Before starting, verify: • K+ <5.0 mEq/L ✓ (this patient: 4.2) • eGFR >30 mL/min ✓ (this patient: 72) • No history of hyperkalemia Why not other options? (A) Digoxin: • Reduces HF hospitalizations • Does NOT reduce mortality • Used for symptom control or rate control in atrial fibrillation (B) Hydralazine and (E) Isosorbide dinitrate: • Combination (Hydralazine-ISDN) provides mortality benefit specifically in African American patients with HFrEF • Not first-line for all patients; added if ACE-I/ARB not tolerated or in addition to GDMT in African Americans (D) Amlodipine: • Safe in HF (unlike other calcium channel blockers) • Does NOT reduce mortality • Used only if additional BP or angina control needed Next optimization steps for this patient: 1. Add spironolactone 12.5–25 mg daily 2. Consider switching ACE-I to ARNI (sacubitril-valsartan) — superior mortality benefit 3. Add SGLT2 inhibitor 4. Assess for ICD indication (EF ≤35% on GDMT for ≥3 months)",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Heart failure with reduced ejection fraction involves maladaptive neurohormonal activation (RAAS and sympathetic stimulation) leading to sodium retention and ventricular remodeling. Mineralocorticoid receptor antagonists block aldosterone-mediated fibrosis and remodeling, improving survival in appropriately selected patients.\n\nCorrect Answer Rationale: He has symptomatic HFrEF (EF 30%) despite an ACE inhibitor and beta-blocker, with normal creatinine and potassium. Adding a mineralocorticoid receptor antagonist such as spironolactone reduces mortality in symptomatic HFrEF when renal function and potassium allow.\n\nDistractor Analysis:\n- Option A (if not correct): Digoxin can improve symptoms and reduce hospitalizations but does not provide a mortality benefit.\n- Option B (if not correct): Hydralazine alone does not provide the same mortality benefit as RAAS blockade/MRA; hydralazine is typically paired with nitrates in select patients.\n- Option C (if not correct): Correct; spironolactone reduces mortality in symptomatic HFrEF with acceptable renal function and K.\n- Option D (if not correct): Amlodipine is generally neutral in HFrEF and does not improve survival.\n- Option E (if not correct): Isosorbide dinitrate alone does not confer mortality benefit; the mortality benefit is with hydralazine–isosorbide combination in select groups.\n\nClinical Pearl: Symptomatic HFrEF: add an MRA (spironolactone/eplerenone) if K <5.0 and renal function is adequate—improves survival.",
+    "cognitive_error": "availability_heuristic",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -375,32 +375,32 @@
     "concept_id": "b1-11-pulmonary-embolism-risk-stratification-and-disposition",
     "batch": "Batch1",
     "system": "Pulmonology, Hematology",
-    "stem": "A 45-year-old woman presents to the emergency department with sudden-onset dyspnea and right-sided pleuritic chest pain that began 6 hours ago. \nShe returned from a 14-hour international flight 3 days ago. She has no significant medical history and takes oral contraceptives. \nOn examination, she is alert and anxious. Temperature is 37.2°C (99.0°F), blood pressure is 132/78 mm Hg, pulse is 102/min, respirations are 22/min, and \noxygen saturation is 94% on room air. Lungs are clear, and there is no lower extremity edema or calf tenderness. \nCT pulmonary angiography shows a segmental pulmonary embolus in the right lower lobe. Echocardiogram shows normal right ventricular size and \nfunction. Troponin I is 0.02 ng/mL (normal <0.04). BNP is 45 pg/mL (normal <100).\n\nWhich of the following is the most appropriate management?",
+    "stem": "A 45-year-old woman presents with pleuritic chest pain and mild shortness of breath that began this morning. She returned from a 6-hour flight 2 days ago. CT pulmonary angiography shows an acute segmental pulmonary embolism.\n\nVital signs are stable: temperature 36.9°C (98.4°F), blood pressure 124/78 mm Hg, pulse 88/min, respirations 16/min, and oxygen saturation 97% on room air. Troponin is normal, and bedside echocardiography shows no right ventricular dilation. She has no cancer, cardiopulmonary disease, or bleeding history and can obtain close outpatient follow-up.\n\nWhich of the following is the most appropriate management and disposition?",
     "options": [
       {
-        "text": "Admit to ICU for thrombolysis",
-        "label": "A"
+        "label": "A",
+        "text": "Admit to the ICU for systemic thrombolysis"
       },
       {
-        "text": "Admit to telemetry for IV heparin and monitoring",
-        "label": "B"
+        "label": "B",
+        "text": "Admit for intravenous unfractionated heparin infusion and telemetry"
       },
       {
-        "text": "Discharge with rivaroxaban and outpatient follow-up",
-        "label": "C"
+        "label": "C",
+        "text": "Discharge with oral anticoagulation and close follow-up"
       },
       {
-        "text": "Admit for observation and IVC filter placement",
-        "label": "D"
+        "label": "D",
+        "text": "Admit for observation and place an inferior vena cava filter"
       },
       {
-        "text": "Discharge with aspirin only",
-        "label": "E"
+        "label": "E",
+        "text": "Discharge with aspirin therapy only"
       }
     ],
     "correct_answer": "C",
-    "explanation": "This patient has an acute pulmonary embolism with features suggesting low risk for adverse outcomes: Risk stratification for PE: High-risk (massive) PE: • Hemodynamic instability (SBP <90, shock) • Requires ICU, consider thrombolysis Intermediate-risk (submassive) PE: • Hemodynamically stable BUT • RV dysfunction on echo OR elevated troponin/BNP • Requires admission for monitoring Low-risk PE: • Hemodynamically stable AND • No RV dysfunction AND • Normal biomarkers AND • Low clinical risk score (sPESI = 0 or PESI class I–II) This patient is LOW RISK: • Hemodynamically stable ✓ • Normal RV function on echo ✓ • Normal troponin ✓ • Normal BNP ✓ • Simplified PESI (sPESI) score: likely 0 (no hypotension, no hypoxia <90%, no cancer, no chronic cardiopulmonary disease, no altered mental status, age <80) Low-risk PE can be managed as outpatient with: • Direct oral anticoagulant (DOAC): rivaroxaban, apixaban, or edoxaban • Duration: Provoked PE (flight + OCPs) → 3 months minimum • Close follow-up within 1 week Why not (A)? • Thrombolysis reserved for massive PE with hemodynamic instability • This patient is stable with no RV strain Why not (B)? • Unnecessary hospitalization for low-risk PE • Increases costs, VTE risk from immobility, nosocomial risks Why not (D)? • IVC filter only if anticoagulation contraindicated • This patient can be anticoagulated Why not (E)? • Aspirin is not treatment for PE • Requires anticoagulation DOAC advantages: No bridging required, fixed dosing, no INR monitoring (for rivaroxaban/apixaban)",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Pulmonary embolism results from thrombus lodging in the pulmonary arterial tree, increasing dead space and pulmonary vascular resistance. Hemodynamic instability reflects large clot burden and right ventricular failure; stable, low-risk patients can often be treated safely as outpatients with anticoagulation.\n\nCorrect Answer Rationale: She is hemodynamically stable with normal oxygenation, normal troponin, and no right ventricular strain, and she lacks major comorbidities or bleeding risk—features consistent with low-risk PE. Appropriate management is anticoagulation (e.g., a DOAC) with outpatient treatment and reliable follow-up.\n\nDistractor Analysis:\n- Option A (if not correct): Systemic thrombolysis is reserved for massive PE with hypotension/shock or select deteriorating intermediate-risk cases, not low-risk PE.\n- Option B (if not correct): IV heparin and inpatient monitoring are appropriate for higher-risk PE or when rapid reversal is needed, but are not required in stable low-risk patients.\n- Option C (if not correct): Correct; low-risk PE can be treated outpatient with oral anticoagulation and close follow-up.\n- Option D (if not correct): IVC filters are indicated when anticoagulation is contraindicated or fails; they are not first-line in patients who can be anticoagulated.\n- Option E (if not correct): Aspirin is inadequate treatment for acute PE.\n\nClinical Pearl: Low-risk, stable PE (no RV strain, normal troponin, good follow-up) can be treated outpatient with a DOAC.",
+    "cognitive_error": "base_rate_neglect",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -412,32 +412,32 @@
     "concept_id": "b1-12-copd-exacerbation-when-to-add-antibiotics",
     "batch": "Batch1",
     "system": "Pulmonology",
-    "stem": "A 68-year-old man with COPD (FEV1 45% predicted) presents with 3 days of worsening dyspnea, increased sputum production, and change in sputum \nfrom white to yellow-green. He uses tiotropium and albuterol inhalers at home. He has had two COPD exacerbations requiring hospitalization in the past \nyear. \nOn examination, temperature is 37.6°C (99.7°F), blood pressure is 138/82 mm Hg, pulse is 94/min, respirations are 24/min, and oxygen saturation is 89% \non room air. He has diffuse expiratory wheezes and is using accessory muscles. There are no signs of consolidation. \nChest X-ray shows hyperinflation without infiltrate.\n\nWhich of the following is the most appropriate treatment regimen?",
+    "stem": "A 68-year-old man with COPD (FEV1 45% predicted) presents with 2 days of worsening shortness of breath and increased cough. He reports increased sputum volume and that the sputum has become yellow-green. He uses tiotropium daily and albuterol as needed.\n\nTemperature is 37.6°C (99.7°F), blood pressure is 138/82 mm Hg, pulse is 94/min, respirations are 22/min, and oxygen saturation is 92% on room air (baseline 94%). Lung examination shows diffuse wheezes. Chest x-ray shows no focal consolidation.\n\nWhich of the following is the most appropriate treatment?",
     "options": [
       {
-        "text": "Increased frequency of albuterol only",
-        "label": "A"
+        "label": "A",
+        "text": "Increase inhaled short-acting bronchodilator use only"
       },
       {
-        "text": "Oral prednisone plus increased bronchodilators",
-        "label": "B"
+        "label": "B",
+        "text": "Add a short course of oral prednisone and increase bronchodilator use"
       },
       {
-        "text": "Oral prednisone plus azithromycin plus increased bronchodilators",
-        "label": "C"
+        "label": "C",
+        "text": "Add a short course of oral prednisone, start oral azithromycin, and increase bronchodilator use"
       },
       {
-        "text": "Intravenous antibiotics plus bronchodilators without steroids",
-        "label": "D"
+        "label": "D",
+        "text": "Start intravenous antibiotics and bronchodilators without systemic corticosteroids"
       },
       {
-        "text": "Inhaled corticosteroids only",
-        "label": "E"
+        "label": "E",
+        "text": "Start inhaled corticosteroids alone for acute symptom control"
       }
     ],
     "correct_answer": "C",
-    "explanation": "This patient has an acute exacerbation of COPD (AECOPD) meeting criteria for antibiotic therapy. Anthonisen criteria for AECOPD severity: 1. Increased dyspnea 2. Increased sputum volume 3. Increased sputum purulence (change in color) Antibiotic indications: • All 3 cardinal symptoms present (Type 1 — severe) → Antibiotics indicated • 2 of 3 symptoms IF one is purulence → Antibiotics indicated • Mechanical ventilation required → Antibiotics indicated • Mild exacerbation (1 symptom) → No antibiotics This patient has ALL 3: • ✓ Increased dyspnea • ✓ Increased sputum volume • ✓ Purulent sputum (yellow-green) Standard AECOPD treatment: Component Details Bronchodilators SABA (albuterol) ± SAMA (ipratropium), nebulized if severe Systemic corticosteroids Prednisone 40 mg × 5 days Antibiotics (if indicated) Azithromycin, doxycycline, or respiratory fluoroquinolone Oxygen Target SpO2 88–92% Why not (A)? • Missing corticosteroids and antibiotics; inadequate for this severity Why not (B)? • Missing antibiotics despite meeting criteria (Type 1 exacerbation) Why not (D)? • IV antibiotics not necessary for uncomplicated AECOPD without pneumonia • Missing systemic steroids (proven to reduce treatment failure and hospital stay) Why not (E)? • Inhaled steroids have no role in acute exacerbation management • Systemic steroids required Antibiotic choice: Cover typical pathogens (H. influenzae, M. catarrhalis, S. pneumoniae) • Azithromycin or doxycycline for most • Fluoroquinolone if recent antibiotic use or Pseudomonas risk",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Acute COPD exacerbations are episodes of worsening dyspnea, cough, and/or sputum, often triggered by viral or bacterial infection and airway inflammation. Antibiotics improve outcomes when bacterial infection is likely, classically suggested by sputum purulence with increased dyspnea and/or sputum volume.\n\nCorrect Answer Rationale: He has an acute COPD exacerbation with increased dyspnea, increased sputum volume, and new sputum purulence, without evidence of pneumonia on chest x-ray. Management includes increased bronchodilators and a short course of systemic corticosteroids; antibiotics are indicated given purulent sputum and increased symptoms.\n\nDistractor Analysis:\n- Option A (if not correct): Bronchodilators alone are insufficient when there is significant inflammation; systemic steroids shorten recovery and reduce treatment failure.\n- Option B (if not correct): Steroids plus bronchodilators are appropriate for many exacerbations, but purulent sputum with increased symptoms supports adding antibiotics.\n- Option C (if not correct): Correct; systemic steroids + antibiotics + bronchodilators are indicated given Anthonisen criteria.\n- Option D (if not correct): IV antibiotics are unnecessary in a stable patient without severe illness or inability to take oral medications, and steroids should not be omitted.\n- Option E (if not correct): Inhaled corticosteroids are not used for acute exacerbation relief and do not replace systemic steroids in moderate exacerbations.\n\nClinical Pearl: AECOPD: add antibiotics when sputum purulence is present with ↑dyspnea and/or ↑sputum volume; treat all with bronchodilators + short-course systemic steroids.",
+    "cognitive_error": "availability_heuristic",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -449,32 +449,32 @@
     "concept_id": "b1-13-community-acquired-pneumonia-outpatient-vs-inpatient-decisio",
     "batch": "Batch1",
     "system": "Pulmonology, Infectious Disease",
-    "stem": "A 72-year-old man presents with 4 days of productive cough with rust-colored sputum, fever, and pleuritic chest pain. He has well-controlled \nhypertension and type 2 diabetes. \nOn examination, temperature is 38.6°C (101.5°F), blood pressure is 102/64 mm Hg, pulse is 108/min, respirations are 26/min, and oxygen saturation is \n91% on room air. He is oriented to person, place, and time. Right lower lung field has bronchial breath sounds and dullness to percussion. \nLaboratory studies show BUN 24 mg/dL (normal 7–20) and WBC 18,400/µL. \nChest X-ray shows right lower lobe consolidation.\n\nWhich of the following is the most appropriate disposition?",
+    "stem": "A 72-year-old man presents with 4 days of productive cough, fever, and pleuritic chest pain. His medical history includes type 2 diabetes mellitus and hypertension.\n\nTemperature is 38.6°C (101.5°F), blood pressure is 118/70 mm Hg, pulse is 108/min, respirations are 26/min, and oxygen saturation is 91% on room air. He is alert and oriented. Lung examination reveals crackles and bronchial breath sounds over the right lower lung field.\n\nLaboratory studies show:\n- BUN: 24 mg/dL (7–20)\n- WBC: 18,400/µL (4,000–11,000)\n\nChest x-ray shows a right lower lobe infiltrate.\n\nWhich of the following is the most appropriate disposition?",
     "options": [
       {
-        "text": "Discharge with oral amoxicillin",
-        "label": "A"
+        "label": "A",
+        "text": "Discharge with oral amoxicillin"
       },
       {
-        "text": "Discharge with oral azithromycin plus amoxicillin",
-        "label": "B"
+        "label": "B",
+        "text": "Discharge with oral azithromycin plus amoxicillin"
       },
       {
-        "text": "Admit to medical ward for IV antibiotics",
-        "label": "C"
+        "label": "C",
+        "text": "Admit to the medical ward for inpatient antibiotic therapy"
       },
       {
-        "text": "Admit to ICU for IV antibiotics and monitoring",
-        "label": "D"
+        "label": "D",
+        "text": "Admit to the ICU for intravenous antibiotics and hemodynamic monitoring"
       },
       {
-        "text": "Observe in ED for 6 hours, then discharge",
-        "label": "E"
+        "label": "E",
+        "text": "Observe in the emergency department for 6 hours and then discharge"
       }
     ],
     "correct_answer": "C",
-    "explanation": "This patient has community-acquired pneumonia (CAP) requiring severity assessment for disposition. CURB-65 score (1 point each): • Confusion → No (0) • Uremia (BUN >19 mg/dL or >7 mmol/L) → Yes (1) • Respiratory rate ≥30 → No, but close at 26 (0) • Blood pressure (SBP <90 or DBP ≤60) → DBP 64, borderline (0 or 1) • Age ≥65 → Yes (1) Score: 2–3 points CURB-65 interpretation: Score Mortality Risk Disposition 0–1 Low (1.5%) Outpatient 2 Intermediate (9.2%) Consider admission 3–5 High (22%) Admit; ≥4 consider ICU Additional concerning features: • Hypoxemia (SpO2 91%) • Elderly with comorbidities (DM) • Borderline hypotension • Elevated WBC suggesting significant infection This patient warrants hospital admission but does not meet ICU criteria. ICU admission criteria (any one major or ≥3 minor): • Major: Septic shock requiring vasopressors, mechanical ventilation • Minor: RR ≥30, PaO2/FiO2 ≤250, multilobar infiltrates, confusion, BUN ≥20, WBC <4000, platelets <100,000, hypothermia, hypotension requiring fluids Inpatient treatment (non-ICU): • Respiratory fluoroquinolone (levofloxacin or moxifloxacin) alone, OR • Beta-lactam (ceftriaxone, ampicillin-sulbactam) PLUS macrolide (azithromycin) Why not (A) or (B)? • Outpatient therapy inappropriate given severity score and hypoxemia Why not (D)? • Does not meet major ICU criteria (hemodynamically stable, not in respiratory failure) Why not (E)? • Brief observation insufficient; requires admission",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Community-acquired pneumonia causes alveolar infection and inflammation leading to impaired gas exchange and systemic illness. Disposition is guided by validated severity scores (e.g., CURB-65/PSI) that predict mortality and need for inpatient care.\n\nCorrect Answer Rationale: He has CAP with tachypnea, hypoxemia, age >65, and BUN >20 mg/dL, giving a CURB-65 score of 2 (age and elevated BUN). A score ≥2 generally warrants inpatient management on a medical ward for close monitoring and antibiotic therapy.\n\nDistractor Analysis:\n- Option A (if not correct): Oral monotherapy and discharge are inappropriate with a CURB-65 score ≥2 and hypoxemia.\n- Option B (if not correct): Outpatient dual therapy may be appropriate for select stable patients, but his severity score and oxygenation warrant admission.\n- Option C (if not correct): Correct; inpatient (ward-level) treatment is indicated.\n- Option D (if not correct): ICU admission is reserved for severe CAP (e.g., shock, need for mechanical ventilation, or major PSI/ATS/IDSA criteria), which he does not meet.\n- Option E (if not correct): Brief ED observation does not address the need for inpatient monitoring given his risk stratification.\n\nClinical Pearl: CAP disposition: CURB-65 ≥2 (or high PSI) generally requires inpatient admission; ICU is for severe CAP criteria.",
+    "cognitive_error": "premature_closure",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -486,32 +486,32 @@
     "concept_id": "b1-14-upper-gi-bleed-timing-of-endoscopy",
     "batch": "Batch1",
     "system": "Gastroenterology",
-    "stem": "A 58-year-old man presents to the emergency department after vomiting approximately 500 mL of bright red blood 2 hours ago. He has a history of \nalcohol use disorder and takes ibuprofen regularly for back pain. He denies abdominal pain. \nOn examination, he is anxious but alert. Temperature is 36.8°C (98.2°F), blood pressure is 98/62 mm Hg (108/70 after 1L NS), pulse is 112/min (98 after \nfluids), respirations are 18/min. Abdomen is soft, nontender. Rectal examination shows melena. \nLaboratory studies: \n• \nHemoglobin: 8.4 g/dL (baseline 14 g/dL) \n• \nPlatelets: 142,000/µL \n• \nINR: 1.2 \n• \nBUN: 42 mg/dL \n• \nCreatinine: 1.0 mg/dL\n\nAfter initial resuscitation and IV PPI, which of the following is the most appropriate timing for esophagogastroduodenoscopy (EGD)?",
+    "stem": "A 58-year-old man presents with two episodes of hematemesis and several black, tarry stools. He takes naproxen daily for back pain. On arrival, he is pale and diaphoretic.\n\nBlood pressure is 88/56 mm Hg, pulse is 124/min. Two large-bore IVs are placed, he receives intravenous fluids and packed red blood cells, and his blood pressure improves to 112/70 mm Hg with pulse 96/min. He is started on an intravenous proton pump inhibitor infusion.\n\nWhich of the following is the most appropriate timing for upper endoscopy?",
     "options": [
       {
-        "text": "Immediately (within 1 hour)",
-        "label": "A"
+        "label": "A",
+        "text": "Immediately, within 1 hour of presentation regardless of response to resuscitation"
       },
       {
-        "text": "Urgent (within 12 hours)",
-        "label": "B"
+        "label": "B",
+        "text": "Urgently, within 12 hours of presentation for all patients with hematemesis"
       },
       {
-        "text": "Within 24 hours",
-        "label": "C"
+        "label": "C",
+        "text": "Within 24 hours after hemodynamic stabilization"
       },
       {
-        "text": "Within 48–72 hours after stabilization",
-        "label": "D"
+        "label": "D",
+        "text": "In 48–72 hours after clinical stabilization"
       },
       {
-        "text": "Elective outpatient EGD in 2 weeks",
-        "label": "E"
+        "label": "E",
+        "text": "Elective outpatient endoscopy in 2 weeks"
       }
     ],
     "correct_answer": "C",
-    "explanation": "This patient has acute upper GI bleeding (hematemesis with melena) requiring risk stratification for EGD timing. Risk assessment (Glasgow-Blatchford Score — GBS): • BUN 42 → 4 points • Hemoglobin 8.4 (male) → 3 points • SBP 98 → 2 points • Pulse ≥100 → 1 point • Melena → 1 point • Total: ~11 points → High risk EGD timing guidelines: Clinical Scenario Timing Hemodynamic instability unresponsive to resuscitation, ongoing hemorrhage Emergent (within 12 hours, some say <6 hours) High-risk but hemodynamically stabilized Urgent (within 24 hours) ← This patient Low-risk (GBS 0–1) May be appropriate for outpatient This patient: • High-risk features (significant hemoglobin drop, melena, elevated BUN) • BUT responded to fluid resuscitation (BP and HR improved) • Appropriate for EGD within 24 hours (not emergency <12 hours) Why within 24 hours, not immediately? • Studies show no mortality benefit of <6 hour EGD vs <24 hour EGD in hemodynamically stable patients • Allows adequate resuscitation, correction of coagulopathy if needed • Improved visualization with controlled endoscopy Immediate/emergent EGD (<12 hours) indicated if: • Ongoing hemodynamic instability despite resuscitation • Signs of continued active bleeding • High suspicion for variceal bleed with instability Pre-endoscopy management: • IV PPI (pantoprazole 80 mg bolus then infusion) • Transfuse if Hgb <7 g/dL (or <8–9 in CAD) • Correct coagulopathy (INR 1.2 is acceptable) • NPO, prokinetic (erythromycin) may improve visualization Why not (A)? • Patient stabilized; no evidence emergent EGD improves outcomes in this scenario Why not (D) or (E)? • Delayed endoscopy increases risk of rebleeding and missed high-risk lesions",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Upper GI bleeding commonly arises from peptic ulcer disease, which can cause significant blood loss and hemodynamic compromise. Early endoscopy provides diagnosis and allows endoscopic hemostasis, but stabilization and resuscitation come first.\n\nCorrect Answer Rationale: He presented with hemodynamic instability from an upper GI bleed but responded to resuscitation with fluids and transfusion. For most acute upper GI bleeds, endoscopy is recommended within 24 hours after hemodynamic stabilization to identify the source and provide therapy while minimizing delay-related complications.\n\nDistractor Analysis:\n- Option A (if not correct): Immediate endoscopy before stabilization can be unsafe; resuscitation and stabilization take priority.\n- Option B (if not correct): Endoscopy within 12 hours is typically reserved for suspected variceal bleeding or ongoing instability; not all hematemesis requires <12-hour endoscopy.\n- Option C (if not correct): Correct; perform endoscopy within 24 hours after stabilization.\n- Option D (if not correct): Delaying beyond 24 hours increases risk of rebleeding and worsens outcomes in many patients.\n- Option E (if not correct): Outpatient endoscopy is inappropriate after significant acute bleeding requiring transfusion.\n\nClinical Pearl: Acute UGIB: stabilize first, then perform endoscopy within 24 hours (earlier for variceal bleed or ongoing instability).",
+    "cognitive_error": "anchoring_bias",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -523,32 +523,32 @@
     "concept_id": "b1-15-spontaneous-bacterial-peritonitis-diagnosis-and-treatment",
     "batch": "Batch1",
     "system": "Gastroenterology, Infectious Disease",
-    "stem": "A 56-year-old man with alcoholic cirrhosis and ascites presents with 2 days of worsening abdominal pain, fever, and confusion. He had a prior episode of \nspontaneous bacterial peritonitis (SBP) 8 months ago but stopped taking prophylactic antibiotics. \nOn examination, temperature is 38.4°C (101.1°F), blood pressure is 94/58 mm Hg, pulse is 110/min. He is disoriented. Abdomen is distended with diffuse \ntenderness and positive fluid wave. There is no rebound tenderness. \nDiagnostic paracentesis is performed: \n\n• \nAscitic fluid WBC: 680 cells/µL \n• \nAscitic fluid PMN (neutrophils): 420 cells/µL \n• \nAscitic fluid protein: 0.8 g/dL \n• \nAscitic fluid culture: pending \n• \nAscitic fluid glucose: 85 mg/dL \n• \nSerum-ascites albumin gradient (SAAG): 1.8 g/dL\n\nWhich of the following is the most appropriate next step?",
+    "stem": "A 56-year-old man with alcoholic cirrhosis and known ascites is admitted for fever and worsening abdominal discomfort. He is drowsy but arousable.\n\nTemperature is 38.5°C (101.3°F), blood pressure is 104/62 mm Hg, and pulse is 110/min. Abdomen is distended with diffuse tenderness but no rebound. Diagnostic paracentesis is performed.\n\nAscitic fluid analysis shows:\n- PMN count: 420 cells/mm³\n- Total protein: low\nSerum creatinine is 1.8 mg/dL (0.6–1.3).\n\nWhich of the following is the most appropriate next step?",
     "options": [
       {
-        "text": "Await culture results before starting antibiotics",
-        "label": "A"
+        "label": "A",
+        "text": "Await ascitic fluid culture results before starting antibiotics"
       },
       {
-        "text": "Start IV cefotaxime and albumin infusion",
-        "label": "B"
+        "label": "B",
+        "text": "Start intravenous third-generation cephalosporin therapy and give intravenous albumin"
       },
       {
-        "text": "Start oral ciprofloxacin",
-        "label": "C"
+        "label": "C",
+        "text": "Start oral ciprofloxacin prophylaxis only and discharge when afebrile"
       },
       {
-        "text": "Emergent surgical exploration",
-        "label": "D"
+        "label": "D",
+        "text": "Perform urgent exploratory laparotomy for secondary peritonitis"
       },
       {
-        "text": "Repeat paracentesis in 48 hours",
-        "label": "E"
+        "label": "E",
+        "text": "Repeat paracentesis in 48 hours before initiating treatment"
       }
     ],
     "correct_answer": "B",
-    "explanation": "This patient has spontaneous bacterial peritonitis (SBP), diagnosed clinically and confirmed by paracentesis. Diagnostic criteria for SBP: • Ascitic fluid PMN count ≥250 cells/µL ← This patient has 420 • Culture may be negative in up to 40% (\"culture-negative neutrocytic ascites\") DO NOT wait for culture results — SBP is a clinical diagnosis requiring immediate treatment Treatment of SBP: Component Details Antibiotics IV 3rd-generation cephalosporin (cefotaxime 2g q8h) × 5 days Albumin 1.5 g/kg on day 1, 1 g/kg on day 3 Alternative antibiotics Ceftriaxone, fluoroquinolone (if no recent FQ use) Why albumin? • Reduces mortality and hepatorenal syndrome risk • Study showed mortality reduction from 29% to 10% when albumin added to antibiotics • Indicated especially if: Cr >1 mg/dL, BUN >30 mg/dL, or bilirubin >4 mg/dL This patient should receive albumin because: • Hypotension (SBP 94) • Altered mental status (hepatic encephalopathy or sepsis) • Prior SBP episode (high-risk) Why not (A)? • Cultures take 24–48+ hours; SBP mortality increases with treatment delay • PMN ≥250 is sufficient to diagnose and treat Why not (C)? • Oral fluoroquinolone inadequate for active SBP with sepsis • Reserved for prophylaxis, not treatment • Additionally, this patient was on FQ prophylaxis → may have resistant organisms Why not (D)? • SBP is treated medically, not surgically • Secondary bacterial peritonitis (from perforation) would show: glucose <50, LDH elevation, protein >1 g/dL, multiple organisms, polymicrobial Why not (E)? • Treatment should start immediately • Repeat paracentesis at 48 hours is done to confirm response (>25% decrease in PMN) Secondary prophylaxis: After recovery, lifelong norfloxacin or TMP-SMX (this patient needs to restart)",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Spontaneous bacterial peritonitis occurs in cirrhosis with ascites due to bacterial translocation and impaired host defenses. Diagnosis is made when ascitic fluid PMN count is ≥250 cells/mm³, and prompt empiric antibiotics reduce mortality.\n\nCorrect Answer Rationale: He has cirrhosis with ascites, fever, abdominal pain, altered mental status, and an ascitic PMN count of 420 cells/mm³—diagnostic of SBP. Empiric IV third-generation cephalosporin therapy should be started immediately; IV albumin is given in higher-risk patients (e.g., elevated creatinine) to reduce hepatorenal syndrome and mortality.\n\nDistractor Analysis:\n- Option A (if not correct): Waiting for cultures delays lifesaving therapy; treatment is based on PMN count and clinical suspicion.\n- Option B (if not correct): Correct; start empiric third-generation cephalosporin and give albumin in high-risk patients.\n- Option C (if not correct): Prophylaxis regimens are for prevention in select patients and do not treat active SBP.\n- Option D (if not correct): Secondary peritonitis suggests a surgically treatable intra-abdominal source (often with multiple organisms and very high protein/LDH); this presentation fits SBP.\n- Option E (if not correct): Repeat paracentesis may be used to assess response after treatment is started, not before initiating antibiotics.\n\nClinical Pearl: Ascitic PMN ≥250 = SBP: start IV ceftriaxone/cefotaxime now; add IV albumin when renal dysfunction is present to prevent hepatorenal syndrome.",
+    "cognitive_error": "premature_closure",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -557,35 +557,35 @@
   {
     "id": "b5f1b0da-9778-48f1-8794-95a4eddec531",
     "question_id": "B1_C16",
-    "concept_id": "b1-16-acute-pancreatitis-severity-assessment-and-fluid-resuscitati",
+    "concept_id": "b1-16-acute-pancreatitis-severity-assessment-and-fluid-resuscitation",
     "batch": "Batch1",
     "system": "Gastroenterology",
-    "stem": "A 44-year-old woman presents with severe epigastric pain radiating to the back for 12 hours, associated with nausea and vomiting. She drinks 4–5 \nglasses of wine daily. She has had similar but milder episodes before. \nOn examination, temperature is 37.8°C (100°F), blood pressure is 104/68 mm Hg, pulse is 108/min. She has epigastric tenderness with guarding but no \nrebound. Bowel sounds are hypoactive. \nLaboratory studies: \n• \nLipase: 1,842 U/L (normal <160) \n• \nWBC: 16,200/µL \n• \nHematocrit: 48% \n• \nBUN: 32 mg/dL \n• \nCreatinine: 1.4 mg/dL \n• \nGlucose: 186 mg/dL \n• \nAST: 58 U/L \n• \nCalcium: 7.8 mg/dL \n• \nLDH: 420 U/L\n\nWhich of the following is the most appropriate initial management?",
+    "stem": "A 44-year-old woman comes to the emergency department because of 10 hours of severe epigastric pain radiating to the back with nausea and vomiting. She has had no prior abdominal surgeries. She drinks 4–5 glasses of wine daily. Temperature is 37.9°C (100.2°F), blood pressure is 92/56 mm Hg, pulse is 118/min, and respirations are 22/min. She appears uncomfortable and diaphoretic. The abdomen is tender in the epigastrium without guarding or rebound. Laboratory studies show:\n• Hematocrit: 49% (36–46)\n• BUN: 32 mg/dL (7–20)\n• Creatinine: 1.4 mg/dL (0.6–1.2)\n• Lipase: 1,200 U/L (0–160)\n• Calcium: 7.8 mg/dL (8.5–10.5)\nBedside ultrasound shows no gallstones and a normal common bile duct diameter.\n\nAfter providing analgesia and antiemetics, which of the following is the most appropriate next step in management?",
     "options": [
       {
-        "text": "Immediate CT of the abdomen",
-        "label": "A"
+        "label": "A",
+        "text": "Administer intravenous furosemide to reduce pancreatic edema"
       },
       {
-        "text": "Aggressive IV crystalloid resuscitation (250–500 mL/hr)",
-        "label": "B"
+        "label": "B",
+        "text": "Begin aggressive isotonic crystalloid resuscitation with lactated Ringer solution"
       },
       {
-        "text": "IV antibiotics to prevent infected necrosis",
-        "label": "C"
+        "label": "C",
+        "text": "Obtain contrast-enhanced CT of the abdomen to confirm the diagnosis"
       },
       {
-        "text": "Urgent ERCP",
-        "label": "D"
+        "label": "D",
+        "text": "Start broad-spectrum intravenous antibiotics"
       },
       {
-        "text": "TPN initiation",
-        "label": "E"
+        "label": "E",
+        "text": "Perform urgent ERCP with sphincterotomy"
       }
     ],
     "correct_answer": "B",
-    "explanation": "This patient has acute pancreatitis (epigastric pain + lipase >3× upper limit of normal). Severity assessment using Ranson criteria at admission: • Age >55 → No (44) • WBC >16,000 → Yes ✓ • Glucose >200 → No (186) • AST >250 → No • LDH >350 → Yes ✓ Additional concerning features: • Elevated BUN (32) → predictor of severity • Elevated hematocrit (48%) → hemoconcentration indicating third-spacing • Hypocalcemia (7.8) → marker of severe pancreatitis • Tachycardia with borderline hypotension → early hypovolemia This is likely moderately severe to severe pancreatitis requiring aggressive management. Initial management priorities: 1. Aggressive IV fluid resuscitation — MOST IMPORTANT • Goal-directed: 250–500 mL/hr of LR (preferred) or NS • Target: urine output >0.5 mL/kg/hr, decreasing BUN, normalizing vitals • First 12–24 hours are critical; fluid needs are highest early • Prevents pancreatic necrosis by maintaining perfusion 2. Pain control (IV opioids) 3. NPO initially (consider early enteral feeding if tolerated) 4. Monitor for organ failure (respiratory, renal, cardiovascular) Why not (A)? • CT is not indicated initially unless: • Diagnosis uncertain • No improvement after 48–72 hours (concern for necrosis/complications) • Early CT can underestimate necrosis; inflammation takes time to develop Why not (C)? • Prophylactic antibiotics do NOT prevent infected necrosis • Antibiotics only indicated for documented infection (infected necrosis, cholangitis) Why not (D)? • ERCP indicated for gallstone pancreatitis with concurrent cholangitis or persistent biliary obstruction • This appears to be alcohol-related; no indication for ERCP Why not (E)? • TPN avoided; enteral nutrition preferred (maintains gut barrier) • Early oral/enteral feeding (within 24–48 hours) if tolerated improves outcomes",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Acute pancreatitis triggers pancreatic enzyme activation and a systemic inflammatory response that increases capillary permeability and third spacing. Early hypovolemia and hemoconcentration can worsen pancreatic ischemia and increase the risk of necrosis.\n\nCorrect Answer Rationale: This patient has acute pancreatitis (severe epigastric pain radiating to the back and markedly elevated lipase) with signs of intravascular depletion (hypotension, tachycardia, elevated hematocrit, elevated BUN). Early aggressive isotonic crystalloid (often lactated Ringer) is the key next step to restore perfusion and reduce complications.\n\nDistractor Analysis:\n- Option A: Diuretics would worsen hypovolemia and pancreatic hypoperfusion; they are not indicated in early pancreatitis.\n- Option B (Correct): Aggressive isotonic crystalloid resuscitation addresses third spacing and improves pancreatic microcirculation in the early phase.\n- Option C: CT with contrast is not required to diagnose uncomplicated pancreatitis and is generally reserved for diagnostic uncertainty or suspected complications (eg, necrosis) after 48–72 hours.\n- Option D: Routine antibiotics are not indicated in acute pancreatitis unless there is proven infected necrosis or another infection source.\n- Option E: ERCP is indicated for gallstone pancreatitis with cholangitis or persistent biliary obstruction; ultrasound here shows no gallstones and a normal bile duct.\n\nClinical Pearl: Early management of acute pancreatitis is aggressive isotonic IV fluids plus pain control; contrast CT is reserved for complications or unclear diagnosis after 48–72 hours.",
+    "cognitive_error": "premature_closure",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -597,32 +597,32 @@
     "concept_id": "b1-17-acute-kidney-injury-prerenal-vs-intrinsic-differentiation",
     "batch": "Batch1",
     "system": "Nephrology",
-    "stem": "A 78-year-old woman is admitted with community-acquired pneumonia. She has hypertension treated with lisinopril and hydrochlorothiazide. Due to \npoor oral intake and fever, she has been volume depleted. On hospital day 2, you note her creatinine has risen from 1.1 mg/dL on admission to 2.4 \nmg/dL. \nPhysical examination shows blood pressure 102/68 mm Hg (baseline 138/82), pulse 96/min, dry mucous membranes, and decreased skin turgor. Urine \noutput has been 15 mL/hr over the past 6 hours. \nUrine studies: \n• \nUrine sodium: 8 mEq/L \n• \nUrine creatinine: 112 mg/dL \n• \nSerum creatinine: 2.4 mg/dL \n• \nFractional excretion of sodium (FENa): 0.3% \n• \nUrine osmolality: 650 mOsm/kg \n• \nUrine microscopy: Few hyaline casts, no cells or cellular casts\n\nWhich of the following is the most likely diagnosis?",
+    "stem": "A 78-year-old woman is admitted for community-acquired pneumonia and is started on ceftriaxone and azithromycin. On hospital day 2, she becomes increasingly confused and has poor oral intake. Her blood pressure is 88/54 mm Hg and pulse is 112/min. Mucous membranes are dry. Lungs have crackles at the right base. No rash is present.\nLaboratory studies show:\n• Serum creatinine: 2.4 mg/dL (baseline 0.9)\n• BUN: 54 mg/dL (7–20)\nUrinalysis is bland without protein or blood. Urine studies show:\n• FENa: 0.3%\n• Urine osmolality: 650 mOsm/kg (50–1,200)\n• Microscopy: few hyaline casts\n\nWhich of the following is the most likely cause of this patient’s acute kidney injury?",
     "options": [
       {
-        "text": "Acute tubular necrosis",
-        "label": "A"
+        "label": "A",
+        "text": "Acute tubular necrosis from ischemic injury"
       },
       {
-        "text": "Acute interstitial nephritis",
-        "label": "B"
+        "label": "B",
+        "text": "Acute interstitial nephritis due to antibiotic exposure"
       },
       {
-        "text": "Prerenal azotemia",
-        "label": "C"
+        "label": "C",
+        "text": "Prerenal azotemia due to decreased renal perfusion"
       },
       {
-        "text": "Postrenal obstruction",
-        "label": "D"
+        "label": "D",
+        "text": "Postrenal obstruction from urinary retention"
       },
       {
-        "text": "Contrast-induced nephropathy",
-        "label": "E"
+        "label": "E",
+        "text": "Contrast-induced nephropathy"
       }
     ],
     "correct_answer": "C",
-    "explanation": "This patient has acute kidney injury (AKI) in the setting of volume depletion. The urine studies help differentiate prerenal from intrinsic causes. Urine indices comparison: Parameter Prerenal ATN (Intrinsic) Urine sodium <20 mEq/L >40 mEq/L FENa <1% >2% Urine osmolality >500 mOsm/kg <350 mOsm/kg BUN:Cr ratio >20:1 <15:1 Urine sediment Bland, hyaline casts Muddy brown granular casts This patient's findings: • Urine sodium 8 mEq/L → Low (<20) ✓ • FENa 0.3% → <1% ✓ • Urine osmolality 650 → Concentrated (>500) ✓ • Bland sediment with hyaline casts ✓ All consistent with PRERENAL AZOTEMIA Pathophysiology: The kidneys are appropriately retaining sodium and water in response to decreased perfusion. Tubular function is intact. Clinical context supports prerenal: • Volume depletion (poor intake, fever, dry mucosa) • Hypotension below baseline • On diuretics and ACE inhibitor (reduced GFR autoregulation) Management: • IV fluid resuscitation • Hold diuretics and ACE inhibitor temporarily • Expect creatinine to improve within 24–48 hours Why not (A) ATN? • FENa would be >2% • Urine would be dilute (osmolality <350) • Would see muddy brown granular casts Why not (B) AIN? • Usually drug-induced (NSAIDs, antibiotics, PPIs) • Would see WBC casts, eosinophiluria • Often presents with fever, rash, eosinophilia (but not always) Why not (D)? • Postrenal requires obstruction (bilateral or single functioning kidney) • No symptoms suggesting obstruction, no hydronephrosis mentioned Why not (E)? • No contrast exposure mentioned Caveat: FENa can be <1% in ATN if caused by contrast, myoglobin, or early sepsis. Use FEUrea (<35% prerenal) if on diuretics.",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Prerenal acute kidney injury results from decreased renal perfusion, leading to increased sodium and water reabsorption and concentrated urine. The kidney’s tubular function remains intact, producing low FENa and bland urine sediment with hyaline casts.\n\nCorrect Answer Rationale: She is hypotensive and clinically volume depleted with an elevated BUN:creatinine ratio, low FENa (0.3%), and high urine osmolality—findings consistent with intact tubular reabsorption and prerenal azotemia.\n\nDistractor Analysis:\n- Option A: Acute tubular necrosis typically has higher FENa (>2%), muddy brown granular casts, and less concentrated urine.\n- Option B: Acute interstitial nephritis classically presents with fever, rash, eosinophilia, and pyuria/WBC casts; urine indices are not typically prerenal.\n- Option C (Correct): Hypotension and volume depletion with low FENa and concentrated urine support prerenal azotemia.\n- Option D: Postrenal obstruction often causes hydronephrosis and may show hematuria; urine indices are variable and not classically low FENa with bland sediment early.\n- Option E: Contrast nephropathy requires recent iodinated contrast exposure, which is not present.\n\nClinical Pearl: Low FENa (<1%), high urine osmolality, and hyaline casts in a volume-depleted patient point to prerenal azotemia.",
+    "cognitive_error": "anchoring_bias",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -634,32 +634,32 @@
     "concept_id": "b1-18-hyperkalemia-emergency-management-sequence",
     "batch": "Batch1",
     "system": "Nephrology, Cardiology",
-    "stem": "A 62-year-old man with end-stage renal disease on hemodialysis missed his last two sessions due to transportation issues. He presents with generalized \nweakness and palpitations. \nOn examination, blood pressure is 168/98 mm Hg, pulse is 52/min and irregular. He has 2+ lower extremity edema bilaterally. \nECG shows peaked T waves, prolonged PR interval, and widening of the QRS complex. \nLaboratory studies: \n• \nSerum potassium: 7.8 mEq/L \n• \nSerum bicarbonate: 16 mEq/L \n• \nSerum creatinine: 8.9 mg/dL\n\nWhich of the following is the most appropriate FIRST step in management?",
+    "stem": "A 62-year-old man with end-stage renal disease on hemodialysis misses his last 2 dialysis sessions. He presents with generalized weakness and palpitations. Blood pressure is 146/88 mm Hg and pulse is 96/min. ECG shows peaked T waves and widening of the QRS complex.\nLaboratory studies show:\n• Potassium: 7.2 mEq/L (3.5–5.0)\n• Bicarbonate: 16 mEq/L (22–28)\n• Creatinine: 8.9 mg/dL (0.6–1.2)\n\nWhich of the following is the most appropriate immediate intervention?",
     "options": [
       {
-        "text": "Insulin plus dextrose",
-        "label": "A"
+        "label": "A",
+        "text": "Administer insulin with dextrose to shift potassium intracellularly"
       },
       {
-        "text": "IV calcium gluconate",
-        "label": "B"
+        "label": "B",
+        "text": "Administer intravenous calcium gluconate to stabilize cardiac membranes"
       },
       {
-        "text": "Sodium polystyrene sulfonate (Kayexalate)",
-        "label": "C"
+        "label": "C",
+        "text": "Give sodium polystyrene sulfonate to enhance gastrointestinal potassium excretion"
       },
       {
-        "text": "Emergent hemodialysis",
-        "label": "D"
+        "label": "D",
+        "text": "Start intravenous furosemide to promote renal potassium excretion"
       },
       {
-        "text": "IV sodium bicarbonate",
-        "label": "E"
+        "label": "E",
+        "text": "Begin oral sodium bicarbonate therapy"
       }
     ],
     "correct_answer": "B",
-    "explanation": "This patient has severe hyperkalemia (K+ 7.8) with ECG changes — a life-threatening emergency. The ECG progression of hyperkalemia: 1. Peaked T waves (early) 2. Prolonged PR interval 3. Widened QRS 4. Sine wave pattern 5. VFib/asystole This patient has advanced ECG changes (peaked T, prolonged PR, wide QRS) → imminent risk of fatal arrhythmia Treatment sequence for severe hyperkalemia: Step Treatment Mechanism Onset 1. FIRST IV Calcium gluconate Stabilizes cardiac membrane 1–3 min 2. Insulin + glucose Shifts K+ into cells 15–30 min 3. Sodium bicarbonate Shifts K+ into cells (if acidotic) 30–60 min 3. Beta-agonist (albuterol) Shifts K+ into cells 15–30 min 4. Definitive removal Dialysis, Kayexalate, patiromer Hours Why calcium FIRST? • Does NOT lower potassium • Directly antagonizes the cardiac membrane effects of hyperkalemia • Provides immediate protection against arrhythmia • Buys time for other treatments to work Why not (A) insulin/glucose first? • Insulin lowers potassium but takes 15–30 minutes • With ECG changes, patient may develop fatal arrhythmia before insulin works • Calcium stabilizes the heart within minutes Why not (C) Kayexalate? • Removes potassium from body but takes hours to work • Not appropriate for acute emergency • Role is in removal after stabilization Why not (D) dialysis first? • Definitive treatment but takes time to arrange • Patient may arrest while waiting • Start dialysis after initial stabilization Why not (E) bicarbonate first? • Less effective than insulin for potassium shift • Useful adjunct if metabolic acidosis present • Not first-line Complete management sequence for this patient: 1. IV calcium gluconate 1–2 g → monitor ECG for narrowing QRS 2. Insulin 10 units IV + D50 25 g (or D10 drip) 3. Emergent hemodialysis",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Severe hyperkalemia alters myocardial resting membrane potential, predisposing to malignant arrhythmias. Calcium salts antagonize the membrane effects of hyperkalemia without changing total body potassium.\n\nCorrect Answer Rationale: He has severe hyperkalemia with ECG changes (peaked T waves and QRS widening). The first priority is immediate cardiac membrane stabilization with IV calcium (eg, calcium gluconate), followed by therapies that shift potassium intracellularly and remove potassium from the body.\n\nDistractor Analysis:\n- Option A: Insulin/dextrose lowers serum potassium rapidly but should follow membrane stabilization when ECG changes are present.\n- Option B (Correct): IV calcium is the immediate step when hyperkalemia causes ECG changes.\n- Option C: Cation-exchange resins have delayed onset and are not appropriate for emergent stabilization.\n- Option D: Loop diuretics are ineffective in ESRD with minimal urine output.\n- Option E: Bicarbonate can shift potassium intracellularly in select acidemic states but is not the first step with ECG changes.\n\nClinical Pearl: Hyperkalemia with ECG changes requires IV calcium first; then shift K+ (insulin/albuterol) and remove K+ (dialysis).",
+    "cognitive_error": "premature_closure",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -671,32 +671,32 @@
     "concept_id": "b1-19-neutropenic-fever-empiric-antibiotic-selection",
     "batch": "Batch1",
     "system": "Infectious Disease, Hematology/Oncology",
-    "stem": "A 58-year-old woman with acute myeloid leukemia completed her third cycle of chemotherapy 10 days ago. She presents with fever (38.9°C/102°F) and \nmild fatigue. She denies cough, diarrhea, urinary symptoms, or skin changes. She has a tunneled central venous catheter in place. \nOn examination, she appears tired but comfortable. Blood pressure is 118/72 mm Hg, pulse is 102/min. Examination of the catheter site shows no \nerythema or discharge. Lungs are clear. Abdomen is soft, nontender. \nLaboratory studies: \n• \nWBC: 400/µL with ANC 80/µL \n• \nHemoglobin: 9.2 g/dL \n• \nPlatelets: 34,000/µL \nChest X-ray shows no infiltrates.\n\nWhich of the following is the most appropriate initial antibiotic therapy?",
+    "stem": "A 53-year-old man with acute myeloid leukemia is on day 10 after induction chemotherapy. He reports chills and malaise for 4 hours. Temperature is 39.1°C (102.4°F), blood pressure is 110/68 mm Hg, and pulse is 104/min. There is no focal pain. Lungs are clear and the abdominal exam is benign. The central venous catheter site is clean.\nLaboratory studies show:\n• WBC: 0.4 ×10^3/µL (4.0–11.0)\n• Absolute neutrophil count: 120/µL (1,500–8,000)\n• Lactate: 1.6 mmol/L (0.5–2.2)\n\nBlood cultures are obtained. Which of the following is the most appropriate empiric therapy?",
     "options": [
       {
-        "text": "Vancomycin monotherapy",
-        "label": "A"
+        "label": "A",
+        "text": "Azithromycin plus ceftriaxone"
       },
       {
-        "text": "Cefepime monotherapy",
-        "label": "B"
+        "label": "B",
+        "text": "Vancomycin plus piperacillin-tazobactam"
       },
       {
-        "text": "Ceftriaxone plus metronidazole",
-        "label": "C"
+        "label": "C",
+        "text": "Cefepime monotherapy"
       },
       {
-        "text": "Ciprofloxacin plus amoxicillin-clavulanate",
-        "label": "D"
+        "label": "D",
+        "text": "Trimethoprim-sulfamethoxazole plus prednisone"
       },
       {
-        "text": "Wait for blood culture results before starting antibiotics",
-        "label": "E"
+        "label": "E",
+        "text": "Amoxicillin-clavulanate plus doxycycline"
       }
     ],
-    "correct_answer": "B",
-    "explanation": "This patient has febrile neutropenia — a medical emergency: • Fever: Single temperature ≥38.3°C (101°F) OR ≥38.0°C (100.4°F) sustained for ≥1 hour • Neutropenia: ANC <500/µL OR ANC <1000/µL expected to decline to <500 • This patient: ANC 80/µL with fever 38.9°C Key principle: Start empiric antibiotics IMMEDIATELY. Do not wait for culture results or localizing signs. Initial empiric therapy options (IDSA guidelines): Regimen Examples Anti-pseudomonal beta-lactam monotherapy Cefepime, piperacillin-tazobactam, meropenem, imipenem Dual therapy (if indicated) Add vancomycin or aminoglycoside for specific indications Cefepime is appropriate because: • Broad-spectrum anti-pseudomonal coverage • Covers most gram-negative pathogens (including Pseudomonas) • Adequate gram-positive coverage for initial empiric therapy • Monotherapy is standard initial approach When to ADD vancomycin to initial regimen: • Hemodynamic instability/sepsis • Skin/soft tissue infection • Catheter-related infection suspected (erythema, tunnel tenderness) • Known MRSA colonization • Gram-positive cocci on blood culture • Severe mucositis • Pneumonia • Fluoroquinolone prophylaxis (increased risk of gram-positive infection) This patient has NONE of these indications — stable vital signs, no catheter site infection, no mucositis, no pneumonia → vancomycin not needed initially. Why not (A)? • Vancomycin alone has no gram-negative coverage — unacceptable Why not (C)? • Ceftriaxone lacks anti-pseudomonal activity • Metronidazole adds anaerobic coverage but not gram-negative/Pseudomonas Why not (D)? • Oral fluoroquinolone regimen may be appropriate for low-risk outpatients • This patient has AML, profound neutropenia (ANC 80), central catheter → HIGH RISK • Requires IV therapy and admission Why not (E)? • NEVER delay antibiotics in febrile neutropenia • Mortality increases with each hour of delayed antibiotic therapy",
-    "cognitive_error": null,
+    "correct_answer": "C",
+    "explanation": "Pathophysiology: Neutropenic fever is a medical emergency because impaired neutrophil-mediated immunity allows rapid progression of bacterial infections, particularly from gram-negative organisms including Pseudomonas. Prompt broad-spectrum antipseudomonal coverage reduces mortality.\n\nCorrect Answer Rationale: This patient has febrile neutropenia (ANC <500/µL and fever). He is hemodynamically stable with no clear catheter infection, pneumonia, skin/soft tissue infection, or mucositis. Empiric IV antipseudomonal beta-lactam monotherapy (eg, cefepime) is appropriate initial management.\n\nDistractor Analysis:\n- Option A: This regimen targets typical community-acquired pneumonia pathogens and lacks antipseudomonal coverage.\n- Option B: Vancomycin is added when there is suspected catheter infection, skin/soft tissue infection, pneumonia, severe mucositis, or hemodynamic instability; it is not routine in stable patients without these features.\n- Option C (Correct): Cefepime provides broad gram-negative coverage including Pseudomonas and is standard empiric therapy for stable febrile neutropenia.\n- Option D: TMP-SMX plus steroids is used for Pneumocystis jirovecii pneumonia and is not initial empiric therapy for neutropenic fever.\n- Option E: Oral outpatient regimens are inappropriate for high-risk neutropenia after induction chemotherapy.\n\nClinical Pearl: Febrile neutropenia requires immediate IV antipseudomonal beta-lactam (cefepime, piperacillin-tazobactam, or meropenem); add vancomycin only for specific indications.",
+    "cognitive_error": "base_rate_neglect",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -708,32 +708,32 @@
     "concept_id": "b1-20-infective-endocarditis-duke-criteria-and-empiric-therapy",
     "batch": "Batch1",
     "system": "Infectious Disease, Cardiology",
-    "stem": "A 34-year-old man who uses IV heroin presents with 2 weeks of fever, night sweats, and malaise. He also reports progressive dyspnea and a new cough \nproductive of blood-tinged sputum. \nOn examination, temperature is 38.8°C (101.8°F), blood pressure is 108/62 mm Hg, pulse is 110/min, respirations are 22/min. There is a 3/6 holosystolic \nmurmur at the left lower sternal border that increases with inspiration. Examination reveals splinter hemorrhages and tender nodules on the fingertips. \nLungs have scattered crackles bilaterally. \nLaboratory studies show WBC 18,400/µL and hemoglobin 10.2 g/dL. Chest X-ray shows multiple bilateral peripheral nodular infiltrates, some with \ncavitation. \nBlood cultures are drawn and sent.\n\nWhich of the following is the most appropriate empiric antibiotic regimen while awaiting culture results?",
+    "stem": "A 35-year-old man who injects heroin presents with 3 days of fever and pleuritic chest pain. Temperature is 38.7°C (101.7°F), blood pressure is 122/74 mm Hg, and pulse is 108/min. He has a new holosystolic murmur loudest at the left lower sternal border. Scattered crackles are heard bilaterally. There are several tender nodules on the finger pads. Chest CT shows multiple peripheral pulmonary nodules with cavitation.\n\nBlood cultures are obtained. Which of the following is the most appropriate empiric antibiotic regimen?",
     "options": [
       {
-        "text": "Vancomycin plus gentamicin",
-        "label": "A"
+        "label": "A",
+        "text": "Vancomycin"
       },
       {
-        "text": "Ceftriaxone plus gentamicin",
-        "label": "B"
+        "label": "B",
+        "text": "Ceftriaxone"
       },
       {
-        "text": "Penicillin G monotherapy",
-        "label": "C"
+        "label": "C",
+        "text": "Ampicillin-sulbactam"
       },
       {
-        "text": "Vancomycin monotherapy",
-        "label": "D"
+        "label": "D",
+        "text": "Nafcillin"
       },
       {
-        "text": "Ciprofloxacin plus rifampin",
-        "label": "E"
+        "label": "E",
+        "text": "Azithromycin"
       }
     ],
     "correct_answer": "A",
-    "explanation": "This patient has clinical features consistent with infective endocarditis (IE) with likely tricuspid valve involvement (right-sided IE). Modified Duke Criteria assessment: Major criteria: 1. Blood cultures pending (likely to be positive if IE) 2. Echocardiographic evidence of vegetation (not yet done, but murmur + IVDU highly suggestive) Minor criteria: 1. ✓ Predisposing condition (IVDU) 2. ✓ Fever 3. ✓ Vascular phenomena: septic pulmonary emboli (cavitary lung nodules + hemoptysis) 4. ✓ Immunologic phenomena: Osler nodes (tender fingertip nodules) Clinical picture: • IVDU → Right-sided (tricuspid) IE most common • Tricuspid regurgitation murmur (holosystolic at LLSB, increases with inspiration) • Septic pulmonary emboli → multiple cavitary lung nodules • Most likely organism: Staphylococcus aureus (especially MRSA in IVDU) Empiric treatment for native valve IE in IVDU: Context Empiric Regimen IVDU, native valve Vancomycin (MRSA coverage) + gentamicin Non-IVDU, native valve Ceftriaxone + vancomycin (or nafcillin if low MRSA risk) Prosthetic valve Vancomycin + gentamicin + rifampin Why vancomycin + gentamicin? • Vancomycin: MRSA coverage essential in IVDU population (high prevalence) • Gentamicin: Synergistic killing, enhances bactericidal activity against staphylococci • Adjust/narrow once cultures speciate Why not (B)? • Ceftriaxone lacks MRSA coverage • Would be appropriate for streptococcal IE but not empiric for IVDU Why not (C)? • Penicillin G for penicillin-susceptible streptococci only • Inadequate for empiric therapy Why not (D)? • Vancomycin monotherapy adequate for some cases but gentamicin adds synergy for serious S. aureus infection Why not (E)? • Not a standard IE regimen • Rifampin is added for prosthetic valve IE, not native valve Next steps: Obtain echocardiogram (TTE first, may need TEE), follow blood cultures, narrow antibiotics when sensitivities available",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Infective endocarditis results from microbial infection of the endocardial surface, leading to vegetations and systemic embolic phenomena. In people who inject drugs, right-sided (tricuspid) endocarditis due to Staphylococcus aureus is common and can cause septic pulmonary emboli.\n\nCorrect Answer Rationale: This patient has findings consistent with right-sided infective endocarditis (IV drug use, new tricuspid regurgitation murmur, peripheral stigmata, and cavitary pulmonary nodules suggesting septic emboli). Empiric therapy should cover MRSA until susceptibilities return; vancomycin is appropriate.\n\nDistractor Analysis:\n- Option A (Correct): Vancomycin provides empiric MRSA coverage for suspected S aureus endocarditis in IV drug users.\n- Option B: Ceftriaxone is used for susceptible viridans streptococci and HACEK organisms but does not reliably cover MRSA.\n- Option C: Ampicillin-sulbactam lacks reliable MRSA coverage.\n- Option D: Nafcillin is appropriate for MSSA once susceptibilities are known; it is not adequate empiric MRSA coverage.\n- Option E: Azithromycin does not treat endocarditis and lacks appropriate bactericidal coverage.\n\nClinical Pearl: IV drug users with suspected endocarditis should receive empiric MRSA-active therapy (vancomycin) after blood cultures are drawn.",
+    "cognitive_error": "availability_heuristic",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -745,32 +745,32 @@
     "concept_id": "b1-21-heparin-induced-thrombocytopenia-diagnosis-and-management",
     "batch": "Batch1",
     "system": "Hematology",
-    "stem": "A 64-year-old woman is postoperative day 7 after hip replacement surgery. She has been receiving subcutaneous unfractionated heparin for DVT \nprophylaxis since admission. The nurse reports that her platelet count has decreased significantly. \nReview of laboratory values: \n• \nPreoperative platelets: 248,000/µL \n• \nPOD 2: 234,000/µL \n• \nPOD 5: 168,000/µL \n• \nPOD 7 (today): 89,000/µL \nShe has no bleeding symptoms but reports new pain and swelling in her left calf. On examination, the left calf is 3 cm larger in circumference than the \nright with tenderness and warmth.\n\nWhich of the following is the most appropriate immediate management?",
+    "stem": "A 66-year-old man is hospitalized for a hip fracture repair. Postoperatively he receives unfractionated heparin for venous thromboembolism prophylaxis. On day 6 of heparin therapy, his platelet count decreases from 240,000/µL to 92,000/µL. He develops swelling and pain in the left calf. Doppler ultrasound confirms a proximal deep vein thrombosis.\n\nWhich of the following is the most appropriate next step in management?",
     "options": [
       {
-        "text": "Continue heparin and transfuse platelets",
-        "label": "A"
+        "label": "A",
+        "text": "Continue heparin and transfuse platelets"
       },
       {
-        "text": "Discontinue heparin and start warfarin",
-        "label": "B"
+        "label": "B",
+        "text": "Stop heparin and start warfarin immediately"
       },
       {
-        "text": "Discontinue heparin and start argatroban",
-        "label": "C"
+        "label": "C",
+        "text": "Stop heparin and start a non-heparin anticoagulant (eg, argatroban)"
       },
       {
-        "text": "Discontinue heparin and observe platelet count",
-        "label": "D"
+        "label": "D",
+        "text": "Stop heparin and observe; thrombocytopenia should resolve spontaneously"
       },
       {
-        "text": "Switch to low-molecular-weight heparin",
-        "label": "E"
+        "label": "E",
+        "text": "Stop heparin and start aspirin therapy"
       }
     ],
     "correct_answer": "C",
-    "explanation": "This patient has heparin-induced thrombocytopenia (HIT), a prothrombotic disorder paradoxically caused by heparin. 4Ts Score for HIT: Criterion This Patient Points Thrombocytopenia (50% fall or nadir 20–100K) 89K (64% fall from baseline) 2 Timing (5–10 days after heparin start) Day 7 of heparin 2 Thrombosis or other sequelae New DVT suspected (calf swelling) 2 OTher causes for thrombocytopenia None apparent (postop, no sepsis) 2 Score: 8 (High probability) Key features of HIT: • Onset 5–10 days after heparin exposure (or sooner if prior exposure) • Platelet drop >50% from baseline (or to <150,000) • Paradoxical thrombosis (arterial or venous) — NOT bleeding • Antibodies against platelet factor 4-heparin complex Management principles: 1. STOP ALL HEPARIN — including heparin flushes, LMWH, heparin-coated catheters 2. Start non-heparin anticoagulant immediately — patients are hypercoagulable • Argatroban (direct thrombin inhibitor) — preferred in renal impairment • Bivalirudin — for PCI • Fondaparinux — sometimes used but technically a heparinoid 3. Do NOT give warfarin until platelets recover — warfarin causes protein C drop, increasing thrombosis risk 4. Do NOT transfuse platelets — \"fuel for the fire\"; increases thrombosis risk 5. Send HIT antibody testing (PF4/heparin ELISA, serotonin release assay) Why not (A)? • Continuing heparin worsens HIT; platelets may trigger more thrombosis Why not (B)? • Warfarin alone is contraindicated in acute HIT • Must wait until platelets >150,000 AND on therapeutic non-heparin anticoagulant • Warfarin monotherapy causes warfarin-induced skin necrosis/limb gangrene Why not (D)? • Observation inadequate — 50% of HIT patients develop thrombosis if untreated Why not (E)? • LMWH cross-reacts with HIT antibodies in ~90% of cases • Contraindicated in HIT",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Heparin-induced thrombocytopenia is an immune-mediated adverse reaction in which antibodies form against PF4-heparin complexes, causing platelet activation. This produces thrombocytopenia and a paradoxical hypercoagulable state with high risk of venous and arterial thrombosis.\n\nCorrect Answer Rationale: The timing (5–10 days after heparin), >50% platelet fall, and new thrombosis strongly suggest HIT. Management is immediate discontinuation of all heparin products and initiation of a non-heparin anticoagulant such as argatroban or bivalirudin.\n\nDistractor Analysis:\n- Option A: Platelet transfusion can worsen thrombosis risk in HIT and is reserved for life-threatening bleeding or urgent invasive procedures.\n- Option B: Warfarin should be avoided initially because it can precipitate venous limb gangrene in HIT; it is started only after platelets recover and patient is therapeutically anticoagulated with a non-heparin agent.\n- Option C (Correct): Stop heparin and anticoagulate with a non-heparin agent to treat thrombosis and prevent progression.\n- Option D: Observation is inappropriate because HIT is prothrombotic and can progress rapidly.\n- Option E: Aspirin does not adequately treat the thrombotic risk of HIT.\n\nClinical Pearl: Suspected HIT requires stopping all heparin and starting a non-heparin anticoagulant; delay warfarin until platelets recover.",
+    "cognitive_error": "premature_closure",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -782,32 +782,32 @@
     "concept_id": "b1-22-tumor-lysis-syndrome-prevention-and-management",
     "batch": "Batch1",
     "system": "Hematology/Oncology, Nephrology",
-    "stem": "A 22-year-old man is newly diagnosed with Burkitt lymphoma with extensive abdominal lymphadenopathy. CT shows multiple bulky retroperitoneal \nlymph nodes with the largest measuring 12 cm. Laboratory studies show WBC 32,000/µL, LDH 2,450 U/L (normal <250), uric acid 9.8 mg/dL, potassium \n4.6 mEq/L, phosphorus 5.2 mg/dL, and creatinine 1.2 mg/dL. \nChemotherapy is planned to begin tomorrow.\n\nWhich of the following is the most appropriate prophylactic management?",
+    "stem": "A 19-year-old man is diagnosed with Burkitt lymphoma and is scheduled to start combination chemotherapy tomorrow. He has bulky abdominal lymphadenopathy on imaging. Baseline labs show uric acid 8.9 mg/dL (3.5–7.2), potassium 4.8 mEq/L, phosphate 4.6 mg/dL (2.5–4.5), calcium 8.4 mg/dL (8.5–10.5), and creatinine 1.1 mg/dL.\n\nWhich of the following is the best initial strategy to prevent a life-threatening complication of therapy?",
     "options": [
       {
-        "text": "Rasburicase, aggressive IV hydration, and close monitoring",
-        "label": "A"
+        "label": "A",
+        "text": "Aggressive IV hydration plus allopurinol"
       },
       {
-        "text": "Allopurinol and IV hydration only",
-        "label": "B"
+        "label": "B",
+        "text": "High-dose loop diuretics to maintain urine output"
       },
       {
-        "text": "Sodium bicarbonate to alkalinize urine",
-        "label": "C"
+        "label": "C",
+        "text": "Calcium gluconate infusion to prevent hypocalcemia"
       },
       {
-        "text": "Observation with treatment if TLS develops",
-        "label": "D"
+        "label": "D",
+        "text": "Prophylactic broad-spectrum antibiotics"
       },
       {
-        "text": "Delay chemotherapy until uric acid normalizes",
-        "label": "E"
+        "label": "E",
+        "text": "Immediate hemodialysis prior to chemotherapy"
       }
     ],
     "correct_answer": "A",
-    "explanation": "This patient is at HIGH RISK for tumor lysis syndrome (TLS) and requires aggressive prophylaxis. TLS risk factors present: • Burkitt lymphoma (one of highest TLS risk malignancies) • Bulky disease (12 cm lymph node mass) • Elevated LDH (marker of tumor burden/cell turnover) • Elevated baseline uric acid (9.8 mg/dL) • High WBC TLS involves release of intracellular contents causing: • ↑ Potassium → arrhythmias • ↑ Phosphorus → binds calcium → hypocalcemia → tetany, arrhythmias • ↑ Uric acid → crystallizes in renal tubules → AKI • ↑ LDH (marker) Risk stratification and prophylaxis: Risk Level Examples Prophylaxis High Burkitt, lymphoblastic lymphoma, AML with WBC >100K, bulky disease, elevated LDH/uric acid Rasburicase + aggressive hydration Intermediate Most hematologic malignancies Allopurinol + hydration Low Solid tumors, indolent lymphomas Hydration ± allopurinol Why rasburicase for high-risk? • Recombinant urate oxidase • Rapidly converts uric acid to allantoin (soluble, easily excreted) • Works within hours (vs. days for allopurinol) • Prevents uric acid nephropathy • Critical when uric acid already elevated or very high tumor burden Why not (B) allopurinol alone? • Allopurinol only prevents NEW uric acid formation (blocks xanthine oxidase) • Does not break down existing uric acid • Takes days to lower uric acid • Inadequate for high-risk patients with elevated baseline uric acid Why not (C)? • Urine alkalinization was historically used but now discouraged • Increases calcium phosphate precipitation (more dangerous than uric acid crystals) • Not recommended by current guidelines Why not (D)? • Treating TLS after it develops is much harder than preventing it • Dialysis often required; significant mortality Why not (E)? • Delaying chemotherapy for aggressive lymphoma worsens outcomes • Rasburicase allows safe initiation of chemotherapy Additional measures: • IV hydration 2–3 L/m²/day • Monitor electrolytes q6–8 hours • Avoid potassium in IV fluids • Dialysis if AKI or refractory hyperkalemia/hyperphosphatemia Rasburicase contraindication: G6PD deficiency (causes hemolysis)",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Tumor lysis syndrome occurs when rapid destruction of malignant cells releases potassium, phosphate, and nucleic acids, leading to hyperkalemia, hyperphosphatemia, hypocalcemia, and hyperuricemia. Uric acid and calcium-phosphate precipitation can cause acute kidney injury and arrhythmias.\n\nCorrect Answer Rationale: High-grade lymphomas with large tumor burden are high risk for TLS. Prevention centers on aggressive IV hydration to enhance renal clearance and xanthine oxidase inhibition with allopurinol (or rasburicase in higher-risk or established hyperuricemia) to limit uric acid accumulation.\n\nDistractor Analysis:\n- Option A (Correct): Hydration plus uric-acid–lowering prophylaxis is first-line TLS prevention.\n- Option B: Diuretics are not first-line and can worsen volume depletion if used without adequate hydration.\n- Option C: Routine calcium administration is avoided because it can increase calcium-phosphate precipitation; treat symptomatic hypocalcemia only.\n- Option D: Antibiotics do not prevent TLS.\n- Option E: Dialysis is reserved for severe or refractory electrolyte derangements or renal failure, not routine prophylaxis.\n\nClinical Pearl: Prevent tumor lysis with aggressive IV fluids and uric-acid control (allopurinol or rasburicase), especially in high-burden lymphomas/leukemias.",
+    "cognitive_error": "base_rate_neglect",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -819,32 +819,32 @@
     "concept_id": "b1-23-sickle-cell-disease-acute-chest-syndrome-management",
     "batch": "Batch1",
     "system": "Hematology, Pulmonology",
-    "stem": "A 24-year-old man with sickle cell disease presents with fever, cough, and chest pain for 2 days. He was admitted 4 days ago for a vaso-occlusive pain \ncrisis affecting his lower back and legs and has been receiving IV morphine and fluids. \nOn examination, temperature is 38.7°C (101.7°F), blood pressure is 102/68 mm Hg, pulse is 118/min, respirations are 28/min, and oxygen saturation is \n88% on room air. He appears in moderate distress. Lung examination reveals decreased breath sounds and crackles at the left base. He has mild scleral \nicterus. \nLaboratory studies: \n• \nHemoglobin: 6.8 g/dL (baseline 8.5 g/dL) \n• \nWBC: 18,200/µL \n• \nReticulocyte count: 1.2% (low for hemolysis) \n• \nLDH: 680 U/L \nChest X-ray shows a new left lower lobe infiltrate not present on admission.\n\nWhich of the following is the most appropriate immediate management?",
+    "stem": "A 24-year-old man with sickle cell disease presents with chest pain and shortness of breath. He was hospitalized 2 days ago for a vaso-occlusive pain crisis. Temperature is 38.4°C (101.1°F), blood pressure is 118/70 mm Hg, pulse is 112/min, and oxygen saturation is 89% on room air. Lung exam reveals decreased breath sounds at the bases. Chest radiograph shows a new left lower lobe infiltrate.\n\nWhich of the following is the most appropriate next step in management?",
     "options": [
       {
-        "text": "Simple blood transfusion to hemoglobin 10 g/dL",
-        "label": "A"
+        "label": "A",
+        "text": "High-dose corticosteroids"
       },
       {
-        "text": "Exchange transfusion",
-        "label": "B"
+        "label": "B",
+        "text": "Oxygen therapy, empiric antibiotics, and simple transfusion"
       },
       {
-        "text": "Supplemental oxygen and incentive spirometry only",
-        "label": "C"
+        "label": "C",
+        "text": "Inhaled beta-agonist therapy alone"
       },
       {
-        "text": "Bronchoscopy with bronchoalveolar lavage",
-        "label": "D"
+        "label": "D",
+        "text": "Immediate thrombolysis"
       },
       {
-        "text": "Increase morphine dose for pain control",
-        "label": "E"
+        "label": "E",
+        "text": "Outpatient oral antibiotics and follow-up"
       }
     ],
     "correct_answer": "B",
-    "explanation": "This patient has acute chest syndrome (ACS), the leading cause of death in sickle cell disease. Diagnosis of ACS: • New pulmonary infiltrate on imaging • PLUS at least ONE of: • Fever • Chest pain • Respiratory symptoms (cough, dyspnea) • Hypoxia This patient has ALL features: New infiltrate + fever + chest pain + cough + hypoxia (88%) ACS often develops during hospitalization for pain crisis — this presentation is classic. Severity assessment: Feature Mild/Moderate Severe Oxygen requirement Low-flow High-flow, worsening Respiratory distress Mild Moderate-severe Multilobar involvement No Yes, or rapidly progressing Hemoglobin drop Mild Significant (>2 g/dL) This patient has SEVERE ACS: • Significant hypoxia (88% on room air) • Hemoglobin dropped 1.7 g/dL from baseline • Tachypnea (RR 28), tachycardia • Low reticulocyte count suggests bone marrow suppression (parvovirus? infarction?) Management of severe ACS: Priority Intervention 1 Exchange transfusion (reduces HbS% to <30%) 2 Supplemental oxygen (target SpO2 >95%) 3 Antibiotics (cover atypical + typical pathogens) 4 Bronchodilators if wheezing 5 Incentive spirometry (prevents atelectasis) 6 Pain control (avoid over-sedation) Why exchange transfusion over simple transfusion? • More rapidly decreases HbS percentage • Prevents hyperviscosity (simple transfusion raises hemoglobin but doesn't reduce HbS as effectively) • Indicated for severe ACS, stroke, multiorgan failure When is simple transfusion acceptable? • Mild ACS with modest hemoglobin drop • Target Hgb 10 g/dL (not higher to avoid hyperviscosity) Why not (C)? • Supplemental oxygen and incentive spirometry are supportive but inadequate alone for severe ACS • Needed, but transfusion is the priority Why not (D)? • Bronchoscopy may be considered if unusual pathogen suspected but not first-line • Empiric antibiotics appropriate Why not (E)? • Excessive opioids cause hypoventilation/atelectasis → worsens ACS • Pain control important but should use multimodal approach",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Acute chest syndrome in sickle cell disease involves pulmonary vaso-occlusion and inflammation triggered by infection, fat emboli, or hypoventilation, leading to new pulmonary infiltrate and hypoxemia. It is a major cause of morbidity and can progress rapidly.\n\nCorrect Answer Rationale: He has acute chest syndrome (fever, hypoxemia, and new infiltrate) shortly after a pain crisis. Management requires supplemental oxygen, empiric antibiotics covering typical and atypical pathogens, incentive spirometry, and transfusion (simple transfusion for most; exchange transfusion for severe or rapidly progressive disease).\n\nDistractor Analysis:\n- Option A: Steroids may shorten symptoms but increase rebound pain crises and are not routine first-line therapy.\n- Option B (Correct): Combined oxygen, empiric antibiotics, and transfusion treats hypoxemia and addresses infectious triggers.\n- Option C: Bronchodilators may help if wheezing/asthma is present but do not address the core pathophysiology.\n- Option D: Thrombolysis is for massive pulmonary embolism with hemodynamic compromise; the presentation fits acute chest syndrome.\n- Option E: This is a potentially life-threatening complication requiring inpatient management.\n\nClinical Pearl: Acute chest syndrome = new infiltrate plus respiratory symptoms in sickle cell; treat with oxygen, antibiotics, and transfusion (exchange if severe).",
+    "cognitive_error": "premature_closure",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -856,32 +856,32 @@
     "concept_id": "b1-24-giant-cell-arteritis-when-to-start-steroids",
     "batch": "Batch1",
     "system": "Rheumatology, Ophthalmology",
-    "stem": "A 72-year-old woman presents with severe new-onset headache for the past 2 weeks, located primarily over her right temple. She also reports jaw pain \nwhen chewing that resolves with rest, and she noticed blurred vision in her right eye yesterday that resolved after a few minutes. She has had fatigue, \nlow-grade fevers, and unintentional 5-kg weight loss over the past 2 months. She also notes shoulder stiffness. \nOn examination, temperature is 37.8°C (100°F), and there is tenderness over the right temporal artery, which feels thickened and has diminished \npulsation. Fundoscopic examination of the right eye shows pallor of the optic disc. \nLaboratory studies show ESR 98 mm/hr and CRP 68 mg/L.\n\nWhich of the following is the most appropriate next step in management?",
+    "stem": "A 72-year-old woman presents with 3 weeks of new headache and scalp tenderness. She also reports jaw fatigue while chewing and transient episodes of blurry vision in her right eye. Temperature is 37.6°C (99.7°F). Physical exam shows tenderness over the right temporal artery. Laboratory studies show ESR 98 mm/hr and CRP 10 mg/dL.\n\nWhich of the following is the most appropriate next step?",
     "options": [
       {
-        "text": "Schedule temporal artery biopsy before starting treatment",
-        "label": "A"
+        "label": "A",
+        "text": "Obtain temporal artery biopsy before initiating therapy"
       },
       {
-        "text": "Start high-dose oral prednisone immediately",
-        "label": "B"
+        "label": "B",
+        "text": "Start high-dose glucocorticoids immediately"
       },
       {
-        "text": "Order temporal artery ultrasound before treatment",
-        "label": "C"
+        "label": "C",
+        "text": "Start NSAIDs and reassess in 1 week"
       },
       {
-        "text": "Start low-dose aspirin and monitor symptoms",
-        "label": "D"
+        "label": "D",
+        "text": "Order MRI of the brain to evaluate for mass lesion"
       },
       {
-        "text": "Refer to ophthalmology for evaluation first",
-        "label": "E"
+        "label": "E",
+        "text": "Start sumatriptan for presumed migraine"
       }
     ],
     "correct_answer": "B",
-    "explanation": "This patient has giant cell arteritis (GCA) with impending vision loss — a medical emergency. Clinical features of GCA: • Age >50 (usually >70) • New headache (temporal) • Scalp/temporal artery tenderness • Jaw claudication (most specific symptom) • Visual symptoms (amaurosis fugax, diplopia) • Constitutional symptoms (fever, weight loss, fatigue) • Associated polymyalgia rheumatica (shoulder/hip stiffness) Laboratory findings: • ESR markedly elevated (>50, often >100) • Elevated CRP • Possible normocytic anemia, thrombocytosis This patient has HIGH-RISK features: • Amaurosis fugax (transient visual loss) — WARNING of impending permanent blindness • Optic disc pallor — suggests early ischemic optic neuropathy CRITICAL PRINCIPLE: START STEROIDS IMMEDIATELY — DO NOT DELAY FOR BIOPSY Why? • Untreated GCA causes permanent bilateral blindness in 15–20% of patients • Once vision is lost, it rarely recovers • Steroids prevent progression to permanent blindness • Temporal artery biopsy remains positive for 1–2 weeks after starting steroids Treatment: Presentation Steroid Regimen GCA without visual symptoms Prednisone 40–60 mg/day GCA with visual symptoms Prednisone 60–80 mg/day OR IV methylprednisolone 1g/day × 3 days This patient should receive high-dose prednisone immediately. Why not (A) or (C)? • Do NOT wait for biopsy or imaging before treatment • Biopsy can be done within 1–2 weeks while on steroids • Every hour of delay increases blindness risk Why not (D)? • Aspirin may reduce ischemic complications but does not treat GCA • Steroids are disease-modifying Why not (E)? • Ophthalmology consultation is appropriate but should not delay steroid initiation • Start steroids, then refer Additional management: • Temporal artery biopsy (still indicated; remains positive 1–2 weeks after steroids) • Consider tocilizumab for steroid-sparing • PCP prophylaxis and bone protection if prolonged steroid course",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Giant cell arteritis is a granulomatous vasculitis of medium and large arteries, often involving branches of the carotid artery. Vascular inflammation can reduce blood flow to the optic nerve, causing irreversible vision loss.\n\nCorrect Answer Rationale: The combination of age >50, new headache, jaw claudication, elevated inflammatory markers, and visual symptoms is highly suggestive of giant cell arteritis. High-dose glucocorticoids should be started immediately to prevent permanent vision loss; diagnostic confirmation with temporal artery biopsy can follow and remains informative for at least 1–2 weeks after starting steroids.\n\nDistractor Analysis:\n- Option A: Biopsy is important for diagnosis but should not delay steroids when vision is threatened.\n- Option B (Correct): Immediate high-dose glucocorticoids are indicated in suspected GCA, especially with visual symptoms.\n- Option C: NSAIDs are inadequate and risk irreversible complications.\n- Option D: Neuroimaging is not the priority given the classic vasculitis features.\n- Option E: Migraine therapy does not address jaw claudication, scalp tenderness, or elevated ESR/CRP.\n\nClinical Pearl: Suspected giant cell arteritis with visual symptoms is treated with immediate high-dose steroids—do not wait for biopsy.",
+    "cognitive_error": "premature_closure",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -893,32 +893,32 @@
     "concept_id": "b1-25-gout-vs-septic-arthritis-diagnostic-differentiation",
     "batch": "Batch1",
     "system": "Rheumatology, Infectious Disease, Orthopedics",
-    "stem": "A 58-year-old man with a history of gout (last flare 3 years ago) and type 2 diabetes presents with severe pain, swelling, and redness of his right knee for \n2 days. He denies recent trauma. He reports fever and chills since this morning. \nOn examination, temperature is 38.6°C (101.5°F), blood pressure is 128/78 mm Hg, pulse is 102/min. The right knee is erythematous, warm, and swollen \nwith a moderate effusion. He cannot bear weight and has severe pain with any range of motion. \nLaboratory studies show WBC 16,400/µL, ESR 78 mm/hr, and serum uric acid 8.9 mg/dL.\n\nWhich of the following is the most appropriate next step?",
+    "stem": "A 58-year-old man presents with acute onset of severe pain and swelling in the right knee that began this morning. He has a history of hypertension treated with hydrochlorothiazide. Temperature is 38.3°C (100.9°F). The knee is warm, erythematous, and has a large effusion with markedly decreased range of motion due to pain. Laboratory studies show WBC 14,800/µL.\n\nWhich of the following is the most appropriate next step to establish the diagnosis?",
     "options": [
       {
-        "text": "Start colchicine and NSAIDs for presumed gout flare",
-        "label": "A"
+        "label": "A",
+        "text": "Start colchicine and reassess response in 24 hours"
       },
       {
-        "text": "Start empiric IV antibiotics for presumed septic arthritis",
-        "label": "B"
+        "label": "B",
+        "text": "Obtain serum uric acid level"
       },
       {
-        "text": "Arthrocentesis of the right knee",
-        "label": "C"
+        "label": "C",
+        "text": "Perform arthrocentesis with synovial fluid analysis and Gram stain/culture"
       },
       {
-        "text": "Order MRI of the knee before intervention",
-        "label": "D"
+        "label": "D",
+        "text": "Order MRI of the knee to evaluate for meniscal tear"
       },
       {
-        "text": "Start allopurinol to lower uric acid",
-        "label": "E"
+        "label": "E",
+        "text": "Begin oral prednisone therapy"
       }
     ],
     "correct_answer": "C",
-    "explanation": "This patient presents with acute monoarticular arthritis with features suggesting BOTH gout (history, elevated uric acid) AND septic arthritis (fever, diabetes, systemic symptoms). CRITICAL RULE: Any acute monoarticular arthritis with systemic symptoms requires arthrocentesis to rule out septic arthritis. Why arthrocentesis is mandatory: • Septic arthritis and gout can be clinically indistinguishable • Septic arthritis destroys cartilage within 24–48 hours if untreated • Gout history and elevated uric acid do NOT exclude infection • Coexistent gout and septic arthritis can occur • Only synovial fluid analysis can differentiate Synovial fluid analysis: Parameter Septic Arthritis Gout Normal WBC >50,000 (often >100,000) 2,000–50,000 <200 PMN% >90% >50% <25% Crystals None Needle-shaped, negative birefringent None Gram stain May be positive Negative Negative Culture Positive (60–80%) Negative Negative This patient has RED FLAGS for septic arthritis: • Fever (38.6°C) • Systemic symptoms (chills) • Diabetes (immunocompromised) • Unable to bear weight • Leukocytosis with elevated ESR Why not (A)? • Cannot presume gout without ruling out infection • Treating gout alone while missing septic arthritis → joint destruction, sepsis, death Why not (B)? • Do NOT start antibiotics before obtaining synovial fluid (decreases culture yield) • Arthrocentesis first, then antibiotics if septic arthritis suspected Why not (D)? • MRI may show synovitis/effusion but cannot differentiate gout from infection • Joint aspiration is the diagnostic procedure Why not (E)? • Allopurinol should never be started during an acute gout flare (can worsen/prolong attack) • This patient needs diagnosis first Procedure of joint aspiration in suspected septic arthritis: 1. Aspirate joint (even if on anticoagulation — risk of missing septic arthritis > bleeding risk) 2. Send for: cell count, Gram stain, culture, crystal analysis 3. If septic arthritis confirmed: IV antibiotics + orthopedic consultation for possible surgical drainage",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Acute monoarthritis can be caused by crystal-induced inflammation (eg, gout) or bacterial infection (septic arthritis). Septic arthritis can rapidly destroy cartilage and requires urgent diagnosis and treatment.\n\nCorrect Answer Rationale: Fever, leukocytosis, and an acutely hot, swollen joint raise concern for septic arthritis even when gout risk factors are present. Arthrocentesis with synovial fluid cell count, crystal analysis, and Gram stain/culture is required to distinguish septic arthritis from gout and guide therapy.\n\nDistractor Analysis:\n- Option A: Empiric gout treatment risks delaying diagnosis of septic arthritis.\n- Option B: Serum uric acid can be normal during an acute gout flare and does not exclude septic arthritis.\n- Option C (Correct): Joint aspiration is the diagnostic gold standard for acute monoarthritis when infection is possible.\n- Option D: MRI does not diagnose gout vs septic arthritis and delays definitive evaluation.\n- Option E: Steroids can worsen infection and should not be given before septic arthritis is excluded.\n\nClinical Pearl: Any febrile acute monoarthritis is septic arthritis until proven otherwise—perform arthrocentesis first.",
+    "cognitive_error": "anchoring_bias",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -930,32 +930,32 @@
     "concept_id": "b1-26-acute-appendicitis-imaging-and-management-decision",
     "batch": "Batch1",
     "system": "Gastrointestinal",
-    "stem": "A 24-year-old man presents with 18 hours of abdominal pain that began around his umbilicus and has now localized to his right lower quadrant. He has \nhad nausea and two episodes of vomiting. He has no appetite. \nOn examination, temperature is 38.2°C (100.8°F), blood pressure is 124/78 mm Hg, pulse is 92/min. Abdomen shows tenderness at McBurney's point with \nvoluntary guarding. Rovsing sign is positive. There is no rebound tenderness. \nLaboratory studies show WBC 14,200/µL with 82% neutrophils and CRP 4.8 mg/dL.\n\nWhich of the following is the most appropriate next step in management?",
+    "stem": "A 27-year-old woman presents with 18 hours of abdominal pain that began periumbilically and migrated to the right lower quadrant. She has nausea and anorexia. Temperature is 38.1°C (100.6°F) and pulse is 102/min. Abdomen is tender at McBurney point with mild guarding. Urine pregnancy test is negative.\n\nWhich of the following is the most appropriate next diagnostic step?",
     "options": [
       {
-        "text": "CT abdomen/pelvis with IV contrast",
-        "label": "A"
+        "label": "A",
+        "text": "Empiric antibiotics and discharge with close follow-up"
       },
       {
-        "text": "Immediate surgical consultation for laparoscopic appendectomy",
-        "label": "B"
+        "label": "B",
+        "text": "Abdominal radiograph"
       },
       {
-        "text": "Abdominal ultrasound",
-        "label": "C"
+        "label": "C",
+        "text": "CT scan of the abdomen and pelvis with IV contrast"
       },
       {
-        "text": "Observation and serial abdominal examinations",
-        "label": "D"
+        "label": "D",
+        "text": "Upper endoscopy"
       },
       {
-        "text": "IV antibiotics and discharge with outpatient follow-up",
-        "label": "E"
+        "label": "E",
+        "text": "Barium enema"
       }
     ],
-    "correct_answer": "B",
-    "explanation": "This patient has a high pretest probability of acute appendicitis based on clinical presentation. Classic appendicitis presentation: • Periumbilical pain → migrating to RLQ (visceral → parietal peritoneum) • Anorexia (almost universal) • Nausea/vomiting (usually after pain onset) • Low-grade fever • RLQ tenderness (McBurney's point) • Positive Rovsing sign (RLQ pain with LLQ palpation) • Leukocytosis with left shift Alvarado Score (MANTRELS): • Migration of pain: 1 • Anorexia: 1 • Nausea/vomiting: 1 • Tenderness in RLQ: 2 • Rebound tenderness: 1 • Elevated temperature: 1 • Leukocytosis: 2 • Shift to left: 1 This patient scores 7–8: HIGH probability When is imaging needed? Clinical Scenario Imaging Approach Classic presentation in young/thin male Often proceed directly to surgery Intermediate probability (Alvarado 5–6) CT abdomen/pelvis Women of childbearing age CT (preferred) or ultrasound first Pregnant women Ultrasound first, then MRI if inconclusive Pediatric Ultrasound first This patient (young male, classic presentation, high Alvarado) can proceed to surgery without imaging, though CT is often obtained in practice to exclude other diagnoses and plan surgery. Acceptable approaches: • Option B (direct to surgery) — appropriate given high clinical probability • CT if any diagnostic uncertainty — would show dilated appendix (>6 mm), periappendiceal fat stranding, appendicolith Why not (A) as NEXT step? • CT is reasonable but not strictly required with this classic presentation • In high-probability cases, imaging delays definitive treatment • Many surgeons will operate based on clinical diagnosis alone Why not (C)? • Ultrasound less sensitive in adults (operator-dependent, body habitus) • CT preferred in adult males when imaging needed Why not (D)? • Observation inappropriate with high clinical probability and systemic signs • Risk of perforation increases with delay Why not (E)? • Antibiotics alone with discharge is not appropriate management • While \"antibiotic-first\" strategy exists for uncomplicated appendicitis, requires careful patient selection and inpatient monitoring Surgery: Laparoscopic appendectomy is preferred — lower wound infection rate, faster recovery.",
-    "cognitive_error": null,
+    "correct_answer": "C",
+    "explanation": "Pathophysiology: Appendicitis results from obstruction of the appendiceal lumen, leading to bacterial overgrowth, inflammation, and potential perforation. Imaging helps confirm the diagnosis and exclude gynecologic or other causes of right lower quadrant pain.\n\nCorrect Answer Rationale: Her migratory pain, anorexia, fever, and RLQ tenderness strongly suggest appendicitis. In nonpregnant adults, CT abdomen/pelvis with IV contrast is the preferred imaging test due to high sensitivity and specificity.\n\nDistractor Analysis:\n- Option A: Suspected appendicitis requires evaluation and often surgical consultation; discharge risks perforation.\n- Option B: Plain films are not useful for appendicitis.\n- Option C (Correct): CT with IV contrast is the diagnostic test of choice for adult appendicitis when pregnancy is excluded.\n- Option D: Endoscopy is not indicated for acute RLQ pain suggestive of appendicitis.\n- Option E: Barium enema is not used and can be harmful if perforation is present.\n\nClinical Pearl: In nonpregnant adults with suspected appendicitis, CT abdomen/pelvis with IV contrast is the preferred confirmatory test.",
+    "cognitive_error": "premature_closure",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -967,32 +967,32 @@
     "concept_id": "b1-27-bowel-obstruction-small-bowel-vs-large-bowel-differentiation",
     "batch": "Batch1",
     "system": "Gastrointestinal",
-    "stem": "A 68-year-old man presents with 2 days of progressive abdominal distension, crampy abdominal pain, and vomiting. He has not had a bowel movement \nor passed flatus for 36 hours. His surgical history includes open appendectomy 30 years ago and cholecystectomy 10 years ago. \nOn examination, temperature is 37.2°C (99°F), blood pressure is 118/72 mm Hg, pulse is 94/min. Abdomen is distended with high-pitched bowel sounds \nand mild diffuse tenderness without peritoneal signs. There is a well-healed RLQ scar. \nAbdominal X-ray shows multiple dilated loops of small bowel (up to 5 cm) with air-fluid levels in a stepladder pattern. No colonic gas is seen. No free air. \nLaboratory studies show WBC 11,200/µL, BUN 28 mg/dL, and lactate 1.4 mmol/L.\n\nWhich of the following is the most appropriate initial management?",
+    "stem": "A 64-year-old man presents with 2 days of progressive abdominal distension, crampy pain, and vomiting. He has not passed stool or flatus since yesterday. He has a history of colon cancer treated with resection 6 years ago. Vital signs are normal. Abdomen is distended with high-pitched bowel sounds. Abdominal radiograph shows multiple dilated loops of bowel with air-fluid levels; the colon is minimally gas-filled.\n\nWhich of the following is the most likely diagnosis?",
     "options": [
       {
-        "text": "Emergent exploratory laparotomy",
-        "label": "A"
+        "label": "A",
+        "text": "Acute pancreatitis"
       },
       {
-        "text": "Colonoscopy for decompression",
-        "label": "B"
+        "label": "B",
+        "text": "Ileus"
       },
       {
-        "text": "Nasogastric tube decompression, IV fluids, and NPO",
-        "label": "C"
+        "label": "C",
+        "text": "Small bowel obstruction"
       },
       {
-        "text": "Water-soluble contrast enema",
-        "label": "D"
+        "label": "D",
+        "text": "Toxic megacolon"
       },
       {
-        "text": "Oral polyethylene glycol bowel preparation",
-        "label": "E"
+        "label": "E",
+        "text": "Acute cholecystitis"
       }
     ],
     "correct_answer": "C",
-    "explanation": "This patient has small bowel obstruction (SBO), most likely due to adhesions from prior abdominal surgery. Differentiating SBO from LBO: Feature SBO LBO Pain Crampy, periumbilical Crampy, lower abdominal Vomiting Early, prominent Late, may be feculent Distension Moderate Marked Obstipation Later Earlier X-ray Dilated small bowel, air-fluid levels Dilated colon, \"cut-off\" sign Common causes Adhesions (most common), hernia Colon cancer, diverticulitis, volvulus This patient has SBO: • Previous abdominal surgeries → adhesions (#1 cause of SBO) • Dilated small bowel with air-fluid levels on X-ray • No colonic gas (complete or near-complete obstruction) • Vomiting prominent Management of uncomplicated/partial SBO: Step Intervention 1 NPO (bowel rest) 2 Nasogastric tube (decompression, relieves vomiting) 3 IV fluid resuscitation (third-spacing causes dehydration) 4 Foley catheter (monitor urine output) 5 Serial abdominal exams 6 Correct electrolytes This conservative \"drip and suck\" approach resolves 65–80% of adhesive SBO without surgery. When is surgery indicated (emergently)? • Peritoneal signs (rebound, guarding) — bowel compromise • Fever, tachycardia, leukocytosis (significant) — strangulation • Elevated lactate — ischemia • Closed-loop obstruction • Failure to improve with conservative management (24–72 hours) • Complete obstruction that doesn't resolve This patient lacks emergent surgical indications: • No peritoneal signs • Mild tachycardia, minimal leukocytosis • Normal lactate Why not (A)? • No signs of strangulation or peritonitis • Surgery reserved for complicated SBO or failed conservative management Why not (B)? • Colonoscopy is for LBO (e.g., sigmoid volvulus decompression) • Not useful for SBO Why not (D)? • Water-soluble contrast (Gastrografin) can be used but is given orally/via NGT in SBO (not enema) • Therapeutic and diagnostic — appearance of contrast in colon within 24 hours predicts resolution Why not (E)? • Oral prep contraindicated in bowel obstruction",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Mechanical small bowel obstruction causes proximal intestinal dilation, fluid sequestration, and vomiting due to impaired passage of contents. Adhesions from prior abdominal surgery are the most common cause in adults.\n\nCorrect Answer Rationale: He has abdominal distension, vomiting, obstipation, high-pitched bowel sounds, and radiographic dilated loops with air-fluid levels and little colonic gas—findings consistent with small bowel obstruction, likely from postoperative adhesions.\n\nDistractor Analysis:\n- Option A: Pancreatitis presents with epigastric pain and elevated lipase rather than obstructive radiographic findings.\n- Option B: Ileus causes diffuse bowel dilation including the colon and typically occurs after surgery, infection, or electrolyte abnormalities; bowel sounds are often decreased.\n- Option C (Correct): Mechanical SBO shows dilated small bowel with air-fluid levels and relative paucity of colonic gas.\n- Option D: Toxic megacolon features systemic toxicity and marked colonic dilation.\n- Option E: Cholecystitis presents with RUQ pain and Murphy sign, not obstructive pattern.\n\nClinical Pearl: SBO classically causes vomiting and high-pitched bowel sounds with dilated small bowel and minimal colonic gas on imaging.",
+    "cognitive_error": "pattern_recognition",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -1004,32 +1004,32 @@
     "concept_id": "b1-28-abdominal-aortic-aneurysm-screening-and-rupture-recognition",
     "batch": "Batch1",
     "system": "Vascular",
-    "stem": "A 72-year-old man is brought to the emergency department with sudden-onset severe lower back and abdominal pain that began 45 minutes ago. He \nhas a history of hypertension, hyperlipidemia, and 50-pack-year smoking history. He quit smoking 5 years ago. \nOn examination, he is pale, diaphoretic, and appears to be in severe distress. Blood pressure is 78/52 mm Hg, pulse is 124/min and weak. Abdomen is \ndistended with a pulsatile mass palpable in the periumbilical region. Femoral pulses are weak bilaterally. \nLaboratory studies show hemoglobin 9.2 g/dL.\n\nWhich of the following is the most appropriate next step?",
+    "stem": "A 72-year-old man is brought to the emergency department for sudden-onset severe abdominal and back pain followed by lightheadedness. He has a history of hypertension and hyperlipidemia and smoked 1 pack of cigarettes daily for 40 years. Blood pressure is 78/44 mm Hg and pulse is 128/min. He is pale and diaphoretic. Abdomen is tender with a palpable pulsatile mass.\n\nWhich of the following is the most appropriate next step in management?",
     "options": [
       {
-        "text": "CT angiography of the abdomen",
-        "label": "A"
+        "label": "A",
+        "text": "CT angiography of the abdomen"
       },
       {
-        "text": "Immediate surgical repair",
-        "label": "B"
+        "label": "B",
+        "text": "Immediate operative repair after initiating resuscitation"
       },
       {
-        "text": "Abdominal ultrasound at bedside",
-        "label": "C"
+        "label": "C",
+        "text": "Abdominal ultrasound as an outpatient"
       },
       {
-        "text": "IV fluids to stabilize blood pressure before imaging",
-        "label": "D"
+        "label": "D",
+        "text": "Administer thrombolytics for presumed aortic thrombosis"
       },
       {
-        "text": "Obtain type and crossmatch, then await hemodynamic stability",
-        "label": "E"
+        "label": "E",
+        "text": "Discharge with analgesics and arrange vascular clinic follow-up"
       }
     ],
     "correct_answer": "B",
-    "explanation": "This patient has ruptured abdominal aortic aneurysm (rAAA) — a surgical emergency with mortality approaching 50% even with treatment, and >80% without. Classic triad of ruptured AAA: 1. Sudden severe abdominal or back pain 2. Hypotension 3. Pulsatile abdominal mass This patient has all three features — the diagnosis is clinical. Management of hemodynamically UNSTABLE rAAA: Priority Action 1 Immediate transfer to OR for surgical repair 2 Permissive hypotension (target SBP ~70–80, avoid aggressive fluid resuscitation) 3 Type and crossmatch, activate massive transfusion protocol 4 Do NOT delay for imaging if diagnosis is clear Why immediate surgery without imaging? • In unstable patients with classic triad, imaging delays definitive treatment • Every minute without repair increases mortality • Diagnosis is clinical; imaging may cause death in unstable patients When is imaging appropriate? • Hemodynamically STABLE patients with suspected AAA → CT angiography • Screens for extent of aneurysm, involvement of renal/iliac arteries • Plans surgical or endovascular approach Why permissive hypotension? • Aggressive IV fluids can: • Dislodge tamponading clot • Dilute clotting factors • Increase hemorrhage • Maintain \"just enough\" pressure for end-organ perfusion Why not (A)? • CT delays surgery in unstable patient • Appropriate only if hemodynamically stable Why not (C)? • Bedside ultrasound can confirm AAA but should not delay OR • In this case, clinical diagnosis is clear Why not (D)? • Avoid aggressive fluid resuscitation — permissive hypotension preferred • Proceed directly to OR Why not (E)? • Type and crossmatch should be drawn but don't wait for stability — this patient may never stabilize without surgery Repair options: • Open surgical repair (traditional) • Endovascular aneurysm repair (EVAR) — increasingly used even for rupture in selected patients Screening recommendation (USPSTF): • One-time abdominal ultrasound for men aged 65–75 who have ever smoked",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Abdominal aortic aneurysms can rupture, causing massive retroperitoneal or intraperitoneal hemorrhage and hemorrhagic shock. Classic presentation includes hypotension, abdominal/back pain, and a pulsatile mass.\n\nCorrect Answer Rationale: He is unstable with signs strongly suggestive of ruptured AAA. In hemodynamically unstable patients with high clinical suspicion, management is immediate resuscitation (large-bore IV access, blood products, permissive hypotension as appropriate) and emergent surgical repair; definitive imaging should not delay treatment.\n\nDistractor Analysis:\n- Option A: CT angiography is useful when the patient is stable; it can delay life-saving intervention in shock.\n- Option B (Correct): Unstable suspected ruptured AAA requires emergent repair after rapid stabilization.\n- Option C: Outpatient ultrasound is inappropriate in an unstable emergency.\n- Option D: Thrombolytics would worsen bleeding.\n- Option E: Discharge is dangerous and inappropriate.\n\nClinical Pearl: Suspected ruptured AAA with hypotension is a surgical emergency—do not delay for CT if unstable.",
+    "cognitive_error": "anchoring_bias",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -1041,32 +1041,32 @@
     "concept_id": "b1-29-pediatric-dehydration-assessment-and-fluid-replacement",
     "batch": "Batch1",
     "system": "Nephrology, Gastroenterology",
-    "stem": "An 18-month-old boy is brought to the emergency department with 3 days of watery diarrhea (8–10 episodes daily) and vomiting. His mother reports he \nhas been increasingly lethargic and has had decreased urine output for the past 24 hours. \nOn examination, temperature is 37.8°C (100°F), heart rate is 156/min, respirations are 32/min, and blood pressure is 85/50 mm Hg. Weight is 10 kg \n(baseline 11 kg). He is lethargic but responds to stimuli. Eyes are sunken with absent tears. Mucous membranes are dry. Capillary refill is 4 seconds. Skin \nturgor is decreased with tenting.\n\nWhich of the following is the most appropriate initial fluid management?",
+    "stem": "An 18-month-old boy is brought to the emergency department for 2 days of vomiting and watery diarrhea. He has had fewer wet diapers today and is sleepy. Temperature is 37.2°C (99.0°F), heart rate is 168/min, blood pressure is 78/46 mm Hg, and respirations are 30/min. He has sunken eyes, dry mucous membranes, and delayed capillary refill of 4 seconds. Tears are absent. Weight is 10 kg.\n\nWhich of the following is the most appropriate initial fluid management?",
     "options": [
       {
-        "text": "Oral rehydration solution 50 mL/kg over 4 hours",
-        "label": "A"
+        "label": "A",
+        "text": "Oral rehydration solution 50 mL/kg over 4 hours"
       },
       {
-        "text": "IV 0.9% normal saline 200 mL/kg bolus",
-        "label": "B"
+        "label": "B",
+        "text": "IV 0.9% saline 5 mL/kg bolus"
       },
       {
-        "text": "IV 0.9% normal saline 20 mL/kg bolus, reassess, repeat as needed",
-        "label": "C"
+        "label": "C",
+        "text": "IV 0.9% saline 20 mL/kg bolus, repeat as needed"
       },
       {
-        "text": "IV D5 0.45% normal saline at maintenance rate",
-        "label": "D"
+        "label": "D",
+        "text": "IV dextrose 5% in water 20 mL/kg bolus"
       },
       {
-        "text": "IV 3% hypertonic saline",
-        "label": "E"
+        "label": "E",
+        "text": "IV 3% hypertonic saline 5 mL/kg bolus"
       }
     ],
     "correct_answer": "C",
-    "explanation": "This child has severe dehydration requiring IV fluid resuscitation. Dehydration severity assessment: Feature Mild (3–5%) Moderate (6–9%) Severe (≥10%) Mental status Alert Irritable/lethargic Lethargic/obtunded Thirst Slight Moderate Drinks poorly Heart rate Normal Increased Markedly increased Blood pressure Normal Normal/orthostatic Hypotension Tears Present Decreased Absent Eyes Normal Slightly sunken Deeply sunken Mucous membranes Moist Dry Parched Capillary refill <2 sec 2–3 sec >3 sec Skin turgor Normal Decreased Tenting Urine output Decreased Oliguria Anuria This child has SEVERE dehydration (≥10%): • 9% weight loss (11 kg → 10 kg) • Lethargic • Absent tears • Sunken eyes • Capillary refill 4 seconds • Tenting • Hypotension for age • Tachycardia Fluid management by severity: Severity Management Mild ORS 50 mL/kg over 4 hours Moderate ORS 100 mL/kg over 4 hours (consider IV if can't tolerate PO) Severe IV bolus 20 mL/kg NS (isotonic), reassess, repeat up to 3 boluses Why NS 20 mL/kg bolus? • Isotonic fluid expands intravascular volume • 20 mL/kg is safe initial dose • Reassess after each bolus (HR, BP, capillary refill, mental status) • May need 2–3 boluses for severe dehydration • After stabilization → calculate deficit + maintenance Why not (A)? • Oral rehydration inappropriate for severe dehydration with lethargy • Risk of aspiration, inadequate absorption Why not (B)? • 200 mL/kg at once is excessive and dangerous • Can cause fluid overload, pulmonary edema Why not (D)? • Hypotonic maintenance fluid inappropriate for resuscitation • Does not adequately expand intravascular volume • D5 0.45% NS used for maintenance after resuscitation Why not (E)? • Hypertonic saline for symptomatic hyponatremia only • Not indicated for routine dehydration After stabilization: • Calculate deficit (10% of body weight = 1000 mL) • Replace deficit over 24–48 hours plus maintenance • Replace ongoing losses",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Severe dehydration leads to decreased intravascular volume and poor tissue perfusion. Rapid isotonic crystalloid boluses restore circulating volume and improve perfusion before transitioning to deficit replacement and maintenance fluids.\n\nCorrect Answer Rationale: He has severe dehydration/shock (hypotension, tachycardia, delayed capillary refill, lethargy). Initial management is rapid isotonic fluid resuscitation with 0.9% saline (or lactated Ringer) 20 mL/kg bolus, repeated until perfusion improves.\n\nDistractor Analysis:\n- Option A: Oral rehydration is appropriate for mild to moderate dehydration but not for shock.\n- Option B: 5 mL/kg is insufficient for shock resuscitation.\n- Option C (Correct): 20 mL/kg isotonic boluses are first-line for pediatric hypovolemic shock.\n- Option D: D5W is hypotonic in vivo and can worsen hyponatremia; it is not used for initial resuscitation.\n- Option E: Hypertonic saline is reserved for severe symptomatic hyponatremia or increased intracranial pressure, not routine dehydration.\n\nClinical Pearl: Pediatric dehydration with shock is treated first with isotonic 20 mL/kg IV boluses; ORS is for mild–moderate dehydration.",
+    "cognitive_error": "premature_closure",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
@@ -1077,33 +1077,33 @@
     "question_id": "B1_C30",
     "concept_id": "b1-30-kawasaki-disease-diagnosis-and-treatment",
     "batch": "Batch1",
-    "system": "",
-    "stem": "A 3-year-old boy is brought to the clinic with 6 days of high fever (up to 40°C/104°F) that has not responded to acetaminophen. His mother reports he \nhas been increasingly irritable. Over the past few days, she noticed redness in both eyes without discharge, cracked red lips, and a rash on his trunk. \nOn examination, temperature is 39.5°C (103.1°F), heart rate is 132/min. He is irritable but consolable. He has bilateral conjunctival injection without \nexudate. Lips are erythematous and cracked; tongue appears red with prominent papillae (\"strawberry tongue\"). There is a polymorphous maculopapular \nrash on his trunk. Bilateral cervical lymph nodes are palpable (largest 1.8 cm). Hands are edematous with erythema of the palms. \nLaboratory studies show WBC 18,400/µL, hemoglobin 10.8 g/dL, platelets 486,000/µL, ESR 82 mm/hr, CRP 12 mg/dL, and albumin 2.8 g/dL.\n\nWhich of the following is the most appropriate treatment?",
+    "system": "Pediatrics",
+    "stem": "A 3-year-old boy is brought to the clinic with 6 days of fever that has not responded to acetaminophen. His parents report irritability and decreased appetite. Over the past 2 days, he developed bilateral red eyes without discharge and a rash on his trunk. Physical examination shows temperature 39.5°C (103.1°F) and heart rate 140/min. He has bilateral nonexudative conjunctival injection, cracked erythematous lips, and a red tongue. There is a polymorphous maculopapular rash on the trunk, swelling of the hands with erythema of the palms, and a 1.8-cm unilateral cervical lymph node.\nLaboratory studies show ESR 82 mm/hr, CRP 12 mg/dL, platelets 486,000/µL, and albumin 2.8 g/dL.\n\nWhich of the following is the most appropriate treatment?",
     "options": [
       {
-        "text": "IV antibiotics for presumed scarlet fever",
-        "label": "A"
+        "label": "A",
+        "text": "Oral amoxicillin for presumed scarlet fever"
       },
       {
-        "text": "High-dose aspirin and supportive care only",
-        "label": "B"
+        "label": "B",
+        "text": "Supportive care only; the illness is self-limited"
       },
       {
-        "text": "IV immunoglobulin (IVIG) plus high-dose aspirin",
-        "label": "C"
+        "label": "C",
+        "text": "Intravenous immune globulin plus aspirin therapy"
       },
       {
-        "text": "Oral corticosteroids",
-        "label": "D"
+        "label": "D",
+        "text": "High-dose glucocorticoids as monotherapy"
       },
       {
-        "text": "Reassurance and follow-up in 2–3 days",
-        "label": "E"
+        "label": "E",
+        "text": "Reassurance and follow-up in 2–3 days without treatment"
       }
     ],
     "correct_answer": "C",
-    "explanation": "This patient meets criteria for Kawasaki disease (KD), a medium-vessel vasculitis affecting children, primarily dangerous for its cardiac complications (coronary artery aneurysms). Diagnostic criteria (classic KD): Fever ≥5 days PLUS ≥4 of 5: 1. Bilateral conjunctival injection (non-exudative) ✓ 2. Oral mucosal changes (strawberry tongue, cracked lips) ✓ 3. Polymorphous rash ✓ 4. Extremity changes (edema, erythema, later desquamation) ✓ 5. Cervical lymphadenopathy (≥1.5 cm, usually unilateral) ✓ This patient: 6 days of fever + 5/5 criteria = CLASSIC KAWASAKI DISEASE Laboratory findings supporting KD: • Leukocytosis • Anemia (normocytic) • Thrombocytosis (peaks in week 2–3) • Elevated ESR/CRP • Hypoalbuminemia • Elevated transaminases • Sterile pyuria may be present Treatment — CRITICAL to start within 10 days of fever onset: Component Details Purpose IVIG 2 g/kg single infusion Reduces coronary aneurysm risk from 25% → <5% Aspirin (high-dose) 80–100 mg/kg/day divided q6h Anti-inflammatory Aspirin (low-dose) 3–5 mg/kg/day after fever resolves Antiplatelet for 6–8 weeks Why IVIG + aspirin? • IVIG dramatically reduces coronary artery aneurysm development • Treatment within 10 days of fever onset is most effective • Aspirin alone is inadequate Why not (A)? • KD is not bacterial; antibiotics ineffective • Can resemble scarlet fever but conjunctivitis is not a feature of scarlet fever • Scarlet fever has sandpaper rash, not polymorphous Why not (B)? • Aspirin alone does not prevent coronary aneurysms • IVIG is essential Why not (D)? • Corticosteroids reserved for IVIG-refractory KD • Not first-line **",
-    "cognitive_error": null,
+    "explanation": "Pathophysiology: Kawasaki disease is an acute medium-vessel vasculitis in young children that can involve the coronary arteries. Inflammation can lead to coronary artery aneurysms and thrombosis if untreated.\n\nCorrect Answer Rationale: He meets criteria for Kawasaki disease (fever ≥5 days plus conjunctivitis, oral mucosal changes, rash, extremity changes, and cervical lymphadenopathy). Treatment with IVIG and aspirin within 10 days of fever onset reduces the risk of coronary artery aneurysms; echocardiography is also obtained but should not delay therapy.\n\nDistractor Analysis:\n- Option A: Scarlet fever is associated with exudative pharyngitis and sandpaper rash; it does not explain extremity swelling and conjunctivitis.\n- Option B: Untreated Kawasaki disease carries significant coronary risk; supportive care alone is insufficient.\n- Option C (Correct): IVIG plus aspirin is standard therapy to prevent coronary complications.\n- Option D: Steroids may be added in refractory/high-risk cases but are not first-line monotherapy.\n- Option E: Delaying treatment increases risk of coronary aneurysms.\n\nClinical Pearl: Kawasaki disease is treated with IVIG plus aspirin within 10 days of fever onset to prevent coronary artery aneurysms.",
+    "cognitive_error": "base_rate_neglect",
     "status": "active",
     "created_at": "2025-12-25T13:35:10.306959+00:00",
     "updated_at": "2025-12-25T13:35:10.306959+00:00",
