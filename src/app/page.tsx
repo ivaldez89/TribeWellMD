@@ -22,6 +22,63 @@ const PlantEvolutionVideo = () => {
   );
 };
 
+// Dynamic animated gradient background for hero
+const DynamicHeroBackground = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Base gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#F5F0E8] via-[#EBE4D8] to-[#E8EDE9]" />
+
+      {/* Animated gradient orbs - hidden for users with reduced motion preference */}
+      <div className="absolute inset-0 motion-reduce:hidden">
+        {/* Orb 1 - Sage green */}
+        <div
+          className="absolute w-[600px] h-[600px] rounded-full blur-[120px] opacity-30 animate-float-slow"
+          style={{
+            background: 'radial-gradient(circle, rgba(91,123,109,0.4) 0%, transparent 70%)',
+            top: '-10%',
+            left: '-10%',
+            animationDelay: '0s'
+          }}
+        />
+
+        {/* Orb 2 - Warm cream */}
+        <div
+          className="absolute w-[800px] h-[800px] rounded-full blur-[100px] opacity-25 animate-float-slow"
+          style={{
+            background: 'radial-gradient(circle, rgba(245,240,232,0.6) 0%, transparent 70%)',
+            bottom: '-15%',
+            right: '-15%',
+            animationDelay: '15s'
+          }}
+        />
+
+        {/* Orb 3 - Soft plum */}
+        <div
+          className="absolute w-[500px] h-[500px] rounded-full blur-[90px] opacity-20 animate-float-diagonal"
+          style={{
+            background: 'radial-gradient(circle, rgba(155,135,163,0.3) 0%, transparent 70%)',
+            top: '40%',
+            right: '30%',
+            animationDelay: '30s'
+          }}
+        />
+      </div>
+
+      {/* Subtle texture overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        }}
+      />
+
+      {/* Gradient overlay for text contrast */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/40 to-white/80" />
+    </div>
+  );
+};
+
 // Simplified logo version for final transformation
 const TribeWellLogo = ({ opacity }: { opacity: number }) => (
   <div
@@ -74,18 +131,15 @@ export default function HomePage() {
         {/* Hero Section with ʻUlu Plant */}
         <section
           ref={heroRef}
-          className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white via-[#F5F0E8] to-[#EBE4D8] dark:from-slate-900 dark:via-slate-800 dark:to-slate-700"
+          className="relative min-h-screen flex items-center justify-center overflow-hidden"
         >
-          {/* Background ambient shapes */}
-          <div className="absolute inset-0 overflow-hidden opacity-30">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-[#C4A77D] rounded-full blur-3xl" />
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#5B7B6D] rounded-full blur-3xl" />
-          </div>
+          {/* Dynamic background */}
+          <DynamicHeroBackground />
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Left: Messaging */}
-              <div className="text-center lg:text-left">
+              <div className="text-center lg:text-left backdrop-blur-[2px]">
                 <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
                   Connection with <span className="text-[#556B5E] dark:text-[#5B7B6D]">purpose</span>
                 </h1>

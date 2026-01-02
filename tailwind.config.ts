@@ -136,6 +136,8 @@ const config: Config = {
         'fade-in': 'fadeIn 0.3s ease-out',
         'slide-up': 'slideUp 0.3s ease-out',
         'scale-in': 'scaleIn 0.2s ease-out',
+        'float-slow': 'float-slow 60s ease-in-out infinite',
+        'float-diagonal': 'float-diagonal 45s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -149,6 +151,25 @@ const config: Config = {
         scaleIn: {
           '0%': { opacity: '0', transform: 'scale(0.95)' },
           '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        'float-slow': {
+          '0%, 100%': {
+            transform: 'translate(0, 0) scale(1)',
+          },
+          '33%': {
+            transform: 'translate(30px, -30px) scale(1.05)',
+          },
+          '66%': {
+            transform: 'translate(-20px, 20px) scale(0.98)',
+          },
+        },
+        'float-diagonal': {
+          '0%, 100%': {
+            transform: 'translate(0, 0) rotate(0deg)',
+          },
+          '50%': {
+            transform: 'translate(40px, 40px) rotate(2deg)',
+          },
         },
       },
     },
