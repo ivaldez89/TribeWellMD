@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { ThreeColumnLayout, CARD_STYLES, ThreeColumnLayoutSkeleton } from '@/components/layout/ThreeColumnLayout';
 import { createClient } from '@/lib/supabase/client';
 import { getShelfIcon, getSystemIcon } from '@/components/icons/MedicalIcons';
+import { findActiveAttempts, getAttemptStats, formatTime, getMaxQuestionCount, type AttemptState } from '@/lib/qbank/attempt';
 
 interface QuestionSummary {
   batch: string;
@@ -60,65 +61,24 @@ export default function QBankPage() {
   const [selectedShelves, setSelectedShelves] = useState<string[]>([]);
   const [selectedSystems, setSelectedSystems] = useState<string[]>([]);
   const [questionCount, setQuestionCount] = useState(20);
-  const [mode, setMode] = useState<'tutor' | 'timed'>('tutor');
+  const [mode, setMode] = useState<'tutor' | 'test'>('tutor');
   const [questionCode, setQuestionCode] = useState('');
   const [showShelfDropdown, setShowShelfDropdown] = useState(false);
   const [showSystemDropdown, setShowSystemDropdown] = useState(false);
   const [previousTests, setPreviousTests] = useState<PreviousTest[]>([]);
+  const [activeAttempts, setActiveAttempts] = useState<AttemptState[]>([]);
 
-  // Load previous tests from localStorage (including in-progress sessions)
+  // Load previous tests and active attempts from localStorage
   useEffect(() => {
     try {
       // Load completed tests
       const stored = localStorage.getItem('qbank-previous-tests');
       const completedTests: PreviousTest[] = stored ? JSON.parse(stored) : [];
+      setPreviousTests(completedTests);
 
-      // Scan for in-progress sessions (session keys start with 'qbank-session-')
-      const inProgressSessions: PreviousTest[] = [];
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key && key.startsWith('qbank-session-')) {
-          try {
-            const sessionData = JSON.parse(localStorage.getItem(key) || '{}');
-            // Check if session is recent (less than 24 hours old)
-            const isRecent = Date.now() - (sessionData.lastUpdated || 0) < 24 * 60 * 60 * 1000;
-
-            if (isRecent && sessionData.questionIds && sessionData.questionIds.length > 0) {
-              // Parse session key to extract batches, systems, count, mode
-              // Key format: qbank-session-[batches]-[systems]-[count]-[mode]
-              const keyParts = key.replace('qbank-session-', '').split('-');
-              const mode = keyParts[keyParts.length - 1] as 'tutor' | 'timed';
-
-              // Count answered questions
-              const questionStates = sessionData.questionStates || {};
-              const statesArray = Object.values(questionStates) as Array<{ isSubmitted?: boolean; isCorrect?: boolean }>;
-              const answeredCount = statesArray.filter(state => state?.isSubmitted).length;
-
-              // Count correct answers
-              const correctCount = statesArray.filter(state => state?.isCorrect === true).length;
-
-              // Only show if there's actual progress (at least on one question or just started)
-              inProgressSessions.push({
-                id: key,
-                date: new Date(sessionData.lastUpdated).toISOString(),
-                shelves: [], // Will be parsed from URL when resuming
-                systems: [],
-                questionCount: sessionData.questionIds.length,
-                answeredCount,
-                correctCount,
-                mode: mode === 'timed' || mode === 'tutor' ? mode : 'tutor',
-                isInProgress: true,
-                sessionKey: key
-              });
-            }
-          } catch (e) {
-            console.warn('Failed to parse session:', key, e);
-          }
-        }
-      }
-
-      // Combine in-progress sessions (first) with completed tests
-      setPreviousTests([...inProgressSessions, ...completedTests]);
+      // Load active attempts using the new attempt model
+      const attempts = findActiveAttempts();
+      setActiveAttempts(attempts);
     } catch (e) {
       console.error('Failed to load tests:', e);
     }
@@ -197,6 +157,19 @@ export default function QBankPage() {
       })
       .reduce((sum, q) => sum + q.count, 0);
   }, [questionSummary, selectedShelves, selectedSystems, totalQuestions]);
+
+  // Get max question count based on mode (tutor: 40, test: 110)
+  const maxQuestionCount = useMemo(() => {
+    const modeMax = getMaxQuestionCount(mode);
+    return Math.min(modeMax, availableQuestions);
+  }, [mode, availableQuestions]);
+
+  // Adjust question count when mode changes or max changes
+  useEffect(() => {
+    if (questionCount > maxQuestionCount) {
+      setQuestionCount(Math.min(20, maxQuestionCount));
+    }
+  }, [maxQuestionCount]);
 
   // Debug: Log filter state (remove after debugging)
   useEffect(() => {
@@ -366,21 +339,24 @@ export default function QBankPage() {
         <div className="mb-5">
           <label className="block text-xs text-content-muted mb-2">
             Number of Questions
+            <span className="ml-1 text-content-muted/70">
+              (max {mode === 'tutor' ? '40' : '110'} in {mode} mode)
+            </span>
           </label>
           <div className="flex items-center gap-2">
             <input
               type="number"
               min={1}
-              max={availableQuestions}
+              max={maxQuestionCount}
               value={questionCount}
               onChange={(e) => {
                 const val = parseInt(e.target.value) || 1;
-                setQuestionCount(Math.min(Math.max(1, val), availableQuestions));
+                setQuestionCount(Math.min(Math.max(1, val), maxQuestionCount));
               }}
               className="flex-1 px-3 py-2.5 rounded-xl bg-surface-muted dark:bg-slate-800 border border-border text-content dark:text-white text-center font-medium focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
             />
             <span className="text-xs text-content-muted whitespace-nowrap">
-              of {availableQuestions}
+              of {maxQuestionCount}
             </span>
           </div>
         </div>
@@ -415,25 +391,25 @@ export default function QBankPage() {
             </button>
 
             <button
-              onClick={() => setMode('timed')}
+              onClick={() => setMode('test')}
               className={`w-full p-3 rounded-xl text-left transition-all border-2 ${
-                mode === 'timed'
+                mode === 'test'
                   ? 'bg-primary/5 border-primary'
                   : 'bg-surface-muted dark:bg-slate-800 border-transparent hover:border-border'
               }`}
             >
               <div className="flex items-center gap-2">
                 <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                  mode === 'timed' ? 'border-primary' : 'border-content-muted'
+                  mode === 'test' ? 'border-primary' : 'border-content-muted'
                 }`}>
-                  {mode === 'timed' && <div className="w-2 h-2 rounded-full bg-primary" />}
+                  {mode === 'test' && <div className="w-2 h-2 rounded-full bg-primary" />}
                 </div>
-                <span className={`text-sm font-medium ${mode === 'timed' ? 'text-primary' : 'text-content-secondary dark:text-slate-300'}`}>
-                  Timed Mode
+                <span className={`text-sm font-medium ${mode === 'test' ? 'text-primary' : 'text-content-secondary dark:text-slate-300'}`}>
+                  Test Mode
                 </span>
               </div>
               <p className="text-xs text-content-muted mt-1 ml-6">
-                90 seconds per question
+                Timed exam, explanations at end
               </p>
             </button>
           </div>
@@ -624,6 +600,87 @@ export default function QBankPage() {
         </div>
       </div>
 
+      {/* Active Attempts Section */}
+      {activeAttempts.length > 0 && (
+        <div className={CARD_STYLES.containerWithPadding}>
+          <div className="flex items-center gap-2 mb-4">
+            <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h2 className="text-lg font-semibold text-content dark:text-white">In Progress</h2>
+          </div>
+
+          <div className="space-y-3">
+            {activeAttempts.map((attempt) => {
+              const stats = getAttemptStats(attempt);
+              const dateStr = new Date(attempt.lastUpdatedAt).toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit'
+              });
+              const filterLabel = attempt.batches.length > 0
+                ? attempt.batches.map(s => getShelfLabel(s)).join(', ')
+                : attempt.systems.length > 0
+                  ? attempt.systems.join(', ')
+                  : 'All Questions';
+
+              return (
+                <div
+                  key={attempt.id}
+                  className="p-4 rounded-xl bg-primary/5 dark:bg-primary/10 border-2 border-primary/30 hover:border-primary/50 transition-colors"
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-primary/20 text-primary uppercase tracking-wide">
+                          In Progress
+                        </span>
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide ${
+                          attempt.currentMode === 'test' ? 'bg-red-500/20 text-red-600' : 'bg-green-500/20 text-green-600'
+                        }`}>
+                          {attempt.currentMode}
+                        </span>
+                      </div>
+                      <p className="font-medium text-content dark:text-white text-sm mt-1">
+                        {filterLabel || 'Mixed Questions'}
+                      </p>
+                      <p className="text-xs text-content-muted">{dateStr}</p>
+                    </div>
+                    <button
+                      onClick={() => {
+                        router.push(`/qbank/practice?attemptId=${attempt.id}`);
+                      }}
+                      className="px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-hover text-white text-xs font-medium transition-colors flex items-center gap-1"
+                    >
+                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      Resume
+                    </button>
+                  </div>
+                  <div className="flex items-center gap-3 text-xs text-content-muted">
+                    <span>Q {attempt.currentIndex + 1}/{stats.totalQuestions}</span>
+                    <span>•</span>
+                    <span>{stats.lockedCount} answered</span>
+                    {stats.lockedCount > 0 && (
+                      <>
+                        <span>•</span>
+                        <span className="text-green-600">{stats.correctCount} correct</span>
+                      </>
+                    )}
+                    <span>•</span>
+                    <span>{formatTime(attempt.timeRemainingSeconds)} left</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* Previous Tests Section */}
       <div className={CARD_STYLES.containerWithPadding}>
         <div className="flex items-center gap-2 mb-4">
@@ -659,66 +716,6 @@ export default function QBankPage() {
                   ? test.systems.join(', ')
                   : 'All Questions';
 
-              // For in-progress sessions, show resume button
-              if (test.isInProgress) {
-                return (
-                  <div
-                    key={test.id}
-                    className="p-4 rounded-xl bg-primary/5 dark:bg-primary/10 border-2 border-primary/30 hover:border-primary/50 transition-colors"
-                  >
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-primary/20 text-primary uppercase tracking-wide">
-                            In Progress
-                          </span>
-                        </div>
-                        <p className="font-medium text-content dark:text-white text-sm mt-1">
-                          Question {test.answeredCount + 1}/{test.questionCount}
-                        </p>
-                        <p className="text-xs text-content-muted">{dateStr}</p>
-                      </div>
-                      <button
-                        onClick={() => {
-                          // Parse the session key to rebuild the URL
-                          // Key format: qbank-session-[batches]-[systems]-[count]-[mode]
-                          const keyContent = test.sessionKey?.replace('qbank-session-', '') || '';
-                          const parts = keyContent.replace(/_/g, ',').split('-');
-                          const mode = parts[parts.length - 1];
-                          const count = parts[parts.length - 2];
-
-                          // Build URL params - the session will be auto-restored
-                          const params = new URLSearchParams();
-                          params.set('count', count || test.questionCount.toString());
-                          params.set('mode', mode || test.mode);
-
-                          router.push(`/qbank/practice?${params.toString()}`);
-                        }}
-                        className="px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-hover text-white text-xs font-medium transition-colors flex items-center gap-1"
-                      >
-                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Resume
-                      </button>
-                    </div>
-                    <div className="flex items-center gap-3 text-xs text-content-muted">
-                      <span>{test.answeredCount}/{test.questionCount} answered</span>
-                      {test.answeredCount > 0 && (
-                        <>
-                          <span>•</span>
-                          <span>{test.correctCount} correct</span>
-                        </>
-                      )}
-                      <span>•</span>
-                      <span className="capitalize">{test.mode}</span>
-                    </div>
-                  </div>
-                );
-              }
-
-              // Completed test display
               return (
                 <div
                   key={test.id}
