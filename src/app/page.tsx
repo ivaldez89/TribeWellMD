@@ -5,92 +5,79 @@ import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 
-// ʻUlu Plant SVG Component - grows and transforms as user scrolls
-const UluPlant = ({ scrollProgress }: { scrollProgress: number }) => {
-  // Calculate growth stages based on scroll
-  const stemHeight = Math.min(100, scrollProgress * 150);
-  const leafOpacity = Math.min(1, Math.max(0, (scrollProgress - 0.2) * 2));
-  const fruitOpacity = Math.min(1, Math.max(0, (scrollProgress - 0.5) * 2));
-  const blossomScale = Math.min(1, Math.max(0, scrollProgress * 1.5));
+// Crisp ʻUlu Flower Component that evolves as user scrolls
+const UluFlower = ({ scrollProgress }: { scrollProgress: number }) => {
+  // Simple, elegant evolution from bud to full bloom
+  const petalScale = Math.min(1, scrollProgress * 2);
+  const petalRotation = scrollProgress * 360;
+  const centerScale = 0.3 + (scrollProgress * 0.7);
 
   return (
     <svg
-      width="400"
-      height="500"
-      viewBox="0 0 400 500"
-      className="w-full max-w-md mx-auto transition-all duration-700 ease-out"
-      style={{ opacity: Math.min(1, scrollProgress * 2) }}
+      width="300"
+      height="300"
+      viewBox="0 0 300 300"
+      className="w-full max-w-sm mx-auto"
+      style={{ opacity: Math.min(1, scrollProgress * 3) }}
     >
-      {/* Root system - always visible, subtle */}
-      <g opacity="0.3">
-        <path
-          d="M200 500 Q180 480 160 450 Q140 420 130 400"
-          stroke="#8B7355"
-          strokeWidth="2"
-          fill="none"
-          strokeLinecap="round"
-        />
-        <path
-          d="M200 500 Q220 480 240 450 Q260 420 270 400"
-          stroke="#8B7355"
-          strokeWidth="2"
-          fill="none"
-          strokeLinecap="round"
-        />
+      {/* Outer petals - cream/beige */}
+      <g transform={`rotate(${petalRotation} 150 150)`}>
+        {[0, 60, 120, 180, 240, 300].map((angle) => (
+          <ellipse
+            key={angle}
+            cx="150"
+            cy="80"
+            rx="25"
+            ry="50"
+            fill="#F5E6D3"
+            opacity={petalScale}
+            transform={`rotate(${angle} 150 150)`}
+            style={{
+              transition: 'opacity 0.5s ease-out',
+              transformOrigin: '150px 150px'
+            }}
+          />
+        ))}
       </g>
 
-      {/* Main stem - grows with scroll */}
-      <path
-        d={`M200 500 L200 ${500 - stemHeight}`}
-        stroke="#556B5E"
-        strokeWidth="8"
-        fill="none"
-        strokeLinecap="round"
-        style={{ transition: 'all 0.3s ease-out' }}
+      {/* Inner petals - lighter tone */}
+      <g transform={`rotate(${petalRotation * 0.7} 150 150)`}>
+        {[30, 90, 150, 210, 270, 330].map((angle) => (
+          <ellipse
+            key={angle}
+            cx="150"
+            cy="100"
+            rx="20"
+            ry="40"
+            fill="#FAF3E8"
+            opacity={petalScale * 0.9}
+            transform={`rotate(${angle} 150 150)`}
+            style={{
+              transition: 'opacity 0.5s ease-out',
+              transformOrigin: '150px 150px'
+            }}
+          />
+        ))}
+      </g>
+
+      {/* Center - green like the brand */}
+      <circle
+        cx="150"
+        cy="150"
+        r={30 * centerScale}
+        fill="#556B5E"
+        style={{ transition: 'all 0.5s ease-out' }}
       />
 
-      {/* Leaves - appear after stem grows */}
-      <g opacity={leafOpacity} style={{ transition: 'opacity 0.5s ease-out' }}>
-        {/* Left leaves */}
-        <ellipse cx="150" cy="350" rx="40" ry="60" fill="#5B7B6D" opacity="0.8" transform="rotate(-30 150 350)" />
-        <ellipse cx="130" cy="280" rx="35" ry="55" fill="#5B7B6D" opacity="0.7" transform="rotate(-35 130 280)" />
-        <ellipse cx="140" cy="220" rx="38" ry="58" fill="#5B7B6D" opacity="0.75" transform="rotate(-25 140 220)" />
-
-        {/* Right leaves */}
-        <ellipse cx="250" cy="330" rx="40" ry="60" fill="#5B7B6D" opacity="0.8" transform="rotate(30 250 330)" />
-        <ellipse cx="270" cy="260" rx="35" ry="55" fill="#5B7B6D" opacity="0.7" transform="rotate(35 270 260)" />
-        <ellipse cx="260" cy="200" rx="38" ry="58" fill="#5B7B6D" opacity="0.75" transform="rotate(25 260 200)" />
-      </g>
-
-      {/* Breadfruit - appears in final stage */}
-      <g opacity={fruitOpacity} style={{ transition: 'opacity 0.5s ease-out' }}>
-        <ellipse cx="180" cy="250" rx="25" ry="30" fill="#C4A77D" opacity="0.9" />
-        <ellipse cx="220" cy="230" rx="28" ry="32" fill="#C4A77D" opacity="0.9" />
-        <ellipse cx="200" cy="190" rx="22" ry="28" fill="#C4A77D" opacity="0.85" />
-
-        {/* Fruit texture */}
-        <circle cx="180" cy="245" r="3" fill="#A89070" opacity="0.6" />
-        <circle cx="185" cy="255" r="3" fill="#A89070" opacity="0.6" />
-        <circle cx="220" cy="225" r="3" fill="#A89070" opacity="0.6" />
-        <circle cx="225" cy="235" r="3" fill="#A89070" opacity="0.6" />
-      </g>
-
-      {/* Blossom at top - scales with scroll */}
-      <g
-        transform={`translate(200, ${500 - stemHeight}) scale(${blossomScale})`}
-        style={{ transition: 'all 0.5s ease-out', transformOrigin: 'center' }}
-      >
-        {/* Flower petals */}
-        <circle cx="0" cy="-20" r="12" fill="#F5E6D3" opacity="0.9" />
-        <circle cx="15" cy="-10" r="12" fill="#F5E6D3" opacity="0.9" />
-        <circle cx="15" cy="10" r="12" fill="#F5E6D3" opacity="0.9" />
-        <circle cx="0" cy="20" r="12" fill="#F5E6D3" opacity="0.9" />
-        <circle cx="-15" cy="10" r="12" fill="#F5E6D3" opacity="0.9" />
-        <circle cx="-15" cy="-10" r="12" fill="#F5E6D3" opacity="0.9" />
-
-        {/* Center */}
-        <circle cx="0" cy="0" r="8" fill="#C4A77D" />
-      </g>
+      {/* Center detail - golden accent */}
+      <circle
+        cx="150"
+        cy="150"
+        r={15 * centerScale}
+        fill="#C4A77D"
+        opacity="0.8"
+        style={{ transition: 'all 0.5s ease-out' }}
+      />
     </svg>
   );
 };
@@ -160,11 +147,7 @@ export default function HomePage() {
               {/* Left: Messaging */}
               <div className="text-center lg:text-left">
                 <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
-                  Health is a journey,
-                  <br />
-                  <span className="text-[#556B5E] dark:text-[#5B7B6D]">
-                    not a destination
-                  </span>
+                  Connection with <span className="text-[#556B5E] dark:text-[#5B7B6D]">purpose</span>
                 </h1>
 
                 <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-8 max-w-2xl">
@@ -183,9 +166,9 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* Right: ʻUlu Plant Visual */}
+              {/* Right: ʻUlu Flower Visual */}
               <div className="flex items-center justify-center">
-                <UluPlant scrollProgress={scrollProgress} />
+                <UluFlower scrollProgress={scrollProgress} />
               </div>
             </div>
           </div>
@@ -195,7 +178,7 @@ export default function HomePage() {
         <section className="bg-white dark:bg-slate-900 py-24">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-8">
-              Proactive, Not Reactive
+              The time for Wellness is now
             </h2>
 
             <div className="grid md:grid-cols-2 gap-8 mb-12">
@@ -467,11 +450,11 @@ export default function HomePage() {
           </div>
 
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-            {/* ʻUlu transforms to logo */}
+            {/* ʻUlu Flower transforms to logo */}
             <div className="mb-12 relative h-64 flex items-center justify-center">
               {!showLogo && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <UluPlant scrollProgress={0.8} />
+                <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-1000">
+                  <UluFlower scrollProgress={1} />
                 </div>
               )}
               {showLogo && (
