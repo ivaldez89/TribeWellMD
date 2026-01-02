@@ -183,10 +183,8 @@ export function parseExplanation(
     if (!reason) {
       // Generate a default reason based on whether it's correct or not
       if (isCorrect) {
-        const shortExplanation = result.mechanismsAndEvidence.length > 150
-          ? result.mechanismsAndEvidence.slice(0, 150) + '...'
-          : result.mechanismsAndEvidence;
-        reason = `Correct. ${shortExplanation}`;
+        // Show full explanation without truncation
+        reason = `Correct. ${result.mechanismsAndEvidence}`;
       } else {
         // Try to extract why this option is wrong from the main explanation
         const optionText = option.text.toLowerCase();
@@ -289,10 +287,7 @@ function extractComparisonTable(explanation: string, options: { label: string; t
           .replace(new RegExp(`^${escapedTerm}\\s*`, 'i'), '')
           .trim();
 
-        // Truncate if too long
-        if (characteristic.length > 120) {
-          characteristic = characteristic.slice(0, 117) + '...';
-        }
+        // Show full characteristic without truncation
 
         // Extract caveat if present
         let caveat = '';
@@ -521,17 +516,7 @@ export function LearningObjective({
       // Remove any leading/trailing formatting artifacts
       pearl = pearl.replace(/^[-•*]\s*/, '').replace(/\s*[-•*]$/, '');
 
-      // If the pearl is very long, try to get meaningful content (not truncate mid-word)
-      if (pearl.length > 500) {
-        // Find the last complete sentence within 500 chars
-        const sentences = pearl.substring(0, 500).match(/[^.!?]*[.!?]/g) || [];
-        if (sentences.length > 0) {
-          pearl = sentences.join(' ').trim();
-        } else {
-          pearl = pearl.substring(0, 500).trim() + '...';
-        }
-      }
-
+      // Show full pearl without truncation
       if (pearl.length > 10) {
         return pearl;
       }
@@ -547,7 +532,8 @@ export function LearningObjective({
       const match = explanation.match(pattern);
       if (match) {
         const pearl = (match[1] || match[0]).trim();
-        if (pearl.length > 20 && pearl.length < 400) {
+        // Show full pearl without length restrictions
+        if (pearl.length > 20) {
           return pearl;
         }
       }
