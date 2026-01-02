@@ -5,90 +5,19 @@ import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 
-// Animated TribeWellz Logo with fading branches
-const AnimatedLogo = ({ scrollProgress }: { scrollProgress: number }) => {
-  // Calculate opacity for branches based on scroll
-  const branchOpacity = Math.min(1, scrollProgress * 2);
-
+// Dynamic video component for plant evolution
+const PlantEvolutionVideo = () => {
   return (
-    <div className="relative w-full max-w-md mx-auto">
-      <div className="relative w-64 h-64 mx-auto">
-        {/* Main logo */}
-        <img
-          src="/logo.jpeg"
-          alt="TribeWellMD"
-          className="w-full h-full object-cover rounded-3xl shadow-2xl"
-        />
-
-        {/* Decorative branches that fade in */}
-        <div
-          className="absolute -left-8 top-1/4 w-24 h-24 transition-opacity duration-1000"
-          style={{ opacity: branchOpacity * 0.6 }}
-        >
-          <svg viewBox="0 0 100 100" className="w-full h-full">
-            <path
-              d="M80 50 Q 60 30, 40 50 T 20 70"
-              stroke="#556B5E"
-              strokeWidth="3"
-              fill="none"
-              strokeLinecap="round"
-            />
-            <circle cx="30" cy="60" r="4" fill="#5B7B6D" />
-            <circle cx="50" cy="45" r="3" fill="#5B7B6D" />
-          </svg>
-        </div>
-
-        <div
-          className="absolute -right-8 top-1/3 w-24 h-24 transition-opacity duration-1000"
-          style={{ opacity: branchOpacity * 0.7 }}
-        >
-          <svg viewBox="0 0 100 100" className="w-full h-full">
-            <path
-              d="M20 50 Q 40 35, 60 50 T 80 65"
-              stroke="#556B5E"
-              strokeWidth="3"
-              fill="none"
-              strokeLinecap="round"
-            />
-            <circle cx="70" cy="58" r="4" fill="#5B7B6D" />
-            <circle cx="50" cy="42" r="3" fill="#5B7B6D" />
-          </svg>
-        </div>
-
-        <div
-          className="absolute -bottom-6 left-1/4 w-20 h-20 transition-opacity duration-1000"
-          style={{ opacity: branchOpacity * 0.8 }}
-        >
-          <svg viewBox="0 0 100 100" className="w-full h-full">
-            <path
-              d="M50 20 Q 45 40, 50 60 T 55 80"
-              stroke="#556B5E"
-              strokeWidth="3"
-              fill="none"
-              strokeLinecap="round"
-            />
-            <circle cx="50" cy="70" r="4" fill="#5B7B6D" />
-            <circle cx="48" cy="45" r="3" fill="#5B7B6D" />
-          </svg>
-        </div>
-
-        <div
-          className="absolute -top-6 right-1/4 w-20 h-20 transition-opacity duration-1000"
-          style={{ opacity: branchOpacity * 0.5 }}
-        >
-          <svg viewBox="0 0 100 100" className="w-full h-full">
-            <path
-              d="M50 80 Q 55 60, 50 40 T 45 20"
-              stroke="#556B5E"
-              strokeWidth="3"
-              fill="none"
-              strokeLinecap="round"
-            />
-            <circle cx="50" cy="30" r="4" fill="#5B7B6D" />
-            <circle cx="52" cy="55" r="3" fill="#5B7B6D" />
-          </svg>
-        </div>
-      </div>
+    <div className="relative w-full h-full flex items-center justify-center">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-full max-w-2xl h-auto object-contain"
+      >
+        <source src="/plant-evolution.mp4" type="video/mp4" />
+      </video>
     </div>
   );
 };
@@ -179,9 +108,9 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* Right: Animated Logo */}
+              {/* Right: Plant Evolution Video */}
               <div className="flex items-center justify-center">
-                <AnimatedLogo scrollProgress={scrollProgress} />
+                <PlantEvolutionVideo />
               </div>
             </div>
           </div>
@@ -446,18 +375,9 @@ export default function HomePage() {
           </div>
 
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-            {/* Animated logo transforms to simple logo */}
+            {/* Logo display */}
             <div className="mb-12 relative h-64 flex items-center justify-center">
-              {!showLogo && (
-                <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-1000">
-                  <AnimatedLogo scrollProgress={1} />
-                </div>
-              )}
-              {showLogo && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <TribeWellLogo opacity={1} />
-                </div>
-              )}
+              <TribeWellLogo opacity={1} />
             </div>
 
             <h2 className="font-serif text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6">
