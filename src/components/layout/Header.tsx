@@ -221,9 +221,11 @@ interface HeaderProps {
     dueToday: number;
     totalCards: number;
   };
+  /** Hide theme toggle and Get Started button (for landing page) */
+  isLandingPage?: boolean;
 }
 
-export function Header({ stats }: HeaderProps) {
+export function Header({ stats, isLandingPage = false }: HeaderProps) {
   const isAuthenticated = useIsAuthenticated();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
@@ -497,8 +499,8 @@ export function Header({ stats }: HeaderProps) {
               </>
             )}
 
-            {/* Theme Toggle */}
-            <ThemeToggleSimple variant="greenHeader" />
+            {/* Theme Toggle - hidden on landing page */}
+            {!isLandingPage && <ThemeToggleSimple variant="greenHeader" />}
 
             {/* Stats Badge - only when authenticated */}
             {isAuthenticated && stats && stats.dueToday > 0 && (
@@ -580,7 +582,7 @@ export function Header({ stats }: HeaderProps) {
               </div>
             )}
 
-            {/* Login/Register when not authenticated */}
+            {/* Login/Register when not authenticated - Get Started hidden on landing page */}
             {isAuthenticated === false && (
               <div className="hidden sm:flex items-center gap-1">
                 <Link
@@ -589,12 +591,14 @@ export function Header({ stats }: HeaderProps) {
                 >
                   Sign In
                 </Link>
-                <Link
-                  href="/register"
-                  className="px-3 py-1.5 text-xs font-medium text-[#5B7B6D] bg-white hover:bg-white/90 rounded-lg shadow-soft transition-all"
-                >
-                  Get Started
-                </Link>
+                {!isLandingPage && (
+                  <Link
+                    href="/register"
+                    className="px-3 py-1.5 text-xs font-medium text-[#5B7B6D] bg-white hover:bg-white/90 rounded-lg shadow-soft transition-all"
+                  >
+                    Get Started
+                  </Link>
+                )}
               </div>
             )}
 
@@ -676,13 +680,15 @@ export function Header({ stats }: HeaderProps) {
                   >
                     Sign In
                   </Link>
-                  <Link
-                    href="/register"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full px-4 py-2.5 text-center text-sm font-medium text-[#5B7B6D] bg-white hover:bg-white/90 rounded-lg shadow-soft transition-all"
-                  >
-                    Get Started
-                  </Link>
+                  {!isLandingPage && (
+                    <Link
+                      href="/register"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block w-full px-4 py-2.5 text-center text-sm font-medium text-[#5B7B6D] bg-white hover:bg-white/90 rounded-lg shadow-soft transition-all"
+                    >
+                      Get Started
+                    </Link>
+                  )}
                 </div>
               </>
             )}
