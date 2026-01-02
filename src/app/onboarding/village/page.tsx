@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { joinVillage, updateUserProfile } from '@/lib/storage/profileStorage';
 import { PARTNER_CHARITIES, type Charity } from '@/data/charities';
+import { PublicPageLayout } from '@/components/layout/PublicPageLayout';
 
 // Icon components for charity categories
 const HeartIcon = ({ className = "w-8 h-8" }: { className?: string }) => (
@@ -98,7 +99,8 @@ export default function VillageSelectionPage() {
   const selectedCharity = PARTNER_CHARITIES.find(c => c.id === selectedVillage);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F5F0E8] via-[#E8E0D5] to-[#D4C4B0] dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <PublicPageLayout>
+      <div className="min-h-[calc(100vh-96px)] relative">
       {/* Decorative background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-[#5B7B6D]/30 to-[#7FA08F]/30 dark:from-[#5B7B6D]/20 dark:to-[#7FA08F]/20 rounded-full blur-3xl" />
@@ -261,6 +263,7 @@ export default function VillageSelectionPage() {
           </Link>
         </div>
       </div>
-    </div>
+      </div>
+    </PublicPageLayout>
   );
 }

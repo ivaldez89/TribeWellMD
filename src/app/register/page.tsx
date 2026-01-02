@@ -13,6 +13,7 @@ import {
   MEDICAL_SPECIALTIES,
   type WellnessDimension
 } from '@/lib/storage/profileStorage';
+import { PublicPageLayout } from '@/components/layout/PublicPageLayout';
 
 interface RoleOption {
   id: UserRole;
@@ -297,15 +298,16 @@ export default function RegisterPage() {
   const selectedRoleData = roleOptions.find(r => r.id === selectedRole);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F5F0E8] via-[#E8E0D5] to-[#D4C4B0] dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center p-4">
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-[#C4A77D]/40 to-[#A89070]/40 dark:from-[#C4A77D]/20 dark:to-[#A89070]/20 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-[#D4C4B0]/40 to-[#C4A77D]/40 dark:from-[#C4A77D]/20 dark:to-[#A89070]/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-[#E8E0D5]/30 to-[#D4C4B0]/30 dark:from-[#C4A77D]/10 dark:to-[#A89070]/10 rounded-full blur-3xl" />
-      </div>
+    <PublicPageLayout>
+      <div className="flex items-center justify-center p-4 min-h-[calc(100vh-96px)]">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-[#C4A77D]/40 to-[#A89070]/40 dark:from-[#C4A77D]/20 dark:to-[#A89070]/20 rounded-full blur-3xl" />
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-[#D4C4B0]/40 to-[#C4A77D]/40 dark:from-[#C4A77D]/20 dark:to-[#A89070]/20 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-[#E8E0D5]/30 to-[#D4C4B0]/30 dark:from-[#C4A77D]/10 dark:to-[#A89070]/10 rounded-full blur-3xl" />
+        </div>
 
-      <div className="relative w-full max-w-2xl">
+        <div className="relative w-full max-w-2xl">
         {/* Logo/Brand */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-4 shadow-xl shadow-[#C4A77D]/25 overflow-hidden">
@@ -723,6 +725,7 @@ export default function RegisterPage() {
           Study Smart. Find Your Tribe. Stay Well.
         </p>
       </div>
-    </div>
+      </div>
+    </PublicPageLayout>
   );
 }

@@ -2,8 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
+import { PublicPageLayout } from '@/components/layout/PublicPageLayout';
 
 // Professional SVG Icons
 const Icons = {
@@ -104,10 +103,9 @@ export default function InvestorsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-slate-900">
-      <Header />
-
-      <main className="flex-1">
+    <PublicPageLayout>
+      <div className="min-h-screen flex flex-col bg-white dark:bg-slate-900 -mt-12 -mb-12">
+        <main className="flex-1">
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
@@ -532,9 +530,8 @@ export default function InvestorsPage() {
             </div>
           </div>
         </section>
-      </main>
-
-      <Footer />
-    </div>
+        </main>
+      </div>
+    </PublicPageLayout>
   );
 }
