@@ -16,7 +16,7 @@ const PlantEvolutionVideo = () => {
         playsInline
         className="w-full max-w-2xl h-auto object-contain"
       >
-        <source src="/plant-evolution.mp4" type="video/mp4" />
+        <source src="https://6mx4ugktbhpecq60.public.blob.vercel-storage.com/Untitled%20design.mp4" type="video/mp4" />
       </video>
     </div>
   );
