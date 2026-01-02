@@ -55,11 +55,11 @@ export function SessionChat({
   };
 
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col h-[400px]">
+    <div className="flex flex-col h-full">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-700 flex-shrink-0">
-        <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-          <svg className="w-5 h-5 text-tribe-sage-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div className="px-4 py-2.5 border-b border-[#D4C4B0] dark:border-[#8B7355]/50 flex-shrink-0">
+        <h3 className="font-medium text-sm text-[#8B7355] dark:text-white flex items-center gap-2">
+          <svg className="w-4 h-4 text-[#5B7B6D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -75,11 +75,11 @@ export function SessionChat({
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+      <div className="flex-1 min-h-0 overflow-y-auto p-3 space-y-3">
         {messages.length === 0 ? (
-          <div className="text-center py-8 text-slate-400 dark:text-slate-500 text-sm">
+          <div className="text-center py-8 text-[#A89070] dark:text-[#D4C4B0]/70 text-sm">
             <svg
-              className="w-12 h-12 mx-auto mb-3 opacity-50"
+              className="w-10 h-10 mx-auto mb-3 opacity-50"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -168,7 +168,7 @@ export function SessionChat({
       {/* Input */}
       <form
         onSubmit={handleSubmit}
-        className="p-3 border-t border-slate-200 dark:border-slate-700 flex-shrink-0"
+        className="p-3 border-t border-[#D4C4B0] dark:border-[#8B7355]/50 flex-shrink-0 bg-[#F5F0E8] dark:bg-slate-800/50"
       >
         <div className="flex gap-2">
           <input
@@ -178,12 +178,12 @@ export function SessionChat({
             onChange={(e) => setNewMessage(e.target.value.slice(0, 500))}
             placeholder={isConnected ? 'Type a message...' : 'Connecting...'}
             disabled={!isConnected}
-            className="flex-1 px-4 py-2 bg-slate-100 dark:bg-slate-700 border-0 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-tribe-sage-500 disabled:opacity-50"
+            className="flex-1 px-3 py-2 bg-white dark:bg-slate-700 border border-[#D4C4B0] dark:border-[#8B7355]/50 rounded-xl text-sm text-[#3D5A4C] dark:text-white placeholder-[#A89070] dark:placeholder-[#D4C4B0]/50 focus:outline-none focus:ring-2 focus:ring-[#5B7B6D] focus:border-transparent disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={!newMessage.trim() || !isConnected}
-            className="px-4 py-2 bg-tribe-sage-500 hover:bg-tribe-sage-600 disabled:bg-slate-300 disabled:dark:bg-slate-600 text-white rounded-xl transition-colors disabled:cursor-not-allowed"
+            className="px-3 py-2 bg-[#5B7B6D] hover:bg-[#4A6B5D] disabled:bg-[#D4C4B0] disabled:dark:bg-slate-600 text-white rounded-xl transition-colors disabled:cursor-not-allowed"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
@@ -195,7 +195,7 @@ export function SessionChat({
             </svg>
           </button>
         </div>
-        <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 text-right">
+        <p className="text-xs text-[#A89070] dark:text-[#D4C4B0]/70 mt-1 text-right">
           {newMessage.length}/500
         </p>
       </form>

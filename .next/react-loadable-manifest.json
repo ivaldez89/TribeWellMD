@@ -1,1 +1,17 @@
-{}
+{
+  "lib/apkg/client-parser.ts -> sql.js": {
+    "id": 919,
+    "files": [
+      "static/chunks/aaea2bcf.33f22d50fe5863ca.js",
+      "static/chunks/5862.327ebacee60aabab.js",
+      "static/chunks/803.aae7270c0f75064a.js"
+    ]
+  },
+  "lib/storage/profileStorage.ts -> @/lib/supabase/client": {
+    "id": 8933,
+    "files": [
+      "static/chunks/4033-804936d674220b19.js",
+      "static/chunks/8933.90d7e19faf4d998c.js"
+    ]
+  }
+}

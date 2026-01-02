@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/Header';
 import {
   getUserProfile,
   saveUserProfile,
+  saveAndSyncProfile,
   createDefaultProfile,
   getUserInitials,
   MEDICAL_SPECIALTIES,
@@ -157,18 +158,18 @@ export default function ProfilePage() {
     return 'none';
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!profile) return;
 
     setIsSaving(true);
-    saveUserProfile(profile);
 
-    setTimeout(() => {
-      setIsSaving(false);
-      setIsEditing(false);
-      setSaveMessage('Profile saved successfully!');
-      setTimeout(() => setSaveMessage(null), 3000);
-    }, 500);
+    // Save locally and sync to cloud
+    await saveAndSyncProfile(profile);
+
+    setIsSaving(false);
+    setIsEditing(false);
+    setSaveMessage('Profile saved successfully!');
+    setTimeout(() => setSaveMessage(null), 3000);
   };
 
   const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {

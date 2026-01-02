@@ -28,28 +28,28 @@ export function VignetteProgress({ session, vignette }: VignetteProgressProps) {
     <div className="space-y-6">
       {/* Summary stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-white rounded-xl p-4 border border-slate-200 text-center">
-          <div className="text-2xl font-bold text-slate-800">{totalDecisions}</div>
-          <div className="text-sm text-slate-500">Decisions</div>
+        <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700 text-center">
+          <div className="text-2xl font-bold text-slate-900 dark:text-white">{totalDecisions}</div>
+          <div className="text-sm text-slate-600 dark:text-slate-400">Decisions</div>
         </div>
-        <div className="bg-white rounded-xl p-4 border border-slate-200 text-center">
-          <div className="text-2xl font-bold text-tribe-sage-600">{optimalDecisions}</div>
-          <div className="text-sm text-slate-500">Optimal</div>
+        <div className="bg-emerald-50 dark:bg-emerald-900/30 rounded-xl p-4 border border-emerald-200 dark:border-emerald-800 text-center">
+          <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{optimalDecisions}</div>
+          <div className="text-sm text-slate-600 dark:text-slate-400">Optimal</div>
         </div>
-        <div className="bg-white rounded-xl p-4 border border-slate-200 text-center">
-          <div className="text-2xl font-bold text-amber-600">{acceptableDecisions}</div>
-          <div className="text-sm text-slate-500">Acceptable</div>
+        <div className="bg-amber-50 dark:bg-amber-900/30 rounded-xl p-4 border border-amber-200 dark:border-amber-800 text-center">
+          <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">{acceptableDecisions}</div>
+          <div className="text-sm text-slate-600 dark:text-slate-400">Acceptable</div>
         </div>
-        <div className="bg-white rounded-xl p-4 border border-slate-200 text-center">
-          <div className="text-2xl font-bold text-slate-600">
+        <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700 text-center">
+          <div className="text-2xl font-bold text-slate-900 dark:text-white">
             {minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`}
           </div>
-          <div className="text-sm text-slate-500">Time Spent</div>
+          <div className="text-sm text-slate-600 dark:text-slate-400">Time Spent</div>
         </div>
       </div>
 
       {/* Score ring */}
-      <div className="bg-white rounded-xl p-6 border border-slate-200">
+      <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
         <div className="flex items-center gap-6">
           {/* Circular progress */}
           <div className="relative w-24 h-24 flex-shrink-0">
@@ -62,7 +62,7 @@ export function VignetteProgress({ session, vignette }: VignetteProgressProps) {
                 stroke="currentColor"
                 strokeWidth="8"
                 fill="none"
-                className="text-slate-100"
+                className="text-slate-200 dark:text-slate-700"
               />
               {/* Progress circle */}
               <circle
@@ -73,18 +73,24 @@ export function VignetteProgress({ session, vignette }: VignetteProgressProps) {
                 strokeWidth="8"
                 fill="none"
                 strokeLinecap="round"
-                className={optimalPercentage >= 80 ? 'text-tribe-sage-500' : optimalPercentage >= 50 ? 'text-amber-500' : 'text-red-500'}
+                className={optimalPercentage >= 80 ? 'text-emerald-500' : optimalPercentage >= 50 ? 'text-amber-500' : 'text-red-500'}
                 strokeDasharray={`${(optimalPercentage / 100) * 251.2} 251.2`}
               />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-xl font-bold text-slate-800">{optimalPercentage}%</span>
+              <span className="text-xl font-bold text-slate-900 dark:text-white">{optimalPercentage}%</span>
             </div>
           </div>
 
           {/* Description */}
           <div>
-            <h3 className="font-semibold text-slate-800 mb-1">
+            <h3 className={`font-semibold mb-1 ${
+              optimalPercentage >= 80
+                ? 'text-emerald-600 dark:text-emerald-400'
+                : optimalPercentage >= 50
+                  ? 'text-amber-600 dark:text-amber-400'
+                  : 'text-red-600 dark:text-red-400'
+            }`}>
               {session.completedOptimally
                 ? 'Perfect Path!'
                 : optimalPercentage >= 80
@@ -94,7 +100,7 @@ export function VignetteProgress({ session, vignette }: VignetteProgressProps) {
                     : 'Room for Improvement'
               }
             </h3>
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-slate-700 dark:text-slate-300">
               {session.completedOptimally
                 ? 'You made optimal choices at every decision point.'
                 : `You made ${optimalDecisions} optimal choice${optimalDecisions !== 1 ? 's' : ''} out of ${totalDecisions} decisions.`
@@ -105,8 +111,8 @@ export function VignetteProgress({ session, vignette }: VignetteProgressProps) {
       </div>
 
       {/* Decision path */}
-      <div className="bg-white rounded-xl p-6 border border-slate-200">
-        <h3 className="font-semibold text-slate-800 mb-4">Your Decision Path</h3>
+      <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
+        <h3 className="font-semibold text-slate-900 dark:text-white mb-4">Your Decision Path</h3>
 
         <div className="space-y-3">
           {decisions.map((decision, index) => {
@@ -161,10 +167,10 @@ function DecisionStep({
           className={`
             w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0
             ${wasOptimal
-              ? 'bg-tribe-sage-100 text-tribe-sage-600'
+              ? 'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400'
               : wasAcceptable
-                ? 'bg-amber-100 text-amber-600'
-                : 'bg-red-100 text-red-600'
+                ? 'bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400'
+                : 'bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-400'
             }
           `}
         >
@@ -183,28 +189,28 @@ function DecisionStep({
           )}
         </div>
         {!isLast && (
-          <div className="w-0.5 h-full bg-slate-200 mt-1" />
+          <div className="w-0.5 h-full bg-slate-200 dark:bg-slate-700 mt-1" />
         )}
       </div>
 
       {/* Content */}
       <div className="flex-1 pb-4">
         <div className="flex items-center justify-between mb-1">
-          <span className="text-sm font-medium text-slate-700">
+          <span className="text-sm font-medium text-slate-900 dark:text-white">
             Decision {index}
           </span>
-          <span className="text-xs text-slate-400">{timeSeconds}s</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400">{timeSeconds}s</span>
         </div>
-        <p className="text-sm text-slate-600">{choiceText}</p>
+        <p className="text-sm text-slate-700 dark:text-slate-300">{choiceText}</p>
         <div className="mt-1">
           <span
             className={`
               inline-flex px-2 py-0.5 text-xs font-medium rounded
               ${wasOptimal
-                ? 'bg-tribe-sage-100 text-tribe-sage-700'
+                ? 'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-400'
                 : wasAcceptable
-                  ? 'bg-amber-100 text-amber-700'
-                  : 'bg-red-100 text-red-700'
+                  ? 'bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-400'
+                  : 'bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-400'
               }
             `}
           >

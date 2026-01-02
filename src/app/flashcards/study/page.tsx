@@ -1,19 +1,18 @@
 'use client';
 
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { StudyLayout, useStudyLayout } from '@/components/layout/StudyLayout';
 import { FlashcardViewer } from '@/components/flashcards/FlashcardViewer';
 import { AnswerButtons } from '@/components/flashcards/AnswerButtons';
-import { DeckFilterPanel } from '@/components/deck/DeckFilterPanel';
 import { CardEditor } from '@/components/deck/CardEditor';
 import { PomodoroTimer } from '@/components/study/PomodoroTimer';
 import { recordCardReview, AchievementNotification } from '@/components/study/StudyStats';
-import { BackgroundSelector, useStudyBackground, getBackgroundUrl } from '@/components/study/BackgroundSelector';
-import { ExamCountdown } from '@/components/study/ExamCountdown';
+import { ThemeToggleSimple } from '@/components/theme/ThemeProvider';
 import { useFlashcards } from '@/hooks/useFlashcards';
 import type { Rating } from '@/types';
-import { FireIcon, LightbulbIcon } from '@/components/icons/MedicalIcons';
+import { FireIcon } from '@/components/icons/MedicalIcons';
 
 // Achievement type for notifications
 interface Achievement {
@@ -24,267 +23,6 @@ interface Achievement {
   unlockedAt: string | null;
   requirement: number;
   type: 'cards' | 'streak' | 'days' | 'pomodoro';
-}
-
-// Ambient sound definitions - generated using Web Audio API
-const AMBIENT_SOUNDS = [
-  { id: 'whitenoise', name: 'White Noise', icon: 'radio' },
-  { id: 'pinknoise', name: 'Pink Noise', icon: 'waves' },
-  { id: 'brownnoise', name: 'Brown Noise', icon: 'sound' },
-  { id: 'rain', name: 'Rain', icon: 'cloud' },
-  { id: 'wind', name: 'Wind', icon: 'wind' },
-  { id: 'binaural', name: 'Focus 40Hz', icon: 'brain' },
-];
-
-// Study music streams - royalty-free radio stations
-const MUSIC_STREAMS = [
-  { id: 'lofi', name: 'Lofi Hip Hop', icon: 'headphones', url: 'https://streams.ilovemusic.de/iloveradio17.mp3' },
-  { id: 'classical', name: 'Classical', icon: 'music', url: 'https://live.musopen.org:8085/streamvbr0' },
-  { id: 'piano', name: 'Piano', icon: 'piano', url: 'https://streams.ilovemusic.de/iloveradio28.mp3' },
-  { id: 'jazz', name: 'Jazz', icon: 'jazz', url: 'https://streaming.radio.co/s774887f7b/listen' },
-  { id: 'ambient', name: 'Ambient', icon: 'ambient', url: 'https://streams.ilovemusic.de/iloveradio6.mp3' },
-  { id: 'chillout', name: 'Chill Out', icon: 'coffee', url: 'https://streams.ilovemusic.de/iloveradio7.mp3' },
-];
-
-// Noise generator using Web Audio API
-class NoiseGenerator {
-  private audioContext: AudioContext | null = null;
-  private gainNode: GainNode | null = null;
-  private noiseNode: AudioBufferSourceNode | null = null;
-  private oscillators: OscillatorNode[] = [];
-  private isPlaying = false;
-
-  start(type: string, volume: number) {
-    this.stop();
-
-    this.audioContext = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
-    this.gainNode = this.audioContext.createGain();
-    this.gainNode.gain.value = volume;
-    this.gainNode.connect(this.audioContext.destination);
-
-    switch (type) {
-      case 'whitenoise':
-        this.createWhiteNoise();
-        break;
-      case 'pinknoise':
-        this.createPinkNoise();
-        break;
-      case 'brownnoise':
-        this.createBrownNoise();
-        break;
-      case 'rain':
-        this.createRain();
-        break;
-      case 'wind':
-        this.createWind();
-        break;
-      case 'binaural':
-        this.createBinaural();
-        break;
-    }
-
-    this.isPlaying = true;
-  }
-
-  private createWhiteNoise() {
-    if (!this.audioContext || !this.gainNode) return;
-
-    const bufferSize = 2 * this.audioContext.sampleRate;
-    const buffer = this.audioContext.createBuffer(1, bufferSize, this.audioContext.sampleRate);
-    const output = buffer.getChannelData(0);
-
-    for (let i = 0; i < bufferSize; i++) {
-      output[i] = Math.random() * 2 - 1;
-    }
-
-    this.noiseNode = this.audioContext.createBufferSource();
-    this.noiseNode.buffer = buffer;
-    this.noiseNode.loop = true;
-    this.noiseNode.connect(this.gainNode);
-    this.noiseNode.start();
-  }
-
-  private createPinkNoise() {
-    if (!this.audioContext || !this.gainNode) return;
-
-    const bufferSize = 2 * this.audioContext.sampleRate;
-    const buffer = this.audioContext.createBuffer(1, bufferSize, this.audioContext.sampleRate);
-    const output = buffer.getChannelData(0);
-
-    let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
-    for (let i = 0; i < bufferSize; i++) {
-      const white = Math.random() * 2 - 1;
-      b0 = 0.99886 * b0 + white * 0.0555179;
-      b1 = 0.99332 * b1 + white * 0.0750759;
-      b2 = 0.96900 * b2 + white * 0.1538520;
-      b3 = 0.86650 * b3 + white * 0.3104856;
-      b4 = 0.55000 * b4 + white * 0.5329522;
-      b5 = -0.7616 * b5 - white * 0.0168980;
-      output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.11;
-      b6 = white * 0.115926;
-    }
-
-    this.noiseNode = this.audioContext.createBufferSource();
-    this.noiseNode.buffer = buffer;
-    this.noiseNode.loop = true;
-    this.noiseNode.connect(this.gainNode);
-    this.noiseNode.start();
-  }
-
-  private createBrownNoise() {
-    if (!this.audioContext || !this.gainNode) return;
-
-    const bufferSize = 2 * this.audioContext.sampleRate;
-    const buffer = this.audioContext.createBuffer(1, bufferSize, this.audioContext.sampleRate);
-    const output = buffer.getChannelData(0);
-
-    let lastOut = 0;
-    for (let i = 0; i < bufferSize; i++) {
-      const white = Math.random() * 2 - 1;
-      output[i] = (lastOut + (0.02 * white)) / 1.02;
-      lastOut = output[i];
-      output[i] *= 3.5;
-    }
-
-    this.noiseNode = this.audioContext.createBufferSource();
-    this.noiseNode.buffer = buffer;
-    this.noiseNode.loop = true;
-    this.noiseNode.connect(this.gainNode);
-    this.noiseNode.start();
-  }
-
-  private createRain() {
-    if (!this.audioContext || !this.gainNode) return;
-
-    const bufferSize = 2 * this.audioContext.sampleRate;
-    const buffer = this.audioContext.createBuffer(1, bufferSize, this.audioContext.sampleRate);
-    const output = buffer.getChannelData(0);
-
-    let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
-    for (let i = 0; i < bufferSize; i++) {
-      const white = Math.random() * 2 - 1;
-      b0 = 0.99886 * b0 + white * 0.0555179;
-      b1 = 0.99332 * b1 + white * 0.0750759;
-      b2 = 0.96900 * b2 + white * 0.1538520;
-      b3 = 0.86650 * b3 + white * 0.3104856;
-      b4 = 0.55000 * b4 + white * 0.5329522;
-      b5 = -0.7616 * b5 - white * 0.0168980;
-      output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.11;
-      b6 = white * 0.115926;
-
-      if (Math.random() > 0.9997) {
-        output[i] += (Math.random() - 0.5) * 0.3;
-      }
-    }
-
-    this.noiseNode = this.audioContext.createBufferSource();
-    this.noiseNode.buffer = buffer;
-    this.noiseNode.loop = true;
-
-    const filter = this.audioContext.createBiquadFilter();
-    filter.type = 'lowpass';
-    filter.frequency.value = 3000;
-
-    this.noiseNode.connect(filter);
-    filter.connect(this.gainNode);
-    this.noiseNode.start();
-  }
-
-  private createWind() {
-    if (!this.audioContext || !this.gainNode) return;
-
-    const bufferSize = 4 * this.audioContext.sampleRate;
-    const buffer = this.audioContext.createBuffer(1, bufferSize, this.audioContext.sampleRate);
-    const output = buffer.getChannelData(0);
-
-    let lastOut = 0;
-    for (let i = 0; i < bufferSize; i++) {
-      const white = Math.random() * 2 - 1;
-      output[i] = (lastOut + (0.02 * white)) / 1.02;
-      lastOut = output[i];
-      const mod = 0.7 + 0.3 * Math.sin(i / (this.audioContext!.sampleRate * 3));
-      output[i] *= 3.5 * mod;
-    }
-
-    this.noiseNode = this.audioContext.createBufferSource();
-    this.noiseNode.buffer = buffer;
-    this.noiseNode.loop = true;
-
-    const filter = this.audioContext.createBiquadFilter();
-    filter.type = 'lowpass';
-    filter.frequency.value = 800;
-
-    this.noiseNode.connect(filter);
-    filter.connect(this.gainNode);
-    this.noiseNode.start();
-  }
-
-  private createBinaural() {
-    if (!this.audioContext || !this.gainNode) return;
-
-    const baseFreq = 200;
-    const beatFreq = 40;
-
-    const leftOsc = this.audioContext.createOscillator();
-    const rightOsc = this.audioContext.createOscillator();
-
-    leftOsc.frequency.value = baseFreq;
-    rightOsc.frequency.value = baseFreq + beatFreq;
-
-    leftOsc.type = 'sine';
-    rightOsc.type = 'sine';
-
-    const leftPan = this.audioContext.createStereoPanner();
-    const rightPan = this.audioContext.createStereoPanner();
-    leftPan.pan.value = -1;
-    rightPan.pan.value = 1;
-
-    leftOsc.connect(leftPan);
-    rightOsc.connect(rightPan);
-    leftPan.connect(this.gainNode);
-    rightPan.connect(this.gainNode);
-
-    leftOsc.start();
-    rightOsc.start();
-
-    this.oscillators = [leftOsc, rightOsc];
-  }
-
-  setVolume(volume: number) {
-    if (this.gainNode) {
-      this.gainNode.gain.value = volume;
-    }
-  }
-
-  stop() {
-    if (this.noiseNode) {
-      this.noiseNode.stop();
-      this.noiseNode.disconnect();
-      this.noiseNode = null;
-    }
-
-    this.oscillators.forEach(osc => {
-      osc.stop();
-      osc.disconnect();
-    });
-    this.oscillators = [];
-
-    if (this.gainNode) {
-      this.gainNode.disconnect();
-      this.gainNode = null;
-    }
-
-    if (this.audioContext) {
-      this.audioContext.close();
-      this.audioContext = null;
-    }
-
-    this.isPlaying = false;
-  }
-
-  getIsPlaying() {
-    return this.isPlaying;
-  }
 }
 
 export default function FlashcardsPage() {
@@ -314,166 +52,17 @@ export default function FlashcardsPage() {
   } = useFlashcards();
 
   const [showEditor, setShowEditor] = useState(false);
-  const [showFilters, setShowFilters] = useState(false);
-  const [showAmbient, setShowAmbient] = useState(false);
-  const [showPomodoro, setShowPomodoro] = useState(false);
   const [newAchievement, setNewAchievement] = useState<Achievement | null>(null);
   const [cramMode, setCramMode] = useState(false);
   const [cramIndex, setCramIndex] = useState(0);
   const [cramRevealed, setCramRevealed] = useState(false);
 
+  // Panel state from StudyLayout hook
+  const { activePanel, setActivePanel, togglePanel } = useStudyLayout();
+
   // Cram mode: cards with lapses (cards user got wrong before)
   const cramCards = cards.filter(card => card.spacedRepetition.lapses > 0);
   const currentCramCard = cramMode ? cramCards[cramIndex] : null;
-
-  // Study background state
-  const { selectedBackground, setSelectedBackground, opacity, setOpacity } = useStudyBackground();
-
-  // Ambient sound state
-  const [currentSound, setCurrentSound] = useState<string | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.3);
-  const noiseGenRef = useRef<NoiseGenerator | null>(null);
-
-  // Music stream state
-  const [currentMusic, setCurrentMusic] = useState<string | null>(null);
-  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
-  const [isMusicLoading, setIsMusicLoading] = useState(false);
-  const [musicVolume, setMusicVolume] = useState(0.3);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  // Initialize noise generator
-  useEffect(() => {
-    noiseGenRef.current = new NoiseGenerator();
-
-    return () => {
-      if (noiseGenRef.current) {
-        noiseGenRef.current.stop();
-      }
-    };
-  }, []);
-
-  // Initialize audio element for music
-  useEffect(() => {
-    audioRef.current = new Audio();
-    audioRef.current.volume = musicVolume;
-    audioRef.current.preload = 'auto';
-
-    // Event listeners for loading state
-    const audio = audioRef.current;
-    const handleCanPlay = () => setIsMusicLoading(false);
-    const handleWaiting = () => setIsMusicLoading(true);
-    const handlePlaying = () => setIsMusicLoading(false);
-    const handleError = () => {
-      setIsMusicLoading(false);
-      setIsMusicPlaying(false);
-      console.error('Music stream error');
-    };
-
-    audio.addEventListener('canplay', handleCanPlay);
-    audio.addEventListener('waiting', handleWaiting);
-    audio.addEventListener('playing', handlePlaying);
-    audio.addEventListener('error', handleError);
-
-    return () => {
-      audio.removeEventListener('canplay', handleCanPlay);
-      audio.removeEventListener('waiting', handleWaiting);
-      audio.removeEventListener('playing', handlePlaying);
-      audio.removeEventListener('error', handleError);
-      audio.pause();
-      audio.src = '';
-    };
-  }, []);
-
-  // Update sound volume
-  useEffect(() => {
-    if (noiseGenRef.current && isPlaying) {
-      noiseGenRef.current.setVolume(volume);
-    }
-  }, [volume, isPlaying]);
-
-  // Update music volume
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = musicVolume;
-    }
-  }, [musicVolume]);
-
-  // Play/pause ambient sound
-  const playSound = useCallback((soundId: string) => {
-    if (!noiseGenRef.current) return;
-
-    // Stop music if playing
-    if (audioRef.current && isMusicPlaying) {
-      audioRef.current.pause();
-      setIsMusicPlaying(false);
-      setCurrentMusic(null);
-    }
-
-    if (currentSound === soundId && isPlaying) {
-      noiseGenRef.current.stop();
-      setIsPlaying(false);
-    } else {
-      noiseGenRef.current.stop();
-      noiseGenRef.current.start(soundId, volume);
-      setCurrentSound(soundId);
-      setIsPlaying(true);
-    }
-  }, [currentSound, isPlaying, volume, isMusicPlaying]);
-
-  // Play/pause music stream
-  const playMusic = useCallback((musicId: string) => {
-    if (!audioRef.current) return;
-
-    // Stop ambient sound if playing
-    if (noiseGenRef.current && isPlaying) {
-      noiseGenRef.current.stop();
-      setIsPlaying(false);
-      setCurrentSound(null);
-    }
-
-    if (currentMusic === musicId && isMusicPlaying) {
-      audioRef.current.pause();
-      setIsMusicPlaying(false);
-      setIsMusicLoading(false);
-    } else {
-      const stream = MUSIC_STREAMS.find(s => s.id === musicId);
-      if (stream) {
-        setIsMusicLoading(true);
-        setCurrentMusic(musicId);
-        audioRef.current.src = stream.url;
-        audioRef.current.play().then(() => {
-          setIsMusicPlaying(true);
-        }).catch((err) => {
-          console.error('Failed to play:', err);
-          setIsMusicLoading(false);
-          setIsMusicPlaying(false);
-        });
-      }
-    }
-  }, [currentMusic, isMusicPlaying, isPlaying]);
-
-  const stopSound = useCallback(() => {
-    if (noiseGenRef.current) {
-      noiseGenRef.current.stop();
-    }
-    setIsPlaying(false);
-    setCurrentSound(null);
-  }, []);
-
-  const stopMusic = useCallback(() => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.src = '';
-    }
-    setIsMusicPlaying(false);
-    setCurrentMusic(null);
-  }, []);
-
-  const stopAll = useCallback(() => {
-    stopSound();
-    stopMusic();
-  }, [stopSound, stopMusic]);
 
   // Auto-start session when page loads with due cards
   useEffect(() => {
@@ -537,11 +126,41 @@ export default function FlashcardsPage() {
     );
   }
 
-  // No cards due - show completion screen
+  // No cards due - show completion screen (uses simplified header, not full StudyLayout)
   if (filteredDueCards.length === 0) {
     return (
       <div className="min-h-screen bg-background">
-        <Header stats={stats} />
+        {/* Simple Header for completion screen */}
+        <header className="fixed top-0 left-0 right-0 z-50 h-12 bg-[#5B7B6D] dark:bg-[#3d5a4d] text-white shadow-lg">
+          <div className="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-full">
+              <div className="flex items-center gap-1 sm:gap-2">
+                <Link href="/flashcards" className="p-1.5 -ml-1 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </Link>
+                <Link href="/home" className="flex items-center gap-1.5 group flex-shrink-0">
+                  <div className="w-7 h-7 rounded-lg shadow-soft group-hover:shadow-soft-md transition-shadow overflow-hidden">
+                    <img src="/logo.jpeg" alt="TribeWellMD" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="hidden sm:block">
+                    <span className="text-sm font-bold text-white">Tribe</span>
+                    <span className="text-sm font-bold text-[#C4A77D]">Well</span>
+                    <span className="text-sm font-light text-white/80">MD</span>
+                  </div>
+                </Link>
+              </div>
+              <div className="flex items-center gap-1.5 px-2 py-1 bg-white/10 rounded-lg">
+                <span className="text-sm font-medium text-white">Complete</span>
+              </div>
+              <div className="flex items-center gap-1 sm:gap-2">
+                <ThemeToggleSimple variant="greenHeader" />
+              </div>
+            </div>
+          </div>
+        </header>
+        <div className="h-12" />
 
         <main className="max-w-5xl mx-auto px-4 py-6">
           <div className="bg-surface rounded-2xl shadow-sm border border-border p-8 text-center">
@@ -618,291 +237,41 @@ export default function FlashcardsPage() {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-background relative">
-      <Header stats={stats} />
+  // Header center content: Card number and session stats
+  const headerCenter = (
+    <>
+      {/* Card Number */}
+      <div className="flex items-center gap-1.5 px-2 py-1 bg-white/10 rounded-lg">
+        <span className="text-[10px] text-white/70 hidden sm:inline">Card</span>
+        <span className="font-bold text-sm text-white tabular-nums">
+          {currentIndex + 1}<span className="text-white/60 font-normal">/{filteredDueCards.length}</span>
+        </span>
+      </div>
 
-      {/* Background overlay - positioned below header, behind all content */}
-      {selectedBackground !== 'none' && (
-        <div
-          className="fixed left-0 right-0 bottom-0 bg-no-repeat transition-opacity duration-500 pointer-events-none"
-          style={{
-            top: '64px', // Right below header
-            backgroundImage: `url(${getBackgroundUrl(selectedBackground)})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'fixed',
-            opacity: opacity,
-            zIndex: 0
-          }}
-        />
-      )}
-
-      <main className="relative max-w-5xl mx-auto px-4 py-8" style={{ zIndex: 2 }}>
-        {/* Session progress bar - solid background to cover the scene */}
-        <div className="mb-6 bg-surface-muted/95 backdrop-blur-sm py-3 -mx-4 px-4 -mt-8 pt-8 rounded-b-xl">
-          {/* Top row: Stats */}
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-3">
-              {session && (
-                <>
-                  <div className="flex items-center gap-1.5 text-sm">
-                    <span className="text-primary font-medium">{session.cardsCorrect}</span>
-                    <span className="text-content-muted">correct</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 text-sm">
-                    <span className="text-error font-medium">{session.cardsFailed}</span>
-                    <span className="text-content-muted">again</span>
-                  </div>
-                </>
-              )}
-
-              {hasActiveFilters && (
-                <div className="flex items-center gap-1.5 text-xs px-2 py-1 bg-info-light text-info rounded-lg">
-                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-                  </svg>
-                  <span>Filtered</span>
-                </div>
-              )}
-            </div>
-
-            <button
-              onClick={endSession}
-              className="text-sm text-content-muted hover:text-content-secondary transition-colors"
-            >
-              End
-            </button>
-          </div>
-
-          {/* Bottom row: Tools - scrollable on mobile */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 -mb-1 scrollbar-hide">
-            {/* Pomodoro Timer (compact) */}
-            <PomodoroTimer />
-
-            {/* Exam Countdown (compact) - hide label on mobile */}
-            <ExamCountdown variant="compact" />
-
-            {/* Cram Mode toggle */}
-            <button
-              onClick={() => {
-                setCramMode(!cramMode);
-                setCramIndex(0);
-                setCramRevealed(false);
-              }}
-              disabled={cramCards.length === 0}
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors whitespace-nowrap flex-shrink-0 ${
-                cramMode
-                  ? 'bg-accent-light text-accent border border-accent'
-                  : cramCards.length > 0
-                    ? 'text-content-muted hover:text-content-secondary hover:bg-surface-muted'
-                    : 'text-content-muted/50 cursor-not-allowed'
-              }`}
-              title={cramCards.length === 0 ? 'No cards to cram - you haven\'t missed any yet!' : `Cram ${cramCards.length} missed cards`}
-            >
-              <FireIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">Cram</span>
-              {cramCards.length > 0 && (
-                <span className={`text-xs px-1.5 py-0.5 rounded-full ${
-                  cramMode ? 'bg-accent/20' : 'bg-surface-muted'
-                }`}>
-                  {cramCards.length}
-                </span>
-              )}
-            </button>
-
-            {/* Sounds & Music button */}
-            <button
-              onClick={() => setShowAmbient(!showAmbient)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors whitespace-nowrap flex-shrink-0 ${
-                showAmbient || isPlaying || isMusicPlaying
-                  ? 'bg-info-light text-info'
-                  : 'text-content-muted hover:text-content-secondary hover:bg-surface-muted'
-              }`}
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-              </svg>
-              {(isPlaying || isMusicPlaying) && (
-                <span className="w-2 h-2 bg-info rounded-full animate-pulse" />
-              )}
-              <span className="hidden sm:inline">Audio</span>
-            </button>
-
-            {/* Background scene selector */}
-            <BackgroundSelector
-              selectedBackground={selectedBackground}
-              opacity={opacity}
-              onBackgroundChange={setSelectedBackground}
-              onOpacityChange={setOpacity}
-              variant="light"
-            />
-
-            {/* Toggle filters button */}
-            <button
-              onClick={() => setShowFilters(!showFilters)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors whitespace-nowrap flex-shrink-0 ${
-                showFilters
-                  ? 'bg-info-light text-info'
-                  : 'text-content-muted hover:text-content-secondary hover:bg-surface-muted'
-              }`}
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-              </svg>
-              <span className="hidden sm:inline">Filters</span>
-            </button>
-          </div>
+      {/* Session Stats */}
+      {session && (
+        <div className="flex items-center gap-1.5 px-2 py-1 bg-white/10 rounded-lg">
+          <span className="text-sm font-medium text-green-300">{session.cardsCorrect}</span>
+          <span className="text-white/40">/</span>
+          <span className="text-sm font-medium text-red-300">{session.cardsFailed}</span>
         </div>
+      )}
+    </>
+  );
 
-        {/* Audio Panel - Ambient Sounds & Music */}
-        {showAmbient && (
-          <div className="mb-6 p-4 bg-surface rounded-2xl border border-border shadow-sm">
-            {/* Header with Stop button */}
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-content flex items-center gap-2">
-                <svg className="w-5 h-5 text-info" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                </svg>
-                Sounds & Music
-              </h3>
-              {(isPlaying || isMusicPlaying) && (
-                <button
-                  onClick={stopAll}
-                  className="text-sm px-3 py-1 bg-error-light text-error rounded-lg hover:bg-error/20 transition-colors"
-                >
-                  Stop All
-                </button>
-              )}
-            </div>
+  // Header right content: Pomodoro timer
+  const headerRight = <PomodoroTimer variant="header" />;
 
-            {/* Ambient Sounds Section */}
-            <div className="mb-5">
-              <h4 className="text-sm font-medium text-content-muted mb-2 flex items-center gap-2">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                </svg>
-                Ambient Sounds
-              </h4>
-              <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-3">
-                {AMBIENT_SOUNDS.map((sound) => (
-                  <button
-                    key={sound.id}
-                    onClick={() => playSound(sound.id)}
-                    className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all ${
-                      currentSound === sound.id && isPlaying
-                        ? 'bg-info-light border-2 border-info shadow-sm'
-                        : 'bg-surface-muted border-2 border-transparent hover:bg-surface'
-                    }`}
-                  >
-                    <svg className="w-5 h-5 text-content-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                    </svg>
-                    <span className="text-xs font-medium text-content-muted">{sound.name}</span>
-                    {currentSound === sound.id && isPlaying && (
-                      <span className="w-2 h-2 bg-info rounded-full animate-pulse" />
-                    )}
-                  </button>
-                ))}
-              </div>
-              {isPlaying && (
-                <div className="flex items-center gap-3">
-                  <svg className="w-4 h-4 text-content-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                  </svg>
-                  <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.05"
-                    value={volume}
-                    onChange={(e) => setVolume(parseFloat(e.target.value))}
-                    className="flex-1 h-2 bg-border rounded-lg appearance-none cursor-pointer accent-info"
-                  />
-                  <span className="text-sm text-content-muted w-12 text-right">{Math.round(volume * 100)}%</span>
-                </div>
-              )}
-            </div>
-
-            {/* Divider */}
-            <div className="border-t border-border my-4" />
-
-            {/* Study Music Section */}
-            <div>
-              <h4 className="text-sm font-medium text-content-muted mb-2 flex items-center gap-2">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                </svg>
-                Study Music
-              </h4>
-              <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-3">
-                {MUSIC_STREAMS.map((music) => (
-                  <button
-                    key={music.id}
-                    onClick={() => playMusic(music.id)}
-                    disabled={isMusicLoading && currentMusic !== music.id}
-                    className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all ${
-                      currentMusic === music.id && (isMusicPlaying || isMusicLoading)
-                        ? 'bg-primary-light border-2 border-primary shadow-sm'
-                        : 'bg-surface-muted border-2 border-transparent hover:bg-surface'
-                    } ${isMusicLoading && currentMusic !== music.id ? 'opacity-50' : ''}`}
-                  >
-                    <svg className="w-5 h-5 text-content-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                    </svg>
-                    <span className="text-xs font-medium text-content-muted">{music.name}</span>
-                    {currentMusic === music.id && isMusicLoading && (
-                      <span className="w-3 h-3 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-                    )}
-                    {currentMusic === music.id && isMusicPlaying && !isMusicLoading && (
-                      <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                    )}
-                  </button>
-                ))}
-              </div>
-              {isMusicPlaying && (
-                <div className="flex items-center gap-3">
-                  <svg className="w-4 h-4 text-content-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                  </svg>
-                  <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.05"
-                    value={musicVolume}
-                    onChange={(e) => setMusicVolume(parseFloat(e.target.value))}
-                    className="flex-1 h-2 bg-border rounded-lg appearance-none cursor-pointer accent-primary"
-                  />
-                  <span className="text-sm text-content-muted w-12 text-right">{Math.round(musicVolume * 100)}%</span>
-                </div>
-              )}
-            </div>
-
-            {/* Tips */}
-            <p className="mt-4 text-xs text-content-muted flex items-start gap-1.5">
-              <LightbulbIcon className="w-4 h-4 flex-shrink-0 text-[#F5D76E]" />
-              <span>Ambient sounds are generated locally. Music streams from free internet radio stations.
-              Use headphones for binaural beats (Focus 40Hz).</span>
-            </p>
-          </div>
-        )}
-
-        {/* Collapsible filter panel */}
-        {showFilters && (
-          <div className="mb-6">
-            <DeckFilterPanel
-              filters={filters}
-              availableTags={availableTags}
-              availableSystems={availableSystems}
-              filteredCount={filteredDueCards.length}
-              totalDueCount={dueCards.length}
-              onFiltersChange={setFilters}
-              onClearFilters={clearFilters}
-            />
-          </div>
-        )}
-
+  return (
+    <StudyLayout
+      backHref="/flashcards"
+      backLabel="Back to Flashcards"
+      headerCenter={headerCenter}
+      headerRight={headerRight}
+      activePanel={activePanel}
+      onPanelChange={setActivePanel}
+    >
+      <main className="relative px-4 py-6 max-w-5xl mx-auto">
         {/* Cram Mode UI */}
         {cramMode && (
           <div className="mb-6">
@@ -1001,16 +370,16 @@ export default function FlashcardsPage() {
           </>
         )}
 
-        {/* Keyboard shortcuts help */}
+        {/* Keyboard shortcuts help - with readable background */}
         <div className="mt-8 text-center">
-          <p className="text-sm text-content-muted">
-            <kbd className="px-1.5 py-0.5 bg-surface-muted rounded text-xs font-mono">Space</kbd> to reveal
-            <span className="mx-2">•</span>
-            <kbd className="px-1.5 py-0.5 bg-surface-muted rounded text-xs font-mono">1-4</kbd> to rate
+          <p className="inline-block study-overlay-surface-sm text-sm">
+            <kbd className="study-overlay-kbd">Space</kbd> to reveal
+            <span className="mx-2 study-overlay-muted">•</span>
+            <kbd className="study-overlay-kbd">1-4</kbd> to rate
             {cramMode && (
               <>
-                <span className="mx-2">•</span>
-                <kbd className="px-1.5 py-0.5 bg-accent-light rounded text-xs font-mono">Esc</kbd> exit cram
+                <span className="mx-2 study-overlay-muted">•</span>
+                <kbd className="study-overlay-kbd">Esc</kbd> exit cram
               </>
             )}
           </p>
@@ -1034,6 +403,9 @@ export default function FlashcardsPage() {
           onClose={() => setNewAchievement(null)}
         />
       )}
-    </div>
+
+      {/* Shared Footer */}
+      <Footer />
+    </StudyLayout>
   );
 }

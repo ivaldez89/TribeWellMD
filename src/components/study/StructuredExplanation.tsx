@@ -492,101 +492,85 @@ export function InlineExplanation({ label, reason, isCorrect, isSelected }: Inli
 }
 
 // Clinical Pearl component - High-Yield Learning Objective
-// Format: "The most effective management for [Condition] in the setting of [Finding] is [Treatment] because [Mechanism]."
-// Must be a standalone fact usable on a real exam
+// Must extract the actual Clinical Pearl from the structured explanation
+// Format should be standalone and test-day actionable
 interface LearningObjectiveProps {
   explanation: string;
   options: { label: string; text: string }[];
   correctAnswer: string;
+  onCreateFlashcard?: (pearl: string) => void;
+  isPearlSaved?: boolean; // Visual feedback when pearl is already saved
 }
 
 export function LearningObjective({
   explanation,
   options,
-  correctAnswer
+  correctAnswer,
+  onCreateFlashcard,
+  isPearlSaved = false
 }: LearningObjectiveProps) {
-  const structured = useMemo(() => {
-    return parseExplanation(explanation, options, correctAnswer);
-  }, [explanation, options, correctAnswer]);
-
-  // Generate a Clinical Pearl in the required format
+  // Extract the Clinical Pearl directly from the explanation
+  // The explanation should have format: "Pathophysiology: ... Distractor Analysis: ... Clinical Pearl: ..."
   const clinicalPearl = useMemo(() => {
+    // First, try to extract the Clinical Pearl section directly
+    // Use a greedy regex that captures everything after "Clinical Pearl:" to the end
+    const pearlMatch = explanation.match(/Clinical Pearl:\s*([\s\S]+?)$/i);
+    if (pearlMatch && pearlMatch[1]) {
+      let pearl = pearlMatch[1].trim();
+
+      // Remove any leading/trailing formatting artifacts
+      pearl = pearl.replace(/^[-•*]\s*/, '').replace(/\s*[-•*]$/, '');
+
+      // If the pearl is very long, try to get meaningful content (not truncate mid-word)
+      if (pearl.length > 500) {
+        // Find the last complete sentence within 500 chars
+        const sentences = pearl.substring(0, 500).match(/[^.!?]*[.!?]/g) || [];
+        if (sentences.length > 0) {
+          pearl = sentences.join(' ').trim();
+        } else {
+          pearl = pearl.substring(0, 500).trim() + '...';
+        }
+      }
+
+      if (pearl.length > 10) {
+        return pearl;
+      }
+    }
+
+    // Fallback: Try to find high-yield patterns in the explanation
+    const highYieldPatterns = [
+      /(?:High-Yield|Takeaway|Key Point|Remember|Board Tip|NBME)[:\s]+([^.]+\.)/i,
+      /(?:first-line|gold standard|most important|always|never)[^.]*\./i,
+    ];
+
+    for (const pattern of highYieldPatterns) {
+      const match = explanation.match(pattern);
+      if (match) {
+        const pearl = (match[1] || match[0]).trim();
+        if (pearl.length > 20 && pearl.length < 400) {
+          return pearl;
+        }
+      }
+    }
+
+    // Last resort: Use the correct answer with context
     const correctOption = options.find(o => o.label === correctAnswer);
     const correctTerm = correctOption?.text?.split(/[,.(]/)[0]?.trim() || correctAnswer;
 
-    // Try to extract condition, finding, and mechanism from explanation
-    const explanationLower = explanation.toLowerCase();
-
-    // Extract condition (what the patient has)
-    let condition = '';
-    const conditionPatterns = [
-      /(?:diagnosed with|has|presenting with|suffering from)\s+([^,.]+)/i,
-      /(?:patient with)\s+([^,.]+)/i,
-      /(?:this is|consistent with|suggests?)\s+([^,.]+)/i,
-    ];
-    for (const pattern of conditionPatterns) {
-      const match = explanation.match(pattern);
-      if (match && match[1].length < 60) {
-        condition = match[1].trim();
-        break;
-      }
+    // Try to extract the pathophysiology first sentence as context
+    const pathoMatch = explanation.match(/Pathophysiology:\s*([^.]+\.)/i);
+    if (pathoMatch && pathoMatch[1]) {
+      return pathoMatch[1].trim();
     }
 
-    // Extract key clinical finding
-    let finding = '';
-    const findingPatterns = [
-      /(?:in the setting of|with|showing|demonstrates?)\s+([^,.]+(?:and|,)[^,.]+|[^,.]+)/i,
-      /(?:laboratory|labs?|imaging|exam)\s+(?:shows?|reveals?|demonstrates?)\s+([^,.]+)/i,
-      /(?:presents? with)\s+([^,.]+)/i,
-    ];
-    for (const pattern of findingPatterns) {
-      const match = explanation.match(pattern);
-      if (match && match[1].length < 80 && match[1].length > 5) {
-        finding = match[1].trim();
-        break;
-      }
-    }
+    return `${correctTerm} is the correct answer for this clinical scenario.`;
+  }, [explanation, options, correctAnswer]);
 
-    // Extract mechanism (why this treatment works)
-    let mechanism = '';
-    const mechanismPatterns = [
-      /(?:because|due to|as it|since it|which)\s+([^.]+)/i,
-      /(?:works by|acts by|mechanism)\s+([^.]+)/i,
-      /(?:by)\s+(inhibiting|blocking|activating|increasing|decreasing|reducing)\s+([^.]+)/i,
-    ];
-    for (const pattern of mechanismPatterns) {
-      const match = explanation.match(pattern);
-      if (match) {
-        mechanism = match[1]?.trim() || (match[2] ? `${match[1]} ${match[2]}`.trim() : '');
-        if (mechanism.length > 10 && mechanism.length < 100) break;
-        mechanism = '';
-      }
+  const handleCreateFlashcard = () => {
+    if (onCreateFlashcard) {
+      onCreateFlashcard(clinicalPearl);
     }
-
-    // Build the Clinical Pearl
-    if (condition && finding && mechanism) {
-      return `The most effective management for ${condition} in the setting of ${finding} is ${correctTerm} because ${mechanism}.`;
-    } else if (condition && mechanism) {
-      return `For ${condition}, ${correctTerm} is the treatment of choice because ${mechanism}.`;
-    } else if (finding && mechanism) {
-      return `When a patient presents with ${finding}, ${correctTerm} is indicated because ${mechanism}.`;
-    } else if (condition) {
-      return `${correctTerm} is first-line therapy for ${condition}.`;
-    } else if (structured.highYieldTakeaway && structured.highYieldTakeaway.length > 20) {
-      // Use existing high-yield if available and meaningful
-      let pearl = structured.highYieldTakeaway
-        .replace(/^(remember|key point|takeaway|high-yield|board tip)[:\s]*/i, '')
-        .replace(/\b(this is|the answer is)\b/gi, '')
-        .trim();
-      if (pearl.length > 0) {
-        pearl = pearl.charAt(0).toUpperCase() + pearl.slice(1);
-      }
-      return pearl;
-    }
-
-    // Fallback: Generate a usable clinical fact
-    return `${correctTerm} is the appropriate choice when the clinical presentation and findings point to this diagnosis or require this intervention.`;
-  }, [structured, options, correctAnswer, explanation]);
+  };
 
   return (
     <div className="p-4 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 border border-amber-200 dark:border-amber-800">
@@ -596,10 +580,32 @@ export function LearningObjective({
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
           </svg>
         </div>
-        <div>
-          <h4 className="text-xs font-semibold text-amber-800 dark:text-amber-200 uppercase tracking-wide mb-1">
-            Clinical Pearl
-          </h4>
+        <div className="flex-1">
+          <div className="flex items-center justify-between mb-1">
+            <h4 className="text-xs font-semibold text-amber-800 dark:text-amber-200 uppercase tracking-wide">
+              Clinical Pearl
+            </h4>
+            {onCreateFlashcard && (
+              isPearlSaved ? (
+                <span className="flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Saved to Library
+                </span>
+              ) : (
+                <button
+                  onClick={handleCreateFlashcard}
+                  className="flex items-center gap-1 text-xs text-amber-700 dark:text-amber-300 hover:text-amber-900 dark:hover:text-amber-100 transition-colors"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                  </svg>
+                  Create Flashcard
+                </button>
+              )
+            )}
+          </div>
           <p className="text-sm text-amber-900 dark:text-amber-100 leading-relaxed font-medium">
             {clinicalPearl}
           </p>
@@ -616,6 +622,8 @@ interface ExplanationSummaryProps {
   correctAnswer: string;
   isCorrect: boolean;
   cognitiveError?: string | null;
+  onCreateFlashcard?: (pearl: string) => void;
+  isPearlSaved?: boolean; // Visual feedback when pearl is already saved
 }
 
 export function ExplanationSummary({
@@ -623,7 +631,9 @@ export function ExplanationSummary({
   options,
   correctAnswer,
   isCorrect,
-  cognitiveError
+  cognitiveError,
+  onCreateFlashcard,
+  isPearlSaved
 }: ExplanationSummaryProps) {
   // Now just renders the Learning Objective - no more verbose sections
   return (
@@ -631,6 +641,8 @@ export function ExplanationSummary({
       explanation={explanation}
       options={options}
       correctAnswer={correctAnswer}
+      onCreateFlashcard={onCreateFlashcard}
+      isPearlSaved={isPearlSaved}
     />
   );
 }

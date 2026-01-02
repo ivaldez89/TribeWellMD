@@ -135,13 +135,14 @@ export function CalendarHub() {
       return;
     }
 
-    // If it's a study room, navigate to the room
-    if (event.type === 'study-room' && event.linkedRoomId) {
-      window.location.href = `/study/room/${event.linkedRoomId}`;
+    // Study rooms are first-class destinations - always route to the room
+    // linkedRoomId takes priority over generic event behavior
+    if (event.linkedRoomId) {
+      window.location.href = `/progress/room/${event.linkedRoomId}`;
       return;
     }
 
-    // Otherwise, open the event modal
+    // Otherwise, open the event modal for generic events
     setSelectedEvent(event);
     setShowEventModal(true);
   };

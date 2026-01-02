@@ -6,6 +6,7 @@ import { TargetIcon, ClockIcon } from '@/components/icons/MedicalIcons';
 
 interface PomodoroTimerProps {
   onSessionComplete?: () => void;
+  variant?: 'default' | 'header';
 }
 
 type TimerMode = 'focus' | 'shortBreak' | 'longBreak';
@@ -16,7 +17,7 @@ const TIMER_SETTINGS = {
   longBreak: 15 * 60, // 15 minutes
 };
 
-export function PomodoroTimer({ onSessionComplete }: PomodoroTimerProps) {
+export function PomodoroTimer({ onSessionComplete, variant = 'default' }: PomodoroTimerProps) {
   const [mode, setMode] = useState<TimerMode>('focus');
   const [timeLeft, setTimeLeft] = useState(TIMER_SETTINGS.focus);
   const [isRunning, setIsRunning] = useState(false);
@@ -198,23 +199,50 @@ export function PomodoroTimer({ onSessionComplete }: PomodoroTimerProps) {
     longBreak: 'Long',
   };
 
+  // Different button styles based on variant
+  const buttonStyles = variant === 'header'
+    ? `group relative flex items-center justify-center w-9 h-9 rounded-lg transition-colors ${
+        showPanel || isRunning
+          ? 'bg-[#C4A77D] text-white'
+          : 'text-white/80 hover:text-white hover:bg-white/10'
+      }`
+    : `flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors ${
+        showPanel || isRunning
+          ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300'
+          : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
+      }`;
+
   return (
     <div className="relative">
       {/* Toggle Button */}
       <button
         ref={buttonRef}
         onClick={handleTogglePanel}
-        className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors ${
-          showPanel || isRunning
-            ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300'
-            : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
-        }`}
+        className={buttonStyles}
       >
-        <ClockIcon className="w-4 h-4" />
-        {isRunning ? (
-          <span className="font-mono font-medium">{formatTime(timeLeft)}</span>
+        {variant === 'header' ? (
+          <>
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {isRunning && (
+              <span className="absolute -top-1 -right-1 px-1 min-w-[20px] h-5 flex items-center justify-center text-[10px] font-bold bg-red-500 text-white rounded-full">
+                {Math.floor(timeLeft / 60)}
+              </span>
+            )}
+            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
+              Pomodoro
+            </span>
+          </>
         ) : (
-          <span>Pomodoro</span>
+          <>
+            <ClockIcon className="w-4 h-4" />
+            {isRunning ? (
+              <span className="font-mono font-medium">{formatTime(timeLeft)}</span>
+            ) : (
+              <span>Pomodoro</span>
+            )}
+          </>
         )}
       </button>
 

@@ -21,6 +21,8 @@ interface PreviousTest {
   answeredCount: number;
   correctCount: number;
   mode: 'tutor' | 'timed';
+  isInProgress?: boolean; // For active, non-finalized sessions
+  sessionKey?: string; // To resume the session
 }
 
 // Map internal batch names to user-friendly Shelf Exam names
@@ -64,15 +66,61 @@ export default function QBankPage() {
   const [showSystemDropdown, setShowSystemDropdown] = useState(false);
   const [previousTests, setPreviousTests] = useState<PreviousTest[]>([]);
 
-  // Load previous tests from localStorage
+  // Load previous tests from localStorage (including in-progress sessions)
   useEffect(() => {
-    const stored = localStorage.getItem('qbank-previous-tests');
-    if (stored) {
-      try {
-        setPreviousTests(JSON.parse(stored));
-      } catch (e) {
-        console.error('Failed to parse previous tests:', e);
+    try {
+      // Load completed tests
+      const stored = localStorage.getItem('qbank-previous-tests');
+      const completedTests: PreviousTest[] = stored ? JSON.parse(stored) : [];
+
+      // Scan for in-progress sessions (session keys start with 'qbank-session-')
+      const inProgressSessions: PreviousTest[] = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('qbank-session-')) {
+          try {
+            const sessionData = JSON.parse(localStorage.getItem(key) || '{}');
+            // Check if session is recent (less than 24 hours old)
+            const isRecent = Date.now() - (sessionData.lastUpdated || 0) < 24 * 60 * 60 * 1000;
+
+            if (isRecent && sessionData.questionIds && sessionData.questionIds.length > 0) {
+              // Parse session key to extract batches, systems, count, mode
+              // Key format: qbank-session-[batches]-[systems]-[count]-[mode]
+              const keyParts = key.replace('qbank-session-', '').split('-');
+              const mode = keyParts[keyParts.length - 1] as 'tutor' | 'timed';
+
+              // Count answered questions
+              const questionStates = sessionData.questionStates || {};
+              const statesArray = Object.values(questionStates) as Array<{ isSubmitted?: boolean; isCorrect?: boolean }>;
+              const answeredCount = statesArray.filter(state => state?.isSubmitted).length;
+
+              // Count correct answers
+              const correctCount = statesArray.filter(state => state?.isCorrect === true).length;
+
+              // Only show if there's actual progress (at least on one question or just started)
+              inProgressSessions.push({
+                id: key,
+                date: new Date(sessionData.lastUpdated).toISOString(),
+                shelves: [], // Will be parsed from URL when resuming
+                systems: [],
+                questionCount: sessionData.questionIds.length,
+                answeredCount,
+                correctCount,
+                mode: mode === 'timed' || mode === 'tutor' ? mode : 'tutor',
+                isInProgress: true,
+                sessionKey: key
+              });
+            }
+          } catch (e) {
+            console.warn('Failed to parse session:', key, e);
+          }
+        }
       }
+
+      // Combine in-progress sessions (first) with completed tests
+      setPreviousTests([...inProgressSessions, ...completedTests]);
+    } catch (e) {
+      console.error('Failed to load tests:', e);
     }
   }, []);
 
@@ -149,6 +197,19 @@ export default function QBankPage() {
       })
       .reduce((sum, q) => sum + q.count, 0);
   }, [questionSummary, selectedShelves, selectedSystems, totalQuestions]);
+
+  // Debug: Log filter state (remove after debugging)
+  useEffect(() => {
+    console.log('[QBank Debug]', {
+      totalQuestions,
+      questionSummaryLength: questionSummary.length,
+      selectedShelves,
+      selectedSystems,
+      availableQuestions,
+      isLoading,
+      error
+    });
+  }, [totalQuestions, questionSummary, selectedShelves, selectedSystems, availableQuestions, isLoading, error]);
 
   // Toggle shelf selection
   const toggleShelf = (shelfId: string) => {
@@ -598,6 +659,66 @@ export default function QBankPage() {
                   ? test.systems.join(', ')
                   : 'All Questions';
 
+              // For in-progress sessions, show resume button
+              if (test.isInProgress) {
+                return (
+                  <div
+                    key={test.id}
+                    className="p-4 rounded-xl bg-primary/5 dark:bg-primary/10 border-2 border-primary/30 hover:border-primary/50 transition-colors"
+                  >
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-primary/20 text-primary uppercase tracking-wide">
+                            In Progress
+                          </span>
+                        </div>
+                        <p className="font-medium text-content dark:text-white text-sm mt-1">
+                          Question {test.answeredCount + 1}/{test.questionCount}
+                        </p>
+                        <p className="text-xs text-content-muted">{dateStr}</p>
+                      </div>
+                      <button
+                        onClick={() => {
+                          // Parse the session key to rebuild the URL
+                          // Key format: qbank-session-[batches]-[systems]-[count]-[mode]
+                          const keyContent = test.sessionKey?.replace('qbank-session-', '') || '';
+                          const parts = keyContent.replace(/_/g, ',').split('-');
+                          const mode = parts[parts.length - 1];
+                          const count = parts[parts.length - 2];
+
+                          // Build URL params - the session will be auto-restored
+                          const params = new URLSearchParams();
+                          params.set('count', count || test.questionCount.toString());
+                          params.set('mode', mode || test.mode);
+
+                          router.push(`/qbank/practice?${params.toString()}`);
+                        }}
+                        className="px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-hover text-white text-xs font-medium transition-colors flex items-center gap-1"
+                      >
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Resume
+                      </button>
+                    </div>
+                    <div className="flex items-center gap-3 text-xs text-content-muted">
+                      <span>{test.answeredCount}/{test.questionCount} answered</span>
+                      {test.answeredCount > 0 && (
+                        <>
+                          <span>•</span>
+                          <span>{test.correctCount} correct</span>
+                        </>
+                      )}
+                      <span>•</span>
+                      <span className="capitalize">{test.mode}</span>
+                    </div>
+                  </div>
+                );
+              }
+
+              // Completed test display
               return (
                 <div
                   key={test.id}

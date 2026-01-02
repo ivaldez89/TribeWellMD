@@ -459,3 +459,128 @@ export function hasCompletedOnboarding(): boolean {
   if (!profile) return false;
   return profile.onboardingCompleted === true && !!profile.currentVillageId;
 }
+
+// ============================================
+// Supabase Profile Sync Functions
+// ============================================
+
+// Note: createClient is imported dynamically to avoid circular dependencies
+
+// Sync profile to Supabase (call after saving locally)
+export async function syncProfileToSupabase(profile: UserProfile): Promise<boolean> {
+  if (typeof window === 'undefined') return false;
+
+  try {
+    const { createClient } = await import('@/lib/supabase/client');
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) return false;
+
+    // Store profile in user_metadata (works without extra table)
+    const { error } = await supabase.auth.updateUser({
+      data: {
+        profile: {
+          firstName: profile.firstName,
+          lastName: profile.lastName,
+          avatar: profile.avatar,
+          bio: profile.bio,
+          school: profile.school,
+          schoolId: profile.schoolId,
+          schoolType: profile.schoolType,
+          graduationYear: profile.graduationYear,
+          currentYear: profile.currentYear,
+          role: profile.role,
+          interestedSpecialties: profile.interestedSpecialties,
+          currentVillageId: profile.currentVillageId,
+          villageHistory: profile.villageHistory,
+          profileVisibility: profile.profileVisibility,
+          showStudyStats: profile.showStudyStats,
+          linkedIn: profile.linkedIn,
+          twitter: profile.twitter,
+          onboardingCompleted: profile.onboardingCompleted,
+          updatedAt: new Date().toISOString(),
+        }
+      }
+    });
+
+    if (error) {
+      console.error('Error syncing profile to Supabase:', error);
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Error syncing profile:', error);
+    return false;
+  }
+}
+
+// Load profile from Supabase (call on login)
+export async function loadProfileFromSupabase(): Promise<UserProfile | null> {
+  if (typeof window === 'undefined') return null;
+
+  try {
+    const { createClient } = await import('@/lib/supabase/client');
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) return null;
+
+    // Ensure the current user ID is set FIRST so storage uses the correct key
+    setCurrentUserId(user.id);
+
+    const cloudProfile = user.user_metadata?.profile;
+
+    // Check if we already have a local profile for this user
+    const localProfile = getUserProfile();
+
+    // If no cloud profile exists but we have local data, sync it up
+    if (!cloudProfile && localProfile) {
+      // User has local profile but not synced to cloud - sync it now
+      await syncProfileToSupabase(localProfile);
+      return localProfile;
+    }
+
+    // If no cloud profile and no local profile, return null (new user needs onboarding)
+    if (!cloudProfile && !localProfile) return null;
+
+    // Merge with local profile or create new one
+    // Cloud data takes precedence for key fields (it's the source of truth after sync)
+    const mergedProfile: UserProfile = {
+      ...createDefaultProfile(),
+      ...localProfile,
+      ...cloudProfile,
+      id: user.id,
+      email: user.email || cloudProfile?.email || localProfile?.email || '',
+      // Use cloud data as source of truth for key fields if present
+      firstName: cloudProfile?.firstName || localProfile?.firstName || '',
+      lastName: cloudProfile?.lastName || localProfile?.lastName || '',
+      avatar: cloudProfile?.avatar || localProfile?.avatar,
+      // Preserve village and interests data from either source
+      currentVillageId: cloudProfile?.currentVillageId || localProfile?.currentVillageId,
+      villageHistory: cloudProfile?.villageHistory || localProfile?.villageHistory,
+      interestedSpecialties: cloudProfile?.interestedSpecialties || localProfile?.interestedSpecialties,
+      onboardingCompleted: cloudProfile?.onboardingCompleted || localProfile?.onboardingCompleted,
+    };
+
+    // Save merged profile locally
+    saveUserProfile(mergedProfile);
+
+    return mergedProfile;
+  } catch (error) {
+    console.error('Error loading profile from Supabase:', error);
+    return null;
+  }
+}
+
+// Enhanced save that syncs to both localStorage and Supabase
+export async function saveAndSyncProfile(profile: UserProfile): Promise<void> {
+  // Always save to localStorage first (fast, offline-capable)
+  saveUserProfile(profile);
+
+  // Then sync to Supabase in the background
+  syncProfileToSupabase(profile).catch(err => {
+    console.warn('Background profile sync failed:', err);
+  });
+}

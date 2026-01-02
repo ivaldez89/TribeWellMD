@@ -1,0 +1,240 @@
+question_id,concept_id,batch,system,stem,options,correct_answer,explanation,cognitive_error
+B1_C31,b1-31-copd-exacerbation-noninvasive-ventilation-indications,Batch1,Pulmonology,"A 68-year-old man with severe COPD presents with 2 days of worsening dyspnea and increased sputum volume. He is using his rescue inhaler every hour. He is somnolent but arousable. Temperature is 37.4°C (99.3°F), blood pressure is 148/84 mm Hg, pulse is 110/min, and respirations are 28/min. Oxygen saturation is 86% on room air and improves to 90% on 2 L/min nasal cannula. He has diffuse wheezes and prolonged expiration.
+Arterial blood gas on 2 L/min O2 shows:
+• pH: 7.28 (7.35–7.45)
+• PaCO2: 68 mm Hg (35–45)
+• PaO2: 58 mm Hg (80–100)
+Chest radiograph shows hyperinflation without infiltrate.
+
+In addition to bronchodilators and systemic glucocorticoids, which of the following is the most appropriate next step?","[{""label"": ""A"", ""text"": ""Endotracheal intubation and mechanical ventilation""}, {""label"": ""B"", ""text"": ""Noninvasive positive-pressure ventilation""}, {""label"": ""C"", ""text"": ""High-flow nasal cannula at 60 L/min""}, {""label"": ""D"", ""text"": ""Immediate bronchoscopy to clear secretions""}, {""label"": ""E"", ""text"": ""Inhaled corticosteroids only and discharge""}]",B,"Pathophysiology: Acute COPD exacerbations can cause worsening ventilation-perfusion mismatch and alveolar hypoventilation, leading to hypercapnia and respiratory acidosis. Noninvasive ventilation (NIV) improves alveolar ventilation, decreases work of breathing, and reduces the need for intubation.
+
+Correct Answer Rationale: He has an acute COPD exacerbation with respiratory acidosis (pH 7.28) and hypercapnia (PaCO2 68) despite supplemental oxygen. NIV is indicated in COPD exacerbations with acute hypercapnic respiratory failure to improve gas exchange and reduce intubation risk.
+
+Distractor Analysis:
+- Option A: Intubation is indicated if NIV fails, the patient cannot protect the airway, has severe hemodynamic instability, or has worsening mental status; NIV is appropriate first here.
+- Option B (Correct): NIV is first-line for COPD exacerbation with hypercapnic respiratory acidosis.
+- Option C: High-flow nasal cannula can improve oxygenation but does not reliably correct hypercapnic acidosis as effectively as NIV in COPD.
+- Option D: Bronchoscopy is not routine for COPD exacerbations without evidence of obstruction/foreign body.
+- Option E: This patient is acidotic and somnolent; discharge is unsafe and inhaled steroids alone are inadequate.
+
+Clinical Pearl: COPD exacerbation with pH <7.35 and elevated PaCO2 is an indication for noninvasive ventilation unless contraindicated.",premature_closure
+B1_C32,b1-32-pulmonary-embolism-pregnancy-imaging-selection,Batch1,"Pulmonology, Obstetrics","A 29-year-old woman who is 26 weeks pregnant presents with sudden-onset dyspnea and pleuritic chest pain. She has no fever or cough. Pulse is 112/min, blood pressure is 118/72 mm Hg, respirations are 24/min, and oxygen saturation is 93% on room air. Lung exam is clear. Her left calf is mildly swollen and tender.
+ECG shows sinus tachycardia. Chest radiograph is normal.
+
+Which of the following is the most appropriate next diagnostic test?","[{""label"": ""A"", ""text"": ""CT pulmonary angiography""}, {""label"": ""B"", ""text"": ""Ventilation-perfusion scan""}, {""label"": ""C"", ""text"": ""D-dimer testing""}, {""label"": ""D"", ""text"": ""Pulmonary function testing""}, {""label"": ""E"", ""text"": ""Stress echocardiography""}]",B,"Pathophysiology: Pulmonary embolism in pregnancy results from venous thromboembolism with embolic obstruction of pulmonary arteries, causing increased dead space and hypoxemia. Pregnancy is a hypercoagulable state due to increased clotting factors and venous stasis.
+
+Correct Answer Rationale: She has high suspicion for PE (pleuritic chest pain, tachycardia, unilateral leg symptoms) and a normal chest radiograph. In pregnancy with a normal CXR, a ventilation-perfusion (V/Q) scan is often preferred to minimize maternal breast radiation while providing high diagnostic yield.
+
+Distractor Analysis:
+- Option A: CTPA is appropriate if the chest radiograph is abnormal or V/Q is nondiagnostic, but it exposes maternal breast tissue to higher radiation.
+- Option B (Correct): With normal CXR in pregnancy, V/Q scan is an appropriate next test for suspected PE.
+- Option C: D-dimer rises physiologically in pregnancy and is less useful; high suspicion warrants imaging.
+- Option D: PFTs do not diagnose acute PE.
+- Option E: Stress echo is not used for acute PE diagnosis.
+
+Clinical Pearl: In pregnancy with suspected PE and a normal CXR, a V/Q scan is often the preferred initial imaging test.",base_rate_neglect
+B1_C33,b1-33-preeclampsia-severe-features-seizure-prophylaxis,Batch1,Obstetrics,"A 33-year-old woman who is G2P1 at 35 weeks gestation presents with a severe frontal headache and visual spots for 6 hours. Blood pressure is 168/112 mm Hg on two measurements 20 minutes apart. She has 2+ pitting edema of the legs. Laboratory studies show:
+• Platelets: 92,000/µL (150,000–400,000)
+• AST: 88 U/L (10–40)
+• Creatinine: 1.3 mg/dL (0.6–1.2)
+Urine protein/creatinine ratio is 0.6 (normal <0.3).
+
+In addition to blood pressure control, which of the following is the most appropriate immediate therapy?","[{""label"": ""A"", ""text"": ""Betamethasone for fetal lung maturation only""}, {""label"": ""B"", ""text"": ""Magnesium sulfate for seizure prophylaxis""}, {""label"": ""C"", ""text"": ""Oral iron supplementation""}, {""label"": ""D"", ""text"": ""Tocolysis with nifedipine""}, {""label"": ""E"", ""text"": ""Expectant management until 37 weeks""}]",B,"Pathophysiology: Preeclampsia is endothelial dysfunction and vasospasm after 20 weeks gestation, leading to hypertension and end-organ injury. Severe features increase the risk of eclampsia (seizures) and maternal morbidity.
+
+Correct Answer Rationale: She has preeclampsia with severe features (severe-range BP, thrombocytopenia, elevated liver enzymes, neurologic symptoms). Magnesium sulfate is indicated for seizure prophylaxis in severe preeclampsia.
+
+Distractor Analysis:
+- Option A: Corticosteroids may be given if earlier gestation, but they do not address maternal seizure risk and should not delay definitive management.
+- Option B (Correct): Magnesium sulfate is first-line for seizure prophylaxis in severe preeclampsia.
+- Option C: Iron does not address acute hypertensive emergency or seizure risk.
+- Option D: Tocolysis is contraindicated in severe preeclampsia.
+- Option E: Severe features at 35 weeks require stabilization and delivery planning; waiting increases maternal/fetal risk.
+
+Clinical Pearl: Severe preeclampsia requires magnesium sulfate for seizure prophylaxis plus BP control and delivery after stabilization.",premature_closure
+B1_C34,b1-34-hellp-syndrome-diagnosis-and-management,Batch1,Obstetrics,"A 28-year-old woman who is G1P0 at 32 weeks gestation presents with right upper quadrant pain, nausea, and malaise. Blood pressure is 156/98 mm Hg. She has mild scleral icterus. Laboratory studies show:
+• Platelets: 78,000/µL (150,000–400,000)
+• AST: 210 U/L (10–40)
+• ALT: 180 U/L (7–56)
+• Total bilirubin: 3.1 mg/dL (0.2–1.2)
+• LDH: 980 U/L (140–280)
+
+Which of the following is the most appropriate next step in management?","[{""label"": ""A"", ""text"": ""Laparoscopic cholecystectomy""}, {""label"": ""B"", ""text"": ""Magnesium sulfate and expedited delivery after stabilization""}, {""label"": ""C"", ""text"": ""Oral ursodeoxycholic acid therapy""}, {""label"": ""D"", ""text"": ""Expectant management with outpatient follow-up""}, {""label"": ""E"", ""text"": ""Rho(D) immune globulin administration""}]",B,"Pathophysiology: HELLP syndrome is a severe variant of preeclampsia characterized by hemolysis, elevated liver enzymes, and low platelets due to endothelial injury and microangiopathy. It carries high risk of maternal complications (eg, hepatic rupture, DIC) and fetal compromise.
+
+Correct Answer Rationale: She has hypertension with hemolysis (elevated LDH and bilirubin) and thrombocytopenia plus elevated transaminases, consistent with HELLP. Management is maternal stabilization (including magnesium sulfate for seizure prophylaxis) and expedited delivery, regardless of gestational age.
+
+Distractor Analysis:
+- Option A: RUQ pain is from hepatic involvement, not gallbladder disease; surgery delays definitive treatment.
+- Option B (Correct): HELLP requires stabilization and delivery to prevent progression.
+- Option C: Ursodeoxycholic acid treats intrahepatic cholestasis of pregnancy, which presents with pruritus and mild LFT elevation.
+- Option D: Outpatient management is unsafe in HELLP.
+- Option E: Rho(D) immune globulin is for Rh-negative mothers to prevent alloimmunization, not HELLP.
+
+Clinical Pearl: HELLP (Hemolysis, Elevated LFTs, Low Platelets) is treated with magnesium and delivery after stabilization.",anchoring_bias
+B1_C35,b1-35-placenta-previa-painless-bleeding-management,Batch1,Obstetrics,"A 31-year-old woman who is G3P2 at 30 weeks gestation presents with sudden, painless vaginal bleeding. She has had two prior cesarean deliveries. She reports normal fetal movement. Blood pressure is 118/74 mm Hg and pulse is 96/min. Abdominal exam is nontender. Fetal heart tracing is reassuring. Transabdominal ultrasound shows the placenta covering the internal cervical os.
+
+Which of the following is the most appropriate next step?","[{""label"": ""A"", ""text"": ""Digital cervical examination to assess dilation""}, {""label"": ""B"", ""text"": ""Immediate induction of labor with oxytocin""}, {""label"": ""C"", ""text"": ""Avoid digital exam and manage expectantly with pelvic rest""}, {""label"": ""D"", ""text"": ""Administer methylergonovine""}, {""label"": ""E"", ""text"": ""Perform amniotomy to expedite delivery""}]",C,"Pathophysiology: Placenta previa occurs when placental tissue overlies or approaches the internal cervical os, predisposing to painless bleeding as the lower uterine segment thins. Digital cervical examination can disrupt placental attachment and precipitate massive hemorrhage.
+
+Correct Answer Rationale: Ultrasound confirms placenta previa and the patient is hemodynamically stable with reassuring fetal status. The next step is to avoid digital vaginal examination and manage expectantly (pelvic rest, monitoring, and planning cesarean delivery at appropriate gestational age or sooner if bleeding is severe).
+
+Distractor Analysis:
+- Option A: Digital exam is contraindicated in placenta previa due to risk of hemorrhage.
+- Option B: Vaginal delivery induction is contraindicated when placenta covers the os.
+- Option C (Correct): Stable placenta previa is managed with pelvic rest and planned cesarean delivery; avoid digital exams.
+- Option D: Methylergonovine is used for uterine atony postpartum, not antepartum bleeding from previa.
+- Option E: Amniotomy is not appropriate and can worsen bleeding.
+
+Clinical Pearl: Painless third-trimester bleeding with previa on ultrasound—no digital exam; plan cesarean delivery.",premature_closure
+B1_C36,b1-36-ectopic-pregnancy-diagnosis-when-ultrasound-negative,Batch1,"Obstetrics, Emergency Medicine","A 26-year-old woman presents with 1 day of lower abdominal pain and light vaginal spotting. Her last menstrual period was 7 weeks ago. Blood pressure is 112/70 mm Hg and pulse is 90/min. Abdomen is mildly tender in the left lower quadrant. Urine pregnancy test is positive. Quantitative serum beta-hCG is 2,200 mIU/mL. Transvaginal ultrasound does not show an intrauterine pregnancy and shows a small amount of free fluid in the pelvis.
+
+Which of the following is the most appropriate next step?","[{""label"": ""A"", ""text"": ""Reassure the patient that this is a normal early pregnancy""}, {""label"": ""B"", ""text"": ""Administer methotrexate immediately without further evaluation""}, {""label"": ""C"", ""text"": ""Repeat beta-hCG in 48 hours and repeat transvaginal ultrasound""}, {""label"": ""D"", ""text"": ""Perform dilation and curettage to confirm intrauterine pregnancy""}, {""label"": ""E"", ""text"": ""Discharge without follow-up because ultrasound is nondiagnostic""}]",C,"Pathophysiology: Ectopic pregnancy occurs when implantation happens outside the uterine cavity, most commonly in the fallopian tube. When beta-hCG is near the discriminatory zone and no intrauterine pregnancy is visualized, the pregnancy location is unknown and requires close follow-up.
+
+Correct Answer Rationale: With beta-hCG around the discriminatory threshold and no intrauterine pregnancy seen, this is a pregnancy of unknown location. The appropriate next step is serial beta-hCG measurement and repeat transvaginal ultrasound to distinguish early intrauterine pregnancy from ectopic pregnancy or early pregnancy loss.
+
+Distractor Analysis:
+- Option A: Absence of an intrauterine pregnancy at this beta-hCG level raises concern for ectopic pregnancy.
+- Option B: Methotrexate is used for confirmed or strongly suspected ectopic pregnancy in stable patients; follow-up evaluation is needed first unless unstable or clear ectopic is identified.
+- Option C (Correct): Serial beta-hCG and repeat ultrasound is standard for pregnancy of unknown location.
+- Option D: D&C may be used in select cases when diagnosis remains unclear, but initial step is serial testing.
+- Option E: Lack of follow-up risks missed ectopic pregnancy and rupture.
+
+Clinical Pearl: No IUP on TVUS with beta-hCG near the discriminatory zone = pregnancy of unknown location; repeat beta-hCG in 48 hours and repeat TVUS.",premature_closure
+B1_C37,b1-37-acute-ischemic-stroke-thrombolysis-eligibility,Batch1,Neurology,"A 71-year-old man is brought to the emergency department 90 minutes after sudden onset of right arm weakness and difficulty speaking. He has hypertension and atrial fibrillation treated with warfarin. Blood pressure is 162/92 mm Hg. Neurologic exam shows expressive aphasia and right arm drift. Noncontrast head CT shows no hemorrhage.
+Laboratory studies show INR 2.3.
+
+Which of the following is the most appropriate acute therapy?","[{""label"": ""A"", ""text"": ""Administer IV alteplase""}, {""label"": ""B"", ""text"": ""Administer aspirin immediately and begin high-intensity statin""}, {""label"": ""C"", ""text"": ""Administer IV heparin infusion""}, {""label"": ""D"", ""text"": ""Administer subcutaneous low-molecular-weight heparin""}, {""label"": ""E"", ""text"": ""Administer clopidogrel monotherapy and discharge""}]",B,"Pathophysiology: Acute ischemic stroke results from arterial occlusion leading to cerebral ischemia and infarction. IV thrombolysis improves outcomes when given within the time window in eligible patients but increases hemorrhage risk.
+
+Correct Answer Rationale: He presents within the thrombolysis window, but an INR >1.7 is a contraindication to IV alteplase. Therefore, acute management includes antiplatelet therapy (aspirin) after hemorrhage is excluded, plus secondary prevention measures such as high-intensity statin.
+
+Distractor Analysis:
+- Option A: Alteplase is contraindicated with INR >1.7 due to bleeding risk.
+- Option B (Correct): Aspirin is appropriate when thrombolysis is contraindicated after CT excludes hemorrhage.
+- Option C: Therapeutic heparin is not used acutely for ischemic stroke because it increases hemorrhage risk without clear benefit.
+- Option D: LMWH is not indicated for acute stroke treatment.
+- Option E: Discharge is unsafe; stroke requires inpatient evaluation and management.
+
+Clinical Pearl: IV alteplase is contraindicated in patients on warfarin with INR >1.7; give aspirin after hemorrhage is excluded.",anchoring_bias
+B1_C38,b1-38-subarachnoid-hemorrhage-evaluation-after-negative-ct,Batch1,Neurology,"A 45-year-old woman presents with the 'worst headache of her life' that began abruptly 8 hours ago while she was exercising. She has nausea and photophobia. Neurologic exam is normal. Noncontrast head CT is read as normal.
+
+Which of the following is the most appropriate next step to evaluate for subarachnoid hemorrhage?","[{""label"": ""A"", ""text"": ""Discharge with migraine therapy""}, {""label"": ""B"", ""text"": ""Lumbar puncture for cerebrospinal fluid analysis""}, {""label"": ""C"", ""text"": ""MRI brain with gadolinium""}, {""label"": ""D"", ""text"": ""Electroencephalography""}, {""label"": ""E"", ""text"": ""Start high-dose steroids""}]",B,"Pathophysiology: Subarachnoid hemorrhage is bleeding into the subarachnoid space, most often from a ruptured saccular aneurysm. Blood breakdown products in CSF lead to xanthochromia, which persists after the initial bleed.
+
+Correct Answer Rationale: Thunderclap headache with a normal neurologic exam is concerning for SAH. A noncontrast CT can miss SAH, particularly as time from onset increases. When CT is negative but suspicion remains high, lumbar puncture to assess for xanthochromia and RBCs is the next step.
+
+Distractor Analysis:
+- Option A: Treating as migraine risks missing a life-threatening SAH.
+- Option B (Correct): LP after negative CT is indicated when SAH remains a concern.
+- Option C: MRI may detect alternative pathology but is not the standard next test for suspected SAH after negative CT.
+- Option D: EEG is not used to diagnose SAH.
+- Option E: Steroids do not treat SAH and delay diagnosis.
+
+Clinical Pearl: Thunderclap headache with negative CT and ongoing suspicion for SAH requires lumbar puncture for xanthochromia.",premature_closure
+B1_C39,b1-39-bacterial-meningitis-empiric-therapy-adult-over-50,Batch1,"Infectious Disease, Neurology","A 58-year-old man presents with 1 day of fever, severe headache, and confusion. Temperature is 39.2°C (102.6°F), blood pressure is 130/78 mm Hg, and pulse is 116/min. He has nuchal rigidity. No focal neurologic deficits are noted. CT head shows no mass effect.
+
+Lumbar puncture reveals:
+• Opening pressure: 28 cm H2O
+• WBC: 1,200/µL (90% neutrophils)
+• Glucose: 28 mg/dL (serum glucose 100 mg/dL)
+• Protein: 220 mg/dL
+
+Which of the following is the most appropriate empiric antibiotic regimen?","[{""label"": ""A"", ""text"": ""Ceftriaxone plus vancomycin plus ampicillin""}, {""label"": ""B"", ""text"": ""Cefazolin alone""}, {""label"": ""C"", ""text"": ""Azithromycin plus oseltamivir""}, {""label"": ""D"", ""text"": ""Metronidazole plus ciprofloxacin""}, {""label"": ""E"", ""text"": ""Trimethoprim-sulfamethoxazole alone""}]",A,"Pathophysiology: Bacterial meningitis causes inflammation of the meninges with neutrophilic CSF pleocytosis, elevated protein, and low glucose due to bacterial metabolism and impaired glucose transport. In adults >50, common pathogens include Streptococcus pneumoniae, Neisseria meningitidis, and Listeria monocytogenes.
+
+Correct Answer Rationale: His CSF profile is consistent with bacterial meningitis. Empiric therapy in adults >50 should cover pneumococcus (ceftriaxone + vancomycin for resistant strains) and Listeria (ampicillin).
+
+Distractor Analysis:
+- Option A (Correct): Ceftriaxone + vancomycin + ampicillin covers pneumococcus, meningococcus, and Listeria in older adults.
+- Option B: Cefazolin does not adequately cover typical meningitis pathogens or achieve appropriate CSF penetration.
+- Option C: This is bacterial meningitis, not influenza.
+- Option D: This regimen does not cover key organisms and is not standard.
+- Option E: TMP-SMX alone is not appropriate empiric therapy for bacterial meningitis.
+
+Clinical Pearl: Empiric meningitis therapy in adults >50 is ceftriaxone + vancomycin + ampicillin to cover Listeria.",base_rate_neglect
+B1_C40,b1-40-hyperglycemic-crisis-dka-vs-hhs-initial-management,Batch1,Endocrinology,"A 59-year-old man with type 2 diabetes presents with confusion and weakness for 1 day. He has had polyuria and polydipsia for a week. Temperature is 37.0°C (98.6°F), blood pressure is 96/60 mm Hg, and pulse is 118/min. Mucous membranes are dry. Laboratory studies show:
+• Glucose: 980 mg/dL (70–100)
+• Sodium: 148 mEq/L (135–145)
+• Potassium: 4.6 mEq/L (3.5–5.0)
+• Bicarbonate: 22 mEq/L (22–28)
+• Anion gap: 10 (8–12)
+• Serum osmolality: 340 mOsm/kg (275–295)
+• Serum ketones: negative
+
+Which of the following is the most appropriate initial management?","[{""label"": ""A"", ""text"": ""IV sodium bicarbonate infusion immediately""}, {""label"": ""B"", ""text"": ""Aggressive isotonic IV fluids followed by insulin infusion""}, {""label"": ""C"", ""text"": ""Subcutaneous insulin only and oral fluids""}, {""label"": ""D"", ""text"": ""Immediate potassium supplementation before fluids""}, {""label"": ""E"", ""text"": ""No insulin; treat with diuretics to remove glucose""}]",B,"Pathophysiology: Hyperosmolar hyperglycemic state (HHS) is characterized by severe hyperglycemia and hyperosmolality causing dehydration and altered mental status without significant ketoacidosis. Profound osmotic diuresis leads to volume depletion and electrolyte losses.
+
+Correct Answer Rationale: He has severe hyperglycemia, elevated serum osmolality, minimal acidosis, normal anion gap, and negative ketones, consistent with HHS. Initial therapy is aggressive isotonic fluid resuscitation to restore perfusion, followed by insulin infusion once volume status is improving and potassium is monitored.
+
+Distractor Analysis:
+- Option A: Bicarbonate is not indicated without significant acidosis.
+- Option B (Correct): Fluids are first priority in HHS; insulin is started after initial resuscitation with careful electrolyte monitoring.
+- Option C: HHS requires ICU-level IV therapy; oral fluids/subcutaneous insulin are inadequate.
+- Option D: Potassium is normal; prioritize fluids and monitor potassium during insulin therapy.
+- Option E: Diuretics worsen dehydration and hyperosmolality.
+
+Clinical Pearl: HHS is treated first with aggressive isotonic IV fluids; add insulin infusion after initial resuscitation and potassium assessment.",premature_closure
+B1_C41,b1-41-thyroid-storm-treatment-sequence,Batch1,Endocrinology,"A 37-year-old woman with untreated Graves disease is brought to the emergency department with fever and agitation. She has had vomiting and diarrhea for 1 day. Temperature is 40.1°C (104.2°F), blood pressure is 142/66 mm Hg, pulse is 156/min, and respirations are 24/min. She is tremulous and confused. Exam shows a diffusely enlarged thyroid and mild proptosis.
+
+Which of the following is the best initial pharmacologic management sequence?","[{""label"": ""A"", ""text"": ""Propylthiouracil, then iodine solution, plus beta-blocker""}, {""label"": ""B"", ""text"": ""Iodine solution, then methimazole, plus beta-blocker""}, {""label"": ""C"", ""text"": ""Radioiodine ablation and discharge""}, {""label"": ""D"", ""text"": ""Levothyroxine and hydrocortisone""}, {""label"": ""E"", ""text"": ""Calcium gluconate and insulin""}]",A,"Pathophysiology: Thyroid storm is a life-threatening exacerbation of thyrotoxicosis with adrenergic hyperactivity and increased metabolic demand. Therapy targets symptom control (beta-blockade), decreased hormone synthesis (thionamides), and decreased hormone release (iodine) while treating precipitating factors.
+
+Correct Answer Rationale: Thionamides must be given before iodine to block new thyroid hormone synthesis; giving iodine first can provide substrate for hormone production. PTU is often used initially because it also decreases peripheral conversion of T4 to T3; a beta-blocker is used for adrenergic symptoms.
+
+Distractor Analysis:
+- Option A (Correct): Give thionamide first (PTU), then iodine to block release, plus beta-blocker; add glucocorticoids/supportive care as needed.
+- Option B: Iodine before thionamide can worsen hormone synthesis (Jod-Basedow effect).
+- Option C: Radioiodine is not an acute therapy and is contraindicated in unstable thyroid storm.
+- Option D: Levothyroxine would worsen thyrotoxicosis.
+- Option E: This is a hyperthyroid emergency, not hyperkalemia.
+
+Clinical Pearl: In thyroid storm, give a thionamide first, then iodine; control symptoms with beta-blockade and provide supportive care.",premature_closure
+B1_C42,b1-42-opioid-intoxication-naloxone-use,Batch1,Toxicology,"A 41-year-old man is brought to the emergency department after being found unresponsive. He has a history of heroin use. Vital signs: temperature 36.8°C (98.2°F), blood pressure 104/62 mm Hg, pulse 58/min, respirations 6/min, oxygen saturation 84% on room air. He has pinpoint pupils and minimal response to painful stimulus.
+
+Which of the following is the most appropriate next step in management?","[{""label"": ""A"", ""text"": ""Administer flumazenil""}, {""label"": ""B"", ""text"": ""Administer naloxone""}, {""label"": ""C"", ""text"": ""Administer activated charcoal""}, {""label"": ""D"", ""text"": ""Administer haloperidol""}, {""label"": ""E"", ""text"": ""Induce emesis with ipecac""}]",B,"Pathophysiology: Opioid intoxication causes central respiratory depression by activating mu-opioid receptors in the brainstem, leading to hypoventilation and hypoxemia. Naloxone is a competitive opioid receptor antagonist that rapidly reverses respiratory depression.
+
+Correct Answer Rationale: He has the classic triad of opioid overdose: CNS depression, miosis, and respiratory depression. Immediate naloxone administration with airway/ventilation support is indicated.
+
+Distractor Analysis:
+- Option A: Flumazenil reverses benzodiazepines and can precipitate seizures in mixed overdoses.
+- Option B (Correct): Naloxone reverses opioid-induced respiratory depression.
+- Option C: Activated charcoal is not useful in an unprotected airway and has limited role in opioid overdose.
+- Option D: Haloperidol does not treat respiratory depression.
+- Option E: Ipecac is not recommended due to aspiration risk and lack of benefit.
+
+Clinical Pearl: Opioid overdose with respiratory depression is treated with naloxone and ventilatory support.",pattern_recognition
+B1_C43,b1-43-serotonin-syndrome-recognition-and-treatment,Batch1,"Psychiatry, Toxicology","A 27-year-old woman is brought to the emergency department for agitation and tremor. Two days ago, her physician increased her sertraline dose, and yesterday she began taking linezolid for pneumonia. Temperature is 39.0°C (102.2°F), blood pressure is 154/86 mm Hg, and pulse is 128/min. She is diaphoretic and anxious. Exam shows hyperreflexia with inducible clonus at the ankles.
+
+Which of the following is the most appropriate management?","[{""label"": ""A"", ""text"": ""Administer dantrolene and discontinue antipsychotics""}, {""label"": ""B"", ""text"": ""Discontinue serotonergic agents and give benzodiazepines; consider cyproheptadine""}, {""label"": ""C"", ""text"": ""Administer naloxone""}, {""label"": ""D"", ""text"": ""Start haloperidol for agitation and continue current medications""}, {""label"": ""E"", ""text"": ""Administer IV calcium gluconate""}]",B,"Pathophysiology: Serotonin syndrome results from excess serotonergic activity, commonly due to drug interactions (eg, SSRI plus MAOI-like agents such as linezolid). It causes autonomic instability, neuromuscular hyperactivity (hyperreflexia, clonus), and altered mental status.
+
+Correct Answer Rationale: She has fever, tachycardia, diaphoresis, agitation, and hyperreflexia with clonus after combined serotonergic medications—findings consistent with serotonin syndrome. Management is stopping serotonergic agents, supportive care, benzodiazepines for agitation, and cyproheptadine for moderate-to-severe cases.
+
+Distractor Analysis:
+- Option A: Dantrolene is used for malignant hyperthermia and sometimes NMS; NMS typically has lead-pipe rigidity and hyporeflexia.
+- Option B (Correct): Stop serotonergic drugs and treat supportively with benzodiazepines; cyproheptadine can be added.
+- Option C: Naloxone treats opioid overdose.
+- Option D: Antipsychotics may worsen hyperthermia and are not first-line.
+- Option E: Calcium is for hyperkalemia-related ECG changes, not serotonin syndrome.
+
+Clinical Pearl: Serotonin syndrome features clonus/hyperreflexia and autonomic instability; treat by stopping serotonergic drugs, giving benzodiazepines, and using cyproheptadine when needed.",availability_heuristic
+B1_C44,b1-44-vte-prophylaxis-when-anticoagulation-contraindicated,Batch1,Hospital Medicine,"A 74-year-old man is hospitalized for an acute upper gastrointestinal bleed due to a bleeding duodenal ulcer. Endoscopy is performed with successful hemostasis. His hemoglobin is 7.8 g/dL. He is on bed rest and has a history of chronic kidney disease stage 3. He is hemodynamically stable but continues to have melena.
+
+Which of the following is the most appropriate venous thromboembolism prophylaxis at this time?","[{""label"": ""A"", ""text"": ""Therapeutic-dose unfractionated heparin infusion""}, {""label"": ""B"", ""text"": ""Prophylactic low-molecular-weight heparin""}, {""label"": ""C"", ""text"": ""Mechanical prophylaxis with intermittent pneumatic compression""}, {""label"": ""D"", ""text"": ""Warfarin therapy""}, {""label"": ""E"", ""text"": ""No prophylaxis is needed during hospitalization""}]",C,"Pathophysiology: Hospitalized immobilized patients are at increased risk of venous thromboembolism due to venous stasis and inflammation. Pharmacologic prophylaxis reduces VTE risk but increases bleeding risk.
+
+Correct Answer Rationale: He has an active GI bleed with ongoing melena, making pharmacologic anticoagulation contraindicated. Mechanical prophylaxis (intermittent pneumatic compression) is appropriate until bleeding risk resolves.
+
+Distractor Analysis:
+- Option A: Therapeutic anticoagulation is contraindicated and unnecessary for prophylaxis.
+- Option B: Pharmacologic prophylaxis increases bleeding risk and should be deferred during active bleeding.
+- Option C (Correct): Mechanical prophylaxis is recommended when anticoagulation is contraindicated.
+- Option D: Warfarin is not used for inpatient prophylaxis and is contraindicated in active bleeding.
+- Option E: Immobilized patients still require VTE prevention; choose mechanical methods if bleeding risk is high.
+
+Clinical Pearl: If pharmacologic VTE prophylaxis is contraindicated due to active bleeding, use intermittent pneumatic compression.",base_rate_neglect
+B1_C45,b1-45-anaphylaxis-recognition-and-epinephrine-first-line,Batch1,"Allergy/Immunology, Emergency Medicine","A 22-year-old woman develops itching, urticaria, and throat tightness minutes after eating a dessert at a restaurant. She becomes dizzy and short of breath. Blood pressure is 84/50 mm Hg, pulse is 132/min, and oxygen saturation is 91% on room air. She has diffuse wheezing and facial swelling.
+
+Which of the following is the most appropriate immediate treatment?","[{""label"": ""A"", ""text"": ""IV diphenhydramine""}, {""label"": ""B"", ""text"": ""Nebulized albuterol""}, {""label"": ""C"", ""text"": ""Intramuscular epinephrine""}, {""label"": ""D"", ""text"": ""IV methylprednisolone""}, {""label"": ""E"", ""text"": ""Subcutaneous epinephrine""}]",C,"Pathophysiology: Anaphylaxis is an IgE-mediated systemic hypersensitivity reaction that causes widespread mast cell degranulation, leading to vasodilation, increased vascular permeability, and bronchospasm. This can rapidly progress to airway compromise and shock.
+
+Correct Answer Rationale: She has hypotension, respiratory symptoms (wheezing, throat tightness), and skin findings shortly after food exposure, consistent with anaphylaxis. The immediate life-saving treatment is intramuscular epinephrine (typically into the anterolateral thigh).
+
+Distractor Analysis:
+- Option A: Antihistamines improve hives/itching but do not treat airway edema or shock.
+- Option B: Albuterol can help bronchospasm but does not treat hypotension or airway edema.
+- Option C (Correct): IM epinephrine is first-line for anaphylaxis and should be given immediately.
+- Option D: Steroids have delayed onset and are adjunctive only.
+- Option E: Subcutaneous epinephrine is absorbed less reliably than IM and is not preferred.
+
+Clinical Pearl: Anaphylaxis is treated first with IM epinephrine; antihistamines and steroids are adjuncts, not substitutes.",premature_closure

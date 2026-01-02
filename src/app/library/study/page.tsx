@@ -4,10 +4,12 @@ import { useEffect, useState, useRef, useCallback, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 import { FlashcardViewer } from '@/components/flashcards/FlashcardViewer';
 import { AnswerButtons } from '@/components/flashcards/AnswerButtons';
 import { PomodoroTimer } from '@/components/study/PomodoroTimer';
 import { BackgroundSelector, useStudyBackground, getBackgroundUrl } from '@/components/study/BackgroundSelector';
+import { ThemeToggleSimple } from '@/components/theme/ThemeProvider';
 import { CalendarWidget } from '@/components/calendar/CalendarWidget';
 import {
   shelfCategories,
@@ -566,12 +568,11 @@ function LibraryStudyContent() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 relative">
       <Header />
 
-      {/* Background overlay */}
+      {/* Background overlay - positioned below header, above footer */}
       {selectedBackground !== 'none' && (
         <div
-          className="fixed left-0 right-0 bottom-0 bg-no-repeat transition-opacity duration-500 pointer-events-none"
+          className="fixed left-0 right-0 top-12 bottom-12 bg-no-repeat transition-opacity duration-500 pointer-events-none"
           style={{
-            top: '64px',
             backgroundImage: `url(${getBackgroundUrl(selectedBackground, customBackgroundUrl)})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
@@ -715,6 +716,9 @@ function LibraryStudyContent() {
               variant="light"
             />
 
+            {/* Day/Night Theme Toggle */}
+            <ThemeToggleSimple />
+
             {/* Calendar Widget */}
             <CalendarWidget variant="compact" />
 
@@ -756,6 +760,9 @@ function LibraryStudyContent() {
           </p>
         </div>
       </main>
+
+      {/* Shared Footer */}
+      <Footer />
     </div>
   );
 }

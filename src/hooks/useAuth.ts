@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import { clearCurrentUserSession, setCurrentUserId, clearLegacyProfileData, getCurrentUserId } from '@/lib/storage/profileStorage';
+import { clearCurrentUserSession, setCurrentUserId, clearLegacyProfileData, getCurrentUserId, loadProfileFromSupabase } from '@/lib/storage/profileStorage';
 import { createClient } from '@/lib/supabase/client';
 
 // Create a simple event system for auth state changes
@@ -20,11 +20,16 @@ export function useIsAuthenticated() {
     const { data: { session } } = await supabase.auth.getSession();
 
     if (session?.user) {
-      // Ensure user ID is set in localStorage for profile storage
+      // Check if this is a different user (re-login or first load)
       const currentUserId = getCurrentUserId();
       if (currentUserId !== session.user.id) {
-        setCurrentUserId(session.user.id);
         clearLegacyProfileData();
+        // Load profile from Supabase (this also sets the user ID internally)
+        loadProfileFromSupabase().catch(err => {
+          console.warn('Failed to load profile from cloud:', err);
+          // Fallback: at least set the user ID so profile storage works
+          setCurrentUserId(session.user.id);
+        });
       }
       setIsAuthenticated(true);
       return;
@@ -50,11 +55,16 @@ export function useIsAuthenticated() {
     const supabase = createClient();
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (session?.user) {
-        // Ensure user ID is set when auth state changes (e.g., after OAuth)
+        // Handle auth state changes (e.g., after OAuth callback)
         const currentUserId = getCurrentUserId();
         if (currentUserId !== session.user.id) {
-          setCurrentUserId(session.user.id);
           clearLegacyProfileData();
+          // Load profile from Supabase (this also sets the user ID internally)
+          loadProfileFromSupabase().catch(err => {
+            console.warn('Failed to load profile from cloud:', err);
+            // Fallback: at least set the user ID so profile storage works
+            setCurrentUserId(session.user.id);
+          });
         }
       }
       setIsAuthenticated(!!session);

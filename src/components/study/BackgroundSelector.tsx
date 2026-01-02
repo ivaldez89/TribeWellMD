@@ -3,466 +3,23 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { SparklesIcon, BookOpenIcon, ClockIcon } from '@/components/icons/MedicalIcons';
+import {
+  STUDY_BACKGROUNDS,
+  CATEGORY_ORDER as CATALOG_CATEGORY_ORDER,
+  CATEGORY_LABELS as CATALOG_CATEGORY_LABELS,
+  getBackgroundUrl as catalogGetBackgroundUrl,
+  validateSceneCatalog,
+  type StudyBackground,
+  type SceneCategory
+} from '@/data/scene-catalog';
 
-// Beautiful high-resolution background images from Unsplash
-export const STUDY_BACKGROUNDS = [
-  // Medical/Study themed backgrounds (featured first)
-  {
-    id: 'library',
-    name: 'Study Library',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1920&q=80',
-    category: 'medical',
-    isDefault: true
-  },
-  {
-    id: 'cozy-study',
-    name: 'Cozy Desk',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920&q=80',
-    category: 'medical'
-  },
-  {
-    id: 'coffee-study',
-    name: 'Coffee & Books',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&q=80',
-    category: 'medical'
-  },
-  // None option
-  {
-    id: 'none',
-    name: 'None',
-    emoji: '',
-    url: null,
-    category: 'default'
-  },
-  // Custom upload option
-  {
-    id: 'custom',
-    name: 'Upload',
-    emoji: '',
-    url: null,
-    category: 'custom'
-  },
-  // ==================== BEACH & OCEAN ====================
-  {
-    id: 'beach-sunset',
-    name: 'Beach Sunset',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80',
-    category: 'beach'
-  },
-  {
-    id: 'tropical-beach',
-    name: 'Tropical',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1520454974749-611b7248ffdb?w=1920&q=80',
-    category: 'beach'
-  },
-  {
-    id: 'ocean-waves',
-    name: 'Ocean Waves',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1920&q=80',
-    category: 'beach'
-  },
-  {
-    id: 'maldives',
-    name: 'Maldives',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1920&q=80',
-    category: 'beach'
-  },
-  {
-    id: 'crystal-water',
-    name: 'Crystal Water',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=1920&q=80',
-    category: 'beach'
-  },
-  // ==================== UNDERWATER ====================
-  {
-    id: 'underwater-coral',
-    name: 'Coral Reef',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=1920&q=80',
-    category: 'underwater'
-  },
-  {
-    id: 'underwater-blue',
-    name: 'Deep Blue',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920&q=80',
-    category: 'underwater'
-  },
-  {
-    id: 'underwater-fish',
-    name: 'Ocean Life',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=1920&q=80',
-    category: 'underwater'
-  },
-  {
-    id: 'jellyfish',
-    name: 'Jellyfish',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1460518451285-97b6aa326961?w=1920&q=80',
-    category: 'underwater'
-  },
-  // ==================== SPACE & COSMOS ====================
-  {
-    id: 'galaxy',
-    name: 'Galaxy',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=80',
-    category: 'space'
-  },
-  {
-    id: 'aurora',
-    name: 'Aurora',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=1920&q=80',
-    category: 'space'
-  },
-  {
-    id: 'milky-way',
-    name: 'Milky Way',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1920&q=80',
-    category: 'space'
-  },
-  {
-    id: 'nebula',
-    name: 'Nebula',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1464802686167-b939a6910659?w=1920&q=80',
-    category: 'space'
-  },
-  {
-    id: 'earth-space',
-    name: 'Earth View',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80',
-    category: 'space'
-  },
-  {
-    id: 'moon-surface',
-    name: 'Moon',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1446941611757-91d2c3bd3d45?w=1920&q=80',
-    category: 'space'
-  },
-  {
-    id: 'saturn-rings',
-    name: 'Saturn',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=1920&q=80',
-    category: 'space'
-  },
-  {
-    id: 'starfield',
-    name: 'Starfield',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=1920&q=80',
-    category: 'space'
-  },
-  // ==================== FORESTS ====================
-  {
-    id: 'forest',
-    name: 'Forest',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=1920&q=80',
-    category: 'forest'
-  },
-  {
-    id: 'autumn-forest',
-    name: 'Autumn Forest',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&q=80',
-    category: 'forest'
-  },
-  {
-    id: 'misty-forest',
-    name: 'Misty Forest',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=1920&q=80',
-    category: 'forest'
-  },
-  {
-    id: 'redwood',
-    name: 'Redwood',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1920&q=80',
-    category: 'forest'
-  },
-  {
-    id: 'bamboo-forest',
-    name: 'Bamboo',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1920&q=80',
-    category: 'forest'
-  },
-  {
-    id: 'spring-forest',
-    name: 'Spring Woods',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1476231682828-37e571bc172f?w=1920&q=80',
-    category: 'forest'
-  },
-  {
-    id: 'snow-forest',
-    name: 'Snowy Forest',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1517299321609-52687d1bc55a?w=1920&q=80',
-    category: 'forest'
-  },
-  // ==================== JUNGLE & TROPICAL ====================
-  {
-    id: 'jungle',
-    name: 'Jungle',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?w=1920&q=80',
-    category: 'jungle'
-  },
-  {
-    id: 'rainforest',
-    name: 'Rainforest',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1536147116438-62679a5e01f2?w=1920&q=80',
-    category: 'jungle'
-  },
-  {
-    id: 'amazon',
-    name: 'Amazon',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=1920&q=80',
-    category: 'jungle'
-  },
-  {
-    id: 'tropical-plants',
-    name: 'Tropical Leaves',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1920&q=80',
-    category: 'jungle'
-  },
-  // ==================== MOUNTAINS ====================
-  {
-    id: 'mountains',
-    name: 'Mountains',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=80',
-    category: 'mountains'
-  },
-  {
-    id: 'alps',
-    name: 'Alpine',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80',
-    category: 'mountains'
-  },
-  {
-    id: 'mountain-lake',
-    name: 'Mountain Lake',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=1920&q=80',
-    category: 'mountains'
-  },
-  {
-    id: 'snowy-peaks',
-    name: 'Snowy Peaks',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1920&q=80',
-    category: 'mountains'
-  },
-  {
-    id: 'mountain-sunset',
-    name: 'Mountain Sunset',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&q=80',
-    category: 'mountains'
-  },
-  // ==================== NATURE ====================
-  {
-    id: 'waterfall',
-    name: 'Waterfall',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=1920&q=80',
-    category: 'nature'
-  },
-  {
-    id: 'japanese-garden',
-    name: 'Zen Garden',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1920&q=80',
-    category: 'nature'
-  },
-  {
-    id: 'lavender-field',
-    name: 'Lavender',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1499002238440-d264edd596ec?w=1920&q=80',
-    category: 'nature'
-  },
-  {
-    id: 'sunflower-field',
-    name: 'Sunflowers',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1470509037663-253afd7f0f51?w=1920&q=80',
-    category: 'nature'
-  },
-  {
-    id: 'cherry-blossom',
-    name: 'Cherry Blossom',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1522383225653-ed111181a951?w=1920&q=80',
-    category: 'nature'
-  },
-  {
-    id: 'northern-lights',
-    name: 'Northern Lights',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1920&q=80',
-    category: 'nature'
-  },
-  {
-    id: 'meadow',
-    name: 'Meadow',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=1920&q=80',
-    category: 'nature'
-  },
-  // ==================== DESERT & SAVANNA ====================
-  {
-    id: 'desert-dunes',
-    name: 'Desert Dunes',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1920&q=80',
-    category: 'desert'
-  },
-  {
-    id: 'sahara',
-    name: 'Sahara',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?w=1920&q=80',
-    category: 'desert'
-  },
-  {
-    id: 'savanna',
-    name: 'Savanna',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1920&q=80',
-    category: 'desert'
-  },
-  {
-    id: 'desert-sunset',
-    name: 'Desert Sunset',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=1920&q=80',
-    category: 'desert'
-  },
-  // ==================== COZY ====================
-  {
-    id: 'rainy-window',
-    name: 'Rainy Day',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=1920&q=80',
-    category: 'cozy'
-  },
-  {
-    id: 'fireplace',
-    name: 'Fireplace',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1544427920-c49ccfb85579?w=1920&q=80',
-    category: 'cozy'
-  },
-  {
-    id: 'snowy-cabin',
-    name: 'Snow Cabin',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1548777123-e216912df7d8?w=1920&q=80',
-    category: 'cozy'
-  },
-  {
-    id: 'cozy-rain',
-    name: 'Cozy Rain',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1428592953211-077101b2021b?w=1920&q=80',
-    category: 'cozy'
-  },
-  {
-    id: 'candle-light',
-    name: 'Candlelight',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&q=80',
-    category: 'cozy'
-  },
-  // ==================== CITY ====================
-  {
-    id: 'night-city',
-    name: 'City Night',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1920&q=80',
-    category: 'city'
-  },
-  {
-    id: 'tokyo',
-    name: 'Tokyo',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1920&q=80',
-    category: 'city'
-  },
-  {
-    id: 'new-york',
-    name: 'New York',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=1920&q=80',
-    category: 'city'
-  },
-  {
-    id: 'paris',
-    name: 'Paris',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1920&q=80',
-    category: 'city'
-  },
-  // ==================== WORLD LANDMARKS ====================
-  {
-    id: 'great-wall',
-    name: 'Great Wall',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=1920&q=80',
-    category: 'world'
-  },
-  {
-    id: 'machu-picchu',
-    name: 'Machu Picchu',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1526392060635-9d6019884377?w=1920&q=80',
-    category: 'world'
-  },
-  {
-    id: 'santorini',
-    name: 'Santorini',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1920&q=80',
-    category: 'world'
-  },
-  {
-    id: 'iceland',
-    name: 'Iceland',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1504829857797-ddff29c27927?w=1920&q=80',
-    category: 'world'
-  },
-  {
-    id: 'norway-fjord',
-    name: 'Norway Fjord',
-    emoji: '',
-    url: 'https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=1920&q=80',
-    category: 'world'
-  }
-];
+// Re-export for backward compatibility
+export { STUDY_BACKGROUNDS } from '@/data/scene-catalog';
+
+// Run validation in development
+if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+  validateSceneCatalog();
+}
 
 interface BackgroundSelectorProps {
   selectedBackground: string;
@@ -544,12 +101,9 @@ export function useStudyBackground() {
 }
 
 // Get background image URL by ID (with optional custom URL)
+// Uses central catalog, re-exported for backward compatibility
 export function getBackgroundUrl(backgroundId: string, customUrl?: string | null): string | null {
-  if (backgroundId === 'custom' && customUrl) {
-    return customUrl;
-  }
-  const bg = STUDY_BACKGROUNDS.find(b => b.id === backgroundId);
-  return bg?.url || null;
+  return catalogGetBackgroundUrl(backgroundId, customUrl);
 }
 
 // Background overlay component to apply behind content
@@ -576,22 +130,16 @@ export function BackgroundOverlay({ backgroundId, opacity, className = '' }: Bac
 }
 
 // Group backgrounds by category for organized display
-const CATEGORY_ORDER = ['medical', 'default', 'custom', 'beach', 'underwater', 'space', 'forest', 'jungle', 'mountains', 'nature', 'desert', 'cozy', 'city', 'world'];
+// Include default and custom in order for UI rendering
+const CATEGORY_ORDER: (SceneCategory | 'default' | 'custom')[] = ['medical', 'default', 'custom', ...CATALOG_CATEGORY_ORDER.filter(c => c !== 'medical')];
 const CATEGORY_LABELS: Record<string, string> = {
+  ...CATALOG_CATEGORY_LABELS,
+  // Override with UI-specific labels (with emojis for special items)
   medical: 'Study',
-  default: '⬜ None',
-  custom: '📷 Custom',
-  beach: 'Beach & Ocean',
-  underwater: 'Underwater',
-  space: 'Space & Cosmos',
-  forest: 'Forests',
-  jungle: 'Jungle & Tropical',
-  mountains: 'Mountains',
-  nature: '🌿 Nature',
-  desert: '🏜️ Desert & Savanna',
-  cozy: 'Cozy',
-  city: 'Cities',
-  world: 'World Landmarks'
+  default: 'None',
+  custom: 'Custom',
+  nature: 'Nature',
+  desert: 'Desert & Savanna',
 };
 
 export function BackgroundSelector({
@@ -676,22 +224,23 @@ export function BackgroundSelector({
   return (
     <div className="relative">
       {/* Toggle Button */}
-      <button
-        ref={buttonRef}
-        onClick={handleTogglePanel}
-        className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors whitespace-nowrap flex-shrink-0 ${
-          showPanel || selectedBackground !== 'none'
-            ? isDark
-              ? 'bg-teal-900/50 text-tribe-sage-400'
-              : 'bg-tribe-sage-100 text-tribe-sage-700'
-            : isDark
-              ? 'text-slate-400 hover:text-white hover:bg-slate-700'
-              : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100'
-        }`}
-      >
-        <span>{currentBg?.emoji || <SparklesIcon className="w-4 h-4" />}</span>
-        <span className="hidden sm:inline">Scene</span>
-      </button>
+      <div className="group relative">
+        <button
+          ref={buttonRef}
+          onClick={handleTogglePanel}
+          className={`flex items-center justify-center w-9 h-9 rounded-lg transition-colors ${
+            showPanel || selectedBackground !== 'none'
+              ? 'bg-[#C4A77D] text-white'
+              : 'text-white/80 hover:text-white hover:bg-white/10'
+          }`}
+        >
+          <span className="text-lg">{currentBg?.emoji || <SparklesIcon className="w-5 h-5" />}</span>
+        </button>
+        {/* Tooltip on hover */}
+        <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
+          Scene
+        </span>
+      </div>
 
       {/* Dropdown Panel - rendered via portal to escape stacking contexts */}
       {showPanel && mounted && createPortal(

@@ -42,7 +42,6 @@ const REFLECTION_PROMPTS = [
   "What's been challenging you most this week?",
   "What's something you're proud of right now?",
   "How did medicine feel for you today?",
-  "Mark a milestone or turning point in your journey.",
 ];
 
 // Sample reflections for demo (10 entries for scrolling)
@@ -58,11 +57,11 @@ const SAMPLE_REFLECTIONS: Reflection[] = [
   },
   {
     id: 'sample-2',
-    content: "Milestone: Passed Step 1! After months of studying, sleepless nights, and too much coffee, I finally did it. This journey is tough but moments like these remind me why I started.",
+    content: "Passed Step 1! After months of studying, sleepless nights, and too much coffee, I finally did it. This journey is tough but moments like these remind me why I started.",
     imageUrl: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80',
     createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
     visibility: 'connections',
-    prompt: "Mark a milestone or turning point in your journey.",
+    prompt: "What's something you're proud of right now?",
     likes: 156,
     comments: 32
   },
@@ -135,7 +134,7 @@ const SAMPLE_REFLECTIONS: Reflection[] = [
     imageUrl: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80',
     createdAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000), // 2 weeks ago
     visibility: 'village',
-    prompt: "Mark a milestone or turning point in your journey.",
+    prompt: "What did you learn about yourself recently?",
     likes: 201,
     comments: 45
   }
@@ -346,12 +345,12 @@ export default function HomePage() {
   // Left Sidebar
   const leftSidebar = (
     <>
-      {/* Profile Card */}
+      {/* Profile Card - Identity + Status */}
       <div className={CARD_STYLES.container + ' overflow-hidden'}>
         {/* Cover gradient */}
         <div className="h-20 bg-gradient-to-br from-[#5B7B6D] via-[#6B8B7D] to-[#C4A77D]" />
 
-        {/* Avatar & Name */}
+        {/* Identity Section */}
         <div className="px-4 pb-4 -mt-10">
           <Link href="/profile/settings" className="block">
             <div className="w-20 h-20 rounded-xl overflow-hidden border-4 border-white dark:border-slate-800 shadow-lg bg-gradient-to-br from-[#5B7B6D] to-[#7FA08F]">
@@ -367,37 +366,59 @@ export default function HomePage() {
           <Link href="/profile/settings" className="block mt-3 hover:underline">
             <h2 className="text-lg font-bold text-slate-900 dark:text-white">{displayName}</h2>
           </Link>
-          <p className="text-sm text-slate-500 dark:text-slate-400">{getRoleLabel()}</p>
+          <p className="text-sm text-slate-600 dark:text-slate-300 font-medium">{getRoleLabel()}</p>
           {profile?.school && (
-            <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">{profile.school}</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">{profile.school}</p>
           )}
         </div>
 
-        {/* Stats */}
-        <div className="border-t border-slate-100 dark:border-slate-700 px-4 py-3 grid grid-cols-3 gap-2 text-center">
-          <div>
-            <p className="text-lg font-bold text-[#5B7B6D] dark:text-[#7FA08F]">{connectionCount}</p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">Connections</p>
+        {/* Interests Section */}
+        {profile?.interestedSpecialties && profile.interestedSpecialties.length > 0 && (
+          <div className="px-4 pb-4">
+            <div className="flex flex-wrap gap-1.5">
+              {profile.interestedSpecialties.map((specialty) => (
+                <span
+                  key={specialty}
+                  className="px-2.5 py-1 bg-[#F5F0E8] dark:bg-[#3D4A44] text-[#5B7B6D] dark:text-[#7FA08F] rounded-full text-xs font-medium"
+                >
+                  {specialty}
+                </span>
+              ))}
+            </div>
           </div>
-          <div>
-            <p className="text-lg font-bold text-[#C4A77D] dark:text-[#D4B78D]">{streakData?.currentStreak || 0}</p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">Day Streak</p>
-          </div>
-          <div>
-            <p className="text-lg font-bold text-[#8B7355] dark:text-[#A89070]">{stats.reviewCards || 0}</p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">Reviewed</p>
+        )}
+
+        {/* Stats Section */}
+        <div className="px-4 py-3 bg-slate-50/50 dark:bg-slate-800/50">
+          <div className="grid grid-cols-3 gap-2 text-center">
+            <div>
+              <p className="text-lg font-bold text-[#5B7B6D] dark:text-[#7FA08F]">{connectionCount}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Connections</p>
+            </div>
+            <div>
+              <p className="text-lg font-bold text-[#C4A77D] dark:text-[#D4B78D]">{streakData?.currentStreak || 0}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Day Streak</p>
+            </div>
+            <div>
+              <p className="text-lg font-bold text-[#8B7355] dark:text-[#A89070]">{stats.reviewCards || 0}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Reviewed</p>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Quick Links - Study Tools */}
       <div className={CARD_STYLES.containerWithPadding.replace('p-4', 'p-3')}>
-        <h3 className="font-semibold text-slate-900 dark:text-white px-3 py-2 text-sm flex items-center gap-2">
-          <svg className="w-4 h-4 text-content-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-          </svg>
-          Study Tools
-        </h3>
+        <div className="px-3 py-2">
+          <h3 className="font-semibold text-slate-900 dark:text-white text-sm flex items-center gap-2">
+            <svg className="w-4 h-4 text-content-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+            </svg>
+            Study Tools
+          </h3>
+          {/* Subtle accent divider */}
+          <div className="mt-2 h-px w-8 bg-gradient-to-r from-[#5B7B6D]/60 to-transparent rounded-full" />
+        </div>
         <nav className="space-y-1">
           <Link href="/flashcards" className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#C4A77D] to-[#D4B78D] flex items-center justify-center">
@@ -426,6 +447,15 @@ export default function HomePage() {
             <span className="font-medium text-slate-700 dark:text-slate-200 group-hover:text-[#5B7B6D]">QBank</span>
           </Link>
 
+          <Link href="/study/rapid-review" className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#7B6B5D] to-[#9F8B7D] flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <span className="font-medium text-slate-700 dark:text-slate-200 group-hover:text-[#7B6B5D]">Rapid Review</span>
+          </Link>
+
           <Link href="/progress/rooms" className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#8B7355] to-[#A89070] flex items-center justify-center">
               <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -437,195 +467,106 @@ export default function HomePage() {
         </nav>
       </div>
 
-      {/* Wellness */}
-      <div className={CARD_STYLES.containerWithPadding.replace('p-4', 'p-3')}>
-        <h3 className="font-semibold text-slate-900 dark:text-white px-3 py-2 text-sm flex items-center gap-2">
-          <svg className="w-4 h-4 text-content-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-          </svg>
-          Wellness
-        </h3>
-        <nav className="space-y-1">
-          <Link href="/wellness" className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#7FA08F] to-[#9FBFAF] flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <span className="font-medium text-slate-700 dark:text-slate-200 group-hover:text-[#7FA08F]">Daily Check-In</span>
-          </Link>
-
-          <Link href="/wellness/journey" className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#5B7B6D] to-[#7FA08F] flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-            </div>
-            <span className="font-medium text-slate-700 dark:text-slate-200 group-hover:text-[#5B7B6D]">My Journey</span>
-          </Link>
-
-          <Link href="/wellness/impact" className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#C4A77D] to-[#D4B78D] flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-              </svg>
-            </div>
-            <span className="font-medium text-slate-700 dark:text-slate-200 group-hover:text-[#C4A77D]">Social Impact</span>
-          </Link>
-
-          <Link href="/groups?filter=wellness" className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#6B8B7D] to-[#8BA89A] flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-            </div>
-            <span className="font-medium text-slate-700 dark:text-slate-200 group-hover:text-[#6B8B7D]">Wellness Groups</span>
-          </Link>
-        </nav>
-      </div>
-
-      {/* Community */}
-      <div className={CARD_STYLES.containerWithPadding.replace('p-4', 'p-3')}>
-        <h3 className="font-semibold text-slate-900 dark:text-white px-3 py-2 text-sm flex items-center gap-2">
-          <svg className="w-4 h-4 text-content-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-          </svg>
-          Community
-        </h3>
-        <nav className="space-y-1">
-          <Link href="/village" className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#5B7B6D] to-[#6B8B7D] flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-              </svg>
-            </div>
-            <span className="font-medium text-slate-700 dark:text-slate-200 group-hover:text-[#5B7B6D]">My Village</span>
-          </Link>
-
-          <Link href="/groups" className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#8B7355] to-[#A89070] flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-            <span className="font-medium text-slate-700 dark:text-slate-200 group-hover:text-[#8B7355]">Explore Groups</span>
-          </Link>
-
-          <Link href="/connections" className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#C4A77D] to-[#D4B78D] flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-            </div>
-            <span className="font-medium text-slate-700 dark:text-slate-200 group-hover:text-[#C4A77D]">Connections</span>
-          </Link>
-
-          <Link href="/leaderboard" className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-              </svg>
-            </div>
-            <span className="font-medium text-slate-700 dark:text-slate-200 group-hover:text-amber-500">Leaderboard</span>
-          </Link>
-        </nav>
-      </div>
-
-      {/* Interests */}
-      {profile?.interestedSpecialties && profile.interestedSpecialties.length > 0 && (
-        <div className={CARD_STYLES.containerWithPadding}>
-          <h3 className="font-semibold text-slate-900 dark:text-white mb-3">Interests</h3>
-          <div className="flex flex-wrap gap-2">
-            {profile.interestedSpecialties.map((specialty) => (
-              <span
-                key={specialty}
-                className="px-3 py-1.5 bg-gradient-to-r from-[#E8E0D5] to-[#F5F0E8] dark:from-[#3D4A44] dark:to-[#4A5A50] text-[#5B7B6D] dark:text-[#7FA08F] rounded-full text-sm font-medium"
-              >
-                {specialty}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
     </>
   );
 
   // Right Sidebar
   const rightSidebar = (
     <>
-      {/* Daily Prompt */}
+      {/* Wellness Section */}
       <div className={CARD_STYLES.containerWithPadding}>
-        <h3 className="font-semibold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
-          <ChatBubbleIcon className="w-5 h-5 text-[#5B7B6D]" />
-          Daily Prompt
-        </h3>
-        <p className="text-sm text-slate-600 dark:text-slate-400 italic">
-          &ldquo;{REFLECTION_PROMPTS[currentPromptIndex]}&rdquo;
-        </p>
-        <button
-          onClick={() => setShowReflectionForm(true)}
-          className="mt-3 w-full py-2 text-sm font-medium text-[#5B7B6D] hover:bg-[#5B7B6D]/10 rounded-lg transition-colors"
-        >
-          Write a reflection
-        </button>
-      </div>
-
-      {/* Connections */}
-      {connections.length > 0 && (
-        <div className={CARD_STYLES.containerWithPadding}>
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="font-semibold text-slate-900 dark:text-white">Connections</h3>
-            <Link href="/connections" className="text-sm text-[#5B7B6D] hover:underline">See all</Link>
-          </div>
-          <div className="space-y-3">
-            {connections.slice(0, 5).map((connection) => {
-              const fullName = `${connection.firstName} ${connection.lastName}`;
-              return (
-                <div key={connection.id} className="flex items-center gap-3">
-                  <div className="relative">
-                    <div className="w-8 h-8 rounded-full overflow-hidden bg-gradient-to-br from-[#5B7B6D] to-[#8B7355]">
-                      {connection.avatar ? (
-                        <img src={connection.avatar} alt={fullName} className="w-full h-full object-cover" />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-white text-xs font-bold">
-                          {connection.firstName[0]}{connection.lastName[0]}
-                        </div>
-                      )}
-                    </div>
-                    {connection.isOnline && (
-                      <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white dark:border-slate-800 rounded-full" />
-                    )}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-slate-700 dark:text-slate-200 truncate">{fullName}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+        <div className="mb-3">
+          <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+            <svg className="w-5 h-5 text-[#C4A77D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            Wellness
+          </h3>
+          <div className="mt-2 h-px w-8 bg-gradient-to-r from-[#C4A77D]/60 to-transparent rounded-full" />
         </div>
-      )}
-
-      {/* Study Stats */}
-      <div className={CARD_STYLES.containerWithPadding}>
-        <h3 className="font-semibold text-slate-900 dark:text-white mb-3">This Week</h3>
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-slate-600 dark:text-slate-400">Cards reviewed</span>
-            <span className="font-semibold text-[#5B7B6D]">{stats.reviewCards || 0}</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-slate-600 dark:text-slate-400">Current streak</span>
-            <span className="font-semibold text-[#C4A77D]">{streakData?.currentStreak || 0} days</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-slate-600 dark:text-slate-400">Weekly goal</span>
-            <span className="font-semibold text-pink-500">
-              {wellnessProfile?.weeklyGoal ? Math.round((wellnessProfile.weeklyGoal.completed / wellnessProfile.weeklyGoal.minutes) * 100) : 0}%
-            </span>
-          </div>
+        <div className="space-y-2">
+          <Link href="/wellness" className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-[#5B7B6D] flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Daily Check-In</span>
+          </Link>
+          <Link href="/home" className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-[#5B7B6D] flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">My Journey</span>
+          </Link>
+          <Link href="/my-impact" className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-[#C4A77D] flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </div>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Social Impact</span>
+          </Link>
+          <Link href="/groups" className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-[#C4A77D] flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Wellness Groups</span>
+          </Link>
         </div>
       </div>
+
+      {/* Community Section */}
+      <div className={CARD_STYLES.containerWithPadding}>
+        <div className="mb-3">
+          <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+            <svg className="w-5 h-5 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            Community
+          </h3>
+          <div className="mt-2 h-px w-8 bg-gradient-to-r from-[#5B7B6D]/60 to-transparent rounded-full" />
+        </div>
+        <div className="space-y-2">
+          <Link href="/village" className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-[#5B7B6D] flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </div>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">My Village</span>
+          </Link>
+          <Link href="/groups" className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-[#C4A77D] flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Explore Groups</span>
+          </Link>
+          <Link href="/connections" className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-[#C4A77D] flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </div>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Connections</span>
+          </Link>
+          <Link href="/progress/progress" className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-[#E6A048] flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Leaderboard</span>
+          </Link>
+        </div>
+      </div>
+
     </>
   );
 

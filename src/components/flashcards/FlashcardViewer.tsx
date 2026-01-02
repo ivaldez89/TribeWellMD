@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import type { Flashcard } from '@/types';
+import { ClozeText, hasClozeContent } from './ClozeText';
 
 interface FlashcardViewerProps {
   card: Flashcard;
@@ -93,11 +94,12 @@ export function FlashcardViewer({
           )}
         </div>
 
-        <div className="flex items-center gap-3 text-sm text-content-muted">
-          <span className="font-medium">{cardNumber} / {totalCards}</span>
-          <div className="w-24 h-1.5 bg-border rounded-full overflow-hidden">
+        {/* Card number with backdrop for scene visibility */}
+        <div className="flex items-center gap-3 study-overlay-surface-sm">
+          <span className="font-medium text-sm">{cardNumber} / {totalCards}</span>
+          <div className="w-24 h-1.5 bg-white/30 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-primary to-info rounded-full transition-all duration-300"
+              className="h-full bg-white rounded-full transition-all duration-300"
               style={{ width: `${(cardNumber / totalCards) * 100}%` }}
             />
           </div>
@@ -149,9 +151,13 @@ export function FlashcardViewer({
                 <span className="text-primary font-bold text-sm">Q</span>
               </div>
               <div className="flex-1">
-                <p className="text-lg text-content leading-relaxed whitespace-pre-wrap">
-                  {card.content.front}
-                </p>
+                <div className="text-lg text-content leading-relaxed whitespace-pre-wrap">
+                  {hasClozeContent(card.content.front) ? (
+                    <ClozeText text={card.content.front} showAnswers={isRevealed} />
+                  ) : (
+                    card.content.front
+                  )}
+                </div>
                 {/* Images for question */}
                 {card.content.images && card.content.images.length > 0 && (
                   <div className="mt-4 flex flex-wrap gap-3">
@@ -203,7 +209,11 @@ export function FlashcardViewer({
                   </div>
                   <div className="flex-1 space-y-4">
                     <div className="text-lg text-content leading-relaxed whitespace-pre-wrap">
-                      {card.content.back}
+                      {hasClozeContent(card.content.back) ? (
+                        <ClozeText text={card.content.back} showAnswers={true} />
+                      ) : (
+                        card.content.back
+                      )}
                     </div>
 
                     {card.content.explanation && (

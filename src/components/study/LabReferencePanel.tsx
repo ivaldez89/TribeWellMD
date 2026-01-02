@@ -58,7 +58,7 @@ export function LabReferencePanel({ isOpen, onClose }: LabReferencePanelProps) {
 
   return (
     <aside
-      className={`fixed top-16 right-0 bottom-0 w-[380px] bg-surface border-l border-border shadow-2xl z-40 flex flex-col transform transition-transform duration-300 ease-in-out ${
+      className={`fixed top-12 right-0 bottom-12 w-[380px] bg-surface border-l border-border shadow-2xl z-40 flex flex-col transform transition-transform duration-300 ease-in-out ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
     >

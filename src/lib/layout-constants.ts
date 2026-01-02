@@ -1,0 +1,28 @@
+/**
+ * Shared layout constants for consistent header/footer sizing across the app.
+ * Both header and footer are 48px (h-12) to maintain visual symmetry.
+ */
+
+// Height values in pixels
+export const LAYOUT = {
+  HEADER_HEIGHT: 48,  // 3rem / h-12
+  FOOTER_HEIGHT: 48,  // 3rem / h-12
+} as const;
+
+// Tailwind class names for consistency
+export const LAYOUT_CLASSES = {
+  HEADER_HEIGHT: 'h-12',
+  FOOTER_HEIGHT: 'h-12',
+  HEADER_SPACER: 'h-12',
+  FOOTER_SPACER: 'h-12',
+  // For positioning panels that need to avoid header/footer
+  PANEL_TOP: 'top-12',
+  PANEL_BOTTOM: 'bottom-12',
+} as const;
+
+// CSS values for inline styles
+export const LAYOUT_STYLES = {
+  headerHeight: '48px',
+  footerHeight: '48px',
+  contentHeight: 'calc(100vh - 96px)', // 100vh - header - footer
+} as const;

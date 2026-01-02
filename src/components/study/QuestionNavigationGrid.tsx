@@ -124,55 +124,58 @@ export function QuestionNavigationGrid({
                 </svg>
               </button>
             </div>
-            {/* Legend */}
+            {/* Legend - using TribeWell colors */}
             <div className="flex flex-wrap gap-3 text-xs text-content-muted">
               <span className="flex items-center gap-1">
-                <span className="w-3 h-3 rounded bg-gray-200 dark:bg-gray-600 border border-gray-300 dark:border-gray-500" />
+                <span className="w-2.5 h-2.5 rounded bg-gray-200 dark:bg-gray-600 border border-gray-300 dark:border-gray-500" />
                 Unanswered
               </span>
               <span className="flex items-center gap-1">
-                <span className="w-3 h-3 rounded bg-blue-500 ring-2 ring-blue-300" />
+                <span className="w-2.5 h-2.5 rounded bg-gray-300 dark:bg-gray-500 ring-2 ring-[#5B7B6D]" />
                 Current
               </span>
               <span className="flex items-center gap-1">
-                <span className="w-3 h-3 rounded bg-green-500" />
+                <span className="w-2.5 h-2.5 rounded bg-[#5B7B6D]" />
                 Correct
               </span>
               <span className="flex items-center gap-1">
-                <span className="w-3 h-3 rounded bg-red-500" />
+                <span className="w-2.5 h-2.5 rounded bg-[#8B5A5A]" />
                 Incorrect
               </span>
               <span className="flex items-center gap-1">
-                <span className="w-3 h-3 rounded bg-yellow-500" />
+                <span className="w-2.5 h-2.5 rounded bg-[#C4A77D]" />
                 Flagged
               </span>
             </div>
           </div>
 
           {/* Question Grid */}
-          <div className="p-4 max-h-[300px] overflow-y-auto">
-            <div className="grid grid-cols-5 sm:grid-cols-7 gap-2">
+          <div className="p-3 max-h-[300px] overflow-y-auto">
+            <div className="grid grid-cols-6 sm:grid-cols-8 gap-1.5">
               {[...Array(totalQuestions)].map((_, idx) => {
                 const qId = questionIds[idx];
                 const state = questionStates[qId];
                 const marked = isMarked[qId];
                 const isCurrent = idx === currentIndex;
 
-                // Determine button style based on state
+                // Determine button style based on state - using TribeWell colors
+                // Forest green: #5B7B6D, Forest red: #8B5A5A (muted earthy red)
                 let buttonClass = 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600';
 
                 if (state?.isSubmitted) {
                   if (state.isCorrect) {
-                    buttonClass = 'bg-green-500 text-white border-green-600 hover:bg-green-600';
+                    // TribeWell forest green
+                    buttonClass = 'bg-[#5B7B6D] text-white border-[#4A6A5C] hover:bg-[#4A6A5C]';
                   } else {
-                    buttonClass = 'bg-red-500 text-white border-red-600 hover:bg-red-600';
+                    // TribeWell earthy red (complementary to forest green)
+                    buttonClass = 'bg-[#8B5A5A] text-white border-[#7A4949] hover:bg-[#7A4949]';
                   }
                 } else if (marked) {
-                  buttonClass = 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-300 border-yellow-300 dark:border-yellow-700 hover:bg-yellow-200 dark:hover:bg-yellow-900/60';
+                  buttonClass = 'bg-[#C4A77D]/20 dark:bg-[#C4A77D]/30 text-[#8B7355] dark:text-[#C4A77D] border-[#C4A77D]/50 hover:bg-[#C4A77D]/30';
                 }
 
                 if (isCurrent) {
-                  buttonClass += ' ring-2 ring-blue-500 ring-offset-1';
+                  buttonClass += ' ring-2 ring-[#5B7B6D] ring-offset-1';
                 }
 
                 return (
@@ -182,7 +185,7 @@ export function QuestionNavigationGrid({
                       onNavigate(idx);
                       setIsOpen(false);
                     }}
-                    className={`w-10 h-10 rounded-lg font-medium text-sm border transition-all ${buttonClass}`}
+                    className={`w-7 h-7 rounded-md font-medium text-[10px] border transition-all ${buttonClass}`}
                   >
                     {idx + 1}
                   </button>
@@ -191,27 +194,27 @@ export function QuestionNavigationGrid({
             </div>
           </div>
 
-          {/* Stats Footer */}
-          <div className="px-4 py-3 border-t border-border bg-surface-muted/50">
+          {/* Stats Footer - using TribeWell colors */}
+          <div className="px-3 py-2.5 border-t border-border bg-surface-muted/50">
             <div className="flex items-center justify-between text-xs">
-              <div className="flex gap-4">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-green-500" />
+              <div className="flex gap-3">
+                <span className="flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-[#5B7B6D]" />
                   <span className="text-content-muted">{correctCount} correct</span>
                 </span>
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-red-500" />
+                <span className="flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-[#8B5A5A]" />
                   <span className="text-content-muted">{incorrectCount} incorrect</span>
                 </span>
                 {flaggedCount > 0 && (
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-yellow-500" />
+                  <span className="flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-[#C4A77D]" />
                     <span className="text-content-muted">{flaggedCount} flagged</span>
                   </span>
                 )}
               </div>
               <span className="font-medium text-secondary">
-                {answeredCount}/{totalQuestions} answered
+                {answeredCount}/{totalQuestions}
               </span>
             </div>
           </div>

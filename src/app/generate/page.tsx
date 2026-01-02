@@ -190,7 +190,7 @@ Return ONLY the JSON array, no other text.`;
     }
   };
 
-  const handleSaveCards = () => {
+  const handleSaveCards = async () => {
     if (generatedCards.length === 0) return;
 
     const now = new Date().toISOString();
@@ -213,6 +213,7 @@ Return ONLY the JSON array, no other text.`;
         topic: card.topic || topic || 'General',
         difficulty: 'medium',
         clinicalVignette: cardStyle === 'clinical',
+        source: 'ai_generated',
       },
       spacedRepetition: {
         state: 'new',
@@ -226,7 +227,8 @@ Return ONLY the JSON array, no other text.`;
       },
     }));
 
-    addCards(cardsToAdd);
+    // Await the addCards call to ensure persistence completes
+    await addCards(cardsToAdd);
     setSavedCount(cardsToAdd.length);
     setGeneratedCards([]);
     setInput('');

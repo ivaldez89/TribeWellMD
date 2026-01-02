@@ -276,10 +276,10 @@ export default function StudyRoomPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900 flex flex-col">
-      {/* Header Bar */}
-      <div className="bg-white dark:bg-slate-800 border-b border-[#D4C4B0]/50 dark:border-slate-700 px-4 py-3">
-        <div className="max-w-full mx-auto flex items-center justify-between">
+    <div className="fixed inset-0 top-0 bottom-12 bg-[#E8DFD0] dark:bg-slate-900 flex flex-col">
+      {/* Header Bar - 48px height to match global header */}
+      <div className="h-12 flex-shrink-0 bg-white dark:bg-slate-800 border-b border-[#D4C4B0]/50 dark:border-slate-700 px-4 flex items-center">
+        <div className="w-full flex items-center justify-between">
           {/* Left: Room info */}
           <div className="flex items-center gap-4">
             <Link

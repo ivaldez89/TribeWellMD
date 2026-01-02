@@ -149,14 +149,23 @@ export function useFlashcards(): UseFlashcardsReturn {
           );
 
           if (fetchResult.success && fetchResult.result) {
-            setCards(fetchResult.result);
-            setDueCards(getDueCards(fetchResult.result));
+            // Also load localStorage cards and merge (for clinical pearls saved from QBank)
+            const localCards = getLocalFlashcards();
+            const supabaseIds = new Set(fetchResult.result.map(c => c.id));
+            const localOnlyCards = localCards.filter(c => !supabaseIds.has(c.id));
+
+            // Merge: Supabase cards + local-only cards (like QBank pearls)
+            const mergedCards = [...fetchResult.result, ...localOnlyCards];
+
+            setCards(mergedCards);
+            setDueCards(getDueCards(mergedCards));
             recordSuccess(CB_FLASHCARD_WRITE);
             const duration = Math.round(performance.now() - loadStart);
-            metrics.record(METRIC_NAMES.FLASHCARD_LOAD, duration, { count: fetchResult.result.length });
-            flashcardLogger.info('Loaded cards from Supabase', {
-              count: fetchResult.result.length,
+            metrics.record(METRIC_NAMES.FLASHCARD_LOAD, duration, { count: mergedCards.length });
+            flashcardLogger.info('Loaded cards from Supabase + localStorage', {
+              count: mergedCards.length,
               duration,
+              metadata: { supabaseCount: fetchResult.result.length, localOnlyCount: localOnlyCards.length },
             });
           } else {
             recordFailure(CB_FLASHCARD_WRITE);
@@ -336,15 +345,30 @@ export function useFlashcards(): UseFlashcardsReturn {
       );
 
       if (refreshResult.success && refreshResult.result) {
-        setCards(refreshResult.result);
-        setDueCards(getDueCards(refreshResult.result));
+        // Also load localStorage cards and merge (for clinical pearls saved from QBank)
+        const localCards = getLocalFlashcards();
+        const supabaseIds = new Set(refreshResult.result.map(c => c.id));
+        const localOnlyCards = localCards.filter(c => !supabaseIds.has(c.id));
+
+        // Merge: Supabase cards + local-only cards (like QBank pearls)
+        const mergedCards = [...refreshResult.result, ...localOnlyCards];
+
+        setCards(mergedCards);
+        setDueCards(getDueCards(mergedCards));
         recordSuccess(CB_FLASHCARD_WRITE);
-        flashcardLogger.debug('Cards refreshed', { count: refreshResult.result.length });
+        flashcardLogger.debug('Cards refreshed', {
+          count: mergedCards.length,
+          metadata: { supabaseCount: refreshResult.result.length, localOnlyCount: localOnlyCards.length }
+        });
       } else {
         recordFailure(CB_FLASHCARD_WRITE);
         flashcardLogger.error('Error refreshing cards', {
           error: refreshResult.error?.message,
         });
+        // Fallback to localStorage
+        const loadedCards = getLocalFlashcards();
+        setCards(loadedCards);
+        setDueCards(getDueCards(loadedCards));
       }
     } else {
       const loadedCards = getLocalFlashcards();
