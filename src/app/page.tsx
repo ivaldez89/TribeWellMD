@@ -1,11 +1,15 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useIsAuthenticated } from '@/hooks/useAuth';
 
-// Minimal landing page header - no theme toggle, no Get Started button
+// CSS custom properties for header/footer heights
+const HEADER_HEIGHT = 48;
+const FOOTER_HEIGHT = 48;
+
+// Minimal landing page header - fixed at top
 function LandingHeader() {
   const isAuthenticated = useIsAuthenticated();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -39,7 +43,7 @@ function LandingHeader() {
             <Link href="/partners" className="px-3 py-1.5 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all">For Partners</Link>
           </nav>
 
-          {/* Right side: Sign In only (no Get Started, no theme toggle) */}
+          {/* Right side: Sign In only */}
           <div className="flex items-center gap-1.5">
             <div className="hidden sm:flex items-center gap-1">
               <Link
@@ -94,7 +98,7 @@ function LandingHeader() {
   );
 }
 
-// Minimal landing page footer
+// Minimal landing page footer - fixed at bottom
 function LandingFooter() {
   const currentYear = new Date().getFullYear();
 
@@ -146,85 +150,114 @@ function LandingFooter() {
 
 export default function HomePage() {
   return (
-    <>
-      {/* Fixed Header - no spacer div */}
+    <div className="min-h-screen">
+      {/* Fixed Header */}
       <LandingHeader />
 
-      {/* Fixed Footer - no spacer div */}
-      <LandingFooter />
-
       {/*
-        Main scrollable content area
-        - Positioned to account for fixed header (top: 48px) and footer (bottom: 48px)
-        - Hero section uses 100vw for true full-bleed
+        HERO SECTION - Full bleed, normal document flow
+        Structure per requirements:
+        - position: relative (NOT fixed)
+        - width: 100%
+        - min-height: calc(100vh - header - footer)
+        - margin: 0, padding: 0
+        - overflow: hidden
+        - Video/img: position absolute, inset 0, object-fit cover
       */}
-      <main
-        className="fixed overflow-y-auto bg-[#FAFAF8]"
+      <section
         style={{
-          top: '48px',
-          bottom: '48px',
-          left: 0,
-          right: 0
+          position: 'relative',
+          width: '100%',
+          minHeight: `calc(100vh - ${HEADER_HEIGHT}px - ${FOOTER_HEIGHT}px)`,
+          marginTop: HEADER_HEIGHT,
+          marginBottom: 0,
+          marginLeft: 0,
+          marginRight: 0,
+          padding: 0,
+          overflow: 'hidden',
         }}
       >
-        {/*
-          Section 1: Hero - True full-bleed
-          - width: 100vw (viewport width, not container width)
-          - No max-width, no padding, no margins
-          - Height fills the available space between header and footer
-        */}
-        <section
-          className="relative flex items-center justify-center overflow-hidden"
+        {/* Video Background - absolute positioned within hero */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
           style={{
-            width: '100vw',
-            maxWidth: 'none',
-            height: 'calc(100vh - 96px)',
-            margin: 0,
-            padding: 0
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
           }}
         >
-          {/* Full-bleed video background */}
-          <div className="absolute inset-0 w-full h-full overflow-hidden">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ objectFit: 'cover' }}
-            >
-              <source src="https://6mx4ugktbhpecq60.public.blob.vercel-storage.com/Untitled%20design.mp4" type="video/mp4" />
-            </video>
-            {/* Overlay for text contrast */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/40" />
+          <source src="https://6mx4ugktbhpecq60.public.blob.vercel-storage.com/Untitled%20design.mp4" type="video/mp4" />
+        </video>
+
+        {/* Overlay for text contrast */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            width: '100%',
+            height: '100%',
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.3), rgba(0,0,0,0.4))',
+          }}
+        />
+
+        {/* Hero Content - Centered CTA */}
+        <div
+          style={{
+            position: 'relative',
+            zIndex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: `calc(100vh - ${HEADER_HEIGHT}px - ${FOOTER_HEIGHT}px)`,
+            textAlign: 'center',
+            padding: '0 16px',
+          }}
+        >
+          <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-2xl">
+            Connection with <span className="text-[#A8C5B8]">purpose</span>
+          </h1>
+
+          <p className="text-xl md:text-2xl text-white/90 mb-8 drop-shadow-lg max-w-2xl">
+            Building well-being through every stage of your medical journey.
+            <br />
+            <span className="text-lg mt-2 block">For the realities of life in medicine</span>
+          </p>
+
+          <Link
+            href="/register"
+            className="inline-block px-10 py-5 bg-white hover:bg-white/90 text-[#556B5E] text-lg font-semibold rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg"
+          >
+            Begin Your Journey
+          </Link>
+
+          <p className="mt-6 text-sm text-white/70">
+            For medical students, residents, and attendings
+          </p>
+
+          {/* Scroll indicator */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <svg className="w-6 h-6 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
           </div>
+        </div>
+      </section>
 
-          {/* Hero Content - Centered CTA */}
-          <div className="relative z-10 text-center px-4">
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-2xl">
-              Connection with <span className="text-[#A8C5B8]">purpose</span>
-            </h1>
-
-            <p className="text-xl md:text-2xl text-white/90 mb-8 drop-shadow-lg">
-              Building well-being through every stage of your medical journey.
-              <br />
-              <span className="text-lg mt-2 block">For the realities of life in medicine</span>
-            </p>
-
-            <Link
-              href="/register"
-              className="inline-block px-10 py-5 bg-white hover:bg-white/90 text-[#556B5E] text-lg font-semibold rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg"
-            >
-              Begin Your Journey
-            </Link>
-
-            <p className="mt-6 text-sm text-white/70">
-              For medical students, residents, and attendings
-            </p>
-          </div>
-        </section>
-
-        {/* Section 2: How TribeWellMD Supports You - White content section with normal constraints */}
+      {/* Main content - white section that scrolls normally */}
+      <main>
+        {/* Section 2: How TribeWellMD Supports You */}
         <section className="bg-white py-24">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
@@ -299,7 +332,13 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* Bottom padding to account for fixed footer */}
+        <div className="h-12 bg-white" />
       </main>
-    </>
+
+      {/* Fixed Footer */}
+      <LandingFooter />
+    </div>
   );
 }
