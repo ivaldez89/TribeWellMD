@@ -5,80 +5,91 @@ import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 
-// Crisp ʻUlu Flower Component that evolves as user scrolls
-const UluFlower = ({ scrollProgress }: { scrollProgress: number }) => {
-  // Simple, elegant evolution from bud to full bloom
-  const petalScale = Math.min(1, scrollProgress * 2);
-  const petalRotation = scrollProgress * 360;
-  const centerScale = 0.3 + (scrollProgress * 0.7);
+// Animated TribeWellz Logo with fading branches
+const AnimatedLogo = ({ scrollProgress }: { scrollProgress: number }) => {
+  // Calculate opacity for branches based on scroll
+  const branchOpacity = Math.min(1, scrollProgress * 2);
 
   return (
-    <svg
-      width="300"
-      height="300"
-      viewBox="0 0 300 300"
-      className="w-full max-w-sm mx-auto"
-      style={{ opacity: Math.min(1, scrollProgress * 3) }}
-    >
-      {/* Outer petals - cream/beige */}
-      <g transform={`rotate(${petalRotation} 150 150)`}>
-        {[0, 60, 120, 180, 240, 300].map((angle) => (
-          <ellipse
-            key={angle}
-            cx="150"
-            cy="80"
-            rx="25"
-            ry="50"
-            fill="#F5E6D3"
-            opacity={petalScale}
-            transform={`rotate(${angle} 150 150)`}
-            style={{
-              transition: 'opacity 0.5s ease-out',
-              transformOrigin: '150px 150px'
-            }}
-          />
-        ))}
-      </g>
+    <div className="relative w-full max-w-md mx-auto">
+      <div className="relative w-64 h-64 mx-auto">
+        {/* Main logo */}
+        <img
+          src="/logo.jpeg"
+          alt="TribeWellMD"
+          className="w-full h-full object-cover rounded-3xl shadow-2xl"
+        />
 
-      {/* Inner petals - lighter tone */}
-      <g transform={`rotate(${petalRotation * 0.7} 150 150)`}>
-        {[30, 90, 150, 210, 270, 330].map((angle) => (
-          <ellipse
-            key={angle}
-            cx="150"
-            cy="100"
-            rx="20"
-            ry="40"
-            fill="#FAF3E8"
-            opacity={petalScale * 0.9}
-            transform={`rotate(${angle} 150 150)`}
-            style={{
-              transition: 'opacity 0.5s ease-out',
-              transformOrigin: '150px 150px'
-            }}
-          />
-        ))}
-      </g>
+        {/* Decorative branches that fade in */}
+        <div
+          className="absolute -left-8 top-1/4 w-24 h-24 transition-opacity duration-1000"
+          style={{ opacity: branchOpacity * 0.6 }}
+        >
+          <svg viewBox="0 0 100 100" className="w-full h-full">
+            <path
+              d="M80 50 Q 60 30, 40 50 T 20 70"
+              stroke="#556B5E"
+              strokeWidth="3"
+              fill="none"
+              strokeLinecap="round"
+            />
+            <circle cx="30" cy="60" r="4" fill="#5B7B6D" />
+            <circle cx="50" cy="45" r="3" fill="#5B7B6D" />
+          </svg>
+        </div>
 
-      {/* Center - green like the brand */}
-      <circle
-        cx="150"
-        cy="150"
-        r={30 * centerScale}
-        fill="#556B5E"
-        style={{ transition: 'all 0.5s ease-out' }}
-      />
+        <div
+          className="absolute -right-8 top-1/3 w-24 h-24 transition-opacity duration-1000"
+          style={{ opacity: branchOpacity * 0.7 }}
+        >
+          <svg viewBox="0 0 100 100" className="w-full h-full">
+            <path
+              d="M20 50 Q 40 35, 60 50 T 80 65"
+              stroke="#556B5E"
+              strokeWidth="3"
+              fill="none"
+              strokeLinecap="round"
+            />
+            <circle cx="70" cy="58" r="4" fill="#5B7B6D" />
+            <circle cx="50" cy="42" r="3" fill="#5B7B6D" />
+          </svg>
+        </div>
 
-      {/* Center detail - golden accent */}
-      <circle
-        cx="150"
-        cy="150"
-        r={15 * centerScale}
-        fill="#C4A77D"
-        opacity="0.8"
-        style={{ transition: 'all 0.5s ease-out' }}
-      />
-    </svg>
+        <div
+          className="absolute -bottom-6 left-1/4 w-20 h-20 transition-opacity duration-1000"
+          style={{ opacity: branchOpacity * 0.8 }}
+        >
+          <svg viewBox="0 0 100 100" className="w-full h-full">
+            <path
+              d="M50 20 Q 45 40, 50 60 T 55 80"
+              stroke="#556B5E"
+              strokeWidth="3"
+              fill="none"
+              strokeLinecap="round"
+            />
+            <circle cx="50" cy="70" r="4" fill="#5B7B6D" />
+            <circle cx="48" cy="45" r="3" fill="#5B7B6D" />
+          </svg>
+        </div>
+
+        <div
+          className="absolute -top-6 right-1/4 w-20 h-20 transition-opacity duration-1000"
+          style={{ opacity: branchOpacity * 0.5 }}
+        >
+          <svg viewBox="0 0 100 100" className="w-full h-full">
+            <path
+              d="M50 80 Q 55 60, 50 40 T 45 20"
+              stroke="#556B5E"
+              strokeWidth="3"
+              fill="none"
+              strokeLinecap="round"
+            />
+            <circle cx="50" cy="30" r="4" fill="#5B7B6D" />
+            <circle cx="52" cy="55" r="3" fill="#5B7B6D" />
+          </svg>
+        </div>
+      </div>
+    </div>
   );
 };
 
@@ -151,7 +162,9 @@ export default function HomePage() {
                 </h1>
 
                 <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-8 max-w-2xl">
-                  A proactive wellness ecosystem for medical professionals—supporting you at every stage.
+                  Building well-being through every stage of your medical journey.
+                  <br />
+                  <span className="text-lg mt-2 block">For the realities of life in medicine</span>
                 </p>
 
                 <Link
@@ -162,13 +175,13 @@ export default function HomePage() {
                 </Link>
 
                 <p className="mt-6 text-sm text-slate-500 dark:text-slate-400">
-                  For pre-med students, medical students, residents, and attendings
+                  For medical students, residents, and attendings
                 </p>
               </div>
 
-              {/* Right: ʻUlu Flower Visual */}
+              {/* Right: Animated Logo */}
               <div className="flex items-center justify-center">
-                <UluFlower scrollProgress={scrollProgress} />
+                <AnimatedLogo scrollProgress={scrollProgress} />
               </div>
             </div>
           </div>
@@ -209,26 +222,26 @@ export default function HomePage() {
               </div>
 
               {/* YES This */}
-              <div className="p-8 rounded-2xl bg-gradient-to-br from-[#5B7B6D] to-[#2D5A4A] text-white border-2 border-[#5B7B6D] shadow-xl">
-                <div className="text-4xl mb-4">✓</div>
-                <h3 className="font-semibold text-lg mb-4">
+              <div className="p-8 rounded-2xl bg-white dark:bg-slate-800 border-4 border-[#5B7B6D] shadow-xl">
+                <div className="text-4xl mb-4 text-[#5B7B6D]">✓</div>
+                <h3 className="font-semibold text-lg text-slate-900 dark:text-white mb-4">
                   Supporting the Journey
                 </h3>
-                <ul className="text-left space-y-2">
+                <ul className="text-left space-y-2 text-slate-600 dark:text-slate-300">
                   <li className="flex items-start gap-2">
-                    <span className="mt-1">•</span>
+                    <span className="text-[#5B7B6D] mt-1">•</span>
                     <span>Prevention before problems arise</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="mt-1">•</span>
+                    <span className="text-[#5B7B6D] mt-1">•</span>
                     <span>Sustainable success at every stage</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="mt-1">•</span>
+                    <span className="text-[#5B7B6D] mt-1">•</span>
                     <span>Built by and for medical professionals</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="mt-1">•</span>
+                    <span className="text-[#5B7B6D] mt-1">•</span>
                     <span>Growth-focused support system</span>
                   </li>
                 </ul>
@@ -254,23 +267,6 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-6">
-              {/* Pre-Med */}
-              <div className="group p-8 rounded-2xl bg-white dark:bg-slate-700 hover:shadow-2xl transition-all duration-300 border-l-4 border-[#C4A77D]">
-                <div className="flex items-start gap-6">
-                  <div className="w-16 h-16 rounded-xl bg-[#C4A77D]/20 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-8 h-8 text-[#C4A77D]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Pre-Med Students</h3>
-                    <p className="text-slate-600 dark:text-slate-300 text-lg">
-                      Building the foundation. You're navigating prerequisites, MCAT prep, and applications while wondering if you can sustain this pace. Start with habits that will carry you through decades of medicine.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
               {/* Medical Students */}
               <div className="group p-8 rounded-2xl bg-white dark:bg-slate-700 hover:shadow-2xl transition-all duration-300 border-l-4 border-[#5B7B6D]">
                 <div className="flex items-start gap-6">
@@ -340,7 +336,7 @@ export default function HomePage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {/* Personalized Guidance */}
               <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#C4A77D] to-[#A89070] flex items-center justify-center shadow-xl">
+                <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#9b87a3] to-[#7d6b85] flex items-center justify-center shadow-xl">
                   <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
                   </svg>
@@ -355,7 +351,7 @@ export default function HomePage() {
 
               {/* Evidence-Based */}
               <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#5B7B6D] to-[#2D5A4A] flex items-center justify-center shadow-xl">
+                <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#9b87a3] to-[#7d6b85] flex items-center justify-center shadow-xl">
                   <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
                   </svg>
@@ -370,7 +366,7 @@ export default function HomePage() {
 
               {/* Community Connection */}
               <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#A89070] to-[#8B7355] flex items-center justify-center shadow-xl">
+                <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#9b87a3] to-[#7d6b85] flex items-center justify-center shadow-xl">
                   <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                   </svg>
@@ -385,7 +381,7 @@ export default function HomePage() {
 
               {/* Long-Term Focus */}
               <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#556B5E] to-[#2D5A4A] flex items-center justify-center shadow-xl">
+                <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#9b87a3] to-[#7d6b85] flex items-center justify-center shadow-xl">
                   <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
                   </svg>
@@ -450,11 +446,11 @@ export default function HomePage() {
           </div>
 
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-            {/* ʻUlu Flower transforms to logo */}
+            {/* Animated logo transforms to simple logo */}
             <div className="mb-12 relative h-64 flex items-center justify-center">
               {!showLogo && (
                 <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-1000">
-                  <UluFlower scrollProgress={1} />
+                  <AnimatedLogo scrollProgress={1} />
                 </div>
               )}
               {showLogo && (
