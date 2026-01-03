@@ -18,7 +18,7 @@ export const STUDY_PLAYLISTS = [
     name: 'Lo-Fi Study',
     description: 'Chill beats to study to',
     spotifyUri: '37i9dQZF1DWWQRwui0ExPn',
-    color: 'from-[#C4A77D] to-[#A89068]', // sand gold
+    color: 'from-[#4A7C59] to-[#3A6147]', // emerald green
     icon: 'lofi', // headphones/chill icon
   },
   {
@@ -26,7 +26,7 @@ export const STUDY_PLAYLISTS = [
     name: 'Classical Focus',
     description: 'Classical music for concentration',
     spotifyUri: '37i9dQZF1DWV0gynK7G6pD',
-    color: 'from-[#64748B] to-[#475569]', // slate blue-gray
+    color: 'from-[#2D5A4A] to-[#1E4035]', // deep teal green
     icon: 'classical', // violin/classical icon
   },
   {
@@ -50,7 +50,7 @@ export const STUDY_PLAYLISTS = [
     name: 'Jazz Study',
     description: 'Smooth jazz for studying',
     spotifyUri: '37i9dQZF1DX0SM0LYsmbMT',
-    color: 'from-[#8B7355] to-[#6B5344]', // warm brown
+    color: 'from-[#3D6B5C] to-[#2A4D42]', // muted sage green
     icon: 'jazz', // saxophone icon
   },
 ];

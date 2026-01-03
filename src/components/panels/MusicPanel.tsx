@@ -20,6 +20,7 @@ const MusicIcon = () => (
 );
 
 // Playlist icons - unique SVG for each playlist type
+// Icons are always white on gradient backgrounds
 const PlaylistIcon = ({ type, isPlaying }: { type: string; isPlaying?: boolean }) => {
   if (isPlaying) {
     return <span className="w-3 h-3 bg-white/90 rounded-full animate-pulse" />;
@@ -363,30 +364,38 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
                   Study Playlists
                 </h4>
                 <div className="space-y-2">
-                  {STUDY_PLAYLISTS.map(playlist => (
-                    <button
-                      key={playlist.id}
-                      onClick={() => selectPlaylist(playlist.id)}
-                      className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all ${
-                        selectedPlaylist === playlist.id
-                          ? 'bg-[#1DB954]/10 dark:bg-[#1DB954]/20 ring-2 ring-[#1DB954]'
-                          : 'hover:bg-surface-muted'
-                      }`}
-                    >
-                      <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${playlist.color} flex items-center justify-center flex-shrink-0 shadow-sm`}>
-                        <PlaylistIcon type={playlist.icon} isPlaying={selectedPlaylist === playlist.id} />
-                      </div>
-                      <div className="text-left flex-1 min-w-0">
-                        <p className="text-sm font-medium text-secondary">{playlist.name}</p>
-                        <p className="text-xs text-content-muted truncate">{playlist.description}</p>
-                      </div>
-                      {selectedPlaylist === playlist.id && (
-                        <svg className="w-5 h-5 text-[#1DB954] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                      )}
-                    </button>
-                  ))}
+                  {STUDY_PLAYLISTS.map(playlist => {
+                    const isSelected = selectedPlaylist === playlist.id;
+                    return (
+                      <button
+                        key={playlist.id}
+                        onClick={() => selectPlaylist(playlist.id)}
+                        className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all ${
+                          isSelected
+                            ? 'bg-green-50 dark:bg-[#1DB954]/20 border-2 border-green-600 dark:border-[#1DB954] shadow-[0_4px_12px_rgba(0,128,96,0.15)] dark:shadow-none'
+                            : 'bg-white dark:bg-transparent border border-border/40 dark:border-transparent shadow-[0_1px_2px_rgba(0,0,0,0.04)] dark:shadow-none hover:bg-surface-muted hover:border-border dark:hover:bg-surface-muted'
+                        }`}
+                      >
+                        {/* Icon container: day mode default uses muted bg, selected/dark uses gradient */}
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm bg-gradient-to-br ${playlist.color}`}>
+                          <PlaylistIcon type={playlist.icon} isPlaying={isSelected} />
+                        </div>
+                        <div className="text-left flex-1 min-w-0">
+                          <p className={`text-sm font-medium ${isSelected ? 'text-green-900 dark:text-secondary' : 'text-secondary'}`}>
+                            {playlist.name}
+                          </p>
+                          <p className={`text-xs truncate ${isSelected ? 'text-green-800 dark:text-content-muted' : 'text-content-muted'}`}>
+                            {playlist.description}
+                          </p>
+                        </div>
+                        {isSelected && (
+                          <svg className="w-5 h-5 text-green-700 dark:text-[#1DB954] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
