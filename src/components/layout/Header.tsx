@@ -1,23 +1,36 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ThemeToggleSimple } from '@/components/theme/ThemeProvider';
-import { StreakCounter } from '@/components/gamification/StreakCounter';
+import { useStreak } from '@/hooks/useStreak';
 import { useIsAuthenticated, signOut as legacySignOut } from '@/hooks/useAuth';
 import { signOut as supabaseSignOut } from '@/lib/supabase/auth';
-import { PomodoroTimer } from '@/components/study/PomodoroTimer';
 import { LabReferencePanel } from '@/components/study/LabReferencePanel';
 import { MessengerPanel } from '@/components/chat/ChatBubble';
 import { MusicPanel } from '@/components/panels/MusicPanel';
+import { StreakPanel } from '@/components/panels/StreakPanel';
+import { PomodoroPanel } from '@/components/panels/PomodoroPanel';
+import { Icons } from '@/components/ui/Icons';
+import { CheckCircleIcon } from '@/components/icons/MedicalIcons';
 
 // Height constant for layout calculations
 export const HEADER_HEIGHT = 48;
 
 // Panel types for unified state management
 // NOTE: Scene panel is NOT included here - it's only available in StudyLayout
-type PanelType = 'labs' | 'messages' | 'music' | null;
+type PanelType = 'labs' | 'messages' | 'music' | 'streak' | 'pomodoro' | null;
+
+// Timer mode type
+type TimerMode = 'focus' | 'shortBreak' | 'longBreak';
+
+// Timer settings
+const TIMER_SETTINGS = {
+  focus: 25 * 60,
+  shortBreak: 5 * 60,
+  longBreak: 15 * 60,
+};
 
 /**
  * Header Component
@@ -442,8 +455,118 @@ export function Header({
   const accountButtonRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
 
+  // Streak data for header button
+  const { streakData, isLoading: streakLoading, getDailyProgress, isGoalComplete } = useStreak();
+
   // Unified panel state - only one panel can be open at a time
   const [activePanel, setActivePanel] = useState<PanelType>(null);
+
+  // Pomodoro timer state - lifted up here to persist across panel open/close
+  const [timerMode, setTimerMode] = useState<TimerMode>('focus');
+  const [timeLeft, setTimeLeft] = useState(TIMER_SETTINGS.focus);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const [sessionsCompleted, setSessionsCompleted] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Load sessions from localStorage
+  useEffect(() => {
+    const today = new Date().toDateString();
+    const stored = localStorage.getItem('step2_pomodoro_sessions');
+    if (stored) {
+      const data = JSON.parse(stored);
+      if (data.date === today) {
+        setSessionsCompleted(data.count);
+      }
+    }
+  }, []);
+
+  // Timer logic
+  useEffect(() => {
+    if (isTimerRunning && timeLeft > 0) {
+      intervalRef.current = setInterval(() => {
+        setTimeLeft(prev => prev - 1);
+      }, 1000);
+    } else if (timeLeft === 0 && isTimerRunning) {
+      // Timer completed
+      setIsTimerRunning(false);
+      playNotificationSound();
+
+      if (timerMode === 'focus') {
+        // Save session
+        const today = new Date().toDateString();
+        const newCount = sessionsCompleted + 1;
+        setSessionsCompleted(newCount);
+        localStorage.setItem('step2_pomodoro_sessions', JSON.stringify({
+          date: today,
+          count: newCount
+        }));
+        // Auto-switch to break
+        if (newCount % 4 === 0) {
+          setTimerMode('longBreak');
+          setTimeLeft(TIMER_SETTINGS.longBreak);
+        } else {
+          setTimerMode('shortBreak');
+          setTimeLeft(TIMER_SETTINGS.shortBreak);
+        }
+      } else {
+        // Break completed, back to focus
+        setTimerMode('focus');
+        setTimeLeft(TIMER_SETTINGS.focus);
+      }
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isTimerRunning, timeLeft, timerMode, sessionsCompleted]);
+
+  const playNotificationSound = () => {
+    try {
+      const audioContext = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      oscillator.frequency.value = 800;
+      oscillator.type = 'sine';
+      gainNode.gain.value = 0.3;
+
+      oscillator.start();
+
+      setTimeout(() => { gainNode.gain.value = 0; }, 200);
+      setTimeout(() => { gainNode.gain.value = 0.3; }, 400);
+      setTimeout(() => { gainNode.gain.value = 0; }, 600);
+      setTimeout(() => { gainNode.gain.value = 0.3; }, 800);
+      setTimeout(() => {
+        oscillator.stop();
+        audioContext.close();
+      }, 1000);
+    } catch (e) {
+      console.log('Audio notification failed');
+    }
+  };
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const handleTimerStateChange = useCallback((newState: Partial<{
+    mode: TimerMode;
+    timeLeft: number;
+    isRunning: boolean;
+    sessionsCompleted: number;
+  }>) => {
+    if (newState.mode !== undefined) setTimerMode(newState.mode);
+    if (newState.timeLeft !== undefined) setTimeLeft(newState.timeLeft);
+    if (newState.isRunning !== undefined) setIsTimerRunning(newState.isRunning);
+    if (newState.sessionsCompleted !== undefined) setSessionsCompleted(newState.sessionsCompleted);
+  }, []);
 
   // Determine effective variant
   // If variant is explicitly set, use it
@@ -501,7 +624,7 @@ export function Header({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [accountMenuOpen]);
 
-  // Keyboard shortcuts for panels: L=Labs, M=Messages, S=Music
+  // Keyboard shortcuts for panels: L=Labs, M=Messages, S=Music, P=Pomodoro, X=Streak
   // NOTE: Scene (B) shortcut is only in StudyLayout, not global header
   useEffect(() => {
     if (!isAuthenticated || isPublicVariant) return;
@@ -525,6 +648,16 @@ export function Header({
       if (key === 's') {
         e.preventDefault();
         togglePanel('music');
+      }
+
+      if (key === 'p') {
+        e.preventDefault();
+        togglePanel('pomodoro');
+      }
+
+      if (key === 'x') {
+        e.preventDefault();
+        togglePanel('streak');
       }
 
       if (e.key === 'Escape') {
@@ -606,8 +739,28 @@ export function Header({
               {/* Study Tools - only show when authenticated and not public variant */}
               {isAuthenticated && !isPublicVariant && (
                 <>
-                  {/* Pomodoro Timer */}
-                  <PomodoroTimer variant="header" />
+                  {/* Pomodoro Timer button - shows remaining time when running */}
+                  <button
+                    onClick={() => togglePanel('pomodoro')}
+                    aria-label="Pomodoro Timer (P)"
+                    className={`group relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg transition-all duration-200 ${
+                      activePanel === 'pomodoro' || isTimerRunning
+                        ? 'bg-[#C4A77D] text-white'
+                        : 'text-white/80 hover:text-white hover:bg-white/10 focus-visible:bg-white/10'
+                    } focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50`}
+                  >
+                    <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {/* Show remaining time when timer is running (CRITICAL requirement) */}
+                    {isTimerRunning ? (
+                      <span className="text-xs font-mono font-bold">{formatTime(timeLeft)}</span>
+                    ) : (
+                      <span className="text-[10px] font-medium whitespace-nowrap max-w-0 overflow-hidden opacity-0 group-hover:max-w-[70px] group-hover:opacity-100 group-focus-visible:max-w-[70px] group-focus-visible:opacity-100 transition-all duration-200 ease-out">
+                        Pomodoro
+                      </span>
+                    )}
+                  </button>
 
                   {/* Messages button */}
                   <button
@@ -663,8 +816,73 @@ export function Header({
                     </span>
                   </button>
 
-                  {/* Streak counter */}
-                  <StreakCounter variant="compact" />
+                  {/* Streak button - opens panel */}
+                  <button
+                    onClick={() => togglePanel('streak')}
+                    aria-label="Streak (X)"
+                    className={`group relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl transition-all duration-200 ${
+                      activePanel === 'streak'
+                        ? 'bg-[#C4A77D] text-white'
+                        : streakData && streakData.currentStreak > 0
+                          ? 'bg-gradient-to-r from-orange-100 to-amber-100 dark:from-orange-900/30 dark:to-amber-900/30 hover:from-orange-200 hover:to-amber-200'
+                          : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
+                    } focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50`}
+                  >
+                    {/* Fire icon */}
+                    <div className={`relative ${streakData && streakData.currentStreak >= 7 ? 'animate-pulse' : ''}`}>
+                      <span className={`w-5 h-5 ${
+                        activePanel === 'streak'
+                          ? 'text-white'
+                          : streakData && streakData.currentStreak > 0
+                            ? 'text-orange-500'
+                            : 'text-slate-400 opacity-50'
+                      }`}>
+                        <Icons.Fire />
+                      </span>
+                    </div>
+                    {/* Streak count */}
+                    <span className={`text-sm font-bold ${
+                      activePanel === 'streak'
+                        ? 'text-white'
+                        : streakData && streakData.currentStreak > 0
+                          ? 'text-orange-600 dark:text-orange-400'
+                          : 'text-slate-400 dark:text-slate-500'
+                    }`}>
+                      {streakData?.currentStreak || 0}
+                    </span>
+                    {/* Daily progress ring (mini) */}
+                    {streakData && (
+                      <div className="relative w-5 h-5">
+                        <svg className="w-5 h-5 -rotate-90" viewBox="0 0 20 20">
+                          <circle
+                            cx="10"
+                            cy="10"
+                            r="8"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            className={activePanel === 'streak' ? 'text-white/30' : 'text-slate-200 dark:text-slate-700'}
+                          />
+                          <circle
+                            cx="10"
+                            cy="10"
+                            r="8"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeDasharray={`${getDailyProgress() * 0.5} 50`}
+                            strokeLinecap="round"
+                            className={activePanel === 'streak' ? 'text-white' : isGoalComplete() ? 'text-green-500' : 'text-amber-500'}
+                          />
+                        </svg>
+                        {isGoalComplete() && (
+                          <span className="absolute inset-0 flex items-center justify-center">
+                            <CheckCircleIcon className={`w-3 h-3 ${activePanel === 'streak' ? 'text-white' : 'text-green-600'}`} />
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </button>
                 </>
               )}
 
@@ -893,6 +1111,18 @@ export function Header({
           <LabReferencePanel isOpen={activePanel === 'labs'} onClose={closePanel} />
           <MessengerPanel isOpen={activePanel === 'messages'} onClose={closePanel} />
           <MusicPanel isOpen={activePanel === 'music'} onClose={closePanel} />
+          <StreakPanel isOpen={activePanel === 'streak'} onClose={closePanel} />
+          <PomodoroPanel
+            isOpen={activePanel === 'pomodoro'}
+            onClose={closePanel}
+            timerState={{
+              mode: timerMode,
+              timeLeft,
+              isRunning: isTimerRunning,
+              sessionsCompleted,
+            }}
+            onTimerStateChange={handleTimerStateChange}
+          />
         </>
       )}
 
