@@ -1,5 +1,7 @@
 'use client';
 
+import { EmailVerificationBanner } from '@/components/auth/EmailVerificationBanner';
+
 // GlobalUI - renders app-wide UI elements that persist across all pages
 //
 // NOTE: Scene backgrounds are intentionally NOT rendered here.
@@ -8,7 +10,10 @@
 // (Home, Community, Wellness, Profile, etc.)
 
 export function GlobalUI() {
-  // Currently empty - reserved for future global UI elements
-  // that should appear on ALL pages (not just study pages)
-  return null;
+  return (
+    <>
+      {/* Email verification banner - shown when user email is not verified */}
+      <EmailVerificationBanner />
+    </>
+  );
 }

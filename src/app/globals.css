@@ -122,6 +122,15 @@
   --gradient-secondary-to: #786551;
   --gradient-accent-from: #786551;
   --gradient-accent-to: #786551;
+
+  /* ==========================================================================
+     LANDING PAGE - Specific tokens for landing/marketing pages
+     ========================================================================== */
+  --landing-header-bg: #5B7B6D;
+  --landing-logo-accent: #C4A77D;       /* Golden "Well" text */
+  --landing-hero-accent: #A8C5B8;       /* Light green "purpose" text */
+  --landing-feature-from: #9b87a3;      /* Feature icon gradient start */
+  --landing-feature-to: #7d6b85;        /* Feature icon gradient end */
 }
 
 /* =============================================================================
@@ -191,6 +200,13 @@
   --gradient-secondary-to: #786551;
   --gradient-accent-from: #B2ADA7;
   --gradient-accent-to: #786551;
+
+  /* Landing page - dark mode adjustments */
+  --landing-header-bg: #3d5a4d;
+  --landing-logo-accent: #C4A77D;
+  --landing-hero-accent: #A8C5B8;
+  --landing-feature-from: #9b87a3;
+  --landing-feature-to: #7d6b85;
 }
 
 /* =============================================================================
@@ -202,12 +218,16 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
   }
 
   body {
     @apply bg-background text-content;
     overflow-x: hidden;
     position: relative;
+    margin: 0;
+    padding: 0;
   }
 
   /* Custom scrollbar */

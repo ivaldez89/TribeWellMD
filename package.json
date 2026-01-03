@@ -10,13 +10,15 @@
     "validate:qbank": "ts-node --project tsconfig.scripts.json scripts/validate-qbank.ts"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^8.6.0",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.89.0",
     "jszip": "^3.10.1",
     "next": "14.2.18",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sql.js": "^1.13.0"
+    "sql.js": "^1.13.0",
+    "stripe": "^20.1.0"
   },
   "devDependencies": {
     "@types/node": "^20",

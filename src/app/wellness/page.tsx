@@ -5,11 +5,15 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { ThreeColumnLayout, CARD_STYLES, ThreeColumnLayoutSkeleton } from '@/components/layout/ThreeColumnLayout';
 import { useWellness } from '@/hooks/useWellness';
+import { useWHO5 } from '@/hooks/useWHO5';
 import { HealthConnect } from '@/components/health/HealthConnect';
+import { WHO5CheckIn, WHO5ScoreCard } from '@/components/wellness';
 import { WELLNESS_DOMAINS, CHARITABLE_CAUSES, type WellnessDomain, type CharitableCause } from '@/types/wellness';
+import { type WHO5Assessment } from '@/types/who5';
 import { useTribes } from '@/hooks/useTribes';
 import { Icons } from '@/components/ui/Icons';
 import { SparklesIcon } from '@/components/icons/MedicalIcons';
+import { createClient } from '@/lib/supabase/client';
 
 // Mood level arrays (1-5 scale)
 const MOOD_LEVELS = [1, 2, 3, 4, 5];
@@ -29,10 +33,33 @@ function WellnessPageContent() {
     donatePoints,
     joinVillage,
     getUserVillages,
-    getStats
+    getStats,
+    earnRewards
   } = useWellness();
 
   const [activeTab, setActiveTab] = useState<'journey' | 'village' | 'impact' | 'skills'>('village');
+
+  // Get user ID for WHO-5
+  const [userId, setUserId] = useState<string | null>(null);
+  useEffect(() => {
+    const getUser = async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        setUserId(user.id);
+      }
+    };
+    getUser();
+  }, []);
+
+  // WHO-5 hook
+  const {
+    assessments: who5Assessments,
+    streak: who5Streak,
+    saveAssessment: saveWHO5Assessment,
+    getLatestAssessment,
+    shouldPrompt: shouldPromptWHO5
+  } = useWHO5(userId);
 
   // Handle tab query parameter from dropdown menu
   useEffect(() => {
@@ -43,10 +70,18 @@ function WellnessPageContent() {
   }, [searchParams]);
 
   const [showMoodModal, setShowMoodModal] = useState(false);
+  const [showWHO5Modal, setShowWHO5Modal] = useState(false);
   const [showDonateModal, setShowDonateModal] = useState(false);
   const [moodData, setMoodData] = useState({ mood: 3, energy: 3, stress: 3, notes: '' });
   const [donateAmount, setDonateAmount] = useState(10);
   const [selectedCause, setSelectedCause] = useState<CharitableCause>('physician-wellness');
+
+  // Handle WHO-5 completion
+  const handleWHO5Complete = (assessment: WHO5Assessment) => {
+    const rewards = saveWHO5Assessment(assessment);
+    // Also add rewards through the wellness system
+    earnRewards(rewards.xp, rewards.points, 'WHO-5 Daily Check-in');
+  };
 
   const stats = getStats();
   const userVillages = getUserVillages();
@@ -79,10 +114,13 @@ function WellnessPageContent() {
           </div>
         </div>
         <button
-          onClick={() => setShowMoodModal(true)}
-          className="px-4 py-2 bg-gradient-to-r from-[#5B7B6D] to-[#6B8B7D] text-white text-sm font-medium rounded-xl"
+          onClick={() => setShowWHO5Modal(true)}
+          className="px-4 py-2 bg-gradient-to-r from-[#5B7B6D] to-[#6B8B7D] text-white text-sm font-medium rounded-xl flex items-center gap-1"
         >
-          Log Mood
+          Check-In
+          {who5Streak.current > 0 && (
+            <span className="px-1.5 py-0.5 bg-white/20 rounded text-xs">{who5Streak.current}</span>
+          )}
         </button>
       </div>
     </div>
@@ -120,15 +158,20 @@ function WellnessPageContent() {
             </div>
           </div>
 
-          {/* Daily Check-in Button */}
+          {/* Daily Check-in Button - WHO-5 */}
           <button
-            onClick={() => setShowMoodModal(true)}
+            onClick={() => setShowWHO5Modal(true)}
             className="w-full py-3 bg-gradient-to-r from-[#5B7B6D] to-[#6B8B7D] hover:from-[#4A6A5C] hover:to-[#5B7B6D] text-white font-semibold rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25z" />
             </svg>
-            Daily Check-In
+            WHO-5 Check-In
+            {who5Streak.current > 0 && (
+              <span className="ml-1 px-1.5 py-0.5 bg-white/20 rounded text-xs">
+                {who5Streak.current}
+              </span>
+            )}
           </button>
         </div>
       </div>
@@ -778,6 +821,14 @@ function WellnessPageContent() {
           </div>
         </div>
       )}
+
+      {/* WHO-5 Check-In Modal */}
+      <WHO5CheckIn
+        isOpen={showWHO5Modal}
+        onClose={() => setShowWHO5Modal(false)}
+        onComplete={handleWHO5Complete}
+        userId={userId || 'anonymous'}
+      />
     </>
   );
 }

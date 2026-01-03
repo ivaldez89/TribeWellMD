@@ -231,9 +231,18 @@ export default function RegisterPage() {
         setCurrentUserId(result.user.id);
         // Clear any legacy profile data from before user-aware storage
         clearLegacyProfileData();
+
+        // If email confirmation is required, redirect to verification page
+        // Supabase returns user but email_confirmed_at will be null
+        if (!result.user.email_confirmed_at) {
+          // Store email for verification page
+          const verifyUrl = `/auth/verify-email?email=${encodeURIComponent(formData.email)}`;
+          router.push(verifyUrl);
+          return;
+        }
       }
 
-      // Move to interests selection step
+      // Move to interests selection step (only if email already confirmed or disabled)
       setIsLoading(false);
       setStep('interests');
     } catch (err) {

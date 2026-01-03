@@ -105,6 +105,18 @@ const config: Config = {
         },
 
         // =============================================================
+        // LANDING PAGE COLORS
+        // Semantic tokens for landing/marketing pages
+        // =============================================================
+        landing: {
+          header: 'var(--landing-header-bg)',
+          'logo-accent': 'var(--landing-logo-accent)',
+          'hero-accent': 'var(--landing-hero-accent)',
+          'feature-from': 'var(--landing-feature-from)',
+          'feature-to': 'var(--landing-feature-to)',
+        },
+
+        // =============================================================
         // 🔒 LOCKED FOREST THEME RAW PALETTE
         // For gradient definitions and legacy compatibility ONLY
         // Do NOT use these directly in components - use semantic tokens
