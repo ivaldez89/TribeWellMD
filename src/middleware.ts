@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 import { updateSession } from '@/lib/supabase/middleware';
 
 // Public routes that don't require authentication
-const publicRoutes = ['/', '/about', '/privacy', '/terms', '/login', '/register', '/investors', '/partners', '/accessibility', '/support', '/feedback', '/faq', '/impact', '/impact/local'];
+const publicRoutes = ['/', '/about', '/privacy', '/terms', '/login', '/register', '/investors', '/partners', '/accessibility', '/support', '/feedback', '/faq', '/impact', '/impact/local', '/pricing'];
 
 export async function middleware(request: NextRequest) {
   // Update Supabase session (refreshes auth tokens) and get user
