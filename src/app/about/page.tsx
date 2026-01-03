@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { LandingHeader } from '@/components/layout/LandingHeader';
-import { LandingFooter, FOOTER_HEIGHT } from '@/components/layout/LandingFooter';
+import { Footer, FOOTER_HEIGHT } from '@/components/layout/Footer';
 
 export default function AboutPage() {
   return (
@@ -185,7 +185,7 @@ export default function AboutPage() {
         <div style={{ height: FOOTER_HEIGHT }} className="bg-primary" />
       </main>
 
-      <LandingFooter />
+      <Footer variant="landing" />
     </div>
   );
 }

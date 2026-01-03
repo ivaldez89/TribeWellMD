@@ -40,7 +40,7 @@ export function PageLayout({
       <main className={`flex-1 ${mainClassName}`}>
         {children}
       </main>
-      {showFooter && <Footer />}
+      {showFooter && <Footer includeSpacer />}
     </div>
   );
 }
