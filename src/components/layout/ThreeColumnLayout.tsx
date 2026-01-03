@@ -1,8 +1,12 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { Header } from './Header';
+import { Header, HEADER_HEIGHT } from './Header';
 import { Footer } from '@/components/footer/Footer';
+
+// Consistent top offset for sticky elements (header height + buffer)
+// h-12 = 48px, plus 16px buffer = 64px = top-16
+const STICKY_TOP_OFFSET = 'top-16';
 
 /**
  * ThreeColumnLayout Component
@@ -50,6 +54,8 @@ export function ThreeColumnLayout({
     return (
       <div className="min-h-screen flex flex-col bg-background">
         <Header />
+        {/* Spacer to account for fixed header (h-12 = 48px) */}
+        <div className="h-12 flex-shrink-0" />
         <main className="flex-1 max-w-7xl mx-auto px-4 py-8 w-full">
           {loadingContent}
         </main>
@@ -61,6 +67,9 @@ export function ThreeColumnLayout({
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
+
+      {/* Spacer to account for fixed header (h-12 = 48px) */}
+      <div className="h-12 flex-shrink-0" />
 
       <main className="flex-1 max-w-7xl mx-auto px-4 py-4 lg:py-6 w-full">
         {/* Mobile Header Card (visible only on mobile) */}
@@ -74,7 +83,7 @@ export function ThreeColumnLayout({
           {/* Left Sidebar - Desktop only */}
           {leftSidebar && (
             <aside className="hidden lg:block w-72 flex-shrink-0">
-              <div className="sticky top-20 space-y-4">
+              <div className={`sticky ${STICKY_TOP_OFFSET} space-y-4`}>
                 {leftSidebar}
               </div>
             </aside>
@@ -88,7 +97,7 @@ export function ThreeColumnLayout({
           {/* Right Sidebar - XL screens only */}
           {rightSidebar && (
             <aside className="hidden xl:block w-64 flex-shrink-0">
-              <div className="sticky top-20 space-y-4">
+              <div className={`sticky ${STICKY_TOP_OFFSET} space-y-4`}>
                 {rightSidebar}
               </div>
             </aside>

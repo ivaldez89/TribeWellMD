@@ -114,10 +114,10 @@ function VerifyEmailContent() {
               </p>
 
               <Link
-                href="/dashboard"
+                href="/calendar"
                 className="inline-block w-full py-4 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#B89B78] hover:to-[#9A8565] text-white font-bold rounded-xl shadow-lg transition-all"
               >
-                Go to Dashboard
+                Go to Calendar
               </Link>
 
               <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">

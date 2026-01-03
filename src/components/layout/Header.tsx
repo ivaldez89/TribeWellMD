@@ -233,7 +233,7 @@ const studyDropdownItems: DropdownItem[] = [
 ];
 
 const toolsDropdownItems: DropdownItem[] = [
-  { label: 'Dashboard', href: '/dashboard', description: 'Your unified calendar & tasks hub' },
+  { label: 'Calendar', href: '/calendar', description: 'Your unified calendar & tasks hub' },
 ];
 
 const wellnessDropdownItems: DropdownItem[] = [
