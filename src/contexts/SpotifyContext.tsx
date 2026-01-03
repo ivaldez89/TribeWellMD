@@ -3,48 +3,49 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 // Curated study playlists (Spotify embed URIs)
+// Icon colors use TribeWellMD green theme - variations for visual distinction
 export const STUDY_PLAYLISTS = [
   {
     id: 'focus',
     name: 'Deep Focus',
     description: 'Instrumental focus music',
     spotifyUri: '37i9dQZF1DWZeKCadgRdKQ',
-    color: 'from-purple-500 to-indigo-600',
+    color: 'from-[#5B7B6D] to-[#4A6A5C]', // tribe-sage solid
   },
   {
     id: 'lofi',
     name: 'Lo-Fi Study',
     description: 'Chill beats to study to',
     spotifyUri: '37i9dQZF1DWWQRwui0ExPn',
-    color: 'from-pink-500 to-rose-600',
+    color: 'from-[#6B8B7D] to-[#5B7B6D]', // tribe-sage lighter
   },
   {
     id: 'classical',
     name: 'Classical Focus',
     description: 'Classical music for concentration',
     spotifyUri: '37i9dQZF1DWV0gynK7G6pD',
-    color: 'from-amber-500 to-orange-600',
+    color: 'from-[#4A6A5C] to-[#3A5A4C]', // tribe-sage darker
   },
   {
     id: 'ambient',
     name: 'Peaceful Piano',
     description: 'Relaxing piano melodies',
     spotifyUri: '37i9dQZF1DX4sWSpwq3LiO',
-    color: 'from-tribe-sage-500 to-cyan-600',
+    color: 'from-[#5B7B6D] to-[#6B8B7D]', // tribe-sage to lighter
   },
   {
     id: 'nature',
     name: 'Nature Sounds',
     description: 'Calming nature ambience',
     spotifyUri: '37i9dQZF1DX4PP3DA4J0N8',
-    color: 'from-tribe-sage-500 to-green-600',
+    color: 'from-[#4A6A5C] to-[#5B7B6D]', // darker to tribe-sage
   },
   {
     id: 'jazz',
     name: 'Jazz Study',
     description: 'Smooth jazz for studying',
     spotifyUri: '37i9dQZF1DX0SM0LYsmbMT',
-    color: 'from-blue-500 to-indigo-600',
+    color: 'from-[#3A5A4C] to-[#4A6A5C]', // darkest tribe-sage
   },
 ];
 
