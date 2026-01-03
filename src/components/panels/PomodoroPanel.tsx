@@ -52,11 +52,18 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
 
   const progress = ((TIMER_SETTINGS[mode] - timeLeft) / TIMER_SETTINGS[mode]) * 100;
 
-  // Theme-consistent colors (green/sage for focus, variations for breaks)
-  const modeColors = {
-    focus: 'from-[#5B7B6D] to-tribe-sage-500',
-    shortBreak: 'from-[#C4A77D] to-amber-500',
-    longBreak: 'from-blue-500 to-cyan-500',
+  // Solid colors for each mode (no gradients - calm, professional aesthetic)
+  const modeSolidColors = {
+    focus: 'bg-[#5B7B6D]',
+    shortBreak: 'bg-sand-500',
+    longBreak: 'bg-slate-600',
+  };
+
+  // Stroke colors for timer ring (solid, not gradient)
+  const modeStrokeColors = {
+    focus: '#5B7B6D',
+    shortBreak: '#C4A77D',
+    longBreak: '#475569',
   };
 
   const modeLabels = {
@@ -119,7 +126,7 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
               onClick={() => switchMode(m)}
               className={`flex-1 py-2 text-xs font-medium rounded-lg transition-all flex items-center justify-center gap-1.5 ${
                 mode === m
-                  ? `bg-gradient-to-r ${modeColors[m]} text-white shadow-md`
+                  ? `${modeSolidColors[m]} text-white shadow-sm`
                   : 'bg-surface-muted text-content-muted hover:bg-border'
               }`}
             >
@@ -130,10 +137,10 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
         </div>
       </div>
 
-      {/* Content - Timer display */}
+      {/* Content - Timer display with elevated surface */}
       <div className="flex-1 flex flex-col items-center justify-center p-6">
-        {/* Timer circle */}
-        <div className="relative w-48 h-48 mb-6">
+        {/* Timer circle - elevated card with subtle shadow */}
+        <div className="relative w-48 h-48 mb-6 rounded-full bg-surface shadow-[0_4px_20px_-4px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.3)]">
           <svg className="w-full h-full transform -rotate-90">
             <circle
               cx="96"
@@ -149,19 +156,13 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
               cy="96"
               r="88"
               fill="none"
-              stroke="url(#pomo-panel-gradient)"
+              stroke={modeStrokeColors[mode]}
               strokeWidth="8"
               strokeLinecap="round"
               strokeDasharray={553}
               strokeDashoffset={553 - (553 * progress) / 100}
               className="transition-all duration-1000"
             />
-            <defs>
-              <linearGradient id="pomo-panel-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor={mode === 'focus' ? '#5B7B6D' : mode === 'shortBreak' ? '#C4A77D' : '#3b82f6'} />
-                <stop offset="100%" stopColor={mode === 'focus' ? '#6B8E7D' : mode === 'shortBreak' ? '#d4b78d' : '#06b6d4'} />
-              </linearGradient>
-            </defs>
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <span className="text-4xl font-bold text-secondary font-mono">
@@ -177,11 +178,11 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
           </div>
         </div>
 
-        {/* Controls */}
-        <div className="flex items-center justify-center gap-3 mb-6">
+        {/* Controls - elevated with subtle shadow */}
+        <div className="flex items-center justify-center gap-3 mb-6 p-3 rounded-2xl bg-surface-muted/50 shadow-[0_2px_12px_-3px_rgba(0,0,0,0.06)] dark:shadow-[0_2px_12px_-3px_rgba(0,0,0,0.2)]">
           <button
             onClick={resetTimer}
-            className="p-3 text-content-muted hover:text-secondary hover:bg-surface-muted rounded-xl transition-colors"
+            className="p-3 text-content-muted hover:text-secondary hover:bg-surface rounded-xl transition-colors"
             aria-label="Reset timer"
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -191,7 +192,7 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
 
           <button
             onClick={toggleTimer}
-            className={`px-8 py-3 rounded-xl font-semibold text-white shadow-lg transition-all transform hover:scale-105 active:scale-95 bg-gradient-to-r ${modeColors[mode]}`}
+            className={`px-8 py-3 rounded-xl font-semibold text-white shadow-sm transition-all transform hover:scale-[1.02] active:scale-[0.98] ${modeSolidColors[mode]}`}
           >
             {isRunning ? 'Pause' : 'Start'}
           </button>
@@ -205,7 +206,7 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
                 switchMode('focus');
               }
             }}
-            className="p-3 text-content-muted hover:text-secondary hover:bg-surface-muted rounded-xl transition-colors"
+            className="p-3 text-content-muted hover:text-secondary hover:bg-surface rounded-xl transition-colors"
             aria-label="Skip to next"
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -224,13 +225,13 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
               value={customMinutes}
               onChange={(e) => setCustomMinutes(e.target.value)}
               placeholder="Minutes"
-              className="flex-1 px-4 py-2 text-sm border border-border rounded-lg bg-surface text-secondary focus:outline-none focus:ring-2 focus:ring-primary"
+              className="flex-1 px-4 py-2 text-sm border border-border rounded-lg bg-surface text-secondary focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
               onKeyDown={(e) => e.key === 'Enter' && setCustomTime()}
               autoFocus
             />
             <button
               onClick={setCustomTime}
-              className={`px-4 py-2 text-sm font-medium text-white rounded-lg bg-gradient-to-r ${modeColors[mode]}`}
+              className={`px-4 py-2 text-sm font-medium text-white rounded-lg ${modeSolidColors[mode]}`}
             >
               Set
             </button>
