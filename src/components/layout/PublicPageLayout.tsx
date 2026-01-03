@@ -35,6 +35,7 @@ function PublicHeader() {
           <nav className="hidden md:flex items-center gap-1.5">
             <Link href="/" className={`px-3 py-1.5 rounded-lg text-sm font-medium ${pathname === '/' ? 'bg-white/20 text-white shadow-soft' : 'text-white/80 hover:text-white hover:bg-white/10 transition-all'}`}>Home</Link>
             <Link href="/about" className={`px-3 py-1.5 rounded-lg text-sm font-medium ${pathname === '/about' ? 'bg-white/20 text-white shadow-soft' : 'text-white/80 hover:text-white hover:bg-white/10 transition-all'}`}>About</Link>
+            <Link href="/pricing" className={`px-3 py-1.5 rounded-lg text-sm font-medium ${pathname === '/pricing' ? 'bg-white/20 text-white shadow-soft' : 'text-white/80 hover:text-white hover:bg-white/10 transition-all'}`}>Pricing</Link>
             <Link href="/investors" className={`px-3 py-1.5 rounded-lg text-sm font-medium ${pathname === '/investors' ? 'bg-white/20 text-white shadow-soft' : 'text-white/80 hover:text-white hover:bg-white/10 transition-all'}`}>For Investors</Link>
             <Link href="/partners" className={`px-3 py-1.5 rounded-lg text-sm font-medium ${pathname === '/partners' ? 'bg-white/20 text-white shadow-soft' : 'text-white/80 hover:text-white hover:bg-white/10 transition-all'}`}>For Partners</Link>
           </nav>
@@ -76,6 +77,7 @@ function PublicHeader() {
           <div className="max-w-7xl mx-auto px-4 py-3 space-y-1">
             <Link href="/" onClick={() => setMobileMenuOpen(false)} className={`block px-4 py-2.5 rounded-lg text-sm font-medium ${pathname === '/' ? 'bg-white/20 text-white' : 'text-white/80 hover:text-white hover:bg-white/10'}`}>Home</Link>
             <Link href="/about" onClick={() => setMobileMenuOpen(false)} className={`block px-4 py-2.5 rounded-lg text-sm font-medium ${pathname === '/about' ? 'bg-white/20 text-white' : 'text-white/80 hover:text-white hover:bg-white/10'}`}>About</Link>
+            <Link href="/pricing" onClick={() => setMobileMenuOpen(false)} className={`block px-4 py-2.5 rounded-lg text-sm font-medium ${pathname === '/pricing' ? 'bg-white/20 text-white' : 'text-white/80 hover:text-white hover:bg-white/10'}`}>Pricing</Link>
             <Link href="/investors" onClick={() => setMobileMenuOpen(false)} className={`block px-4 py-2.5 rounded-lg text-sm font-medium ${pathname === '/investors' ? 'bg-white/20 text-white' : 'text-white/80 hover:text-white hover:bg-white/10'}`}>For Investors</Link>
             <Link href="/partners" onClick={() => setMobileMenuOpen(false)} className={`block px-4 py-2.5 rounded-lg text-sm font-medium ${pathname === '/partners' ? 'bg-white/20 text-white' : 'text-white/80 hover:text-white hover:bg-white/10'}`}>For Partners</Link>
             <div className="pt-3 border-t border-white/20 space-y-2">
