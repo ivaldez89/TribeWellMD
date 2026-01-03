@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { TargetIcon, ClockIcon } from '@/components/icons/MedicalIcons';
+import { ToolPanel } from '@/components/panels/ToolPanel';
 
 interface PomodoroPanelProps {
   isOpen: boolean;
@@ -35,17 +36,6 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
     shortBreak: TIMER_SETTINGS.shortBreak,
     longBreak: TIMER_SETTINGS.longBreak,
   });
-
-  // Handle Escape key to close
-  useEffect(() => {
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
-    }
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -101,34 +91,43 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
     }
   };
 
-  return (
-    <aside
-      className={`fixed top-12 right-0 bottom-12 w-full sm:w-[380px] bg-surface border-l border-border shadow-2xl z-40 flex flex-col transform transition-transform duration-300 ease-in-out ${
-        isOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}
-    >
-      {/* Header */}
-      <div className={`flex items-center justify-between px-4 py-3 border-b border-border bg-gradient-to-r ${modeColors[mode]}`}>
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">
-            <ClockIcon className="w-5 h-5 text-white" />
-          </div>
-          <div className="text-white">
-            <h2 className="text-sm font-bold">Pomodoro Timer</h2>
-            <p className="text-[10px] opacity-90">Today: {sessionsCompleted} sessions</p>
-          </div>
+  // Custom header with dynamic gradient based on mode
+  const customHeader = (
+    <div className={`flex items-center justify-between px-4 py-3 border-b border-border bg-gradient-to-r ${modeColors[mode]}`}>
+      <div className="flex items-center gap-3">
+        <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">
+          <ClockIcon className="w-5 h-5 text-white" />
         </div>
-        <button
-          onClick={onClose}
-          className="p-1.5 text-white/80 hover:text-white hover:bg-white/20 rounded-lg transition-colors"
-          title="Close (Esc)"
-        >
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+        <div className="text-white">
+          <h2 className="text-sm font-bold">Pomodoro Timer</h2>
+          <p className="text-[10px] opacity-90">Today: {sessionsCompleted} sessions</p>
+        </div>
       </div>
+      <button
+        onClick={onClose}
+        className="p-1.5 text-white/80 hover:text-white hover:bg-white/20 rounded-lg transition-colors"
+        title="Close (Esc)"
+      >
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  );
 
+  const footerText = isRunning ? 'Timer running - persists when panel is closed' : 'Start a focus session';
+
+  return (
+    <ToolPanel
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Pomodoro Timer"
+      subtitle={`Today: ${sessionsCompleted} sessions`}
+      variant="compact"
+      header={customHeader}
+      shortcutKey="P"
+      footerText={footerText}
+    >
       {/* Mode tabs */}
       <div className="px-4 py-3 border-b border-border bg-surface-muted/30">
         <div className="flex gap-1.5">
@@ -150,7 +149,7 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
       </div>
 
       {/* Content - Timer display */}
-      <div className="flex-1 overflow-y-auto flex flex-col items-center justify-center p-6">
+      <div className="flex-1 flex flex-col items-center justify-center p-6">
         {/* Timer circle */}
         <div className="relative w-48 h-48 mb-6">
           <svg className="w-full h-full transform -rotate-90">
@@ -276,17 +275,7 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
           {4 - (sessionsCompleted % 4)} more focus sessions until long break
         </p>
       </div>
-
-      {/* Footer */}
-      <div className="px-4 py-2 border-t border-border bg-surface-muted/30 flex items-center justify-between">
-        <p className="text-[10px] text-content-muted">
-          {isRunning ? 'Timer running - persists when panel is closed' : 'Start a focus session'}
-        </p>
-        <p className="text-[10px] text-content-muted">
-          <kbd className="px-1 py-0.5 bg-surface border border-border rounded font-mono text-[9px]">P</kbd> toggle
-        </p>
-      </div>
-    </aside>
+    </ToolPanel>
   );
 }
 

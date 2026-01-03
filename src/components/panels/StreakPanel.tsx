@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useStreak } from '@/hooks/useStreak';
 import { Icons } from '@/components/ui/Icons';
 import { CheckCircleIcon } from '@/components/icons/MedicalIcons';
+import { ToolPanel } from '@/components/panels/ToolPanel';
 
 interface StreakPanelProps {
   isOpen: boolean;
@@ -13,28 +13,22 @@ interface StreakPanelProps {
 export function StreakPanel({ isOpen, onClose }: StreakPanelProps) {
   const { streakData, isLoading, getDailyProgress, getXPToNextLevel, isGoalComplete } = useStreak();
 
-  // Handle Escape key to close
-  useEffect(() => {
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape' && isOpen) {
-        onClose();
-      }
-    }
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
-
   if (isLoading || !streakData) {
     return (
-      <aside
-        className={`fixed top-12 right-0 bottom-12 w-full sm:w-[380px] bg-surface border-l border-border shadow-2xl z-40 flex flex-col transform transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+      <ToolPanel
+        isOpen={isOpen}
+        onClose={onClose}
+        title="Streak"
+        subtitle="Loading..."
+        variant="compact"
+        headerBg="bg-gradient-to-r from-slate-400 to-slate-500"
+        headerTextColor="text-white"
+        showFooter={false}
       >
         <div className="flex-1 flex items-center justify-center">
           <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
         </div>
-      </aside>
+      </ToolPanel>
     );
   }
 
@@ -45,40 +39,47 @@ export function StreakPanel({ isOpen, onClose }: StreakPanelProps) {
   const hasStreak = streakData.currentStreak > 0;
   const isOnFire = streakData.currentStreak >= 7;
 
-  return (
-    <aside
-      className={`fixed top-12 right-0 bottom-12 w-full sm:w-[380px] bg-surface border-l border-border shadow-2xl z-40 flex flex-col transform transition-transform duration-300 ease-in-out ${
-        isOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}
-    >
-      {/* Header */}
-      <div className={`flex items-center justify-between px-4 py-3 border-b border-border ${
-        hasStreak
-          ? 'bg-gradient-to-r from-orange-500 to-amber-500'
-          : 'bg-gradient-to-r from-slate-400 to-slate-500'
-      }`}>
-        <div className="flex items-center gap-3">
-          <div className={`w-9 h-9 ${isOnFire ? 'animate-pulse' : ''}`}>
-            <Icons.Fire />
-          </div>
-          <div className="text-white">
-            <h2 className="text-sm font-bold flex items-center gap-2">
-              <span className="text-2xl">{streakData.currentStreak}</span>
-              <span className="text-xs opacity-90">day streak</span>
-            </h2>
-          </div>
+  // Custom header with dynamic gradient based on streak status
+  const customHeader = (
+    <div className={`flex items-center justify-between px-4 py-3 border-b border-border ${
+      hasStreak
+        ? 'bg-gradient-to-r from-orange-500 to-amber-500'
+        : 'bg-gradient-to-r from-slate-400 to-slate-500'
+    }`}>
+      <div className="flex items-center gap-3">
+        <div className={`w-9 h-9 ${isOnFire ? 'animate-pulse' : ''}`}>
+          <Icons.Fire />
         </div>
-        <button
-          onClick={onClose}
-          className="p-1.5 text-white/80 hover:text-white hover:bg-white/20 rounded-lg transition-colors"
-          title="Close (Esc)"
-        >
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+        <div className="text-white">
+          <h2 className="text-sm font-bold flex items-center gap-2">
+            <span className="text-2xl">{streakData.currentStreak}</span>
+            <span className="text-xs opacity-90">day streak</span>
+          </h2>
+        </div>
       </div>
+      <button
+        onClick={onClose}
+        className="p-1.5 text-white/80 hover:text-white hover:bg-white/20 rounded-lg transition-colors"
+        title="Close (Esc)"
+      >
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  );
 
+  return (
+    <ToolPanel
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Streak"
+      subtitle={`${streakData.currentStreak} day streak`}
+      variant="compact"
+      header={customHeader}
+      shortcutKey="X"
+      footerText="Keep studying to grow your streak"
+    >
       {/* Weekly Activity */}
       <div className={`px-4 py-4 ${
         hasStreak
@@ -115,7 +116,7 @@ export function StreakPanel({ isOpen, onClose }: StreakPanelProps) {
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="p-4 space-y-4">
         {/* Daily Goal Progress */}
         <div className="p-4 bg-surface-muted rounded-xl">
           <div className="flex items-center justify-between mb-2">
@@ -239,17 +240,7 @@ export function StreakPanel({ isOpen, onClose }: StreakPanelProps) {
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <div className="px-4 py-2 border-t border-border bg-surface-muted/30 flex items-center justify-between">
-        <p className="text-[10px] text-content-muted">
-          Keep studying to grow your streak
-        </p>
-        <p className="text-[10px] text-content-muted">
-          <kbd className="px-1 py-0.5 bg-surface border border-border rounded font-mono text-[9px]">X</kbd> toggle
-        </p>
-      </div>
-    </aside>
+    </ToolPanel>
   );
 }
 
