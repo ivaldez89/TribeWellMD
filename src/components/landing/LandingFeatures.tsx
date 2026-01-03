@@ -4,6 +4,7 @@ const FEATURES = [
   {
     title: 'One Unified System',
     description: 'Study tools, wellness practices, and community—working together, not scattered across a dozen apps',
+    gradient: 'from-[#8B6F9E] to-[#6B5280]', // muted plum
     icon: (
       <path
         strokeLinecap="round"
@@ -13,8 +14,9 @@ const FEATURES = [
     ),
   },
   {
-    title: 'Prevention First',
+    title: 'Proactive',
     description: 'Build resilience before you need it—not as a reaction to burnout',
+    gradient: 'from-[#C9A961] to-[#A88F4E]', // mustard yellow
     icon: (
       <path
         strokeLinecap="round"
@@ -24,8 +26,9 @@ const FEATURES = [
     ),
   },
   {
-    title: 'Your Tribe',
-    description: 'Peers and mentors who get it—because they\'re living it too',
+    title: 'Not in Isolation',
+    description: 'Peers & mentors who get it - because they are living it too',
+    gradient: 'from-[#6B9B9E] to-[#557F82]', // muted jade blue
     icon: (
       <path
         strokeLinecap="round"
@@ -35,8 +38,9 @@ const FEATURES = [
     ),
   },
   {
-    title: 'Progress Without Guilt',
-    description: 'Rest is part of the work here—not time stolen from it',
+    title: 'Progress with Purpose',
+    description: 'Personal growth and contribution to community are mutually reinforced - not in competition',
+    gradient: 'from-[#C9A5A5] to-[#A88787]', // dusty rose
     icon: (
       <path
         strokeLinecap="round"
@@ -63,7 +67,7 @@ export function LandingFeatures() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {FEATURES.map((feature) => (
             <div key={feature.title} className="text-center">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-landing-feature-from to-landing-feature-to flex items-center justify-center shadow-xl">
+              <div className={`w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center shadow-xl`}>
                 <svg
                   className="w-10 h-10 text-white"
                   fill="none"
