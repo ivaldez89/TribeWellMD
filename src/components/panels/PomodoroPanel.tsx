@@ -55,9 +55,10 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
 
   const progress = ((TIMER_SETTINGS[mode] - timeLeft) / TIMER_SETTINGS[mode]) * 100;
 
+  // Theme-consistent colors (green/sage for focus, variations for breaks)
   const modeColors = {
-    focus: 'from-red-500 to-orange-500',
-    shortBreak: 'from-green-500 to-tribe-sage-500',
+    focus: 'from-[#5B7B6D] to-tribe-sage-500',
+    shortBreak: 'from-[#C4A77D] to-amber-500',
     longBreak: 'from-blue-500 to-cyan-500',
   };
 
@@ -176,8 +177,8 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
             />
             <defs>
               <linearGradient id="pomo-panel-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor={mode === 'focus' ? '#ef4444' : mode === 'shortBreak' ? '#22c55e' : '#3b82f6'} />
-                <stop offset="100%" stopColor={mode === 'focus' ? '#f97316' : mode === 'shortBreak' ? '#10b981' : '#06b6d4'} />
+                <stop offset="0%" stopColor={mode === 'focus' ? '#5B7B6D' : mode === 'shortBreak' ? '#C4A77D' : '#3b82f6'} />
+                <stop offset="100%" stopColor={mode === 'focus' ? '#6B8E7D' : mode === 'shortBreak' ? '#d4b78d' : '#06b6d4'} />
               </linearGradient>
             </defs>
           </svg>
@@ -188,7 +189,7 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
             <span className="text-sm text-content-muted mt-1">{modeLabels[mode]}</span>
             {isRunning && (
               <span className="mt-2 flex items-center gap-1 text-xs text-content-muted">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-[#5B7B6D] animate-pulse" />
                 Running
               </span>
             )}

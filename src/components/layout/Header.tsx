@@ -743,7 +743,7 @@ export function Header({
                   <button
                     onClick={() => togglePanel('pomodoro')}
                     aria-label="Pomodoro Timer (P)"
-                    className={`group relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg transition-all duration-200 ${
+                    className={`group relative flex flex-col items-center justify-center px-3 py-1 min-w-[44px] rounded-lg transition-all duration-200 ${
                       activePanel === 'pomodoro' || isTimerRunning
                         ? 'bg-[#C4A77D] text-white'
                         : 'text-white/80 hover:text-white hover:bg-white/10 focus-visible:bg-white/10'
@@ -754,9 +754,9 @@ export function Header({
                     </svg>
                     {/* Show remaining time when timer is running (CRITICAL requirement) */}
                     {isTimerRunning ? (
-                      <span className="text-xs font-mono font-bold">{formatTime(timeLeft)}</span>
+                      <span className="text-[10px] font-mono font-bold mt-0.5">{formatTime(timeLeft)}</span>
                     ) : (
-                      <span className="text-[10px] font-medium whitespace-nowrap max-w-0 overflow-hidden opacity-0 group-hover:max-w-[70px] group-hover:opacity-100 group-focus-visible:max-w-[70px] group-focus-visible:opacity-100 transition-all duration-200 ease-out">
+                      <span className="text-[10px] font-medium whitespace-nowrap max-h-0 overflow-hidden opacity-0 group-hover:max-h-4 group-hover:opacity-100 group-hover:mt-0.5 group-focus-visible:max-h-4 group-focus-visible:opacity-100 group-focus-visible:mt-0.5 transition-all duration-200 ease-out">
                         Pomodoro
                       </span>
                     )}
