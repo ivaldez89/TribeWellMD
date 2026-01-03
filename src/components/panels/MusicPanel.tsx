@@ -19,6 +19,66 @@ const MusicIcon = () => (
   </svg>
 );
 
+// Playlist icons - unique SVG for each playlist type
+const PlaylistIcon = ({ type, isPlaying }: { type: string; isPlaying?: boolean }) => {
+  if (isPlaying) {
+    return <span className="w-3 h-3 bg-white/90 rounded-full animate-pulse" />;
+  }
+
+  switch (type) {
+    case 'focus':
+      // Brain/target icon for deep focus
+      return (
+        <svg className="w-5 h-5 text-white/90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.746 3.746 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.746 3.746 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+        </svg>
+      );
+    case 'lofi':
+      // Headphones icon for lo-fi
+      return (
+        <svg className="w-5 h-5 text-white/90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+        </svg>
+      );
+    case 'classical':
+      // Musical note icon for classical
+      return (
+        <svg className="w-5 h-5 text-white/90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z" />
+        </svg>
+      );
+    case 'piano':
+      // Piano keys pattern
+      return (
+        <svg className="w-5 h-5 text-white/90" viewBox="0 0 24 24" fill="currentColor">
+          <rect x="3" y="6" width="4" height="12" rx="0.5" fillOpacity="0.9" />
+          <rect x="8" y="6" width="4" height="12" rx="0.5" fillOpacity="0.9" />
+          <rect x="13" y="6" width="4" height="12" rx="0.5" fillOpacity="0.9" />
+          <rect x="18" y="6" width="3" height="12" rx="0.5" fillOpacity="0.9" />
+          <rect x="5.5" y="6" width="2" height="7" rx="0.25" fill="currentColor" fillOpacity="0.4" />
+          <rect x="10.5" y="6" width="2" height="7" rx="0.25" fill="currentColor" fillOpacity="0.4" />
+          <rect x="16.5" y="6" width="2" height="7" rx="0.25" fill="currentColor" fillOpacity="0.4" />
+        </svg>
+      );
+    case 'nature':
+      // Leaf icon for nature
+      return (
+        <svg className="w-5 h-5 text-white/90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6.115 5.19l.319 1.913A6 6 0 008.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 002.288-4.042 1.087 1.087 0 00-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 01-.98-.314l-.295-.295a1.125 1.125 0 010-1.591l.13-.132a1.125 1.125 0 011.3-.21l.603.302a.809.809 0 001.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 001.528-1.732l.146-.292M6.115 5.19A9 9 0 1017.18 4.64M6.115 5.19A8.965 8.965 0 0112 3c1.929 0 3.716.607 5.18 1.64" />
+        </svg>
+      );
+    case 'jazz':
+      // Saxophone-like musical icon
+      return (
+        <svg className="w-5 h-5 text-white/90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+        </svg>
+      );
+    default:
+      return <span className="w-2 h-2 bg-white/60 rounded-full" />;
+  }
+};
+
 export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
   const [activeTab, setActiveTab] = useState<TabType>('ambient');
 
@@ -268,8 +328,8 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
               {isSpotifyPlaying && selectedPlaylistData && (
                 <div className="p-3 bg-[#1DB954]/10 dark:bg-[#1DB954]/20 rounded-xl border border-[#1DB954]/30">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${selectedPlaylistData.color} flex items-center justify-center flex-shrink-0`}>
-                      <span className="w-3 h-3 bg-white rounded-full animate-pulse" />
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${selectedPlaylistData.color} flex items-center justify-center flex-shrink-0 shadow-sm`}>
+                      <PlaylistIcon type={selectedPlaylistData.icon} isPlaying={true} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold text-secondary truncate">Now Playing</p>
@@ -313,10 +373,8 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
                           : 'hover:bg-surface-muted'
                       }`}
                     >
-                      <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${playlist.color} flex items-center justify-center flex-shrink-0`}>
-                        {selectedPlaylist === playlist.id && (
-                          <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                        )}
+                      <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${playlist.color} flex items-center justify-center flex-shrink-0 shadow-sm`}>
+                        <PlaylistIcon type={playlist.icon} isPlaying={selectedPlaylist === playlist.id} />
                       </div>
                       <div className="text-left flex-1 min-w-0">
                         <p className="text-sm font-medium text-secondary">{playlist.name}</p>

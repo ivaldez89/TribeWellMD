@@ -3,49 +3,55 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 // Curated study playlists (Spotify embed URIs)
-// Icon colors use TribeWellMD green theme - variations for visual distinction
+// Icon colors use TribeWellMD theme palette for visual distinction
 export const STUDY_PLAYLISTS = [
   {
     id: 'focus',
     name: 'Deep Focus',
     description: 'Instrumental focus music',
     spotifyUri: '37i9dQZF1DWZeKCadgRdKQ',
-    color: 'from-[#5B7B6D] to-[#4A6A5C]', // tribe-sage solid
+    color: 'from-[#5B7B6D] to-[#3D5A4F]', // tribe-sage green
+    icon: 'focus', // brain/target icon
   },
   {
     id: 'lofi',
     name: 'Lo-Fi Study',
     description: 'Chill beats to study to',
     spotifyUri: '37i9dQZF1DWWQRwui0ExPn',
-    color: 'from-[#6B8B7D] to-[#5B7B6D]', // tribe-sage lighter
+    color: 'from-[#C4A77D] to-[#A89068]', // sand gold
+    icon: 'lofi', // headphones/chill icon
   },
   {
     id: 'classical',
     name: 'Classical Focus',
     description: 'Classical music for concentration',
     spotifyUri: '37i9dQZF1DWV0gynK7G6pD',
-    color: 'from-[#4A6A5C] to-[#3A5A4C]', // tribe-sage darker
+    color: 'from-[#64748B] to-[#475569]', // slate blue-gray
+    icon: 'classical', // violin/classical icon
   },
   {
     id: 'ambient',
     name: 'Peaceful Piano',
     description: 'Relaxing piano melodies',
     spotifyUri: '37i9dQZF1DX4sWSpwq3LiO',
-    color: 'from-[#5B7B6D] to-[#6B8B7D]', // tribe-sage to lighter
+    color: 'from-[#7C9A92] to-[#5B7B6D]', // soft sage
+    icon: 'piano', // piano keys icon
   },
   {
     id: 'nature',
     name: 'Nature Sounds',
     description: 'Calming nature ambience',
     spotifyUri: '37i9dQZF1DX4PP3DA4J0N8',
-    color: 'from-[#4A6A5C] to-[#5B7B6D]', // darker to tribe-sage
+    color: 'from-[#6B8F71] to-[#4A7050]', // forest green
+    icon: 'nature', // leaf/tree icon
   },
   {
     id: 'jazz',
     name: 'Jazz Study',
     description: 'Smooth jazz for studying',
     spotifyUri: '37i9dQZF1DX0SM0LYsmbMT',
-    color: 'from-[#3A5A4C] to-[#4A6A5C]', // darkest tribe-sage
+    color: 'from-[#8B7355] to-[#6B5344]', // warm brown
+    icon: 'jazz', // saxophone icon
   },
 ];
 
