@@ -65,12 +65,13 @@ const CHAT_STYLES = {
     field: 'w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#5B7B6D]/50 focus:border-[#5B7B6D] transition-all',
     icon: 'absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400',
   },
-  // Panel chrome
+  // Panel chrome - matches ToolPanel canonical style (Lab Reference as source of truth)
   panel: {
-    container: 'fixed top-12 right-0 bottom-12 w-[380px] bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-700 shadow-2xl z-40 flex flex-col',
-    header: 'flex items-center justify-between px-4 py-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50',
-    headerTitle: 'text-base font-bold text-slate-800 dark:text-white',
-    headerSubtitle: 'text-xs text-slate-500 dark:text-slate-400',
+    container: 'fixed top-12 right-0 bottom-12 w-full sm:w-[380px] bg-surface border-l border-border shadow-2xl z-40 flex flex-col',
+    header: 'flex items-center justify-between px-4 py-3 border-b border-border bg-gradient-to-r from-sand-50 to-blue-50 dark:from-sand-950/30 dark:to-blue-950/30',
+    headerIconContainer: 'w-9 h-9 rounded-xl flex items-center justify-center bg-gradient-to-br from-sand-100 to-blue-100 dark:from-sand-900/50 dark:to-blue-900/50',
+    headerTitle: 'text-sm font-bold text-secondary',
+    headerSubtitle: 'text-[10px] text-content-muted',
   },
 } as const;
 
@@ -456,22 +457,22 @@ export function MessengerPanel({ isOpen, onClose }: MessengerPanelProps) {
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
     >
-      {/* Header - Clean, premium styling */}
+      {/* Header - Canonical ToolPanel style (Lab Reference as source of truth) */}
       <div className={CHAT_STYLES.panel.header}>
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#5B7B6D] flex items-center justify-center">
-            <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <div className={CHAT_STYLES.panel.headerIconContainer}>
+            <svg className="w-5 h-5 text-sand-600 dark:text-sand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
           </div>
           <div>
-            <h2 className={CHAT_STYLES.panel.headerTitle}>Messages</h2>
+            <h2 className={CHAT_STYLES.panel.headerTitle}>TribeWell Messages</h2>
             <p className={CHAT_STYLES.panel.headerSubtitle}>Connect with your tribe</p>
           </div>
         </div>
         <button
           onClick={onClose}
-          className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
+          className="p-1.5 rounded-lg transition-colors text-content-muted hover:text-secondary hover:bg-surface-muted"
           title="Close (Esc)"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
