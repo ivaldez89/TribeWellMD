@@ -1,9 +1,23 @@
 /**
- * Shared layout constants for consistent header/footer sizing across the app.
- * Both header and footer are 48px (h-12) to maintain visual symmetry.
+ * Layout Constants
+ *
+ * Centralized source of truth for all layout-related constants.
+ * Use these values throughout the application to maintain consistency.
  */
 
-// Height values in pixels
+/** Fixed header height in pixels */
+export const HEADER_HEIGHT = 48;
+
+/** Fixed footer height in pixels */
+export const FOOTER_HEIGHT = 48;
+
+/** Tailwind class for sticky top offset (header height + buffer) */
+export const STICKY_TOP_OFFSET = 'top-16';
+
+/** Combined header + footer height for full-page calculations */
+export const HEADER_FOOTER_HEIGHT = HEADER_HEIGHT + FOOTER_HEIGHT;
+
+// Height values in pixels (legacy - use individual constants above)
 export const LAYOUT = {
   HEADER_HEIGHT: 48,  // 3rem / h-12
   FOOTER_HEIGHT: 48,  // 3rem / h-12

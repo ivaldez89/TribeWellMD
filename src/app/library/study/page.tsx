@@ -3,8 +3,7 @@
 import { useEffect, useState, useRef, useCallback, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/footer/Footer';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import { FlashcardViewer } from '@/components/flashcards/FlashcardViewer';
 import { AnswerButtons } from '@/components/flashcards/AnswerButtons';
 import { PomodoroTimer } from '@/components/study/PomodoroTimer';
@@ -448,7 +447,7 @@ function LibraryStudyContent() {
   // Handle missing data
   if (!subcategoryId || !category || !subcategory) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+      <ContentPageLayout mainClassName="flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">No cards to study</h2>
           <p className="text-slate-600 dark:text-slate-400 mb-6">Please select a subcategory from the library.</p>
@@ -459,13 +458,13 @@ function LibraryStudyContent() {
             Back to Library
           </Link>
         </div>
-      </div>
+      </ContentPageLayout>
     );
   }
 
   if (studyCards.length === 0) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+      <ContentPageLayout mainClassName="flex items-center justify-center">
         <div className="text-center max-w-md">
           <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
             <span className="text-4xl">{category.icon}</span>
@@ -484,7 +483,7 @@ function LibraryStudyContent() {
             </Link>
           </div>
         </div>
-      </div>
+      </ContentPageLayout>
     );
   }
 
@@ -495,79 +494,78 @@ function LibraryStudyContent() {
       : 0;
 
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
-        <Header />
-        <main className="max-w-4xl mx-auto px-4 py-12">
-          <div className="text-center">
-            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#E8E0D5] to-[#D4C4B0] dark:from-[#5B7B6D]/30 dark:to-[#2D5A4A]/30 flex items-center justify-center">
-              <svg className="w-12 h-12 text-[#5B7B6D] dark:text-[#C4A77D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
+      <ContentPageLayout maxWidth="7xl" mainClassName="max-w-4xl mx-auto px-4 py-12">
+        <div className="text-center">
+          <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#E8E0D5] to-[#D4C4B0] dark:from-[#5B7B6D]/30 dark:to-[#2D5A4A]/30 flex items-center justify-center">
+            <svg className="w-12 h-12 text-[#5B7B6D] dark:text-[#C4A77D]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
 
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
-              {subcategory.name} Complete!
-            </h2>
-            <p className="text-lg text-slate-600 dark:text-slate-400 mb-8">
-              Great work on {category.name}!
-            </p>
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+            {subcategory.name} Complete!
+          </h2>
+          <p className="text-lg text-slate-600 dark:text-slate-400 mb-8">
+            Great work on {category.name}!
+          </p>
 
-            {/* Session Stats */}
-            <div className="mb-8 p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 inline-block">
-              <h3 className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-4">Session Summary</h3>
-              <div className="flex items-center justify-center gap-8">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-slate-900 dark:text-white">{sessionStats.reviewed}</p>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">Reviewed</p>
-                </div>
-                <div className="w-px h-12 bg-slate-200 dark:bg-slate-700" />
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-[#5B7B6D]">{sessionStats.correct}</p>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">Correct</p>
-                </div>
-                <div className="w-px h-12 bg-slate-200 dark:bg-slate-700" />
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-red-500">{sessionStats.incorrect}</p>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">To Review</p>
-                </div>
-                <div className="w-px h-12 bg-slate-200 dark:bg-slate-700" />
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-[#5B7B6D]">{accuracy}%</p>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">Accuracy</p>
-                </div>
+          {/* Session Stats */}
+          <div className="mb-8 p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 inline-block">
+            <h3 className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-4">Session Summary</h3>
+            <div className="flex items-center justify-center gap-8">
+              <div className="text-center">
+                <p className="text-3xl font-bold text-slate-900 dark:text-white">{sessionStats.reviewed}</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">Reviewed</p>
+              </div>
+              <div className="w-px h-12 bg-slate-200 dark:bg-slate-700" />
+              <div className="text-center">
+                <p className="text-3xl font-bold text-[#5B7B6D]">{sessionStats.correct}</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">Correct</p>
+              </div>
+              <div className="w-px h-12 bg-slate-200 dark:bg-slate-700" />
+              <div className="text-center">
+                <p className="text-3xl font-bold text-red-500">{sessionStats.incorrect}</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">To Review</p>
+              </div>
+              <div className="w-px h-12 bg-slate-200 dark:bg-slate-700" />
+              <div className="text-center">
+                <p className="text-3xl font-bold text-[#5B7B6D]">{accuracy}%</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">Accuracy</p>
               </div>
             </div>
-
-            {/* Actions */}
-            <div className="flex justify-center gap-4">
-              <button
-                onClick={() => {
-                  setCurrentIndex(0);
-                  setIsRevealed(false);
-                  setIsComplete(false);
-                  setSessionStats({ reviewed: 0, correct: 0, incorrect: 0 });
-                }}
-                className="px-6 py-3 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] text-white font-semibold rounded-xl transition-all shadow-md hover:shadow-lg"
-              >
-                Study Again
-              </button>
-              <Link
-                href={`/library?view=${viewType}`}
-                className="px-6 py-3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-              >
-                Back to Library
-              </Link>
-            </div>
           </div>
-        </main>
-      </div>
+
+          {/* Actions */}
+          <div className="flex justify-center gap-4">
+            <button
+              onClick={() => {
+                setCurrentIndex(0);
+                setIsRevealed(false);
+                setIsComplete(false);
+                setSessionStats({ reviewed: 0, correct: 0, incorrect: 0 });
+              }}
+              className="px-6 py-3 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] text-white font-semibold rounded-xl transition-all shadow-md hover:shadow-lg"
+            >
+              Study Again
+            </button>
+            <Link
+              href={`/library?view=${viewType}`}
+              className="px-6 py-3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+            >
+              Back to Library
+            </Link>
+          </div>
+        </div>
+      </ContentPageLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 relative">
-      <Header />
-
+    <ContentPageLayout
+      maxWidth="7xl"
+      className="relative"
+      mainClassName="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
+    >
       {/* Background overlay - positioned below header, above footer */}
       {selectedBackground !== 'none' && (
         <div
@@ -582,8 +580,6 @@ function LibraryStudyContent() {
           }}
         />
       )}
-
-      <main className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8" style={{ zIndex: 2 }}>
         {/* Session toolbar */}
         <div className="relative z-[60] mb-6 flex items-center justify-between flex-wrap gap-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur py-3 px-4 rounded-xl border border-slate-200 dark:border-slate-700">
           {/* Breadcrumb */}
@@ -751,19 +747,15 @@ function LibraryStudyContent() {
           </>
         )}
 
-        {/* Keyboard shortcuts */}
-        <div className="mt-8 text-center">
-          <p className="text-sm text-slate-400">
-            <kbd className="px-1.5 py-0.5 bg-slate-200 dark:bg-slate-700 rounded text-xs font-mono">Space</kbd> to reveal
-            <span className="mx-2">•</span>
-            <kbd className="px-1.5 py-0.5 bg-slate-200 dark:bg-slate-700 rounded text-xs font-mono">1-4</kbd> to rate
-          </p>
-        </div>
-      </main>
-
-      {/* Shared Footer */}
-      <Footer />
-    </div>
+      {/* Keyboard shortcuts */}
+      <div className="mt-8 text-center">
+        <p className="text-sm text-slate-400">
+          <kbd className="px-1.5 py-0.5 bg-slate-200 dark:bg-slate-700 rounded text-xs font-mono">Space</kbd> to reveal
+          <span className="mx-2">•</span>
+          <kbd className="px-1.5 py-0.5 bg-slate-200 dark:bg-slate-700 rounded text-xs font-mono">1-4</kbd> to rate
+        </p>
+      </div>
+    </ContentPageLayout>
   );
 }
 

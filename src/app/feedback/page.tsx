@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/footer/Footer';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import Link from 'next/link';
 import { LightbulbIcon, TrendingUpIcon, BookOpenIcon, ChatBubbleIcon } from '@/components/icons/MedicalIcons';
 
@@ -58,20 +57,17 @@ export default function FeedbackPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900">
-      <Header />
-
-      <main className="flex-1 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
-        <div className="mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white mb-4">
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Home
-          </Link>
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Send Feedback</h1>
-          <p className="text-slate-600 dark:text-slate-400 mt-2">Help us make TribeWellMD better for everyone</p>
-        </div>
+    <ContentPageLayout maxWidth="xl">
+      <div className="mb-8">
+        <Link href="/" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white mb-4">
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Home
+        </Link>
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Send Feedback</h1>
+        <p className="text-slate-600 dark:text-slate-400 mt-2">Help us make TribeWellMD better for everyone</p>
+      </div>
 
         <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-8">
           {submitted ? (
@@ -249,12 +245,9 @@ export default function FeedbackPage() {
           </p>
         </div>
 
-        <div className="mt-8 text-center text-sm text-slate-500 dark:text-slate-400">
-          <p>© {new Date().getFullYear()} TribeWellMD</p>
-        </div>
-      </main>
-
-      <Footer />
-    </div>
+      <div className="mt-8 text-center text-sm text-slate-500 dark:text-slate-400">
+        <p>© {new Date().getFullYear()} TribeWellMD</p>
+      </div>
+    </ContentPageLayout>
   );
 }

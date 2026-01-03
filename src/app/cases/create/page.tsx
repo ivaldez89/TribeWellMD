@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import type { ClinicalVignette, DecisionNode } from '@/types';
 import { VignetteEditor } from '@/components/vignettes/VignetteEditor';
 import { useVignettes } from '@/hooks/useVignettes';
@@ -119,12 +119,10 @@ export default function CreateCasePage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-
+    <ContentPageLayout maxWidth="7xl">
       {/* Sub-header with page-specific actions */}
-      <div className="bg-surface border-b border-border sticky top-0 z-10">
-        <div className="max-w-5xl mx-auto px-4 py-4">
+      <div className="bg-surface border-b border-border sticky top-0 z-10 -mx-4 px-4">
+        <div className="max-w-5xl mx-auto py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Link href="/cases" className="text-content-muted hover:text-content-secondary transition-colors">
@@ -160,7 +158,7 @@ export default function CreateCasePage() {
         </div>
       </div>
 
-      <main className="max-w-5xl mx-auto px-4 py-6">
+      <div className="max-w-5xl mx-auto py-6">
         <VignetteEditor
           vignette={vignette}
           onChange={setVignette}
@@ -168,7 +166,7 @@ export default function CreateCasePage() {
           onCancel={handleCancel}
           isSaving={isSaving}
         />
-      </main>
+      </div>
 
       {/* Import Modal */}
       {showImportModal && (
@@ -256,6 +254,6 @@ export default function CreateCasePage() {
           </div>
         </div>
       )}
-    </div>
+    </ContentPageLayout>
   );
 }

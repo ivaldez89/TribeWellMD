@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/footer/Footer';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 
 interface LocalCharity {
   name: string;
@@ -176,11 +175,8 @@ export default function LocalCharitiesPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900">
-      <Header />
-
-      <main className="flex-1">
-        {/* Hero Section */}
+    <ContentPageLayout maxWidth="full">
+      {/* Hero Section */}
         <section className="relative overflow-hidden bg-gradient-to-br from-[#5B7B6D] via-[#2D5A4A] to-[#8B7355] py-16">
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
@@ -347,9 +343,6 @@ export default function LocalCharitiesPage() {
             </Link>
           </div>
         </section>
-      </main>
-
-      <Footer />
-    </div>
+    </ContentPageLayout>
   );
 }

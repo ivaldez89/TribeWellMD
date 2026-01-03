@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { Header } from '@/components/layout/Header';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import { TribeHeader } from '@/components/tribes/TribeHeader';
 import { TribeMemberList } from '@/components/tribes/TribeMemberList';
 import { TribeChat } from '@/components/tribes/TribeChat';
@@ -67,27 +67,20 @@ export default function GroupPage() {
 
   if (isLoading) {
     return (
-      <>
-        <Header />
-        <main className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900 pt-20 px-4 pb-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="animate-pulse space-y-4">
-              <div className="h-64 bg-[#D4C4B0] dark:bg-slate-700 rounded-2xl"></div>
-              <div className="h-12 bg-[#D4C4B0] dark:bg-slate-700 rounded-xl"></div>
-              <div className="h-96 bg-[#D4C4B0] dark:bg-slate-700 rounded-xl"></div>
-            </div>
-          </div>
-        </main>
-      </>
+      <ContentPageLayout maxWidth="xl" className="bg-[#E8DFD0] dark:bg-slate-900" mainClassName="pt-20 pb-8">
+        <div className="animate-pulse space-y-4">
+          <div className="h-64 bg-[#D4C4B0] dark:bg-slate-700 rounded-2xl"></div>
+          <div className="h-12 bg-[#D4C4B0] dark:bg-slate-700 rounded-xl"></div>
+          <div className="h-96 bg-[#D4C4B0] dark:bg-slate-700 rounded-xl"></div>
+        </div>
+      </ContentPageLayout>
     );
   }
 
   if (!group) {
     return (
-      <>
-        <Header />
-        <main className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900 pt-20 px-4 pb-8">
-          <div className="max-w-4xl mx-auto text-center py-12">
+      <ContentPageLayout maxWidth="xl" className="bg-[#E8DFD0] dark:bg-slate-900" mainClassName="pt-20 pb-8">
+        <div className="text-center py-12">
             <div className="w-16 h-16 mx-auto mb-4 text-[#8B7355]"><Icons.Search /></div>
             <h1 className="text-2xl font-bold text-[#3D5A4C] dark:text-white mb-2">Group Not Found</h1>
             <p className="text-[#6B5344]/80 dark:text-slate-400 mb-6">
@@ -99,23 +92,20 @@ export default function GroupPage() {
             >
               Browse Groups
             </a>
-          </div>
-        </main>
-      </>
+        </div>
+      </ContentPageLayout>
     );
   }
 
   return (
-    <>
-      <Header />
-      <main className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900 pt-20 px-4 pb-8 relative">
-        {/* Subtle organic pattern overlay on sides */}
-        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
-          <div className="absolute top-0 left-0 w-1/4 h-full bg-gradient-to-r from-[#D4C4B0]/30 to-transparent" />
-          <div className="absolute top-0 right-0 w-1/4 h-full bg-gradient-to-l from-[#D4C4B0]/30 to-transparent" />
-        </div>
+    <ContentPageLayout maxWidth="xl" className="bg-[#E8DFD0] dark:bg-slate-900 relative" mainClassName="pt-20 pb-8">
+      {/* Subtle organic pattern overlay on sides */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+        <div className="absolute top-0 left-0 w-1/4 h-full bg-gradient-to-r from-[#D4C4B0]/30 to-transparent" />
+        <div className="absolute top-0 right-0 w-1/4 h-full bg-gradient-to-l from-[#D4C4B0]/30 to-transparent" />
+      </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto space-y-6">
+      <div className="relative z-10 space-y-6">
           {/* Group Header */}
           <TribeHeader
             tribe={group}
@@ -257,8 +247,7 @@ export default function GroupPage() {
               />
             )}
           </div>
-        </div>
-      </main>
-    </>
+      </div>
+    </ContentPageLayout>
   );
 }

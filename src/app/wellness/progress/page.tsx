@@ -1,8 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/footer/Footer';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import Link from 'next/link';
 import { useWellness } from '@/hooks/useWellness';
 import { useTribes } from '@/hooks/useTribes';
@@ -63,23 +62,19 @@ export default function WellnessProgressPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
-        <Header />
-        <div className="flex items-center justify-center" style={{ minHeight: 'calc(100vh - 64px)' }}>
+      <ContentPageLayout>
+        <div className="flex items-center justify-center py-20">
           <div className="text-center">
             <div className="w-12 h-12 border-4 border-[#C4A77D] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
             <p className="text-slate-600 dark:text-slate-400">Loading your wellness progress...</p>
           </div>
         </div>
-      </div>
+      </ContentPageLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-[#F5F0E8]/30 dark:from-slate-900 dark:to-[#C4A77D]/10">
-      <Header />
-
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <ContentPageLayout maxWidth="xl" className="bg-gradient-to-b from-slate-50 to-[#F5F0E8]/30 dark:from-slate-900 dark:to-[#C4A77D]/10">
         {/* Back Link */}
         <Link
           href="/wellness"
@@ -599,9 +594,6 @@ export default function WellnessProgressPage() {
             Continue Wellness Journey
           </Link>
         </div>
-      </main>
-
-      <Footer />
-    </div>
+    </ContentPageLayout>
   );
 }

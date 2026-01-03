@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo, useCallback, Suspense, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import { StudyLayout, useStudyLayout, type PanelType } from '@/components/layout/StudyLayout';
 import {
   ExplanationSummary,
@@ -646,23 +646,21 @@ function QBankPracticeContent() {
   // Loading state
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
+      <ContentPageLayout>
         <div className="flex items-center justify-center" style={{ minHeight: 'calc(100vh - 64px)' }}>
           <div className="text-center">
             <div className="w-12 h-12 border-4 border-secondary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
             <p className="text-secondary font-medium">Loading questions...</p>
           </div>
         </div>
-      </div>
+      </ContentPageLayout>
     );
   }
 
   // Error state
   if (error) {
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
+      <ContentPageLayout>
         <div className="flex items-center justify-center p-4" style={{ minHeight: 'calc(100vh - 64px)' }}>
           <div className="bg-surface rounded-2xl shadow-xl p-8 max-w-md text-center">
             <div className="w-16 h-16 bg-error-light rounded-full flex items-center justify-center mx-auto mb-4">
@@ -677,15 +675,14 @@ function QBankPracticeContent() {
             </button>
           </div>
         </div>
-      </div>
+      </ContentPageLayout>
     );
   }
 
   // No questions or no attempt
   if (!attempt || questions.length === 0) {
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
+      <ContentPageLayout>
         <div className="flex items-center justify-center p-4" style={{ minHeight: 'calc(100vh - 64px)' }}>
           <div className="bg-surface rounded-2xl shadow-xl p-8 max-w-md text-center">
             <div className="w-16 h-16 bg-surface-muted rounded-full flex items-center justify-center mx-auto mb-4">
@@ -698,15 +695,14 @@ function QBankPracticeContent() {
             <Link href="/qbank" className="text-primary hover:underline text-sm">Back to QBank</Link>
           </div>
         </div>
-      </div>
+      </ContentPageLayout>
     );
   }
 
   // Paused overlay
   if (isPaused && !attempt.isCompleted) {
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
+      <ContentPageLayout>
         <div className="flex items-center justify-center p-4" style={{ minHeight: 'calc(100vh - 64px)' }}>
           <div className="bg-surface rounded-2xl shadow-xl p-8 max-w-md text-center">
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
@@ -722,7 +718,7 @@ function QBankPracticeContent() {
             </button>
           </div>
         </div>
-      </div>
+      </ContentPageLayout>
     );
   }
 
@@ -1097,15 +1093,14 @@ function QBankPracticeContent() {
 export default function QBankPracticePage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-background">
-        <Header />
+      <ContentPageLayout>
         <div className="flex items-center justify-center" style={{ minHeight: 'calc(100vh - 64px)' }}>
           <div className="text-center">
             <div className="w-12 h-12 border-4 border-secondary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
             <p className="text-secondary font-medium">Loading...</p>
           </div>
         </div>
-      </div>
+      </ContentPageLayout>
     }>
       <QBankPracticeContent />
     </Suspense>

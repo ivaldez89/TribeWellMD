@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/footer/Footer';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import { getCurrentVillageId, getUserProfile, getTotalPointsContributed, getVillagePoints } from '@/lib/storage/profileStorage';
 import { getCharityById, PARTNER_CHARITIES } from '@/data/charities';
 import { useWellness } from '@/hooks/useWellness';
@@ -38,10 +37,8 @@ export default function MyImpactPage() {
   const nextGlobal = getNextMilestone(globalStats.totalPoints, GLOBAL_MILESTONES);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900">
-      <Header />
-      <main className="flex-1 pt-4 pb-20 md:pb-8">
-        <div className="max-w-4xl mx-auto px-4 py-6">
+    <ContentPageLayout maxWidth="full" mainClassName="pt-4 pb-20 md:pb-8">
+      <div className="max-w-4xl mx-auto px-4 py-6">
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-2">
@@ -441,9 +438,7 @@ export default function MyImpactPage() {
               </div>
             </div>
           )}
-        </div>
-      </main>
-      <Footer />
-    </div>
+      </div>
+    </ContentPageLayout>
   );
 }

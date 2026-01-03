@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import { StudyLayout, useStudyLayout } from '@/components/layout/StudyLayout';
 import { useVignette } from '@/hooks/useVignette';
 import { VignetteViewer } from '@/components/vignettes/VignetteViewer';
@@ -76,23 +76,21 @@ export default function CasePlayerPage() {
   // Loading state - before StudyLayout
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
+      <ContentPageLayout>
         <div className="flex items-center justify-center" style={{ minHeight: 'calc(100vh - 64px)' }}>
           <div className="text-center">
             <div className="w-12 h-12 border-4 border-secondary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
             <p className="text-secondary font-medium">Loading case...</p>
           </div>
         </div>
-      </div>
+      </ContentPageLayout>
     );
   }
 
   // Error state - before StudyLayout
   if (error || !vignette) {
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
+      <ContentPageLayout>
         <div className="flex items-center justify-center p-4" style={{ minHeight: 'calc(100vh - 64px)' }}>
           <div className="bg-surface rounded-2xl shadow-xl p-8 max-w-md text-center">
             <div className="w-16 h-16 bg-error-light rounded-full flex items-center justify-center mx-auto mb-4">
@@ -110,22 +108,21 @@ export default function CasePlayerPage() {
             </button>
           </div>
         </div>
-      </div>
+      </ContentPageLayout>
     );
   }
 
   // Starting state - before StudyLayout
   if (!currentNode || !session) {
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
+      <ContentPageLayout>
         <div className="flex items-center justify-center" style={{ minHeight: 'calc(100vh - 64px)' }}>
           <div className="text-center">
             <div className="w-12 h-12 border-4 border-secondary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
             <p className="text-secondary font-medium">Starting case...</p>
           </div>
         </div>
-      </div>
+      </ContentPageLayout>
     );
   }
 

@@ -1,8 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/footer/Footer';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import Link from 'next/link';
 import { StudyStatsDisplay, getStudyStats } from '@/components/study/StudyStats';
 import { PerformanceAnalytics } from '@/components/deck/PerformanceAnalytics';
@@ -154,15 +153,13 @@ export default function ProgressPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#E8DFD0] dark:from-slate-900 dark:to-[#3D5A4C]/20 relative">
+    <ContentPageLayout maxWidth="xl" className="bg-[#E8DFD0] dark:from-slate-900 dark:to-[#3D5A4C]/20 relative">
       {/* Subtle organic pattern overlay on sides */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
         <div className="absolute top-0 left-0 w-1/4 h-full bg-gradient-to-r from-[#D4C4B0]/30 to-transparent" />
         <div className="absolute top-0 right-0 w-1/4 h-full bg-gradient-to-l from-[#D4C4B0]/30 to-transparent" />
       </div>
-      <Header />
-
-      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="relative z-10">
         {/* Back Link */}
         <Link
           href="/progress"
@@ -658,9 +655,7 @@ export default function ProgressPage() {
             Continue Studying
           </Link>
         </div>
-      </main>
-
-      <Footer />
-    </div>
+      </div>
+    </ContentPageLayout>
   );
 }

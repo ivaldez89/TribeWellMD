@@ -2,8 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/footer/Footer';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import { TribeCard } from '@/components/tribes/TribeCard';
 import { CreateTribeModal } from '@/components/tribes/CreateTribeModal';
 import { useTribes } from '@/hooks/useTribes';
@@ -91,34 +90,27 @@ export default function TribesPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900">
-        <Header />
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="animate-pulse space-y-6">
-            <div className="h-48 bg-[#D4C4B0]/50 dark:bg-slate-800 rounded-3xl"></div>
-            <div className="h-16 bg-[#D4C4B0]/50 dark:bg-slate-800 rounded-2xl"></div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="h-64 bg-[#D4C4B0]/50 dark:bg-slate-800 rounded-2xl"></div>
-              ))}
-            </div>
+      <ContentPageLayout maxWidth="7xl" className="bg-[#E8DFD0] dark:bg-slate-900">
+        <div className="animate-pulse space-y-6">
+          <div className="h-48 bg-[#D4C4B0]/50 dark:bg-slate-800 rounded-3xl"></div>
+          <div className="h-16 bg-[#D4C4B0]/50 dark:bg-slate-800 rounded-2xl"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="h-64 bg-[#D4C4B0]/50 dark:bg-slate-800 rounded-2xl"></div>
+            ))}
           </div>
-        </main>
-      </div>
+        </div>
+      </ContentPageLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900 relative">
+    <ContentPageLayout maxWidth="7xl" className="bg-[#E8DFD0] dark:bg-slate-900 relative">
       {/* Subtle organic pattern overlay on sides */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
         <div className="absolute top-0 left-0 w-1/4 h-full bg-gradient-to-r from-[#D4C4B0]/30 to-transparent" />
         <div className="absolute top-0 right-0 w-1/4 h-full bg-gradient-to-l from-[#D4C4B0]/30 to-transparent" />
       </div>
-
-      <Header />
-
-      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Banner */}
         <section className="mb-8 animate-fade-in-up">
           <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#5B7B6D] via-[#6B8B7D] to-[#7FA08F] p-8 md:p-10 shadow-2xl shadow-[#3D5A4C]/20">
@@ -380,9 +372,6 @@ export default function TribesPage() {
             Back to Home
           </Link>
         </div>
-      </main>
-
-      <Footer />
 
       {/* Create Tribe Modal */}
       <CreateTribeModal
@@ -390,6 +379,6 @@ export default function TribesPage() {
         onClose={() => setShowCreateModal(false)}
         onCreate={handleCreateTribe}
       />
-    </div>
+    </ContentPageLayout>
   );
 }

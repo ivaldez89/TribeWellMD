@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/footer/Footer';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import { CARD_STYLES } from '@/components/layout/ThreeColumnLayout';
 import { useFlashcards } from '@/hooks/useFlashcards';
 
@@ -106,77 +105,71 @@ export default function StudyHubPage() {
   const dueCount = stats?.dueToday || 0;
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+    <ContentPageLayout maxWidth="7xl" mainClassName="flex items-start justify-center px-4 py-8 lg:py-12">
+      <div className="w-full max-w-4xl">
+        {/* Subtle background panel */}
+        <div className="bg-surface-muted/30 dark:bg-surface-muted/10 rounded-3xl p-6 sm:p-8 lg:p-10">
+          {/* Page Header - Centered */}
+          <div className="text-center mb-8">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
+              Study
+            </h1>
+            <p className="mt-2 text-sm sm:text-base text-slate-500 dark:text-slate-400">
+              Choose how you want to study right now.
+            </p>
+          </div>
 
-      <main className="flex-1 flex items-start justify-center px-4 py-8 lg:py-12">
-        <div className="w-full max-w-4xl">
-          {/* Subtle background panel */}
-          <div className="bg-surface-muted/30 dark:bg-surface-muted/10 rounded-3xl p-6 sm:p-8 lg:p-10">
-            {/* Page Header - Centered */}
-            <div className="text-center mb-8">
-              <h1 className="text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">
-                Study
-              </h1>
-              <p className="mt-2 text-sm sm:text-base text-slate-500 dark:text-slate-400">
-                Choose how you want to study right now.
-              </p>
-            </div>
+          {/* Study Mode Grid - Centered */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Flashcards (Primary) */}
+            <StudyCard
+              href="/flashcards"
+              title="Flashcards"
+              subtitle="Spaced repetition"
+              meta={dueCount > 0 ? `${dueCount} cards due` : undefined}
+              icon="flashcards"
+              accent="sand"
+              primary
+            />
 
-            {/* Study Mode Grid - Centered */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {/* Flashcards (Primary) */}
-              <StudyCard
-                href="/flashcards"
-                title="Flashcards"
-                subtitle="Spaced repetition"
-                meta={dueCount > 0 ? `${dueCount} cards due` : undefined}
-                icon="flashcards"
-                accent="sand"
-                primary
-              />
+            {/* QBank */}
+            <StudyCard
+              href="/qbank"
+              title="QBank"
+              subtitle="Practice questions"
+              icon="qbank"
+              accent="sage"
+            />
 
-              {/* QBank */}
-              <StudyCard
-                href="/qbank"
-                title="QBank"
-                subtitle="Practice questions"
-                icon="qbank"
-                accent="sage"
-              />
+            {/* Cases */}
+            <StudyCard
+              href="/cases"
+              title="Cases"
+              subtitle="Clinical reasoning"
+              icon="cases"
+              accent="forest"
+            />
 
-              {/* Cases */}
-              <StudyCard
-                href="/cases"
-                title="Cases"
-                subtitle="Clinical reasoning"
-                icon="cases"
-                accent="forest"
-              />
+            {/* Rapid Review */}
+            <StudyCard
+              href="/study/rapid-review"
+              title="Rapid Review"
+              subtitle="Text-to-speech"
+              icon="bolt"
+              accent="amber"
+            />
 
-              {/* Rapid Review */}
-              <StudyCard
-                href="/study/rapid-review"
-                title="Rapid Review"
-                subtitle="Text-to-speech"
-                icon="bolt"
-                accent="amber"
-              />
-
-              {/* Study Groups */}
-              <StudyCard
-                href="/progress/rooms"
-                title="Study Groups"
-                subtitle="Learn together"
-                icon="users"
-                accent="clay"
-              />
-            </div>
+            {/* Study Groups */}
+            <StudyCard
+              href="/progress/rooms"
+              title="Study Groups"
+              subtitle="Learn together"
+              icon="users"
+              accent="clay"
+            />
           </div>
         </div>
-      </main>
-
-      <Footer />
-    </div>
+      </div>
+    </ContentPageLayout>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Header } from '@/components/layout/Header';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import {
   getUserProfile,
   saveUserProfile,
@@ -199,19 +199,16 @@ export default function ProfilePage() {
 
   if (!profile) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5] dark:from-slate-900 dark:to-slate-800">
-        <Header />
-        <div className="flex items-center justify-center h-[calc(100vh-64px)]">
+      <ContentPageLayout>
+        <div className="flex items-center justify-center min-h-[60vh]">
           <div className="w-8 h-8 border-4 border-[#C4A77D] border-t-transparent rounded-full animate-spin" />
         </div>
-      </div>
+      </ContentPageLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-[#E8E0D5] dark:from-slate-900 dark:to-slate-800">
-      <Header />
-
+    <ContentPageLayout maxWidth="xl">
       {/* Success Message Toast */}
       {saveMessage && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-2">
@@ -224,7 +221,7 @@ export default function ProfilePage() {
         </div>
       )}
 
-      <main className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Profile Header Card */}
         <div className="relative bg-white dark:bg-slate-800 rounded-3xl shadow-xl overflow-hidden mb-8">
           {/* Gradient Banner */}
@@ -968,7 +965,7 @@ export default function ProfilePage() {
             </div>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </ContentPageLayout>
   );
 }

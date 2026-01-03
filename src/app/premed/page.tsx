@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/footer/Footer';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import { Icons } from '@/components/ui/Icons';
 import Link from 'next/link';
 
@@ -133,10 +132,7 @@ export default function PreMedPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F5F0E8] dark:bg-slate-900">
-      <Header />
-
-      <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    <ContentPageLayout maxWidth="7xl" mainClassName="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         {/* Hero Section */}
         <section className="mb-8">
           <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#5B7B6D] via-[#8B7355] to-[#A89070] p-8 md:p-10 shadow-2xl">
@@ -366,26 +362,22 @@ export default function PreMedPage() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="mb-8">
-          <div className="p-8 bg-white dark:bg-slate-800 rounded-3xl border border-[#D4C4B0] dark:border-[#5B7B6D] text-center">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#F5F0E8] to-[#E8E0D5] dark:from-[#8B7355]/30 dark:to-[#5B7B6D]/30 flex items-center justify-center text-[#8B7355] dark:text-[#D4C4B0]">
-              <Icons.Sparkles />
-            </div>
-            <h2 className="text-2xl font-bold text-[#8B7355] dark:text-white mb-2">Ready to Start Your Journey?</h2>
-            <p className="text-[#A89070] dark:text-[#D4C4B0] mb-6 max-w-2xl mx-auto">
-              Sign up for early access and be the first to know when TribeWellPreMed launches.
-              Your future in medicine starts with a single step.
-            </p>
-            <button className="px-8 py-4 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#C4A77D] text-white font-bold rounded-xl shadow-lg shadow-[#C4A77D]/25 transition-all hover:scale-105">
-              Get Early Access
-            </button>
+      {/* CTA */}
+      <section className="mb-8">
+        <div className="p-8 bg-white dark:bg-slate-800 rounded-3xl border border-[#D4C4B0] dark:border-[#5B7B6D] text-center">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-[#F5F0E8] to-[#E8E0D5] dark:from-[#8B7355]/30 dark:to-[#5B7B6D]/30 flex items-center justify-center text-[#8B7355] dark:text-[#D4C4B0]">
+            <Icons.Sparkles />
           </div>
-        </section>
-
-      </main>
-
-      <Footer />
-    </div>
+          <h2 className="text-2xl font-bold text-[#8B7355] dark:text-white mb-2">Ready to Start Your Journey?</h2>
+          <p className="text-[#A89070] dark:text-[#D4C4B0] mb-6 max-w-2xl mx-auto">
+            Sign up for early access and be the first to know when TribeWellPreMed launches.
+            Your future in medicine starts with a single step.
+          </p>
+          <button className="px-8 py-4 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#C4A77D] text-white font-bold rounded-xl shadow-lg shadow-[#C4A77D]/25 transition-all hover:scale-105">
+            Get Early Access
+          </button>
+        </div>
+      </section>
+    </ContentPageLayout>
   );
 }

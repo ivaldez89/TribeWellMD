@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import {
   SharedPomodoroTimer,
   ParticipantsSidebar,
@@ -127,67 +127,58 @@ export default function StudyRoomPage() {
   // Loading state
   if (isLoading || !userId) {
     return (
-      <div className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900">
-        <Header />
-        <main className="max-w-7xl mx-auto px-4 py-8">
-          <div className="flex items-center justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#5B7B6D]" />
-          </div>
-        </main>
-      </div>
+      <ContentPageLayout maxWidth="7xl" className="bg-[#E8DFD0] dark:bg-slate-900">
+        <div className="flex items-center justify-center py-20">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#5B7B6D]" />
+        </div>
+      </ContentPageLayout>
     );
   }
 
   // Error or not found
   if (error || !session) {
     return (
-      <div className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900">
-        <Header />
-        <main className="max-w-7xl mx-auto px-4 py-8">
-          <div className="flex items-center justify-center py-20">
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                </svg>
-              </div>
-              <h2 className="text-xl font-semibold text-[#8B7355] dark:text-white mb-2">
-                {error || 'Room not found'}
-              </h2>
-              <p className="text-[#A89070] dark:text-[#D4C4B0] mb-4">
-                This study room may have ended or doesn&apos;t exist.
-              </p>
-              <Link
-                href="/progress/rooms"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] text-white font-medium rounded-xl transition-all shadow-sm"
-              >
-                Back to Rooms
-              </Link>
+      <ContentPageLayout maxWidth="7xl" className="bg-[#E8DFD0] dark:bg-slate-900">
+        <div className="flex items-center justify-center py-20">
+          <div className="text-center">
+            <div className="w-16 h-16 mx-auto mb-4 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
+              <svg className="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
             </div>
+            <h2 className="text-xl font-semibold text-[#8B7355] dark:text-white mb-2">
+              {error || 'Room not found'}
+            </h2>
+            <p className="text-[#A89070] dark:text-[#D4C4B0] mb-4">
+              This study room may have ended or doesn&apos;t exist.
+            </p>
+            <Link
+              href="/progress/rooms"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] text-white font-medium rounded-xl transition-all shadow-sm"
+            >
+              Back to Rooms
+            </Link>
           </div>
-        </main>
-      </div>
+        </div>
+      </ContentPageLayout>
     );
   }
 
   // Session ended
   if (session.status === 'ended') {
     return (
-      <div className="min-h-screen bg-[#E8DFD0] dark:bg-slate-900">
-        <Header />
-        <main className="max-w-7xl mx-auto px-4 py-8">
-          <div className="flex items-center justify-center py-20">
-            <div className="text-center">
-              <h2 className="text-xl font-semibold text-[#8B7355] dark:text-white mb-2">
-                Study Session Ended
-              </h2>
-              <Link href="/progress/rooms" className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] text-white font-medium rounded-xl transition-all shadow-sm">
-                Find Another Room
-              </Link>
-            </div>
+      <ContentPageLayout maxWidth="7xl" className="bg-[#E8DFD0] dark:bg-slate-900">
+        <div className="flex items-center justify-center py-20">
+          <div className="text-center">
+            <h2 className="text-xl font-semibold text-[#8B7355] dark:text-white mb-2">
+              Study Session Ended
+            </h2>
+            <Link href="/progress/rooms" className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#C4A77D] to-[#A89070] hover:from-[#A89070] hover:to-[#8B7355] text-white font-medium rounded-xl transition-all shadow-sm">
+              Find Another Room
+            </Link>
           </div>
-        </main>
-      </div>
+        </div>
+      </ContentPageLayout>
     );
   }
 

@@ -1,15 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { Header, HEADER_HEIGHT } from '@/components/layout/Header';
-import { Footer, FOOTER_HEIGHT } from '@/components/footer/Footer';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-surface">
-      <Header variant="public" />
-
-      <main className="flex-1 pt-12">
+    <ContentPageLayout variant="public" maxWidth="full">
         {/* Hero Section */}
         <section className="py-16 md:py-24">
           <div className="max-w-3xl mx-auto px-6 sm:px-8">
@@ -181,11 +177,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Bottom padding for fixed footer */}
-        <div style={{ height: FOOTER_HEIGHT }} className="bg-primary" />
-      </main>
-
-      <Footer variant="landing" />
-    </div>
+    </ContentPageLayout>
   );
 }

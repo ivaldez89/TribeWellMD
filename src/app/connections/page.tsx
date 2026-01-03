@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/footer/Footer';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import { getCurrentVillageId, getUserProfile } from '@/lib/storage/profileStorage';
 import { getCharityById } from '@/data/charities';
 import {
@@ -68,10 +67,7 @@ export default function ConnectionsPage() {
 
   if (!villageId) {
     return (
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900">
-        <Header />
-        <main className="flex-1 pt-4 pb-20 md:pb-8">
-          <div className="max-w-4xl mx-auto px-4 py-8">
+      <ContentPageLayout maxWidth="xl" className="bg-slate-50 dark:bg-slate-900" mainClassName="pt-4 pb-20 md:pb-8">
             <div className="text-center py-12">
               <div className="w-20 h-20 mx-auto mb-4 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center">
                 <svg className="w-10 h-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,18 +87,12 @@ export default function ConnectionsPage() {
                 Choose Your Village
               </Link>
             </div>
-          </div>
-        </main>
-        <Footer />
-      </div>
+      </ContentPageLayout>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900">
-      <Header />
-      <main className="flex-1 pt-4 pb-20 md:pb-8">
-        <div className="max-w-4xl mx-auto px-4 py-6">
+    <ContentPageLayout maxWidth="xl" className="bg-slate-50 dark:bg-slate-900" mainClassName="pt-4 pb-20 md:pb-8">
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center gap-2 text-sm text-slate-500 mb-2">
@@ -363,9 +353,6 @@ export default function ConnectionsPage() {
               )}
             </div>
           )}
-        </div>
-      </main>
-      <Footer />
 
       {/* Question Session Modal */}
       {activeSession && (
@@ -375,6 +362,6 @@ export default function ConnectionsPage() {
           onConnectionEnded={loadData}
         />
       )}
-    </div>
+    </ContentPageLayout>
   );
 }

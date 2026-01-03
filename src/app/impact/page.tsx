@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/footer/Footer';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import { PARTNER_CHARITIES } from '@/data/charities';
 import { VillageLeaderboard } from '@/components/village/VillageLeaderboard';
 import { BookOpenIcon, UsersIcon, HeartIcon } from '@/components/icons/MedicalIcons';
@@ -83,11 +82,8 @@ export default function ImpactPage() {
   const pointsToDollars = (points: number) => (points / 1000).toFixed(2);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900">
-      <Header />
-
-      <main className="flex-1">
-        {/* Hero Section */}
+    <ContentPageLayout maxWidth="full">
+      {/* Hero Section */}
         <section className="relative overflow-hidden bg-gradient-to-br from-[#5B7B6D] via-[#6B8B7D] to-[#7FA08F] py-20">
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
@@ -529,9 +525,6 @@ export default function ImpactPage() {
             </div>
           </div>
         </section>
-      </main>
-
-      <Footer />
-    </div>
+    </ContentPageLayout>
   );
 }

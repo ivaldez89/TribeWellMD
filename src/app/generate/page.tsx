@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/footer/Footer';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import { useFlashcards } from '@/hooks/useFlashcards';
 import type { Flashcard, MedicalSystem } from '@/types';
 
@@ -246,18 +245,15 @@ Return ONLY the JSON array, no other text.`;
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header stats={stats} />
-
-      <main className="max-w-5xl mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 text-content-muted hover:text-content transition-colors mb-4">
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Dashboard
-          </Link>
+    <ContentPageLayout maxWidth="lg">
+      {/* Header */}
+      <div className="mb-8">
+        <Link href="/" className="inline-flex items-center gap-2 text-content-muted hover:text-content transition-colors mb-4">
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Dashboard
+        </Link>
 
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-sand-500 to-sand-600 flex items-center justify-center">
@@ -544,9 +540,6 @@ Example:
             )}
           </div>
         </div>
-      </main>
-
-      <Footer />
-    </div>
+    </ContentPageLayout>
   );
 }

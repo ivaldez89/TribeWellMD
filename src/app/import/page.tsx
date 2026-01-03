@@ -2,8 +2,7 @@
 
 import { useState, useRef } from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/footer/Footer';
+import { ContentPageLayout } from '@/components/layout/PageLayout';
 import { useFlashcards } from '@/hooks/useFlashcards';
 import { createClient } from '@/lib/supabase/client';
 import {
@@ -422,19 +421,16 @@ export default function ImportPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <Header stats={stats} />
-
-      <main className="flex-1 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-content-muted hover:text-secondary mb-6 transition-colors"
-        >
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Back to Dashboard
-        </Link>
+    <ContentPageLayout maxWidth="xl">
+      <Link
+        href="/"
+        className="inline-flex items-center gap-2 text-content-muted hover:text-secondary mb-6 transition-colors"
+      >
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Dashboard
+      </Link>
 
         <div className="bg-surface rounded-2xl border border-border shadow-sm p-6 md:p-8">
           <h1 className="text-2xl font-bold text-secondary mb-2">Import Flashcards</h1>
@@ -783,9 +779,6 @@ export default function ImportPage() {
             </div>
           )}
         </div>
-      </main>
-
-      <Footer />
-    </div>
+    </ContentPageLayout>
   );
 }
