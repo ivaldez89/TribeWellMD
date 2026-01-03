@@ -72,7 +72,7 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
             onClick={() => setActiveTab('ambient')}
             className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-colors flex items-center gap-1.5 ${
               activeTab === 'ambient'
-                ? 'bg-purple-500 text-white'
+                ? 'bg-sand-500 text-white'
                 : 'bg-surface-muted text-content-muted hover:bg-border'
             }`}
           >
@@ -88,7 +88,7 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
             onClick={() => setActiveTab('spotify')}
             className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-colors flex items-center gap-1.5 ${
               activeTab === 'spotify'
-                ? 'bg-green-500 text-white'
+                ? 'bg-sand-500 text-white'
                 : 'bg-surface-muted text-content-muted hover:bg-border'
             }`}
           >
@@ -108,17 +108,17 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
         <div className="p-4 space-y-4">
           {/* Now Playing indicator */}
           {activeAmbientSound && (
-            <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-xl border border-purple-200 dark:border-purple-800">
+            <div className="p-3 bg-surface-muted rounded-xl border border-border">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" />
-                  <span className="text-sm font-medium text-purple-700 dark:text-purple-300">
+                  <span className="w-2 h-2 bg-sand-500 rounded-full animate-pulse" />
+                  <span className="text-sm font-medium text-secondary">
                     {AMBIENT_SOUNDS.find(s => s.id === activeAmbientSound)?.name}
                   </span>
                 </div>
                 <button
                   onClick={stopAmbientSound}
-                  className="p-1.5 text-purple-600 hover:bg-purple-100 dark:hover:bg-purple-800/50 rounded-lg transition-colors"
+                  className="p-1.5 text-content-muted hover:text-secondary hover:bg-border rounded-lg transition-colors"
                   title="Stop"
                 >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -129,8 +129,8 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
               {/* Volume Control */}
               <div className="mt-2">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-[10px] text-purple-600 dark:text-purple-400">Volume</span>
-                  <span className="text-[10px] text-purple-600 dark:text-purple-400">{Math.round(ambientVolume * 100)}%</span>
+                  <span className="text-[10px] text-content-muted">Volume</span>
+                  <span className="text-[10px] text-content-muted">{Math.round(ambientVolume * 100)}%</span>
                 </div>
                 <input
                   type="range"
@@ -139,7 +139,7 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
                   step="0.05"
                   value={ambientVolume}
                   onChange={(e) => setAmbientVolume(parseFloat(e.target.value))}
-                  className="w-full h-1.5 rounded-lg appearance-none cursor-pointer bg-purple-200 dark:bg-purple-700 accent-purple-500"
+                  className="w-full h-1.5 rounded-lg appearance-none cursor-pointer bg-border accent-sand-500"
                 />
               </div>
             </div>
@@ -157,12 +157,12 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
                   onClick={() => playAmbientSound(sound.id)}
                   className={`p-3 rounded-xl transition-all text-center ${
                     activeAmbientSound === sound.id
-                      ? 'bg-purple-100 dark:bg-purple-900/30 ring-2 ring-purple-500'
+                      ? 'bg-sand-100 dark:bg-sand-900/30 ring-2 ring-sand-500'
                       : 'bg-surface-muted hover:bg-border'
                   }`}
                 >
                   <span className={`text-xs font-medium block ${
-                    activeAmbientSound === sound.id ? 'text-purple-700 dark:text-purple-300' : 'text-secondary'
+                    activeAmbientSound === sound.id ? 'text-sand-700 dark:text-sand-300' : 'text-secondary'
                   }`}>
                     {sound.name}
                   </span>
@@ -183,12 +183,12 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
                   onClick={() => playAmbientSound(sound.id)}
                   className={`p-3 rounded-xl transition-all text-left ${
                     activeAmbientSound === sound.id
-                      ? 'bg-green-100 dark:bg-green-900/30 ring-2 ring-green-500'
+                      ? 'bg-sand-100 dark:bg-sand-900/30 ring-2 ring-sand-500'
                       : 'bg-surface-muted hover:bg-border'
                   }`}
                 >
                   <span className={`text-sm font-medium block ${
-                    activeAmbientSound === sound.id ? 'text-green-700 dark:text-green-300' : 'text-secondary'
+                    activeAmbientSound === sound.id ? 'text-sand-700 dark:text-sand-300' : 'text-secondary'
                   }`}>
                     {sound.name}
                   </span>
@@ -210,12 +210,12 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
                   onClick={() => playAmbientSound(sound.id)}
                   className={`p-3 rounded-xl transition-all text-left ${
                     activeAmbientSound === sound.id
-                      ? 'bg-indigo-100 dark:bg-indigo-900/30 ring-2 ring-indigo-500'
+                      ? 'bg-sand-100 dark:bg-sand-900/30 ring-2 ring-sand-500'
                       : 'bg-surface-muted hover:bg-border'
                   }`}
                 >
                   <span className={`text-sm font-medium block ${
-                    activeAmbientSound === sound.id ? 'text-indigo-700 dark:text-indigo-300' : 'text-secondary'
+                    activeAmbientSound === sound.id ? 'text-sand-700 dark:text-sand-300' : 'text-secondary'
                   }`}>
                     {sound.name}
                   </span>
@@ -229,9 +229,9 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
           </div>
 
           {/* Tips */}
-          <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-xl">
-            <h4 className="text-xs font-semibold text-purple-700 dark:text-purple-300 mb-1">Study Tips</h4>
-            <ul className="text-[10px] text-purple-600 dark:text-purple-400 space-y-1">
+          <div className="p-3 bg-surface-muted rounded-xl">
+            <h4 className="text-xs font-semibold text-secondary mb-1">Study Tips</h4>
+            <ul className="text-[10px] text-content-muted space-y-1">
               <li>White noise masks distracting sounds</li>
               <li>Brown noise helps with deep focus</li>
               <li>Rain sounds promote calm concentration</li>
@@ -246,7 +246,7 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
         <div className="p-4">
           {!isConnected ? (
             <div className="text-center py-8">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 rounded-full bg-[#1DB954] flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
                 </svg>
@@ -257,7 +257,7 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
               </p>
               <button
                 onClick={connect}
-                className="px-6 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold rounded-full shadow-lg shadow-green-500/25 transition-all"
+                className="px-6 py-2.5 bg-[#1DB954] hover:bg-[#1ed760] text-white font-semibold rounded-full shadow-sm transition-all"
               >
                 Connect Spotify
               </button>
@@ -266,7 +266,7 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
             <div className="space-y-3">
               {/* Now Playing */}
               {isSpotifyPlaying && selectedPlaylistData && (
-                <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800">
+                <div className="p-3 bg-surface-muted rounded-xl border border-border">
                   <div className="flex items-center gap-3 mb-3">
                     <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${selectedPlaylistData.color} flex items-center justify-center flex-shrink-0`}>
                       <span className="w-3 h-3 bg-white rounded-full animate-pulse" />
@@ -277,7 +277,7 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
                     </div>
                     <button
                       onClick={stopPlayback}
-                      className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+                      className="p-2 text-content-muted hover:text-secondary hover:bg-border rounded-lg transition-colors"
                       title="Stop"
                     >
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -309,7 +309,7 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
                       onClick={() => selectPlaylist(playlist.id)}
                       className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all ${
                         selectedPlaylist === playlist.id
-                          ? 'bg-green-50 dark:bg-green-900/20 ring-2 ring-green-500'
+                          ? 'bg-sand-100 dark:bg-sand-900/30 ring-2 ring-sand-500'
                           : 'hover:bg-surface-muted'
                       }`}
                     >
@@ -323,7 +323,7 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
                         <p className="text-xs text-content-muted truncate">{playlist.description}</p>
                       </div>
                       {selectedPlaylist === playlist.id && (
-                        <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-5 h-5 text-sand-600 dark:text-sand-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       )}
