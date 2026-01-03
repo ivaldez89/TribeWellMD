@@ -1,6 +1,6 @@
 'use client';
 
-import { LandingHeader, HEADER_HEIGHT } from './LandingHeader';
+import { Header, HEADER_HEIGHT } from './Header';
 import { Footer, FOOTER_HEIGHT } from './Footer';
 
 // Re-export height constants for convenience
@@ -25,7 +25,7 @@ interface LandingLayoutProps {
 export function LandingLayout({ children }: LandingLayoutProps) {
   return (
     <div className="min-h-screen">
-      <LandingHeader />
+      <Header variant="public" />
       {children}
       <Footer variant="landing" />
     </div>

@@ -1,13 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { LandingHeader } from '@/components/layout/LandingHeader';
+import { Header, HEADER_HEIGHT } from '@/components/layout/Header';
 import { Footer, FOOTER_HEIGHT } from '@/components/layout/Footer';
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen flex flex-col bg-surface">
-      <LandingHeader />
+      <Header variant="public" />
 
       <main className="flex-1 pt-12">
         {/* Hero Section */}

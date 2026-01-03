@@ -36,7 +36,7 @@ export function PageLayout({
 }: PageLayoutProps) {
   return (
     <div className={`min-h-screen flex flex-col ${className}`}>
-      {showHeader && <Header />}
+      {showHeader && <Header includeSpacer />}
       <main className={`flex-1 ${mainClassName}`}>
         {children}
       </main>
