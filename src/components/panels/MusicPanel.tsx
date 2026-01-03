@@ -65,14 +65,14 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
       shortcutKey="S"
       footerText={footerText}
     >
-      {/* Tab Switcher */}
+      {/* Tab Switcher - Green highlight for active tab */}
       <div className="px-4 py-3 border-b border-border bg-surface-muted/30">
         <div className="flex gap-1.5">
           <button
             onClick={() => setActiveTab('ambient')}
             className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-colors flex items-center gap-1.5 ${
               activeTab === 'ambient'
-                ? 'bg-sand-500 text-white'
+                ? 'bg-[#5B7B6D] text-white'
                 : 'bg-surface-muted text-content-muted hover:bg-border'
             }`}
           >
@@ -88,7 +88,7 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
             onClick={() => setActiveTab('spotify')}
             className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-colors flex items-center gap-1.5 ${
               activeTab === 'spotify'
-                ? 'bg-sand-500 text-white'
+                ? 'bg-[#1DB954] text-white'
                 : 'bg-surface-muted text-content-muted hover:bg-border'
             }`}
           >
@@ -108,10 +108,10 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
         <div className="p-4 space-y-4">
           {/* Now Playing indicator */}
           {activeAmbientSound && (
-            <div className="p-3 bg-surface-muted rounded-xl border border-border">
+            <div className="p-3 bg-[#5B7B6D]/10 dark:bg-[#5B7B6D]/20 rounded-xl border border-[#5B7B6D]/30">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-sand-500 rounded-full animate-pulse" />
+                  <span className="w-2 h-2 bg-[#5B7B6D] rounded-full animate-pulse" />
                   <span className="text-sm font-medium text-secondary">
                     {AMBIENT_SOUNDS.find(s => s.id === activeAmbientSound)?.name}
                   </span>
@@ -139,7 +139,7 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
                   step="0.05"
                   value={ambientVolume}
                   onChange={(e) => setAmbientVolume(parseFloat(e.target.value))}
-                  className="w-full h-1.5 rounded-lg appearance-none cursor-pointer bg-border accent-sand-500"
+                  className="w-full h-1.5 rounded-lg appearance-none cursor-pointer bg-border accent-[#5B7B6D]"
                 />
               </div>
             </div>
@@ -157,12 +157,12 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
                   onClick={() => playAmbientSound(sound.id)}
                   className={`p-3 rounded-xl transition-all text-center ${
                     activeAmbientSound === sound.id
-                      ? 'bg-sand-100 dark:bg-sand-900/30 ring-2 ring-sand-500'
+                      ? 'bg-[#5B7B6D]/20 dark:bg-[#5B7B6D]/30 ring-2 ring-[#5B7B6D]'
                       : 'bg-surface-muted hover:bg-border'
                   }`}
                 >
                   <span className={`text-xs font-medium block ${
-                    activeAmbientSound === sound.id ? 'text-sand-700 dark:text-sand-300' : 'text-secondary'
+                    activeAmbientSound === sound.id ? 'text-[#5B7B6D] dark:text-[#7A9B8D]' : 'text-secondary'
                   }`}>
                     {sound.name}
                   </span>
@@ -183,12 +183,12 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
                   onClick={() => playAmbientSound(sound.id)}
                   className={`p-3 rounded-xl transition-all text-left ${
                     activeAmbientSound === sound.id
-                      ? 'bg-sand-100 dark:bg-sand-900/30 ring-2 ring-sand-500'
+                      ? 'bg-[#5B7B6D]/20 dark:bg-[#5B7B6D]/30 ring-2 ring-[#5B7B6D]'
                       : 'bg-surface-muted hover:bg-border'
                   }`}
                 >
                   <span className={`text-sm font-medium block ${
-                    activeAmbientSound === sound.id ? 'text-sand-700 dark:text-sand-300' : 'text-secondary'
+                    activeAmbientSound === sound.id ? 'text-[#5B7B6D] dark:text-[#7A9B8D]' : 'text-secondary'
                   }`}>
                     {sound.name}
                   </span>
@@ -210,12 +210,12 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
                   onClick={() => playAmbientSound(sound.id)}
                   className={`p-3 rounded-xl transition-all text-left ${
                     activeAmbientSound === sound.id
-                      ? 'bg-sand-100 dark:bg-sand-900/30 ring-2 ring-sand-500'
+                      ? 'bg-[#5B7B6D]/20 dark:bg-[#5B7B6D]/30 ring-2 ring-[#5B7B6D]'
                       : 'bg-surface-muted hover:bg-border'
                   }`}
                 >
                   <span className={`text-sm font-medium block ${
-                    activeAmbientSound === sound.id ? 'text-sand-700 dark:text-sand-300' : 'text-secondary'
+                    activeAmbientSound === sound.id ? 'text-[#5B7B6D] dark:text-[#7A9B8D]' : 'text-secondary'
                   }`}>
                     {sound.name}
                   </span>
@@ -266,7 +266,7 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
             <div className="space-y-3">
               {/* Now Playing */}
               {isSpotifyPlaying && selectedPlaylistData && (
-                <div className="p-3 bg-surface-muted rounded-xl border border-border">
+                <div className="p-3 bg-[#1DB954]/10 dark:bg-[#1DB954]/20 rounded-xl border border-[#1DB954]/30">
                   <div className="flex items-center gap-3 mb-3">
                     <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${selectedPlaylistData.color} flex items-center justify-center flex-shrink-0`}>
                       <span className="w-3 h-3 bg-white rounded-full animate-pulse" />
@@ -309,7 +309,7 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
                       onClick={() => selectPlaylist(playlist.id)}
                       className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all ${
                         selectedPlaylist === playlist.id
-                          ? 'bg-sand-100 dark:bg-sand-900/30 ring-2 ring-sand-500'
+                          ? 'bg-[#1DB954]/10 dark:bg-[#1DB954]/20 ring-2 ring-[#1DB954]'
                           : 'hover:bg-surface-muted'
                       }`}
                     >
@@ -323,7 +323,7 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
                         <p className="text-xs text-content-muted truncate">{playlist.description}</p>
                       </div>
                       {selectedPlaylist === playlist.id && (
-                        <svg className="w-5 h-5 text-sand-600 dark:text-sand-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-5 h-5 text-[#1DB954] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       )}

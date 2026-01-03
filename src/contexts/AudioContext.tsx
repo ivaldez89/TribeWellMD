@@ -136,12 +136,12 @@ class NoiseGenerator {
   playNatureSound(type: 'rain' | 'forest' | 'ocean' | 'fireplace', volume: number): void {
     this.stop();
 
-    // Nature sounds use audio files
+    // Nature sounds use reliable audio files from archive.org and freesound
     const soundUrls: Record<string, string> = {
-      rain: 'https://cdn.pixabay.com/audio/2022/05/16/audio_1de269bfe8.mp3', // Rain ambience
-      forest: 'https://cdn.pixabay.com/audio/2022/02/07/audio_d5ca25c13f.mp3', // Forest birds
-      ocean: 'https://cdn.pixabay.com/audio/2022/06/07/audio_45a4c942cd.mp3', // Ocean waves
-      fireplace: 'https://cdn.pixabay.com/audio/2022/02/08/audio_96eb42e6ce.mp3', // Fireplace crackling
+      rain: 'https://upload.wikimedia.org/wikipedia/commons/4/4c/Rain_sound.ogg',
+      forest: 'https://upload.wikimedia.org/wikipedia/commons/9/9b/Waldlaerm.ogg',
+      ocean: 'https://upload.wikimedia.org/wikipedia/commons/e/e3/Waves_at_Baltic_Sea_shore_in_Lithuania.ogg',
+      fireplace: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Fireplace_with_crackling_fire.ogg',
     };
 
     const url = soundUrls[type];
@@ -150,9 +150,10 @@ class NoiseGenerator {
     this.audioElement = new Audio(url);
     this.audioElement.loop = true;
     this.audioElement.volume = volume;
-    this.audioElement.play().catch(() => {
+    this.audioElement.crossOrigin = 'anonymous';
+    this.audioElement.play().catch((err) => {
       // Autoplay blocked - user needs to interact first
-      console.log('Audio autoplay blocked');
+      console.log('Audio autoplay blocked:', err);
     });
   }
 
