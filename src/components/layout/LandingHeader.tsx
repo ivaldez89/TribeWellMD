@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useIsAuthenticated } from '@/hooks/useAuth';
+import { ThemeToggleSimple } from '@/components/theme/ThemeProvider';
 
 // Height constant for layout calculations
 export const HEADER_HEIGHT = 48;
@@ -42,8 +43,11 @@ export function LandingHeader() {
             <Link href="/partners" className="px-3 py-1.5 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all">For Partners</Link>
           </nav>
 
-          {/* Right side: Sign In only */}
+          {/* Right side: Theme toggle + Sign In */}
           <div className="flex items-center gap-1.5">
+            {/* Theme Toggle */}
+            <ThemeToggleSimple variant="greenHeader" />
+
             <div className="hidden sm:flex items-center gap-1">
               <Link
                 href="/login"

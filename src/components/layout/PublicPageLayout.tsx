@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useIsAuthenticated } from '@/hooks/useAuth';
+import { ThemeToggleSimple } from '@/components/theme/ThemeProvider';
 
 // Header for public pages (same as landing page header)
 function PublicHeader() {
@@ -40,8 +41,11 @@ function PublicHeader() {
             <Link href="/partners" className={`px-3 py-1.5 rounded-lg text-sm font-medium ${pathname === '/partners' ? 'bg-white/20 text-white shadow-soft' : 'text-white/80 hover:text-white hover:bg-white/10 transition-all'}`}>For Partners</Link>
           </nav>
 
-          {/* Right side: Sign In only */}
+          {/* Right side: Theme toggle + Sign In */}
           <div className="flex items-center gap-1.5">
+            {/* Theme Toggle */}
+            <ThemeToggleSimple variant="greenHeader" />
+
             <div className="hidden sm:flex items-center gap-1">
               <Link
                 href="/login"
