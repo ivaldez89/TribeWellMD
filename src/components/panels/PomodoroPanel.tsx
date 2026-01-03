@@ -25,9 +25,9 @@ const TIMER_SETTINGS = {
   longBreak: 15 * 60,
 };
 
-// Header icon (matches ToolPanel canonical style)
+// Header icon (matches ToolPanel canonical style - sand-600/sand-400)
 const PomodoroIcon = () => (
-  <svg className="w-5 h-5 text-[#5B7B6D] dark:text-tribe-sage-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+  <svg className="w-5 h-5 text-sand-600 dark:text-sand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
   </svg>
 );
