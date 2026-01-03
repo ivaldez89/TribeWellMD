@@ -53,6 +53,10 @@ export interface FooterProps {
   includeSpacer?: boolean;
 }
 
+/**
+ * Global Footer component.
+ * Rendered conditionally via layouts (LandingLayout, PublicPageLayout, PageLayout).
+ */
 export function Footer({ variant = 'default', includeSpacer = false }: FooterProps) {
   const currentYear = new Date().getFullYear();
 

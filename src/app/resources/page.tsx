@@ -1,7 +1,7 @@
 'use client';
 
 import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
+import { Footer } from '@/components/footer/Footer';
 import { Icons } from '@/components/ui/Icons';
 import Link from 'next/link';
 import { useState } from 'react';

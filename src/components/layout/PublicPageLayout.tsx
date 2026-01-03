@@ -1,7 +1,7 @@
 'use client';
 
 import { Header } from './Header';
-import { Footer } from './Footer';
+import { Footer } from '@/components/footer/Footer';
 
 interface PublicPageLayoutProps {
   children: React.ReactNode;

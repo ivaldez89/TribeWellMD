@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
+import { Footer } from '@/components/footer/Footer';
 import { getCurrentVillageId, getUserProfile } from '@/lib/storage/profileStorage';
 import { getCharityById } from '@/data/charities';
 import {

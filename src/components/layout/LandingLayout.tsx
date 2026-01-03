@@ -1,7 +1,7 @@
 'use client';
 
 import { Header, HEADER_HEIGHT } from './Header';
-import { Footer, FOOTER_HEIGHT } from './Footer';
+import { Footer, FOOTER_HEIGHT } from '@/components/footer/Footer';
 
 // Re-export height constants for convenience
 export { HEADER_HEIGHT, FOOTER_HEIGHT };

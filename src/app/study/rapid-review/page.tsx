@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
-import { Footer } from '@/components/layout/Footer';
+import { Footer } from '@/components/footer/Footer';
 import { StudyLayout, useStudyLayout } from '@/components/layout/StudyLayout';
 import { useFlashcards } from '@/hooks/useFlashcards';
 import { LightbulbIcon } from '@/components/icons/MedicalIcons';

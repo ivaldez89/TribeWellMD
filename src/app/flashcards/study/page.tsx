@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
-import { Footer } from '@/components/layout/Footer';
+import { Footer } from '@/components/footer/Footer';
 import { StudyLayout, useStudyLayout } from '@/components/layout/StudyLayout';
 import { FlashcardViewer } from '@/components/flashcards/FlashcardViewer';
 import { AnswerButtons } from '@/components/flashcards/AnswerButtons';

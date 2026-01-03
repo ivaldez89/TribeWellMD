@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
+import { Footer } from '@/components/footer/Footer';
 import { PARTNER_CHARITIES } from '@/data/charities';
 import { VillageLeaderboard } from '@/components/village/VillageLeaderboard';
 import { BookOpenIcon, UsersIcon, HeartIcon } from '@/components/icons/MedicalIcons';

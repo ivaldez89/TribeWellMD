@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
+import { Footer } from '@/components/footer/Footer';
 import Link from 'next/link';
 import { StudyStatsDisplay, getStudyStats } from '@/components/study/StudyStats';
 import { PerformanceAnalytics } from '@/components/deck/PerformanceAnalytics';

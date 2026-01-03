@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Header, HEADER_HEIGHT } from '@/components/layout/Header';
-import { Footer, FOOTER_HEIGHT } from '@/components/layout/Footer';
+import { Footer, FOOTER_HEIGHT } from '@/components/footer/Footer';
 
 export default function AboutPage() {
   return (
