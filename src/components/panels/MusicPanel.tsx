@@ -12,7 +12,7 @@ interface MusicPanelProps {
 
 type TabType = 'spotify' | 'ambient';
 
-// Music icon for header
+// Header icon (matches ToolPanel canonical style)
 const MusicIcon = () => (
   <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
@@ -55,20 +55,13 @@ export function MusicPanel({ isOpen, onClose }: MusicPanelProps) {
       ? 'Spotify Integration'
       : 'Select a sound';
 
-  // Custom header icon container with green gradient
-  const headerIcon = (
-    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/50 dark:to-emerald-900/50 flex items-center justify-center">
-      <MusicIcon />
-    </div>
-  );
-
   return (
     <ToolPanel
       isOpen={isOpen}
       onClose={onClose}
       title="TribeWell Music"
       subtitle="Study sounds & playlists"
-      icon={headerIcon}
+      icon={<MusicIcon />}
       shortcutKey="S"
       footerText={footerText}
     >

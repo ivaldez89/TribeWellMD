@@ -8,18 +8,16 @@ import { ReactNode, useEffect } from 'react';
  * This component standardizes the visual structure of all right-side panels
  * opened from the header (Messages, Labs, Music, Scene, Pomodoro, Streak).
  *
- * Responsibilities:
- * - Panel background and surface color
- * - Consistent padding and spacing
- * - Standard panel header (title + close button)
- * - Scroll container placement
- * - Light/dark theme handling
- * - Slide-in/out animation
- * - Escape key handling
+ * CANONICAL HEADER STYLE (based on Lab Reference panel):
+ * - Flat, neutral gradient background
+ * - Same surface tone across all panels
+ * - Consistent padding, spacing, and alignment
+ * - Same title/subtitle typography
+ * - Same icon treatment and size
+ * - Same close button styling
  *
- * Variants:
- * - 'default': Full-featured panels (Messages, Labs, Music, Scene)
- * - 'compact': Lighter panels (Pomodoro, Streak) with more flexible header styling
+ * NOTE: Dynamic state (e.g., Pomodoro mode, streak status) must be
+ * represented inside the panel body, not via header styling.
  */
 
 export interface ToolPanelProps {
@@ -31,18 +29,12 @@ export interface ToolPanelProps {
   title: string;
   /** Optional subtitle displayed under title */
   subtitle?: string;
-  /** Icon element for the header */
+  /** Icon element for the header (should be an SVG with w-5 h-5) */
   icon?: ReactNode;
-  /** Header background - can be gradient class or custom element */
-  headerBg?: string;
-  /** Header text color class (default: text-secondary for default, text-white for compact) */
-  headerTextColor?: string;
   /** Optional keyboard shortcut key to display in footer */
   shortcutKey?: string;
   /** Footer left text content */
   footerText?: string;
-  /** Variant: 'default' for full panels, 'compact' for lighter panels */
-  variant?: 'default' | 'compact';
   /** Panel content */
   children: ReactNode;
   /** Optional className for the content wrapper */
@@ -51,12 +43,7 @@ export interface ToolPanelProps {
   showFooter?: boolean;
   /** Custom footer content (replaces default footer) */
   footer?: ReactNode;
-  /** Custom header content (replaces default header) */
-  header?: ReactNode;
 }
-
-// Default header gradient for standard panels
-const DEFAULT_HEADER_BG = 'bg-gradient-to-r from-sand-50 to-blue-50 dark:from-sand-950/30 dark:to-blue-950/30';
 
 export function ToolPanel({
   isOpen,
@@ -64,16 +51,12 @@ export function ToolPanel({
   title,
   subtitle,
   icon,
-  headerBg,
-  headerTextColor,
   shortcutKey,
   footerText,
-  variant = 'default',
   children,
   contentClassName = '',
   showFooter = true,
   footer,
-  header,
 }: ToolPanelProps) {
   // Handle Escape key to close
   useEffect(() => {
@@ -86,54 +69,37 @@ export function ToolPanel({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Determine header styling based on variant
-  const resolvedHeaderBg = headerBg || (variant === 'compact' ? '' : DEFAULT_HEADER_BG);
-  const resolvedHeaderTextColor = headerTextColor || (variant === 'compact' ? 'text-white' : '');
-
-  // Close button styling based on variant/header color
-  const closeButtonClass = variant === 'compact' || headerTextColor?.includes('white')
-    ? 'text-white/80 hover:text-white hover:bg-white/20'
-    : 'text-content-muted hover:text-secondary hover:bg-surface-muted';
-
   return (
     <aside
       className={`fixed top-12 right-0 bottom-12 w-full sm:w-[380px] bg-surface border-l border-border shadow-2xl z-40 flex flex-col transform transition-transform duration-300 ease-in-out ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
     >
-      {/* Header */}
-      {header ? (
-        header
-      ) : (
-        <div className={`flex items-center justify-between px-4 py-3 border-b border-border ${resolvedHeaderBg}`}>
-          <div className="flex items-center gap-3">
-            {icon && (
-              <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${
-                variant === 'compact' ? 'bg-white/20' : 'bg-gradient-to-br from-sand-100 to-blue-100 dark:from-sand-900/50 dark:to-blue-900/50'
-              }`}>
-                {icon}
-              </div>
-            )}
-            <div className={resolvedHeaderTextColor}>
-              <h2 className={`text-sm font-bold ${resolvedHeaderTextColor || 'text-secondary'}`}>{title}</h2>
-              {subtitle && (
-                <p className={`text-[10px] ${variant === 'compact' ? 'opacity-90' : 'text-content-muted'}`}>
-                  {subtitle}
-                </p>
-              )}
+      {/* Header - Canonical style (Lab Reference as source of truth) */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-gradient-to-r from-sand-50 to-blue-50 dark:from-sand-950/30 dark:to-blue-950/30">
+        <div className="flex items-center gap-3">
+          {icon && (
+            <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-gradient-to-br from-sand-100 to-blue-100 dark:from-sand-900/50 dark:to-blue-900/50">
+              {icon}
             </div>
+          )}
+          <div>
+            <h2 className="text-sm font-bold text-secondary">{title}</h2>
+            {subtitle && (
+              <p className="text-[10px] text-content-muted">{subtitle}</p>
+            )}
           </div>
-          <button
-            onClick={onClose}
-            className={`p-1.5 rounded-lg transition-colors ${closeButtonClass}`}
-            title="Close (Esc)"
-          >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
         </div>
-      )}
+        <button
+          onClick={onClose}
+          className="p-1.5 rounded-lg transition-colors text-content-muted hover:text-secondary hover:bg-surface-muted"
+          title="Close (Esc)"
+        >
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
 
       {/* Content */}
       <div className={`flex-1 overflow-y-auto ${contentClassName}`}>

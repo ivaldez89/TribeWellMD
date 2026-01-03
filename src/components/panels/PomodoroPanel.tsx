@@ -25,6 +25,13 @@ const TIMER_SETTINGS = {
   longBreak: 15 * 60,
 };
 
+// Header icon (matches ToolPanel canonical style)
+const PomodoroIcon = () => (
+  <svg className="w-5 h-5 text-[#5B7B6D] dark:text-tribe-sage-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+);
+
 export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange }: PomodoroPanelProps) {
   const { mode, timeLeft, isRunning, sessionsCompleted } = timerState;
   const [showCustomTime, setShowCustomTime] = useState(false);
@@ -91,30 +98,6 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
     }
   };
 
-  // Custom header with dynamic gradient based on mode
-  const customHeader = (
-    <div className={`flex items-center justify-between px-4 py-3 border-b border-border bg-gradient-to-r ${modeColors[mode]}`}>
-      <div className="flex items-center gap-3">
-        <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">
-          <ClockIcon className="w-5 h-5 text-white" />
-        </div>
-        <div className="text-white">
-          <h2 className="text-sm font-bold">Pomodoro Timer</h2>
-          <p className="text-[10px] opacity-90">Today: {sessionsCompleted} sessions</p>
-        </div>
-      </div>
-      <button
-        onClick={onClose}
-        className="p-1.5 text-white/80 hover:text-white hover:bg-white/20 rounded-lg transition-colors"
-        title="Close (Esc)"
-      >
-        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
-  );
-
   const footerText = isRunning ? 'Timer running - persists when panel is closed' : 'Start a focus session';
 
   return (
@@ -123,8 +106,7 @@ export function PomodoroPanel({ isOpen, onClose, timerState, onTimerStateChange 
       onClose={onClose}
       title="Pomodoro Timer"
       subtitle={`Today: ${sessionsCompleted} sessions`}
-      variant="compact"
-      header={customHeader}
+      icon={<PomodoroIcon />}
       shortcutKey="P"
       footerText={footerText}
     >
