@@ -201,10 +201,10 @@ export function PomodoroTimer({ onSessionComplete, variant = 'default' }: Pomodo
 
   // Different button styles based on variant
   const buttonStyles = variant === 'header'
-    ? `group relative flex items-center justify-center w-9 h-9 rounded-lg transition-colors ${
+    ? `group relative flex flex-col items-center justify-center px-3 py-1 min-w-[44px] rounded-lg transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 ${
         showPanel || isRunning
           ? 'bg-[#C4A77D] text-white'
-          : 'text-white/80 hover:text-white hover:bg-white/10'
+          : 'text-white/80 hover:text-white hover:bg-white/10 focus-visible:bg-white/10'
       }`
     : `flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors ${
         showPanel || isRunning
@@ -218,19 +218,22 @@ export function PomodoroTimer({ onSessionComplete, variant = 'default' }: Pomodo
       <button
         ref={buttonRef}
         onClick={handleTogglePanel}
+        aria-label="Pomodoro Timer"
         className={buttonStyles}
       >
         {variant === 'header' ? (
           <>
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            {isRunning && (
-              <span className="absolute -top-1 -right-1 px-1 min-w-[20px] h-5 flex items-center justify-center text-[10px] font-bold bg-red-500 text-white rounded-full">
-                {Math.floor(timeLeft / 60)}
-              </span>
-            )}
-            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
+            <div className="relative">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {isRunning && (
+                <span className="absolute -top-1 -right-1 px-1 min-w-[20px] h-5 flex items-center justify-center text-[10px] font-bold bg-red-500 text-white rounded-full">
+                  {Math.floor(timeLeft / 60)}
+                </span>
+              )}
+            </div>
+            <span className="text-[10px] font-medium whitespace-nowrap max-h-0 overflow-hidden opacity-0 group-hover:max-h-4 group-hover:opacity-100 group-hover:mt-0.5 group-focus-visible:max-h-4 group-focus-visible:opacity-100 group-focus-visible:mt-0.5 transition-all duration-200 ease-out">
               Pomodoro
             </span>
           </>

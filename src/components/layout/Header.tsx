@@ -61,7 +61,7 @@ function HeaderNavItem({ href, label, icon, activeIcon, matchPrefix, ariaLabel }
       aria-label={ariaLabel || label}
       aria-current={isActive ? 'page' : undefined}
       className={`
-        group relative flex items-center justify-center gap-1.5 px-2.5 py-1.5 h-9
+        group relative flex flex-col items-center justify-center px-3 py-1 min-w-[44px]
         rounded-lg transition-all duration-200
         focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent
         ${isActive
@@ -81,12 +81,12 @@ function HeaderNavItem({ href, label, icon, activeIcon, matchPrefix, ariaLabel }
         {isActive && activeIcon ? activeIcon : icon}
       </div>
 
-      {/* Label - hidden by default, revealed on hover/focus with pill highlight */}
+      {/* Label - hidden by default, revealed BELOW icon on hover/focus */}
       <span className={`
-        text-[11px] font-medium leading-tight whitespace-nowrap
-        max-w-0 overflow-hidden opacity-0
-        group-hover:max-w-[80px] group-hover:opacity-100
-        group-focus-visible:max-w-[80px] group-focus-visible:opacity-100
+        text-[10px] font-medium leading-tight whitespace-nowrap
+        max-h-0 overflow-hidden opacity-0
+        group-hover:max-h-4 group-hover:opacity-100 group-hover:mt-0.5
+        group-focus-visible:max-h-4 group-focus-visible:opacity-100 group-focus-visible:mt-0.5
         transition-all duration-200 ease-out
         ${isActive
           ? 'text-white'
@@ -613,7 +613,7 @@ export function Header({
                   <button
                     onClick={() => togglePanel('messages')}
                     aria-label="Messages (M)"
-                    className={`group relative flex items-center justify-center gap-1.5 h-9 px-2.5 rounded-lg transition-all duration-200 ${
+                    className={`group relative flex flex-col items-center justify-center px-3 py-1 min-w-[44px] rounded-lg transition-all duration-200 ${
                       activePanel === 'messages'
                         ? 'bg-[#C4A77D] text-white'
                         : 'text-white/80 hover:text-white hover:bg-white/10 focus-visible:bg-white/10'
@@ -622,7 +622,7 @@ export function Header({
                     <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                     </svg>
-                    <span className="text-[11px] font-medium whitespace-nowrap max-w-0 overflow-hidden opacity-0 group-hover:max-w-[80px] group-hover:opacity-100 group-focus-visible:max-w-[80px] group-focus-visible:opacity-100 transition-all duration-200 ease-out">
+                    <span className="text-[10px] font-medium whitespace-nowrap max-h-0 overflow-hidden opacity-0 group-hover:max-h-4 group-hover:opacity-100 group-hover:mt-0.5 group-focus-visible:max-h-4 group-focus-visible:opacity-100 group-focus-visible:mt-0.5 transition-all duration-200 ease-out">
                       Messages
                     </span>
                   </button>
@@ -631,7 +631,7 @@ export function Header({
                   <button
                     onClick={() => togglePanel('labs')}
                     aria-label="Labs (L)"
-                    className={`group relative flex items-center justify-center gap-1.5 h-9 px-2.5 rounded-lg transition-all duration-200 ${
+                    className={`group relative flex flex-col items-center justify-center px-3 py-1 min-w-[44px] rounded-lg transition-all duration-200 ${
                       activePanel === 'labs'
                         ? 'bg-[#C4A77D] text-white'
                         : 'text-white/80 hover:text-white hover:bg-white/10 focus-visible:bg-white/10'
@@ -640,7 +640,7 @@ export function Header({
                     <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
                     </svg>
-                    <span className="text-[11px] font-medium whitespace-nowrap max-w-0 overflow-hidden opacity-0 group-hover:max-w-[60px] group-hover:opacity-100 group-focus-visible:max-w-[60px] group-focus-visible:opacity-100 transition-all duration-200 ease-out">
+                    <span className="text-[10px] font-medium whitespace-nowrap max-h-0 overflow-hidden opacity-0 group-hover:max-h-4 group-hover:opacity-100 group-hover:mt-0.5 group-focus-visible:max-h-4 group-focus-visible:opacity-100 group-focus-visible:mt-0.5 transition-all duration-200 ease-out">
                       Labs
                     </span>
                   </button>
@@ -649,7 +649,7 @@ export function Header({
                   <button
                     onClick={() => togglePanel('music')}
                     aria-label="Music (S)"
-                    className={`group relative flex items-center justify-center gap-1.5 h-9 px-2.5 rounded-lg transition-all duration-200 ${
+                    className={`group relative flex flex-col items-center justify-center px-3 py-1 min-w-[44px] rounded-lg transition-all duration-200 ${
                       activePanel === 'music'
                         ? 'bg-[#C4A77D] text-white'
                         : 'text-white/80 hover:text-white hover:bg-white/10 focus-visible:bg-white/10'
@@ -658,7 +658,7 @@ export function Header({
                     <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                     </svg>
-                    <span className="text-[11px] font-medium whitespace-nowrap max-w-0 overflow-hidden opacity-0 group-hover:max-w-[60px] group-hover:opacity-100 group-focus-visible:max-w-[60px] group-focus-visible:opacity-100 transition-all duration-200 ease-out">
+                    <span className="text-[10px] font-medium whitespace-nowrap max-h-0 overflow-hidden opacity-0 group-hover:max-h-4 group-hover:opacity-100 group-hover:mt-0.5 group-focus-visible:max-h-4 group-focus-visible:opacity-100 group-focus-visible:mt-0.5 transition-all duration-200 ease-out">
                       Music
                     </span>
                   </button>
