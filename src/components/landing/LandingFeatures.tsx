@@ -2,7 +2,7 @@
 
 const FEATURES = [
   {
-    title: 'An Integrated Experience',
+    title: 'Ecosystem',
     description: 'Study tools, wellness practices, and community—working together, not scattered across a dozen apps',
     gradient: 'from-[#8B6F9E] to-[#6B5280]', // muted plum
     icon: (
@@ -14,7 +14,7 @@ const FEATURES = [
     ),
   },
   {
-    title: 'Care Before Crisis',
+    title: 'Proactive',
     description: 'Build resilience before you need it—not as a reaction to burnout',
     gradient: 'from-[#C9A961] to-[#A88F4E]', // mustard yellow
     icon: (
@@ -26,7 +26,7 @@ const FEATURES = [
     ),
   },
   {
-    title: 'Together, Not Alone',
+    title: 'Together',
     description: 'Peers & mentors who get it - because they are living it too',
     gradient: 'from-[#6B9B9E] to-[#557F82]', // muted jade blue
     icon: (
@@ -38,7 +38,7 @@ const FEATURES = [
     ),
   },
   {
-    title: 'Growth With Purpose',
+    title: 'Purpose',
     description: 'Personal growth and contribution to community are mutually reinforced - not in competition',
     gradient: 'from-[#C9A5A5] to-[#A88787]', // dusty rose
     icon: (
