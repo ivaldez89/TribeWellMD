@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { PRICING_TIERS, getYearlySavings, getYearlySavingsPercent } from '@/lib/stripe/config'
 import { useIsAuthenticated } from '@/hooks/useAuth'
+import { LandingLayout, HEADER_HEIGHT, FOOTER_HEIGHT } from '@/components/layout/LandingLayout'
 
 export default function PricingPage() {
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('yearly')
@@ -63,44 +63,11 @@ export default function PricingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-white dark:from-slate-900 dark:to-slate-800">
-      {/* Header */}
-      <header className="py-4 px-4 border-b border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#5B7B6D] to-[#7FA08F] flex items-center justify-center">
-              <span className="text-white font-bold text-lg">T</span>
-            </div>
-            <span className="font-bold text-xl text-slate-900 dark:text-white">TribeWellMD</span>
-          </Link>
-          <div className="flex items-center gap-4">
-            {isAuthenticated ? (
-              <Link
-                href="/home"
-                className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-[#5B7B6D]"
-              >
-                Dashboard
-              </Link>
-            ) : (
-              <>
-                <Link
-                  href="/login"
-                  className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-[#5B7B6D]"
-                >
-                  Log In
-                </Link>
-                <Link
-                  href="/register"
-                  className="px-4 py-2 bg-[#5B7B6D] hover:bg-[#4A6A5C] text-white text-sm font-medium rounded-lg transition-colors"
-                >
-                  Start Free
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
-      </header>
-
+    <LandingLayout>
+      <div
+        className="min-h-screen bg-gradient-to-b from-[#F5F0E8] to-white dark:from-slate-900 dark:to-slate-800"
+        style={{ paddingTop: HEADER_HEIGHT, paddingBottom: FOOTER_HEIGHT }}
+      >
       {/* Hero */}
       <section className="py-16 px-4 text-center">
         <div className="max-w-3xl mx-auto">
@@ -347,25 +314,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 px-4 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#5B7B6D] to-[#7FA08F] flex items-center justify-center">
-              <span className="text-white font-bold text-sm">T</span>
-            </div>
-            <span className="font-semibold text-slate-900 dark:text-white">TribeWellMD</span>
-          </div>
-          <div className="flex items-center gap-6 text-sm text-slate-500 dark:text-slate-400">
-            <Link href="/privacy" className="hover:text-[#5B7B6D]">Privacy</Link>
-            <Link href="/terms" className="hover:text-[#5B7B6D]">Terms</Link>
-            <a href="mailto:support@tribewellmd.com" className="hover:text-[#5B7B6D]">Support</a>
-          </div>
-          <div className="text-sm text-slate-500 dark:text-slate-400">
-            &copy; {new Date().getFullYear()} TribeWellMD. All rights reserved.
-          </div>
-        </div>
-      </footer>
-    </div>
+      </div>
+    </LandingLayout>
   )
 }
