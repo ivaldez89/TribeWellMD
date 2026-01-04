@@ -35,6 +35,20 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* Video Section */}
+        <section className="py-16 bg-white dark:bg-surface-elevated border-y border-border-light">
+          <div className="max-w-4xl mx-auto px-6 sm:px-8">
+            <div className="aspect-video w-full rounded-2xl overflow-hidden shadow-2xl">
+              <iframe
+                src="https://drive.google.com/file/d/1nHPbpCi8j7CPkd7J-LHhlTs4vLUq-hYf/preview"
+                className="w-full h-full"
+                allow="autoplay"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </section>
+
         {/* The Problem Section */}
         <section className="py-16 bg-white dark:bg-surface-elevated border-y border-border-light">
           <div className="max-w-3xl mx-auto px-6 sm:px-8">
