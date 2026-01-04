@@ -13,7 +13,6 @@ import { MusicPanel } from '@/components/panels/MusicPanel';
 import { StreakPanel } from '@/components/panels/StreakPanel';
 import { PomodoroPanel } from '@/components/panels/PomodoroPanel';
 import { Icons } from '@/components/ui/Icons';
-import { CheckCircleIcon } from '@/components/icons/MedicalIcons';
 
 // Height constant for layout calculations
 export const HEADER_HEIGHT = 48;
@@ -452,7 +451,7 @@ export function Header({
   const pathname = usePathname();
 
   // Streak data for header button
-  const { streakData, isLoading: streakLoading, getDailyProgress, isGoalComplete } = useStreak();
+  const { streakData } = useStreak();
 
   // Unified panel state - only one panel can be open at a time
   const [activePanel, setActivePanel] = useState<PanelType>(null);
@@ -812,72 +811,33 @@ export function Header({
                     </span>
                   </button>
 
-                  {/* Streak button - opens panel */}
+                  {/* Streak button - matches other pill buttons exactly */}
                   <button
                     onClick={() => togglePanel('streak')}
                     aria-label="Streak (X)"
-                    className={`group relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl transition-all duration-200 ${
+                    className={`group relative flex flex-col items-center justify-center px-3 py-1 min-w-[44px] rounded-lg transition-all duration-200 ${
                       activePanel === 'streak'
                         ? 'bg-[#C4A77D] text-white'
-                        : streakData && streakData.currentStreak > 0
-                          ? 'bg-gradient-to-r from-orange-100 to-amber-100 dark:from-orange-900/30 dark:to-amber-900/30 hover:from-orange-200 hover:to-amber-200'
-                          : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700'
+                        : 'text-white/80 hover:text-white hover:bg-white/10 focus-visible:bg-white/10'
                     } focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50`}
                   >
-                    {/* Fire icon */}
-                    <div className={`relative ${streakData && streakData.currentStreak >= 7 ? 'animate-pulse' : ''}`}>
-                      <span className={`w-5 h-5 ${
-                        activePanel === 'streak'
-                          ? 'text-white'
-                          : streakData && streakData.currentStreak > 0
-                            ? 'text-orange-500'
-                            : 'text-slate-400 opacity-50'
-                      }`}>
-                        <Icons.Fire />
-                      </span>
+                    {/* Fire icon with streak count badge */}
+                    <div className="relative w-5 h-5 flex-shrink-0">
+                      <Icons.Fire />
+                      {/* Streak count badge - small overlay */}
+                      {streakData && streakData.currentStreak > 0 && (
+                        <span className={`absolute -top-1 -right-1.5 min-w-[14px] h-[14px] flex items-center justify-center text-[9px] font-bold rounded-full ${
+                          activePanel === 'streak'
+                            ? 'bg-white text-[#C4A77D]'
+                            : 'bg-orange-500 text-white'
+                        }`}>
+                          {streakData.currentStreak}
+                        </span>
+                      )}
                     </div>
-                    {/* Streak count */}
-                    <span className={`text-sm font-bold ${
-                      activePanel === 'streak'
-                        ? 'text-white'
-                        : streakData && streakData.currentStreak > 0
-                          ? 'text-orange-600 dark:text-orange-400'
-                          : 'text-slate-400 dark:text-slate-500'
-                    }`}>
-                      {streakData?.currentStreak || 0}
+                    <span className="text-[10px] font-medium whitespace-nowrap max-h-0 overflow-hidden opacity-0 group-hover:max-h-4 group-hover:opacity-100 group-hover:mt-0.5 group-focus-visible:max-h-4 group-focus-visible:opacity-100 group-focus-visible:mt-0.5 transition-all duration-200 ease-out">
+                      Streak
                     </span>
-                    {/* Daily progress ring (mini) */}
-                    {streakData && (
-                      <div className="relative w-5 h-5">
-                        <svg className="w-5 h-5 -rotate-90" viewBox="0 0 20 20">
-                          <circle
-                            cx="10"
-                            cy="10"
-                            r="8"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            className={activePanel === 'streak' ? 'text-white/30' : 'text-slate-200 dark:text-slate-700'}
-                          />
-                          <circle
-                            cx="10"
-                            cy="10"
-                            r="8"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeDasharray={`${getDailyProgress() * 0.5} 50`}
-                            strokeLinecap="round"
-                            className={activePanel === 'streak' ? 'text-white' : isGoalComplete() ? 'text-green-500' : 'text-amber-500'}
-                          />
-                        </svg>
-                        {isGoalComplete() && (
-                          <span className="absolute inset-0 flex items-center justify-center">
-                            <CheckCircleIcon className={`w-3 h-3 ${activePanel === 'streak' ? 'text-white' : 'text-green-600'}`} />
-                          </span>
-                        )}
-                      </div>
-                    )}
                   </button>
                 </>
               )}
