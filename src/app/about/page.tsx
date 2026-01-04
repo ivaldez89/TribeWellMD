@@ -40,7 +40,7 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto px-6 sm:px-8">
             <div className="aspect-video w-full rounded-2xl overflow-hidden shadow-2xl">
               <iframe
-                src="https://drive.google.com/file/d/1nHPbpCi8j7CPkd7J-LHhlTs4vLUq-hYf/preview"
+                src="https://drive.google.com/file/d/1WP67cKn6q5z3Pp1VpmQm-9JBkVj1yR-r/preview"
                 className="w-full h-full"
                 allow="autoplay"
                 allowFullScreen
