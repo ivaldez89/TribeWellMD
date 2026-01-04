@@ -10,9 +10,9 @@ interface StreakPanelProps {
   onClose: () => void;
 }
 
-// Header icon (matches ToolPanel canonical style - sand-600/sand-400)
+// Header icon (matches ToolPanel canonical style - green-600/green-400)
 const StreakIcon = () => (
-  <svg className="w-5 h-5 text-sand-600 dark:text-sand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+  <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
   </svg>
@@ -58,7 +58,7 @@ export function StreakPanel({ isOpen, onClose }: StreakPanelProps) {
       {/* Weekly Activity */}
       <div className={`px-4 py-4 ${
         hasStreak
-          ? 'bg-gradient-to-r from-orange-100 to-amber-100 dark:from-orange-900/30 dark:to-amber-900/30'
+          ? 'bg-green-100 dark:bg-green-900/30'
           : 'bg-slate-100 dark:bg-slate-800'
       }`}>
         <div className="flex justify-center gap-2">
@@ -69,12 +69,12 @@ export function StreakPanel({ isOpen, onClose }: StreakPanelProps) {
 
             return (
               <div key={index} className="flex flex-col items-center gap-1">
-                <span className={`text-[10px] ${hasStreak ? 'text-orange-600 dark:text-orange-400' : 'text-slate-500'}`}>{day}</span>
+                <span className={`text-[10px] ${hasStreak ? 'text-green-700 dark:text-green-400' : 'text-slate-500'}`}>{day}</span>
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
                   isActive
-                    ? 'bg-orange-500 text-white'
+                    ? 'bg-green-600 text-white'
                     : isToday
-                      ? 'bg-orange-200 dark:bg-orange-800/50 text-orange-600 dark:text-orange-400 border-2 border-orange-400'
+                      ? 'bg-green-200 dark:bg-green-800/50 text-green-700 dark:text-green-400 border-2 border-green-600'
                       : 'bg-white dark:bg-slate-700 text-slate-400'
                 }`}>
                   {isActive && <CheckCircleIcon className="w-4 h-4" />}
@@ -84,7 +84,7 @@ export function StreakPanel({ isOpen, onClose }: StreakPanelProps) {
           })}
         </div>
         {streakData.longestStreak > 0 && (
-          <p className="text-center mt-2 text-xs text-orange-600 dark:text-orange-400">
+          <p className="text-center mt-2 text-xs text-green-700 dark:text-green-400">
             Personal best: {streakData.longestStreak} days
           </p>
         )}
@@ -102,11 +102,7 @@ export function StreakPanel({ isOpen, onClose }: StreakPanelProps) {
           </div>
           <div className="relative h-3 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
             <div
-              className={`absolute inset-y-0 left-0 rounded-full transition-all duration-500 ${
-                goalComplete
-                  ? 'bg-gradient-to-r from-green-400 to-tribe-sage-500'
-                  : 'bg-gradient-to-r from-amber-400 to-orange-500'
-              }`}
+              className="absolute inset-y-0 left-0 rounded-full transition-all duration-500 bg-green-600"
               style={{ width: `${Math.min(dailyProgress, 100)}%` }}
             />
           </div>
@@ -121,9 +117,9 @@ export function StreakPanel({ isOpen, onClose }: StreakPanelProps) {
         </div>
 
         {/* Level Progress */}
-        <div className="p-4 bg-surface-muted rounded-xl">
+        <div className="p-4 bg-green-50 dark:bg-surface-muted rounded-xl border border-green-200 dark:border-transparent">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+            <div className="w-12 h-12 rounded-xl bg-green-600 flex items-center justify-center shadow-lg">
               <span className="text-xl font-bold text-white">{streakData.level}</span>
             </div>
             <div className="flex-1">
@@ -135,7 +131,7 @@ export function StreakPanel({ isOpen, onClose }: StreakPanelProps) {
               </div>
               <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full transition-all duration-500"
+                  className="h-full bg-green-600 rounded-full transition-all duration-500"
                   style={{ width: `${levelProgress.progress}%` }}
                 />
               </div>
@@ -144,17 +140,17 @@ export function StreakPanel({ isOpen, onClose }: StreakPanelProps) {
         </div>
 
         {/* Village Points */}
-        <div className="p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-xl border border-emerald-200 dark:border-emerald-800">
+        <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="w-6 h-6 text-tribe-sage-500"><Icons.HeartHand /></span>
+              <span className="w-6 h-6 text-green-700 dark:text-green-400"><Icons.HeartHand /></span>
               <div>
                 <div className="text-sm font-medium text-secondary">Village Points</div>
                 <div className="text-xs text-content-muted">Your study helps the community</div>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-lg font-bold text-tribe-sage-600 dark:text-tribe-sage-400">
+              <div className="text-lg font-bold text-green-700 dark:text-green-400">
                 {(streakData.weeklyVillagePoints || 0).toLocaleString()}
               </div>
               <div className="text-xs text-content-muted">this week</div>
@@ -169,7 +165,7 @@ export function StreakPanel({ isOpen, onClose }: StreakPanelProps) {
         <div className="p-4 bg-surface-muted rounded-xl">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="w-6 h-6 text-cyan-500"><Icons.Snowflake /></span>
+              <span className="w-6 h-6 text-green-600 dark:text-green-400"><Icons.Snowflake /></span>
               <div>
                 <div className="text-sm font-medium text-secondary">Streak Freezes</div>
                 <div className="text-xs text-content-muted">Protect your streak</div>
@@ -181,7 +177,7 @@ export function StreakPanel({ isOpen, onClose }: StreakPanelProps) {
                   key={i}
                   className={`w-6 h-6 rounded-md flex items-center justify-center ${
                     i < streakData.streakFreezes
-                      ? 'bg-cyan-100 dark:bg-cyan-900/50 text-cyan-600 dark:text-cyan-400'
+                      ? 'bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400'
                       : 'bg-slate-200 dark:bg-slate-700 text-slate-400 dark:text-slate-600'
                   }`}
                 >
