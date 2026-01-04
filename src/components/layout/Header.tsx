@@ -66,6 +66,11 @@ interface HeaderNavItemProps {
 // Fixed width for all header nav buttons (based on longest label "Community" + padding)
 const HEADER_NAV_BUTTON_WIDTH = 'w-[72px]';
 
+// Active state classes for header nav buttons - matches right-side utility buttons exactly
+// Usage: bg-[#C4A77D] text-white (gold pill with white text/icons)
+const HEADER_NAV_ACTIVE_CLASSES = 'bg-[#C4A77D] text-white';
+const HEADER_NAV_INACTIVE_CLASSES = 'text-white/80 hover:text-white hover:bg-white/10 focus-visible:bg-white/10';
+
 function HeaderNavItem({ href, label, icon, activeIcon, matchPrefix, ariaLabel }: HeaderNavItemProps) {
   const pathname = usePathname();
   const isActive = matchPrefix
@@ -81,20 +86,11 @@ function HeaderNavItem({ href, label, icon, activeIcon, matchPrefix, ariaLabel }
         group relative flex flex-col items-center justify-center ${HEADER_NAV_BUTTON_WIDTH} py-1
         rounded-lg transition-all duration-200
         focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent
-        ${isActive
-          ? 'bg-white/20'
-          : 'hover:bg-white/10 focus-visible:bg-white/10'
-        }
+        ${isActive ? HEADER_NAV_ACTIVE_CLASSES : HEADER_NAV_INACTIVE_CLASSES}
       `}
     >
-      {/* Icon - uses gold color (#C4A77D) when active to match utility icons */}
-      <div className={`
-        w-5 h-5 flex items-center justify-center flex-shrink-0 transition-colors duration-200
-        ${isActive
-          ? 'text-[#C4A77D]'
-          : 'text-white/70 group-hover:text-white group-focus-visible:text-white'
-        }
-      `}>
+      {/* Icon - inherits text color from parent (white when active, white/80 otherwise) */}
+      <div className="w-5 h-5 flex items-center justify-center flex-shrink-0 transition-colors duration-200">
         {isActive && activeIcon ? activeIcon : icon}
       </div>
 
@@ -105,10 +101,6 @@ function HeaderNavItem({ href, label, icon, activeIcon, matchPrefix, ariaLabel }
         group-hover:max-h-4 group-hover:opacity-100 group-hover:mt-0.5
         group-focus-visible:max-h-4 group-focus-visible:opacity-100 group-focus-visible:mt-0.5
         transition-all duration-200 ease-out
-        ${isActive
-          ? 'text-white'
-          : 'text-white/90'
-        }
       `}>
         {label}
       </span>
