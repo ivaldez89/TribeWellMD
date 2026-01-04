@@ -2,7 +2,6 @@
 
 import { useStreak } from '@/hooks/useStreak';
 import { Icons } from '@/components/ui/Icons';
-import { CheckCircleIcon } from '@/components/icons/MedicalIcons';
 import { ToolPanel } from '@/components/panels/ToolPanel';
 
 interface StreakPanelProps {
@@ -15,6 +14,24 @@ const StreakIcon = () => (
   <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
+  </svg>
+);
+
+// Ulu plant SVG - TribeWellMD brand signature for streak indicators
+interface UluPlantProps {
+  className?: string;
+}
+
+const UluPlant = ({ className = '' }: UluPlantProps) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    {/* Main leaf - large heart-shaped ulu leaf */}
+    <path d="M12 3c-1.5 2-3 4.5-3 7.5c0 2.5 1.5 4.5 3 5.5c1.5-1 3-3 3-5.5c0-3-1.5-5.5-3-7.5z" />
+    {/* Left smaller leaf */}
+    <path d="M8 8c-1 1.5-1.5 3-1.5 4.5c0 1.5 0.5 2.5 1.5 3.5c0.5-0.5 1-1.5 1-3c0-2-0.5-3.5-1-5z" opacity="0.8" />
+    {/* Right smaller leaf */}
+    <path d="M16 8c1 1.5 1.5 3 1.5 4.5c0 1.5-0.5 2.5-1.5 3.5c-0.5-0.5-1-1.5-1-3c0-2 0.5-3.5 1-5z" opacity="0.8" />
+    {/* Stem */}
+    <path d="M11.5 16v5h1v-5z" opacity="0.6" />
   </svg>
 );
 
@@ -66,18 +83,32 @@ export function StreakPanel({ isOpen, onClose }: StreakPanelProps) {
             const dayIndex = 6 - index;
             const isActive = streakData.weeklyActivity[dayIndex];
             const isToday = dayIndex === 0;
+            const isFuture = dayIndex < 0; // Days after today (not applicable in current logic)
+            const isMissed = !isActive && !isToday && dayIndex > 0;
+
+            // Determine Ulu plant styling based on state
+            const getUluClasses = () => {
+              if (isActive) {
+                // Completed day - solid green
+                return 'text-green-600 dark:text-green-400';
+              }
+              if (isToday) {
+                // Today - emphasized with slight scale
+                return 'text-green-700 dark:text-green-300 scale-105';
+              }
+              if (isMissed) {
+                // Missed/broken day - muted with reduced opacity
+                return 'text-content-muted opacity-40';
+              }
+              // Future/not yet completed - light green outline effect
+              return 'text-green-300 dark:text-green-700';
+            };
 
             return (
               <div key={index} className="flex flex-col items-center gap-1">
                 <span className={`text-[10px] ${hasStreak ? 'text-green-700 dark:text-green-400' : 'text-slate-500'}`}>{day}</span>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                  isActive
-                    ? 'bg-green-600 text-white'
-                    : isToday
-                      ? 'bg-green-200 dark:bg-green-800/50 text-green-700 dark:text-green-400 border-2 border-green-600'
-                      : 'bg-white dark:bg-slate-700 text-slate-400'
-                }`}>
-                  {isActive && <CheckCircleIcon className="w-4 h-4" />}
+                <div className="w-8 h-8 flex items-center justify-center">
+                  <UluPlant className={`w-7 h-7 ${getUluClasses()}`} />
                 </div>
               </div>
             );
