@@ -49,7 +49,7 @@ export function CreateRoomModal({
         <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white">
-              Create Study Room
+              Start Pocket Time
             </h2>
             <button
               onClick={onClose}

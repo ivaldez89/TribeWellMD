@@ -97,7 +97,7 @@ export function DayView({ currentDate, events, onTimeSlotClick, onEventClick, on
                   )}
                   {event.type === 'study-room' && (
                     <span className="text-xs px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
-                      Study Room
+                      Pocket Time
                     </span>
                   )}
                   {canDelete && onDeleteEvent && (

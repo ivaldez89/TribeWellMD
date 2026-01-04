@@ -219,7 +219,7 @@ function MobileNavLink({ href, children, onClick }: { href: string; children: Re
 // Dropdown menu configurations for authenticated users
 const studyDropdownItems: DropdownItem[] = [
   { label: 'Flashcards', href: '/progress', description: 'Study sessions & Pomodoro timer' },
-  { label: 'Study Rooms', href: '/progress/rooms', description: 'Collaborative study with chat & timers' },
+  { label: 'Pocket Time', href: '/progress/rooms', description: 'Study together, even when apart' },
   { label: 'Clinical Cases', href: '/cases', description: 'Interactive patient scenarios' },
   { label: 'AI Generator', href: '/generate', description: 'Create flashcards with AI' },
   { label: 'QBank', href: '/qbank', description: 'Practice question bank' },

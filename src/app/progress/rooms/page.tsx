@@ -148,7 +148,7 @@ export default function StudyRoomsPage() {
             </svg>
           </div>
           <div>
-            <h1 className="text-lg font-bold text-slate-900 dark:text-white">Study Rooms</h1>
+            <h1 className="text-lg font-bold text-slate-900 dark:text-white">Pocket Time</h1>
             <p className="text-sm text-slate-500 dark:text-slate-400">{displayRooms.length} active rooms</p>
           </div>
         </div>
@@ -176,7 +176,7 @@ export default function StudyRoomsPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
             </div>
-            <h2 className="text-lg font-bold text-white">Study Rooms</h2>
+            <h2 className="text-lg font-bold text-white">Pocket Time</h2>
           </div>
         </div>
 
@@ -314,7 +314,7 @@ export default function StudyRoomsPage() {
         <div className="space-y-3">
           <div className="flex items-start gap-3">
             <span className="w-6 h-6 rounded-full bg-[#5B7B6D] text-white flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
-            <p className="text-sm text-slate-600 dark:text-slate-400">Create or join a study room</p>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Start or join Pocket Time</p>
           </div>
           <div className="flex items-start gap-3">
             <span className="w-6 h-6 rounded-full bg-[#5B7B6D] text-white flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
@@ -386,7 +386,7 @@ export default function StudyRoomsPage() {
             </svg>
           </div>
           <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-1">No active rooms</h3>
-          <p className="text-slate-500 dark:text-slate-400 mb-4">Be the first to create a study room!</p>
+          <p className="text-slate-500 dark:text-slate-400 mb-4">Be the first to start Pocket Time!</p>
           <button
             onClick={() => (isAuthenticated ? setShowCreateModal(true) : router.push('/login'))}
             className="px-5 py-2 bg-[#5B7B6D] hover:bg-[#4A6A5C] text-white font-medium rounded-xl transition-colors"

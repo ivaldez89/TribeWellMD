@@ -159,11 +159,11 @@ export default function StudyHubPage() {
               accent="amber"
             />
 
-            {/* Study Groups */}
+            {/* Pocket Time */}
             <StudyCard
               href="/progress/rooms"
-              title="Study Groups"
-              subtitle="Learn together"
+              title="Pocket Time"
+              subtitle="Study together, even apart"
               icon="users"
               accent="clay"
             />

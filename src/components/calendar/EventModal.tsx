@@ -106,10 +106,10 @@ export function EventModal({
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                  Group Study Session
+                  Group Pocket Time
                 </p>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                  Create a study room others can join
+                  Start a session others can join
                 </p>
               </div>
               <button

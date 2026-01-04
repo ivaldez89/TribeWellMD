@@ -150,7 +150,7 @@ export default function StudyRoomPage() {
               {error || 'Room not found'}
             </h2>
             <p className="text-[#A89070] dark:text-[#D4C4B0] mb-4">
-              This study room may have ended or doesn&apos;t exist.
+              This Pocket Time session may have ended or doesn&apos;t exist.
             </p>
             <Link
               href="/progress/rooms"
@@ -503,7 +503,7 @@ export default function StudyRoomPage() {
           <div className="absolute inset-0 bg-black/50" onClick={() => setShowLeaveConfirm(false)} />
           <div className="relative bg-white dark:bg-slate-800 rounded-2xl p-6 max-w-sm w-full shadow-xl">
             <h3 className="text-lg font-semibold text-[#8B7355] dark:text-white mb-2">
-              Leave Study Room?
+              Leave Pocket Time?
             </h3>
             <p className="text-[#A89070] dark:text-[#D4C4B0] mb-6">
               You can rejoin this room later using the invite code.

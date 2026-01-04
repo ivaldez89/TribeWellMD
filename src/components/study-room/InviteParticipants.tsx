@@ -240,8 +240,8 @@ export function InviteParticipants({
               <button
                 onClick={() => {
                   const text = inviteCode
-                    ? `Join my study room! Use code: ${inviteCode} or link: ${window.location.origin}/study/rooms?join=${inviteCode}`
-                    : `Join my study room: ${window.location.href}`;
+                    ? `Join my Pocket Time! Use code: ${inviteCode} or link: ${window.location.origin}/study/rooms?join=${inviteCode}`
+                    : `Join my Pocket Time: ${window.location.href}`;
                   window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
                 }}
                 className="flex-1 py-2 px-3 bg-green-500 hover:bg-green-600 text-white rounded-lg text-sm font-medium flex items-center justify-center gap-2 transition-colors"
@@ -254,8 +254,8 @@ export function InviteParticipants({
               <button
                 onClick={() => {
                   const text = inviteCode
-                    ? `Join my study room! Code: ${inviteCode}`
-                    : `Join my study room!`;
+                    ? `Join my Pocket Time! Code: ${inviteCode}`
+                    : `Join my Pocket Time!`;
                   const url = inviteCode
                     ? `${window.location.origin}/study/rooms?join=${inviteCode}`
                     : window.location.href;
@@ -270,10 +270,10 @@ export function InviteParticipants({
               </button>
               <button
                 onClick={() => {
-                  const subject = 'Join my TribeWellMD Study Room';
+                  const subject = 'Join my Pocket Time on TribeWellMD';
                   const body = inviteCode
-                    ? `Hey! I'm studying on TribeWellMD. Join my room using code: ${inviteCode}\n\nOr click here: ${window.location.origin}/study/rooms?join=${inviteCode}`
-                    : `Hey! I'm studying on TribeWellMD. Join my room: ${window.location.href}`;
+                    ? `Hey! I'm in Pocket Time on TribeWellMD. Join me using code: ${inviteCode}\n\nOr click here: ${window.location.origin}/study/rooms?join=${inviteCode}`
+                    : `Hey! I'm in Pocket Time on TribeWellMD. Join me: ${window.location.href}`;
                   window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
                 }}
                 className="flex-1 py-2 px-3 bg-slate-500 hover:bg-slate-600 text-white rounded-lg text-sm font-medium flex items-center justify-center gap-2 transition-colors"

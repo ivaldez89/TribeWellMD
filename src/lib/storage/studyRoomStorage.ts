@@ -81,7 +81,7 @@ export async function createStudySession(
     session_id: sessionData.id,
     sender_id: userId,
     sender_name: 'System',
-    content: `${userDisplayName} created the study room`,
+    content: `${userDisplayName} started Pocket Time`,
     message_type: 'system',
   });
 
