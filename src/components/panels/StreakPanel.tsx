@@ -17,22 +17,17 @@ const StreakIcon = () => (
   </svg>
 );
 
-// Ulu plant SVG - TribeWellMD brand signature for streak indicators
-interface UluPlantProps {
+// TribeWellMD logo for streak indicators - brand signature
+interface TribeLogoProps {
   className?: string;
 }
 
-const UluPlant = ({ className = '' }: UluPlantProps) => (
-  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-    {/* Main leaf - large heart-shaped ulu leaf */}
-    <path d="M12 3c-1.5 2-3 4.5-3 7.5c0 2.5 1.5 4.5 3 5.5c1.5-1 3-3 3-5.5c0-3-1.5-5.5-3-7.5z" />
-    {/* Left smaller leaf */}
-    <path d="M8 8c-1 1.5-1.5 3-1.5 4.5c0 1.5 0.5 2.5 1.5 3.5c0.5-0.5 1-1.5 1-3c0-2-0.5-3.5-1-5z" opacity="0.8" />
-    {/* Right smaller leaf */}
-    <path d="M16 8c1 1.5 1.5 3 1.5 4.5c0 1.5-0.5 2.5-1.5 3.5c-0.5-0.5-1-1.5-1-3c0-2 0.5-3.5 1-5z" opacity="0.8" />
-    {/* Stem */}
-    <path d="M11.5 16v5h1v-5z" opacity="0.6" />
-  </svg>
+const TribeLogo = ({ className = '' }: TribeLogoProps) => (
+  <img
+    src="/logo.jpeg"
+    alt=""
+    className={`rounded-md object-cover ${className}`}
+  />
 );
 
 export function StreakPanel({ isOpen, onClose }: StreakPanelProps) {
@@ -83,32 +78,31 @@ export function StreakPanel({ isOpen, onClose }: StreakPanelProps) {
             const dayIndex = 6 - index;
             const isActive = streakData.weeklyActivity[dayIndex];
             const isToday = dayIndex === 0;
-            const isFuture = dayIndex < 0; // Days after today (not applicable in current logic)
             const isMissed = !isActive && !isToday && dayIndex > 0;
 
-            // Determine Ulu plant styling based on state
-            const getUluClasses = () => {
+            // Determine logo styling based on state
+            const getLogoClasses = () => {
               if (isActive) {
-                // Completed day - solid green
-                return 'text-green-600 dark:text-green-400';
+                // Completed day - full visibility
+                return 'opacity-100';
               }
               if (isToday) {
-                // Today - emphasized with slight scale
-                return 'text-green-700 dark:text-green-300 scale-105';
+                // Today - emphasized with slight scale and ring
+                return 'opacity-100 scale-105 ring-2 ring-green-600 ring-offset-1';
               }
               if (isMissed) {
-                // Missed/broken day - muted with reduced opacity
-                return 'text-content-muted opacity-40';
+                // Missed/broken day - reduced opacity
+                return 'opacity-30 grayscale';
               }
-              // Future/not yet completed - light green outline effect
-              return 'text-green-300 dark:text-green-700';
+              // Future/not yet completed - lighter opacity
+              return 'opacity-50';
             };
 
             return (
               <div key={index} className="flex flex-col items-center gap-1">
                 <span className={`text-[10px] ${hasStreak ? 'text-green-700 dark:text-green-400' : 'text-slate-500'}`}>{day}</span>
                 <div className="w-8 h-8 flex items-center justify-center">
-                  <UluPlant className={`w-7 h-7 ${getUluClasses()}`} />
+                  <TribeLogo className={`w-7 h-7 ${getLogoClasses()}`} />
                 </div>
               </div>
             );
