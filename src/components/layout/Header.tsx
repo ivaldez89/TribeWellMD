@@ -65,6 +65,9 @@ interface HeaderNavItemProps {
 // Fixed width for all header nav buttons (based on longest label "Community" + padding)
 const HEADER_NAV_BUTTON_WIDTH = 'w-[72px]';
 
+// Fixed width for right-side utility buttons (based on longest labels "Pomodoro"/"Messages" + padding)
+const HEADER_UTILITY_BUTTON_WIDTH = 'w-[56px]';
+
 // Active state classes for header nav buttons - matches right-side utility buttons exactly
 // Usage: bg-[#C4A77D] text-white (gold pill with white text/icons)
 const HEADER_NAV_ACTIVE_CLASSES = 'bg-[#C4A77D] text-white';
@@ -738,10 +741,10 @@ export function Header({
                   <button
                     onClick={() => togglePanel('pomodoro')}
                     aria-label="Pomodoro Timer (P)"
-                    className={`group relative flex flex-col items-center justify-center px-3 py-1 min-w-[44px] rounded-lg transition-all duration-200 ${
+                    className={`group relative flex flex-col items-center justify-center ${HEADER_UTILITY_BUTTON_WIDTH} py-1 rounded-lg transition-all duration-200 ${
                       activePanel === 'pomodoro' || isTimerRunning
-                        ? 'bg-[#C4A77D] text-white'
-                        : 'text-white/80 hover:text-white hover:bg-white/10 focus-visible:bg-white/10'
+                        ? HEADER_NAV_ACTIVE_CLASSES
+                        : HEADER_NAV_INACTIVE_CLASSES
                     } focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50`}
                   >
                     <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -761,10 +764,10 @@ export function Header({
                   <button
                     onClick={() => togglePanel('messages')}
                     aria-label="Messages (M)"
-                    className={`group relative flex flex-col items-center justify-center px-3 py-1 min-w-[44px] rounded-lg transition-all duration-200 ${
+                    className={`group relative flex flex-col items-center justify-center ${HEADER_UTILITY_BUTTON_WIDTH} py-1 rounded-lg transition-all duration-200 ${
                       activePanel === 'messages'
-                        ? 'bg-[#C4A77D] text-white'
-                        : 'text-white/80 hover:text-white hover:bg-white/10 focus-visible:bg-white/10'
+                        ? HEADER_NAV_ACTIVE_CLASSES
+                        : HEADER_NAV_INACTIVE_CLASSES
                     } focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50`}
                   >
                     <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -779,10 +782,10 @@ export function Header({
                   <button
                     onClick={() => togglePanel('labs')}
                     aria-label="Labs (L)"
-                    className={`group relative flex flex-col items-center justify-center px-3 py-1 min-w-[44px] rounded-lg transition-all duration-200 ${
+                    className={`group relative flex flex-col items-center justify-center ${HEADER_UTILITY_BUTTON_WIDTH} py-1 rounded-lg transition-all duration-200 ${
                       activePanel === 'labs'
-                        ? 'bg-[#C4A77D] text-white'
-                        : 'text-white/80 hover:text-white hover:bg-white/10 focus-visible:bg-white/10'
+                        ? HEADER_NAV_ACTIVE_CLASSES
+                        : HEADER_NAV_INACTIVE_CLASSES
                     } focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50`}
                   >
                     <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -797,10 +800,10 @@ export function Header({
                   <button
                     onClick={() => togglePanel('music')}
                     aria-label="Music (S)"
-                    className={`group relative flex flex-col items-center justify-center px-3 py-1 min-w-[44px] rounded-lg transition-all duration-200 ${
+                    className={`group relative flex flex-col items-center justify-center ${HEADER_UTILITY_BUTTON_WIDTH} py-1 rounded-lg transition-all duration-200 ${
                       activePanel === 'music'
-                        ? 'bg-[#C4A77D] text-white'
-                        : 'text-white/80 hover:text-white hover:bg-white/10 focus-visible:bg-white/10'
+                        ? HEADER_NAV_ACTIVE_CLASSES
+                        : HEADER_NAV_INACTIVE_CLASSES
                     } focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50`}
                   >
                     <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -815,10 +818,10 @@ export function Header({
                   <button
                     onClick={() => togglePanel('streak')}
                     aria-label="Streak (X)"
-                    className={`group relative flex flex-col items-center justify-center px-3 py-1 min-w-[44px] rounded-lg transition-all duration-200 ${
+                    className={`group relative flex flex-col items-center justify-center ${HEADER_UTILITY_BUTTON_WIDTH} py-1 rounded-lg transition-all duration-200 ${
                       activePanel === 'streak'
-                        ? 'bg-[#C4A77D] text-white'
-                        : 'text-white/80 hover:text-white hover:bg-white/10 focus-visible:bg-white/10'
+                        ? HEADER_NAV_ACTIVE_CLASSES
+                        : HEADER_NAV_INACTIVE_CLASSES
                     } focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50`}
                   >
                     {/* Fire icon with streak count badge */}
