@@ -50,8 +50,9 @@ const TIMER_SETTINGS = {
  * Canonical pattern for all header navigation items (both public and auth variants):
  * - Icon-only by default (no visible text label)
  * - On hover/focus: reveal text label with pill-style highlight
- * - Consistent spacing and hit area
+ * - Fixed width for visual alignment (based on longest label: "Community")
  * - Proper keyboard focus styles and accessibility (aria-label preserved)
+ * - Active state uses gold icon color to match utility icons
  */
 interface HeaderNavItemProps {
   href: string;
@@ -61,6 +62,9 @@ interface HeaderNavItemProps {
   matchPrefix?: boolean;
   ariaLabel?: string;
 }
+
+// Fixed width for all header nav buttons (based on longest label "Community" + padding)
+const HEADER_NAV_BUTTON_WIDTH = 'w-[72px]';
 
 function HeaderNavItem({ href, label, icon, activeIcon, matchPrefix, ariaLabel }: HeaderNavItemProps) {
   const pathname = usePathname();
@@ -74,7 +78,7 @@ function HeaderNavItem({ href, label, icon, activeIcon, matchPrefix, ariaLabel }
       aria-label={ariaLabel || label}
       aria-current={isActive ? 'page' : undefined}
       className={`
-        group relative flex flex-col items-center justify-center px-3 py-1 min-w-[44px]
+        group relative flex flex-col items-center justify-center ${HEADER_NAV_BUTTON_WIDTH} py-1
         rounded-lg transition-all duration-200
         focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent
         ${isActive
@@ -83,11 +87,11 @@ function HeaderNavItem({ href, label, icon, activeIcon, matchPrefix, ariaLabel }
         }
       `}
     >
-      {/* Icon */}
+      {/* Icon - uses gold color (#C4A77D) when active to match utility icons */}
       <div className={`
         w-5 h-5 flex items-center justify-center flex-shrink-0 transition-colors duration-200
         ${isActive
-          ? 'text-white'
+          ? 'text-[#C4A77D]'
           : 'text-white/70 group-hover:text-white group-focus-visible:text-white'
         }
       `}>
